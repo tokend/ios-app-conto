@@ -85,6 +85,7 @@
 "choose_email" = "Choose email";
 "close_time" = "Close time";
 "code" = "Code";
+"companies" = "Companies";
 "confirm" = "Confirm";
 "confirm_new_password" = "Confirm New Password";
 "confirm_password" = "Confirm password";
@@ -459,6 +460,7 @@
 "terms_of_service" = "Terms of Service";
 "terms_of_service_not_agreed" = "Terms of Service not agreed";
 "terms_of_use" = "Terms of use";
+"there_is_not_any_company_where_you_are_a_client_yet" = "There is not any company where you are a client yet";
 "there_is_no_any_poll_for_chosen_asset" = "There is no any poll for chosen asset";
 "there_is_no_progress_history_yet" = "There is no progress history yet";
 "this_feature_will_be" = "This feature will be available once you have any asset that can be deposited";

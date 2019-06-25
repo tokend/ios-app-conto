@@ -11,7 +11,33 @@ class DashboardFlowController: BaseSignedInFlowController {
     private var operationCompletionScene: UIViewController {
         return self.dashboardScene ?? UIViewController()
     }
+    private let ownerAccountId: String
     private let disposeBag: DisposeBag = DisposeBag()
+    
+    // MARK: -
+    
+    init(
+        appController: AppControllerProtocol,
+        flowControllerStack: FlowControllerStack,
+        reposController: ReposController,
+        managersController: ManagersController,
+        userDataProvider: UserDataProviderProtocol,
+        keychainDataProvider: KeychainDataProviderProtocol,
+        rootNavigation: RootNavigationProtocol,
+        ownerAccountId: String
+        ) {
+        
+        self.ownerAccountId = ownerAccountId
+        super.init(
+            appController: appController,
+            flowControllerStack: flowControllerStack,
+            reposController: reposController,
+            managersController: managersController,
+            userDataProvider: userDataProvider,
+            keychainDataProvider: keychainDataProvider,
+            rootNavigation: rootNavigation
+        )
+    }
     
     // MARK: - Public
     

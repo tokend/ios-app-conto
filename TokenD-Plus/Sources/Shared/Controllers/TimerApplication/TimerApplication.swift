@@ -64,7 +64,7 @@ class TimerUIApplication: UIApplication {
         guard self.idleTimerEnabled else { return }
         
         self.idleTimer = Timer.scheduledTimer(
-            withTimeInterval: SignedInFlowController.userActionsTimeout,
+            withTimeInterval: CompaniesListFlowController.userActionsTimeout,
             repeats: false,
             block: { [weak self] _ in
                 self?.idleTimerExceeded()

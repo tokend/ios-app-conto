@@ -151,7 +151,7 @@ class AppController {
             userDataManager: self.userDataManager,
             keychainManager: self.keychainManager,
             onAuthorized: { [weak self] (account) in
-                self?.runSignedInFlowController(account: account)
+                self?.runCompaniesListFlowController(account: account)
             },
             onSignOut: { [weak self] in
                 self?.initiateSignOut()
@@ -160,7 +160,7 @@ class AppController {
         launchFlowController.start()
     }
     
-    private func runSignedInFlowController(account: String) {
+    private func runCompaniesListFlowController(account: String) {
         guard let keychainDataProvider = KeychainDataProvider(
             account: account,
             keychainManager: self.keychainManager
@@ -225,7 +225,7 @@ class AppController {
             transactionSender: transactionSender,
             userDataProvider: userDataProvider
         )
-        let flowController = SignedInFlowController(
+        let flowController = CompaniesListFlowController(
             appController: self,
             flowControllerStack: self.flowControllerStack,
             reposController: reposController,
