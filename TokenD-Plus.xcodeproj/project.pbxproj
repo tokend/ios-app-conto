@@ -2046,10 +2046,10 @@
 		DB720AD022C1396B00ED116A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DB720AD422C1396B00ED116A /* PollsChoiceCell.swift */,
 				DB720AD122C1396B00ED116A /* PollsEmptyView.swift */,
 				DB720AD222C1396B00ED116A /* PollsNavigationTitleView.swift */,
 				DB720AD322C1396B00ED116A /* PollsPollCell.swift */,
-				DB720AD422C1396B00ED116A /* PollsChoiceCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
