@@ -139,7 +139,7 @@ class CompaniesListFlowController: BaseSignedInFlowController {
                 self?.navigationController.hideProgress()
             },
             onCompanyChosen: { [weak self] (accountId) in
-                
+                self?.runCompanyFlow(ownerAccountId: accountId)
         })
         CompaniesList.Configurator.configure(
             viewController: vc,
@@ -162,6 +162,23 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             navigationController: self.navigationController,
             onSignOut: self.onSignOut
         )
+        self.currentFlowController = flow
+        flow.run()
+    }
+    
+    private func runCompanyFlow(ownerAccountId: String) {
+        let flow = CompanyFlowController(
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider,
+            rootNavigation: self.rootNavigation,
+            ownerAccountId: ownerAccountId,
+            onBackToCompanies: { [weak self] in
+                self?.run()
+            })
         self.currentFlowController = flow
         flow.run()
     }

@@ -19,7 +19,6 @@ extension Polls {
         
         // MARK: - Private properties
         
-        private let navigationTitleView: NavigationTitleView = NavigationTitleView()
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
         private let emptyView: EmptyView.View = EmptyView.View()
         
@@ -58,7 +57,6 @@ extension Polls {
             super.viewDidLoad()
             
             self.setupView()
-            self.setupNavigationTitleView()
             self.setupEmptyView()
             self.setupTableView()
             self.setupLayout()
@@ -77,22 +75,6 @@ extension Polls {
         
         private func setupEmptyView() {
             self.emptyView.isHidden = true
-        }
-        
-        private func setupNavigationTitleView() {
-            self.navigationTitleView.onPickerSelected = { [weak self] in
-                let onSelected: (String, String) -> Void = { [weak self] (ownerAccountId, assetCode) in
-                    let request = Event.AssetSelected.Request(
-                        assetCode: assetCode,
-                        ownerAccountId: ownerAccountId
-                    )
-                    self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
-                        businessLogic.onAssetSelected(request: request)
-                    })
-                }
-                self?.routing?.onPresentPicker(onSelected)
-            }
-            self.navigationItem.titleView = self.navigationTitleView
         }
         
         private func setupTableView() {
@@ -131,7 +113,6 @@ extension Polls.ViewController: Polls.DisplayLogic {
             self.emptyView.isHidden = true
             self.polls = polls
         }
-        self.navigationTitleView.setAsset(asset: viewModel.asset)
     }
     
     public func displayError(viewModel: Event.Error.ViewModel) {

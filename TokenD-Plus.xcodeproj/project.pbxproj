@@ -241,7 +241,6 @@
 		DB720D9F22C1396B00ED116A /* PollsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720AC622C1396B00ED116A /* PollsModels.swift */; };
 		DB720DA022C1396B00ED116A /* PollsRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720AC722C1396B00ED116A /* PollsRouting.swift */; };
 		DB720DA122C1396B00ED116A /* PollsPercentFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720AC922C1396B00ED116A /* PollsPercentFormatter.swift */; };
-		DB720DA222C1396B00ED116A /* PollsBalancesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720ACA22C1396B00ED116A /* PollsBalancesFetcher.swift */; };
 		DB720DA322C1396B00ED116A /* PollsVoteWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720ACB22C1396B00ED116A /* PollsVoteWorker.swift */; };
 		DB720DA422C1396B00ED116A /* PollsPollsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720ACC22C1396B00ED116A /* PollsPollsFetcher.swift */; };
 		DB720DA522C1396B00ED116A /* PollsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720ACD22C1396B00ED116A /* PollsPresenter.swift */; };
@@ -867,7 +866,6 @@
 		DB720AC622C1396B00ED116A /* PollsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsModels.swift; sourceTree = "<group>"; };
 		DB720AC722C1396B00ED116A /* PollsRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsRouting.swift; sourceTree = "<group>"; };
 		DB720AC922C1396B00ED116A /* PollsPercentFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsPercentFormatter.swift; sourceTree = "<group>"; };
-		DB720ACA22C1396B00ED116A /* PollsBalancesFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsBalancesFetcher.swift; sourceTree = "<group>"; };
 		DB720ACB22C1396B00ED116A /* PollsVoteWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsVoteWorker.swift; sourceTree = "<group>"; };
 		DB720ACC22C1396B00ED116A /* PollsPollsFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsPollsFetcher.swift; sourceTree = "<group>"; };
 		DB720ACD22C1396B00ED116A /* PollsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsPresenter.swift; sourceTree = "<group>"; };
@@ -1418,14 +1416,14 @@
 		DB7209A622C1396B00ED116A /* SaleInvest */ = {
 			isa = PBXGroup;
 			children = (
-				DB7209A722C1396B00ED116A /* SaleInvestPresenter.swift */,
-				DB7209A822C1396B00ED116A /* SaleInvestRouting.swift */,
-				DB7209A922C1396B00ED116A /* SaleInvestModels.swift */,
 				DB7209AA22C1396B00ED116A /* SaleInvestConfigurator.swift */,
 				DB7209AB22C1396B00ED116A /* SaleInvestInteractor.swift */,
-				DB7209AC22C1396B00ED116A /* Workers */,
+				DB7209A922C1396B00ED116A /* SaleInvestModels.swift */,
+				DB7209A722C1396B00ED116A /* SaleInvestPresenter.swift */,
+				DB7209A822C1396B00ED116A /* SaleInvestRouting.swift */,
 				DB7209B322C1396B00ED116A /* SaleInvestViewController.swift */,
 				DB7209B422C1396B00ED116A /* Views */,
+				DB7209AC22C1396B00ED116A /* Workers */,
 			);
 			path = SaleInvest;
 			sourceTree = "<group>";
@@ -2039,7 +2037,6 @@
 			isa = PBXGroup;
 			children = (
 				DB720AC922C1396B00ED116A /* PollsPercentFormatter.swift */,
-				DB720ACA22C1396B00ED116A /* PollsBalancesFetcher.swift */,
 				DB720ACB22C1396B00ED116A /* PollsVoteWorker.swift */,
 				DB720ACC22C1396B00ED116A /* PollsPollsFetcher.swift */,
 			);
@@ -2453,13 +2450,13 @@
 			isa = PBXGroup;
 			children = (
 				DB720B8722C1396B00ED116A /* BalancesListConfigurator.swift */,
+				DB720B8A22C1396B00ED116A /* BalancesListInteractor.swift */,
 				DB720B8822C1396B00ED116A /* BalancesListModels.swift */,
 				DB720B8922C1396B00ED116A /* BalancesListPresenter.swift */,
-				DB720B8A22C1396B00ED116A /* BalancesListInteractor.swift */,
-				DB720B8B22C1396B00ED116A /* Workers */,
-				DB720B9122C1396B00ED116A /* Views */,
-				DB720B9622C1396B00ED116A /* BalancesListViewController.swift */,
 				DB720B9722C1396B00ED116A /* BalancesListRouting.swift */,
+				DB720B9622C1396B00ED116A /* BalancesListViewController.swift */,
+				DB720B9122C1396B00ED116A /* Views */,
+				DB720B8B22C1396B00ED116A /* Workers */,
 			);
 			path = BalancesList;
 			sourceTree = "<group>";
@@ -3575,7 +3572,6 @@
 				DB720D7722C1396B00ED116A /* BalanceHeaderWithPickerModels.swift in Sources */,
 				DB720EBA22C1396C00ED116A /* AppInfoUtils.swift in Sources */,
 				DB720E5122C1396C00ED116A /* DepositSceneAssetsFetcher.swift in Sources */,
-				DB720DA222C1396B00ED116A /* PollsBalancesFetcher.swift in Sources */,
 				DB720E1F22C1396C00ED116A /* RegisterSceneModels.swift in Sources */,
 				DB720E1122C1396C00ED116A /* AssetPickerEmptyView.swift in Sources */,
 				DB720D7922C1396B00ED116A /* CreateOfferInteractor.swift in Sources */,

@@ -30,23 +30,29 @@ extension Sales {
         
         private let salesRepo: SalesRepo
         private let imagesUtility: ImagesUtility
+        private let ownerAccountId: String
         
         // MARK: -
         
         init(
             salesRepo: SalesRepo,
-            imagesUtility: ImagesUtility
+            imagesUtility: ImagesUtility,
+            ownerAccountId: String
             ) {
             
             self.salesRepo = salesRepo
             self.imagesUtility = imagesUtility
+            self.ownerAccountId = ownerAccountId
         }
         
         // MARK: - SectionsProvider
         
         func observeSections() -> Observable<[Sales.Model.SectionModel]> {
             return self.salesRepo.observeSales().map({ (sales) -> [Sales.Model.SectionModel] in
-                return self.createSections(sales: sales)
+                let filteredSales = sales.filter({ (sale) -> Bool in
+                    return sale.ownerId == self.ownerAccountId
+                })
+                return self.createSections(sales: filteredSales)
             })
         }
         

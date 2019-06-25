@@ -82,6 +82,7 @@ class DashboardFlowController: BaseSignedInFlowController {
         let balancesFetcher = BalancesList.BalancesFetcher(
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
+            ownerAccountId: self.ownerAccountId,
             imageUtility: imagesUtility
         )
         let actionProvider = TransactionsListScene.ActionProvider(
