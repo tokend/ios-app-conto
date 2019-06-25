@@ -141,28 +141,10 @@ class SignedInFlowController: BaseSignedInFlowController {
                         self?.runDashboardFlow()
                 }),
                 SideMenu.Model.MenuItem(
-                    iconImage: Assets.depositIcon.image,
-                    title: Localized(.deposit),
-                    onSelected: { [weak self] in
-                        self?.runDepositFlow()
-                }),
-                SideMenu.Model.MenuItem(
-                    iconImage: Assets.withdrawIcon.image,
-                    title: Localized(.withdraw),
-                    onSelected: { [weak self] in
-                        self?.runWithdrawFlow()
-                }),
-                SideMenu.Model.MenuItem(
                     iconImage: Assets.exploreFundsIcon.image,
                     title: Localized(.sales),
                     onSelected: { [weak self] in
                         self?.runExploreFundsFlow()
-                }),
-                SideMenu.Model.MenuItem(
-                    iconImage: Assets.tradeIcon.image,
-                    title: Localized(.trades),
-                    onSelected: { [weak self] in
-                        self?.runTradeFlow()
                 }),
                 SideMenu.Model.MenuItem(
                     iconImage: Assets.polls.image,
@@ -269,22 +251,6 @@ class SignedInFlowController: BaseSignedInFlowController {
         })
     }
     
-    private func runTradeFlow() {
-        let flow = TradeFlowController(
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation
-        )
-        self.currentFlowController = flow
-        flow.run(showRootScreen: { [weak self] (vc) in
-            self?.sideNavigationController.embed(centerViewController: vc)
-        })
-    }
-    
     private func runSendPaymentFlow() {
         let navigationController = NavigationController()
         let flow = SendPaymentFlowController(
@@ -303,27 +269,6 @@ class SignedInFlowController: BaseSignedInFlowController {
             showRootScreen: { [weak self] (vc) in
                 navigationController.setViewControllers([vc], animated: false)
                 self?.sideNavigationController.embed(centerViewController: navigationController)
-            },
-            onShowMovements: { [weak self] in
-                self?.runDashboardFlow(selectedTabIndetifier: Localized(.movements))
-        })
-    }
-    
-    private func runWithdrawFlow() {
-        let flow = WithdrawFlowController(
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation,
-            navigationController: nil
-        )
-        self.currentFlowController = flow
-        flow.run(
-            showRootScreen: { [weak self] (vc) in
-                self?.sideNavigationController.embed(centerViewController: vc)
             },
             onShowMovements: { [weak self] in
                 self?.runDashboardFlow(selectedTabIndetifier: Localized(.movements))
