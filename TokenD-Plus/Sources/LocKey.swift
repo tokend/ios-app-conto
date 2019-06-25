@@ -88,6 +88,7 @@ enum LocKey: String {
     case choose_email
     case close_time
     case code
+    case companies
     case confirm
     case confirm_new_password
     case confirm_password
