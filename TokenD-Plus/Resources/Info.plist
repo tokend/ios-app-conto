@@ -2,6 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>FirebaseScreenReportingEnabled</key>
+	<false/>
+	<key>CFBundleDisplayName</key>
+	<string>TokenD Plus</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Application uses Face ID to sign user into the app.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Application uses contacts to fetch emails of potential recipients</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Application requires camera access to scan QR codes.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

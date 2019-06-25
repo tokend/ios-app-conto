@@ -614,6 +614,8 @@
 		DB720F1A22C1396C00ED116A /* BaseFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA822C1396B00ED116A /* BaseFlowController.swift */; };
 		DB720F1B22C1396C00ED116A /* LocKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA922C1396B00ED116A /* LocKey.swift */; };
 		DB720F1D22C13DD600ED116A /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F1C22C13DD500ED116A /* UserDataManager.swift */; };
+		DB720F1F22C210A300ED116A /* APIConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB720F1E22C210A200ED116A /* APIConfiguration.plist */; };
+		DB720F2222C210BB00ED116A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB720F2022C210BB00ED116A /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1228,6 +1230,8 @@
 		DB720CA822C1396B00ED116A /* BaseFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFlowController.swift; sourceTree = "<group>"; };
 		DB720CA922C1396B00ED116A /* LocKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocKey.swift; sourceTree = "<group>"; };
 		DB720F1C22C13DD500ED116A /* UserDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
+		DB720F1E22C210A200ED116A /* APIConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIConfiguration.plist; sourceTree = "<group>"; };
+		DB720F2122C210BB00ED116A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1289,9 +1293,11 @@
 		DB72099522C1347D00ED116A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DB72098C22C1347200ED116A /* LaunchScreen.storyboard */,
-				DB72098A22C1347200ED116A /* Assets.xcassets */,
+				DB720F1E22C210A200ED116A /* APIConfiguration.plist */,
 				DB72098F22C1347200ED116A /* Info.plist */,
+				DB72098A22C1347200ED116A /* Assets.xcassets */,
+				DB72098C22C1347200ED116A /* LaunchScreen.storyboard */,
+				DB720F2022C210BB00ED116A /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -3215,8 +3221,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB720F2222C210BB00ED116A /* Localizable.strings in Resources */,
 				DB72098E22C1347200ED116A /* LaunchScreen.storyboard in Resources */,
 				DB72098B22C1347200ED116A /* Assets.xcassets in Resources */,
+				DB720F1F22C210A300ED116A /* APIConfiguration.plist in Resources */,
 				DB720ED822C1396C00ED116A /* BXFStaticTableViewButtonCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3890,6 +3898,14 @@
 				DB72098D22C1347200ED116A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		DB720F2022C210BB00ED116A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB720F2122C210BB00ED116A /* Base */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
