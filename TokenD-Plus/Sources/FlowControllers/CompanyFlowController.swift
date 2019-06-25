@@ -178,7 +178,8 @@ class CompanyFlowController: BaseSignedInFlowController {
             managersController: self.managersController,
             userDataProvider: self.userDataProvider,
             keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation
+            rootNavigation: self.rootNavigation,
+            ownerAccountId: self.ownerAccountId
         )
         self.currentFlowController = flow
         flow.run(
@@ -222,7 +223,8 @@ class CompanyFlowController: BaseSignedInFlowController {
             managersController: self.managersController,
             userDataProvider: self.userDataProvider,
             keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation
+            rootNavigation: self.rootNavigation,
+            ownerAccountId: self.ownerAccountId
         )
         self.currentFlowController = flow
         flow.run(
@@ -242,7 +244,8 @@ class CompanyFlowController: BaseSignedInFlowController {
             managersController: self.managersController,
             userDataProvider: self.userDataProvider,
             keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation
+            rootNavigation: self.rootNavigation,
+            ownerAccountId: self.ownerAccountId
         )
         self.currentFlowController = flow
         flow.run(showRootScreen: { [weak self] (vc) in

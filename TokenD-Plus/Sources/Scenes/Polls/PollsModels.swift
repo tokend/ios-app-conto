@@ -17,14 +17,11 @@ public enum Polls {
 extension Polls.Model {
     
     public struct SceneModel {
-        var assets: [Asset]
-        var selectedAsset: Asset?
         var polls: [Poll]
     }
     
     public struct Poll: Equatable {
         let id: String
-        let ownerAccountId: String
         let subject: String
         let choices: [Choice]
         var currentChoice: Int?
@@ -53,11 +50,6 @@ extension Polls.Model {
     public enum ActionType {
         case submit
         case remove
-    }
-    
-    public struct Asset: Equatable {
-        let code: String
-        let ownerAccountId: String
     }
     
     public enum SceneContent {
@@ -95,19 +87,10 @@ extension Polls.Event {
     public enum SceneUpdated {
         public struct Response {
             let content: Model.SceneContent
-            let selectedAsset: Model.Asset
         }
         
         public struct ViewModel {
             let content: Model.SceneContentViewModel
-            let asset: String
-        }
-    }
-    
-    public enum AssetSelected {
-        public struct Request {
-            let assetCode: String
-            let ownerAccountId: String
         }
     }
     

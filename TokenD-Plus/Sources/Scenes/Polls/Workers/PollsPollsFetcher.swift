@@ -7,7 +7,6 @@ public protocol PollsPollsFetcherProtocol {
     func observePolls() -> Observable<[Polls.Model.Poll]>
     func observeLoadingStatus() -> Observable<Polls.Model.LoadingStatus>
     func reloadPolls()
-    func setOwnerAccountId(ownerAccountId: String)
 }
 
 extension Polls {
@@ -18,34 +17,27 @@ extension Polls {
         
         // MARK: - Private properties
         
-        private var pollsRepo: PollsRepo?
+        private var pollsRepo: PollsRepo
         private let polls: BehaviorRelay<[Model.Poll]> = BehaviorRelay(value: [])
         private let loadingStatus: BehaviorRelay<Model.LoadingStatus> = BehaviorRelay(value: .loaded)
-        
-        private var ownerAccountId: String?
-        private let reposController: ReposController
         
         private let disposeBag: DisposeBag = DisposeBag()
         
         // MARK: -
         
-        init(reposController: ReposController) {
-            self.reposController = reposController
+        init(pollsRepo: PollsRepo) {
+            self.pollsRepo = pollsRepo
         }
         
         // MARK: - Private
         
         private func observeRepoPolls() {
-            guard let pollsRepo = self.pollsRepo else {
-                return
-            }
-            let pollsObservable = pollsRepo.observePolls()
+            let pollsObservable = self.pollsRepo.observePolls()
             let votesObservable = self.getVotesObservable()
             Observable.zip(pollsObservable, votesObservable)
                 .subscribe(onNext: { [weak self] (pollResources, votes) in
                     let polls = pollResources.compactMap({ (poll) -> Model.Poll? in
                         guard let id = poll.id,
-                        let ownerAccountId = self?.ownerAccountId,
                             let subject = poll.subject,
                             let pollChoices = poll.choices else {
                                 return nil
@@ -53,7 +45,7 @@ extension Polls {
                         
                         let choices = pollChoices.choices.map({ (choice) -> Model.Poll.Choice in
                             return Model.Poll.Choice(
-                                name: "LOoooøoщщшькугклаунгнгпалгфиыгикплгцйицщшйгнкшгцниушдгцфинфгцшгнифдшцгсанкшфгуицфшгиашгуцфниашгнкифгнкишгфцнфшгнцуфуцшнфдушгцншгуншгфцшгншгфншгцнфшгцнфудн",
+                                name: choice.description,
                                 value: choice.number,
                                 result: nil
                             )
@@ -64,7 +56,6 @@ extension Polls {
                         
                         return Model.Poll(
                             id: id,
-                            ownerAccountId: ownerAccountId,
                             subject: subject.question,
                             choices: choices,
                             currentChoice: currentChoice
@@ -76,7 +67,7 @@ extension Polls {
         }
         
         private func observeRepoLoadingStatus() {
-            self.pollsRepo?
+            self.pollsRepo
                 .observeLoadingStatus()
                 .subscribe(onNext: { [weak self] (status) in
                     self?.loadingStatus.accept(status.pollsLoadingStatus)
@@ -85,10 +76,7 @@ extension Polls {
         }
         
         private func getVotesObservable() -> Observable<[Model.Vote]> {
-            guard let pollsRepo = self.pollsRepo else {
-                return Observable.just([])
-            }
-            return pollsRepo.observeVotes()
+            return self.pollsRepo.observeVotes()
                 .map { (votesResources) -> [Model.Vote] in
                     return votesResources
                         .compactMap({ (vote) -> Model.Vote? in
@@ -118,15 +106,7 @@ extension Polls.PollsFetcher: Polls.PollsFetcherProtocol {
     }
     
     public func reloadPolls() {
-        self.pollsRepo?.reloadPolls()
-    }
-    
-    public func setOwnerAccountId(ownerAccountId: String) {
-        self.pollsRepo = self.reposController.getPollsRepo(for: ownerAccountId)
-        self.ownerAccountId = ownerAccountId
-        
-        self.observeRepoPolls()
-        self.observeRepoLoadingStatus()
+        self.pollsRepo.reloadPolls()
     }
 }
 

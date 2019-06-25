@@ -7,9 +7,35 @@ class SalesFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol = NavigationController()
+    private let ownerAccountId: String
     private let disposeBag: DisposeBag = DisposeBag()
     
     private var onShowMovements: (() -> Void)?
+    
+    // MARK: -
+    
+    init(
+        appController: AppControllerProtocol,
+        flowControllerStack: FlowControllerStack,
+        reposController: ReposController,
+        managersController: ManagersController,
+        userDataProvider: UserDataProviderProtocol,
+        keychainDataProvider: KeychainDataProviderProtocol,
+        rootNavigation: RootNavigationProtocol,
+        ownerAccountId: String
+        ) {
+        
+        self.ownerAccountId = ownerAccountId
+        super.init(
+            appController: appController,
+            flowControllerStack: flowControllerStack,
+            reposController: reposController,
+            managersController: managersController,
+            userDataProvider: userDataProvider,
+            keychainDataProvider: keychainDataProvider,
+            rootNavigation: rootNavigation
+        )
+    }
     
     // MARK: - Public
     
@@ -63,7 +89,8 @@ class SalesFlowController: BaseSignedInFlowController {
         
         let sectionsProvider = Sales.SalesSectionsProvider(
             salesRepo: self.reposController.salesRepo,
-            imagesUtility: self.reposController.imagesUtility
+            imagesUtility: self.reposController.imagesUtility,
+            ownerAccountId: self.ownerAccountId
         )
         
         let investedAmountFormatter = Sales.AmountFormatter()

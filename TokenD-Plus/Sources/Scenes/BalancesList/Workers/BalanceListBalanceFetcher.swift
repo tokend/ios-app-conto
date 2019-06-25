@@ -16,6 +16,7 @@ extension BalancesList {
         
         private let balancesRepo: BalancesRepo
         private let assetsRepo: AssetsRepo
+        private let ownerAccountId: String
         
         private let imageUtility: ImagesUtility
         private let balancesRelay: BehaviorRelay<[Model.Balance]> = BehaviorRelay(value: [])
@@ -30,11 +31,13 @@ extension BalancesList {
         init(
             balancesRepo: BalancesRepo,
             assetsRepo: AssetsRepo,
+            ownerAccountId: String,
             imageUtility: ImagesUtility
             ) {
             
             self.balancesRepo = balancesRepo
             self.assetsRepo = assetsRepo
+            self.ownerAccountId = ownerAccountId
             self.imageUtility = imageUtility
         }
         
@@ -70,12 +73,15 @@ extension BalancesList {
         }
         
         private func updateBalances() {
-            let updatedBalances = self.balances.map { (details) -> Model.Balance in
+            let updatedBalances = self.balances.compactMap { (details) -> Model.Balance? in
                 var iconUrl: URL?
                 var assetName: String?
                 if let asset = self.assets.first(where: { (asset) -> Bool in
                     return details.asset == asset.code
                 }) {
+                    guard asset.owner == self.ownerAccountId else {
+                        return nil
+                    }
                     if let name = asset.defaultDetails?.name {
                         assetName = name
                     }

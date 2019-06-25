@@ -107,15 +107,8 @@ extension Polls.Presenter: Polls.PresentationLogic {
                 contentViewModel = .polls(polls)
             }
         }
-        let asset = Localized(
-            .asset_colon,
-            replace: [
-                .asset_colon_replace_code: response.selectedAsset.code
-            ]
-        )
         let viewModel = Event.SceneUpdated.ViewModel(
-            content: contentViewModel,
-            asset: asset
+            content: contentViewModel
         )
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displaySceneUpdated(viewModel: viewModel)

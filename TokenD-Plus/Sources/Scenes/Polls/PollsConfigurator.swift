@@ -6,7 +6,6 @@ extension Polls {
         
         public static func configure(
             viewController: ViewController,
-            assetsFetcher: AssetsFetcherProtocol,
             pollsFetcher: PollsFetcherProtocol,
             percentFormatter: PercentFormatterProtocol,
             voteWorker: VoteWorkerProtocol,
@@ -21,7 +20,6 @@ extension Polls {
             )
             let interactor = Interactor(
                 presenter: presenter,
-                assetsFetcher: assetsFetcher,
                 pollsFetcher: pollsFetcher,
                 voteWorker: voteWorker
             )
