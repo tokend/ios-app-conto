@@ -20,6 +20,7 @@ extension Polls {
                 cell.subtitle = self.subtitle
                 cell.choices = self.choicesViewModels
                 cell.actionState = self.actionState
+                cell.actionTitle = self.actionTitle
             }
             
             public static func == (lhs: PollCell.ViewModel, rhs: PollCell.ViewModel) -> Bool {
@@ -53,7 +54,7 @@ extension Polls {
                 }
             }
             
-            var actionState: Model.ActionState? {
+            var actionState: Model.ActionState = .disabled {
                 didSet {
                     self.updateActionState()
                 }
@@ -125,17 +126,26 @@ extension Polls {
             }
             
             private func updateActionState() {
-                guard let state = self.actionState else {
-                    return
-                }
-                switch state {
+                switch self.actionState {
                     
                 case .disabled:
+                    self.choicesTableView.isUserInteractionEnabled = true
+                    self.actionButton.isHidden = false
                     self.actionButton.isEnabled = false
+                    self.updateButtonAppearence()
                     
                 case .hidden:
                     self.actionButton.isHidden = true
+                    self.choicesTableView.isUserInteractionEnabled = false
                 }
+            }
+            
+            private func updateButtonAppearence() {
+                let actionTitleColorAlpha: CGFloat = self.actionButton.isEnabled ? 1.0 : 0.25
+                self.actionButton.setTitleColor(
+                    Theme.Colors.accentColor.withAlphaComponent(actionTitleColorAlpha),
+                    for: .normal
+                )
             }
             
             // MARK: - Setup
@@ -240,6 +250,7 @@ extension Polls.PollCell.View: UITableViewDelegate {
         self.onChoiceSelected?(model.choiceValue)
         self.setSeletctedChoice(index: indexPath.section)
         self.actionButton.isEnabled = true
+        self.updateButtonAppearence()
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

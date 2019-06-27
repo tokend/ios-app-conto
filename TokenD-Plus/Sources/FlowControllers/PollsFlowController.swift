@@ -45,6 +45,8 @@ class PollsFlowController: BaseSignedInFlowController {
     
     private func showPollsScreen(showRootScreen: ((_ vc: UIViewController) -> Void)?) {
         let vc = self.setupPollsScene()
+        vc.navigationItem.title = Localized(.polls)
+        
         self.navigationController.setViewControllers([vc], animated: false)
         
         if let showRootScreen = showRootScreen {

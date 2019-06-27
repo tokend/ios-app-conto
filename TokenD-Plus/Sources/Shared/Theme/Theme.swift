@@ -7,7 +7,7 @@ enum Theme {
         private static let disabledColorAlpha: CGFloat = 0.3
         
         static let mainColor: UIColor = UIColor.white
-        static let accentColor: UIColor = UIColor(red: 0.39, green: 0.33, blue: 0.93, alpha: 1.0)
+        static let accentColor: UIColor = UIColor(red: 0.839, green: 0.106, blue: 0.376, alpha: 1.0)
         static let darkAccentColor: UIColor = UIColor(red: 0.28, green: 0.27, blue: 0.42, alpha: 1.0)
         
         static let textOnMainColor: UIColor = UIColor.black

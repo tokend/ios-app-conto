@@ -28,7 +28,18 @@ extension CompaniesList {
         // MARK: - Private
         
         private func loadCompanies() {
+            let uaHardware = Model.Company.init(
+                accountId: "GBA4EX43M25UPV4WIE6RRMQOFTWXZZRIPFAI5VPY6Z2ZVVXVWZ6NEOOB",
+                name: "UA Hardware",
+                imageUrl: URL(string: "https://google.com")!
+            )
             
+            let pubLolek = Model.Company.init(
+                accountId: "GDLWLDE33BN7SG6V4P63V2HFA56JYRMODESBLR2JJ5F3ITNQDUVKS2JE",
+                name: "Pub Lolek",
+                imageUrl: URL(string: "https://google.com")!
+            )
+            self.companies.accept([uaHardware, pubLolek])
         }
     }
 }

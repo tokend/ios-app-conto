@@ -55,7 +55,6 @@ extension CompaniesList {
             
             private let cardView: UIView = UIView()
             private let companyImageView: UIImageView = UIImageView()
-            private let amountLabel: UILabel = UILabel()
             private let companyNameLabel: UILabel = UILabel()
             
             // MARK: -
@@ -66,7 +65,6 @@ extension CompaniesList {
                 self.setupView()
                 self.setupCardView()
                 self.setupCompanyImageView()
-                self.setupAmountLabel()
                 self.setupCompanyNameLabel()
                 self.setupLayout()
             }
@@ -100,18 +98,10 @@ extension CompaniesList {
                 self.companyImageView.backgroundColor = Theme.Colors.contentBackgroundColor
             }
             
-            private func setupAmountLabel() {
-                self.amountLabel.backgroundColor = UIColor.clear
-                self.amountLabel.textColor = Theme.Colors.textOnContentBackgroundColor
-                self.amountLabel.font = Theme.Fonts.largeTitleFont
-                self.amountLabel.textAlignment = .left
-                self.amountLabel.numberOfLines = 1
-            }
-            
             private func setupCompanyNameLabel() {
                 self.companyNameLabel.backgroundColor = UIColor.clear
                 self.companyNameLabel.textColor = Theme.Colors.textOnContentBackgroundColor
-                self.companyNameLabel.font = Theme.Fonts.plainTextFont
+                self.companyNameLabel.font = Theme.Fonts.largeTitleFont
                 self.companyNameLabel.textAlignment = .left
                 self.companyNameLabel.numberOfLines = 1
             }
@@ -119,7 +109,6 @@ extension CompaniesList {
             private func setupLayout() {
                 self.addSubview(self.cardView)
                 self.cardView.addSubview(self.companyImageView)
-                self.addSubview(self.amountLabel)
                 self.addSubview(self.companyNameLabel)
                 
                 self.cardView.snp.makeConstraints { (make) in
@@ -133,16 +122,10 @@ extension CompaniesList {
                     make.width.height.equalTo(View.logoSize)
                 }
                 
-                self.amountLabel.snp.makeConstraints { (make) in
-                    make.leading.equalTo(self.cardView.snp.trailing).offset(View.sideInset)
-                    make.trailing.equalToSuperview().offset(View.sideInset)
-                    make.bottom.equalTo(self.cardView.snp.centerY).offset(-View.topInset / 2.0)
-                }
-                
                 self.companyNameLabel.snp.makeConstraints { (make) in
                     make.leading.equalTo(self.cardView.snp.trailing).offset(View.sideInset)
                     make.trailing.equalToSuperview().offset(View.sideInset)
-                    make.top.equalTo(self.amountLabel.snp.bottom).offset(View.topInset)
+                    make.top.centerY.equalTo(self.companyImageView)
                 }
             }
         }
