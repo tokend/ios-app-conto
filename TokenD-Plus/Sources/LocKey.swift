@@ -140,6 +140,7 @@ enum LocKey: String {
     case empty_recipient_address
     case empty_signers_data
     case ended
+    case ended_capitalized
     case enter_account_holders_name
     case enter_account_id_or_email
     case enter_amount
@@ -323,6 +324,8 @@ enum LocKey: String {
     case one_for_replace_base_asset
     case one_for_replace_quote_asset
     case one_for_replace_sale_invest_price_amount
+    case one_vote
+    case one_vote_replace_percent
     case open_app
     case operation
     case opportunities
@@ -523,6 +526,9 @@ enum LocKey: String {
     case view_history
     case view_more
     case volume
+    case votes
+    case votes_replace_votes_count
+    case votes_replace_percent
     case wallet
     case we_do_not_know_your_seed
     case week

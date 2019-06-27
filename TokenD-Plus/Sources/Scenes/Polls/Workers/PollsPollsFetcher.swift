@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 import TokenDSDK
 import RxSwift
 import RxCocoa
@@ -7,6 +7,7 @@ public protocol PollsPollsFetcherProtocol {
     func observePolls() -> Observable<[Polls.Model.Poll]>
     func observeLoadingStatus() -> Observable<Polls.Model.LoadingStatus>
     func reloadPolls()
+    func reloadVotes()
 }
 
 extension Polls {
@@ -34,26 +35,26 @@ extension Polls {
         private func observeRepoPolls() {
             let pollsObservable = self.pollsRepo.observePolls()
             let votesObservable = self.getVotesObservable()
-            Observable.zip(pollsObservable, votesObservable)
+            
+            Observable.combineLatest(pollsObservable, votesObservable)
                 .subscribe(onNext: { [weak self] (pollResources, votes) in
                     let currentTime = Date()
                     let polls = pollResources.compactMap({ (poll) -> Model.Poll? in
                         guard let id = poll.id,
                             let subject = poll.subject,
-                            let pollChoices = poll.choices,
-                            let outcomeDetails = poll.outcome else {
+                            let pollChoices = poll.choices else {
                                 return nil
                         }
                         
                         let pollIsClosed = currentTime > poll.endTime
-                        let totalVotes = outcomeDetails.outcome
+                        let totalVotes = (poll.outcome?.outcome ?? [:])
                             .reduce(0, { (total, pair) -> Int in
                                 return total + pair.value
                             })
                         let choices = pollChoices.choices.map({ (choice) -> Model.Poll.Choice in
                             var result: Model.Poll.Choice.Result?
                             if currentTime > poll.endTime {
-                                let votesCount = outcomeDetails.outcome["\(choice.number)"] ?? 0
+                                let votesCount = poll.outcome?.outcome["\(choice.number)"] ?? 0
                                 result = Model.Poll.Choice.Result(
                                     voteCounts: votesCount,
                                     totalVotes: totalVotes
@@ -73,13 +74,14 @@ extension Polls {
                             id: id,
                             subject: subject.question,
                             choices: choices,
+                            currentRemoteChoice: currentChoice,
                             currentChoice: currentChoice,
                             isClosed: pollIsClosed
                         )
                     })
                     self?.polls.accept(polls)
                 })
-            .disposed(by: self.disposeBag)
+                .disposed(by: self.disposeBag)
         }
         
         private func observeRepoLoadingStatus() {
@@ -88,7 +90,7 @@ extension Polls {
                 .subscribe(onNext: { [weak self] (status) in
                     self?.loadingStatus.accept(status.pollsLoadingStatus)
                 })
-            .disposed(by: self.disposeBag)
+                .disposed(by: self.disposeBag)
         }
         
         private func getVotesObservable() -> Observable<[Model.Vote]> {
@@ -118,11 +120,16 @@ extension Polls.PollsFetcher: Polls.PollsFetcherProtocol {
     }
     
     public func observeLoadingStatus() -> Observable<Polls.Model.LoadingStatus> {
+        self.observeRepoLoadingStatus()
         return self.loadingStatus.asObservable()
     }
     
     public func reloadPolls() {
         self.pollsRepo.reloadPolls()
+    }
+    
+    public func reloadVotes() {
+        self.pollsRepo.reloadVotes()
     }
 }
 

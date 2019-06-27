@@ -24,6 +24,7 @@ extension Polls.Model {
         let id: String
         let subject: String
         let choices: [Choice]
+        var currentRemoteChoice: Int?
         var currentChoice: Int?
         let isClosed: Bool
         
@@ -48,9 +49,9 @@ extension Polls.Model {
         let choice: Int
     }
     
-    public enum ActionType {
-        case submit
-        case remove
+    public enum ActionState {
+        case disabled
+        case hidden
     }
     
     public enum SceneContent {
@@ -95,10 +96,18 @@ extension Polls.Event {
         }
     }
     
+    public enum PollsDidChange {
+        public struct Response {
+            let polls: [Model.Poll]
+        }
+        public struct ViewModel {
+            let polls: [Polls.PollCell.ViewModel]
+        }
+    }
+    
     public enum ActionButtonClicked {
         public struct Request {
             let pollId: String
-            let actionType: Model.ActionType
         }
     }
     

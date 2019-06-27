@@ -56,6 +56,9 @@ public class PollsRepo {
     
     func reloadPolls() {
         self.loadPolls()
+    }
+    
+    func reloadVotes() {
         self.loadVotes()
     }
     
