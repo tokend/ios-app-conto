@@ -192,7 +192,7 @@ class LocalAuthFlowController: BaseFlowController {
             routing: routing
         )
         
-        vc.navigationItem.title = Localized(.tokend)
+        vc.navigationItem.title = Localized(.conto)
         
         return vc
     }

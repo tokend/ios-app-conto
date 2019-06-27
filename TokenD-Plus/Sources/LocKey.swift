@@ -97,6 +97,7 @@ enum LocKey: String {
     case confirmation
     case contacts
     case continue_capitalized
+    case conto
     case copied
     case copy
     case corrupted_keychain_data
@@ -184,6 +185,7 @@ enum LocKey: String {
     case failed_to_decode_quote_balance_id
     case failed_to_encode_destination_address
     case failed_to_encode_destination_data
+    case failed_to_fetch_companies
     case failed_to_fetch_fees
     case failed_to_fetch_network_info
     case failed_to_generate_key_pair

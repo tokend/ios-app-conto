@@ -5,6 +5,7 @@ class ExploreTokensFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol
+    private let ownerAccountId: String
     private weak var walletScene: UIViewController?
     private var operationCompletionScene: UIViewController {
         return self.walletScene ?? UIViewController()
@@ -14,6 +15,7 @@ class ExploreTokensFlowController: BaseSignedInFlowController {
     
     init(
         navigationController: NavigationControllerProtocol,
+        ownerAccountId: String,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
         reposController: ReposController,
@@ -24,6 +26,7 @@ class ExploreTokensFlowController: BaseSignedInFlowController {
         ) {
         
         self.navigationController = navigationController
+        self.ownerAccountId = ownerAccountId
         super.init(
             appController: appController,
             flowControllerStack: flowControllerStack,
@@ -57,6 +60,7 @@ class ExploreTokensFlowController: BaseSignedInFlowController {
         let viewController = ExploreTokensScene.ViewController()
         
         let tokensFetcher = ExploreTokensScene.TokensFetcher(
+            ownerAccountId: self.ownerAccountId,
             assetsRepo: self.reposController.assetsRepo,
             imagesUtility: self.reposController.imagesUtility,
             balancesRepo: self.reposController.balancesRepo

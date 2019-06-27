@@ -73,3 +73,14 @@ extension CompaniesList.Presenter: CompaniesList.PresentationLogic {
         }
     }
 }
+
+extension CompaniesList.Model.Error: LocalizedError {
+    
+    public var errorDescription: String? {
+        switch self {
+            
+        case .companiesNotFound:
+            return Localized(.failed_to_fetch_companies)
+        }
+    }
+}

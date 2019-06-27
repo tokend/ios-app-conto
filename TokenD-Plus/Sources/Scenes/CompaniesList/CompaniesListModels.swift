@@ -19,12 +19,16 @@ extension CompaniesList.Model {
     public struct Company {
         let accountId: String
         let name: String
-        let imageUrl: URL
+        let imageUrl: URL?
     }
     
     public enum LoadingStatus {
         case loaded
         case loading
+    }
+    
+    public enum Error: Swift.Error {
+        case companiesNotFound
     }
 }
 

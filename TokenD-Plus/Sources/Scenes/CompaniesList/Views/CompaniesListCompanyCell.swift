@@ -8,7 +8,7 @@ extension CompaniesList {
         public struct ViewModel: CellViewModel {
             
             let companyColor: UIColor
-            let companyImageUrl: URL
+            let companyImageUrl: URL?
             let companyName: String
             let accountId: String
             
@@ -94,6 +94,7 @@ extension CompaniesList {
             private func setupCompanyImageView() {
                 self.companyImageView.layer.cornerRadius = View.logoSize / 2.0
                 self.companyImageView.layer.masksToBounds = true
+                self.companyImageView.clipsToBounds = true
                 self.companyImageView.contentMode = .scaleAspectFit
                 self.companyImageView.backgroundColor = Theme.Colors.contentBackgroundColor
             }

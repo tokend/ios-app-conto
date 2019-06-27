@@ -6,6 +6,7 @@ import RxSwift
 extension ExploreTokensScene {
     class TokensFetcher: TokensFetcherProtocol {
         
+        private let ownerAccountId: String
         private let disposeBag: DisposeBag = DisposeBag()
         private var imagesDisposables: [Disposable] = []
         private let assetsRepo: AssetsRepo
@@ -38,11 +39,13 @@ extension ExploreTokensScene {
         private let errorStatus: PublishRelay<Swift.Error> = PublishRelay()
         
         init(
+            ownerAccountId: String,
             assetsRepo: AssetsRepo,
             imagesUtility: ImagesUtility,
             balancesRepo: BalancesRepo
             ) {
             
+            self.ownerAccountId = ownerAccountId
             self.assetsRepo = assetsRepo
             self.imagesUtility = imagesUtility
             self.balancesRepo = balancesRepo
@@ -115,30 +118,34 @@ extension ExploreTokensScene {
             let assets = self.assetsRepo.assetsValue
             let balances = self.balancesRepo.balancesDetailsValue
             
-            let tokens = assets.map({ (asset) -> Token in
-                
-                let imageKey = asset.defaultDetails?.logo?.imageKey
-                let iconUrl = self.imagesUtility.getImageURL(imageKey)
-                
-                let balanceState = balances.first(where: { (state) -> Bool in
-                    return state.asset == asset.code
-                })?.tokenBalanceState ?? .notCreated
-                
-                return self.createTokenWithAsset(
-                    asset,
-                    iconUrl: iconUrl,
-                    balanceState: balanceState
-                )
-            })
-            .sorted(by: { (left, right) -> Bool in
-                if case Token.BalanceState.notCreated = left.balanceState {
-                    return true
-                } else if case Token.BalanceState.notCreated = right.balanceState {
-                    return false
-                } else {
-                    return true
+            let tokens = assets
+                .filter { (asset) -> Bool in
+                    return asset.owner == self.ownerAccountId
                 }
-            })
+                .map({ (asset) -> Token in
+                    
+                    let imageKey = asset.defaultDetails?.logo?.imageKey
+                    let iconUrl = self.imagesUtility.getImageURL(imageKey)
+                    
+                    let balanceState = balances.first(where: { (state) -> Bool in
+                        return state.asset == asset.code
+                    })?.tokenBalanceState ?? .notCreated
+                    
+                    return self.createTokenWithAsset(
+                        asset,
+                        iconUrl: iconUrl,
+                        balanceState: balanceState
+                    )
+                })
+                .sorted(by: { (left, right) -> Bool in
+                    if case Token.BalanceState.notCreated = left.balanceState {
+                        return true
+                    } else if case Token.BalanceState.notCreated = right.balanceState {
+                        return false
+                    } else {
+                        return true
+                    }
+                })
             self.tokensBehaviorRelay.accept(tokens)
         }
         

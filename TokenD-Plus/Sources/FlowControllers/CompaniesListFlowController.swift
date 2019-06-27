@@ -130,7 +130,10 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             .disposed(by: self.disposeBag)
         
         vc.navigationItem.leftBarButtonItem = settingsItem
-        let companiesFetcher = CompaniesList.CompaniesFetcher()
+        let companiesFetcher = CompaniesList.CompaniesFetcher(
+            accountsApi: self.flowControllerStack.apiV3.accountsApi,
+            userDataProvider: self.userDataProvider
+        )
         let routing = CompaniesList.Routing(
             showLoading: { [weak self] in
                 self?.navigationController.showProgress()

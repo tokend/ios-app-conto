@@ -3336,6 +3336,7 @@
 			files = (
 				DB720EF022C1396C00ED116A /* SalesRepo.swift in Sources */,
 				DB720EE522C1396C00ED116A /* MovementsRepo.swift in Sources */,
+				DB720F2C22C2286C00ED116A /* CompaniesListModels.swift in Sources */,
 				DB720CE022C1396B00ED116A /* UpdatePasswordBaseSubmitWorker.swift in Sources */,
 				DB720EEF22C1396C00ED116A /* PendingOffersRepo.swift in Sources */,
 				DB720CD922C1396B00ED116A /* UpdatePasswordModels.swift in Sources */,
@@ -3562,7 +3563,6 @@
 				DB720EC622C1396C00ED116A /* TradesTableViewCell.swift in Sources */,
 				DB720D9822C1396B00ED116A /* TabBarModels.swift in Sources */,
 				DB720CE622C1396B00ED116A /* VerifyEmailRouting.swift in Sources */,
-				DB720F2C22C2286C00ED116A /* CompaniesListModels.swift in Sources */,
 				DB720E3022C1396C00ED116A /* ReceiveAddressQRCodeGeneratorProtocol.swift in Sources */,
 				DB720D5F22C1396B00ED116A /* TradeOffersOffersFetcher.swift in Sources */,
 				DB720D7722C1396B00ED116A /* BalanceHeaderWithPickerModels.swift in Sources */,

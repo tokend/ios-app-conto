@@ -368,6 +368,7 @@ class DashboardFlowController: BaseSignedInFlowController {
     private func runExploreTokensFlow() {
         let exploreTokensFlowController = ExploreTokensFlowController(
             navigationController: self.navigationController,
+            ownerAccountId: self.ownerAccountId,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
             reposController: self.reposController,

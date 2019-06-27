@@ -94,6 +94,7 @@
 "confirmation" = "Confirmation";
 "contacts" = "Contacts";
 "continue_capitalized" = "Continue";
+"conto" = "Conto";
 "copied" = "Copied";
 "copy" = "Copy";
 "corrupted_keychain_data" = "Corrupted keychain data";
@@ -181,6 +182,7 @@
 "failed_to_decode_quote_balance_id" = "Failed to decode quote balance id";
 "failed_to_encode_destination_address" = "Failed to encode destination address";
 "failed_to_encode_destination_data" = "Failed to encode destination data";
+"failed_to_fetch_companies" = "Failed to fetch companies";
 "failed_to_fetch_fees" = "Failed to fetch sender fee";
 "failed_to_fetch_network_info" = "Failed to fetch network info";
 "failed_to_generate_key_pair" = "Failed to generate key pair";
