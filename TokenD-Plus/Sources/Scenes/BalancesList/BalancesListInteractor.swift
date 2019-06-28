@@ -166,9 +166,13 @@ extension BalancesList {
         }
         
         private func getChartModel() -> Model.PieChartModel {
-            let entries = self.sceneModel.chartBalances.map { (balance) -> Model.PieChartEntry in
-                
-                return Model.PieChartEntry(value: balance.balancePercentage)
+            let entries = self.sceneModel.chartBalances
+                .map { (balance) -> Model.PieChartEntry in
+                    
+                    return Model.PieChartEntry(value: balance.balancePercentage)
+                }
+                .filter { (entry) -> Bool in
+                    return entry.value > 0.0
             }
             let legendCells = self.getLegendCellModels()
             let highlitedEntry = self.getHighLightedEntryModel()
@@ -182,19 +186,23 @@ extension BalancesList {
         }
         
         private func getLegendCellModels() -> [Model.LegendCellModel] {
-            let cells = self.sceneModel.chartBalances.map { (balance) -> Model.LegendCellModel in
-                var isSelected = false
-                if let selectedBalance = self.sceneModel.selectedChartBalance {
-                    isSelected = balance == selectedBalance
+            let cells = self.sceneModel.chartBalances
+                .filter { (balance) -> Bool in
+                    return balance.convertedBalance > 0.0
                 }
-                
-                return Model.LegendCellModel(
-                    assetName: balance.assetName,
-                    balance: balance.convertedBalance,
-                    isSelected: isSelected,
-                    balancePercentage: balance.balancePercentage,
-                    balanceType: balance.type
-                )
+                .map { (balance) -> Model.LegendCellModel in
+                    var isSelected = false
+                    if let selectedBalance = self.sceneModel.selectedChartBalance {
+                        isSelected = balance == selectedBalance
+                    }
+                    
+                    return Model.LegendCellModel(
+                        assetName: balance.assetName,
+                        balance: balance.convertedBalance,
+                        isSelected: isSelected,
+                        balancePercentage: balance.balancePercentage,
+                        balanceType: balance.type
+                    )
             }
             return cells
         }

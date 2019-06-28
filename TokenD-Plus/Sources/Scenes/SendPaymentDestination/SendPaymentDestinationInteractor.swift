@@ -59,15 +59,15 @@ extension SendPaymentDestination {
                         
                         switch error {
                             
-                        case .invalidAccountIdOrEmail:
-                            response = .failed(.invalidAccountId)
+                        case .invalidEmail:
+                            response = .failed(.invalidEmail)
                             
                         case .other(let errors):
                             response = .failed(.other(errors))
                         }
                         
-                    case .succeeded(let recipientAddress):
-                        self?.handleSucceededQRScan(recipientAddress: recipientAddress)
+                    case .succeeded(_):
+                        self?.handleSucceededQRScan(recipientAddress: qrValue)
                         return
                     }
                     

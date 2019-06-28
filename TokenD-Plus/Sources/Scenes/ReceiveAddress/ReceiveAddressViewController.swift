@@ -208,6 +208,8 @@ extension ReceiveAddress.ViewController: ReceiveAddress.DisplayLogic {
     }
     
     func displayShareAction(viewModel: ReceiveAddress.Event.ShareAction.ViewModel) {
+        var itemsToShare = viewModel.itemsToShare
+        itemsToShare.append(self.qrContentView)
         self.routing?.onShare(viewModel.itemsToShare)
     }
 }

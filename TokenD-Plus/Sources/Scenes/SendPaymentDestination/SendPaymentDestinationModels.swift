@@ -167,7 +167,7 @@ extension SendPaymentDestination.Event {
 extension SendPaymentDestination.Event.ScanRecipientQRAddress {
     
     public enum FailedReason: Error, LocalizedError {
-        case invalidAccountId
+        case invalidEmail
         case other(Error)
         case permissionDenied
         
@@ -175,8 +175,8 @@ extension SendPaymentDestination.Event.ScanRecipientQRAddress {
         
         public var errorDescription: String? {
             switch self {
-            case .invalidAccountId:
-                return Localized(.invalid_account_id)
+            case .invalidEmail:
+                return Localized(.there_is_not_any_user_with_such_an_email_was_found)
             case .other(let error):
                 let message = error.localizedDescription
                 return Localized(
@@ -203,8 +203,8 @@ extension SendPaymentDestination.Model.ViewConfig {
             ]
         )
         return SendPaymentDestination.Model.ViewConfig(
-            recipientAddressFieldPlaceholder: Localized(.enter_account_id_or_email),
-            actionTitle: Localized(.enter_account_id_or_email),
+            recipientAddressFieldPlaceholder: Localized(.enter_email),
+            actionTitle: Localized(.enter_email),
             actionButtonTitle: actionButtonTitle,
             contactsAreHidden: false
         )

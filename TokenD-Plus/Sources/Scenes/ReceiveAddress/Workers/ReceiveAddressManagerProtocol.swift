@@ -5,8 +5,10 @@ import RxSwift
 protocol ReceiveAddressManagerProtocol {
     typealias Address = ReceiveAddress.Address
     
-    var address: Address { get }
-    func observeAddressChange() -> Observable<Address>
+    var addressToCode: Address { get }
+    var addressToShow: Address { get }
+    func observeAddressToCodeChange() -> Observable<Address>
+    func observeAddressToShowChange() -> Observable<Address>
 }
 
 extension ReceiveAddress {

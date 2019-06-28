@@ -113,9 +113,26 @@ extension ReceiveAddress.Presenter: ReceiveAddress.PresentationLogic {
     }
     
     func presentShareAction(response: ReceiveAddress.Event.ShareAction.Response) {
-        let viewModel = ReceiveAddress.Event.ShareAction.ViewModel(itemsToShare: response.itemsToShare)
-        self.presenterDispatch.display { (displayLogic) in
-            displayLogic.displayShareAction(viewModel: viewModel)
+        
+        let qrValue = self.invoiceFormatter.qrValueForAddress(
+            response.itemsToShare.addressToCode
+        )
+        
+        self.qrCodeGenerator.generateQRCodeFromString(
+            qrValue,
+            withTintColor: UIColor.black,
+            backgroundColor: UIColor.clear,
+            size: response.itemsToShare.qrCodeSize
+        ) { (code) in
+            guard let qrImage = code
+                else {
+                    return
+            }
+            let itemsToShare: [Any] = [qrImage, response.itemsToShare.addressToShow]
+            let viewModel = ReceiveAddress.Event.ShareAction.ViewModel(itemsToShare: itemsToShare)
+            self.presenterDispatch.display { (displayLogic) in
+                displayLogic.displayShareAction(viewModel: viewModel)
+            }
         }
     }
 }

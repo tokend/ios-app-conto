@@ -1806,13 +1806,13 @@
 			isa = PBXGroup;
 			children = (
 				DB720A6522C1396B00ED116A /* SendPaymentDestinationConfigurator.swift */,
-				DB720A6622C1396B00ED116A /* SendPaymentDestinationModels.swift */,
 				DB720A6722C1396B00ED116A /* SendPaymentDestinationInteractor.swift */,
+				DB720A6622C1396B00ED116A /* SendPaymentDestinationModels.swift */,
 				DB720A6822C1396B00ED116A /* SendPaymentDestinationPresenter.swift */,
-				DB720A6922C1396B00ED116A /* Workers */,
 				DB720A6D22C1396B00ED116A /* SendPaymentDestinationRouting.swift */,
 				DB720A6E22C1396B00ED116A /* SendPaymentDestinationViewController.swift */,
 				DB720A6F22C1396B00ED116A /* Views */,
+				DB720A6922C1396B00ED116A /* Workers */,
 			);
 			path = SendPaymentDestination;
 			sourceTree = "<group>";
@@ -2375,14 +2375,14 @@
 		DB720B6F22C1396B00ED116A /* ReceiveAddress */ = {
 			isa = PBXGroup;
 			children = (
-				DB720B7022C1396B00ED116A /* ReceiveAddressModels.swift */,
-				DB720B7122C1396B00ED116A /* ReceiveAddressViewController.swift */,
-				DB720B7222C1396B00ED116A /* ReceiveAddressInteractor.swift */,
-				DB720B7322C1396B00ED116A /* ReceiveAddressRouting.swift */,
 				DB720B7422C1396B00ED116A /* ReceiveAddressConfigurator.swift */,
-				DB720B7522C1396B00ED116A /* Workers */,
-				DB720B7E22C1396B00ED116A /* Views */,
+				DB720B7222C1396B00ED116A /* ReceiveAddressInteractor.swift */,
+				DB720B7022C1396B00ED116A /* ReceiveAddressModels.swift */,
 				DB720B8022C1396B00ED116A /* ReceiveAddressPresenter.swift */,
+				DB720B7322C1396B00ED116A /* ReceiveAddressRouting.swift */,
+				DB720B7122C1396B00ED116A /* ReceiveAddressViewController.swift */,
+				DB720B7E22C1396B00ED116A /* Views */,
+				DB720B7522C1396B00ED116A /* Workers */,
 			);
 			path = ReceiveAddress;
 			sourceTree = "<group>";
@@ -2539,14 +2539,14 @@
 		DB720BC222C1396B00ED116A /* SaleDetails */ = {
 			isa = PBXGroup;
 			children = (
+				DB720BC622C1396B00ED116A /* SaleDetailsConfigurator.swift */,
+				DB720BC522C1396B00ED116A /* SaleDetailsInteractor.swift */,
 				DB720BC322C1396B00ED116A /* SaleDetailsModels.swift */,
 				DB720BC422C1396B00ED116A /* SaleDetailsPresenter.swift */,
-				DB720BC522C1396B00ED116A /* SaleDetailsInteractor.swift */,
-				DB720BC622C1396B00ED116A /* SaleDetailsConfigurator.swift */,
-				DB720BC722C1396B00ED116A /* Workers */,
 				DB720BC922C1396B00ED116A /* SaleDetailsRouting.swift */,
-				DB720BCA22C1396B00ED116A /* Views */,
 				DB720BCF22C1396B00ED116A /* SaleDetailsViewController.swift */,
+				DB720BCA22C1396B00ED116A /* Views */,
+				DB720BC722C1396B00ED116A /* Workers */,
 			);
 			path = SaleDetails;
 			sourceTree = "<group>";

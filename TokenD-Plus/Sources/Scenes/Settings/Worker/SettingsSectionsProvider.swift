@@ -142,7 +142,7 @@ extension Settings {
         
         private func createSections() -> [Model.SectionModel] {
             let accountIdCell = Model.CellModel(
-                title: Localized(.account_id),
+                title: Localized(.account_capitalized),
                 icon: Assets.verificationIcon.image,
                 cellType: .disclosureCell,
                 identifier: .accountId

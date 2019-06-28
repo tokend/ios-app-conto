@@ -21,14 +21,23 @@ extension ReceiveAddress {
 }
 
 extension ReceiveAddress.ExportSeedManager: ReceiveAddressManagerProtocol {
-    var address: Address {
+    
+    var addressToCode: Address {
         return self.seedRelay.value
     }
     
-    func observeAddressChange() -> Observable<Address> {
+    var addressToShow: Address {
+        return self.seedRelay.value
+    }
+    
+    func observeAddressToCodeChange() -> Observable<Address> {
         let seedData = self.keychainDataProvider.getKeyData()
         let seed = Base32Check.encode(version: .seedEd25519, data: seedData.getSeedData())
         self.seedRelay.accept(seed)
+        return self.seedRelay.asObservable()
+    }
+    
+    func observeAddressToShowChange() -> Observable<Address> {
         return self.seedRelay.asObservable()
     }
 }
