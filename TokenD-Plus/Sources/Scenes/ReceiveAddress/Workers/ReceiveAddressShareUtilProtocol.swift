@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 protocol ReceiveAddressShareUtilProtocol {
     var canBeCopied: Bool { get }
@@ -9,8 +9,10 @@ protocol ReceiveAddressShareUtilProtocol {
         ) -> String
     
     func itemsToShareAddress(
-        _ address: ReceiveAddress.Address
-        ) -> [Any]
+        _ addressToCode: ReceiveAddress.Address,
+        _ qrCodeSize: CGSize,
+        _ addressToShow: ReceiveAddress.Address
+        ) -> ReceiveAddress.Model.ItemsToShare
 }
 
 extension ReceiveAddress {

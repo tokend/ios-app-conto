@@ -107,9 +107,10 @@ class SettingsFlowController: BaseSignedInFlowController {
             
         case .accountId:
             let addressManager = ReceiveAddress.ReceiveAddressManager(
-                accountId: self.userDataProvider.walletData.accountId
+                accountId: self.userDataProvider.walletData.accountId,
+                email: self.userDataProvider.account
             )
-            self.showInfoScreen(title: Localized(.account_id), addressManager: addressManager)
+            self.showInfoScreen(title: Localized(.account_capitalized), addressManager: addressManager)
             
         case .seed:
             let addressManager = ReceiveAddress.ExportSeedManager(

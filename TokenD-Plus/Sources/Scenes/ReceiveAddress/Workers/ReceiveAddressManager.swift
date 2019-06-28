@@ -5,20 +5,35 @@ import UIKit
 extension ReceiveAddress {
     class ReceiveAddressManager {
     
-        private let addressBehaviorRelay: BehaviorRelay<ReceiveAddressManagerProtocol.Address>
+        private let addressToCodeBehaviorRelay: BehaviorRelay<ReceiveAddressManagerProtocol.Address>
+        private let addressToShowBehaviorRelay: BehaviorRelay<ReceiveAddressManagerProtocol.Address>
         
-        init(accountId: String) {
-            self.addressBehaviorRelay = BehaviorRelay(value: accountId)
+        init(
+            accountId: String,
+            email: String
+            ) {
+            
+            self.addressToCodeBehaviorRelay = BehaviorRelay(value: accountId)
+            self.addressToShowBehaviorRelay = BehaviorRelay(value: email)
         }
     }
 }
 
 extension ReceiveAddress.ReceiveAddressManager: ReceiveAddress.AddressManagerProtocol {
-    var address: ReceiveAddressManagerProtocol.Address {
-        return self.addressBehaviorRelay.value
+    
+    var addressToCode: ReceiveAddressManagerProtocol.Address {
+        return self.addressToCodeBehaviorRelay.value
     }
     
-    func observeAddressChange() -> Observable<ReceiveAddressManagerProtocol.Address> {
-        return self.addressBehaviorRelay.asObservable()
+    var addressToShow: ReceiveAddressManagerProtocol.Address {
+        return self.addressToShowBehaviorRelay.value
+    }
+    
+    func observeAddressToCodeChange() -> Observable<ReceiveAddressManagerProtocol.Address> {
+        return self.addressToCodeBehaviorRelay.asObservable()
+    }
+    
+    func observeAddressToShowChange() -> Observable<ReceiveAddressManagerProtocol.Address> {
+        return self.addressToShowBehaviorRelay.asObservable()
     }
 }

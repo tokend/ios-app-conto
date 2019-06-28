@@ -106,16 +106,16 @@ class CompanyFlowController: BaseSignedInFlowController {
                         self?.runPollsFlow()
                 }),
                 SideMenu.Model.MenuItem(
-                    iconImage: Assets.companies.image,
-                    title: Localized(.back_to_companies),
-                    onSelected: { [weak self] in
-                        self?.onBackToCompanies()
-                }),
-                SideMenu.Model.MenuItem(
                     iconImage: Assets.settingsIcon.image,
                     title: Localized(.settings),
                     onSelected: { [weak self] in
                         self?.runSettingsFlow()
+                }),
+                SideMenu.Model.MenuItem(
+                    iconImage: Assets.companies.image,
+                    title: Localized(.back_to_companies),
+                    onSelected: { [weak self] in
+                        self?.onBackToCompanies()
                 })
             ]
         ]

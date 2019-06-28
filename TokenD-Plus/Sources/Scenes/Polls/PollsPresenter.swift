@@ -46,10 +46,10 @@ extension Polls {
                 )
                 let actionTitle = Localized(.submit_vote)
                 let actionState: Model.ActionState
-                if poll.currentChoice == nil {
-                    actionState = .disabled
-                } else {
+                if poll.currentChoice != nil || poll.isClosed {
                     actionState = .hidden
+                } else {
+                    actionState = .disabled
                 }
                 
                 return Polls.PollCell.ViewModel(
@@ -119,11 +119,13 @@ extension Polls.Presenter: Polls.PresentationLogic {
     public func presentSceneUpdated(response: Event.SceneUpdated.Response) {
         let contentViewModel: Model.SceneContentViewModel
         switch response.content {
+            
         case .error(let error):
             contentViewModel = .empty(error.localizedDescription)
+            
         case .polls(let responsePolls):
             if responsePolls.isEmpty {
-                contentViewModel = .empty(Localized(.there_is_no_any_poll_for_chosen_asset))
+                contentViewModel = .empty(Localized(.there_is_no_any_poll_for_chosen_company))
             } else {
                 let polls = self.getPollsViewModel(polls: responsePolls)
                 contentViewModel = .polls(polls)

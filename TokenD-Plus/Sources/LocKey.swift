@@ -7,6 +7,7 @@ enum LocKey: String {
     case account
     case account_has_been_successfully_recovered
     case account_id
+    case account_capitalized
     case account_id_or_email_colon
     case acknowledgements
     case address_is_copied_to_pasteboard
@@ -470,7 +471,8 @@ enum LocKey: String {
     case terms_of_service_not_agreed
     case terms_of_use
     case there_is_not_any_company_where_you_are_a_client_yet
-    case there_is_no_any_poll_for_chosen_asset
+    case there_is_not_any_user_with_such_an_email_was_found
+    case there_is_no_any_poll_for_chosen_company
     case there_is_no_progress_history_yet
     case this_feature_will_be
     case this_seed_is_the_only_way

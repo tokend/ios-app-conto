@@ -113,7 +113,7 @@ extension SendPaymentDestination {
             self.recipientAddressView.onQRAction = { [weak self] in
                 self?.routing?.onPresentQRCodeReader({ result in
                     let request = Event.ScanRecipientQRAddress.Request(qrResult: result)
-                    self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                    self?.interactorDispatch?.sendSyncRequest(requestBlock: { (businessLogic) in
                         businessLogic.onScanRecipientQRAddress(request: request)
                     })
                 })

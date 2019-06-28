@@ -175,7 +175,8 @@ class DashboardFlowController: BaseSignedInFlowController {
         let vc = ReceiveAddress.ViewController()
         
         let addressManager = ReceiveAddress.ReceiveAddressManager(
-            accountId: self.userDataProvider.walletData.accountId
+            accountId: self.userDataProvider.walletData.accountId,
+            email: self.userDataProvider.account
         )
         
         let viewConfig = ReceiveAddress.Model.ViewConfig(
@@ -211,7 +212,7 @@ class DashboardFlowController: BaseSignedInFlowController {
             routing: routing
         )
         
-        vc.navigationItem.title = Localized(.account_id)
+        vc.navigationItem.title = Localized(.account_capitalized)
         vc.tabBarItem.title = Localized(.receive)
         vc.tabBarItem.image = Assets.receive.image
         

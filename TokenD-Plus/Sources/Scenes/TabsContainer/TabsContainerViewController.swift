@@ -146,7 +146,7 @@ extension TabsContainer {
         
         private func setupHorizontalPicker() {
             self.horizontalPicker.backgroundColor = Theme.Colors.mainColor
-            self.horizontalPicker.tintColor = Theme.Colors.darkAccentColor
+            self.horizontalPicker.tintColor = Theme.Colors.accentColor
         }
         
         private func setupContainerView() {

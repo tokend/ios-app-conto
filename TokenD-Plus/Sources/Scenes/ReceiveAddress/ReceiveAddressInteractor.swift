@@ -58,29 +58,46 @@ extension ReceiveAddress {
         
         private func passRegenerateResponse() {
             let response = ReceiveAddress.Event.QRCodeRegenerated.Response(
-                address: self.sceneModel.address,
+                address: self.sceneModel.addressToCode,
                 qrSize: self.sceneModel.qrCodeSize
             )
             self.presenter.presentQRCodeRegenerated(response: response)
         }
         
-        private func observeAddressChange() {
+        private func observeAddressToCodeChange() {
             self.addressManager
-                .observeAddressChange()
+                .observeAddressToCodeChange()
                 .subscribe(onNext: { [weak self] (address) in
-                    self?.updateAddressIfNeeded(address)
+                    self?.updateAddressToCodeIfNeeded(address)
                 })
                 .disposed(by: self.disposeBag)
         }
         
-        private func updateAddressIfNeeded(_ newAddress: Address) {
-            guard self.sceneModel.address != newAddress else {
+        private func observeAddressToShowChange() {
+            self.addressManager
+                .observeAddressToShowChange()
+                .subscribe(onNext: { [weak self] (address) in
+                    self?.updateAddressToShowIfNeeded(address)
+                })
+                .disposed(by: self.disposeBag)
+        }
+        
+        private func updateAddressToCodeIfNeeded(_ newAddress: Address) {
+            guard self.sceneModel.addressToCode != newAddress else {
                 return
             }
             
-            self.sceneModel.address = newAddress
-            self.presentValueChanged()
+            self.sceneModel.addressToCode = newAddress
             self.regenerateQR()
+        }
+        
+        private func updateAddressToShowIfNeeded(_ newAddress: Address) {
+            guard self.sceneModel.addressToShow != newAddress else {
+                return
+            }
+            
+            self.sceneModel.addressToShow = newAddress
+            self.presentValueChanged()
         }
         
         private func regenerateQR() {
@@ -89,7 +106,7 @@ extension ReceiveAddress {
         
         private func presentValueChanged() {
             let response = ReceiveAddress.Event.ValueChanged.Response(
-                address: self.sceneModel.address,
+                address: self.sceneModel.addressToShow,
                 availableValueActions: self.sceneModel.availableValueActions
             )
             self.presenter.presentValueChanged(response: response)
@@ -99,18 +116,19 @@ extension ReceiveAddress {
 
 extension ReceiveAddress.Interactor: ReceiveAddress.BusinessLogic {
     func onViewDidLoad(request: ReceiveAddress.Event.ViewDidLoad.Request) {
-        self.observeAddressChange()
+        self.observeAddressToCodeChange()
+        self.observeAddressToShowChange()
     }
     
     func onViewDidLoadSync(request: ReceiveAddress.Event.ViewDidLoadSync.Request) {
         let response = ReceiveAddress.Event.ViewDidLoadSync.Response(
-            address: self.addressManager.address
+            address: self.addressManager.addressToShow
         )
         self.presenter.presentViewDidLoadSync(response: response)
     }
     
     func onViewWillAppear(request: ReceiveAddress.Event.ViewWillAppear.Request) {
-        self.updateAddressIfNeeded(self.addressManager.address)
+        self.updateAddressToCodeIfNeeded(self.addressManager.addressToCode)
     }
     
     func onViewDidLayoutSubviews(request: ReceiveAddress.Event.ViewDidLayoutSubviews.Request) {
@@ -120,7 +138,7 @@ extension ReceiveAddress.Interactor: ReceiveAddress.BusinessLogic {
     
     func onCopyAction(request: ReceiveAddress.Event.CopyAction.Request) {
         let toCopy = self.shareUtil.stringToCopyAddress(
-            self.sceneModel.address
+            self.sceneModel.addressToShow
         )
         let response = ReceiveAddress.Event.CopyAction.Response(stringToCopy: toCopy)
         self.presenter.presentCopyAction(response: response)
@@ -128,7 +146,9 @@ extension ReceiveAddress.Interactor: ReceiveAddress.BusinessLogic {
     
     func onShareAction(request: ReceiveAddress.Event.ShareAction.Request) {
         let toShare = self.shareUtil.itemsToShareAddress(
-            self.sceneModel.address
+            self.sceneModel.addressToCode,
+            self.sceneModel.qrCodeSize,
+            self.sceneModel.addressToShow
         )
         let response = ReceiveAddress.Event.ShareAction.Response(itemsToShare: toShare)
         self.presenter.presentShareAction(response: response)

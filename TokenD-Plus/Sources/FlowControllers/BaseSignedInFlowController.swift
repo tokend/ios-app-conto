@@ -179,7 +179,8 @@ class BaseSignedInFlowController: BaseFlowController {
         )
         
         let addressManager = ReceiveAddress.ReceiveAddressManager(
-            accountId: self.userDataProvider.walletData.accountId
+            accountId: self.userDataProvider.walletData.accountId,
+            email: self.userDataProvider.account
         )
         
         let sceneModel = ReceiveAddress.Model.SceneModel()

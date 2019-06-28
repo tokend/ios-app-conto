@@ -70,7 +70,7 @@ extension Fees {
         
         private func setupHorizontalPicker() {
             self.horisontalPicker.backgroundColor = Theme.Colors.mainColor
-            self.horisontalPicker.tintColor = Theme.Colors.darkAccentColor
+            self.horisontalPicker.tintColor = Theme.Colors.accentColor
         }
         
         private func setupTableView() {

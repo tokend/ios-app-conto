@@ -67,30 +67,12 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
                     actions.append(sendAction)
                     actions.append(receiveAction)
                     
-                    if Int32(asset.policy) & AssetPolicy.withdrawable.rawValue == AssetPolicy.withdrawable.rawValue {
-                        let withdrawAction = TransactionsListScene.ActionModel(
-                            title: Localized(.withdraw),
-                            image: Assets.withdrawAction.image,
-                            type: .withdraw(balanceId: details.balanceId)
-                        )
-                        actions.append(withdrawAction)
-                    }
                 }
             case .creating:
                 break
             }
         } else {
             actions.append(receiveAction)
-        }
-        
-        if let details = asset.defaultDetails,
-            details.externalSystemType != nil {
-            let depositAction = TransactionsListScene.ActionModel(
-                title: Localized(.deposit),
-                image: Assets.depositAction.image,
-                type: .deposit(assetId: asset.identifier)
-            )
-            actions.append(depositAction)
         }
         
         return actions
@@ -127,28 +109,6 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
             )
             actions.append(sendAction)
             actions.append(receiveAction)
-            
-            if let asset = self.assetsRepo.assetsValue.first(where: { (asset) -> Bool in
-                return asset.code == details.asset
-            }),
-                Int32(asset.policy) & AssetPolicy.withdrawable.rawValue == AssetPolicy.withdrawable.rawValue {
-                let withdrawAction = TransactionsListScene.ActionModel(
-                    title: Localized(.withdraw),
-                    image: Assets.withdrawAction.image,
-                    type: .withdraw(balanceId: details.balanceId)
-                )
-                actions.append(withdrawAction)
-                
-                if let assetDetails = asset.defaultDetails,
-                    assetDetails.externalSystemType != nil {
-                    let depositAction = TransactionsListScene.ActionModel(
-                        title: Localized(.deposit),
-                        image: Assets.depositAction.image,
-                        type: .deposit(assetId: asset.identifier)
-                    )
-                    actions.append(depositAction)
-                }
-            }
         } else {
             actions.append(receiveAction)
         }

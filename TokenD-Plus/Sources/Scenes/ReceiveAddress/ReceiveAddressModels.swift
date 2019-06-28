@@ -12,12 +12,14 @@ enum ReceiveAddress {
 extension ReceiveAddress.Model {
     
     struct SceneModel {
-        var address: ReceiveAddress.Address
+        var addressToCode: ReceiveAddress.Address
+        var addressToShow: ReceiveAddress.Address
         var qrCodeSize: CGSize
         var availableValueActions: [ValueAction]
         
         init() {
-            self.address = ""
+            self.addressToCode = ""
+            self.addressToShow = ""
             self.qrCodeSize = .zero
             self.availableValueActions = []
         }
@@ -32,9 +34,16 @@ extension ReceiveAddress.Model {
         case copy
         case share
     }
+    
+    struct ItemsToShare {
+        let addressToCode: ReceiveAddress.Address
+        let qrCodeSize: CGSize
+        let addressToShow: ReceiveAddress.Address
+    }
 }
 
 extension ReceiveAddress.Event {
+    typealias Model = ReceiveAddress.Model
     
     enum ViewDidLoad {
         struct Request { }
@@ -74,7 +83,7 @@ extension ReceiveAddress.Event {
     enum ShareAction {
         struct Request { }
         struct Response {
-            let itemsToShare: [Any]
+            let itemsToShare: Model.ItemsToShare
         }
         struct ViewModel {
             let itemsToShare: [Any]

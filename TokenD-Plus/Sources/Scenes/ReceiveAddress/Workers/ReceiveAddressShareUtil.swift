@@ -24,6 +24,7 @@ extension ReceiveAddress {
 }
 
 extension ReceiveAddress.ReceiveAddressShareUtil: ReceiveAddress.ShareUtilProtocol {
+    
     var canBeCopied: Bool {
         return true
     }
@@ -40,9 +41,15 @@ extension ReceiveAddress.ReceiveAddressShareUtil: ReceiveAddress.ShareUtilProtoc
     }
     
     func itemsToShareAddress(
-        _ address: ReceiveAddress.Address
-        ) -> [Any] {
+        _ addressToCode: ReceiveAddress.Address,
+        _ qrCodeSize: CGSize,
+        _ addressToShow: ReceiveAddress.Address
+        ) -> ReceiveAddress.Model.ItemsToShare {
         
-        return [address]
+        return ReceiveAddress.Model.ItemsToShare(
+            addressToCode: addressToCode,
+            qrCodeSize: qrCodeSize,
+            addressToShow:addressToShow
+        )
     }
 }

@@ -3,14 +3,14 @@ import TokenDWallet
 import TokenDSDK
 
 public enum RecipientAddressResolverResult {
-   public enum AddressResolveError: Swift.Error, LocalizedError {
-        case invalidAccountIdOrEmail
+    public enum AddressResolveError: Swift.Error, LocalizedError {
+        case invalidEmail
         case other(ApiErrors)
         
-       public var errorDescription: String? {
+        public var errorDescription: String? {
             switch self {
-            case .invalidAccountIdOrEmail:
-                return Localized(.invalid_account_id_or_email)
+            case .invalidEmail:
+                return Localized(.there_is_not_any_user_with_such_an_email_was_found)
             case .other(let errors):
                 let message = errors.localizedDescription
                 return Localized(
@@ -37,7 +37,7 @@ public protocol SendPaymentDestinationRecipientAddressResolverProtocol {
 extension SendPaymentDestination {
     public typealias RecipientAddressResolver = SendPaymentDestinationRecipientAddressResolverProtocol
     
-   public class RecipientAddressResolverWorker: RecipientAddressResolver {
+    public class RecipientAddressResolverWorker: RecipientAddressResolver {
         
         // MARK: - Private properties
         
@@ -56,29 +56,9 @@ extension SendPaymentDestination {
             completion: @escaping (_ result: RecipientAddressResolverResult) -> Void
             ) {
             
-            // Try to derive account id from address string
-            
-            do {
-                _ = try Base32Check.decodeCheck(
-                    expectedVersion: .accountIdEd25519,
-                    encoded: recipientAddress
-                )
-                completion(.succeeded(recipientAddress: recipientAddress))
-            } catch {
-                let email = recipientAddress.lowercased()
-                self.requestDataByEmail(email, completion: completion)
-            }
-        }
-        
-        // MARK: - Private
-        
-        private func requestDataByEmail(
-            _ email: String,
-            completion: @escaping (_ result: RecipientAddressResolverResult) -> Void
-            ) {
-            
+            let email = recipientAddress.lowercased()
             guard self.validateEmail(email) else {
-                completion(.failed(.invalidAccountIdOrEmail))
+                completion(.failed(.invalidEmail))
                 return
             }
             
@@ -94,7 +74,7 @@ extension SendPaymentDestination {
                         guard let identity = response.first(where: { (identity) -> Bool in
                             return identity.attributes.email == email
                         }) else {
-                            completion(.failed(.invalidAccountIdOrEmail))
+                            completion(.failed(.invalidEmail))
                             return
                         }
                         
@@ -102,6 +82,8 @@ extension SendPaymentDestination {
                     }
             })
         }
+        
+        // MARK: - Private
         
         private func validateEmail(_ email: String) -> Bool {
             return true
