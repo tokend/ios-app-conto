@@ -16,6 +16,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     // MARK: - Callbacks
     
+    let onSignOut: () -> Void
     let onBackToCompanies: () -> Void
     
     // MARK: -
@@ -29,10 +30,12 @@ class CompanyFlowController: BaseSignedInFlowController {
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
         ownerAccountId: String,
+        onSignOut: @escaping () -> Void,
         onBackToCompanies: @escaping () -> Void
         ) {
         
         self.ownerAccountId = ownerAccountId
+        self.onSignOut = onSignOut
         self.onBackToCompanies = onBackToCompanies
         
         SideMenuController.preferences.drawing.menuButtonImage = Assets.menuIcon.image
@@ -107,6 +110,12 @@ class CompanyFlowController: BaseSignedInFlowController {
                     title: Localized(.back_to_companies),
                     onSelected: { [weak self] in
                         self?.onBackToCompanies()
+                }),
+                SideMenu.Model.MenuItem(
+                    iconImage: Assets.settingsIcon.image,
+                    title: Localized(.settings),
+                    onSelected: { [weak self] in
+                        self?.runSettingsFlow()
                 })
             ]
         ]
@@ -252,6 +261,23 @@ class CompanyFlowController: BaseSignedInFlowController {
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation,
             ownerAccountId: self.ownerAccountId
+        )
+        self.currentFlowController = flow
+        flow.run(showRootScreen: { [weak self] (vc) in
+            self?.sideNavigationController.embed(centerViewController: vc)
+        })
+    }
+    
+    private func runSettingsFlow() {
+        let flow = SettingsFlowController(
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider,
+            rootNavigation: self.rootNavigation,
+            onSignOut: self.onSignOut
         )
         self.currentFlowController = flow
         flow.run(showRootScreen: { [weak self] (vc) in

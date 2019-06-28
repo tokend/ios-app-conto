@@ -44,7 +44,7 @@ extension TabBar {
         public override init(frame: CGRect) {
             super.init(frame: frame)
             
-            self.delegate = self
+            self.setupView()
         }
         
         required init?(coder aDecoder: NSCoder) {
@@ -52,6 +52,11 @@ extension TabBar {
         }
         
         // MARK: - Private
+        
+        private func setupView() {
+            self.tintColor = Theme.Colors.accentColor
+            self.delegate = self
+        }
         
         private func getTabBarItem(identifier: Model.TabIdentifier) -> UITabBarItem? {
             return self.items?.compactMap({ (item) -> TabBar.TabBarItem? in

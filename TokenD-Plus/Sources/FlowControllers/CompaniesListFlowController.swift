@@ -14,7 +14,6 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol = NavigationController()
-    private let disposeBag: DisposeBag = DisposeBag()
     private let onSignOut: () -> Void
     private let onLocalAuthRecoverySucceeded: () -> Void
     
@@ -114,22 +113,6 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     private func setupCompaniesScreen() -> UIViewController {
         let vc = CompaniesList.ViewController()
         
-        let settingsItem = UIBarButtonItem(
-            image: Assets.settingsIcon.image,
-            style: .plain,
-            target: nil,
-            action: nil
-        )
-        settingsItem
-            .rx
-            .tap
-            .asDriver()
-            .drive(onNext: { [weak self] (_) in
-                self?.runSettingsFlow()
-            })
-            .disposed(by: self.disposeBag)
-        
-        vc.navigationItem.leftBarButtonItem = settingsItem
         let companiesFetcher = CompaniesList.CompaniesFetcher(
             accountsApi: self.flowControllerStack.apiV3.accountsApi,
             userDataProvider: self.userDataProvider
@@ -153,22 +136,6 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         return vc
     }
     
-    private func runSettingsFlow() {
-        let flow = SettingsFlowController(
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation,
-            navigationController: self.navigationController,
-            onSignOut: self.onSignOut
-        )
-        self.currentFlowController = flow
-        flow.run()
-    }
-    
     private func runCompanyFlow(ownerAccountId: String) {
         let flow = CompanyFlowController(
             appController: self.appController,
@@ -179,6 +146,7 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation,
             ownerAccountId: ownerAccountId,
+            onSignOut: self.onSignOut,
             onBackToCompanies: { [weak self] in
                 self?.run()
             })

@@ -6,7 +6,7 @@ class SettingsFlowController: BaseSignedInFlowController {
     
     // MARK: - Private properties
     
-    private let navigationController: NavigationControllerProtocol
+    private let navigationController: NavigationControllerProtocol = NavigationController()
     private let onSignOut: () -> Void
     
     // MARK: -
@@ -19,11 +19,9 @@ class SettingsFlowController: BaseSignedInFlowController {
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
-        navigationController: NavigationControllerProtocol,
         onSignOut: @escaping () -> Void
         ) {
         
-        self.navigationController = navigationController
         self.onSignOut = onSignOut
         super.init(
             appController: appController,
@@ -38,13 +36,13 @@ class SettingsFlowController: BaseSignedInFlowController {
     
     // MARK: - Public
     
-    public func run() {
-        self.showSettingsScreen()
+    public func run(showRootScreen: ((_ vc: UIViewController) -> Void)?) {
+        self.showSettingsScreen(showRootScreen: showRootScreen)
     }
     
     // MARK: - Private
     
-    private func showSettingsScreen() {
+    private func showSettingsScreen(showRootScreen: ((_ vc: UIViewController) -> Void)?) {
         let vc = Settings.ViewController()
         
         let sectionsProvider = Settings.SettingsSectionsProvider(
@@ -95,7 +93,13 @@ class SettingsFlowController: BaseSignedInFlowController {
         )
         
         vc.navigationItem.title = Localized(.settings)
-        self.navigationController.pushViewController(vc, animated: true)
+        
+        self.navigationController.setViewControllers([vc], animated: false)
+        if let showRoot = showRootScreen {
+            showRoot(self.navigationController.getViewController())
+        } else {
+            self.rootNavigation.setRootContent(self.navigationController, transition: .fade, animated: false)
+        }
     }
     
     private func switchToSetting(_ identifier: Settings.CellIdentifier) {

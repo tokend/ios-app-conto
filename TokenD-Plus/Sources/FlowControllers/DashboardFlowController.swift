@@ -152,7 +152,7 @@ class DashboardFlowController: BaseSignedInFlowController {
             })
             .disposed(by: self.disposeBag)
         
-        container.navigationItem.rightBarButtonItem = exploreAssetsItem
+        // container.navigationItem.rightBarButtonItem = exploreAssetsItem
         self.navigationController.setViewControllers([container], animated: false)
         
         if let showRoot = showRootScreen {
