@@ -37,6 +37,17 @@ extension BalancesList.Model {
         case chart(PieChartModel)
     }
     
+    public struct ActionModel {
+        let title: String
+        let image: UIImage
+        let actionType: ActionType
+    }
+    
+    public enum ActionType {
+        case send
+        case receive
+    }
+    
     public struct LegendCellModel: Equatable {
         let assetName: String
         let balance: Decimal
@@ -172,5 +183,12 @@ extension BalancesList.Event {
             let pieChartViewModel: Model.PieChartViewModel
             let legendCells: [BalancesList.LegendCell.ViewModel]
         }
+    }
+    
+    public enum ActionsDidChange {
+        public struct Response {
+            let models: [Model.ActionModel]
+        }
+        public typealias ViewModel = Response
     }
 }

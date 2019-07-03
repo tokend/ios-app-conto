@@ -22,6 +22,7 @@ extension BalancesList {
         private let presenter: PresentationLogic
         private var sceneModel: Model.SceneModel
         private let balancesFetcher: BalancesFetcherProtocol
+        private let actionProvider: ActionsProviderProtocol
         
         private let displayEntriesCount: Int = 3
         private let disposeBag: DisposeBag = DisposeBag()
@@ -31,12 +32,14 @@ extension BalancesList {
         init(
             presenter: PresentationLogic,
             sceneModel: Model.SceneModel,
-            balancesFetcher: BalancesFetcherProtocol
+            balancesFetcher: BalancesFetcherProtocol,
+            actionProvider: ActionsProviderProtocol
             ) {
             
             self.presenter = presenter
             self.sceneModel = sceneModel
             self.balancesFetcher = balancesFetcher
+            self.actionProvider = actionProvider
         }
         
         // MARK: - Private
@@ -54,6 +57,12 @@ extension BalancesList {
                 ]
             )
             self.presenter.presentSectionsUpdated(response: response)
+        }
+        
+        private func updateActions() {
+            let actions = self.actionProvider.getActions()
+            let response = Event.ActionsDidChange.Response(models: actions)
+            self.presenter.presentActionsDidChange(response: response)
         }
         
         // MARK: - Header
@@ -233,6 +242,7 @@ extension BalancesList {
 extension BalancesList.Interactor: BalancesList.BusinessLogic {
     
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
+        self.updateActions()
         self.balancesFetcher
             .observeLoadingStatus()
             .subscribe(onNext: { [weak self] (status) in
@@ -248,6 +258,7 @@ extension BalancesList.Interactor: BalancesList.BusinessLogic {
                 self?.updateSections()
             })
             .disposed(by: self.disposeBag)
+        
     }
     
     public func onPieChartBalanceSelected(request: Event.PieChartBalanceSelected.Request) {

@@ -137,8 +137,13 @@ extension TabBarContainer {
                     self?.showShadow()
                 }, hideShadow: { [weak self] in
                     self?.hideShadow()
+                }, showReceive: { [weak self] in
+                    self?.showReceiveScene()
+                }, showSendPayment: { [weak self] in
+                    self?.showSendScene()
             })
             
+            let actionProvider = BalancesList.ActionProvider()
             let amountFormatter = BalancesList.AmountFormatter()
             let percentFormatter = BalancesList.PercentFormatter()
             let sceneModel = BalancesList.Model.SceneModel(
@@ -152,6 +157,7 @@ extension TabBarContainer {
                 viewController: vc,
                 sceneModel: sceneModel,
                 balancesFetcher: self.balancesFetcher,
+                actionProvider: actionProvider,
                 amountFormatter: amountFormatter,
                 percentFormatter: percentFormatter,
                 colorsProvider: self.colorsProvider,

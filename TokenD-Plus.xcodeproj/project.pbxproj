@@ -382,7 +382,7 @@
 		DB720E3C22C1396C00ED116A /* BalancesListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8A22C1396B00ED116A /* BalancesListInteractor.swift */; };
 		DB720E3D22C1396C00ED116A /* BalancesListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8C22C1396B00ED116A /* BalancesListDataProvider.swift */; };
 		DB720E3E22C1396C00ED116A /* BalancesListPieChartColorsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8D22C1396B00ED116A /* BalancesListPieChartColorsProvider.swift */; };
-		DB720E3F22C1396C00ED116A /* BalanceListBalanceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8E22C1396B00ED116A /* BalanceListBalanceFetcher.swift */; };
+		DB720E3F22C1396C00ED116A /* BalancesListBalanceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8E22C1396B00ED116A /* BalancesListBalanceFetcher.swift */; };
 		DB720E4022C1396C00ED116A /* BalancesListAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8F22C1396B00ED116A /* BalancesListAmountFormatter.swift */; };
 		DB720E4122C1396C00ED116A /* BalancesListPercentFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B9022C1396B00ED116A /* BalancesListPercentFormatter.swift */; };
 		DB720E4222C1396C00ED116A /* BalancesListLegendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B9222C1396B00ED116A /* BalancesListLegendCell.swift */; };
@@ -625,6 +625,7 @@
 		DB720F5F22C4CD1C00ED116A /* PollsNavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F5122C4CD1C00ED116A /* PollsNavigationTitleView.swift */; };
 		DB720F6022C4CD1C00ED116A /* PollsPollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F5222C4CD1C00ED116A /* PollsPollCell.swift */; };
 		DB720F6122C4CD1C00ED116A /* PollsChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F5322C4CD1C00ED116A /* PollsChoiceCell.swift */; };
+		DB72280A22CCBB4200341565 /* BalancesListActionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1007,7 +1008,7 @@
 		DB720B8A22C1396B00ED116A /* BalancesListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListInteractor.swift; sourceTree = "<group>"; };
 		DB720B8C22C1396B00ED116A /* BalancesListDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListDataProvider.swift; sourceTree = "<group>"; };
 		DB720B8D22C1396B00ED116A /* BalancesListPieChartColorsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListPieChartColorsProvider.swift; sourceTree = "<group>"; };
-		DB720B8E22C1396B00ED116A /* BalanceListBalanceFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceListBalanceFetcher.swift; sourceTree = "<group>"; };
+		DB720B8E22C1396B00ED116A /* BalancesListBalanceFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListBalanceFetcher.swift; sourceTree = "<group>"; };
 		DB720B8F22C1396B00ED116A /* BalancesListAmountFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListAmountFormatter.swift; sourceTree = "<group>"; };
 		DB720B9022C1396B00ED116A /* BalancesListPercentFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListPercentFormatter.swift; sourceTree = "<group>"; };
 		DB720B9222C1396B00ED116A /* BalancesListLegendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListLegendCell.swift; sourceTree = "<group>"; };
@@ -1250,6 +1251,7 @@
 		DB720F5122C4CD1C00ED116A /* PollsNavigationTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsNavigationTitleView.swift; sourceTree = "<group>"; };
 		DB720F5222C4CD1C00ED116A /* PollsPollCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsPollCell.swift; sourceTree = "<group>"; };
 		DB720F5322C4CD1C00ED116A /* PollsChoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsChoiceCell.swift; sourceTree = "<group>"; };
+		DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesListActionProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2180,15 +2182,15 @@
 		DB720B1E22C1396B00ED116A /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				DB720B3822C1396B00ED116A /* DashboardConfigurator.swift */,
 				DB720B1F22C1396B00ED116A /* DashboardInteractor.swift */,
+				DB720B3722C1396B00ED116A /* DashboardModels.swift */,
+				DB720B3622C1396B00ED116A /* DashboardPresenter.swift */,
+				DB720B3922C1396B00ED116A /* DashboardRouting.swift */,
 				DB720B2022C1396B00ED116A /* DashboardViewController.swift */,
 				DB720B2122C1396B00ED116A /* PlugIns */,
-				DB720B3622C1396B00ED116A /* DashboardPresenter.swift */,
-				DB720B3722C1396B00ED116A /* DashboardModels.swift */,
-				DB720B3822C1396B00ED116A /* DashboardConfigurator.swift */,
-				DB720B3922C1396B00ED116A /* DashboardRouting.swift */,
-				DB720B3A22C1396B00ED116A /* Workers */,
 				DB720B3D22C1396B00ED116A /* Views */,
+				DB720B3A22C1396B00ED116A /* Workers */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -2428,11 +2430,12 @@
 		DB720B8B22C1396B00ED116A /* Workers */ = {
 			isa = PBXGroup;
 			children = (
-				DB720B8C22C1396B00ED116A /* BalancesListDataProvider.swift */,
-				DB720B8D22C1396B00ED116A /* BalancesListPieChartColorsProvider.swift */,
-				DB720B8E22C1396B00ED116A /* BalanceListBalanceFetcher.swift */,
+				DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */,
 				DB720B8F22C1396B00ED116A /* BalancesListAmountFormatter.swift */,
+				DB720B8E22C1396B00ED116A /* BalancesListBalanceFetcher.swift */,
+				DB720B8C22C1396B00ED116A /* BalancesListDataProvider.swift */,
 				DB720B9022C1396B00ED116A /* BalancesListPercentFormatter.swift */,
+				DB720B8D22C1396B00ED116A /* BalancesListPieChartColorsProvider.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -3404,6 +3407,7 @@
 				DB720CF522C1396B00ED116A /* SalesModels.swift in Sources */,
 				DB720D4922C1396B00ED116A /* ChartDataProvider.swift in Sources */,
 				DB720DAC22C1396B00ED116A /* SendPaymentAmountModels.swift in Sources */,
+				DB72280A22CCBB4200341565 /* BalancesListActionProvider.swift in Sources */,
 				DB720E6C22C1396C00ED116A /* SaleDetailsPresenter.swift in Sources */,
 				DB720D7222C1396B00ED116A /* BalanceHeaderWithPickerAmountFormatterProtocol.swift in Sources */,
 				DB720EE722C1396C00ED116A /* WalletRepo.swift in Sources */,
@@ -3686,7 +3690,7 @@
 				DB720F3422C2290800ED116A /* CompaniesListCompanyCell.swift in Sources */,
 				DB720E1522C1396C00ED116A /* RegisterScenePresenter.swift in Sources */,
 				DB720E7E22C1396C00ED116A /* BalanceHeaderInteractor.swift in Sources */,
-				DB720E3F22C1396C00ED116A /* BalanceListBalanceFetcher.swift in Sources */,
+				DB720E3F22C1396C00ED116A /* BalancesListBalanceFetcher.swift in Sources */,
 				DB720D9A22C1396B00ED116A /* TabBarDashboardTabProvider.swift in Sources */,
 				DB720E7122C1396C00ED116A /* SaleDetailsGeneralContentView.swift in Sources */,
 				DB720DB922C1396B00ED116A /* ConfirmationScenePresenter.swift in Sources */,

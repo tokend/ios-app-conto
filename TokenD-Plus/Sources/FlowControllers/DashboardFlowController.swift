@@ -7,7 +7,7 @@ class DashboardFlowController: BaseSignedInFlowController {
     
     private let navigationController: NavigationControllerProtocol =
         NavigationController()
-    private weak var dashboardScene: TabBarContainer.ViewController?
+    private weak var dashboardScene: BalancesList.ViewController?
     private var operationCompletionScene: UIViewController {
         return self.dashboardScene ?? UIViewController()
     }
@@ -59,9 +59,6 @@ class DashboardFlowController: BaseSignedInFlowController {
             self.operationCompletionScene,
             animated: true
         )
-        self.dashboardScene?.setSelectedContentWithIdentifier(
-            idetifier: Localized(.movements)
-        )
     }
     
     private func showDashboardScreen(
@@ -69,13 +66,16 @@ class DashboardFlowController: BaseSignedInFlowController {
         selectedTabIdentifier: TabsContainer.Model.TabIdentifier?
         ) {
         
-        let container = TabBarContainer.ViewController()
-        let transactionsProvider = TransactionsListScene.MovementsProvider(
-            movementsRepo: self.reposController.movementsRepo
+        let vc = BalancesList.ViewController()
+        let sceneModel = BalancesList.Model.SceneModel(
+            balances: [],
+            chartBalances: [],
+            selectedChartBalance: nil,
+            convertedAsset: "USD"
         )
-        let transactionsFetcher = TransactionsListScene.PaymentsFetcher(
-            transactionsProvider: transactionsProvider
-        )
+        let amountFormatter = BalancesList.AmountFormatter()
+        let percentFormatter = BalancesList.PercentFormatter()
+        
         let imagesUtility = ImagesUtility(
             storageUrl: self.flowControllerStack.apiConfigurationModel.storageEndpoint
         )
@@ -85,75 +85,45 @@ class DashboardFlowController: BaseSignedInFlowController {
             ownerAccountId: self.ownerAccountId,
             imageUtility: imagesUtility
         )
-        let actionProvider = TransactionsListScene.ActionProvider(
-            assetsRepo: self.reposController.assetsRepo,
-            balancesRepo: self.reposController.balancesRepo
-        )
-        let amountFormatter = TransactionsListScene.AmountFormatter()
-        let dateFormatter = TransactionsListScene.DateFormatter()
+        let actionProvider = BalancesList.ActionProvider()
         let colorsProvider = BalancesList.PieChartColorsProvider()
         
-        let contentProvider = TabBarContainer.DashboardProvider(
-            transactionsFetcher: transactionsFetcher,
+        let routing = BalancesList.Routing(
+            onBalanceSelected: { [weak self] (balanceId) in
+                self?.showPaymentsFor(selectedBalanceId: balanceId)
+            },
+            showProgress: { [weak self] in
+                self?.navigationController.showProgress()
+            },
+            hideProgress: { [weak self] in
+                self?.navigationController.hideProgress()
+            },
+            showShadow: { [weak self] in
+                self?.navigationController.showShadow()
+            },
+            hideShadow: { [weak self] in
+                self?.navigationController.hideShadow()
+            }, showReceive: { [weak self] in
+                self?.showReceiveScene()
+            }, showSendPayment: { [weak self] in
+                self?.showSendScene()
+        })
+        
+        BalancesList.Configurator.configure(
+            viewController: vc,
+            sceneModel: sceneModel,
             balancesFetcher: balancesFetcher,
             actionProvider: actionProvider,
             amountFormatter: amountFormatter,
-            dateFormatter: dateFormatter,
+            percentFormatter: percentFormatter,
             colorsProvider: colorsProvider,
-            onDidSelectItemWithIdentifier: { [weak self] (transactionId, balanceId) in
-                guard let navigationContrpller = self?.navigationController else {
-                    return
-                }
-                self?.showTransactionDetailsScreen(
-                    transactionsProvider: transactionsProvider,
-                    navigationController: navigationContrpller,
-                    transactionId: transactionId,
-                    balanceId: balanceId
-                )
-            },
-            showPaymentsFor: { [weak self] (balanceId) in
-                self?.showPaymentsFor(selectedBalanceId: balanceId)
-            }, showSendScene: { [weak self] in
-                self?.showSendScene()
-            }, showReceiveScene: { [weak self] in
-                self?.showReceiveScene()
-            }, showProgress: { [weak self] in
-                self?.navigationController.showProgress()
-            }, hideProgress: { [weak self] in
-                self?.navigationController.hideProgress()
-            }, showShadow: { [weak self] in
-                self?.navigationController.showShadow()
-            }, hideShadow: { [weak self] in
-                self?.navigationController.hideShadow()
-            },
-               selectedTabIdentifier: selectedTabIdentifier
-        )
-        let routing = TabBarContainer.Routing()
-        
-        self.dashboardScene = container
-        TabBarContainer.Configurator.configure(
-            viewController: container,
-            contentProvider: contentProvider,
             routing: routing
         )
         
-        let exploreAssetsItem = UIBarButtonItem(
-            image: Assets.plusIcon.image,
-            style: .plain,
-            target: nil,
-            action: nil
-        )
-        exploreAssetsItem
-            .rx
-            .tap
-            .asDriver()
-            .drive(onNext: { [weak self] (_) in
-                self?.runExploreTokensFlow()
-            })
-            .disposed(by: self.disposeBag)
+        self.dashboardScene = vc
         
-        // container.navigationItem.rightBarButtonItem = exploreAssetsItem
-        self.navigationController.setViewControllers([container], animated: false)
+        vc.navigationItem.title = Localized(.balances)
+        self.navigationController.setViewControllers([vc], animated: false)
         
         if let showRoot = showRootScreen {
             showRoot(self.navigationController.getViewController())
