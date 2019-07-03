@@ -1,6 +1,7 @@
 import UIKit
 import RxSwift
 import Charts
+import ActionsList
 
 public protocol BalancesListDisplayLogic: class {
     typealias Event = BalancesList.Event
@@ -9,6 +10,7 @@ public protocol BalancesListDisplayLogic: class {
     func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel)
     func displayPieChartEntriesChanged(viewModel: Event.PieChartEntriesChanged.ViewModel)
     func displayPieChartBalanceSelected(viewModel: Event.PieChartBalanceSelected.ViewModel)
+    func displayActionsDidChange(viewModel: Event.ActionsDidChange.ViewModel)
 }
 
 extension BalancesList {
@@ -23,10 +25,17 @@ extension BalancesList {
         // MARK: - Private properties
         
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
+        private let fab: UIButton = UIButton()
         
         private var sections: [Model.SectionViewModel] = []
         
+        private var actions: [ActionsListDefaultButtonModel] = []
+        private var actionsList: ActionsListModel?
         private let disposeBag: DisposeBag = DisposeBag()
+        
+        private let sideInset: CGFloat = 25.0
+        private let topInset: CGFloat = 25.0
+        private let buttonSize: CGFloat = 65.0
         
         // MARK: -
         
@@ -58,6 +67,7 @@ extension BalancesList {
             
             self.setupView()
             self.setupTableView()
+            self.setupFab()
             self.setupLayout()
             
             let request = Event.ViewDidLoad.Request()
@@ -68,9 +78,28 @@ extension BalancesList {
         
         // MARK: - Private
         
+        private func showActions() {
+            self.actionsList = self.fab.createActionsList()
+            
+            self.actions.forEach { (action) in
+                self.actionsList?.add(action: action)
+            }
+            self.actionsList?.present()
+        }
+        
         private func updateContentOffset(offset: CGPoint) {
             if offset.y > 0 {
                 self.routing?.showShadow()
+                let topInset = self.topInset - offset.y
+                let insetMultiplier: CGFloat = topInset > 0 ? 1 : 5
+                let inset = topInset * insetMultiplier
+                self.fab.snp.updateConstraints { (make) in
+                    make.bottom.equalTo(self.view.safeArea.bottom).inset(inset)
+                }
+                UIView.animate(withDuration: 0.01, animations: {
+                    self.fab.setNeedsLayout()
+                    self.fab.layoutIfNeeded()
+                })
             } else {
                 self.routing?.hideShadow()
             }
@@ -126,18 +155,46 @@ extension BalancesList {
                 .rx
                 .contentOffset
                 .asDriver()
-                .throttle(0.25)
                 .drive(onNext: { [weak self] (offset) in
                     self?.updateContentOffset(offset: offset)
                 })
                 .disposed(by: self.disposeBag)
         }
         
+        private func setupFab() {
+            self.fab.backgroundColor = Theme.Colors.accentColor
+            self.fab.tintColor = Theme.Colors.textOnAccentColor
+            self.fab.layer.cornerRadius = self.buttonSize / 2
+            self.fab.setImage(
+                Assets.plusIcon.image,
+                for: .normal
+            )
+            self.fab.layer.shadowColor = Theme.Colors.textOnMainColor.cgColor
+            self.fab.layer.shadowOffset = CGSize(width: 3.5, height: 3.5)
+            self.fab.layer.shadowOpacity = 0.25
+            self.fab.layer.masksToBounds = false
+            self.fab
+                .rx
+                .tap
+                .asDriver()
+                .drive(onNext: { [weak self] (_) in
+                    self?.showActions()
+                })
+                .disposed(by: self.disposeBag)
+        }
+        
         private func setupLayout() {
             self.view.addSubview(self.tableView)
+            self.view.addSubview(self.fab)
             
             self.tableView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
+            }
+            
+            self.fab.snp.makeConstraints { (make) in
+                make.trailing.equalToSuperview().inset(self.sideInset)
+                make.bottom.equalTo(self.view.safeArea.bottom).inset(self.topInset)
+                make.height.width.equalTo(self.buttonSize)
             }
         }
     }
@@ -182,6 +239,35 @@ extension BalancesList.ViewController: BalancesList.DisplayLogic {
         udpdatedChartViewModel.legendCells = viewModel.legendCells
         udpdatedChartViewModel.setup(cell: chartCell)
         self.sections[indexPath.section].cells[indexPath.row] = udpdatedChartViewModel
+    }
+    
+    public func displayActionsDidChange(viewModel: Event.ActionsDidChange.ViewModel) {
+        let actions = viewModel.models.map { [weak self] (item) -> ActionsListDefaultButtonModel in
+            
+            let action: (ActionsListDefaultButtonModel) -> Void = { (model) in
+                self?.actionsList?.dismiss({
+                    switch item.actionType {
+                        
+                    case .receive:
+                        self?.routing?.showReceive()
+                        
+                    case .send:
+                        self?.routing?.showSendPayment()
+                    }
+                })
+            }
+            let actionModel = ActionsListDefaultButtonModel(
+                localizedTitle: item.title,
+                image: item.image,
+                action: action,
+                isEnabled: true
+            )
+            actionModel.appearance.backgroundColor = Theme.Colors.clear
+            actionModel.appearance.tint = Theme.Colors.accentColor
+            return actionModel
+        }
+        
+        self.actions = actions
     }
 }
 

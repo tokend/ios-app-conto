@@ -52,7 +52,10 @@ extension TransactionsListScene {
                 self.tableView.scrollIndicatorInsets.top = self.topContentInset
             }
         }
-        private let iconSize: CGFloat = 60.0
+        private let iconSize: CGFloat = 65.0
+        private let sideInset: CGFloat = 25.0
+        private let topInset: CGFloat = 25.0
+        
         private let disposeBag = DisposeBag()
         private var actions: [ActionsListDefaultButtonModel] = []
         private var actionsList: ActionsListModel?
@@ -195,7 +198,6 @@ extension TransactionsListScene {
                 .rx
                 .contentOffset
                 .asDriver()
-                .throttle(0.25)
                 .drive(onNext: { [weak self] (offset) in
                     self?.updateContentOffset(offset: offset)
                 })
@@ -245,8 +247,8 @@ extension TransactionsListScene {
             }
             
             self.floatyActionButton.snp.makeConstraints { (make) in
-                make.trailing.equalToSuperview().inset(15.0)
-                make.bottom.equalTo(self.view.safeArea.bottom).inset(15.0)
+                make.trailing.equalToSuperview().inset(self.sideInset)
+                make.top.equalTo(self.view.safeArea.bottom).inset(self.topInset + self.iconSize)
                 make.height.width.equalTo(self.iconSize)
             }
             
@@ -288,6 +290,18 @@ extension TransactionsListScene {
         private func updateContentOffset(offset: CGPoint) {
             if offset.y > 0 {
                 self.routing?.showShadow()
+                let topInset = self.topInset - offset.y
+                let insetMultiplier: CGFloat = topInset > 0 ? 1 : 5
+                let inset = topInset * insetMultiplier + self.iconSize
+                self.floatyActionButton.snp.updateConstraints { (make) in
+                    make.top.equalTo(self.view.safeArea.bottom).inset(inset)
+                }
+                UIView.animate(
+                    withDuration: 0.1,
+                    animations: {
+                        self.floatyActionButton.setNeedsLayout()
+                        self.floatyActionButton.layoutIfNeeded()
+                })
             } else {
                 self.routing?.hideShadow()
             }
