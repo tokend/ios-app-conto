@@ -1,4 +1,5 @@
 import UIKit
+import RxSwift
 
 public protocol CompaniesListDisplayLogic: class {
     typealias Event = CompaniesList.Event
@@ -22,6 +23,7 @@ extension CompaniesList {
         private let emptyView: EmptyView.View = EmptyView.View()
         
         private var companies: [CompanyCell.ViewModel] = []
+        private let disposeBag: DisposeBag = DisposeBag()
         
         // MARK: -
         
@@ -63,6 +65,16 @@ extension CompaniesList {
         
         // MARK: - Private
         
+        private func updateContentOffset(offset: CGPoint) {
+            if offset.y > 0 {
+                self.routing?.showShadow()
+            } else {
+                self.routing?.hideShadow()
+            }
+        }
+        
+        // MARK: - Setup
+        
         private func setupTableView() {
             self.tableView.backgroundColor = Theme.Colors.contentBackgroundColor
             self.tableView.separatorStyle = .none
@@ -72,6 +84,14 @@ extension CompaniesList {
             )
             self.tableView.delegate = self
             self.tableView.dataSource = self
+            self.tableView
+                .rx
+                .contentOffset
+                .asDriver()
+                .drive(onNext: { [weak self] (offset) in
+                    self?.updateContentOffset(offset: offset)
+                })
+                .disposed(by: self.disposeBag)
         }
         
         private func setupEmptyView() {

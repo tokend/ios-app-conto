@@ -123,8 +123,13 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             },
             hideLoading: { [weak self] in
                 self?.navigationController.hideProgress()
+            }, showShadow: { [weak self] in
+                self?.navigationController.showShadow()
             },
-            onCompanyChosen: { [weak self] (accountId, companyName) in
+               hideShadow: { [weak self] in
+                self?.navigationController.hideShadow()
+            },
+               onCompanyChosen: { [weak self] (accountId, companyName) in
                 self?.runCompanyFlow(
                     ownerAccountId: accountId,
                     companyName: companyName
@@ -157,7 +162,7 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             onSignOut: self.onSignOut,
             onBackToCompanies: { [weak self] in
                 self?.run()
-            })
+        })
         self.currentFlowController = flow
         flow.run()
     }

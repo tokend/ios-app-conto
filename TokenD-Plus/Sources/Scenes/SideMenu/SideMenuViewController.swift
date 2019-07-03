@@ -49,6 +49,8 @@ extension SideMenu {
         // MARK: - Private
         
         private func reloadTable() {
+            let set = IndexSet([0])
+            self.tableView.insertSections(set, with: UITableView.RowAnimation.left)
             self.tableView.reloadData()
         }
         

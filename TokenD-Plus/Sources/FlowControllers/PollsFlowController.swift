@@ -81,6 +81,10 @@ class PollsFlowController: BaseSignedInFlowController {
                 self?.navigationController.showProgress()
             }, hideLoading: { [weak self] in
                 self?.navigationController.hideProgress()
+            }, showShadow: { [weak self] in
+                self?.navigationController.showShadow()
+            }, hideShadow: { [weak self] in
+                self?.navigationController.hideShadow()
         })
         
         Polls.Configurator.configure(

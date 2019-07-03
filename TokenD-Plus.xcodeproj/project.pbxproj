@@ -1701,14 +1701,14 @@
 		DB720A2322C1396B00ED116A /* AuthenticatorAuth */ = {
 			isa = PBXGroup;
 			children = (
-				DB720A2422C1396B00ED116A /* AuthenticatorAuthRouting.swift */,
-				DB720A2522C1396B00ED116A /* AuthenticatorAuthPresenter.swift */,
-				DB720A2622C1396B00ED116A /* Workers */,
-				DB720A2D22C1396B00ED116A /* AuthenticatorAuthViewController.swift */,
 				DB720A2E22C1396B00ED116A /* AuthenticatorAuthConfigurator.swift */,
 				DB720A2F22C1396B00ED116A /* AuthenticatorAuthInteractor.swift */,
 				DB720A3022C1396B00ED116A /* AuthenticatorAuthModels.swift */,
+				DB720A2522C1396B00ED116A /* AuthenticatorAuthPresenter.swift */,
+				DB720A2422C1396B00ED116A /* AuthenticatorAuthRouting.swift */,
+				DB720A2D22C1396B00ED116A /* AuthenticatorAuthViewController.swift */,
 				DB720A3122C1396B00ED116A /* Views */,
+				DB720A2622C1396B00ED116A /* Workers */,
 			);
 			path = AuthenticatorAuth;
 			sourceTree = "<group>";
@@ -1882,13 +1882,13 @@
 		DB720A8722C1396B00ED116A /* BalanceHeaderWithPicker */ = {
 			isa = PBXGroup;
 			children = (
-				DB720A8822C1396B00ED116A /* BalanceHeaderWithPickerInteractor.swift */,
-				DB720A8922C1396B00ED116A /* BalanceHeaderWithPickerRouting.swift */,
-				DB720A8A22C1396B00ED116A /* BalanceHeaderWithPickerPresenter.swift */,
 				DB720A8B22C1396B00ED116A /* BalanceHeaderWithPickerConfigurator.swift */,
-				DB720A8C22C1396B00ED116A /* Workers */,
-				DB720A9222C1396B00ED116A /* BalanceHeaderWithPickerView.swift */,
+				DB720A8822C1396B00ED116A /* BalanceHeaderWithPickerInteractor.swift */,
 				DB720A9322C1396B00ED116A /* BalanceHeaderWithPickerModels.swift */,
+				DB720A8A22C1396B00ED116A /* BalanceHeaderWithPickerPresenter.swift */,
+				DB720A8922C1396B00ED116A /* BalanceHeaderWithPickerRouting.swift */,
+				DB720A9222C1396B00ED116A /* BalanceHeaderWithPickerView.swift */,
+				DB720A8C22C1396B00ED116A /* Workers */,
 			);
 			path = BalanceHeaderWithPicker;
 			sourceTree = "<group>";
@@ -1943,14 +1943,14 @@
 		DB720AA322C1396B00ED116A /* TransactionDetails */ = {
 			isa = PBXGroup;
 			children = (
+				DB720AA922C1396B00ED116A /* TransactionDetailsConfigurator.swift */,
 				DB720AA422C1396B00ED116A /* TransactionDetailsInteractor.swift */,
 				DB720AA522C1396B00ED116A /* TransactionDetailsModels.swift */,
 				DB720AA622C1396B00ED116A /* TransactionDetailsPresenter.swift */,
 				DB720AA722C1396B00ED116A /* TransactionDetailsRouting.swift */,
 				DB720AA822C1396B00ED116A /* TransactionDetailsViewController.swift */,
-				DB720AA922C1396B00ED116A /* TransactionDetailsConfigurator.swift */,
-				DB720AAA22C1396B00ED116A /* Worker */,
 				DB720AB622C1396B00ED116A /* Views */,
+				DB720AAA22C1396B00ED116A /* Worker */,
 			);
 			path = TransactionDetails;
 			sourceTree = "<group>";
@@ -1959,13 +1959,13 @@
 			isa = PBXGroup;
 			children = (
 				DB720AAB22C1396B00ED116A /* TransactionDetailsAmountFormatter.swift */,
+				DB720AAF22C1396B00ED116A /* TransactionDetailsAmountFormatterProtocol.swift */,
+				DB720AAE22C1396B00ED116A /* TransactionDetailsDateFormatter.swift */,
 				DB720AAC22C1396B00ED116A /* TransactionDetailsDateFormatterProtocol.swift */,
 				DB720AAD22C1396B00ED116A /* TransactionDetailsEmailFetcher.swift */,
-				DB720AAE22C1396B00ED116A /* TransactionDetailsDateFormatter.swift */,
-				DB720AAF22C1396B00ED116A /* TransactionDetailsAmountFormatterProtocol.swift */,
-				DB720AB022C1396B00ED116A /* SectionsProviders */,
 				DB720AB422C1396B00ED116A /* TransactionDetailsSectionsProviderProtocol.swift */,
 				DB720AB522C1396B00ED116A /* TransactionDetailsTransactionProvider.swift */,
+				DB720AB022C1396B00ED116A /* SectionsProviders */,
 			);
 			path = Worker;
 			sourceTree = "<group>";
@@ -2285,14 +2285,14 @@
 		DB720B4822C1396B00ED116A /* AssetPicker */ = {
 			isa = PBXGroup;
 			children = (
-				DB720B4922C1396B00ED116A /* AssetPickerViewController.swift */,
+				DB720B5122C1396B00ED116A /* AssetPickerConfigurator.swift */,
+				DB720B5022C1396B00ED116A /* AssetPickerInteractor.swift */,
 				DB720B4A22C1396B00ED116A /* AssetPickerModels.swift */,
 				DB720B4B22C1396B00ED116A /* AssetPickerPresenter.swift */,
 				DB720B4C22C1396B00ED116A /* AssetPickerRouting.swift */,
-				DB720B4D22C1396B00ED116A /* Workers */,
-				DB720B5022C1396B00ED116A /* AssetPickerInteractor.swift */,
-				DB720B5122C1396B00ED116A /* AssetPickerConfigurator.swift */,
+				DB720B4922C1396B00ED116A /* AssetPickerViewController.swift */,
 				DB720B5222C1396B00ED116A /* Views */,
+				DB720B4D22C1396B00ED116A /* Workers */,
 			);
 			path = AssetPicker;
 			sourceTree = "<group>";
@@ -2600,11 +2600,11 @@
 			children = (
 				DB720BDA22C1396B00ED116A /* BalanceHeaderConfigurator.swift */,
 				DB720BDB22C1396B00ED116A /* BalanceHeaderInteractor.swift */,
+				DB720BDE22C1396B00ED116A /* BalanceHeaderModels.swift */,
 				DB720BDC22C1396B00ED116A /* BalanceHeaderPresenter.swift */,
 				DB720BDD22C1396B00ED116A /* BalanceHeaderRouting.swift */,
-				DB720BDE22C1396B00ED116A /* BalanceHeaderModels.swift */,
-				DB720BDF22C1396B00ED116A /* Workers */,
 				DB720BE322C1396B00ED116A /* BalanceHeaderView.swift */,
+				DB720BDF22C1396B00ED116A /* Workers */,
 			);
 			path = BalanceHeader;
 			sourceTree = "<group>";

@@ -799,7 +799,8 @@ extension TransactionDetails {
                     switch result {
                         
                     case .failed:
-                        return
+                        self?.counterpartyEmail = Localized(.undefined)
+                        self?.loadDataSections()
                         
                     case .succeeded(let email):
                         self?.counterpartyEmail = email
