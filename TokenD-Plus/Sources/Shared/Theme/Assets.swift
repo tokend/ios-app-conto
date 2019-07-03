@@ -31,6 +31,7 @@ enum Assets: String {
     case icon = "Icon"
     case incoming = "Incoming"
     case inviteAFriendIcon = "Invite a friend icon"
+    case logo = "Logo"
     case lock = "Lock"
     case match = "Match"
     case menuIcon = "Menu icon"

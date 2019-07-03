@@ -125,7 +125,7 @@ extension CompaniesList.ViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = self.companies[indexPath.section]
-        self.routing?.onCompanyChosen(model.accountId)
+        self.routing?.onCompanyChosen(model.accountId, model.companyName)
     }
 }
 
