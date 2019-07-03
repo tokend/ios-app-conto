@@ -70,10 +70,8 @@ extension TabBarContainer {
             let vc = TabsContainer.ViewController()
             
             let balancesTab = self.setupBalancesTab()
-            let movementsTab = self.setupMovementsTab()
             let tabs: [TabsContainer.Model.TabModel] = [
-                balancesTab,
-                movementsTab
+                balancesTab
             ]
             
             let contentProvider = TabsContainer.InfoContentProvider(tabs: tabs)

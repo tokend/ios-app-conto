@@ -79,7 +79,7 @@ extension SaleDetails {
             
             public var tokenBalanceStateImage: UIImage? {
                 didSet {
-                    self.tokenBalanceStateIcon.image = self.tokenBalanceStateImage
+                    self.tokenBalanceStateIcon.image = self.tokenBalanceStateImage?.withRenderingMode(.alwaysTemplate)
                 }
             }
             
@@ -263,6 +263,7 @@ extension SaleDetails {
             }
             
             private func setupTokenBalanceStateIcon() {
+                self.tokenBalanceStateIcon.tintColor = Theme.Colors.accentColor
                 self.tokenBalanceStateIcon.contentMode = .center
             }
             

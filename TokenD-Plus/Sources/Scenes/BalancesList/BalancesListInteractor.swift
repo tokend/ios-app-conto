@@ -49,7 +49,7 @@ extension BalancesList {
             let response = Event.SectionsUpdated.Response(
                 sections: [
                     headerSection,
-                    chartSection,
+                    //chartSection,
                     balancesSection
                 ]
             )
