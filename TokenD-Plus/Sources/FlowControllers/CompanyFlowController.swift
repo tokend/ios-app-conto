@@ -12,6 +12,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private let exploreTokensIdentifier: String = "ExploreTokens"
     private let sendPaymentIdentifier: String = "SendPayment"
+    private let companyName: String
     private let ownerAccountId: String
     
     // MARK: - Callbacks
@@ -29,11 +30,13 @@ class CompanyFlowController: BaseSignedInFlowController {
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
+        companyName: String,
         ownerAccountId: String,
         onSignOut: @escaping () -> Void,
         onBackToCompanies: @escaping () -> Void
         ) {
         
+        self.companyName = companyName
         self.ownerAccountId = ownerAccountId
         self.onSignOut = onSignOut
         self.onBackToCompanies = onBackToCompanies
@@ -80,8 +83,8 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private func setupSideMenu() {
         let headerModel = SideMenu.Model.HeaderModel(
-            icon: #imageLiteral(resourceName: "Icon").withRenderingMode(.alwaysTemplate),
-            title: self.getSideMenuHeaderTitle(),
+            icon: Assets.logo.image,
+            title: self.companyName,
             subTitle: self.userDataProvider.userEmail
         )
         
