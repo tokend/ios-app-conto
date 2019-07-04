@@ -2454,13 +2454,13 @@
 		DB720B9822C1396B00ED116A /* DepositScene */ = {
 			isa = PBXGroup;
 			children = (
-				DB720B9922C1396B00ED116A /* DepositSceneModels.swift */,
-				DB720B9A22C1396B00ED116A /* DepositSceneRouting.swift */,
-				DB720B9B22C1396B00ED116A /* DepositSceneInteractor.swift */,
 				DB720B9C22C1396B00ED116A /* DepositSceneConfigurator.swift */,
-				DB720B9D22C1396B00ED116A /* Workers */,
-				DB720BA622C1396B00ED116A /* DepositSceneViewController.swift */,
+				DB720B9B22C1396B00ED116A /* DepositSceneInteractor.swift */,
+				DB720B9922C1396B00ED116A /* DepositSceneModels.swift */,
 				DB720BA722C1396B00ED116A /* DepositScenePresenter.swift */,
+				DB720B9A22C1396B00ED116A /* DepositSceneRouting.swift */,
+				DB720BA622C1396B00ED116A /* DepositSceneViewController.swift */,
+				DB720B9D22C1396B00ED116A /* Workers */,
 			);
 			path = DepositScene;
 			sourceTree = "<group>";

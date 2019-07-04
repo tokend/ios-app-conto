@@ -91,7 +91,7 @@ class CompanyFlowController: BaseSignedInFlowController {
         let sections: [[SideMenu.Model.MenuItem]] = [
             [
                 SideMenu.Model.MenuItem(
-                    iconImage: Assets.dashboardIcon.image,
+                    iconImage: Assets.walletIcon.image,
                     title: Localized(.balances),
                     onSelected: { [weak self] in
                         self?.runDashboardFlow()
