@@ -626,6 +626,7 @@
 		DB720F6022C4CD1C00ED116A /* PollsPollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F5222C4CD1C00ED116A /* PollsPollCell.swift */; };
 		DB720F6122C4CD1C00ED116A /* PollsChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F5322C4CD1C00ED116A /* PollsChoiceCell.swift */; };
 		DB72280A22CCBB4200341565 /* BalancesListActionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */; };
+		DB72281222CE309000341565 /* SideMenuAccountsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281122CE309000341565 /* SideMenuAccountsProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1252,6 +1253,7 @@
 		DB720F5222C4CD1C00ED116A /* PollsPollCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsPollCell.swift; sourceTree = "<group>"; };
 		DB720F5322C4CD1C00ED116A /* PollsChoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsChoiceCell.swift; sourceTree = "<group>"; };
 		DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesListActionProvider.swift; sourceTree = "<group>"; };
+		DB72281122CE309000341565 /* SideMenuAccountsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuAccountsProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2023,14 +2025,14 @@
 		DB720AD522C1396B00ED116A /* SendPaymentAmount */ = {
 			isa = PBXGroup;
 			children = (
+				DB720AE422C1396B00ED116A /* SendPaymentAmountConfigurator.swift */,
+				DB720AD922C1396B00ED116A /* SendPaymentAmountInteractor.swift */,
 				DB720AD622C1396B00ED116A /* SendPaymentAmountModels.swift */,
 				DB720AD722C1396B00ED116A /* SendPaymentAmountPresenter.swift */,
 				DB720AD822C1396B00ED116A /* SendPaymentAmountRouting.swift */,
-				DB720AD922C1396B00ED116A /* SendPaymentAmountInteractor.swift */,
-				DB720ADA22C1396B00ED116A /* Workers */,
 				DB720ADF22C1396B00ED116A /* SendPaymentAmountViewController.swift */,
 				DB720AE022C1396B00ED116A /* Views */,
-				DB720AE422C1396B00ED116A /* SendPaymentAmountConfigurator.swift */,
+				DB720ADA22C1396B00ED116A /* Workers */,
 			);
 			path = SendPaymentAmount;
 			sourceTree = "<group>";
@@ -2361,6 +2363,7 @@
 				DB720B6A22C1396B00ED116A /* SideMenuRouting.swift */,
 				DB720B6622C1396B00ED116A /* SideMenuViewController.swift */,
 				DB720B6B22C1396B00ED116A /* Views */,
+				DB72281022CE305500341565 /* Workers */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -3215,6 +3218,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DB72281022CE305500341565 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DB72281122CE309000341565 /* SideMenuAccountsProvider.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3513,6 +3524,7 @@
 				DB720CFD22C1396B00ED116A /* SaleListCell.swift in Sources */,
 				DB720DBD22C1396B00ED116A /* ConfirmationSceneModels.swift in Sources */,
 				DB720E7222C1396C00ED116A /* SaleDetailsLoadingView.swift in Sources */,
+				DB72281222CE309000341565 /* SideMenuAccountsProvider.swift in Sources */,
 				DB720DFF22C1396C00ED116A /* DashboardPlugInsProvider.swift in Sources */,
 				DB720EFE22C1396C00ED116A /* TransactionSender.swift in Sources */,
 				DB720EB622C1396C00ED116A /* FeeLoader.swift in Sources */,

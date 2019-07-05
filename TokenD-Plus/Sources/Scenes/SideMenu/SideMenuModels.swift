@@ -52,24 +52,51 @@ extension SideMenu.Model {
             self.onSelected = onSelected
         }
     }
+    
+    struct SectionModel {
+        let items: [MenuItem]
+        var isExpanded: Bool
+    }
+    
+    struct SectionViewModel {
+        let items: [CellViewAnyModel]
+        var isExpanded: Bool
+    }
+    
+    struct AccountItem {
+        let name: String
+        let image: UIImage
+        let ownerAccountId: String
+    }
 }
 
 // MARK: - Events
 
 extension SideMenu.Event {
+    typealias Model = SideMenu.Model
+    
     enum ViewDidLoad {
         struct Request {
             
         }
         
         struct Response {
-            let header: SideMenu.Model.HeaderModel
-            let sections: [[SideMenu.Model.MenuItem]]
+            let header: Model.HeaderModel
+            let sections: [Model.SectionModel]
         }
         
         struct ViewModel {
-            let header: SideMenu.Model.HeaderModel
-            let sections: [[SideMenuTableViewCell.Model]]
+            let header: Model.HeaderModel
+            let sections: [Model.SectionViewModel]
         }
+    }
+    
+    enum AccountChanged {
+        
+        struct Response {
+            let ownerAccountId: String
+            let companyName: String
+        }
+        typealias ViewModel = Response
     }
 }

@@ -12,8 +12,8 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private let exploreTokensIdentifier: String = "ExploreTokens"
     private let sendPaymentIdentifier: String = "SendPayment"
-    private let companyName: String
-    private let ownerAccountId: String
+    private var companyName: String
+    private var ownerAccountId: String
     
     // MARK: - Callbacks
     
@@ -123,11 +123,20 @@ class CompanyFlowController: BaseSignedInFlowController {
             ]
         ]
         
+        let accountProvider = SideMenu.AccountsProvider()
+        let routing = SideMenu.Routing(
+            onAccountChanged: { [weak self] (ownerAccountId, companyName) in
+                self?.ownerAccountId = ownerAccountId
+                self?.companyName = companyName
+                self?.runDashboardFlow()
+        })
+        
         SideMenu.Configurator.configure(
             viewController: self.sideMenuViewController,
             header: headerModel,
             sections: sections,
-            routing: SideMenu.Routing()
+            accountsProvider: accountProvider,
+            routing: routing
         )
         
         self.sideNavigationController.embed(sideViewController: self.sideMenuViewController)

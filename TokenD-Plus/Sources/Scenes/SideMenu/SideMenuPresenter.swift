@@ -2,6 +2,7 @@ import Foundation
 
 protocol SideMenuPresentationLogic {
     func presentViewDidLoad(response: SideMenu.Event.ViewDidLoad.Response)
+    func presentAccountChanged(response: SideMenu.Event.AccountChanged.Response)
 }
 
 extension SideMenu {
@@ -9,6 +10,8 @@ extension SideMenu {
     typealias CellModel = SideMenuTableViewCell.Model
     
     struct Presenter {
+        typealias Model = SideMenu.Model
+        typealias Event = SideMenu.Event
         
         private let presenterDispatch: PresenterDispatch
         
@@ -18,9 +21,9 @@ extension SideMenu {
         
         // MARK: - Private
         
-        private func getCellModelSections(_ sections: [[Model.MenuItem]]) -> [[CellModel]] {
-            let cellSections: [[CellModel]] = sections.map { (section) -> [CellModel] in
-                let cellModelSection: [CellModel] = section.map({ (menuItem) -> CellModel in
+        private func getCellModelSections(_ sections: [Model.SectionModel]) -> [Model.SectionViewModel] {
+            let sections = sections.map { (section) -> Model.SectionViewModel in
+                let cells = section.items.map({ (menuItem) -> CellModel in
                     let cellModel = CellModel(
                         icon: menuItem.iconImage,
                         title: menuItem.title,
@@ -29,24 +32,33 @@ extension SideMenu {
                     
                     return cellModel
                 })
-                
-                return cellModelSection
+                return Model.SectionViewModel(
+                    items: cells,
+                    isExpanded: section.isExpanded
+                )
             }
-            
-            return cellSections
+            return sections
         }
     }
 }
 
 extension SideMenu.Presenter: SideMenu.PresentationLogic {
-    func presentViewDidLoad(response: SideMenu.Event.ViewDidLoad.Response) {
-        let cellModelSections = self.getCellModelSections(response.sections)
+    
+    func presentViewDidLoad(response: Event.ViewDidLoad.Response) {
+        let sections = self.getCellModelSections(response.sections)
         let viewModel = SideMenu.Event.ViewDidLoad.ViewModel(
             header: response.header,
-            sections: cellModelSections
+            sections: sections
         )
         self.presenterDispatch.display { displayLogic in
             displayLogic.displayViewDidLoad(viewModel: viewModel)
+        }
+    }
+    
+    func presentAccountChanged(response: SideMenu.Event.AccountChanged.Response) {
+        let viewModel = response
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displayAccountChanged(viewModel: viewModel)
         }
     }
 }

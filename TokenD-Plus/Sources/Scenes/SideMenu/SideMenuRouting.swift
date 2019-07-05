@@ -1,5 +1,7 @@
 import Foundation
 
 extension SideMenu {
-    struct Routing { }
+    struct Routing {
+        let onAccountChanged: (_ ownerAccountId: String, _ companyName: String) -> Void
+    }
 }
