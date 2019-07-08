@@ -251,6 +251,9 @@ extension BalancesList.ViewController: BalancesList.DisplayLogic {
                     case .receive:
                         self?.routing?.showReceive()
                         
+                    case .redeem:
+                        self?.routing?.showRedeem()
+                        
                     case .send:
                         self?.routing?.showSendPayment()
                     }

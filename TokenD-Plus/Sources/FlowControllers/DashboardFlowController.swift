@@ -107,6 +107,8 @@ class DashboardFlowController: BaseSignedInFlowController {
                 self?.showReceiveScene()
             }, showSendPayment: { [weak self] in
                 self?.showSendScene()
+            }, showRedeem: { [weak self] in
+                self?.showRedeemScene()
         })
         
         BalancesList.Configurator.configure(
@@ -132,6 +134,13 @@ class DashboardFlowController: BaseSignedInFlowController {
         }
     }
     
+    private func showRedeemScene() {
+        self.runCreateRedeemFlow(
+            navigationController: self.navigationController,
+            balanceId: nil
+         )
+    }
+    
     private func showSendScene() {
         self.runSendPaymentFlow(
             navigationController: self.navigationController,
@@ -151,7 +160,8 @@ class DashboardFlowController: BaseSignedInFlowController {
         
         let viewConfig = ReceiveAddress.Model.ViewConfig(
             copiedLocalizationKey: Localized(.copied),
-            tableViewTopInset: 24
+            tableViewTopInset: 24,
+            headerAppearence: .hidden
         )
         
         let sceneModel = ReceiveAddress.Model.SceneModel()

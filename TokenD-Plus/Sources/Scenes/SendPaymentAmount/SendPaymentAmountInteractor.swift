@@ -30,6 +30,7 @@ extension SendPaymentAmount {
         private let senderAccountId: String
         private let selectedBalanceId: String?
         private let balanceDetailsLoader: BalanceDetailsLoader
+        private let createRedeemRequestWorker: CreateRedeemRequestWorkerProtocol?
         
         private let feeLoader: FeeLoaderProtocol
         private let feeOverviewer: FeeOverviewerProtocol
@@ -46,6 +47,7 @@ extension SendPaymentAmount {
             senderAccountId: String,
             selectedBalanceId: String?,
             balanceDetailsLoader: BalanceDetailsLoader,
+            createRedeemRequestWorker: CreateRedeemRequestWorkerProtocol? = nil,
             feeLoader: FeeLoaderProtocol,
             feeOverviewer: FeeOverviewerProtocol
             ) {
@@ -56,6 +58,7 @@ extension SendPaymentAmount {
             self.senderAccountId = senderAccountId
             self.selectedBalanceId = selectedBalanceId
             self.balanceDetailsLoader = balanceDetailsLoader
+            self.createRedeemRequestWorker = createRedeemRequestWorker
             self.feeLoader = feeLoader
             self.feeOverviewer = feeOverviewer
         }
@@ -213,6 +216,40 @@ extension SendPaymentAmount {
                         )
                         self?.presenter.presentWithdrawAction(response: .succeeded(sendWitdrawtModel))
                     }
+            })
+        }
+        
+        private func handleRedeem() {
+            guard let balance = self.sceneModel.selectedBalance else {
+                self.presenter.presentRedeemAction(response: .failed(.noBalance))
+                return
+            }
+            
+            guard self.sceneModel.amount > 0 else {
+                self.presenter.presentRedeemAction(response: .failed(.emptyAmount))
+                return
+            }
+            
+            let amount = self.sceneModel.amount
+            guard balance.balance > amount else {
+                self.presenter.presentRedeemAction(response: .failed(.insufficientFunds))
+                return
+            }
+            self.createRedeemRequestWorker?.createRedeemRequest(
+                asset: balance.asset,
+                amount: amount,
+                completion: { [weak self] (result) in
+                    let response: Event.RedeemAction.Response
+                    
+                    switch result {
+                        
+                    case .failure(let error):
+                        response = .failed(error)
+                        
+                    case .success(let redeemModel):
+                        response = .succeeded(redeemModel)
+                    }
+                    self?.presenter.presentRedeemAction(response: response)
             })
         }
         
@@ -381,6 +418,9 @@ extension SendPaymentAmount.Interactor: SendPaymentAmount.BusinessLogic {
     
     func onSubmitAction(request: Event.SubmitAction.Request) {
         switch self.sceneModel.operation {
+            
+        case .handleRedeem:
+            self.handleRedeem()
             
         case .handleSend:
             self.handleSendAction()

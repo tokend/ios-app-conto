@@ -200,6 +200,7 @@
 "failed_to_save_key_and_wallet_data" = "Failed to save key and wallet data";
 "failed_to_save_network_info" = "Failed to save network info";
 "failed_to_scan_server_info" = "Failed to scan server info";
+"failed_to_sign_transaction" = "Failed to sign transaction";
 "fatal_error" = "Fatal Error";
 "fee" = "Fee";
 "fee_error" = "Fee error: $(message)";
@@ -519,6 +520,8 @@
 "upper_bound" = "Upper bound";
 "up_to" = "Up to $(amount)";
 "up_to_replace_amount" = "amount";
+"use_this_qr_code_to_redeem" = "Use this QR code to redeem $(amount)";
+"use_this_qr_code_to_redeem_replace_amount" = "amount";
 "userdataprovider_should_always_provide_walletdata" = "UserDataProvider should always provide walletData";
 "verification" = "Verification";
 "verification_link_is_sent" = "Verification link is sent to your email\n\nIn case email is not received press resend email button";

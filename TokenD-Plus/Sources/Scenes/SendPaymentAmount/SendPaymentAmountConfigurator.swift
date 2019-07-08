@@ -9,6 +9,7 @@ extension SendPaymentAmount {
             selectedBalanceId: String?,
             sceneModel: Model.SceneModel,
             balanceDetailsLoader: BalanceDetailsLoader,
+            createRedeemRequestWorker: CreateRedeemRequestWorkerProtocol? = nil,
             amountFormatter: AmountFormatterProtocol,
             feeLoader: FeeLoaderProtocol,
             feeOverviewer: FeeOverviewerProtocol,
@@ -33,6 +34,7 @@ extension SendPaymentAmount {
                 senderAccountId: senderAccountId,
                 selectedBalanceId: selectedBalanceId,
                 balanceDetailsLoader: balanceDetailsLoader,
+                createRedeemRequestWorker: createRedeemRequestWorker,
                 feeLoader: feeLoader,
                 feeOverviewer: feeOverviewer
             )

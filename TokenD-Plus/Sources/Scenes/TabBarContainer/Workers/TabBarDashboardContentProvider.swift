@@ -141,6 +141,8 @@ extension TabBarContainer {
                     self?.showReceiveScene()
                 }, showSendPayment: { [weak self] in
                     self?.showSendScene()
+                }, showRedeem: {
+                    
             })
             
             let actionProvider = BalancesList.ActionProvider()

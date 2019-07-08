@@ -1,15 +1,13 @@
 import UIKit
 import RxSwift
 
-class SendPaymentFlowController: BaseSignedInFlowController {
+class CreateRedeemFlowController: BaseSignedInFlowController {
     
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol
     private let selectedBalanceId: String?
     private let disposeBag: DisposeBag = DisposeBag()
-    
-    private var onShowMovements: (() -> Void)?
     
     // MARK: -
     
@@ -41,49 +39,39 @@ class SendPaymentFlowController: BaseSignedInFlowController {
     
     // MARK: - Public
     
-    func run(
-        showRootScreen: ((_ vc: UIViewController) -> Void)?,
-        onShowMovements: (() -> Void)?
-        ) {
-        
-        self.onShowMovements = onShowMovements
-        self.startFromDestinationScreen(showRootScreen: showRootScreen)
+    func run(showRootScreen: ((_ vc: UIViewController) -> Void)?) {
+        self.showRedeemAmountScene(showRootScreen: showRootScreen)
     }
     
     // MARK: - Private
     
-    private func startFromDestinationScreen(showRootScreen: ((_ vc: UIViewController) -> Void)?) {
-        let viewController = self.setupSendDestinationScreen()
+    private func showRedeemAmountScene(showRootScreen: ((_ vc: UIViewController) -> Void)?) {
+        let vc = self.setupRedeemAmountScreen()
         
-        viewController.navigationItem.title = Localized(.payment_destination)
-        
+        vc.navigationItem.title = Localized(.redeem)
         if let showRoot = showRootScreen {
-            showRoot(viewController)
+            showRoot(vc)
         } else {
             self.rootNavigation.setRootContent(self.navigationController, transition: .fade, animated: false)
         }
     }
     
-    private func showSendPaymentAmountScene(
-        destination: SendPaymentDestination.Model.SendDestinationModel
-        ) {
-        
-        let vc = self.setupSendAmountScreen(destination: destination)
-        
-        vc.navigationItem.title = Localized(.payment_amount)
-        self.navigationController.pushViewController(vc, animated: true)
-    }
-    
-    private func setupSendAmountScreen(
-        destination: SendPaymentDestination.Model.SendDestinationModel
-        ) -> SendPaymentAmount.ViewController {
-        
+    private func setupRedeemAmountScreen() -> SendPaymentAmount.ViewController {
         let vc = SendPaymentAmount.ViewController()
         
         let balanceDetailsLoader = SendPaymentAmount.BalanceDetailsLoaderWorker(
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
-            operation: .handleSend
+            operation: .handleRedeem
+        )
+        let amountConverter = AmountConverter()
+        let createRedeemRequestWorker = SendPaymentAmount.CreateRedeemRequestWorker(
+            assetsRepo: self.reposController.assetsRepo,
+            balancesRepo: self.reposController.balancesRepo,
+            networkRepo: self.reposController.networkInfoRepo,
+            keychainManager: self.managersController.keychainManager,
+            amountConverter: amountConverter,
+            originalAccountId: self.userDataProvider.walletData.accountId
         )
         
         let amountFormatter = SendPaymentAmount.AmountFormatter()
@@ -101,12 +89,10 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         
         let sceneModel = SendPaymentAmount.Model.SceneModel(
             feeType: .payment,
-            operation: .handleSend,
-            recipientAddress: destination.recipientNickname
+            operation: .handleRedeem
         )
-        sceneModel.resolvedRecipientId = destination.recipientAccountId
         
-        let viewConfig = SendPaymentAmount.Model.ViewConfig.sendPaymentViewConfig()
+        let viewConfig = SendPaymentAmount.Model.ViewConfig.redeemViewConfig()
         
         let routing = SendPaymentAmount.Routing(
             onShowProgress: { [weak self] in
@@ -124,11 +110,11 @@ class SendPaymentFlowController: BaseSignedInFlowController {
                     onSelected: onSelected
                 )
             },
-            onSendAction: { [weak self] (sendModel) in
-                self?.showPaymentConfirmationScreen(sendPaymentModel: sendModel)
-            },
+            onSendAction: nil,
             onShowWithdrawDestination: nil,
-            onShowRedeem: nil,
+            onShowRedeem: { [weak self] (redeemModel) in
+                self?.showRedeemQrScene(redeemModel: redeemModel)
+            },
             showFeesOverview: { [weak self] (asset, feeType) in
                 self?.showFees(asset: asset, feeType: feeType)
         })
@@ -139,140 +125,13 @@ class SendPaymentFlowController: BaseSignedInFlowController {
             selectedBalanceId: self.selectedBalanceId,
             sceneModel: sceneModel,
             balanceDetailsLoader: balanceDetailsLoader,
+            createRedeemRequestWorker: createRedeemRequestWorker,
             amountFormatter: amountFormatter,
             feeLoader: feeLoaderWorker,
             feeOverviewer: feeOverviewer,
             viewConfig: viewConfig,
             routing: routing
         )
-        
-        return vc
-    }
-    
-    private func setupSendDestinationScreen() -> SendPaymentDestination.ViewController {
-        let vc = SendPaymentDestination.ViewController()
-        let viewConfig = SendPaymentDestination.Model.ViewConfig.sendPayment()
-        let routing = SendPaymentDestination.Routing(
-            onSelectContactEmail: { [weak self] (completion) in
-                self?.presentContactEmailPicker(
-                    completion: completion,
-                    presentViewController: { [weak self] (vc, animated, completion) in
-                        self?.navigationController.present(vc, animated: animated, completion: completion)
-                })
-            },
-            onPresentQRCodeReader: { [weak self] (completion) in
-                self?.presentQRCodeReader(completion: completion)
-            },
-            showWithdrawConformation: { (_) in
-                
-        },
-            showSendAmount: { [weak self] (destination) in
-                self?.showSendPaymentAmountScene(destination: destination)
-            },
-            showProgress: { [weak self] in
-                self?.navigationController.showProgress()
-            },
-            hideProgress: { [weak self] in
-                self?.navigationController.hideProgress()
-            },
-            showError: { [weak self] (message) in
-                self?.navigationController.showErrorMessage(message, completion: nil)
-        })
-        
-        let recipientAddressResolver = SendPaymentDestination.RecipientAddressResolverWorker(
-            generalApi: self.flowControllerStack.api.generalApi
-        )
-        
-        let contactsFetcher = SendPaymentDestination.ContactsFetcher()
-        
-        let sceneModel = SendPaymentDestination.Model.SceneModel(
-            feeType: .payment,
-            operation: .handleSend
-        )
-        
-        SendPaymentDestination.Configurator.configure(
-            viewController: vc,
-            recipientAddressResolver: recipientAddressResolver,
-            contactsFetcher: contactsFetcher,
-            sceneModel: sceneModel,
-            viewConfig: viewConfig,
-            routing: routing
-        )
-        
-        return vc
-    }
-    
-    private func showPaymentConfirmationScreen(sendPaymentModel: SendPaymentAmount.Model.SendPaymentModel) {
-        let vc = self.setupPaymentConfirmationScreen(sendPaymentModel: sendPaymentModel)
-        
-        self.navigationController.pushViewController(vc, animated: true)
-    }
-    
-    private func setupPaymentConfirmationScreen(
-        sendPaymentModel: SendPaymentAmount.Model.SendPaymentModel
-        ) -> ConfirmationScene.ViewController {
-        
-        let vc = ConfirmationScene.ViewController()
-        
-        let amountFormatter = ConfirmationScene.AmountFormatter()
-        let percentFormatter = ConfirmationScene.PercentFormatter()
-        let amountConverter = AmountConverter()
-        
-        let senderFee = ConfirmationScene.Model.FeeModel(
-            asset: sendPaymentModel.senderFee.asset,
-            fixed: sendPaymentModel.senderFee.fixed,
-            percent: sendPaymentModel.senderFee.percent
-        )
-        
-        let recipientFee = ConfirmationScene.Model.FeeModel(
-            asset: sendPaymentModel.recipientFee.asset,
-            fixed: sendPaymentModel.recipientFee.fixed,
-            percent: sendPaymentModel.recipientFee.percent
-        )
-        
-        let paymentModel = ConfirmationScene.Model.SendPaymentModel(
-            senderBalanceId: sendPaymentModel.senderBalanceId,
-            asset: sendPaymentModel.asset,
-            amount: sendPaymentModel.amount,
-            recipientNickname: sendPaymentModel.recipientNickname,
-            recipientAccountId: sendPaymentModel.recipientAccountId,
-            senderFee: senderFee,
-            recipientFee: recipientFee,
-            description: sendPaymentModel.description,
-            reference: sendPaymentModel.reference
-        )
-        
-        let sectionsProvider = ConfirmationScene.SendPaymentConfirmationSectionsProvider(
-            sendPaymentModel: paymentModel,
-            transactionSender: self.managersController.transactionSender,
-            networkInfoFetcher: self.reposController.networkInfoRepo,
-            amountFormatter: amountFormatter,
-            userDataProvider: self.userDataProvider,
-            amountConverter: amountConverter,
-            percentFormatter: percentFormatter
-        )
-        
-        let routing = ConfirmationScene.Routing(
-            onShowProgress: { [weak self] in
-                self?.navigationController.showProgress()
-            },
-            onHideProgress: { [weak self] in
-                self?.navigationController.hideProgress()
-            },
-            onShowError: { [weak self] (errorMessage) in
-                self?.navigationController.showErrorMessage(errorMessage, completion: nil)
-            },
-            onConfirmationSucceeded: { [weak self] in
-                self?.onShowMovements?()
-        })
-        
-        ConfirmationScene.Configurator.configure(
-            viewController: vc,
-            sectionsProvider: sectionsProvider,
-            routing: routing
-        )
-        
-        vc.navigationItem.title = Localized(.confirmation)
         
         return vc
     }
@@ -327,7 +186,62 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         return vc
     }
     
-    // MARK: -
+    private func showRedeemQrScene(redeemModel: SendPaymentAmount.Model.ShowRedeemViewModel) {
+        let vc = ReceiveAddress.ViewController()
+        
+        let header = Localized(
+            .use_this_qr_code_to_redeem,
+            replace: [
+                .use_this_qr_code_to_redeem_replace_amount: redeemModel.amount
+            ]
+        )
+        let viewConfig = ReceiveAddress.Model.ViewConfig(
+            copiedLocalizationKey: Localized(.copied),
+            tableViewTopInset: 24,
+            headerAppearence: .withText(header)
+        )
+        
+        let sceneModel = ReceiveAddress.Model.SceneModel()
+        
+        let qrCodeGenerator = QRCodeGenerator()
+        let addressManager = ReceiveAddress.RedeemManager(redeem: redeemModel.redeemRequest)
+        let shareUtil = ReceiveAddress.ReceiveAddressShareUtil(
+            qrCodeGenerator: qrCodeGenerator
+        )
+        
+        let invoiceFormatter = ReceiveAddress.InvoiceFormatter()
+        
+        let routing = ReceiveAddress.Routing(
+            onCopy: { (stringToCopy) in
+                UIPasteboard.general.string = stringToCopy
+        },
+            onShare: { [weak self] (itemsToShare) in
+                self?.shareItems(itemsToShare)
+        })
+        
+        ReceiveAddress.Configurator.configure(
+            viewController: vc,
+            viewConfig: viewConfig,
+            sceneModel: sceneModel,
+            addressManager: addressManager,
+            shareUtil: shareUtil,
+            qrCodeGenerator: qrCodeGenerator,
+            invoiceFormatter: invoiceFormatter,
+            routing: routing
+        )
+        
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func shareItems(_ items: [Any]) {
+        let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        self.navigationController.present(activity, animated: true, completion: nil)
+    }
+
+    
+    // MARK: - Private
+    
+    
     
     private func presentQRCodeReader(completion: @escaping SendPaymentDestination.QRCodeReaderCompletion) {
         self.runQRCodeReaderFlow(

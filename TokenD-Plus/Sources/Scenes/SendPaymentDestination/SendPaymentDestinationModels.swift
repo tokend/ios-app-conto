@@ -18,10 +18,30 @@ public enum SendPaymentDestination {
 
 public extension SendPaymentDestination.Model {
     public typealias FeeModel = SendPaymentAmount.Model.FeeModel
-    public typealias Operation = SendPaymentAmount.Model.Operation
     public typealias FeeType = SendPaymentAmount.Model.FeeType
     public typealias BalanceDetails = SendPaymentAmount.Model.BalanceDetails
-    public typealias SceneModel = SendPaymentAmount.Model.SceneModel
+    
+    public class SceneModel {
+        public var selectedBalance: BalanceDetails?
+        public var senderFee: FeeModel?
+        public var recipientAddress: String?
+        public var resolvedRecipientId: String?
+        public var description: String?
+        public var amount: Decimal = 0.0
+        public let operation: Operation
+        public let feeType: FeeType
+        
+        init(
+            feeType: FeeType,
+            operation: Operation,
+            recipientAddress: String? = nil
+            ) {
+            
+            self.operation = operation
+            self.recipientAddress = recipientAddress
+            self.feeType = feeType
+        }
+    }
     
     public struct SendDestinationModel {
         public let recipientNickname: String
@@ -62,6 +82,11 @@ public extension SendPaymentDestination.Model {
         let actionTitle: String
         let actionButtonTitle: NSAttributedString
         let contactsAreHidden: Bool
+    }
+    
+    public enum Operation {
+        case handleSend
+        case handleWithdraw
     }
     
     public enum LoadingStatus {

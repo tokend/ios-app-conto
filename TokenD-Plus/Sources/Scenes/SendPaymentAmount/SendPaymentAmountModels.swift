@@ -83,9 +83,21 @@ public extension SendPaymentAmount.Model {
         public let senderFee: FeeModel
     }
     
+    public struct ShowRedeemModel {
+        let redeemRequest: String
+        let amount: Decimal
+        let asset: String
+    }
+    
+    public struct ShowRedeemViewModel {
+        let redeemRequest: String
+        let amount: String
+    }
+    
     public enum Operation {
         case handleSend
         case handleWithdraw
+        case handleRedeem
     }
     
     public enum FeeType {
@@ -219,6 +231,22 @@ extension SendPaymentAmount.Event {
         }
     }
     
+    struct RedeemAction {
+        enum Response {
+            case loading
+            case loaded
+            case failed(RedeemError)
+            case succeeded(Model.ShowRedeemModel)
+        }
+        
+        enum ViewModel {
+            case loading
+            case loaded
+            case failed(errorMessage: String)
+            case succeeded(Model.ShowRedeemViewModel)
+        }
+    }
+    
     struct FeeOverviewAvailability {
         struct Response {
             let available: Bool
@@ -290,6 +318,74 @@ extension SendPaymentAmount.Event.PaymentAction {
     }
 }
 
+extension SendPaymentAmount.Event.RedeemAction {
+    
+    public enum RedeemError: Error, LocalizedError {
+        case emptyAmount
+        case insufficientFunds
+        case noBalance
+        case failedToDecodeAccountId(AccountId)
+        case failedToDecodeBalanceId(BalanceId)
+        case failedToSignTransaction
+        case other(Error)
+        
+        // MARK: - LocalizedError
+        
+        public var errorDescription: String? {
+            switch self {
+                
+            case .emptyAmount:
+                return Localized(.empty_amount)
+                
+            case .insufficientFunds:
+                return Localized(.insufficient_funds)
+                
+            case .noBalance:
+                return Localized(.no_balance)
+                
+            case .failedToDecodeAccountId(let accountId):
+                let id = accountId.rawValue
+                return Localized(
+                    .failed_to_decode_account_id,
+                    replace: [
+                        .failed_to_decode_account_id_replace_id: id
+                    ]
+                )
+            case .failedToDecodeBalanceId(let balanceId):
+                let id = balanceId.rawValue
+                return Localized(
+                    .failed_to_decode_balance_id,
+                    replace: [
+                        .failed_to_decode_balance_id_replace_id: id
+                    ]
+                )
+                
+            case .failedToSignTransaction:
+                return Localized(.failed_to_sign_transaction)
+                
+            case .other(let error):
+                let message = error.localizedDescription
+                return Localized(
+                    .request_error,
+                    replace: [
+                        .request_error_replace_message: message
+                    ]
+                )
+            }
+        }
+    }
+    
+    enum BalanceId: String {
+        case senderBalanceId
+    }
+    
+    enum AccountId: String {
+        case recipientAccountId
+        case senderAccountId
+    }
+}
+
+
 // MARK: -
 
 extension SendPaymentAmount.Model.BalanceDetails: Equatable {
@@ -322,6 +418,21 @@ extension SendPaymentAmount.Model.ViewConfig {
     static func withdrawViewConfig() -> SendPaymentAmount.Model.ViewConfig {
         let actionButtonTitle = NSAttributedString(
             string: Localized(.continue_capitalized),
+            attributes: [
+                .font: Theme.Fonts.actionButtonFont,
+                .foregroundColor: Theme.Colors.textOnAccentColor
+            ]
+        )
+        
+        return SendPaymentAmount.Model.ViewConfig(
+            descriptionIsHidden: true,
+            actionButtonTitle: actionButtonTitle
+        )
+    }
+    
+    static func redeemViewConfig() -> SendPaymentAmount.Model.ViewConfig {
+        let actionButtonTitle = NSAttributedString(
+            string: Localized(.confirm),
             attributes: [
                 .font: Theme.Fonts.actionButtonFont,
                 .foregroundColor: Theme.Colors.textOnAccentColor

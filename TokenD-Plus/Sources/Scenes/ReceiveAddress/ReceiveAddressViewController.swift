@@ -18,7 +18,8 @@ extension ReceiveAddress {
         
         public var viewConfig: ReceiveAddress.Model.ViewConfig = ReceiveAddress.Model.ViewConfig(
             copiedLocalizationKey: "",
-            tableViewTopInset: 0
+            tableViewTopInset: 0,
+            headerAppearence: .hidden
             ) {
             didSet {
                 guard self.isViewLoaded else {
@@ -32,6 +33,20 @@ extension ReceiveAddress {
         
         private let tableView: BXFStaticTableView = BXFStaticTableView()
         private let defaultBottomInset: CGFloat = 24
+        
+        private lazy var headerView: ((String) -> HeaderCell) = { (header) in
+            let view = HeaderCell()
+            view.text = header
+            return view
+        }
+        private lazy var headerSection: ((String) ->BXFStaticTableViewSection) = {
+            (header) in
+            let section = BXFStaticTableViewSection(
+                header: BXFStaticTableViewSectionHeaderFooterView.instantiate(with: .header, text: nil),
+                cell: BXFStaticTableViewSectionCell.instantiate(with: self.headerView(header), border: false),
+                footer: BXFStaticTableViewSectionHeaderFooterView.instantiate(with: .footer, text: nil))
+            return section
+        }
         
         private lazy var qrContentView: QRCell = {
             let view = QRCell()
@@ -123,6 +138,9 @@ extension ReceiveAddress {
                 make.edges.equalToSuperview()
             }
             
+            if case let Model.HeaderAppearence.withText(header) = self.viewConfig.headerAppearence {
+                self.tableView.addSection(self.headerView(header))
+            }
             self.tableView.addSection(self.qrSection)
             self.tableView.layoutIfNeeded()
         }

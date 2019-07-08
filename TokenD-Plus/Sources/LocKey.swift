@@ -203,6 +203,7 @@ enum LocKey: String {
     case failed_to_save_key_and_wallet_data
     case failed_to_save_network_info
     case failed_to_scan_server_info
+    case failed_to_sign_transaction
     case fatal_error
     case fee
     case fee_error
@@ -522,6 +523,8 @@ enum LocKey: String {
     case upper_bound
     case up_to
     case up_to_replace_amount
+    case use_this_qr_code_to_redeem
+    case use_this_qr_code_to_redeem_replace_amount
     case userdataprovider_should_always_provide_walletdata
     case verification
     case verification_link_is_sent

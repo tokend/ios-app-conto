@@ -10,6 +10,12 @@ extension BalancesList {
     public class ActionProvider: ActionsProviderProtocol  {
         
         public func getActions() -> [BalancesList.Model.ActionModel] {
+            let redeem = Model.ActionModel(
+                title: Localized(.redeem),
+                image: Assets.scanQrIcon.image,
+                actionType: .redeem
+            )
+            
             let sendAction = Model.ActionModel(
                 title: Localized(.send),
                 image: Assets.send.image,
@@ -22,7 +28,7 @@ extension BalancesList {
                 actionType: .receive
             )
             
-            return [sendAction, receiveAction]
+            return [redeem, sendAction, receiveAction]
         }
     }
 }

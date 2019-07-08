@@ -28,6 +28,12 @@ extension ReceiveAddress.Model {
     struct ViewConfig {
         let copiedLocalizationKey: String
         let tableViewTopInset: CGFloat
+        let headerAppearence: HeaderAppearence
+    }
+    
+    enum HeaderAppearence {
+        case hidden
+        case withText(String)
     }
     
     enum ValueAction {
