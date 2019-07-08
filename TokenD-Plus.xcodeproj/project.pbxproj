@@ -10,6 +10,18 @@
 		A456E9D8F6860BA2357882C2 /* libPods-TokenD-Plus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */; };
 		DB28C4A722CFAF58005362FD /* ReceiveAddressRedeemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */; };
 		DB28C4A922CFB79A005362FD /* ReceiveAddressHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A822CFB79A005362FD /* ReceiveAddressHeader.swift */; };
+		DB28C4B122D34ECD005362FD /* AcceptRedeemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4AB22D34ECD005362FD /* AcceptRedeemPresenter.swift */; };
+		DB28C4B222D34ECD005362FD /* AcceptRedeemRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4AC22D34ECD005362FD /* AcceptRedeemRouting.swift */; };
+		DB28C4B322D34ECD005362FD /* AcceptRedeemModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4AD22D34ECD005362FD /* AcceptRedeemModels.swift */; };
+		DB28C4B422D34ECD005362FD /* AcceptRedeemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4AE22D34ECD005362FD /* AcceptRedeemViewController.swift */; };
+		DB28C4B522D34ECD005362FD /* AcceptRedeemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4AF22D34ECD005362FD /* AcceptRedeemInteractor.swift */; };
+		DB28C4B622D34ECD005362FD /* AcceptRedeemConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4B022D34ECD005362FD /* AcceptRedeemConfigurator.swift */; };
+		DB28C4B922D34F4E005362FD /* AcceptRedeemAcceptRedeemWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4B822D34F4E005362FD /* AcceptRedeemAcceptRedeemWorker.swift */; };
+		DB28C4BB22D35B4C005362FD /* AcceptRedeemFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4BA22D35B4C005362FD /* AcceptRedeemFlowController.swift */; };
+		DB28C4BD22D38C18005362FD /* Data+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4BC22D38C18005362FD /* Data+Bytes.swift */; };
+		DB28C4BF22D38E38005362FD /* Array+ReadBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4BE22D38E38005362FD /* Array+ReadBytes.swift */; };
+		DB28C4C122D38EFE005362FD /* Array+Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4C022D38EFE005362FD /* Array+Numeric.swift */; };
+		DB28C4C322D39EE6005362FD /* Numeric+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4C222D39EE6005362FD /* Numeric+Bytes.swift */; };
 		DB72098B22C1347200ED116A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB72098A22C1347200ED116A /* Assets.xcassets */; };
 		DB72098E22C1347200ED116A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB72098C22C1347200ED116A /* LaunchScreen.storyboard */; };
 		DB720CAA22C1396B00ED116A /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099922C1396B00ED116A /* SettingsModels.swift */; };
@@ -638,6 +650,18 @@
 		B5AD850E3986FEE4CD13E7C4 /* Pods-TokenD-Plus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.release.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.release.xcconfig"; sourceTree = "<group>"; };
 		DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressRedeemManager.swift; sourceTree = "<group>"; };
 		DB28C4A822CFB79A005362FD /* ReceiveAddressHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressHeader.swift; sourceTree = "<group>"; };
+		DB28C4AB22D34ECD005362FD /* AcceptRedeemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemPresenter.swift; sourceTree = "<group>"; };
+		DB28C4AC22D34ECD005362FD /* AcceptRedeemRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemRouting.swift; sourceTree = "<group>"; };
+		DB28C4AD22D34ECD005362FD /* AcceptRedeemModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemModels.swift; sourceTree = "<group>"; };
+		DB28C4AE22D34ECD005362FD /* AcceptRedeemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemViewController.swift; sourceTree = "<group>"; };
+		DB28C4AF22D34ECD005362FD /* AcceptRedeemInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemInteractor.swift; sourceTree = "<group>"; };
+		DB28C4B022D34ECD005362FD /* AcceptRedeemConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemConfigurator.swift; sourceTree = "<group>"; };
+		DB28C4B822D34F4E005362FD /* AcceptRedeemAcceptRedeemWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemAcceptRedeemWorker.swift; sourceTree = "<group>"; };
+		DB28C4BA22D35B4C005362FD /* AcceptRedeemFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemFlowController.swift; sourceTree = "<group>"; };
+		DB28C4BC22D38C18005362FD /* Data+Bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Bytes.swift"; sourceTree = "<group>"; };
+		DB28C4BE22D38E38005362FD /* Array+ReadBytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+ReadBytes.swift"; sourceTree = "<group>"; };
+		DB28C4C022D38EFE005362FD /* Array+Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Numeric.swift"; sourceTree = "<group>"; };
+		DB28C4C222D39EE6005362FD /* Numeric+Bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Bytes.swift"; sourceTree = "<group>"; };
 		DB72098022C1347100ED116A /* TokenD-Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TokenD-Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB72098A22C1347200ED116A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB72098D22C1347200ED116A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1291,6 +1315,28 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		DB28C4AA22D34EAE005362FD /* AcceptRedeem */ = {
+			isa = PBXGroup;
+			children = (
+				DB28C4B022D34ECD005362FD /* AcceptRedeemConfigurator.swift */,
+				DB28C4AF22D34ECD005362FD /* AcceptRedeemInteractor.swift */,
+				DB28C4AD22D34ECD005362FD /* AcceptRedeemModels.swift */,
+				DB28C4AB22D34ECD005362FD /* AcceptRedeemPresenter.swift */,
+				DB28C4AC22D34ECD005362FD /* AcceptRedeemRouting.swift */,
+				DB28C4AE22D34ECD005362FD /* AcceptRedeemViewController.swift */,
+				DB28C4B722D34F14005362FD /* Workers */,
+			);
+			path = AcceptRedeem;
+			sourceTree = "<group>";
+		};
+		DB28C4B722D34F14005362FD /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DB28C4B822D34F4E005362FD /* AcceptRedeemAcceptRedeemWorker.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		DB72097722C1347100ED116A = {
 			isa = PBXGroup;
 			children = (
@@ -1346,6 +1392,7 @@
 		DB72099722C1396B00ED116A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DB28C4AA22D34EAE005362FD /* AcceptRedeem */,
 				DB720B4822C1396B00ED116A /* AssetPicker */,
 				DB720A2322C1396B00ED116A /* AuthenticatorAuth */,
 				DB720BD922C1396B00ED116A /* BalanceHeader */,
@@ -2665,29 +2712,33 @@
 		DB720BEA22C1396B00ED116A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				DB720BEB22C1396B00ED116A /* Bundle+Version.swift */,
+				DB720BF422C1396B00ED116A /* Array+IndexInBounds.swift */,
 				DB720BEC22C1396B00ED116A /* Array+IndexOf.swift */,
-				DB720BED22C1396B00ED116A /* TokenDSDK.Asset+Identifier.swift */,
+				DB28C4C022D38EFE005362FD /* Array+Numeric.swift */,
+				DB28C4BE22D38E38005362FD /* Array+ReadBytes.swift */,
+				DB720BF722C1396B00ED116A /* Array+RemoveObject.swift */,
+				DB720BF922C1396B00ED116A /* Array+Take.swift */,
+				DB720BF822C1396B00ED116A /* BehaviorRelay+EmitValue.swift */,
+				DB720BEB22C1396B00ED116A /* Bundle+Version.swift */,
+				DB28C4BC22D38C18005362FD /* Data+Bytes.swift */,
+				DB720BFA22C1396B00ED116A /* Hashable+Iterate.swift */,
+				DB720BFD22C1396B00ED116A /* NumberFormatter+Decimal.swift */,
+				DB720C0022C1396B00ED116A /* SideMenuController+RootContent.swift */,
+				DB720BF122C1396B00ED116A /* SnapKit+Extension.swift */,
 				DB720BEE22C1396B00ED116A /* String+Index.swift */,
+				DB720BF322C1396B00ED116A /* String+QueueLabel.swift */,
+				DB720BED22C1396B00ED116A /* TokenDSDK.Asset+Identifier.swift */,
+				DB720BFF22C1396B00ED116A /* TokenDWallet.PublicKey+base32EncodedString.swift */,
+				DB720BF222C1396B00ED116A /* UIColor+Hex.swift */,
 				DB720BEF22C1396B00ED116A /* UIColor+Interpolation.swift */,
 				DB720BF022C1396B00ED116A /* UIImage+ButtonImage.swift */,
-				DB720BF122C1396B00ED116A /* SnapKit+Extension.swift */,
-				DB720BF222C1396B00ED116A /* UIColor+Hex.swift */,
-				DB720BF322C1396B00ED116A /* String+QueueLabel.swift */,
-				DB720BF422C1396B00ED116A /* Array+IndexInBounds.swift */,
-				DB720BF522C1396B00ED116A /* UITableView+LastCell.swift */,
-				DB720BF622C1396B00ED116A /* UIViewController+ChildViewController.swift */,
-				DB720BF722C1396B00ED116A /* Array+RemoveObject.swift */,
-				DB720BF822C1396B00ED116A /* BehaviorRelay+EmitValue.swift */,
-				DB720BF922C1396B00ED116A /* Array+Take.swift */,
-				DB720BFA22C1396B00ED116A /* Hashable+Iterate.swift */,
-				DB720BFB22C1396B00ED116A /* UIView+Loading.swift */,
-				DB720BFC22C1396B00ED116A /* UISegmentedControl+FillWithSegments.swift */,
-				DB720BFD22C1396B00ED116A /* NumberFormatter+Decimal.swift */,
-				DB720BFE22C1396B00ED116A /* UIViewController+Nib.swift */,
-				DB720BFF22C1396B00ED116A /* TokenDWallet.PublicKey+base32EncodedString.swift */,
-				DB720C0022C1396B00ED116A /* SideMenuController+RootContent.swift */,
 				DB720C0122C1396B00ED116A /* UIResponder+First.swift */,
+				DB720BFC22C1396B00ED116A /* UISegmentedControl+FillWithSegments.swift */,
+				DB720BF522C1396B00ED116A /* UITableView+LastCell.swift */,
+				DB720BFB22C1396B00ED116A /* UIView+Loading.swift */,
+				DB720BF622C1396B00ED116A /* UIViewController+ChildViewController.swift */,
+				DB720BFE22C1396B00ED116A /* UIViewController+Nib.swift */,
+				DB28C4C222D39EE6005362FD /* Numeric+Bytes.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3136,6 +3187,7 @@
 		DB720C9722C1396B00ED116A /* FlowControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DB28C4BA22D35B4C005362FD /* AcceptRedeemFlowController.swift */,
 				DB720C9B22C1396B00ED116A /* AuthenticatorAuthFlowController.swift */,
 				DB720CA822C1396B00ED116A /* BaseFlowController.swift */,
 				DB720C9E22C1396B00ED116A /* BaseSignedInFlowController.swift */,
@@ -3367,6 +3419,7 @@
 				DB720E9922C1396C00ED116A /* UIView+Loading.swift in Sources */,
 				DB720D4F22C1396B00ED116A /* ChartModels.swift in Sources */,
 				DB720CDA22C1396B00ED116A /* UpdatePasswordInteractor.swift in Sources */,
+				DB28C4BF22D38E38005362FD /* Array+ReadBytes.swift in Sources */,
 				DB720D8F22C1396B00ED116A /* TransactionDetailsInvestmentSectionsProvider.swift in Sources */,
 				DB720D1422C1396B00ED116A /* TokenDetailsFetcher.swift in Sources */,
 				DB720F1122C1396C00ED116A /* PermissionRequestFlowController.swift in Sources */,
@@ -3437,6 +3490,7 @@
 				DB720CC522C1396B00ED116A /* BalancePickerViewController.swift in Sources */,
 				DB720CAC22C1396B00ED116A /* SettingsRouting.swift in Sources */,
 				DB720D6A22C1396B00ED116A /* TradeOffersTitleView.swift in Sources */,
+				DB28C4B522D34ECD005362FD /* AcceptRedeemInteractor.swift in Sources */,
 				DB720E6B22C1396C00ED116A /* SaleDetailsModels.swift in Sources */,
 				DB720E5B22C1396C00ED116A /* TransactionsListSceneMovementsProvider.swift in Sources */,
 				DB720E0122C1396C00ED116A /* TabBarContainerRouting.swift in Sources */,
@@ -3607,6 +3661,7 @@
 				DB720DCA22C1396C00ED116A /* ConfirmationTitleTextView.swift in Sources */,
 				DB720E6322C1396C00ED116A /* TransactionsListSceneTransactionsProviderProtocol.swift in Sources */,
 				DB720D0D22C1396B00ED116A /* TokenDetailsInteractor.swift in Sources */,
+				DB28C4B622D34ECD005362FD /* AcceptRedeemConfigurator.swift in Sources */,
 				DB720D0422C1396B00ED116A /* FeeSectionProvider.swift in Sources */,
 				DB720ECC22C1396C00ED116A /* OrderBookTableViewSellCell.swift in Sources */,
 				DB720D4722C1396B00ED116A /* ChartRouting.swift in Sources */,
@@ -3642,6 +3697,7 @@
 				DB720DDF22C1396C00ED116A /* TradesListPresenter.swift in Sources */,
 				DB720DE222C1396C00ED116A /* TradesListConfigurator.swift in Sources */,
 				DB720D2722C1396B00ED116A /* AuthenticatorAuthActionCell.swift in Sources */,
+				DB28C4C322D39EE6005362FD /* Numeric+Bytes.swift in Sources */,
 				DB720D0C22C1396B00ED116A /* TokenDetailsPresenter.swift in Sources */,
 				DB720EA622C1396C00ED116A /* Theme.swift in Sources */,
 				DB720DB122C1396B00ED116A /* SendPaymentAmountsBalanceDetailsLoader.swift in Sources */,
@@ -3653,6 +3709,7 @@
 				DB720E9622C1396C00ED116A /* BehaviorRelay+EmitValue.swift in Sources */,
 				DB720DB222C1396B00ED116A /* SendPaymentAmountAmountFormatter.swift in Sources */,
 				DB720E5E22C1396C00ED116A /* TransactionsListScenePendingOffersFetcher.swift in Sources */,
+				DB28C4BB22D35B4C005362FD /* AcceptRedeemFlowController.swift in Sources */,
 				DB720E8E22C1396C00ED116A /* UIImage+ButtonImage.swift in Sources */,
 				DB720EAA22C1396C00ED116A /* SharedAmountFormatter.swift in Sources */,
 				DB720E7A22C1396C00ED116A /* BiometricsAuthModels.swift in Sources */,
@@ -3714,6 +3771,7 @@
 				DB720EB422C1396C00ED116A /* QRCodeGenerationOperation.swift in Sources */,
 				DB720CF422C1396B00ED116A /* TabsContainerPresenter.swift in Sources */,
 				DB720ED922C1396C00ED116A /* BXFLabelWithInsets.swift in Sources */,
+				DB28C4B222D34ECD005362FD /* AcceptRedeemRouting.swift in Sources */,
 				DB720DDE22C1396C00ED116A /* TradesListViewController.swift in Sources */,
 				DB720CB522C1396B00ED116A /* SaleInvestPresenter.swift in Sources */,
 				DB720E0F22C1396C00ED116A /* AssetPickerInteractor.swift in Sources */,
@@ -3791,6 +3849,7 @@
 				DB720EDC22C1396C00ED116A /* BXFScrollViewWithKeyboardResponder.swift in Sources */,
 				DB720EC122C1396C00ED116A /* ValueValidator.swift in Sources */,
 				DB720DBE22C1396C00ED116A /* ConfirmationSectionsProviderDummy.swift in Sources */,
+				DB28C4B922D34F4E005362FD /* AcceptRedeemAcceptRedeemWorker.swift in Sources */,
 				DB720CF022C1396B00ED116A /* TabsContainerModels.swift in Sources */,
 				DB720CB222C1396B00ED116A /* SettingsBoolCell.swift in Sources */,
 				DB720CDB22C1396B00ED116A /* UpdatePasswordRouting.swift in Sources */,
@@ -3853,6 +3912,7 @@
 				DB720CBE22C1396B00ED116A /* SaleInvestAmountFormatter.swift in Sources */,
 				DB720E3E22C1396C00ED116A /* BalancesListPieChartColorsProvider.swift in Sources */,
 				DB720DB022C1396B00ED116A /* SendPaymentAmountFeeLoader.swift in Sources */,
+				DB28C4B322D34ECD005362FD /* AcceptRedeemModels.swift in Sources */,
 				DB720E1422C1396C00ED116A /* RegisterSceneRouting.swift in Sources */,
 				DB720CC622C1396B00ED116A /* BalancePickerConfigurator.swift in Sources */,
 				DB720D0722C1396B00ED116A /* FeesFeeCell.swift in Sources */,
@@ -3892,6 +3952,7 @@
 				DB720EA822C1396C00ED116A /* BalanceBinderProtocol.swift in Sources */,
 				DB720D6C22C1396B00ED116A /* TradeOffersViewController.swift in Sources */,
 				DB720DD922C1396C00ED116A /* WalletRecoveryPresenter.swift in Sources */,
+				DB28C4BD22D38C18005362FD /* Data+Bytes.swift in Sources */,
 				DB720EE122C1396C00ED116A /* DynamicContentTableViewCell.swift in Sources */,
 				DB720D5122C1396B00ED116A /* SendPaymentDestinationModels.swift in Sources */,
 				DB720EBD22C1396C00ED116A /* PrecisedFormatter.swift in Sources */,
@@ -3944,9 +4005,11 @@
 				DB720D7622C1396B00ED116A /* BalanceHeaderWithPickerView.swift in Sources */,
 				DB720E2322C1396C00ED116A /* SideMenuInteractor.swift in Sources */,
 				DB720D1922C1396B00ED116A /* TokenDetailsRouting.swift in Sources */,
+				DB28C4B422D34ECD005362FD /* AcceptRedeemViewController.swift in Sources */,
 				DB720D4E22C1396B00ED116A /* ChartInteractor.swift in Sources */,
 				DB720CEE22C1396B00ED116A /* TabsContainerConfigurator.swift in Sources */,
 				DB720ECA22C1396C00ED116A /* OrderBookCard.swift in Sources */,
+				DB28C4B122D34ECD005362FD /* AcceptRedeemPresenter.swift in Sources */,
 				DB720F6122C4CD1C00ED116A /* PollsChoiceCell.swift in Sources */,
 				DB720EAE22C1396C00ED116A /* RateProvider.swift in Sources */,
 				DB720E9822C1396C00ED116A /* Hashable+Iterate.swift in Sources */,
@@ -3966,6 +4029,7 @@
 				DB720D8D22C1396B00ED116A /* TransactionDetailsDateFormatter.swift in Sources */,
 				DB720CE322C1396B00ED116A /* UpdatePasswordConfigurator.swift in Sources */,
 				DB720EF322C1396C00ED116A /* UserDataProvider.swift in Sources */,
+				DB28C4C122D38EFE005362FD /* Array+Numeric.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

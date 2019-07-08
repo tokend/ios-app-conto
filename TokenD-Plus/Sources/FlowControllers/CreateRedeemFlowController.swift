@@ -241,23 +241,6 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
     
     // MARK: - Private
     
-    
-    
-    private func presentQRCodeReader(completion: @escaping SendPaymentDestination.QRCodeReaderCompletion) {
-        self.runQRCodeReaderFlow(
-            presentingViewController: self.navigationController.getViewController(),
-            handler: { result in
-                switch result {
-                    
-                case .canceled:
-                    completion(.canceled)
-                    
-                case .success(let value, let metadataType):
-                    completion(.success(value: value, metadataType: metadataType))
-                }
-        })
-    }
-    
     private func showBalancePicker(
         targetAssets: [String],
         onSelected: @escaping ((String) -> Void)

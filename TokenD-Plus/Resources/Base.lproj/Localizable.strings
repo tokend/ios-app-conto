@@ -1,6 +1,7 @@
 // Localized strings
 
 "access_revoked_sign_in_required" = "Access revoked.\nSign In required.";
+"accept_redeem" = "Accept redeem";
 "account" = "ACCOUNT";
 "account_has_been_successfully_recovered" = "Account has been successfully recovered";
 "account_id" = "Account ID";
@@ -190,7 +191,9 @@
 "failed_to_generate_new_key_pair" = "Failed to generate new key pair";
 "failed_to_generate_password_factor_key_pair" = "Failed to generate password factor key pair";
 "failed_to_generate_recovery_key_pair" = "Failed to generate recovery key pair";
+"failed_to_get_asset_data" = "Failed to convert asset into bytes";
 "failed_to_get_wallet_data" = "Failed to get wallet data";
+"failed_to_fetch_transaction_signature" = "Failed to fetch transaction signature";
 "failed_to_load_fees" = "Failed to load fees: $(message)";
 "failed_to_load_fees_replace_message" = "message";
 "failed_to_prepare_transaction" = "Failed to prepare transaction";

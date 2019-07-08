@@ -4,6 +4,7 @@ import Foundation
 
 enum LocKey: String {
     case access_revoked_sign_in_required
+    case accept_redeem
     case account
     case account_has_been_successfully_recovered
     case account_id
@@ -193,7 +194,9 @@ enum LocKey: String {
     case failed_to_generate_new_key_pair
     case failed_to_generate_password_factor_key_pair
     case failed_to_generate_recovery_key_pair
+    case failed_to_get_asset_data
     case failed_to_get_wallet_data
+    case failed_to_fetch_transaction_signature
     case failed_to_load_fees
     case failed_to_load_fees_replace_message
     case failed_to_prepare_transaction

@@ -137,7 +137,7 @@ extension ConfirmationScene {
             )
             
             let percent = self.amountConverter.convertDecimalToUInt64(
-                value: feeModel.percent ,
+                value: feeModel.percent,
                 precision: networkInfo.precision
             )
             

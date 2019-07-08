@@ -248,11 +248,14 @@ extension BalancesList.ViewController: BalancesList.DisplayLogic {
                 self?.actionsList?.dismiss({
                     switch item.actionType {
                         
+                    case .acceptRedeem:
+                        self?.routing?.showAcceptRedeem()
+                        
                     case .receive:
                         self?.routing?.showReceive()
                         
-                    case .redeem:
-                        self?.routing?.showRedeem()
+                    case .createRedeem:
+                        self?.routing?.showCreateRedeem()
                         
                     case .send:
                         self?.routing?.showSendPayment()

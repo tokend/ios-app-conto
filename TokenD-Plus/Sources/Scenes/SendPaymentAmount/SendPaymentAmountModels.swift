@@ -327,6 +327,8 @@ extension SendPaymentAmount.Event.RedeemAction {
         case failedToDecodeAccountId(AccountId)
         case failedToDecodeBalanceId(BalanceId)
         case failedToSignTransaction
+        case failedToGetAssetData
+        case failedToGetTransactionSignature
         case other(Error)
         
         // MARK: - LocalizedError
@@ -359,6 +361,12 @@ extension SendPaymentAmount.Event.RedeemAction {
                         .failed_to_decode_balance_id_replace_id: id
                     ]
                 )
+                
+            case .failedToGetAssetData:
+                return Localized(.failed_to_get_asset_data)
+                
+            case .failedToGetTransactionSignature:
+                return Localized(.failed_to_fetch_transaction_signature)
                 
             case .failedToSignTransaction:
                 return Localized(.failed_to_sign_transaction)

@@ -145,11 +145,10 @@ extension SendPaymentAmount {
                 ext: .emptyVersion()
             )
             
-            let convertedAmount = Uint64(
-                self.amountConverter.convertDecimalToUInt64(
+            let convertedAmount = self.amountConverter.convertDecimalToUInt64(
                     value: amount,
                     precision: networkInfo.precision
-            ))
+            )
             
             var generator = SystemRandomNumberGenerator()
             let mask: UInt64 = 0xffffffff
@@ -158,7 +157,7 @@ extension SendPaymentAmount {
             let operation = PaymentOp(
                 sourceBalanceID: sourceBalanceID,
                 destination: .account(destinationAccountID),
-                amount: convertedAmount,
+                amount: Uint64(convertedAmount),
                 feeData: feeData,
                 subject: "",
                 reference: salt.description,
@@ -181,6 +180,7 @@ extension SendPaymentAmount {
             self.signTransaction(
                 asset: asset,
                 amount: amount,
+                convertedAmount: Int64(convertedAmount),
                 transaction: transaction,
                 completion: completion
             )
@@ -189,6 +189,7 @@ extension SendPaymentAmount {
         private func signTransaction(
             asset: String,
             amount: Decimal,
+            convertedAmount: Int64,
             transaction: TransactionModel,
             completion: @escaping (SendPaymentAmountCreateRedeemRequest) -> Void
             ) {
@@ -205,6 +206,7 @@ extension SendPaymentAmount {
             self.createRedeemRequest(
                 asset: asset,
                 amount: amount,
+                convertedAmount: convertedAmount,
                 transaction: transaction,
                 completion: completion
             )
@@ -213,14 +215,40 @@ extension SendPaymentAmount {
         private func createRedeemRequest(
             asset: String,
             amount: Decimal,
+            convertedAmount: Int64,
             transaction: TransactionModel,
             completion: @escaping (SendPaymentAmountCreateRedeemRequest) -> Void
             ) {
             
-            // TODO - Convert to Data, then encode to base64
+            var redeemBytes: [Int8] = []
+            guard let sourceAccountIdData = try? Base32Check.decode(encoded: self.originalAccountId) else {
+                completion(.failure(.failedToDecodeAccountId(.senderAccountId)))
+                return
+            }
+            redeemBytes.append(contentsOf: sourceAccountIdData.data.bytes)
+            redeemBytes.append(contentsOf: asset.count.bytes)
+            
+            guard let assetData = asset.data(using: .utf8) else {
+                completion(.failure(.failedToGetAssetData))
+                return
+            }
+            redeemBytes.append(contentsOf: assetData.bytes)
+            redeemBytes.append(contentsOf: convertedAmount.bytes)
+            redeemBytes.append(contentsOf: Int64(transaction.salt).bytes)
+            redeemBytes.append(contentsOf: Int64(transaction.timeBounds.minTime).bytes)
+            redeemBytes.append(contentsOf: Int64(transaction.timeBounds.maxTime).bytes)
+            
+            guard let signature = transaction.signatures.first else {
+                completion(.failure(.failedToGetTransactionSignature))
+                return
+            }
+            redeemBytes.append(contentsOf: signature.hint.wrapped.bytes)
+            redeemBytes.append(contentsOf: signature.signature.bytes)
+            
+            let redeemRequestData = Data(bytes: redeemBytes, count: redeemBytes.count)
             
             let redeemToShow = Model.ShowRedeemModel(
-                redeemRequest: "Redeem request",
+                redeemRequest: redeemRequestData.base64EncodedString(),
                 amount: amount,
                 asset: asset
             )

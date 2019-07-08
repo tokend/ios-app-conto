@@ -22,6 +22,8 @@ extension TabBarContainer {
         private let hideShadow: (() -> Void)
         private let selectedTabIdentifier: TabsContainer.Model.TabIdentifier?
         
+        private let originalAccountId: String
+        private let ownerAccountId: String
         private var content: ContentProtocol?
         
         // MARK: -
@@ -44,7 +46,9 @@ extension TabBarContainer {
             hideProgress: @escaping (() -> Void),
             showShadow: @escaping (() -> Void),
             hideShadow: @escaping (() -> Void),
-            selectedTabIdentifier: TabsContainer.Model.TabIdentifier?
+            selectedTabIdentifier: TabsContainer.Model.TabIdentifier?,
+            originalAccountId: String,
+            ownerAccountId: String
             ) {
             
             self.balancesFetcher = balancesFetcher
@@ -62,6 +66,8 @@ extension TabBarContainer {
             self.showShadow = showShadow
             self.hideShadow = hideShadow
             self.selectedTabIdentifier = selectedTabIdentifier
+            self.originalAccountId = originalAccountId
+            self.ownerAccountId = ownerAccountId
         }
         
         // MARK: - Private
@@ -141,11 +147,16 @@ extension TabBarContainer {
                     self?.showReceiveScene()
                 }, showSendPayment: { [weak self] in
                     self?.showSendScene()
-                }, showRedeem: {
+                }, showCreateRedeem: {
                     
+            }, showAcceptRedeem: {
+                
             })
             
-            let actionProvider = BalancesList.ActionProvider()
+            let actionProvider = BalancesList.ActionProvider(
+                originalAccountId: self.originalAccountId,
+                ownerAccountId: self.ownerAccountId
+            )
             let amountFormatter = BalancesList.AmountFormatter()
             let percentFormatter = BalancesList.PercentFormatter()
             let sceneModel = BalancesList.Model.SceneModel(
