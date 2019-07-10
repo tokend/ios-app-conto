@@ -193,4 +193,8 @@ extension BalancesList.Event {
         }
         public typealias ViewModel = Response
     }
+    
+    public enum RefreshInitiated {
+        public struct Request {}
+    }
 }

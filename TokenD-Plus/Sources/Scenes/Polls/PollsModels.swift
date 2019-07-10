@@ -131,4 +131,8 @@ extension Polls.Event {
         public typealias Response = Model.LoadingStatus
         public typealias ViewModel = Response
     }
+    
+    public enum RefreshInitiated {
+        public struct Request {}
+    }
 }

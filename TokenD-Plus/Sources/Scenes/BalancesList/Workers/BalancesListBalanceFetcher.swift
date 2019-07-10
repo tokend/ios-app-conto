@@ -5,6 +5,7 @@ import RxSwift
 protocol BalanceListBalanceFetcherProtocol {
     func observeBalances() -> Observable<[BalancesList.Model.Balance]>
     func observeLoadingStatus() -> Observable<BalancesList.Model.LoadingStatus>
+    func reloadBalances()
 }
 
 extension BalancesList {
@@ -133,5 +134,9 @@ extension BalancesList.BalancesFetcher: BalancesList.BalancesFetcherProtocol {
             .disposed(by: self.disposeBag)
         
         return self.loadingStatus.asObservable()
+    }
+    
+    func reloadBalances() {
+        self.balancesRepo.reloadBalancesDetails()
     }
 }

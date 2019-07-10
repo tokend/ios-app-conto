@@ -8,6 +8,7 @@ public protocol PollsBusinessLogic {
     func onViewDidLoad(request: Event.ViewDidLoad.Request)
     func onActionButtonClicked(request: Event.ActionButtonClicked.Request)
     func onChoiceChanged(request: Event.ChoiceChanged.Request)
+    func onRefreshInitiated(request: Event.RefreshInitiated.Request)
 }
 
 extension Polls {
@@ -169,5 +170,9 @@ extension Polls.Interactor: Polls.BusinessLogic {
         
         poll.currentChoice = request.choice
         self.sceneModel.polls[pollIndex] = poll
+    }
+    
+    public func onRefreshInitiated(request: Event.RefreshInitiated.Request) {
+        self.pollsFetcher.reloadPolls()
     }
 }
