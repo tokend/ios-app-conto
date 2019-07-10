@@ -179,7 +179,6 @@ extension ConfirmationScene {
                         
                         try strongSelf.transactionSender.sendTransaction(
                             transaction,
-                            walletId: strongSelf.userDataProvider.walletId,
                             completion: { (result) in
                                 self?.pendingOffersRepo.reloadOffers()
                                 

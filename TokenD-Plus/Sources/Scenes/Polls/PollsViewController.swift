@@ -22,6 +22,7 @@ extension Polls {
         // MARK: - Private properties
         
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
+        private let refreshControl: UIRefreshControl = UIRefreshControl()
         private let emptyView: EmptyView.View = EmptyView.View()
         
         private var polls: [PollCell.ViewModel] = []
@@ -57,6 +58,7 @@ extension Polls {
             super.viewDidLoad()
             
             self.setupView()
+            self.setupRefreshControl()
             self.setupEmptyView()
             self.setupTableView()
             self.setupLayout()
@@ -81,6 +83,19 @@ extension Polls {
         
         private func setupView() {
             self.view.backgroundColor = Theme.Colors.containerBackgroundColor
+        }
+        
+        private func setupRefreshControl() {
+            self.refreshControl
+                .rx
+                .controlEvent(.valueChanged)
+                .subscribe(onNext: { [weak self] (_) in
+                    let request = Event.RefreshInitiated.Request()
+                    self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                        businessLogic.onRefreshInitiated(request: request)
+                    })
+                })
+            .disposed(by: self.disposeBag)
         }
         
         private func setupEmptyView() {
@@ -108,6 +123,9 @@ extension Polls {
         private func setupLayout() {
             self.view.addSubview(self.tableView)
             self.view.addSubview(self.emptyView)
+            
+            self.tableView.addSubview(self.refreshControl)
+            
             self.tableView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
@@ -156,10 +174,10 @@ extension Polls.ViewController: Polls.DisplayLogic {
         switch viewModel {
             
         case .loaded:
-            self.routing?.hideLoading()
+            self.refreshControl.endRefreshing()
             
         case .loading:
-            self.routing?.showLoading()
+            self.refreshControl.beginRefreshing()
         }
     }
 }

@@ -46,6 +46,8 @@ extension BalancesList.Model {
     public enum ActionType {
         case send
         case receive
+        case createRedeem
+        case acceptRedeem
     }
     
     public struct LegendCellModel: Equatable {
@@ -190,5 +192,9 @@ extension BalancesList.Event {
             let models: [Model.ActionModel]
         }
         public typealias ViewModel = Response
+    }
+    
+    public enum RefreshInitiated {
+        public struct Request {}
     }
 }

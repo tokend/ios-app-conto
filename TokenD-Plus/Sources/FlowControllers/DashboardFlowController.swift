@@ -85,7 +85,10 @@ class DashboardFlowController: BaseSignedInFlowController {
             ownerAccountId: self.ownerAccountId,
             imageUtility: imagesUtility
         )
-        let actionProvider = BalancesList.ActionProvider()
+        let actionProvider = BalancesList.ActionProvider(
+            originalAccountId: self.userDataProvider.walletData.accountId,
+            ownerAccountId: ownerAccountId
+            )
         let colorsProvider = BalancesList.PieChartColorsProvider()
         
         let routing = BalancesList.Routing(
@@ -107,6 +110,10 @@ class DashboardFlowController: BaseSignedInFlowController {
                 self?.showReceiveScene()
             }, showSendPayment: { [weak self] in
                 self?.showSendScene()
+            }, showCreateRedeem: { [weak self] in
+                self?.showCreateRedeemScene()
+            }, showAcceptRedeem: { [weak self] in
+                self?.showAcceptRedeemScene()
         })
         
         BalancesList.Configurator.configure(
@@ -132,6 +139,17 @@ class DashboardFlowController: BaseSignedInFlowController {
         }
     }
     
+    private func showCreateRedeemScene() {
+        self.runCreateRedeemFlow(
+            navigationController: self.navigationController,
+            balanceId: nil
+         )
+    }
+    
+    private func showAcceptRedeemScene() {
+        self.runAcceptRedeemFlow(navigationController: self.navigationController)
+    }
+    
     private func showSendScene() {
         self.runSendPaymentFlow(
             navigationController: self.navigationController,
@@ -151,7 +169,8 @@ class DashboardFlowController: BaseSignedInFlowController {
         
         let viewConfig = ReceiveAddress.Model.ViewConfig(
             copiedLocalizationKey: Localized(.copied),
-            tableViewTopInset: 24
+            tableViewTopInset: 24,
+            headerAppearence: .hidden
         )
         
         let sceneModel = ReceiveAddress.Model.SceneModel()

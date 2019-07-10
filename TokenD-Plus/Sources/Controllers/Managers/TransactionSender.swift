@@ -32,12 +32,13 @@ public class TransactionSender {
     }
     public func sendTransaction(
         _ transaction: TransactionModel,
-        walletId: String,
+        shouldSign: Bool = true,
         completion: @escaping (SendTransactionResult) -> Void
         ) throws {
         
-        try transaction.addSignature(signer: self.keychainDataProvider.getKeyData())
-        
+        if shouldSign {
+            try transaction.addSignature(signer: self.keychainDataProvider.getKeyData())
+        }
         self.api.sendTransaction(
             envelope: transaction.getEnvelope().toXdrBase64String()
         ) { (result) in

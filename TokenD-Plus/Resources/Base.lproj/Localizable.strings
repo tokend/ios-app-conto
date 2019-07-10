@@ -1,6 +1,7 @@
 // Localized strings
 
 "access_revoked_sign_in_required" = "Access revoked.\nSign In required.";
+"accept_redemption" = "Accept redemption";
 "account" = "ACCOUNT";
 "account_has_been_successfully_recovered" = "Account has been successfully recovered";
 "account_id" = "Account ID";
@@ -186,11 +187,16 @@
 "failed_to_fetch_companies" = "Failed to fetch companies";
 "failed_to_fetch_fees" = "Failed to fetch sender fee";
 "failed_to_fetch_network_info" = "Failed to fetch network info";
+"failed_to_fetch_sender_account" = "Failed to fetch sender account";
+"failed_to_fetch_sender_balance" = "Failed to fetch sender balance";
+"failed_to_fetch_sender_signature" = "Failed to fetch sender signature";
 "failed_to_generate_key_pair" = "Failed to generate key pair";
 "failed_to_generate_new_key_pair" = "Failed to generate new key pair";
 "failed_to_generate_password_factor_key_pair" = "Failed to generate password factor key pair";
 "failed_to_generate_recovery_key_pair" = "Failed to generate recovery key pair";
+"failed_to_get_asset_data" = "Failed to convert asset into bytes";
 "failed_to_get_wallet_data" = "Failed to get wallet data";
+"failed_to_fetch_transaction_signature" = "Failed to fetch transaction signature";
 "failed_to_load_fees" = "Failed to load fees: $(message)";
 "failed_to_load_fees_replace_message" = "message";
 "failed_to_prepare_transaction" = "Failed to prepare transaction";
@@ -200,6 +206,7 @@
 "failed_to_save_key_and_wallet_data" = "Failed to save key and wallet data";
 "failed_to_save_network_info" = "Failed to save network info";
 "failed_to_scan_server_info" = "Failed to scan server info";
+"failed_to_sign_transaction" = "Failed to sign transaction";
 "fatal_error" = "Fatal Error";
 "fee" = "Fee";
 "fee_error" = "Fee error: $(message)";
@@ -248,6 +255,9 @@
 "insufficient_funds" = "Insufficient funds";
 "invalid_account_id" = "Invalid account id";
 "invalid_account_id_or_email" = "Invalid account id or email";
+"invalid_redeem_asset" = "Invalid redeem asset";
+"invalid_redeem_request" = "Invalid redeem request";
+"invalid_sender_account_id" = "Invalid sender account id";
 "invest" = "Invest";
 "invest_cap" = "INVEST";
 "invest_help" = "Investment help";
@@ -399,6 +409,7 @@
 "repeat_title" = "Repeat";
 "request_error" = "Request error: $(message)";
 "request_error_replace_message" = "message";
+"requestor" = "Requestor";
 "resend_email" = "Resend Email";
 "sale" = "Sale";
 "sale_details" = "Sale details";
@@ -482,6 +493,7 @@
 "to_make_a_deposit_send_to_this_address_replace_asset" = "asset";
 "to_pay" = "To pay";
 "to_receive" = "To receive";
+"to_redeem" = "To redeem";
 "to_replace_address" = "address";
 "to_sell" = " to sell";
 "tokend" = "TokenD";
@@ -519,6 +531,8 @@
 "upper_bound" = "Upper bound";
 "up_to" = "Up to $(amount)";
 "up_to_replace_amount" = "amount";
+"use_this_qr_code_to_redeem" = "Use this QR code to redeem $(amount)";
+"use_this_qr_code_to_redeem_replace_amount" = "amount";
 "userdataprovider_should_always_provide_walletdata" = "UserDataProvider should always provide walletData";
 "verification" = "Verification";
 "verification_link_is_sent" = "Verification link is sent to your email\n\nIn case email is not received press resend email button";
@@ -547,6 +561,7 @@
 "yesterday_at" = "yesterday at $(hours)";
 "yesterday_at_replace_hours" = "hours";
 "you_can_grant_permissions" = "You can grant permissions from app Settings in System Preferences. Would you like to open Settings?";
+"you_cannot_accept_redeem_of_the_asset_that_you_do_not_own" = "You cannot accept the redemption of the asset that you do not own";
 "you_have_already_invested" = "You have already invested:";
 "you_have_no_depositable_assets" = "You have no depositable assets";
 "your_account_is_approved" = "Your account is approved. All actions that requires verification are now available";

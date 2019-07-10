@@ -6,6 +6,7 @@ public protocol BalancesListBusinessLogic {
     
     func onViewDidLoad(request: Event.ViewDidLoad.Request)
     func onPieChartBalanceSelected(request: Event.PieChartBalanceSelected.Request)
+    func onRefreshInitiated(request: Event.RefreshInitiated.Request)
 }
 
 extension BalancesList {
@@ -269,5 +270,9 @@ extension BalancesList.Interactor: BalancesList.BusinessLogic {
             legendCells: legendCells
         )
         self.presenter.presentPieChartBalanceSelected(response: response)
+    }
+    
+    public func onRefreshInitiated(request: Event.RefreshInitiated.Request) {
+        self.balancesFetcher.reloadBalances()
     }
 }

@@ -118,7 +118,7 @@ public class BalancesRepo {
     }
     
     func observeLoadingStatus() -> Observable<LoadingStatus> {
-        return loadingStatus.asObservable()
+        return self.loadingStatus.asObservable()
     }
     
     func observeErrorStatus() -> Observable<Swift.Error> {
@@ -204,7 +204,6 @@ public class BalancesRepo {
             
             try self.transactionSender.sendTransaction(
                 transaction,
-                walletId: self.walletId,
                 completion: { [weak self] (result) in
                     switch result {
                         

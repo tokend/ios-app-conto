@@ -26,6 +26,7 @@ extension BalancesList {
         
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
         private let fab: UIButton = UIButton()
+        private let refreshControl: UIRefreshControl = UIRefreshControl()
         
         private var sections: [Model.SectionViewModel] = []
         
@@ -66,6 +67,7 @@ extension BalancesList {
             super.viewDidLoad()
             
             self.setupView()
+            self.setupRefreshControl()
             self.setupTableView()
             self.setupFab()
             self.setupLayout()
@@ -139,6 +141,21 @@ extension BalancesList {
             self.view.backgroundColor = Theme.Colors.contentBackgroundColor
         }
         
+        private func setupRefreshControl() {
+            self.refreshControl.tintColor = Theme.Colors.contentBackgroundColor
+            self.refreshControl
+                .rx
+                .controlEvent(.valueChanged)
+                .subscribe(onNext: { [weak self] (_) in
+                    self?.refreshControl.endRefreshing()
+                    let request = Event.RefreshInitiated.Request()
+                    self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                        businessLogic.onRefreshInitiated(request: request)
+                    })
+                })
+                .disposed(by: self.disposeBag)
+        }
+        
         private func setupTableView() {
             self.tableView.backgroundColor = Theme.Colors.contentBackgroundColor
             self.tableView.register(classes: [
@@ -186,6 +203,8 @@ extension BalancesList {
         private func setupLayout() {
             self.view.addSubview(self.tableView)
             self.view.addSubview(self.fab)
+            
+            self.tableView.addSubview(self.refreshControl)
             
             self.tableView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
@@ -248,8 +267,14 @@ extension BalancesList.ViewController: BalancesList.DisplayLogic {
                 self?.actionsList?.dismiss({
                     switch item.actionType {
                         
+                    case .acceptRedeem:
+                        self?.routing?.showAcceptRedeem()
+                        
                     case .receive:
                         self?.routing?.showReceive()
+                        
+                    case .createRedeem:
+                        self?.routing?.showCreateRedeem()
                         
                     case .send:
                         self?.routing?.showSendPayment()
