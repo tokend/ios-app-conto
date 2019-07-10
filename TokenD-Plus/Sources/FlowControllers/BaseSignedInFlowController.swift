@@ -112,6 +112,50 @@ class BaseSignedInFlowController: BaseFlowController {
         })
     }
     
+    func runCreateRedeemFlow(
+        navigationController: NavigationControllerProtocol,
+        balanceId: String?
+        ) {
+        
+        let flow = CreateRedeemFlowController(
+            navigationController: navigationController,
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider,
+            rootNavigation: self.rootNavigation,
+            selectedBalanceId: nil
+        )
+        self.currentFlowController = flow
+        flow.run(
+            showRootScreen: { (vc) in
+                navigationController.pushViewController(vc, animated: true)
+        })
+    }
+    
+    func runAcceptRedeemFlow(
+        navigationController: NavigationControllerProtocol
+        ) {
+        
+        let flow = AcceptRedeemFlowController(
+            navigationController: navigationController,
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider,
+            rootNavigation: self.rootNavigation
+        )
+        self.currentFlowController = flow
+        flow.run(
+            showRootScreen: { (vc) in
+                navigationController.pushViewController(vc, animated: true)
+        })
+    }
+    
     func showDepositScreen(
         navigationController: NavigationControllerProtocol,
         assetId: String?
@@ -175,7 +219,8 @@ class BaseSignedInFlowController: BaseFlowController {
         
         let viewConfig = ReceiveAddress.Model.ViewConfig(
             copiedLocalizationKey: Localized(.copied),
-            tableViewTopInset: 24
+            tableViewTopInset: 24,
+            headerAppearence: .hidden
         )
         
         let addressManager = ReceiveAddress.ReceiveAddressManager(

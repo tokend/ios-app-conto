@@ -128,6 +128,19 @@ extension ConfirmationScene.Model {
         let reference: String
     }
     
+    struct RedeemModel {
+        let senderAccountId: String
+        let senderBalanceId: String
+        let asset: String
+        let inputAmount: Decimal
+        let precisedAmount: UInt64
+        let salt: UInt64
+        let minTimeBound: UInt64
+        let maxTimeBound: UInt64
+        let hintWrapped: Data
+        let signature: Data
+    }
+    
     struct SaleInvestModel {
         let baseAsset: String
         let quoteAsset: String
@@ -313,6 +326,7 @@ extension ConfirmationScene.Event.ConfirmAction {
     }
     
     enum AccountId: String {
+        case senderAccountId
         case recipientAccountId
     }
 }

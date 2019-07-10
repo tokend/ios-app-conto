@@ -46,6 +46,8 @@ extension BalancesList.Model {
     public enum ActionType {
         case send
         case receive
+        case createRedeem
+        case acceptRedeem
     }
     
     public struct LegendCellModel: Equatable {

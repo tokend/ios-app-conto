@@ -299,7 +299,6 @@ extension TransactionDetails.PendingOfferSectionsProvider: TransactionDetails.Se
             
             try self.transactionSender.sendTransaction(
                 transaction,
-                walletId: self.userDataProvider.walletId,
                 completion: { [weak self] (result) in
                     switch result {
                     case .succeeded:

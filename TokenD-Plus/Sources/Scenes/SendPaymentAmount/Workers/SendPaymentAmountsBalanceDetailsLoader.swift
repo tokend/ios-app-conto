@@ -95,7 +95,9 @@ extension SendPaymentAmount.BalanceDetailsLoaderWorker: SendPaymentAmount.Balanc
             
             switch self.operation {
                 
-            case .handleSend:
+            case .handleSend,
+                 .handleRedeem:
+                
                 return balances.filter({ (balance) -> Bool in
                     return balance.balance > 0
                 })

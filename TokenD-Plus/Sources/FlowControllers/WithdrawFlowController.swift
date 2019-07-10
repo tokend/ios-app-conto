@@ -121,6 +121,7 @@ class WithdrawFlowController: BaseSignedInFlowController {
             onShowWithdrawDestination: { [weak self] (sendModel) in
                 self?.showWithdrawDestinationScreen(withdrawAmountModel: sendModel)
             },
+            onShowRedeem: nil,
             showFeesOverview: { [weak self] (asset, feeType) in
                 self?.showFees(asset: asset, feeType: feeType)
             })

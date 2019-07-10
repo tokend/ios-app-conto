@@ -12,6 +12,7 @@ protocol SendPaymentDisplayLogic: class {
     func displayEditAmount(viewModel: Event.EditAmount.ViewModel)
     func displayPaymentAction(viewModel: Event.PaymentAction.ViewModel)
     func displayWithdrawAction(viewModel: Event.WithdrawAction.ViewModel)
+    func displayRedeemAction(viewModel: Event.RedeemAction.ViewModel)
     func displayFeeOverviewAvailability(viewModel: Event.FeeOverviewAvailability.ViewModel)
     func displayFeeOverviewAction(viewModel: Event.FeeOverviewAction.ViewModel)
 }
@@ -354,6 +355,24 @@ extension SendPaymentAmount.ViewController: SendPaymentAmount.DisplayLogic {
         case .succeeded(let sendModel):
             self.routing?.onHideProgress()
             self.routing?.onShowWithdrawDestination?(sendModel)
+        }
+    }
+    
+    func displayRedeemAction(viewModel: Event.RedeemAction.ViewModel) {
+        switch viewModel {
+        case .loading:
+            self.routing?.onShowProgress()
+            
+        case .loaded:
+            self.routing?.onHideProgress()
+            
+        case .failed(let errorMessage):
+            self.routing?.onHideProgress()
+            self.routing?.onShowError(errorMessage)
+            
+        case .succeeded(let redeemModel):
+            self.routing?.onHideProgress()
+            self.routing?.onShowRedeem?(redeemModel)
         }
     }
     
