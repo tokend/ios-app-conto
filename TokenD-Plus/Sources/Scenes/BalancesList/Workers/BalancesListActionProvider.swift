@@ -23,34 +23,38 @@ extension BalancesList {
         
         
         public func getActions() -> [BalancesList.Model.ActionModel] {
-            let redeem: Model.ActionModel
-            if self.ownerAccountId == self.originalAccountId {
-                redeem = Model.ActionModel(
-                    title: Localized(.accept_redeem),
-                    image: Assets.scanQrIcon.image,
-                    actionType: .acceptRedeem
-                )
-            } else {
-                redeem = Model.ActionModel(
-                    title: Localized(.redeem),
-                    image: Assets.scanQrIcon.image,
-                    actionType: .createRedeem
-                )
-            }
-            
+            var actions: [BalancesList.Model.ActionModel] = []
             let sendAction = Model.ActionModel(
                 title: Localized(.send),
                 image: Assets.send.image,
                 actionType: .send
             )
+            actions.append(sendAction)
             
             let receiveAction = Model.ActionModel(
                 title: Localized(.receive),
                 image: Assets.receive.image,
                 actionType: .receive
             )
+            actions.append(receiveAction)
             
-            return [sendAction, receiveAction, redeem]
+            let createRedeem = Model.ActionModel(
+                title: Localized(.redeem),
+                image: Assets.redeem.image,
+                actionType: .createRedeem
+            )
+            actions.append(createRedeem)
+            
+            if self.ownerAccountId == self.originalAccountId {
+                let acceptRedeem = Model.ActionModel(
+                    title: Localized(.accept_redemption),
+                    image: Assets.scanQrIcon.image,
+                    actionType: .acceptRedeem
+                )
+                actions.append(acceptRedeem)
+            }
+            
+            return actions
         }
     }
 }

@@ -132,7 +132,8 @@ extension ConfirmationScene.Model {
         let senderAccountId: String
         let senderBalanceId: String
         let asset: String
-        let amount: UInt64
+        let inputAmount: Decimal
+        let precisedAmount: UInt64
         let salt: UInt64
         let minTimeBound: UInt64
         let maxTimeBound: UInt64

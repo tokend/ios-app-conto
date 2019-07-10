@@ -21,8 +21,12 @@ extension AcceptRedeem {
         
         private let accountsApiV3: AccountsApiV3
         private let networkInfoFetcher: NetworkInfoFetcher
-        private let amountFormatter: AmountFormatterProtocol
+        private let amountConverter: AmountConverterProtocol
         private let redeemRequest: String
+        private let originalAccountId: String
+        
+        private var showProgress: (() -> Void)?
+        private var hideProgress: (() -> Void)?
         
         private let accountIdSize: Int = 32
         private let int32Size: Int = 4
@@ -33,14 +37,20 @@ extension AcceptRedeem {
         public init(
             accountsApiV3: AccountsApiV3,
             networkInfoFetcher: NetworkInfoFetcher,
-            amountFormatter: AmountFormatterProtocol,
-            redeemRequest: String
+            amountConverter: AmountConverterProtocol,
+            redeemRequest: String,
+            originalAccountId: String,
+            showProgress: (() -> Void)?,
+            hideProgress: (() -> Void)?
             ) {
             
             self.accountsApiV3 = accountsApiV3
             self.networkInfoFetcher = networkInfoFetcher
-            self.amountFormatter = amountFormatter
+            self.amountConverter = amountConverter
             self.redeemRequest = redeemRequest
+            self.originalAccountId = originalAccountId
+            self.showProgress = showProgress
+            self.hideProgress = hideProgress
         }
         
         // MARK: - Private
@@ -53,6 +63,7 @@ extension AcceptRedeem {
                 switch result {
                     
                 case .failed(let error):
+                    self?.hideProgress?()
                     completion(.failure(.other(error)))
                     
                 case .succeeded(let networkInfo):
@@ -70,6 +81,7 @@ extension AcceptRedeem {
             ) {
             
             guard let decodedRequestData = Data(base64Encoded: self.redeemRequest) else {
+                self.hideProgress?()
                 completion(.failure(.failedToFetchDecodeRedeemRequest))
                 return
             }
@@ -95,6 +107,7 @@ extension AcceptRedeem {
                 data: Data(bytes: assetCodeBytes, count: assetCodeBytes.count),
                 encoding: .utf8
                 ) else {
+                    self.hideProgress?()
                     completion(.failure(.failedToDecodeRedeemAsset))
                     return
             }
@@ -107,22 +120,33 @@ extension AcceptRedeem {
                     switch result {
                         
                     case .failure(let error):
+                        self?.hideProgress?()
                         completion(.failure(.other(error)))
                         
                     case .success(let document):
                         guard let account = document.data else {
+                            self?.hideProgress?()
                             completion(.failure(.failedToFetchSenderAccount))
                             return
                         }
                         guard let balances = account.balances else {
+                            self?.hideProgress?()
                             completion(.failure(.failedToFindSenderBalance))
                             return
                         }
                         guard let balance = balances.first(where: { (balance) -> Bool in
                             return balance.asset?.id ?? "" == assetCode
                         }), let senderBalanceId = balance.id else {
+                            
+                            self?.hideProgress?()
                             completion(.failure(.failedToFindSenderBalance))
                             return
+                        }
+                        guard let assetOwner = balance.asset?.owner?.id,
+                            self?.originalAccountId == assetOwner else {
+                                self?.hideProgress?()
+                                completion(.failure(.attempToRedeemForeignAsset))
+                                return
                         }
                         self?.buildRedeemModel(
                             networkInfo: networkInfo,
@@ -145,12 +169,12 @@ extension AcceptRedeem {
             completion: @escaping (AcceptRedeemAcceptRedeemResult) -> Void
             ) {
             
-            let amount = requestBytes
+            let precisedAmount = requestBytes
                 .readBytes(n: self.int64Size)
                 .getValue(type: UInt64.self)
             
-            let formattedAmount = self.amountFormatter.format(
-                amount: amount,
+            let inputAmount = self.amountConverter.convertUInt64ToDecimal(
+                value: precisedAmount,
                 precision: networkInfo.precision
             )
             
@@ -170,7 +194,9 @@ extension AcceptRedeem {
             guard let hint = try? SignatureHint(Data(
                 bytes: hintBytes,
                 count: XDRDataFixed4.length
-                )) else {
+            )) else {
+                self.hideProgress?()
+                completion(.failure(.failedToDecodeSignature))
                 return
             }
             let signature = Signature(
@@ -182,13 +208,15 @@ extension AcceptRedeem {
                 senderAccountId: senderAccountId,
                 senderBalanceId: senderBalanceId,
                 asset: asset,
-                amount: formattedAmount,
+                inputAmount: inputAmount,
+                precisedAmount: precisedAmount,
                 salt: salt,
                 minTimeBound: minTimeBound,
                 maxTimeBound: maxTimeBound,
                 hintWrapped: hint.wrapped,
                 signature: signature
             )
+            self.hideProgress?()
             completion(.success(acceptRedeemModel))
         }
     }
@@ -200,6 +228,7 @@ extension AcceptRedeem.AcceptRedeemWorker: AcceptRedeem.AcceptRedeemWorkerProtoc
         completion: @escaping (AcceptRedeemAcceptRedeemResult) -> Void
         ) {
         
+        self.showProgress?()
         self.fetchNetworkInfo(completion: completion)
     }
 }

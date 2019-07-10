@@ -26,6 +26,12 @@ extension ConfirmationScene {
         private let originalAccountId: String
         private let sectionsRelay: BehaviorRelay<[ConfirmationScene.Model.SectionModel]> = BehaviorRelay(value: [])
         
+        private var requestorEmail: String? {
+            didSet {
+                self.loadConfirmationSections()
+            }
+        }
+        
         // MARK: -
         
         init(
@@ -49,9 +55,27 @@ extension ConfirmationScene {
             self.amountConverter = amountConverter
             self.percentFormatter = percentFormatter
             self.originalAccountId = originalAccountId
+            
+            self.fetchRequestor()
         }
         
         // MARK: - Private
+        
+        private func fetchRequestor() {
+            self.generalApi.requestIdentities(
+                filter: .accountId(self.redeemModel.senderAccountId),
+                completion: { [weak self] (result) in
+                    switch result {
+                    case .failed:
+                        self?.requestorEmail = Localized(.undefined)
+                        
+                    case .succeeded(let identities):
+                        if let identity = identities.first {
+                            self?.requestorEmail = identity.attributes.email
+                        }
+                    }
+            })
+        }
         
         private func confirmationSendPayment(
             networkInfo: NetworkInfoModel,
@@ -66,11 +90,6 @@ extension ConfirmationScene {
                 destinationFee: destinationFee,
                 sourcePaysForDest: false,
                 ext: .emptyVersion()
-            )
-            
-            let amount = self.amountConverter.convertUInt64ToPrecisedUInt64(
-                value: self.redeemModel.amount,
-                precision: networkInfo.precision
             )
             
             guard let sourceAccountID = AccountID(
@@ -100,7 +119,7 @@ extension ConfirmationScene {
             let operation = PaymentOp(
                 sourceBalanceID: sourceBalanceID,
                 destination: .account(destinationAccountID),
-                amount: amount,
+                amount: self.redeemModel.precisedAmount,
                 feeData: feeData,
                 subject: "",
                 reference: "\(self.redeemModel.salt)",
@@ -179,8 +198,20 @@ extension ConfirmationScene.AcceptRedeemConfirmationSectionsProvider: Confirmati
     func loadConfirmationSections() {
         var sections: [ConfirmationScene.Model.SectionModel] = []
         
+        let email = self.requestorEmail ?? Localized(.loading)
+        let requestorCell = ConfirmationScene.Model.CellModel(
+            hint: Localized(.requestor),
+            cellType: .text(value: email),
+            identifier: .recipient
+        )
+        let requestorSection = ConfirmationScene.Model.SectionModel(
+            title: "",
+            cells: [requestorCell]
+        )
+        sections.append(requestorSection)
+        
         let toRedeemAmountCellText = self.amountFormatter.assetAmountToString(
-            Decimal(self.redeemModel.amount)
+            self.redeemModel.inputAmount
             ) + " " + self.redeemModel.asset
         
         let toRedeemAmountCell = ConfirmationScene.Model.CellModel(
@@ -194,30 +225,7 @@ extension ConfirmationScene.AcceptRedeemConfirmationSectionsProvider: Confirmati
             cells: [toRedeemAmountCell]
         )
         sections.append(toRedeemSection)
-        
-        self.generalApi.requestIdentities(
-            filter: .accountId(self.redeemModel.senderAccountId),
-            completion: { [weak self] (result) in
-                switch result {
-                case .failed:
-                    break
-                    
-                case .succeeded(let identities):
-                    if let identity = identities.first {
-                        let requestorCell = ConfirmationScene.Model.CellModel(
-                            hint: Localized(.requestor),
-                            cellType: .text(value: identity.attributes.email),
-                            identifier: .recipient
-                        )
-                        let requestorSection = ConfirmationScene.Model.SectionModel(
-                            title: "",
-                            cells: [requestorCell]
-                        )
-                        sections.insert(requestorSection, at: 0)
-                    }
-                }
-                self?.sectionsRelay.accept(sections)
-        })
+        self.sectionsRelay.accept(sections)
     }
     
     func handleTextEdit(

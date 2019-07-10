@@ -6,6 +6,7 @@ class AcceptRedeemFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol
+    private var acceptRedemptionWorker: AcceptRedeemAcceptRedeemWorkerProtocol?
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: -
@@ -36,7 +37,7 @@ class AcceptRedeemFlowController: BaseSignedInFlowController {
     
     // MARK: - Public
     
-    func run(showRootScreen: ((_ vc: UIViewController) -> Void)?) {
+    func run(showRootScreen: @escaping ((_ vc: UIViewController) -> Void)) {
         self.presentQRCodeReader(completion: { [weak self] (result) in
             switch result {
             case .canceled:
@@ -55,58 +56,50 @@ class AcceptRedeemFlowController: BaseSignedInFlowController {
     // MARK: - Private
     
     private func showAcceptRedeemScene(
-        showRootScreen: ((_ vc: UIViewController) -> Void)?,
+        showRootScreen: @escaping ((_ vc: UIViewController) -> Void),
         request: String
         ) {
         
-        let vc = self.setupAcceptRedeemScene(request: request)
-        vc.navigationItem.title = Localized(.accept_redeem)
-        if let showRoot = showRootScreen {
-            showRoot(vc)
-        } else {
-            self.rootNavigation.setRootContent(self.navigationController, transition: .fade, animated: false)
-        }
-    }
-    
-    private func setupAcceptRedeemScene(request: String) -> UIViewController {
-        let vc = AcceptRedeem.ViewController()
-        let amountFormatter = AcceptRedeem.AmountFormatter()
-        let acceptRedeemWorker = AcceptRedeem.AcceptRedeemWorker(
+        let amountConverter = AmountConverter()
+        acceptRedemptionWorker = AcceptRedeem.AcceptRedeemWorker(
             accountsApiV3: self.flowControllerStack.apiV3.accountsApi,
             networkInfoFetcher: self.reposController.networkInfoRepo,
-            amountFormatter: amountFormatter,
-            redeemRequest: request
-        )
-        let routing = AcceptRedeem.Routing(
+            amountConverter: amountConverter,
+            redeemRequest: request,
+            originalAccountId: self.userDataProvider.walletData.accountId,
             showProgress: { [weak self] in
                 self?.navigationController.showProgress()
             },
             hideProgress: { [weak self] in
                 self?.navigationController.hideProgress()
-            },
-            showError: { [weak self] (message) in
-                self?.navigationController.showErrorMessage(
-                    message,
-                    completion: { [weak self] in
-                        self?.navigationController.popViewController(true)
-                })
-            },
-            onConfirmRedeem: { [weak self] (redeemModel) in
-                self?.showRedeemConfirmationScreen(redeemModel: redeemModel)
         })
-        
-        AcceptRedeem.Configurator.configure(
-            viewController: vc,
-            acceptRedeemWorker: acceptRedeemWorker,
-            routing: routing
-        )
-        return vc
+        acceptRedemptionWorker?.acceptRedeem(completion: { [weak self] (result) in
+            switch result {
+                
+            case .failure(let error):
+                self?.navigationController.showErrorMessage(
+                    error.localizedDescription,
+                    completion: nil
+                )
+                
+            case .success(let redeemModel):
+                self?.showRedeemConfirmationScreen(
+                    showRootScreen: showRootScreen,
+                    redeemModel: redeemModel
+                )
+            }
+        })
     }
     
-    private func showRedeemConfirmationScreen(redeemModel: AcceptRedeem.Model.RedeemModel) {
-        let vc = self.setupRedeemConfirmationScreen(redeemModel: redeemModel)
+    private func showRedeemConfirmationScreen(
+        showRootScreen: @escaping ((_ vc: UIViewController) -> Void),
+        redeemModel: AcceptRedeem.Model.RedeemModel
+        ) {
         
-        self.navigationController.pushViewController(vc, animated: true)
+        let vc = self.setupRedeemConfirmationScreen(redeemModel: redeemModel)
+        vc.navigationItem.title = Localized(.confirmation)
+        
+        showRootScreen(vc)
     }
     
     private func setupRedeemConfirmationScreen(
@@ -123,7 +116,8 @@ class AcceptRedeemFlowController: BaseSignedInFlowController {
             senderAccountId: redeemModel.senderAccountId,
             senderBalanceId: redeemModel.senderBalanceId,
             asset: redeemModel.asset,
-            amount: redeemModel.amount,
+            inputAmount: redeemModel.inputAmount,
+            precisedAmount: redeemModel.precisedAmount,
             salt: redeemModel.salt,
             minTimeBound: redeemModel.minTimeBound,
             maxTimeBound: redeemModel.maxTimeBound,

@@ -45,6 +45,7 @@ enum Assets: String {
     case price = "Price"
     case receive = "Receive"
     case recipient = "Recipient"
+    case redeem = "Redeem"
     case reference = "Reference"
     case scanQrIcon = "Scan QR icon"
     case securityIcon = "Security icon"

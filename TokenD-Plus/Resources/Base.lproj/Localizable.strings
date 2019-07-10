@@ -1,7 +1,7 @@
 // Localized strings
 
 "access_revoked_sign_in_required" = "Access revoked.\nSign In required.";
-"accept_redeem" = "Accept redeem";
+"accept_redemption" = "Accept redemption";
 "account" = "ACCOUNT";
 "account_has_been_successfully_recovered" = "Account has been successfully recovered";
 "account_id" = "Account ID";
@@ -189,6 +189,7 @@
 "failed_to_fetch_network_info" = "Failed to fetch network info";
 "failed_to_fetch_sender_account" = "Failed to fetch sender account";
 "failed_to_fetch_sender_balance" = "Failed to fetch sender balance";
+"failed_to_fetch_sender_signature" = "Failed to fetch sender signature";
 "failed_to_generate_key_pair" = "Failed to generate key pair";
 "failed_to_generate_new_key_pair" = "Failed to generate new key pair";
 "failed_to_generate_password_factor_key_pair" = "Failed to generate password factor key pair";
@@ -560,6 +561,7 @@
 "yesterday_at" = "yesterday at $(hours)";
 "yesterday_at_replace_hours" = "hours";
 "you_can_grant_permissions" = "You can grant permissions from app Settings in System Preferences. Would you like to open Settings?";
+"you_cannot_accept_redeem_of_the_asset_that_you_do_not_own" = "You cannot accept the redemption of the asset that you do not own";
 "you_have_already_invested" = "You have already invested:";
 "you_have_no_depositable_assets" = "You have no depositable assets";
 "your_account_is_approved" = "Your account is approved. All actions that requires verification are now available";
