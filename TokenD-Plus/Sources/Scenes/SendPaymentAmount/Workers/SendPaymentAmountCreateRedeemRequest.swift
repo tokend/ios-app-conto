@@ -226,7 +226,7 @@ extension SendPaymentAmount {
                 return
             }
             redeemBytes.append(contentsOf: sourceAccountIdData.data.bytes)
-            redeemBytes.append(contentsOf: asset.count.bytes)
+            redeemBytes.append(contentsOf: Int32(asset.count).bytes)
             
             guard let assetData = asset.data(using: .utf8) else {
                 completion(.failure(.failedToGetAssetData))
@@ -234,9 +234,9 @@ extension SendPaymentAmount {
             }
             redeemBytes.append(contentsOf: assetData.bytes)
             redeemBytes.append(contentsOf: convertedAmount.bytes)
-            redeemBytes.append(contentsOf: Int64(transaction.salt).bytes)
-            redeemBytes.append(contentsOf: Int64(transaction.timeBounds.minTime).bytes)
-            redeemBytes.append(contentsOf: Int64(transaction.timeBounds.maxTime).bytes)
+            redeemBytes.append(contentsOf: transaction.salt.bytes)
+            redeemBytes.append(contentsOf: transaction.timeBounds.minTime.bytes)
+            redeemBytes.append(contentsOf: transaction.timeBounds.maxTime.bytes)
             
             guard let signature = transaction.signatures.first else {
                 completion(.failure(.failedToGetTransactionSignature))

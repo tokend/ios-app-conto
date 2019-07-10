@@ -70,7 +70,13 @@ class AcceptRedeemFlowController: BaseSignedInFlowController {
     
     private func setupAcceptRedeemScene(request: String) -> UIViewController {
         let vc = AcceptRedeem.ViewController()
-        let acceptRedeemWorker = AcceptRedeem.AcceptRedeemWorker(redeemRequest: request)
+        let amountFormatter = AcceptRedeem.AmountFormatter()
+        let acceptRedeemWorker = AcceptRedeem.AcceptRedeemWorker(
+            accountsApiV3: self.flowControllerStack.apiV3.accountsApi,
+            networkInfoFetcher: self.reposController.networkInfoRepo,
+            amountFormatter: amountFormatter,
+            redeemRequest: request
+        )
         let routing = AcceptRedeem.Routing(
             showProgress: { [weak self] in
                 self?.navigationController.showProgress()
@@ -113,38 +119,28 @@ class AcceptRedeemFlowController: BaseSignedInFlowController {
         let percentFormatter = ConfirmationScene.PercentFormatter()
         let amountConverter = AmountConverter()
         
-        let senderFee = ConfirmationScene.Model.FeeModel(
-            asset: redeemModel.senderFee.asset,
-            fixed: redeemModel.senderFee.fixed,
-            percent: redeemModel.senderFee.percent
-        )
-        
-        let recipientFee = ConfirmationScene.Model.FeeModel(
-            asset: redeemModel.recipientFee.asset,
-            fixed: redeemModel.recipientFee.fixed,
-            percent: redeemModel.recipientFee.percent
-        )
-        
-        let paymentModel = ConfirmationScene.Model.SendPaymentModel(
+        let redeemModel = ConfirmationScene.Model.RedeemModel(
+            senderAccountId: redeemModel.senderAccountId,
             senderBalanceId: redeemModel.senderBalanceId,
             asset: redeemModel.asset,
             amount: redeemModel.amount,
-            recipientNickname: redeemModel.recipientNickname,
-            recipientAccountId: redeemModel.recipientAccountId,
-            senderFee: senderFee,
-            recipientFee: recipientFee,
-            description: redeemModel.description,
-            reference: redeemModel.reference
+            salt: redeemModel.salt,
+            minTimeBound: redeemModel.minTimeBound,
+            maxTimeBound: redeemModel.maxTimeBound,
+            hintWrapped: redeemModel.hintWrapped,
+            signature: redeemModel.signature
         )
         
-        let sectionsProvider = ConfirmationScene.SendPaymentConfirmationSectionsProvider(
-            sendPaymentModel: paymentModel,
+        let sectionsProvider = ConfirmationScene.AcceptRedeemConfirmationSectionsProvider(
+            redeemModel: redeemModel,
+            generalApi: self.flowControllerStack.api.generalApi,
             transactionSender: self.managersController.transactionSender,
             networkInfoFetcher: self.reposController.networkInfoRepo,
             amountFormatter: amountFormatter,
-            userDataProvider: self.userDataProvider,
+            userDataProvider: userDataProvider,
             amountConverter: amountConverter,
-            percentFormatter: percentFormatter
+            percentFormatter: percentFormatter,
+            originalAccountId: self.userDataProvider.walletData.accountId
         )
         
         let routing = ConfirmationScene.Routing(

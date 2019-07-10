@@ -115,8 +115,7 @@ extension ConfirmationScene {
                 let transaction = try transactionBuilder.buildTransaction()
                 
                 try self.transactionSender.sendTransaction(
-                    transaction,
-                    walletId: self.userDataProvider.walletId
+                    transaction
                 ) { (result) in
                     switch result {
                     case .succeeded:

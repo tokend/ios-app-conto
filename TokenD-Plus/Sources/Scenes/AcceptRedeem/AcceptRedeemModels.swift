@@ -17,15 +17,15 @@ public enum AcceptRedeem {
 extension AcceptRedeem.Model {
     
     public struct RedeemModel {
+        let senderAccountId: String
         let senderBalanceId: String
         let asset: String
-        let amount: Decimal
-        let recipientNickname: String
-        let recipientAccountId: String
-        let senderFee: FeeModel
-        let recipientFee: FeeModel
-        let description: String
-        let reference: String
+        let amount: UInt64
+        let salt: UInt64
+        let minTimeBound: UInt64
+        let maxTimeBound: UInt64
+        let hintWrapped: Data
+        let signature: Data
     }
     
     public struct FeeModel {
@@ -40,7 +40,12 @@ extension AcceptRedeem.Model {
     }
     
     public enum AcceptRedeemError: Error {
-        
+        case failedToFetchDecodeRedeemRequest
+        case failedToDecodeSenderAccountId
+        case failedToFetchSenderAccount
+        case failedToDecodeRedeemAsset
+        case failedToFindSenderBalance
+        case other(Error)
     }
 }
 

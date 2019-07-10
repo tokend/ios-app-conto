@@ -67,7 +67,7 @@ class AppController {
         )
         
         // TODO
-        // network.startLogger()
+        network.startLogger()
         
         let queue = DispatchQueue(label: "io.tokend.resources", qos: .background, attributes: .concurrent)
         let resourcePool = ResourcePool(

@@ -3,6 +3,7 @@ import UIKit
 protocol AmountConverterProtocol {
     func convertDecimalToUInt64(value: Decimal, precision: Int64) -> UInt64
     func convertDecimalToInt64(value: Decimal, precision: Int64) -> Int64
+    func convertUInt64ToPrecisedUInt64(value: UInt64, precision: Int64) -> UInt64
 }
 
 public class AmountConverter: AmountConverterProtocol {
@@ -21,5 +22,9 @@ public class AmountConverter: AmountConverterProtocol {
     func convertDecimalToInt64(value: Decimal, precision: Int64) -> Int64 {
         let amount = NSDecimalNumber(decimal: value * Decimal(precision)).rounding(accordingToBehavior: self.behavior)
         return Int64(exactly: amount) ?? 0
+    }
+    
+    func convertUInt64ToPrecisedUInt64(value: UInt64, precision: Int64) -> UInt64 {
+        return value * UInt64(precision)
     }
 }

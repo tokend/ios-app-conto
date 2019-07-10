@@ -190,6 +190,8 @@ enum LocKey: String {
     case failed_to_fetch_companies
     case failed_to_fetch_fees
     case failed_to_fetch_network_info
+    case failed_to_fetch_sender_account
+    case failed_to_fetch_sender_balance
     case failed_to_generate_key_pair
     case failed_to_generate_new_key_pair
     case failed_to_generate_password_factor_key_pair
@@ -255,6 +257,9 @@ enum LocKey: String {
     case insufficient_funds
     case invalid_account_id
     case invalid_account_id_or_email
+    case invalid_redeem_asset
+    case invalid_redeem_request
+    case invalid_sender_account_id
     case invest
     case invest_cap
     case invest_help
@@ -406,6 +411,7 @@ enum LocKey: String {
     case repeat_title
     case request_error
     case request_error_replace_message
+    case requestor
     case resend_email
     case sale
     case sale_details
@@ -489,6 +495,7 @@ enum LocKey: String {
     case to_make_a_deposit_send_to_this_address_replace_asset
     case to_pay
     case to_receive
+    case to_redeem
     case to_replace_address
     case to_sell
     case tokend

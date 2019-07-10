@@ -53,3 +53,29 @@ extension AcceptRedeem.Presenter: AcceptRedeem.PresentationLogic {
         }
     }
 }
+
+extension AcceptRedeem.Model.AcceptRedeemError: LocalizedError {
+    
+    public var errorDescription: String? {
+        switch self {
+            
+        case .failedToFetchDecodeRedeemRequest:
+            return Localized(.invalid_redeem_request)
+            
+        case .failedToDecodeSenderAccountId:
+            return Localized(.invalid_sender_account_id)
+            
+        case .failedToFetchSenderAccount:
+            return Localized(.failed_to_fetch_sender_account)
+            
+        case .failedToDecodeRedeemAsset:
+            return Localized(.invalid_redeem_asset)
+        
+        case .failedToFindSenderBalance:
+            return Localized(.failed_to_fetch_sender_balance)
+            
+        case .other(let error):
+            return error.localizedDescription
+        }
+    }
+}

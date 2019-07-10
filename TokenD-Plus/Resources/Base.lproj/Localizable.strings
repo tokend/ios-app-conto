@@ -187,6 +187,8 @@
 "failed_to_fetch_companies" = "Failed to fetch companies";
 "failed_to_fetch_fees" = "Failed to fetch sender fee";
 "failed_to_fetch_network_info" = "Failed to fetch network info";
+"failed_to_fetch_sender_account" = "Failed to fetch sender account";
+"failed_to_fetch_sender_balance" = "Failed to fetch sender balance";
 "failed_to_generate_key_pair" = "Failed to generate key pair";
 "failed_to_generate_new_key_pair" = "Failed to generate new key pair";
 "failed_to_generate_password_factor_key_pair" = "Failed to generate password factor key pair";
@@ -252,6 +254,9 @@
 "insufficient_funds" = "Insufficient funds";
 "invalid_account_id" = "Invalid account id";
 "invalid_account_id_or_email" = "Invalid account id or email";
+"invalid_redeem_asset" = "Invalid redeem asset";
+"invalid_redeem_request" = "Invalid redeem request";
+"invalid_sender_account_id" = "Invalid sender account id";
 "invest" = "Invest";
 "invest_cap" = "INVEST";
 "invest_help" = "Investment help";
@@ -403,6 +408,7 @@
 "repeat_title" = "Repeat";
 "request_error" = "Request error: $(message)";
 "request_error_replace_message" = "message";
+"requestor" = "Requestor";
 "resend_email" = "Resend Email";
 "sale" = "Sale";
 "sale_details" = "Sale details";
@@ -486,6 +492,7 @@
 "to_make_a_deposit_send_to_this_address_replace_asset" = "asset";
 "to_pay" = "To pay";
 "to_receive" = "To receive";
+"to_redeem" = "To redeem";
 "to_replace_address" = "address";
 "to_sell" = " to sell";
 "tokend" = "TokenD";

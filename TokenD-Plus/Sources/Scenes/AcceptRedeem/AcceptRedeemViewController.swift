@@ -44,10 +44,18 @@ extension AcceptRedeem {
         public override func viewDidLoad() {
             super.viewDidLoad()
             
+            self.setupView()
+            
             let request = Event.ViewDidLoad.Request()
             self.interactorDispatch?.sendRequest { businessLogic in
                 businessLogic.onViewDidLoad(request: request)
             }
+        }
+        
+        // MARK: - Private
+        
+        private func setupView() {
+            self.view.backgroundColor = Theme.Colors.contentBackgroundColor
         }
     }
 }

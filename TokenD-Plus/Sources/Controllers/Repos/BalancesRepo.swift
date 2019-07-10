@@ -204,7 +204,6 @@ public class BalancesRepo {
             
             try self.transactionSender.sendTransaction(
                 transaction,
-                walletId: self.walletId,
                 completion: { [weak self] (result) in
                     switch result {
                         

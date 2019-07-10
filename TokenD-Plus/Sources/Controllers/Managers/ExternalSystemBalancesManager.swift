@@ -67,8 +67,7 @@ class ExternalSystemBalancesManager {
             let transaction = try transactionBuilder.buildTransaction()
             
             try self.transactionSender.sendTransaction(
-                transaction,
-                walletId: self.userDataProvider.walletId
+                transaction
             ) { [weak self] (result) in
                 switch result {
                 case .succeeded:

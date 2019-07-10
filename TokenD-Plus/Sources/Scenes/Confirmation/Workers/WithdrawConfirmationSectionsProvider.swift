@@ -110,7 +110,6 @@ extension ConfirmationScene {
                 
                 try self.transactionSender.sendTransaction(
                     transaction,
-                    walletId: self.userDataProvider.walletId,
                     completion: { (result) in
                         switch result {
                             

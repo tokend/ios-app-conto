@@ -268,7 +268,6 @@ extension TransactionDetails.InvestmentSectionsProvider: TransactionDetails.Sect
             
             try self.transactionSender.sendTransaction(
                 transaction,
-                walletId: self.userDataProvider.walletId,
                 completion: { [weak self] (result) in
                     switch result {
                     case .succeeded:
