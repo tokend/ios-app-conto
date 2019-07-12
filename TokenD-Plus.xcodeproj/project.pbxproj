@@ -634,11 +634,15 @@
 		DB720F6022C4CD1C00ED116A /* PollsPollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F5222C4CD1C00ED116A /* PollsPollCell.swift */; };
 		DB720F6122C4CD1C00ED116A /* PollsChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F5322C4CD1C00ED116A /* PollsChoiceCell.swift */; };
 		DB72280A22CCBB4200341565 /* BalancesListActionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */; };
+		DB72281222CE309000341565 /* SideMenuAccountsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281122CE309000341565 /* SideMenuAccountsProvider.swift */; };
 		DB72281422CF546200341565 /* CreateRedeemFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281322CF546200341565 /* CreateRedeemFlowController.swift */; };
 		DB72281622CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */; };
 		DBCA02D822D5EB8900503025 /* AcceptRedeemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02D722D5EB8900503025 /* AcceptRedeemModel.swift */; };
 		DBCA02DA22D5EB9800503025 /* AcceptRedeemWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02D922D5EB9800503025 /* AcceptRedeemWorker.swift */; };
-		DB72281222CE309000341565 /* SideMenuAccountsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281122CE309000341565 /* SideMenuAccountsProvider.swift */; };
+		DBCA02DF22D7354100503025 /* TabBarGlobalNavigationTabBarProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02DE22D7354100503025 /* TabBarGlobalNavigationTabBarProvider.swift */; };
+		DBCA02E122D73D2200503025 /* TabBarGlobalContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E022D73D2200503025 /* TabBarGlobalContentProvider.swift */; };
+		DBCA02E322D787B600503025 /* SettingsTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E222D787B600503025 /* SettingsTextCell.swift */; };
+		DBCA02E522D78DE600503025 /* acknowledgements.markdown in Resources */ = {isa = PBXBuildFile; fileRef = DBCA02E422D78DE500503025 /* acknowledgements.markdown */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1273,11 +1277,15 @@
 		DB720F5222C4CD1C00ED116A /* PollsPollCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsPollCell.swift; sourceTree = "<group>"; };
 		DB720F5322C4CD1C00ED116A /* PollsChoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsChoiceCell.swift; sourceTree = "<group>"; };
 		DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesListActionProvider.swift; sourceTree = "<group>"; };
+		DB72281122CE309000341565 /* SideMenuAccountsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuAccountsProvider.swift; sourceTree = "<group>"; };
 		DB72281322CF546200341565 /* CreateRedeemFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRedeemFlowController.swift; sourceTree = "<group>"; };
 		DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountCreateRedeemRequest.swift; sourceTree = "<group>"; };
 		DBCA02D722D5EB8900503025 /* AcceptRedeemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemModel.swift; sourceTree = "<group>"; };
 		DBCA02D922D5EB9800503025 /* AcceptRedeemWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemWorker.swift; sourceTree = "<group>"; };
-		DB72281122CE309000341565 /* SideMenuAccountsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuAccountsProvider.swift; sourceTree = "<group>"; };
+		DBCA02DE22D7354100503025 /* TabBarGlobalNavigationTabBarProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarGlobalNavigationTabBarProvider.swift; sourceTree = "<group>"; };
+		DBCA02E022D73D2200503025 /* TabBarGlobalContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarGlobalContentProvider.swift; sourceTree = "<group>"; };
+		DBCA02E222D787B600503025 /* SettingsTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextCell.swift; sourceTree = "<group>"; };
+		DBCA02E422D78DE500503025 /* acknowledgements.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = acknowledgements.markdown; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1339,6 +1347,7 @@
 		DB72099522C1347D00ED116A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DBCA02E422D78DE500503025 /* acknowledgements.markdown */,
 				DB720F1E22C210A200ED116A /* APIConfiguration.plist */,
 				DB72098F22C1347200ED116A /* Info.plist */,
 				DB72098A22C1347200ED116A /* Assets.xcassets */,
@@ -1437,6 +1446,7 @@
 				DB7209A222C1396B00ED116A /* SettingsLoadingCell.swift */,
 				DB7209A322C1396B00ED116A /* SettingsBoolCell.swift */,
 				DB7209A422C1396B00ED116A /* SettingsPushCell.swift */,
+				DBCA02E222D787B600503025 /* SettingsTextCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2034,6 +2044,7 @@
 			children = (
 				DB720ABE22C1396B00ED116A /* TabBarTabProviderProtocol.swift */,
 				DB720ABF22C1396B00ED116A /* TabBarDashboardTabProvider.swift */,
+				DBCA02DE22D7354100503025 /* TabBarGlobalNavigationTabBarProvider.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -2306,6 +2317,7 @@
 			children = (
 				DB720B4622C1396B00ED116A /* TabBarContentProvider.swift */,
 				DB720B4722C1396B00ED116A /* TabBarDashboardContentProvider.swift */,
+				DBCA02E022D73D2200503025 /* TabBarGlobalContentProvider.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -3253,6 +3265,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DB72281022CE305500341565 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DB72281122CE309000341565 /* SideMenuAccountsProvider.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		DBCA02D622D5E7C300503025 /* AcceptRedeemWorker */ = {
 			isa = PBXGroup;
 			children = (
@@ -3260,14 +3280,6 @@
 				DBCA02D922D5EB9800503025 /* AcceptRedeemWorker.swift */,
 			);
 			path = AcceptRedeemWorker;
-			sourceTree = "<group>";
-		};
-		DB72281022CE305500341565 /* Workers */ = {
-			isa = PBXGroup;
-			children = (
-				DB72281122CE309000341565 /* SideMenuAccountsProvider.swift */,
-			);
-			path = Workers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3333,6 +3345,7 @@
 				DB720F2222C210BB00ED116A /* Localizable.strings in Resources */,
 				DB72098E22C1347200ED116A /* LaunchScreen.storyboard in Resources */,
 				DB72098B22C1347200ED116A /* Assets.xcassets in Resources */,
+				DBCA02E522D78DE600503025 /* acknowledgements.markdown in Resources */,
 				DB720F1F22C210A300ED116A /* APIConfiguration.plist in Resources */,
 				DB720ED822C1396C00ED116A /* BXFStaticTableViewButtonCell.xib in Resources */,
 			);
@@ -3715,6 +3728,7 @@
 				DB720E8122C1396C00ED116A /* BalanceHeaderModels.swift in Sources */,
 				DB720CAE22C1396B00ED116A /* SettingsConfigurator.swift in Sources */,
 				DB720F1422C1396C00ED116A /* WalletDetailsFlowController.swift in Sources */,
+				DBCA02E322D787B600503025 /* SettingsTextCell.swift in Sources */,
 				DB720CF822C1396B00ED116A /* SalesPresenter.swift in Sources */,
 				DB720EB922C1396C00ED116A /* PermissionsManager.swift in Sources */,
 				DB720E3B22C1396C00ED116A /* BalancesListPresenter.swift in Sources */,
@@ -3761,6 +3775,7 @@
 				DB720CC722C1396B00ED116A /* BalancePickerPresenter.swift in Sources */,
 				DB720D5722C1396B00ED116A /* SendPaymentDestinationRouting.swift in Sources */,
 				DB720EB422C1396C00ED116A /* QRCodeGenerationOperation.swift in Sources */,
+				DBCA02E122D73D2200503025 /* TabBarGlobalContentProvider.swift in Sources */,
 				DB720CF422C1396B00ED116A /* TabsContainerPresenter.swift in Sources */,
 				DB720ED922C1396C00ED116A /* BXFLabelWithInsets.swift in Sources */,
 				DB720DDE22C1396C00ED116A /* TradesListViewController.swift in Sources */,
@@ -3871,6 +3886,7 @@
 				DB720D2322C1396B00ED116A /* AuthenticatorAuthConfigurator.swift in Sources */,
 				DB720ED122C1396C00ED116A /* BXFStaticTableViewInputCell.swift in Sources */,
 				DB720DEC22C1396C00ED116A /* DashboardPaymentsPlugInViewController.swift in Sources */,
+				DBCA02DF22D7354100503025 /* TabBarGlobalNavigationTabBarProvider.swift in Sources */,
 				DB720CD622C1396B00ED116A /* SaleOverviewRouting.swift in Sources */,
 				DB720DE422C1396C00ED116A /* TradesListAmountFormatterProtocol.swift in Sources */,
 				DB720F2B22C2286C00ED116A /* CompaniesListRouting.swift in Sources */,

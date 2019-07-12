@@ -244,11 +244,34 @@ extension Settings {
                 description: ""
             )
             
+            let appShortVersion: String = Bundle.main.shortVersion ?? ""
+            let appBundleVersion: String = Bundle.main.bundleVersion ?? ""
+            let appVersion: String
+            if appBundleVersion.isEmpty {
+                appVersion = appShortVersion
+            } else {
+                appVersion = "v\(appShortVersion) (\(appBundleVersion))"
+            }
+            
+            let versionCell = Model.CellModel(
+                title: appVersion,
+                icon: UIImage(),
+                cellType: .text,
+                identifier: .version
+            )
+            
+            let versionSection = Model.SectionModel(
+                title: "",
+                cells: [versionCell],
+                description: ""
+            )
+            
             return [
                 acountSection,
                 securitySection,
                 termsSection,
-                signOutSection
+                signOutSection,
+                versionSection
             ]
         }
         

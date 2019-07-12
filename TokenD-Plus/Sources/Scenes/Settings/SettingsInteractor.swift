@@ -82,6 +82,9 @@ extension Settings.Interactor: Settings.BusinessLogic {
                 cellIdentifier: request.cellIdentifier
             )
             self.presenter.presentDidSelectCell(response: response)
+            
+        case .version:
+            break
         }
     }
     

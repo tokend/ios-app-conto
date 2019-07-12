@@ -51,6 +51,8 @@ extension TabBarContainer {
             }
         }
         
+        private var viewDidAppear: Bool = false
+        
         // MARK: -
         
         deinit {
@@ -85,11 +87,47 @@ extension TabBarContainer {
             }
         }
         
+        public override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            DispatchQueue.main.asyncAfter(
+                deadline: .now() + .milliseconds(100), execute: {
+                    self.viewDidAppear = true
+            })
+        }
+        
         // MARK: - Public
         
         public func setSelectedContentWithIdentifier(idetifier: TabIdentifier) {
             self.tabBar?.setSelectedTabWithIdentifier(idetifier)
             self.content?.setContentWithIdentifier(idetifier)
+        }
+        
+        public func showTabBar() {
+            if self.viewDidAppear {
+                self.tabBar?.view.snp.remakeConstraints({ (make) in
+                    make.leading.trailing.equalToSuperview()
+                    make.bottom.equalTo(self.view.safeArea.bottom)
+                })
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.view.setNeedsLayout()
+                    self.view.layoutIfNeeded()
+                })
+            }
+        }
+        
+        public func hideTabBar() {
+            if self.viewDidAppear {
+                self.tabBar?.view.snp.remakeConstraints({ (make) in
+                    make.leading.trailing.equalToSuperview()
+                    make.top.equalTo(self.view.safeArea.bottom)
+                })
+                if self.viewDidAppear {
+                    UIView.animate(withDuration: 0.25, animations: {
+                        self.view.setNeedsLayout()
+                        self.view.layoutIfNeeded()
+                    })
+                }
+            }
         }
         
         // MARK: - Private

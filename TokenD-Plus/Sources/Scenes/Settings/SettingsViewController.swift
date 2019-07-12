@@ -21,7 +21,6 @@ extension Settings {
         // MARK: - Private properties
         
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
-        private let appVersionLabel: UILabel = UILabel()
         
         private var sections: [Model.SectionViewModel] = []
         private let disposeBag: DisposeBag = DisposeBag()
@@ -43,7 +42,6 @@ extension Settings {
             
             self.setupView()
             self.setupTableView()
-            self.setupAppVersionLabel()
             
             self.setupLayout()
             
@@ -72,7 +70,8 @@ extension Settings {
                 SettingsPushCell.Model.self,
                 SettingsBoolCell.Model.self,
                 SettingsLoadingCell.Model.self,
-                SettingsActionCell.Model.self
+                SettingsActionCell.Model.self,
+                SettingsTextCell.Model.self
             ]
             self.tableView.register(classes: cellClasses)
             self.tableView.dataSource = self
@@ -90,32 +89,8 @@ extension Settings {
                 .disposed(by: self.disposeBag)
         }
         
-        private func setupAppVersionLabel() {
-            let appShortVersion: String = Bundle.main.shortVersion ?? ""
-            let appBundleVersion: String = Bundle.main.bundleVersion ?? ""
-            let appVersion: String
-            if appBundleVersion.isEmpty {
-                appVersion = appShortVersion
-            } else {
-                appVersion = "v\(appShortVersion) (\(appBundleVersion))"
-            }
-            
-            self.appVersionLabel.font = Theme.Fonts.smallTextFont
-            self.appVersionLabel.textColor = Theme.Colors.sideTextOnContainerBackgroundColor
-            self.appVersionLabel.textAlignment = .center
-            
-            self.appVersionLabel.text = appVersion
-        }
-        
         private func setupLayout() {
             self.view.addSubview(self.tableView)
-            self.view.addSubview(self.appVersionLabel)
-            
-            self.appVersionLabel.snp.makeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.bottom.equalTo(self.view.safeArea.bottom).inset(20.0)
-            }
-            
             self.tableView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }

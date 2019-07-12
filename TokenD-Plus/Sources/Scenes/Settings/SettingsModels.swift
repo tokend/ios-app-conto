@@ -17,6 +17,7 @@ enum Settings {
         case licenses
         case fees
         case signOut
+        case version
     }
     
     enum Model {}
@@ -64,6 +65,7 @@ extension Settings.Model.CellModel {
         case boolCell(Bool)
         case loading
         case reload
+        case text
     }
 }
 

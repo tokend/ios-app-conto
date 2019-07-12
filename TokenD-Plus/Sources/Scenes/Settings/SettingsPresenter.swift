@@ -62,6 +62,11 @@ extension Settings {
                             icon: cellData.icon,
                             buttonTitle: Localized(.reload)
                         )
+                    case .text:
+                        cellModel = SettingsTextCell.Model(
+                            title: cellData.title,
+                            identifier: cellData.identifier
+                        )
                     }
                     
                     arrayCellModels.append(cellModel)

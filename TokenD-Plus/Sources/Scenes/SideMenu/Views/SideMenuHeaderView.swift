@@ -105,7 +105,7 @@ extension SideMenu {
         }
         
         private func setupPickerButton() {
-            self.pickerButton.setImage(Assets.drop.image, for: .normal)
+            self.pickerButton.setImage(Assets.dropLarge.image, for: .normal)
             self.pickerButton.tintColor = Theme.Colors.darkAccentColor
             self.pickerButton.contentEdgeInsets = UIEdgeInsets(
                 top: 7.5,
@@ -150,7 +150,7 @@ extension SideMenu {
                 make.leading.equalTo(self.titleLabel.snp.trailing).offset(5.0)
                 make.trailing.lessThanOrEqualToSuperview()
                 make.centerY.equalTo(self.titleLabel)
-                make.width.height.equalTo(36.0)
+                make.width.height.equalTo(48.0)
             }
             
             self.subTitleLabel.snp.makeConstraints { (make) in

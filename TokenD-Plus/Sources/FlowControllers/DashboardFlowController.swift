@@ -5,8 +5,7 @@ class DashboardFlowController: BaseSignedInFlowController {
     
     // MARK: - Private
     
-    private let navigationController: NavigationControllerProtocol =
-        NavigationController()
+    private let navigationController: NavigationControllerProtocol
     private weak var dashboardScene: BalancesList.ViewController?
     private var operationCompletionScene: UIViewController {
         return self.dashboardScene ?? UIViewController()
@@ -17,16 +16,18 @@ class DashboardFlowController: BaseSignedInFlowController {
     // MARK: -
     
     init(
+        navigationController: NavigationControllerProtocol,
+        ownerAccountId: String,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
         reposController: ReposController,
         managersController: ManagersController,
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
-        rootNavigation: RootNavigationProtocol,
-        ownerAccountId: String
+        rootNavigation: RootNavigationProtocol
         ) {
         
+        self.navigationController = navigationController
         self.ownerAccountId = ownerAccountId
         super.init(
             appController: appController,
@@ -42,7 +43,7 @@ class DashboardFlowController: BaseSignedInFlowController {
     // MARK: - Public
     
     public func run(
-        showRootScreen: ((_ vc: UIViewController) -> Void)?,
+        showRootScreen: ((_ vc: UIViewController) -> Void),
         selectedTabIdentifier: TabsContainer.Model.TabIdentifier?
         ) {
         
@@ -62,7 +63,7 @@ class DashboardFlowController: BaseSignedInFlowController {
     }
     
     private func showDashboardScreen(
-        showRootScreen: ((_ vc: UIViewController) -> Void)?,
+        showRootScreen: ((_ vc: UIViewController) -> Void),
         selectedTabIdentifier: TabsContainer.Model.TabIdentifier?
         ) {
         
@@ -130,13 +131,8 @@ class DashboardFlowController: BaseSignedInFlowController {
         self.dashboardScene = vc
         
         vc.navigationItem.title = Localized(.balances)
-        self.navigationController.setViewControllers([vc], animated: false)
         
-        if let showRoot = showRootScreen {
-            showRoot(self.navigationController.getViewController())
-        } else {
-            self.rootNavigation.setRootContent(self.navigationController, transition: .fade, animated: false)
-        }
+        showRootScreen(vc)
     }
     
     private func showCreateRedeemScene() {

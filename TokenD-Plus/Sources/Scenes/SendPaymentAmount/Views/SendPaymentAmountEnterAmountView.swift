@@ -62,6 +62,11 @@ extension SendPaymentAmount {
                 : Theme.Colors.textOnContentBackgroundColor
         }
         
+        func showKeyboard() {
+             _ = self.amountField.becomeFirstResponder()
+        }
+        
+        
         // MARK: - Private
         
         private func setupView() {
@@ -97,8 +102,6 @@ extension SendPaymentAmount {
                         self?.onEnterAmount?(value)
                 })
             )
-            
-            _ = self.amountField.becomeFirstResponder()
         }
         
         private func setupAssetButton() {

@@ -1,5 +1,6 @@
 import UIKit
 import RxSwift
+import RxCocoa
 
 protocol SendPaymentDisplayLogic: class {
     
@@ -46,6 +47,7 @@ extension SendPaymentAmount {
         
         private let buttonHeight: CGFloat = 45.0
         
+        private var layoutUpdatePublishRelay: PublishRelay<Void> = PublishRelay()
         private var viewDidAppear: Bool = false
         
         // MARK: - Injections
@@ -81,6 +83,7 @@ extension SendPaymentAmount {
             self.setupFeesAction()
             self.setupLayout()
             
+            self.observeLayoutUpdates()
             self.observeKeyboard()
             
             let request = Event.ViewDidLoad.Request()
@@ -100,7 +103,52 @@ extension SendPaymentAmount {
             }
         }
         
+        override func viewLayoutMarginsDidChange() {
+            self.layoutUpdatePublishRelay.accept(())
+        }
+        
         // MARK: - Private
+        
+        // MARK: - Observe
+        
+        private func observeLayoutUpdates() {
+            self.layoutUpdatePublishRelay
+                .debounce(0.75, scheduler: MainScheduler.instance)
+                .subscribe(onNext: { [weak self] (_) in
+                    self?.enterAmountView.showKeyboard()
+                })
+                .disposed(by: self.disposeBag)
+        }
+        
+        private func observeKeyboard() {
+            let keyboardObserver = KeyboardObserver(
+                self,
+                keyboardWillChange: { (attributes) in
+                    let keyboardHeight = attributes.heightIn(view: self.view)
+                    if attributes.showingIn(view: self.view) {
+                        self.actionButton.snp.remakeConstraints { (make) in
+                            make.leading.trailing.equalToSuperview()
+                            make.bottom.equalToSuperview().inset(keyboardHeight)
+                            make.height.equalTo(self.buttonHeight)
+                        }
+                    } else {
+                        self.actionButton.snp.remakeConstraints { (make) in
+                            make.leading.trailing.equalToSuperview()
+                            make.bottom.equalTo(self.view.safeArea.bottom)
+                            make.height.equalTo(self.buttonHeight)
+                        }
+                    }
+                    
+                    if self.viewDidAppear {
+                        UIView.animate(withKeyboardAttributes: attributes, animations: {
+                            self.view.layoutIfNeeded()
+                        })
+                    }
+            })
+            KeyboardController.shared.add(observer: keyboardObserver)
+        }
+        
+        // MARK: - Update
         
         private func updateWithSceneModel(_ sceneModel: Model.SceneViewModel) {
             self.balanceView.set(
@@ -117,6 +165,8 @@ extension SendPaymentAmount {
             self.balanceView.set(balanceHighlighted: !amountValid)
             self.enterAmountView.set(amountHighlighted: !amountValid)
         }
+        
+        // MARK: - Setup
         
         private func setupView() {
             self.view.backgroundColor = Theme.Colors.contentBackgroundColor
@@ -205,34 +255,6 @@ extension SendPaymentAmount {
                     })
                 })
                 .disposed(by: self.disposeBag)
-        }
-        
-        private func observeKeyboard() {
-            let keyboardObserver = KeyboardObserver(
-                self,
-                keyboardWillChange: { (attributes) in
-                    let keyboardHeight = attributes.heightIn(view: self.view)
-                    if attributes.showingIn(view: self.view) {
-                        self.actionButton.snp.remakeConstraints { (make) in
-                            make.leading.trailing.equalToSuperview()
-                            make.bottom.equalToSuperview().inset(keyboardHeight)
-                            make.height.equalTo(self.buttonHeight)
-                        }
-                    } else {
-                        self.actionButton.snp.remakeConstraints { (make) in
-                            make.leading.trailing.equalToSuperview()
-                            make.bottom.equalTo(self.view.safeArea.bottom)
-                            make.height.equalTo(self.buttonHeight)
-                        }
-                    }
-                    
-                    if self.viewDidAppear {
-                        UIView.animate(withKeyboardAttributes: attributes, animations: {
-                            self.view.layoutIfNeeded()
-                        })
-                    }
-            })
-            KeyboardController.shared.add(observer: keyboardObserver)
         }
         
         private func setupLayout() {
