@@ -48,7 +48,26 @@ extension Settings.Model {
         let title: String
         let icon: UIImage
         let cellType: CellType
+        let topSeparator: SeparatorStyle
+        let bottomSeparator: SeparatorStyle
         let identifier: Settings.CellIdentifier
+        
+        init(
+            title: String,
+            icon: UIImage,
+            cellType: CellType,
+            topSeparator: SeparatorStyle = .none,
+            bottomSeparator: SeparatorStyle = .lineWithInset,
+            identifier: Settings.CellIdentifier
+            ) {
+            
+            self.title = title
+            self.icon = icon
+            self.cellType = cellType
+            self.topSeparator = topSeparator
+            self.bottomSeparator = bottomSeparator
+            self.identifier = identifier
+        }
     }
     
     struct SectionViewModel {
@@ -66,6 +85,12 @@ extension Settings.Model.CellModel {
         case loading
         case reload
         case text
+    }
+    
+    enum SeparatorStyle {
+        case none
+        case line
+        case lineWithInset
     }
 }
 

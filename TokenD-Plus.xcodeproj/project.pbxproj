@@ -643,6 +643,7 @@
 		DBCA02E122D73D2200503025 /* TabBarGlobalContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E022D73D2200503025 /* TabBarGlobalContentProvider.swift */; };
 		DBCA02E322D787B600503025 /* SettingsTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E222D787B600503025 /* SettingsTextCell.swift */; };
 		DBCA02E522D78DE600503025 /* acknowledgements.markdown in Resources */ = {isa = PBXBuildFile; fileRef = DBCA02E422D78DE500503025 /* acknowledgements.markdown */; };
+		DBCA02E722D885B500503025 /* SettingsBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E622D885B500503025 /* SettingsBaseCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1286,6 +1287,7 @@
 		DBCA02E022D73D2200503025 /* TabBarGlobalContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarGlobalContentProvider.swift; sourceTree = "<group>"; };
 		DBCA02E222D787B600503025 /* SettingsTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextCell.swift; sourceTree = "<group>"; };
 		DBCA02E422D78DE500503025 /* acknowledgements.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = acknowledgements.markdown; sourceTree = "<group>"; };
+		DBCA02E622D885B500503025 /* SettingsBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBaseCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1443,8 +1445,9 @@
 			isa = PBXGroup;
 			children = (
 				DB7209A122C1396B00ED116A /* SettingsActionCell.swift */,
-				DB7209A222C1396B00ED116A /* SettingsLoadingCell.swift */,
+				DBCA02E622D885B500503025 /* SettingsBaseCell.swift */,
 				DB7209A322C1396B00ED116A /* SettingsBoolCell.swift */,
+				DB7209A222C1396B00ED116A /* SettingsLoadingCell.swift */,
 				DB7209A422C1396B00ED116A /* SettingsPushCell.swift */,
 				DBCA02E222D787B600503025 /* SettingsTextCell.swift */,
 			);
@@ -3436,6 +3439,7 @@
 				DB720D9522C1396B00ED116A /* TabBarRouting.swift in Sources */,
 				DB720D4D22C1396B00ED116A /* ChartEmptyView.swift in Sources */,
 				DB720CC422C1396B00ED116A /* BalancePickerModels.swift in Sources */,
+				DBCA02E722D885B500503025 /* SettingsBaseCell.swift in Sources */,
 				DB720CED22C1396B00ED116A /* VerifyEmailVerifyWorkerProtocol.swift in Sources */,
 				DB720DB622C1396B00ED116A /* SendPaymentAmountEnterAmountView.swift in Sources */,
 				DB720DF122C1396C00ED116A /* DashboardPaymentsPlugInAmountFormatter.swift in Sources */,

@@ -4,14 +4,18 @@ enum SettingsTextCell {
     struct Model: CellViewModel {
         
         let title: String
+        let topSeparator: Settings.Model.CellModel.SeparatorStyle
+        let bottomSeparator: Settings.Model.CellModel.SeparatorStyle
         let identifier: Settings.CellIdentifier
         
         func setup(cell: SettingsTextCell.View) {
             cell.title = self.title
+            cell.topSeparatorValue = self.topSeparator
+            cell.bottomSeparatorValue = self.bottomSeparator
         }
     }
     
-    class View: UITableViewCell {
+    class View: Settings.SettingsBaseCell {
         
         // MARK: - Private properties
         

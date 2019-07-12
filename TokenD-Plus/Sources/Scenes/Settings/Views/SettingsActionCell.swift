@@ -10,16 +10,19 @@ enum SettingsActionCell {
         let identifier: Settings.CellIdentifier
         let icon: UIImage
         let buttonTitle: String
+        let topSeparator: Settings.Model.CellModel.SeparatorStyle
+        let bottomSeparator: Settings.Model.CellModel.SeparatorStyle
         
         func setup(cell: SettingsActionCell.View) {
-            
             cell.title = self.title
             cell.icon = self.icon
             cell.buttonTitle = self.buttonTitle
+            cell.topSeparatorValue = self.topSeparator
+            cell.bottomSeparatorValue = self.bottomSeparator
         }
     }
     
-    class View: UITableViewCell {
+    class View: Settings.SettingsBaseCell {
         
         // MARK: - Closures
         

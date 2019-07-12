@@ -78,6 +78,7 @@ extension Settings {
             self.tableView.delegate = self
             self.tableView.rowHeight = UITableView.automaticDimension
             self.tableView.estimatedRowHeight = 125
+            self.tableView.separatorStyle = .none
             self.tableView
                 .rx
                 .contentOffset
@@ -149,7 +150,7 @@ extension Settings.ViewController: UITableViewDelegate {
         
         let cellModel = self.sections[indexPath.section].cells[indexPath.row]
         
-        guard let model = cellModel as? SettingsPushCell.Model else {
+        guard let model = cellModel as? Settings.SettingsPushCell.Model else {
             return
         }
         let request = Settings.Event.DidSelectCell.Request(cellIdentifier: model.identifier)
@@ -171,7 +172,7 @@ extension Settings.ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = self.sections[indexPath.section].cells[indexPath.row]
         let cell = tableView.dequeueReusableCell(with: model, for: indexPath)
-        if model is SettingsPushCell.Model {
+        if model is Settings.SettingsPushCell.Model {
             cell.selectionStyle = UITableViewCell.SelectionStyle.blue
         }
         
