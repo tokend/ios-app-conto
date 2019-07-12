@@ -130,6 +130,8 @@ class CompaniesListFlowController: BaseSignedInFlowController {
                 self?.navigationController.hideShadow()
             },
                onCompanyChosen: { [weak self] (accountId, companyName) in
+                self?.flowControllerStack.settingsManager.businessOwnerAccountId = accountId
+                self?.flowControllerStack.settingsManager.businessName = companyName
                 self?.runCompanyFlow(
                     ownerAccountId: accountId,
                     companyName: companyName

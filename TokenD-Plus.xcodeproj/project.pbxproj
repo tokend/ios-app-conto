@@ -2735,9 +2735,9 @@
 			isa = PBXGroup;
 			children = (
 				DB720C0322C1396B00ED116A /* FlexibleHeaderContainerViewController.swift */,
-				DB720C0422C1396B00ED116A /* QR */,
-				DB720C0722C1396B00ED116A /* RootNavigationViewController.swift */,
 				DB720C0822C1396B00ED116A /* NavigationController.swift */,
+				DB720C0722C1396B00ED116A /* RootNavigationViewController.swift */,
+				DB720C0422C1396B00ED116A /* QR */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
