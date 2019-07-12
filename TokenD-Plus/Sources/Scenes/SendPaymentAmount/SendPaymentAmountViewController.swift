@@ -1,6 +1,5 @@
 import UIKit
 import RxSwift
-import RxCocoa
 
 protocol SendPaymentDisplayLogic: class {
     
@@ -46,8 +45,6 @@ extension SendPaymentAmount {
         private let disposeBag = DisposeBag()
         
         private let buttonHeight: CGFloat = 45.0
-        
-        private var layoutUpdatePublishRelay: PublishRelay<Void> = PublishRelay()
         private var viewDidAppear: Bool = false
         
         // MARK: - Injections
@@ -83,7 +80,6 @@ extension SendPaymentAmount {
             self.setupFeesAction()
             self.setupLayout()
             
-            self.observeLayoutUpdates()
             self.observeKeyboard()
             
             let request = Event.ViewDidLoad.Request()
@@ -103,22 +99,9 @@ extension SendPaymentAmount {
             }
         }
         
-        override func viewLayoutMarginsDidChange() {
-            self.layoutUpdatePublishRelay.accept(())
-        }
-        
         // MARK: - Private
         
         // MARK: - Observe
-        
-        private func observeLayoutUpdates() {
-            self.layoutUpdatePublishRelay
-                .debounce(0.75, scheduler: MainScheduler.instance)
-                .subscribe(onNext: { [weak self] (_) in
-                    self?.enterAmountView.showKeyboard()
-                })
-                .disposed(by: self.disposeBag)
-        }
         
         private func observeKeyboard() {
             let keyboardObserver = KeyboardObserver(

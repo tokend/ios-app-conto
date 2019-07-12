@@ -103,6 +103,7 @@ extension TabBarContainer {
         }
         
         public func showTabBar() {
+            self.tabBar?.view.isUserInteractionEnabled = true
             if self.viewDidAppear {
                 self.tabBar?.view.snp.remakeConstraints({ (make) in
                     make.leading.trailing.equalToSuperview()
@@ -116,6 +117,7 @@ extension TabBarContainer {
         }
         
         public func hideTabBar() {
+            self.tabBar?.view.isUserInteractionEnabled = false
             if self.viewDidAppear {
                 self.tabBar?.view.snp.remakeConstraints({ (make) in
                     make.leading.trailing.equalToSuperview()
