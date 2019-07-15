@@ -1881,14 +1881,14 @@
 		DB720A7322C1396B00ED116A /* TradeOffers */ = {
 			isa = PBXGroup;
 			children = (
-				DB720A7422C1396B00ED116A /* TradeOffersModels.swift */,
-				DB720A7522C1396B00ED116A /* TradeOffersInteractor.swift */,
-				DB720A7622C1396B00ED116A /* TradeOffersRouting.swift */,
-				DB720A7722C1396B00ED116A /* Workers */,
-				DB720A8222C1396B00ED116A /* TradeOffersPresenter.swift */,
-				DB720A8322C1396B00ED116A /* Views */,
 				DB720A8522C1396B00ED116A /* TradeOffersConfigurator.swift */,
+				DB720A7522C1396B00ED116A /* TradeOffersInteractor.swift */,
+				DB720A7422C1396B00ED116A /* TradeOffersModels.swift */,
+				DB720A8222C1396B00ED116A /* TradeOffersPresenter.swift */,
+				DB720A7622C1396B00ED116A /* TradeOffersRouting.swift */,
 				DB720A8622C1396B00ED116A /* TradeOffersViewController.swift */,
+				DB720A8322C1396B00ED116A /* Views */,
+				DB720A7722C1396B00ED116A /* Workers */,
 			);
 			path = TradeOffers;
 			sourceTree = "<group>";
@@ -2190,14 +2190,14 @@
 		DB720B1022C1396B00ED116A /* TradesList */ = {
 			isa = PBXGroup;
 			children = (
-				DB720B1122C1396B00ED116A /* TradesListInteractor.swift */,
-				DB720B1222C1396B00ED116A /* TradesListViewController.swift */,
-				DB720B1322C1396B00ED116A /* TradesListPresenter.swift */,
-				DB720B1422C1396B00ED116A /* TradesListModels.swift */,
-				DB720B1522C1396B00ED116A /* View */,
 				DB720B1722C1396B00ED116A /* TradesListConfigurator.swift */,
-				DB720B1822C1396B00ED116A /* Workers */,
+				DB720B1122C1396B00ED116A /* TradesListInteractor.swift */,
+				DB720B1422C1396B00ED116A /* TradesListModels.swift */,
+				DB720B1322C1396B00ED116A /* TradesListPresenter.swift */,
 				DB720B1D22C1396B00ED116A /* TradesListRouting.swift */,
+				DB720B1222C1396B00ED116A /* TradesListViewController.swift */,
+				DB720B1522C1396B00ED116A /* View */,
+				DB720B1822C1396B00ED116A /* Workers */,
 			);
 			path = TradesList;
 			sourceTree = "<group>";

@@ -88,7 +88,6 @@ extension SendPaymentAmount {
             }
             let valueFormatter = PrecisedFormatter()
             valueFormatter.emptyZeroValue = true
-            _ = self.amountField.becomeFirstResponder()
             
             self.amountEditingContext = TextEditingContext(
                 textInputView: self.amountField,
@@ -98,6 +97,8 @@ extension SendPaymentAmount {
                         self?.onEnterAmount?(value)
                 })
             )
+            
+            _ = self.amountField.becomeFirstResponder()
         }
         
         private func setupAssetButton() {

@@ -43,7 +43,8 @@ class NavigationController: UINavigationController {
         return activity
     }()
     
-    private let viewControllersCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+    private let didShowViewControllersCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+    private let willShowViewControllersCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
     
     private lazy var activityView: UIView = {
         let view = UIView()
@@ -131,7 +132,13 @@ extension NavigationController: NavigationControllerProtocol {
     }
     
     func observerViewControllersCount() -> Observable<Int> {
-        return self.viewControllersCount.asObservable()
+        return Observable.combineLatest(
+            self.didShowViewControllersCount,
+            self.willShowViewControllersCount
+            )
+            .map { (shown, willShow) -> Int in
+                return max(shown, willShow)
+        }
     }
     
     func showShadow() {
@@ -189,6 +196,11 @@ extension NavigationController: RootContentProtocol {
 extension NavigationController: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        self.viewControllersCount.accept(self.viewControllers.count)
+        self.willShowViewControllersCount.accept(self.viewControllers.count)
     }
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        self.didShowViewControllersCount.accept(self.viewControllers.count)
+    }
+    
 }
