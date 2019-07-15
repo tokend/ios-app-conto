@@ -602,7 +602,7 @@
 		DB720F1422C1396C00ED116A /* WalletDetailsFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA222C1396B00ED116A /* WalletDetailsFlowController.swift */; };
 		DB720F1522C1396C00ED116A /* LocalAuthFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA322C1396B00ED116A /* LocalAuthFlowController.swift */; };
 		DB720F1622C1396C00ED116A /* SalesFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA422C1396B00ED116A /* SalesFlowController.swift */; };
-		DB720F1722C1396C00ED116A /* DashboardFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA522C1396B00ED116A /* DashboardFlowController.swift */; };
+		DB720F1722C1396C00ED116A /* BalancesListFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA522C1396B00ED116A /* BalancesListFlowController.swift */; };
 		DB720F1822C1396C00ED116A /* TradeFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA622C1396B00ED116A /* TradeFlowController.swift */; };
 		DB720F1922C1396C00ED116A /* WithdrawFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA722C1396B00ED116A /* WithdrawFlowController.swift */; };
 		DB720F1A22C1396C00ED116A /* BaseFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA822C1396B00ED116A /* BaseFlowController.swift */; };
@@ -1246,7 +1246,7 @@
 		DB720CA222C1396B00ED116A /* WalletDetailsFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletDetailsFlowController.swift; sourceTree = "<group>"; };
 		DB720CA322C1396B00ED116A /* LocalAuthFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAuthFlowController.swift; sourceTree = "<group>"; };
 		DB720CA422C1396B00ED116A /* SalesFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesFlowController.swift; sourceTree = "<group>"; };
-		DB720CA522C1396B00ED116A /* DashboardFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardFlowController.swift; sourceTree = "<group>"; };
+		DB720CA522C1396B00ED116A /* BalancesListFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListFlowController.swift; sourceTree = "<group>"; };
 		DB720CA622C1396B00ED116A /* TradeFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeFlowController.swift; sourceTree = "<group>"; };
 		DB720CA722C1396B00ED116A /* WithdrawFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawFlowController.swift; sourceTree = "<group>"; };
 		DB720CA822C1396B00ED116A /* BaseFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFlowController.swift; sourceTree = "<group>"; };
@@ -3183,7 +3183,7 @@
 				DB720F3922C2537300ED116A /* CompaniesListFlowController.swift */,
 				DB720CA022C1396B00ED116A /* CompanyFlowController.swift */,
 				DB72281322CF546200341565 /* CreateRedeemFlowController.swift */,
-				DB720CA522C1396B00ED116A /* DashboardFlowController.swift */,
+				DB720CA522C1396B00ED116A /* BalancesListFlowController.swift */,
 				DB720C9822C1396B00ED116A /* ExploreTokensFlowController.swift */,
 				DB720C9922C1396B00ED116A /* LaunchFlowController.swift */,
 				DB720CA322C1396B00ED116A /* LocalAuthFlowController.swift */,
@@ -3665,7 +3665,7 @@
 				DB720DCB22C1396C00ED116A /* ConfirmationTitleBoolSwitchView.swift in Sources */,
 				DB720E5D22C1396C00ED116A /* TransactionsListScenePaymentsFetcher.swift in Sources */,
 				DB720E3C22C1396C00ED116A /* BalancesListInteractor.swift in Sources */,
-				DB720F1722C1396C00ED116A /* DashboardFlowController.swift in Sources */,
+				DB720F1722C1396C00ED116A /* BalancesListFlowController.swift in Sources */,
 				DB720E9122C1396C00ED116A /* String+QueueLabel.swift in Sources */,
 				DB720DF222C1396C00ED116A /* DashboardPaymentsPlugInBalancesFetcherProtocol.swift in Sources */,
 				DB720DCA22C1396C00ED116A /* ConfirmationTitleTextView.swift in Sources */,

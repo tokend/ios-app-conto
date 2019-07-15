@@ -1,7 +1,7 @@
 import UIKit
 import RxSwift
 
-class DashboardFlowController: BaseSignedInFlowController {
+class BalancesListFlowController: BaseSignedInFlowController {
     
     // MARK: - Private
     
@@ -107,15 +107,7 @@ class DashboardFlowController: BaseSignedInFlowController {
             },
             hideShadow: { [weak self] in
                 self?.navigationController.hideShadow()
-            }, showReceive: { [weak self] in
-                self?.showReceiveScene()
-            }, showSendPayment: { [weak self] in
-                self?.showSendScene()
-            }, showCreateRedeem: { [weak self] in
-                self?.showCreateRedeemScene()
-            }, showAcceptRedeem: { [weak self] in
-                self?.showAcceptRedeemScene()
-        })
+            })
         
         BalancesList.Configurator.configure(
             viewController: vc,
@@ -133,75 +125,6 @@ class DashboardFlowController: BaseSignedInFlowController {
         vc.navigationItem.title = Localized(.balances)
         
         showRootScreen(vc)
-    }
-    
-    private func showCreateRedeemScene() {
-        self.runCreateRedeemFlow(
-            navigationController: self.navigationController,
-            balanceId: nil
-         )
-    }
-    
-    private func showAcceptRedeemScene() {
-        self.runAcceptRedeemFlow(navigationController: self.navigationController)
-    }
-    
-    private func showSendScene() {
-        self.runSendPaymentFlow(
-            navigationController: self.navigationController,
-            balanceId: nil,
-            completion: { [weak self] in
-                self?.showMovements()
-        })
-    }
-    
-    private func showReceiveScene() {
-        let vc = ReceiveAddress.ViewController()
-        
-        let addressManager = ReceiveAddress.ReceiveAddressManager(
-            accountId: self.userDataProvider.walletData.accountId,
-            email: self.userDataProvider.account
-        )
-        
-        let viewConfig = ReceiveAddress.Model.ViewConfig(
-            copiedLocalizationKey: Localized(.copied),
-            tableViewTopInset: 24,
-            headerAppearence: .hidden
-        )
-        
-        let sceneModel = ReceiveAddress.Model.SceneModel()
-        
-        let qrCodeGenerator = QRCodeGenerator()
-        let shareUtil = ReceiveAddress.ReceiveAddressShareUtil(
-            qrCodeGenerator: qrCodeGenerator
-        )
-        
-        let invoiceFormatter = ReceiveAddress.InvoiceFormatter()
-        
-        let routing = ReceiveAddress.Routing(
-            onCopy: { (stringToCopy) in
-                UIPasteboard.general.string = stringToCopy
-        },
-            onShare: { [weak self] (itemsToShare) in
-                self?.shareItems(itemsToShare)
-        })
-        
-        ReceiveAddress.Configurator.configure(
-            viewController: vc,
-            viewConfig: viewConfig,
-            sceneModel: sceneModel,
-            addressManager: addressManager,
-            shareUtil: shareUtil,
-            qrCodeGenerator: qrCodeGenerator,
-            invoiceFormatter: invoiceFormatter,
-            routing: routing
-        )
-        
-        vc.navigationItem.title = Localized(.account_capitalized)
-        vc.tabBarItem.title = Localized(.receive)
-        vc.tabBarItem.image = Assets.receive.image
-        
-        self.navigationController.pushViewController(vc, animated: true)
     }
     
     private func showPaymentsFor(selectedBalanceId: String) {

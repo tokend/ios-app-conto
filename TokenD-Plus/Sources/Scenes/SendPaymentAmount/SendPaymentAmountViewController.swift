@@ -106,25 +106,28 @@ extension SendPaymentAmount {
         private func observeKeyboard() {
             let keyboardObserver = KeyboardObserver(
                 self,
-                keyboardWillChange: { (attributes) in
-                    let keyboardHeight = attributes.heightIn(view: self.view)
-                    if attributes.showingIn(view: self.view) {
-                        self.actionButton.snp.remakeConstraints { (make) in
+                keyboardWillChange: { [weak self] (attributes) in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    let keyboardHeight = attributes.heightIn(view: strongSelf.view)
+                    if attributes.showingIn(view: strongSelf.view) {
+                        strongSelf.actionButton.snp.remakeConstraints { (make) in
                             make.leading.trailing.equalToSuperview()
                             make.bottom.equalToSuperview().inset(keyboardHeight)
-                            make.height.equalTo(self.buttonHeight)
+                            make.height.equalTo(strongSelf.buttonHeight)
                         }
                     } else {
-                        self.actionButton.snp.remakeConstraints { (make) in
+                        strongSelf.actionButton.snp.remakeConstraints { (make) in
                             make.leading.trailing.equalToSuperview()
-                            make.bottom.equalTo(self.view.safeArea.bottom)
-                            make.height.equalTo(self.buttonHeight)
+                            make.bottom.equalTo(strongSelf.view.safeArea.bottom)
+                            make.height.equalTo(strongSelf.buttonHeight)
                         }
                     }
                     
-                    if self.viewDidAppear {
+                    if strongSelf.viewDidAppear {
                         UIView.animate(withKeyboardAttributes: attributes, animations: {
-                            self.view.layoutIfNeeded()
+                            strongSelf.view.layoutIfNeeded()
                         })
                     }
             })

@@ -10,6 +10,10 @@ extension TabBarContainer {
         private let ownerAccountId: String
         private let navigationController: NavigationControllerProtocol
         private let backToCompanies: () -> Void
+        private let showSendScene: () -> Void
+        private let showReceiveScene: () -> Void
+        private let showCreateRedeemScene: () -> Void
+        private let showAcceptRedeemScene: () -> Void
         private let onSignOut: () -> Void
         private let showTabBar: () -> Void
         private let hideTabBar: () -> Void
@@ -33,6 +37,10 @@ extension TabBarContainer {
             navigationController: NavigationControllerProtocol,
             ownerAccountId: String,
             backToCompanies: @escaping () -> Void,
+            showSendScene: @escaping () -> Void,
+            showReceiveScene: @escaping () -> Void,
+            showCreateRedeemScene: @escaping () -> Void,
+            showAcceptRedeemScene: @escaping () -> Void,
             onSignOut: @escaping () -> Void,
             showTabBar: @escaping () -> Void,
             hideTabBar: @escaping () -> Void,
@@ -48,6 +56,10 @@ extension TabBarContainer {
             self.navigationController = navigationController
             self.ownerAccountId = ownerAccountId
             self.backToCompanies = backToCompanies
+            self.showSendScene = showSendScene
+            self.showReceiveScene = showReceiveScene
+            self.showCreateRedeemScene = showCreateRedeemScene
+            self.showAcceptRedeemScene = showAcceptRedeemScene
             self.onSignOut = onSignOut
             self.showTabBar = showTabBar
             self.hideTabBar = hideTabBar
@@ -95,7 +107,10 @@ extension TabBarContainer {
                 selectedTab: nil,
                 selectedTabIdentifier: nil
             )
-            let tabProvider = TabBar.GlobalNavigationTabProvider()
+            let tabProvider = TabBar.GlobalNavigationTabProvider(
+                ownerAccountId: self.ownerAccountId,
+                originalAccountId: self.userDataProvider.walletData.accountId
+                )
             let routing = TabBar.Routing(
                 onAction: { [weak self] (tabIdentifier) in
                     self?.handleAction(identifier: tabIdentifier)
@@ -139,7 +154,7 @@ extension TabBarContainer {
             selectedTabIndetifier: TabsContainer.Model.TabIdentifier? = nil
             ) {
             
-            let balancesFlow = DashboardFlowController(
+            let balancesFlow = BalancesListFlowController(
                 navigationController: navigationController,
                 ownerAccountId: self.ownerAccountId,
                 appController: self.appController,
@@ -192,8 +207,7 @@ extension TabBarContainer {
             },
                 onShowMovements: {
                     _ = navigationController.popToRootViewController(animated: true)
-            }
-            )
+            })
         }
         
         
@@ -284,6 +298,14 @@ extension TabBarContainer {
         private func handleAction(identifier: TabIdentifier) {
             if identifier == Localized(.companies) {
                  self.backToCompanies()
+            } else if identifier == Localized(.send) {
+                self.showSendScene()
+            } else if identifier == Localized(.receive) {
+                self.showReceiveScene()
+            } else if identifier == Localized(.redeem) {
+                self.showCreateRedeemScene()
+            } else if identifier == Localized(.accept_redemption) {
+                self.showAcceptRedeemScene()
             } else {
                 self.content?.setContentWithIdentifier(identifier)
             }
@@ -297,7 +319,7 @@ extension TabBarContainer.GlobalContentProvider: TabBarContainer.ContentProvider
         let tabsContainer = self.setupTabsContainer()
         let tabBar = self.setupTabBar()
         
-        return TabBarContainer.Model.SceneContent.init(
+        return TabBarContainer.Model.SceneContent(
             content: tabsContainer,
             tabBar: tabBar,
             title: ""

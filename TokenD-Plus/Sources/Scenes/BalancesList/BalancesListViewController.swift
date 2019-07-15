@@ -26,6 +26,12 @@ extension BalancesList {
         
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
         private let fab: UIButton = UIButton()
+        private let button: UIBarButtonItem = UIBarButtonItem(
+            image: Assets.plusIcon.image,
+            style: .plain,
+            target: nil,
+            action: nil
+        )
         private let refreshControl: UIRefreshControl = UIRefreshControl()
         
         private var sections: [Model.SectionViewModel] = []
@@ -69,7 +75,7 @@ extension BalancesList {
             self.setupView()
             self.setupRefreshControl()
             self.setupTableView()
-            self.setupFab()
+            self.setupNavBarItems()
             self.setupLayout()
             
             let request = Event.ViewDidLoad.Request()
@@ -81,8 +87,11 @@ extension BalancesList {
         // MARK: - Private
         
         private func showActions() {
-            self.actionsList = self.fab.createActionsList()
-            
+            self.actionsList = self.button.createActionsList(
+                withColor: Theme.Colors.clear,
+                font: nil,
+                delegate: nil
+            )
             self.actions.forEach { (action) in
                 self.actionsList?.add(action: action)
             }
@@ -139,6 +148,17 @@ extension BalancesList {
         
         private func setupView() {
             self.view.backgroundColor = Theme.Colors.contentBackgroundColor
+        }
+        
+        private func setupNavBarItems() {
+            self.button.rx
+                .tap
+                .asDriver()
+                .drive(onNext: { [weak self] (_) in
+                    self?.showActions()
+                })
+                .disposed(by: self.disposeBag)
+            //self.navigationItem.rightBarButtonItem = button
         }
         
         private func setupRefreshControl() {
@@ -261,38 +281,38 @@ extension BalancesList.ViewController: BalancesList.DisplayLogic {
     }
     
     public func displayActionsDidChange(viewModel: Event.ActionsDidChange.ViewModel) {
-        let actions = viewModel.models.map { [weak self] (item) -> ActionsListDefaultButtonModel in
-            
-            let action: (ActionsListDefaultButtonModel) -> Void = { (model) in
-                self?.actionsList?.dismiss({
-                    switch item.actionType {
-                        
-                    case .acceptRedeem:
-                        self?.routing?.showAcceptRedeem()
-                        
-                    case .receive:
-                        self?.routing?.showReceive()
-                        
-                    case .createRedeem:
-                        self?.routing?.showCreateRedeem()
-                        
-                    case .send:
-                        self?.routing?.showSendPayment()
-                    }
-                })
-            }
-            let actionModel = ActionsListDefaultButtonModel(
-                localizedTitle: item.title,
-                image: item.image,
-                action: action,
-                isEnabled: true
-            )
-            actionModel.appearance.backgroundColor = Theme.Colors.clear
-            actionModel.appearance.tint = Theme.Colors.accentColor
-            return actionModel
-        }
-        
-        self.actions = actions
+//        let actions = viewModel.models.map { [weak self] (item) -> ActionsListDefaultButtonModel in
+//            
+//            let action: (ActionsListDefaultButtonModel) -> Void = { (model) in
+//                self?.actionsList?.dismiss({
+//                    switch item.actionType {
+//                        
+//                    case .acceptRedeem:
+//                        self?.routing?.showAcceptRedeem()
+//                        
+//                    case .receive:
+//                        self?.routing?.showReceive()
+//                        
+//                    case .createRedeem:
+//                        self?.routing?.showCreateRedeem()
+//                        
+//                    case .send:
+//                        self?.routing?.showSendPayment()
+//                    }
+//                })
+//            }
+//            let actionModel = ActionsListDefaultButtonModel(
+//                localizedTitle: item.title,
+//                image: item.image,
+//                action: action,
+//                isEnabled: true
+//            )
+//            actionModel.appearance.backgroundColor = Theme.Colors.clear
+//            actionModel.appearance.tint = Theme.Colors.accentColor
+//            return actionModel
+//        }
+//        
+//        self.actions = actions
     }
 }
 

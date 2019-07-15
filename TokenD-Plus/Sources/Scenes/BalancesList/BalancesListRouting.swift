@@ -7,9 +7,5 @@ extension BalancesList {
         let hideProgress: () -> Void
         let showShadow: () -> Void
         let hideShadow: () -> Void
-        let showReceive: () -> Void
-        let showSendPayment: () -> Void
-        let showCreateRedeem: () -> Void
-        let showAcceptRedeem: () -> Void
     }
 }

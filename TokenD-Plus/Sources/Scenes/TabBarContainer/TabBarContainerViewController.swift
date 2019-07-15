@@ -54,8 +54,6 @@ extension TabBarContainer {
         
         private var viewDidAppear: Bool = false
         
-        private let conatinerTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
-        
         private let barTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
         private let disposeBag: DisposeBag = DisposeBag()
         
@@ -86,7 +84,6 @@ extension TabBarContainer {
         
         public override func viewDidLoad() {
             super.viewDidLoad()
-            self.setupContainerTapGestureRecognizer()
             self.setupBarTapGestureRecognizer()
             
             let request = Event.ViewDidLoad.Request()
@@ -97,10 +94,23 @@ extension TabBarContainer {
         
         public override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
+            self.navigationController?.navigationBar.isHidden = false
             DispatchQueue.main.asyncAfter(
                 deadline: .now() + .milliseconds(100), execute: {
                     self.viewDidAppear = true
             })
+        }
+        
+        public override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
+        }
+        
+        public override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
         
         // MARK: - Public
@@ -153,31 +163,12 @@ extension TabBarContainer {
         private func setupContent() {
             guard let viewController = self.content?.viewController else { return }
             viewController.view.isUserInteractionEnabled = true
-            viewController.view.addGestureRecognizer(self.conatinerTapRecognizer)
             self.addChild(
                 viewController,
                 to: self.view,
                 layoutFulledge: false
             )
             self.updateSubviews()
-        }
-        
-        private func setupContainerTapGestureRecognizer() {
-            self.conatinerTapRecognizer.cancelsTouchesInView = false
-            self.conatinerTapRecognizer.numberOfTapsRequired = 1
-            self.conatinerTapRecognizer.delegate = self
-            self.conatinerTapRecognizer
-                .rx
-                .event
-                .asDriver()
-                .drive(onNext: { [weak self] (_) in
-                    DispatchQueue.main.asyncAfter(
-                        deadline: .now() + .milliseconds(250),
-                        execute: {
-                            self?.tabBar?.view.isUserInteractionEnabled = true
-                    })
-                })
-                .disposed(by: self.disposeBag)
         }
         
         private func setupBarTapGestureRecognizer() {
@@ -223,20 +214,5 @@ extension TabBarContainer.ViewController: TabBarContainer.DisplayLogic {
     public func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel) {
         self.content = viewModel.sceneContent.content
         self.tabBar = viewModel.sceneContent.tabBar
-        self.navigationItem.title = viewModel.sceneContent.title
-    }
-}
-
-extension TabBarContainer.ViewController: UIGestureRecognizerDelegate {
-    
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        self.barTapRecognizer.cancelsTouchesInView = true
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + .milliseconds(300),
-            execute: {
-                self.barTapRecognizer.cancelsTouchesInView = false
-        })
-        print("shoulde begin")
-        return true
     }
 }

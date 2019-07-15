@@ -85,10 +85,26 @@ class CompanyFlowController: BaseSignedInFlowController {
         let backToCompanies: () -> Void = {
             self.onBackToCompanies()
         }
+        let showSendScene: () -> Void = {
+            self.showSendScene()
+        }
+        let showReceiveScene: () -> Void = {
+            self.showReceiveScene()
+        }
+        let showCreateRedeemScene: () -> Void = {
+            self.showCreateRedeemScene()
+        }
+        let acceptRedeemScene: () -> Void = {
+            self.showAcceptRedeemScene()
+        }
         let globalContentProvider = TabBarContainer.GlobalContentProvider(
             navigationController: self.navigationController,
             ownerAccountId: self.ownerAccountId,
             backToCompanies: backToCompanies,
+            showSendScene: showSendScene,
+            showReceiveScene: showReceiveScene,
+            showCreateRedeemScene: showCreateRedeemScene,
+            showAcceptRedeemScene: acceptRedeemScene,
             onSignOut: self.onSignOut,
             showTabBar: showTabBar,
             hideTabBar: hideTabBar,
@@ -113,6 +129,75 @@ class CompanyFlowController: BaseSignedInFlowController {
         return tabBarContainer
     }
     
+    private func showCreateRedeemScene() {
+        self.runCreateRedeemFlow(
+            navigationController: self.navigationController,
+            balanceId: nil
+        )
+    }
+    
+    private func showAcceptRedeemScene() {
+        self.runAcceptRedeemFlow(navigationController: self.navigationController)
+    }
+    
+    private func showSendScene() {
+        self.runSendPaymentFlow(
+            navigationController: self.navigationController,
+            balanceId: nil,
+            completion: { [weak self] in
+                _ = self?.navigationController.popToRootViewController(animated: true)
+        })
+    }
+    
+    private func showReceiveScene() {
+        let vc = ReceiveAddress.ViewController()
+        
+        let addressManager = ReceiveAddress.ReceiveAddressManager(
+            accountId: self.userDataProvider.walletData.accountId,
+            email: self.userDataProvider.account
+        )
+        
+        let viewConfig = ReceiveAddress.Model.ViewConfig(
+            copiedLocalizationKey: Localized(.copied),
+            tableViewTopInset: 24,
+            headerAppearence: .hidden
+        )
+        
+        let sceneModel = ReceiveAddress.Model.SceneModel()
+        
+        let qrCodeGenerator = QRCodeGenerator()
+        let shareUtil = ReceiveAddress.ReceiveAddressShareUtil(
+            qrCodeGenerator: qrCodeGenerator
+        )
+        
+        let invoiceFormatter = ReceiveAddress.InvoiceFormatter()
+        
+        let routing = ReceiveAddress.Routing(
+            onCopy: { (stringToCopy) in
+                UIPasteboard.general.string = stringToCopy
+        },
+            onShare: { [weak self] (itemsToShare) in
+                self?.shareItems(itemsToShare)
+        })
+        
+        ReceiveAddress.Configurator.configure(
+            viewController: vc,
+            viewConfig: viewConfig,
+            sceneModel: sceneModel,
+            addressManager: addressManager,
+            shareUtil: shareUtil,
+            qrCodeGenerator: qrCodeGenerator,
+            invoiceFormatter: invoiceFormatter,
+            routing: routing
+        )
+        
+        vc.navigationItem.title = Localized(.account_capitalized)
+        vc.tabBarItem.title = Localized(.receive)
+        vc.tabBarItem.image = Assets.receive.image
+        
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
     private func getSideMenuHeaderTitle() -> String {
         return AppInfoUtils.getValue(.bundleDisplayName, Localized(.tokend))
     }
@@ -122,5 +207,10 @@ class CompanyFlowController: BaseSignedInFlowController {
     private func runReposPreload() {
         _ = self.reposController.assetsRepo.observeAssets()
         _ = self.reposController.balancesRepo.observeBalancesDetails()
+    }
+    
+    private func shareItems(_ items: [Any]) {
+        let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        self.navigationController.present(activity, animated: true, completion: nil)
     }
 }
