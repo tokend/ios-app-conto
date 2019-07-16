@@ -41,22 +41,12 @@ extension TabBar {
                 identifier: Localized(.polls),
                 isSelectable: true
             )
-            let settingsTab = Model.TabItem(
-                title: Localized(.settings),
-                image: Assets.settingsIcon.image,
-                identifier: Localized(.settings),
-                isSelectable: true
-            )
-            let sendTab = Model.TabItem(
-                title: Localized(.send),
-                image: Assets.sendIcon.image,
-                identifier: Localized(.send),
-                isSelectable: false
-            )
-            let receiveTab = Model.TabItem(
-                title: Localized(.receive),
-                image: Assets.receive.image,
-                identifier: Localized(.receive),
+            let operationsActions = self.getActions()
+            let operationsTab = Model.TabItem(
+                title: Localized(.operations),
+                image: Assets.walletIcon.image,
+                actions: operationsActions,
+                identifier: Localized(.operations),
                 isSelectable: false
             )
             let otherTab = Model.TabItem(
@@ -70,20 +60,19 @@ extension TabBar {
                 balancesTab,
                 salesTab,
                 pollsTab,
-                sendTab,
-                receiveTab,
+                operationsTab,
                 otherTab
             ]
         }
         
-        private func getOtherActions() -> [Model.ActionModel] {
+        private func getActions() -> [Model.ActionModel] {
             var actions: [Model.ActionModel] = []
-            let companiesAction = Model.ActionModel(
-                title: Localized(.companies),
-                icon: Assets.companies.image,
-                actionIdentifier: Localized(.companies)
+            let receiveAction = Model.ActionModel(
+                title: Localized(.receive),
+                icon: Assets.receive.image,
+                actionIdentifier: Localized(.receive)
             )
-            actions.append(companiesAction)
+            actions.append(receiveAction)
             
             let sendAction = Model.ActionModel(
                 title: Localized(.send),
@@ -91,13 +80,6 @@ extension TabBar {
                 actionIdentifier: Localized(.send)
             )
             actions.append(sendAction)
-            
-            let receiveAction = Model.ActionModel(
-                title: Localized(.receive),
-                icon: Assets.receive.image,
-                actionIdentifier: Localized(.receive)
-            )
-            actions.append(receiveAction)
             
             let createRedeem = Model.ActionModel(
                 title: Localized(.redeem),

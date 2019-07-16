@@ -343,6 +343,7 @@ enum LocKey: String {
     case one_vote_replace_percent
     case open_app
     case operation
+    case operations
     case opportunities
     case opportunity_cancelation
     case opportunity_details

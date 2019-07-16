@@ -27,7 +27,7 @@ extension FacilitiesList {
             private let titleLabel: UILabel = UILabel()
             private let iconImageView: UIImageView = UIImageView()
             
-            private let sideInset: CGFloat = 20.0
+            private let sideInset: CGFloat = 15.0
             private let topInset: CGFloat = 10.0
             private let iconSize: CGFloat = 24.0
             
@@ -51,7 +51,9 @@ extension FacilitiesList {
             }
             
             required init?(coder aDecoder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
+                super.init(coder: aDecoder)
+                
+                self.commonInit()
             }
             
             // MARK: - Private
@@ -67,6 +69,8 @@ extension FacilitiesList {
             private func setupView() {
                 self.backgroundColor = Theme.Colors.contentBackgroundColor
                 self.selectionStyle = .none
+                self.accessoryType = .disclosureIndicator
+                self.separatorInset.left = self.sideInset * 2 + self.iconSize
             }
             
             private func setupTitleLabel() {

@@ -36,42 +36,27 @@ extension FacilitiesList {
         private func getSections() -> [Model.SectionModel] {
             var sections: [Model.SectionModel] = []
             
-            var redeemItems: [Model.FacilityItem] = []
-            let redeemFacility = Model.FacilityItem(
-                name: Localized(.create_redeem),
-                icon: Assets.redeem.image,
-                type: .redeem
-            )
-            redeemItems.append(redeemFacility)
-            if self.sceneModel.originalAccountId == self.sceneModel.ownerAccountId {
-                let acceptRedeemFacility = Model.FacilityItem(
-                    name: Localized(.accept_redemption),
-                    icon: Assets.scanQrIcon.image,
-                    type: .acceptRedeem
-                )
-                redeemItems.append(acceptRedeemFacility)
-            }
-            let redeemSection = Model.SectionModel.init(
-                title: Localized(.redeem),
-                items: redeemItems
-            )
-            sections.append(redeemSection)
-            
             let settingsFacility = Model.FacilityItem(
                 name: Localized(.settings),
                 icon: Assets.settingsIcon.image,
                 type: .settings
             )
+            let settingsSection = Model.SectionModel(
+                title: "",
+                items: [settingsFacility]
+            )
+            sections.append(settingsSection)
+            
             let companiesFacility = Model.FacilityItem(
-                name: Localized(.companies),
+                name: Localized(.back_to_companies),
                 icon: Assets.companies.image,
                 type: .companies
             )
-            let settingsSection = Model.SectionModel(
+            let companiesSection = Model.SectionModel(
                 title: "",
-                items: [settingsFacility, companiesFacility]
+                items: [companiesFacility]
             )
-            sections.append(settingsSection)
+            sections.append(companiesSection)
             
             return sections
         }
