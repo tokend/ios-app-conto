@@ -1,12 +1,11 @@
 import UIKit
 import RxSwift
 
-class DashboardFlowController: BaseSignedInFlowController {
+class BalancesListFlowController: BaseSignedInFlowController {
     
     // MARK: - Private
     
-    private let navigationController: NavigationControllerProtocol =
-        NavigationController()
+    private let navigationController: NavigationControllerProtocol
     private weak var dashboardScene: BalancesList.ViewController?
     private var operationCompletionScene: UIViewController {
         return self.dashboardScene ?? UIViewController()
@@ -17,16 +16,18 @@ class DashboardFlowController: BaseSignedInFlowController {
     // MARK: -
     
     init(
+        navigationController: NavigationControllerProtocol,
+        ownerAccountId: String,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
         reposController: ReposController,
         managersController: ManagersController,
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
-        rootNavigation: RootNavigationProtocol,
-        ownerAccountId: String
+        rootNavigation: RootNavigationProtocol
         ) {
         
+        self.navigationController = navigationController
         self.ownerAccountId = ownerAccountId
         super.init(
             appController: appController,
@@ -42,7 +43,7 @@ class DashboardFlowController: BaseSignedInFlowController {
     // MARK: - Public
     
     public func run(
-        showRootScreen: ((_ vc: UIViewController) -> Void)?,
+        showRootScreen: ((_ vc: UIViewController) -> Void),
         selectedTabIdentifier: TabsContainer.Model.TabIdentifier?
         ) {
         
@@ -62,7 +63,7 @@ class DashboardFlowController: BaseSignedInFlowController {
     }
     
     private func showDashboardScreen(
-        showRootScreen: ((_ vc: UIViewController) -> Void)?,
+        showRootScreen: ((_ vc: UIViewController) -> Void),
         selectedTabIdentifier: TabsContainer.Model.TabIdentifier?
         ) {
         
@@ -106,15 +107,7 @@ class DashboardFlowController: BaseSignedInFlowController {
             },
             hideShadow: { [weak self] in
                 self?.navigationController.hideShadow()
-            }, showReceive: { [weak self] in
-                self?.showReceiveScene()
-            }, showSendPayment: { [weak self] in
-                self?.showSendScene()
-            }, showCreateRedeem: { [weak self] in
-                self?.showCreateRedeemScene()
-            }, showAcceptRedeem: { [weak self] in
-                self?.showAcceptRedeemScene()
-        })
+            })
         
         BalancesList.Configurator.configure(
             viewController: vc,
@@ -130,82 +123,8 @@ class DashboardFlowController: BaseSignedInFlowController {
         self.dashboardScene = vc
         
         vc.navigationItem.title = Localized(.balances)
-        self.navigationController.setViewControllers([vc], animated: false)
         
-        if let showRoot = showRootScreen {
-            showRoot(self.navigationController.getViewController())
-        } else {
-            self.rootNavigation.setRootContent(self.navigationController, transition: .fade, animated: false)
-        }
-    }
-    
-    private func showCreateRedeemScene() {
-        self.runCreateRedeemFlow(
-            navigationController: self.navigationController,
-            balanceId: nil
-         )
-    }
-    
-    private func showAcceptRedeemScene() {
-        self.runAcceptRedeemFlow(navigationController: self.navigationController)
-    }
-    
-    private func showSendScene() {
-        self.runSendPaymentFlow(
-            navigationController: self.navigationController,
-            balanceId: nil,
-            completion: { [weak self] in
-                self?.showMovements()
-        })
-    }
-    
-    private func showReceiveScene() {
-        let vc = ReceiveAddress.ViewController()
-        
-        let addressManager = ReceiveAddress.ReceiveAddressManager(
-            accountId: self.userDataProvider.walletData.accountId,
-            email: self.userDataProvider.account
-        )
-        
-        let viewConfig = ReceiveAddress.Model.ViewConfig(
-            copiedLocalizationKey: Localized(.copied),
-            tableViewTopInset: 24,
-            headerAppearence: .hidden
-        )
-        
-        let sceneModel = ReceiveAddress.Model.SceneModel()
-        
-        let qrCodeGenerator = QRCodeGenerator()
-        let shareUtil = ReceiveAddress.ReceiveAddressShareUtil(
-            qrCodeGenerator: qrCodeGenerator
-        )
-        
-        let invoiceFormatter = ReceiveAddress.InvoiceFormatter()
-        
-        let routing = ReceiveAddress.Routing(
-            onCopy: { (stringToCopy) in
-                UIPasteboard.general.string = stringToCopy
-        },
-            onShare: { [weak self] (itemsToShare) in
-                self?.shareItems(itemsToShare)
-        })
-        
-        ReceiveAddress.Configurator.configure(
-            viewController: vc,
-            viewConfig: viewConfig,
-            sceneModel: sceneModel,
-            addressManager: addressManager,
-            shareUtil: shareUtil,
-            qrCodeGenerator: qrCodeGenerator,
-            invoiceFormatter: invoiceFormatter,
-            routing: routing
-        )
-        
-        vc.navigationItem.title = Localized(.account_capitalized)
-        vc.tabBarItem.title = Localized(.receive)
-        vc.tabBarItem.image = Assets.receive.image
-        
-        self.navigationController.pushViewController(vc, animated: true)
+        showRootScreen(vc)
     }
     
     private func showPaymentsFor(selectedBalanceId: String) {

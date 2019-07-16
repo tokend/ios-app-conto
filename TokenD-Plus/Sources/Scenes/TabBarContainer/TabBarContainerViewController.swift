@@ -1,4 +1,5 @@
 import UIKit
+import RxSwift
 
 public protocol TabBarContainerDisplayLogic: class {
     typealias Event = TabBarContainer.Event
@@ -51,6 +52,11 @@ extension TabBarContainer {
             }
         }
         
+        private var viewDidAppear: Bool = false
+        
+        private let barTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
+        private let disposeBag: DisposeBag = DisposeBag()
+        
         // MARK: -
         
         deinit {
@@ -78,6 +84,7 @@ extension TabBarContainer {
         
         public override func viewDidLoad() {
             super.viewDidLoad()
+            self.setupBarTapGestureRecognizer()
             
             let request = Event.ViewDidLoad.Request()
             self.interactorDispatch?.sendSyncRequest { businessLogic in
@@ -85,11 +92,58 @@ extension TabBarContainer {
             }
         }
         
+        public override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            self.navigationController?.navigationBar.isHidden = false
+            DispatchQueue.main.asyncAfter(
+                deadline: .now() + .milliseconds(100), execute: {
+                    self.viewDidAppear = true
+            })
+        }
+        
+        public override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
+        }
+        
+        public override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+        
         // MARK: - Public
         
         public func setSelectedContentWithIdentifier(idetifier: TabIdentifier) {
             self.tabBar?.setSelectedTabWithIdentifier(idetifier)
             self.content?.setContentWithIdentifier(idetifier)
+        }
+        
+        public func showTabBar() {
+            self.tabBar?.view.isUserInteractionEnabled = true
+            self.tabBar?.view.snp.remakeConstraints({ (make) in
+                make.leading.trailing.equalToSuperview()
+                make.bottom.equalTo(self.view.safeArea.bottom)
+            })
+            if self.viewDidAppear {
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.view.setNeedsLayout()
+                    self.view.layoutIfNeeded()
+                })
+            }
+        }
+        
+        public func hideTabBar() {
+            self.tabBar?.view.isUserInteractionEnabled = false
+            if self.viewDidAppear {
+                self.tabBar?.view.snp.remakeConstraints({ (make) in
+                    make.leading.trailing.equalToSuperview()
+                    make.top.equalTo(self.view.safeArea.bottom)
+                })
+                self.view.setNeedsLayout()
+                self.view.layoutIfNeeded()
+            }
         }
         
         // MARK: - Private
@@ -100,6 +154,7 @@ extension TabBarContainer {
         
         private func setupTabBar() {
             guard let tabBar = self.tabBar?.view else { return }
+            tabBar.addGestureRecognizer(self.barTapRecognizer)
             self.view.addSubview(tabBar)
             self.layoutTabBar()
             self.updateSubviews()
@@ -107,12 +162,20 @@ extension TabBarContainer {
         
         private func setupContent() {
             guard let viewController = self.content?.viewController else { return }
+            viewController.view.isUserInteractionEnabled = true
             self.addChild(
                 viewController,
                 to: self.view,
                 layoutFulledge: false
             )
             self.updateSubviews()
+        }
+        
+        private func setupBarTapGestureRecognizer() {
+            self.barTapRecognizer.cancelsTouchesInView = false
+            self.barTapRecognizer.numberOfTapsRequired = 1
+            self.barTapRecognizer.delaysTouchesBegan = true
+            self.tabBar?.view.addGestureRecognizer(self.barTapRecognizer)
         }
         
         private func layoutTabBar() {
@@ -151,6 +214,5 @@ extension TabBarContainer.ViewController: TabBarContainer.DisplayLogic {
     public func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel) {
         self.content = viewModel.sceneContent.content
         self.tabBar = viewModel.sceneContent.tabBar
-        self.navigationItem.title = viewModel.sceneContent.title
     }
 }

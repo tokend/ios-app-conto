@@ -39,7 +39,7 @@ extension TabBar {
         
         private func sendAction(identifier: Model.TabIdentifier) {
             let response = Event.Action.Response(tabIdentifier: identifier)
-            self.presenter.presenterAction(response: response)
+            self.presenter.presentAction(response: response)
         }
     }
 }
@@ -67,7 +67,7 @@ extension TabBar.Interactor: TabBar.BusinessLogic {
             tabs: tabs,
             selectedTab: selectedTab
         )
-        self.presenter.presenterViewDidLoad(response: response)
+        self.presenter.presentViewDidLoad(response: response)
     }
     
     public func onTabWasSelected(request: Event.TabWasSelected.Request) {
@@ -78,7 +78,15 @@ extension TabBar.Interactor: TabBar.BusinessLogic {
         }
         
         self.sceneModel.selectedTabIdentifier = request.identifier
-        self.sendAction(identifier: tab.identifier)
+        if tab.actions.isEmpty {
+            self.sendAction(identifier: tab.identifier)
+        } else {
+            let response = Event.ShowActionsList.Response(
+                tabIdentifier: tab.identifier,
+                actions: tab.actions
+            )
+            self.presenter.presentShowActionsList(response: response)
+        }
         if let currentSelectedTab = self.sceneModel.selectedTab,
             tab.identifier == currentSelectedTab.identifier {
             return
@@ -90,6 +98,6 @@ extension TabBar.Interactor: TabBar.BusinessLogic {
         
         guard let selectedTab = self.sceneModel.selectedTab else { return }
         let response = Event.TabWasSelected.Response(item: selectedTab)
-        self.presenter.presenterTabWasSelected(response: response)
+        self.presenter.presentTabWasSelected(response: response)
     }
 }

@@ -151,7 +151,7 @@ class AppController {
             userDataManager: self.userDataManager,
             keychainManager: self.keychainManager,
             onAuthorized: { [weak self] (account) in
-                self?.runCompaniesListFlowController(account: account)
+                self?.runSignedInFlowController(account: account)
             },
             onSignOut: { [weak self] in
                 self?.initiateSignOut()
@@ -160,7 +160,7 @@ class AppController {
         launchFlowController.start()
     }
     
-    private func runCompaniesListFlowController(account: String) {
+    private func runSignedInFlowController(account: String) {
         guard let keychainDataProvider = KeychainDataProvider(
             account: account,
             keychainManager: self.keychainManager
@@ -225,6 +225,44 @@ class AppController {
             transactionSender: transactionSender,
             userDataProvider: userDataProvider
         )
+        
+        if
+            let previousBusiness = self.flowControllerStack.settingsManager.businessOwnerAccountId,
+            let previosBusinessName = self.flowControllerStack.settingsManager.businessName {
+            self.runCompanyFlow(
+                appController: self,
+                flowControllerStack: self.flowControllerStack,
+                reposController: reposController,
+                managersController: managersController,
+                userDataProvider: userDataProvider,
+                keychainDataProvider: keychainDataProvider,
+                rootNavigation: self.rootNavigation,
+                companyName: previosBusinessName,
+                ownerAccountId: previousBusiness
+            )
+        } else {
+            self.runCompanyListFlowController(
+                appController: self,
+                flowControllerStack: self.flowControllerStack,
+                reposController: reposController,
+                managersController: managersController,
+                userDataProvider: userDataProvider,
+                keychainDataProvider: keychainDataProvider,
+                rootNavigation: self.rootNavigation
+            )
+        }
+    }
+    
+    private func runCompanyListFlowController(
+        appController: AppControllerProtocol,
+        flowControllerStack: FlowControllerStack,
+        reposController: ReposController,
+        managersController: ManagersController,
+        userDataProvider: UserDataProviderProtocol,
+        keychainDataProvider: KeychainDataProviderProtocol,
+        rootNavigation: RootNavigationProtocol
+        ) {
+        
         let flowController = CompaniesListFlowController(
             appController: self,
             flowControllerStack: self.flowControllerStack,
@@ -241,6 +279,46 @@ class AppController {
         })
         self.currentFlowController = flowController
         flowController.run()
+    }
+    
+    private func runCompanyFlow(
+        appController: AppControllerProtocol,
+        flowControllerStack: FlowControllerStack,
+        reposController: ReposController,
+        managersController: ManagersController,
+        userDataProvider: UserDataProviderProtocol,
+        keychainDataProvider: KeychainDataProviderProtocol,
+        rootNavigation: RootNavigationProtocol,
+        companyName: String,
+        ownerAccountId: String
+        ) {
+        
+        let companyFlow = CompanyFlowController(
+            appController: appController,
+            flowControllerStack: flowControllerStack,
+            reposController: reposController,
+            managersController: managersController,
+            userDataProvider: userDataProvider,
+            keychainDataProvider: keychainDataProvider,
+            rootNavigation: rootNavigation,
+            companyName: companyName,
+            ownerAccountId: ownerAccountId,
+            onSignOut:  { [weak self] in
+                self?.initiateSignOut()
+            },
+            onBackToCompanies: { [weak self] in
+                self?.runCompanyListFlowController(
+                    appController: appController,
+                    flowControllerStack: flowControllerStack,
+                    reposController: reposController,
+                    managersController: managersController,
+                    userDataProvider: userDataProvider,
+                    keychainDataProvider: keychainDataProvider,
+                    rootNavigation: rootNavigation
+                )
+        })
+        self.currentFlowController = companyFlow
+        companyFlow.run()
     }
     
     private func setupReposControllerStack() -> ReposControllerStack {

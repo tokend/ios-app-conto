@@ -145,6 +145,7 @@ extension Settings {
                 title: Localized(.account_capitalized),
                 icon: Assets.verificationIcon.image,
                 cellType: .disclosureCell,
+                topSeparator: .line,
                 identifier: .accountId
             )
             
@@ -159,6 +160,7 @@ extension Settings {
                 title: Localized(.fees),
                 icon: Assets.fee.image,
                 cellType: .disclosureCell,
+                bottomSeparator: .line,
                 identifier: .fees
             )
             
@@ -168,17 +170,18 @@ extension Settings {
                 description: ""
             )
             
-            let tfaCell = self.checkTFAEnabledState()
+            var tfaTopSeparator: Model.CellModel.SeparatorStyle = .line
+            var tfaPosition: Int = 0
             
             let changePassCell = Model.CellModel(
                 title: Localized(.change_password),
                 icon: Assets.passwordIcon.image,
                 cellType: .disclosureCell,
+                bottomSeparator: .line,
                 identifier: .changePassword
             )
             
             var securityCells: [Model.CellModel] = [
-                tfaCell,
                 changePassCell
             ]
             
@@ -188,6 +191,7 @@ extension Settings {
                     title: Localized(.verification),
                     icon: Assets.verificationIcon.image,
                     cellType: .disclosureCell,
+                    bottomSeparator: .lineWithInset,
                     identifier: .verification
                 )
                 securityCells.insert(verificationCell, at: 1)
@@ -198,10 +202,17 @@ extension Settings {
                     title: biometricsSettingInfo.title,
                     icon: biometricsSettingInfo.icon,
                     cellType: .boolCell(biometricsSettingInfo.enabled),
+                    topSeparator: .line,
+                    bottomSeparator: .lineWithInset,
                     identifier: .biometrics
                 )
                 securityCells.insert(biometricsAuthCell, at: 0)
+                tfaTopSeparator = .none
+                tfaPosition = 1
             }
+            
+            let tfaCell = self.checkTFAEnabledState(topSeparator: tfaTopSeparator)
+            securityCells.insert(tfaCell, at: tfaPosition)
             
             let securitySection = Model.SectionModel(
                 title: Localized(.security),
@@ -213,12 +224,14 @@ extension Settings {
                 title: Localized(.terms_of_service),
                 icon: Assets.documentIcon.image,
                 cellType: .disclosureCell,
+                topSeparator: .line,
                 identifier: .termsOfService
             )
             let licensesCell = Model.CellModel(
                 title: Localized(.acknowledgements),
                 icon: Assets.copyright.image,
                 cellType: .disclosureCell,
+                bottomSeparator: .line,
                 identifier: .licenses
             )
             
@@ -235,6 +248,8 @@ extension Settings {
                 title: Localized(.sign_out),
                 icon: Assets.signOutIcon.image,
                 cellType: .disclosureCell,
+                topSeparator: .line,
+                bottomSeparator: .line,
                 identifier: .signOut
             )
             
@@ -244,11 +259,36 @@ extension Settings {
                 description: ""
             )
             
+            let appShortVersion: String = Bundle.main.shortVersion ?? ""
+            let appBundleVersion: String = Bundle.main.bundleVersion ?? ""
+            let appVersion: String
+            if appBundleVersion.isEmpty {
+                appVersion = appShortVersion
+            } else {
+                appVersion = "v\(appShortVersion) (\(appBundleVersion))"
+            }
+            
+            let versionCell = Model.CellModel(
+                title: appVersion,
+                icon: UIImage(),
+                cellType: .text,
+                topSeparator: .none,
+                bottomSeparator: .none,
+                identifier: .version
+            )
+            
+            let versionSection = Model.SectionModel(
+                title: "",
+                cells: [versionCell],
+                description: ""
+            )
+            
             return [
                 acountSection,
                 securitySection,
                 termsSection,
-                signOutSection
+                signOutSection,
+                versionSection
             ]
         }
         
@@ -309,7 +349,10 @@ extension Settings {
             case loaded(enabled: Bool)
         }
         
-        private func checkTFAEnabledState() -> Model.CellModel {
+        private func checkTFAEnabledState(
+            topSeparator: Model.CellModel.SeparatorStyle
+            ) -> Model.CellModel {
+            
             let cellType: Model.CellModel.CellType
             
             switch self.tfaEnabledState {
@@ -331,6 +374,7 @@ extension Settings {
                 title: Localized(.twofactor_authentication),
                 icon: Assets.securityIcon.image,
                 cellType: cellType,
+                topSeparator: topSeparator,
                 identifier: .tfa
             )
             

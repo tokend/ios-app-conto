@@ -45,7 +45,6 @@ extension SendPaymentAmount {
         private let disposeBag = DisposeBag()
         
         private let buttonHeight: CGFloat = 45.0
-        
         private var viewDidAppear: Bool = false
         
         // MARK: - Injections
@@ -64,6 +63,7 @@ extension SendPaymentAmount {
             self.viewConfig = viewConfig
             self.routing = routing
         }
+        
         
         // MARK: - Overridden
         
@@ -102,6 +102,41 @@ extension SendPaymentAmount {
         
         // MARK: - Private
         
+        // MARK: - Observe
+        
+        private func observeKeyboard() {
+            let keyboardObserver = KeyboardObserver(
+                self,
+                keyboardWillChange: { [weak self] (attributes) in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    let keyboardHeight = attributes.heightIn(view: strongSelf.view)
+                    if attributes.showingIn(view: strongSelf.view) {
+                        strongSelf.actionButton.snp.remakeConstraints { (make) in
+                            make.leading.trailing.equalToSuperview()
+                            make.bottom.equalToSuperview().inset(keyboardHeight)
+                            make.height.equalTo(strongSelf.buttonHeight)
+                        }
+                    } else {
+                        strongSelf.actionButton.snp.remakeConstraints { (make) in
+                            make.leading.trailing.equalToSuperview()
+                            make.bottom.equalTo(strongSelf.view.safeArea.bottom)
+                            make.height.equalTo(strongSelf.buttonHeight)
+                        }
+                    }
+                    
+                    if strongSelf.viewDidAppear {
+                        UIView.animate(withKeyboardAttributes: attributes, animations: {
+                            strongSelf.view.layoutIfNeeded()
+                        })
+                    }
+            })
+            KeyboardController.shared.add(observer: keyboardObserver)
+        }
+        
+        // MARK: - Update
+        
         private func updateWithSceneModel(_ sceneModel: Model.SceneViewModel) {
             self.balanceView.set(
                 amount: sceneModel.selectedBalance?.balance,
@@ -117,6 +152,8 @@ extension SendPaymentAmount {
             self.balanceView.set(balanceHighlighted: !amountValid)
             self.enterAmountView.set(amountHighlighted: !amountValid)
         }
+        
+        // MARK: - Setup
         
         private func setupView() {
             self.view.backgroundColor = Theme.Colors.contentBackgroundColor
@@ -205,34 +242,6 @@ extension SendPaymentAmount {
                     })
                 })
                 .disposed(by: self.disposeBag)
-        }
-        
-        private func observeKeyboard() {
-            let keyboardObserver = KeyboardObserver(
-                self,
-                keyboardWillChange: { (attributes) in
-                    let keyboardHeight = attributes.heightIn(view: self.view)
-                    if attributes.showingIn(view: self.view) {
-                        self.actionButton.snp.remakeConstraints { (make) in
-                            make.leading.trailing.equalToSuperview()
-                            make.bottom.equalToSuperview().inset(keyboardHeight)
-                            make.height.equalTo(self.buttonHeight)
-                        }
-                    } else {
-                        self.actionButton.snp.remakeConstraints { (make) in
-                            make.leading.trailing.equalToSuperview()
-                            make.bottom.equalTo(self.view.safeArea.bottom)
-                            make.height.equalTo(self.buttonHeight)
-                        }
-                    }
-                    
-                    if self.viewDidAppear {
-                        UIView.animate(withKeyboardAttributes: attributes, animations: {
-                            self.view.layoutIfNeeded()
-                        })
-                    }
-            })
-            KeyboardController.shared.add(observer: keyboardObserver)
         }
         
         private func setupLayout() {

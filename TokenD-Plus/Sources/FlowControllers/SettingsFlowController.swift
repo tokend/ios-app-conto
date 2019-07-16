@@ -6,22 +6,24 @@ class SettingsFlowController: BaseSignedInFlowController {
     
     // MARK: - Private properties
     
-    private let navigationController: NavigationControllerProtocol = NavigationController()
+    private let navigationController: NavigationControllerProtocol
     private let onSignOut: () -> Void
     
     // MARK: -
     
     init(
+        navigationController: NavigationControllerProtocol,
+        onSignOut: @escaping () -> Void,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
         reposController: ReposController,
         managersController: ManagersController,
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
-        rootNavigation: RootNavigationProtocol,
-        onSignOut: @escaping () -> Void
+        rootNavigation: RootNavigationProtocol
         ) {
         
+        self.navigationController = navigationController
         self.onSignOut = onSignOut
         super.init(
             appController: appController,
@@ -36,13 +38,13 @@ class SettingsFlowController: BaseSignedInFlowController {
     
     // MARK: - Public
     
-    public func run(showRootScreen: ((_ vc: UIViewController) -> Void)?) {
+    public func run(showRootScreen: ((_ vc: UIViewController) -> Void)) {
         self.showSettingsScreen(showRootScreen: showRootScreen)
     }
     
     // MARK: - Private
     
-    private func showSettingsScreen(showRootScreen: ((_ vc: UIViewController) -> Void)?) {
+    private func showSettingsScreen(showRootScreen: ((_ vc: UIViewController) -> Void)) {
         let vc = Settings.ViewController()
         
         let sectionsProvider = Settings.SettingsSectionsProvider(
@@ -93,13 +95,7 @@ class SettingsFlowController: BaseSignedInFlowController {
         )
         
         vc.navigationItem.title = Localized(.settings)
-        
-        self.navigationController.setViewControllers([vc], animated: false)
-        if let showRoot = showRootScreen {
-            showRoot(self.navigationController.getViewController())
-        } else {
-            self.rootNavigation.setRootContent(self.navigationController, transition: .fade, animated: false)
-        }
+        showRootScreen(vc)
     }
     
     private func switchToSetting(_ identifier: Settings.CellIdentifier) {

@@ -6,7 +6,7 @@ class SalesFlowController: BaseSignedInFlowController {
     
     // MARK: - Private properties
     
-    private let navigationController: NavigationControllerProtocol = NavigationController()
+    private let navigationController: NavigationControllerProtocol
     private let ownerAccountId: String
     private let disposeBag: DisposeBag = DisposeBag()
     
@@ -15,16 +15,18 @@ class SalesFlowController: BaseSignedInFlowController {
     // MARK: -
     
     init(
+        navigationController: NavigationControllerProtocol,
+        ownerAccountId: String,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
         reposController: ReposController,
         managersController: ManagersController,
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
-        rootNavigation: RootNavigationProtocol,
-        ownerAccountId: String
+        rootNavigation: RootNavigationProtocol
         ) {
         
+        self.navigationController = navigationController
         self.ownerAccountId = ownerAccountId
         super.init(
             appController: appController,
@@ -40,7 +42,7 @@ class SalesFlowController: BaseSignedInFlowController {
     // MARK: - Public
     
     public func run(
-        showRootScreen: ((_ vc: UIViewController) -> Void)?,
+        showRootScreen: ((_ vc: UIViewController) -> Void),
         onShowMovements: (() -> Void)?
         ) {
         
@@ -50,20 +52,10 @@ class SalesFlowController: BaseSignedInFlowController {
     
     // MARK: - Private
     
-    private func showSalesScreen(showRootScreen: ((_ vc: UIViewController) -> Void)?) {
+    private func showSalesScreen(showRootScreen: ((_ vc: UIViewController) -> Void)) {
         let vc = self.setupSalesScreen()
         
-        self.navigationController.setViewControllers([vc], animated: false)
-        
-        if let showRoot = showRootScreen {
-            showRoot(self.navigationController.getViewController())
-        } else {
-            self.rootNavigation.setRootContent(
-                self.navigationController,
-                transition: .fade,
-                animated: false
-            )
-        }
+        showRootScreen(vc)
     }
     
     private func setupSalesScreen() -> Sales.ViewController {

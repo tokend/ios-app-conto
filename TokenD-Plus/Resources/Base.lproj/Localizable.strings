@@ -102,6 +102,7 @@
 "corrupted_keychain_data" = "Corrupted keychain data";
 "create_balance" = "Create balance";
 "create_order" = "Create order";
+"create_redeem" = "Create redemption";
 "credit_card" = "Credit card";
 "cvv" = "CVV";
 "dashboard" = "Dashboard";
@@ -339,6 +340,7 @@
 "one_vote_replace_percent" = "percent";
 "open_app" = "Open App";
 "operation" = "Operation";
+"operations" = "Operations";
 "opportunities" = "Opportunities";
 "opportunity_cancelation" = "Opportunity cancellation";
 "opportunity_details" = "Opportunity details";

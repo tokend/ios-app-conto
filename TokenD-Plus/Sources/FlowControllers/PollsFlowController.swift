@@ -6,24 +6,27 @@ class PollsFlowController: BaseSignedInFlowController {
     
     // MARK: - Private properties
     
-    private let navigationController: NavigationControllerProtocol = NavigationController()
+    private let navigationController: NavigationControllerProtocol
     private let ownerAccountId: String
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: -
     
     init(
+        navigationController: NavigationControllerProtocol,
+        ownerAccountId: String,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
         reposController: ReposController,
         managersController: ManagersController,
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
-        rootNavigation: RootNavigationProtocol,
-        ownerAccountId: String
+        rootNavigation: RootNavigationProtocol
         ) {
         
+        self.navigationController = navigationController
         self.ownerAccountId = ownerAccountId
+        
         super.init(
             appController: appController,
             flowControllerStack: flowControllerStack,
@@ -37,27 +40,17 @@ class PollsFlowController: BaseSignedInFlowController {
     
     // MARK: - Public
     
-    public func run(showRootScreen: ((_ vc: UIViewController) -> Void)?) {
+    public func run(showRootScreen: ((_ vc: UIViewController) -> Void)) {
         self.showPollsScreen(showRootScreen: showRootScreen)
     }
     
     // MARK: - Private
     
-    private func showPollsScreen(showRootScreen: ((_ vc: UIViewController) -> Void)?) {
+    private func showPollsScreen(showRootScreen: ((_ vc: UIViewController) -> Void)) {
         let vc = self.setupPollsScene()
         vc.navigationItem.title = Localized(.polls)
         
-        self.navigationController.setViewControllers([vc], animated: false)
-        
-        if let showRootScreen = showRootScreen {
-            showRootScreen(self.navigationController.getViewController())
-        } else {
-            self.rootNavigation.setRootContent(
-                self.navigationController,
-                transition: .fade,
-                animated: false
-            )
-        }
+        showRootScreen(vc)
     }
     
     private func setupPollsScene() -> UIViewController {
@@ -81,6 +74,10 @@ class PollsFlowController: BaseSignedInFlowController {
                 self?.navigationController.showProgress()
             }, hideLoading: { [weak self] in
                 self?.navigationController.hideProgress()
+            }, showShadow: { [weak self] in
+                self?.navigationController.showShadow()
+            }, hideShadow: { [weak self] in
+                self?.navigationController.hideShadow()
         })
         
         Polls.Configurator.configure(

@@ -143,14 +143,6 @@ extension TabBarContainer {
                     self?.showShadow()
                 }, hideShadow: { [weak self] in
                     self?.hideShadow()
-                }, showReceive: { [weak self] in
-                    self?.showReceiveScene()
-                }, showSendPayment: { [weak self] in
-                    self?.showSendScene()
-                }, showCreateRedeem: {
-                    
-            }, showAcceptRedeem: {
-                
             })
             
             let actionProvider = BalancesList.ActionProvider(

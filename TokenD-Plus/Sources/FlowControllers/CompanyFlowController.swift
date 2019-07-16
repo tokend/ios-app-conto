@@ -6,14 +6,11 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     // MARK: - Private properties
     
-    private let sideNavigationController: SideMenuController
+    private let navigationController: NavigationControllerProtocol = NavigationController()
+    private var companyName: String
+    private var ownerAccountId: String
     
-    private let sideMenuViewController = SideMenu.ViewController()
-    
-    private let exploreTokensIdentifier: String = "ExploreTokens"
-    private let sendPaymentIdentifier: String = "SendPayment"
-    private let companyName: String
-    private let ownerAccountId: String
+    private var flowControllers: [FlowControllerProtocol] = []
     
     // MARK: - Callbacks
     
@@ -41,13 +38,7 @@ class CompanyFlowController: BaseSignedInFlowController {
         self.onSignOut = onSignOut
         self.onBackToCompanies = onBackToCompanies
         
-        SideMenuController.preferences.drawing.menuButtonImage = Assets.menuIcon.image
-        SideMenuController.preferences.drawing.menuButtonWidth = 35
-        SideMenuController.preferences.drawing.centerPanelShadow = true
-        SideMenuController.preferences.animating.statusBarBehaviour = .horizontalPan
-        SideMenuController.preferences.animating.transitionAnimator = nil
-        
-        self.sideNavigationController = SideMenuController()
+        self.navigationController.setNavigationBarHidden(true, animated: false)
         
         super.init(
             appController: appController,
@@ -63,7 +54,8 @@ class CompanyFlowController: BaseSignedInFlowController {
     // MARK: - Public
     
     public func run() {
-        self.setupSideMenu()
+        let tabBarContainer = self.setupTabsNavigationBarContainer()
+        self.navigationController.setViewControllers([tabBarContainer], animated: false)
         self.showHomeScreen()
     }
     
@@ -73,7 +65,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private func showHomeScreen() {
         self.rootNavigation.setRootContent(
-            self.sideNavigationController,
+            self.navigationController,
             transition: .fade,
             animated: true
         )
@@ -81,58 +73,129 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     // MARK: - Setup
     
-    private func setupSideMenu() {
-        let headerModel = SideMenu.Model.HeaderModel(
-            icon: Assets.logo.image,
-            title: self.companyName,
-            subTitle: self.userDataProvider.userEmail
+    private func setupTabsNavigationBarContainer() -> UIViewController {
+        let tabBarContainer = TabBarContainer.ViewController()
+        
+        let showTabBar: () -> Void = {
+            tabBarContainer.showTabBar()
+        }
+        let hideTabBar: () -> Void = {
+            tabBarContainer.hideTabBar()
+        }
+        let backToCompanies: () -> Void = {
+            self.onBackToCompanies()
+        }
+        let showSendScene: () -> Void = {
+            self.showSendScene()
+        }
+        let showReceiveScene: () -> Void = {
+            self.showReceiveScene()
+        }
+        let showCreateRedeemScene: () -> Void = {
+            self.showCreateRedeemScene()
+        }
+        let acceptRedeemScene: () -> Void = {
+            self.showAcceptRedeemScene()
+        }
+        let globalContentProvider = TabBarContainer.GlobalContentProvider(
+            navigationController: self.navigationController,
+            ownerAccountId: self.ownerAccountId,
+            backToCompanies: backToCompanies,
+            showSendScene: showSendScene,
+            showReceiveScene: showReceiveScene,
+            showCreateRedeemScene: showCreateRedeemScene,
+            showAcceptRedeemScene: acceptRedeemScene,
+            onSignOut: self.onSignOut,
+            showTabBar: showTabBar,
+            hideTabBar: hideTabBar,
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            rootNavigation: self.rootNavigation,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider
         )
         
-        let sections: [[SideMenu.Model.MenuItem]] = [
-            [
-                SideMenu.Model.MenuItem(
-                    iconImage: Assets.dashboardIcon.image,
-                    title: Localized(.balances),
-                    onSelected: { [weak self] in
-                        self?.runDashboardFlow()
-                }),
-                SideMenu.Model.MenuItem(
-                    iconImage: Assets.exploreFundsIcon.image,
-                    title: Localized(.sales),
-                    onSelected: { [weak self] in
-                        self?.runExploreFundsFlow()
-                }),
-                SideMenu.Model.MenuItem(
-                    iconImage: Assets.polls.image,
-                    title: Localized(.polls),
-                    onSelected: { [weak self] in
-                        self?.runPollsFlow()
-                }),
-                SideMenu.Model.MenuItem(
-                    iconImage: Assets.settingsIcon.image,
-                    title: Localized(.settings),
-                    onSelected: { [weak self] in
-                        self?.runSettingsFlow()
-                }),
-                SideMenu.Model.MenuItem(
-                    iconImage: Assets.companies.image,
-                    title: Localized(.back_to_companies),
-                    onSelected: { [weak self] in
-                        self?.onBackToCompanies()
-                })
-            ]
-        ]
+        let routing = TabBarContainer.Routing()
         
-        SideMenu.Configurator.configure(
-            viewController: self.sideMenuViewController,
-            header: headerModel,
-            sections: sections,
-            routing: SideMenu.Routing()
+        TabBarContainer.Configurator.configure(
+            viewController: tabBarContainer,
+            contentProvider: globalContentProvider,
+            routing: routing
         )
-        
-        self.sideNavigationController.embed(sideViewController: self.sideMenuViewController)
         self.runReposPreload()
-        self.runDashboardFlow()
+        
+        return tabBarContainer
+    }
+    
+    private func showCreateRedeemScene() {
+        self.runCreateRedeemFlow(
+            navigationController: self.navigationController,
+            balanceId: nil
+        )
+    }
+    
+    private func showAcceptRedeemScene() {
+        self.runAcceptRedeemFlow(navigationController: self.navigationController)
+    }
+    
+    private func showSendScene() {
+        self.runSendPaymentFlow(
+            navigationController: self.navigationController,
+            balanceId: nil,
+            completion: { [weak self] in
+                _ = self?.navigationController.popToRootViewController(animated: true)
+        })
+    }
+    
+    private func showReceiveScene() {
+        let vc = ReceiveAddress.ViewController()
+        
+        let addressManager = ReceiveAddress.ReceiveAddressManager(
+            accountId: self.userDataProvider.walletData.accountId,
+            email: self.userDataProvider.account
+        )
+        
+        let viewConfig = ReceiveAddress.Model.ViewConfig(
+            copiedLocalizationKey: Localized(.copied),
+            tableViewTopInset: 24,
+            headerAppearence: .hidden
+        )
+        
+        let sceneModel = ReceiveAddress.Model.SceneModel()
+        
+        let qrCodeGenerator = QRCodeGenerator()
+        let shareUtil = ReceiveAddress.ReceiveAddressShareUtil(
+            qrCodeGenerator: qrCodeGenerator
+        )
+        
+        let invoiceFormatter = ReceiveAddress.InvoiceFormatter()
+        
+        let routing = ReceiveAddress.Routing(
+            onCopy: { (stringToCopy) in
+                UIPasteboard.general.string = stringToCopy
+        },
+            onShare: { [weak self] (itemsToShare) in
+                self?.shareItems(itemsToShare)
+        })
+        
+        ReceiveAddress.Configurator.configure(
+            viewController: vc,
+            viewConfig: viewConfig,
+            sceneModel: sceneModel,
+            addressManager: addressManager,
+            shareUtil: shareUtil,
+            qrCodeGenerator: qrCodeGenerator,
+            invoiceFormatter: invoiceFormatter,
+            routing: routing
+        )
+        
+        vc.navigationItem.title = Localized(.account_capitalized)
+        vc.tabBarItem.title = Localized(.receive)
+        vc.tabBarItem.image = Assets.receive.image
+        
+        self.navigationController.pushViewController(vc, animated: true)
     }
     
     private func getSideMenuHeaderTitle() -> String {
@@ -146,145 +209,8 @@ class CompanyFlowController: BaseSignedInFlowController {
         _ = self.reposController.balancesRepo.observeBalancesDetails()
     }
     
-    private func runWalletFlow(selectedBalanceId: String) {
-        let walletDetailsFlowController = WalletDetailsFlowController(
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation
-        )
-        self.currentFlowController = walletDetailsFlowController
-        walletDetailsFlowController.run(
-            showRootScreen: { [weak self] (vc) in
-                self?.sideNavigationController.embed(centerViewController: vc)
-            },
-            selectedBalanceId: selectedBalanceId
-        )
-    }
-    
-    private func runDashboardFlow(
-        selectedTabIndetifier: TabsContainer.Model.TabIdentifier? = nil
-        ) {
-        
-        let dashboardFlowController = DashboardFlowController(
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation,
-            ownerAccountId: self.ownerAccountId
-        )
-        self.currentFlowController = dashboardFlowController
-        dashboardFlowController.run(
-            showRootScreen: { [weak self] (vc) in
-                self?.sideNavigationController.embed(centerViewController: vc)
-            },
-            selectedTabIdentifier: selectedTabIndetifier
-        )
-    }
-    
-    private func runExploreFundsFlow() {
-        let flow = SalesFlowController(
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation,
-            ownerAccountId: self.ownerAccountId
-        )
-        self.currentFlowController = flow
-        flow.run(
-            showRootScreen: { [weak self] (vc) in
-                self?.sideNavigationController.embed(centerViewController: vc)
-            },
-            onShowMovements: { [weak self]  in
-                self?.runDashboardFlow(selectedTabIndetifier: Localized(.movements))
-        })
-    }
-    
-    private func runSendPaymentFlow() {
-        let navigationController = NavigationController()
-        let flow = SendPaymentFlowController(
-            navigationController: navigationController,
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation,
-            selectedBalanceId: nil
-        )
-        self.currentFlowController = flow
-        flow.run(
-            showRootScreen: { [weak self] (vc) in
-                navigationController.setViewControllers([vc], animated: false)
-                self?.sideNavigationController.embed(centerViewController: navigationController)
-            },
-            onShowMovements: { [weak self] in
-                self?.runDashboardFlow(selectedTabIndetifier: Localized(.movements))
-        })
-    }
-    
-    private func runSaleFlow() {
-        let flow = SalesFlowController(
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation,
-            ownerAccountId: self.ownerAccountId
-        )
-        self.currentFlowController = flow
-        flow.run(
-            showRootScreen: { [weak self] (vc) in
-                self?.sideNavigationController.embed(centerViewController: vc)
-            },
-            onShowMovements: { [weak self] in
-                self?.runDashboardFlow()
-        })
-    }
-    
-    private func runPollsFlow() {
-        let flow = PollsFlowController(
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation,
-            ownerAccountId: self.ownerAccountId
-        )
-        self.currentFlowController = flow
-        flow.run(showRootScreen: { [weak self] (vc) in
-            self?.sideNavigationController.embed(centerViewController: vc)
-        })
-    }
-    
-    private func runSettingsFlow() {
-        let flow = SettingsFlowController(
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation,
-            onSignOut: self.onSignOut
-        )
-        self.currentFlowController = flow
-        flow.run(showRootScreen: { [weak self] (vc) in
-            self?.sideNavigationController.embed(centerViewController: vc)
-        })
+    private func shareItems(_ items: [Any]) {
+        let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        self.navigationController.present(activity, animated: true, completion: nil)
     }
 }

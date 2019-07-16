@@ -1,30 +1,35 @@
+import RxCocoa
+import RxSwift
+import SnapKit
 import UIKit
 
-extension Settings {
+extension FacilitiesList {
     
-    enum SettingsPushCell {
-        struct Model: CellViewModel {
+    enum FacilityCell {
+        struct ViewModel: CellViewModel {
             
             let title: String
-            let identifier: Settings.CellIdentifier
             let icon: UIImage
-            let topSeparator: Settings.Model.CellModel.SeparatorStyle
-            let bottomSeparator: Settings.Model.CellModel.SeparatorStyle
+            let type: Model.FacilityItem.FacilityType
             
-            func setup(cell: SettingsPushCell.View) {
+            func setup(cell: View) {
                 cell.title = self.title
                 cell.icon = self.icon
-                cell.topSeparatorValue = self.topSeparator
-                cell.bottomSeparatorValue = self.bottomSeparator
             }
         }
         
-        class View: Settings.SettingsBaseCell {
+        class View: UITableViewCell {
             
             // MARK: - Private properties
             
+            private let disposeBag = DisposeBag()
+            
             private let titleLabel: UILabel = UILabel()
             private let iconImageView: UIImageView = UIImageView()
+            
+            private let sideInset: CGFloat = 15.0
+            private let topInset: CGFloat = 10.0
+            private let iconSize: CGFloat = 24.0
             
             // MARK: - Public properties
             
@@ -42,12 +47,13 @@ extension Settings {
             override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
                 super.init(style: style, reuseIdentifier: reuseIdentifier)
                 
-                self.accessoryType = .disclosureIndicator
                 self.commonInit()
             }
             
             required init?(coder aDecoder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
+                super.init(coder: aDecoder)
+                
+                self.commonInit()
             }
             
             // MARK: - Private
@@ -63,6 +69,8 @@ extension Settings {
             private func setupView() {
                 self.backgroundColor = Theme.Colors.contentBackgroundColor
                 self.selectionStyle = .none
+                self.accessoryType = .disclosureIndicator
+                self.separatorInset.left = self.sideInset * 2 + self.iconSize
             }
             
             private func setupTitleLabel() {
@@ -70,36 +78,30 @@ extension Settings {
                 self.titleLabel.textColor = Theme.Colors.textOnContentBackgroundColor
                 self.titleLabel.textAlignment = .left
                 self.titleLabel.numberOfLines = 1
+                self.titleLabel.lineBreakMode = .byWordWrapping
             }
             
             private func setupIconImageView() {
                 self.iconImageView.tintColor = Theme.Colors.iconColor
                 self.iconImageView.clipsToBounds = true
-                self.iconImageView.contentMode = .scaleAspectFit
+                self.iconImageView.layer.masksToBounds = true
             }
             
             private func setupLayout() {
-                self.contentView.addSubview(self.iconImageView)
-                self.contentView.addSubview(self.titleLabel)
-                
-                let sideInset: CGFloat = 15
-                let topInset: CGFloat = 14
-                let bottomInset: CGFloat = 14
-                let expectedIconWidth: CGFloat = 24
-                let actualIconWidth: CGFloat = 18
-                let iconWidthDelta: CGFloat = expectedIconWidth - actualIconWidth
+                self.addSubview(self.iconImageView)
+                self.addSubview(self.titleLabel)
                 
                 self.iconImageView.snp.makeConstraints { (make) in
-                    make.centerY.equalToSuperview()
-                    make.leading.equalToSuperview().inset(sideInset + iconWidthDelta / 2)
-                    make.width.height.equalTo(actualIconWidth)
+                    make.leading.equalToSuperview().inset(self.sideInset)
+                    make.top.bottom.equalToSuperview().inset(self.topInset)
+                    make.width.height.equalTo(self.iconSize)
                 }
                 
                 self.titleLabel.snp.makeConstraints { (make) in
-                    make.top.equalToSuperview().inset(topInset)
-                    make.bottom.equalToSuperview().inset(bottomInset)
-                    make.trailing.equalToSuperview().inset(sideInset)
-                    make.leading.equalTo(self.iconImageView.snp.trailing).offset(sideInset)
+                    make.top.bottom.equalToSuperview().inset(self.topInset)
+                    
+                    make.leading.equalTo(self.iconImageView.snp.trailing).offset(self.sideInset)
+                    make.trailing.equalToSuperview().offset(self.sideInset)
                 }
             }
         }

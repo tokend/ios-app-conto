@@ -1,4 +1,5 @@
 import UIKit
+import ActionsList
 
 public protocol TabBarDisplayLogic: class {
     typealias Event = TabBar.Event
@@ -6,6 +7,7 @@ public protocol TabBarDisplayLogic: class {
     func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel)
     func displayTabWasSelected(viewModel: Event.TabWasSelected.ViewModel)
     func displayAction(viewModel: Event.Action.ViewModel)
+    func displayShowActionsList(viewModel: Event.ShowActionsList.ViewModel)
 }
 
 extension TabBar {
@@ -93,6 +95,31 @@ extension TabBar.View: TabBar.DisplayLogic {
     public func displayAction(viewModel: Event.Action.ViewModel) {
         self.routing?.onAction(viewModel.tabIdentifier)
     }
+    
+    public func displayShowActionsList(viewModel: Event.ShowActionsList.ViewModel) {
+        guard let tab = self.getTabBarItem(identifier: viewModel.tabIdentifier) else {
+            return
+        }
+        let actionsList = tab.createActionsList()
+        let actions = viewModel.actions.map { (actionModel) -> ActionsListDefaultButtonModel in
+            let action: (ActionsListDefaultButtonModel) -> Void = { [weak self] _ in
+                actionsList?.dismiss({
+                    self?.routing?.onAction(actionModel.actionIdentifier)
+                })
+            }
+            let actionItem = ActionsListDefaultButtonModel(
+                localizedTitle: actionModel.title,
+                image: actionModel.icon,
+                action: action
+            )
+            actionItem.appearance.tint = Theme.Colors.accentColor
+            return actionItem
+        }
+        actions.forEach { (action) in
+            actionsList?.add(action: action)
+        }
+        actionsList?.present()
+    }
 }
 
 extension TabBar.View: UITabBarDelegate {
@@ -101,6 +128,7 @@ extension TabBar.View: UITabBarDelegate {
         guard let tabBarItem = item as? TabBar.TabBarItem else {
             return
         }
+        
         let request = Event.TabWasSelected.Request(identifier: tabBarItem.identifier)
         self.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
             businessLogic.onTabWasSelected(request: request)

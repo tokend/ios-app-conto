@@ -1,35 +1,36 @@
 import Foundation
 
-extension SideMenu {
+extension FacilitiesList {
     
-    enum Configurator {
-        static func configure(
+    public enum Configurator {
+        
+        public static func configure(
             viewController: ViewController,
-            header: Model.HeaderModel,
-            sections: [[Model.MenuItem]],
-            accountsProvider: AccountsProviderProtocol,
-            routing: Routing?
+            sceneModel: Model.SceneModel,
+            routing: Routing?,
+            onDeinit: DeinitCompletion = nil
             ) {
-            
-            let sceneModel = Model.SceneModel(sections: sections)
             
             let presenterDispatch = PresenterDispatch(displayLogic: viewController)
             let presenter = Presenter(presenterDispatch: presenterDispatch)
             let interactor = Interactor(
                 presenter: presenter,
-                headerModel: header,
-                sceneModel: sceneModel,
-                accountsProvider: accountsProvider
+                sceneModel: sceneModel
             )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)
-            viewController.inject(interactorDispatch: interactorDispatch, routing: routing)
+            viewController.inject(
+                interactorDispatch: interactorDispatch,
+                routing: routing,
+                onDeinit: onDeinit
+            )
         }
     }
 }
 
-extension SideMenu {
+extension FacilitiesList {
     
-    class InteractorDispatch {
+    @objc(FacilitiesListInteractorDispatch)
+    public class InteractorDispatch: NSObject {
         
         private let queue: DispatchQueue = DispatchQueue(
             label: "\(NSStringFromClass(InteractorDispatch.self))\(BusinessLogic.self)".queueLabel,
@@ -38,32 +39,33 @@ extension SideMenu {
         
         private let businessLogic: BusinessLogic
         
-        init(businessLogic: BusinessLogic) {
+        public init(businessLogic: BusinessLogic) {
             self.businessLogic = businessLogic
         }
         
-        func sendRequest(requestBlock: @escaping (_ businessLogic: BusinessLogic) -> Void) {
+        public func sendRequest(requestBlock: @escaping (_ businessLogic: BusinessLogic) -> Void) {
             self.queue.async {
                 requestBlock(self.businessLogic)
             }
         }
         
-        func sendSyncRequest<ReturnType: Any>(
+        public func sendSyncRequest<ReturnType: Any>(
             requestBlock: @escaping (_ businessLogic: BusinessLogic) -> ReturnType
             ) -> ReturnType {
             return requestBlock(self.businessLogic)
         }
     }
     
-    class PresenterDispatch {
+    @objc(FacilitiesListPresenterDispatch)
+    public class PresenterDispatch: NSObject {
         
         private weak var displayLogic: DisplayLogic?
         
-        init(displayLogic: DisplayLogic) {
+        public init(displayLogic: DisplayLogic) {
             self.displayLogic = displayLogic
         }
         
-        func display(displayBlock: @escaping (_ displayLogic: DisplayLogic) -> Void) {
+        public func display(displayBlock: @escaping (_ displayLogic: DisplayLogic) -> Void) {
             guard let displayLogic = self.displayLogic else { return }
             
             DispatchQueue.main.async {
@@ -71,7 +73,7 @@ extension SideMenu {
             }
         }
         
-        func displaySync(displayBlock: @escaping (_ displayLogic: DisplayLogic) -> Void) {
+        public func displaySync(displayBlock: @escaping (_ displayLogic: DisplayLogic) -> Void) {
             guard let displayLogic = self.displayLogic else { return }
             
             displayBlock(displayLogic)

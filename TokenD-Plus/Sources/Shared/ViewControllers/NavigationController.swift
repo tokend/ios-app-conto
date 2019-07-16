@@ -1,4 +1,6 @@
 import UIKit
+import RxSwift
+import RxCocoa
 
 typealias PresentViewControllerClosure = (
     _ vc: UIViewController,
@@ -8,6 +10,7 @@ typealias PresentViewControllerClosure = (
 
 protocol NavigationControllerProtocol: RootContentProtocol {
     func getViewController() -> UIViewController
+    func observerViewControllersCount() -> Observable<Int>
     
     var navigationBar: UINavigationBar { get }
     func setNavigationBarHidden(_ hidden: Bool, animated: Bool)
@@ -39,6 +42,9 @@ class NavigationController: UINavigationController {
         let activity = UIActivityIndicatorView(style: .whiteLarge)
         return activity
     }()
+    
+    private let didShowViewControllersCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+    private let willShowViewControllersCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
     
     private lazy var activityView: UIView = {
         let view = UIView()
@@ -107,6 +113,7 @@ class NavigationController: UINavigationController {
             NSAttributedString.Key.foregroundColor: Theme.Colors.textOnMainColor
         ]
         self.navigationBar.shadowImage = UIImage()
+        self.delegate = self
     }
     
     private func setupNavigationBar() {
@@ -122,6 +129,16 @@ extension NavigationController: NavigationControllerProtocol {
     
     func getViewController() -> UIViewController {
         return self
+    }
+    
+    func observerViewControllersCount() -> Observable<Int> {
+        return Observable.combineLatest(
+            self.didShowViewControllersCount,
+            self.willShowViewControllersCount
+            )
+            .map { (shown, willShow) -> Int in
+                return max(shown, willShow)
+        }
     }
     
     func showShadow() {
@@ -174,4 +191,16 @@ extension NavigationController: RootContentProtocol {
     func getRootContentViewController() -> UIViewController {
         return self
     }
+}
+
+extension NavigationController: UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        self.willShowViewControllersCount.accept(self.viewControllers.count)
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        self.didShowViewControllersCount.accept(self.viewControllers.count)
+    }
+    
 }

@@ -16,6 +16,14 @@
 		DB28C4C122D38EFE005362FD /* Array+Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4C022D38EFE005362FD /* Array+Numeric.swift */; };
 		DB28C4C322D39EE6005362FD /* Numeric+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4C222D39EE6005362FD /* Numeric+Bytes.swift */; };
 		DB28C4C522D48D61005362FD /* AcceptRedeemConfirmationSectionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4C422D48D61005362FD /* AcceptRedeemConfirmationSectionsProvider.swift */; };
+		DB363E0522DCDBB700F5761C /* FacilitiesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363DFF22DCDBB700F5761C /* FacilitiesListPresenter.swift */; };
+		DB363E0622DCDBB700F5761C /* FacilitiesListRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0022DCDBB700F5761C /* FacilitiesListRouting.swift */; };
+		DB363E0722DCDBB700F5761C /* FacilitiesListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0122DCDBB700F5761C /* FacilitiesListModels.swift */; };
+		DB363E0822DCDBB700F5761C /* FacilitiesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0222DCDBB700F5761C /* FacilitiesListViewController.swift */; };
+		DB363E0922DCDBB700F5761C /* FacilitiesListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0322DCDBB700F5761C /* FacilitiesListInteractor.swift */; };
+		DB363E0A22DCDBB700F5761C /* FacilitiesListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0422DCDBB700F5761C /* FacilitiesListConfigurator.swift */; };
+		DB363E0D22DCE13800F5761C /* FacilityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0C22DCE13800F5761C /* FacilityCell.swift */; };
+		DB363E0F22DDCE9800F5761C /* FacilitiesFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0E22DDCE9800F5761C /* FacilitiesFlowController.swift */; };
 		DB72098B22C1347200ED116A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB72098A22C1347200ED116A /* Assets.xcassets */; };
 		DB72098E22C1347200ED116A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB72098C22C1347200ED116A /* LaunchScreen.storyboard */; };
 		DB720CAA22C1396B00ED116A /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099922C1396B00ED116A /* SettingsModels.swift */; };
@@ -602,7 +610,7 @@
 		DB720F1422C1396C00ED116A /* WalletDetailsFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA222C1396B00ED116A /* WalletDetailsFlowController.swift */; };
 		DB720F1522C1396C00ED116A /* LocalAuthFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA322C1396B00ED116A /* LocalAuthFlowController.swift */; };
 		DB720F1622C1396C00ED116A /* SalesFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA422C1396B00ED116A /* SalesFlowController.swift */; };
-		DB720F1722C1396C00ED116A /* DashboardFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA522C1396B00ED116A /* DashboardFlowController.swift */; };
+		DB720F1722C1396C00ED116A /* BalancesListFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA522C1396B00ED116A /* BalancesListFlowController.swift */; };
 		DB720F1822C1396C00ED116A /* TradeFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA622C1396B00ED116A /* TradeFlowController.swift */; };
 		DB720F1922C1396C00ED116A /* WithdrawFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA722C1396B00ED116A /* WithdrawFlowController.swift */; };
 		DB720F1A22C1396C00ED116A /* BaseFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA822C1396B00ED116A /* BaseFlowController.swift */; };
@@ -634,10 +642,16 @@
 		DB720F6022C4CD1C00ED116A /* PollsPollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F5222C4CD1C00ED116A /* PollsPollCell.swift */; };
 		DB720F6122C4CD1C00ED116A /* PollsChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F5322C4CD1C00ED116A /* PollsChoiceCell.swift */; };
 		DB72280A22CCBB4200341565 /* BalancesListActionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */; };
+		DB72281222CE309000341565 /* SideMenuAccountsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281122CE309000341565 /* SideMenuAccountsProvider.swift */; };
 		DB72281422CF546200341565 /* CreateRedeemFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281322CF546200341565 /* CreateRedeemFlowController.swift */; };
 		DB72281622CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */; };
 		DBCA02D822D5EB8900503025 /* AcceptRedeemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02D722D5EB8900503025 /* AcceptRedeemModel.swift */; };
 		DBCA02DA22D5EB9800503025 /* AcceptRedeemWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02D922D5EB9800503025 /* AcceptRedeemWorker.swift */; };
+		DBCA02DF22D7354100503025 /* TabBarGlobalNavigationTabBarProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02DE22D7354100503025 /* TabBarGlobalNavigationTabBarProvider.swift */; };
+		DBCA02E122D73D2200503025 /* TabBarGlobalContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E022D73D2200503025 /* TabBarGlobalContentProvider.swift */; };
+		DBCA02E322D787B600503025 /* SettingsTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E222D787B600503025 /* SettingsTextCell.swift */; };
+		DBCA02E522D78DE600503025 /* acknowledgements.markdown in Resources */ = {isa = PBXBuildFile; fileRef = DBCA02E422D78DE500503025 /* acknowledgements.markdown */; };
+		DBCA02E722D885B500503025 /* SettingsBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E622D885B500503025 /* SettingsBaseCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -652,6 +666,14 @@
 		DB28C4C022D38EFE005362FD /* Array+Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Numeric.swift"; sourceTree = "<group>"; };
 		DB28C4C222D39EE6005362FD /* Numeric+Bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Bytes.swift"; sourceTree = "<group>"; };
 		DB28C4C422D48D61005362FD /* AcceptRedeemConfirmationSectionsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemConfirmationSectionsProvider.swift; sourceTree = "<group>"; };
+		DB363DFF22DCDBB700F5761C /* FacilitiesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesListPresenter.swift; sourceTree = "<group>"; };
+		DB363E0022DCDBB700F5761C /* FacilitiesListRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesListRouting.swift; sourceTree = "<group>"; };
+		DB363E0122DCDBB700F5761C /* FacilitiesListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesListModels.swift; sourceTree = "<group>"; };
+		DB363E0222DCDBB700F5761C /* FacilitiesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesListViewController.swift; sourceTree = "<group>"; };
+		DB363E0322DCDBB700F5761C /* FacilitiesListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesListInteractor.swift; sourceTree = "<group>"; };
+		DB363E0422DCDBB700F5761C /* FacilitiesListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesListConfigurator.swift; sourceTree = "<group>"; };
+		DB363E0C22DCE13800F5761C /* FacilityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilityCell.swift; sourceTree = "<group>"; };
+		DB363E0E22DDCE9800F5761C /* FacilitiesFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesFlowController.swift; sourceTree = "<group>"; };
 		DB72098022C1347100ED116A /* TokenD-Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TokenD-Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB72098A22C1347200ED116A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB72098D22C1347200ED116A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1240,7 +1262,7 @@
 		DB720CA222C1396B00ED116A /* WalletDetailsFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletDetailsFlowController.swift; sourceTree = "<group>"; };
 		DB720CA322C1396B00ED116A /* LocalAuthFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAuthFlowController.swift; sourceTree = "<group>"; };
 		DB720CA422C1396B00ED116A /* SalesFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesFlowController.swift; sourceTree = "<group>"; };
-		DB720CA522C1396B00ED116A /* DashboardFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardFlowController.swift; sourceTree = "<group>"; };
+		DB720CA522C1396B00ED116A /* BalancesListFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListFlowController.swift; sourceTree = "<group>"; };
 		DB720CA622C1396B00ED116A /* TradeFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeFlowController.swift; sourceTree = "<group>"; };
 		DB720CA722C1396B00ED116A /* WithdrawFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawFlowController.swift; sourceTree = "<group>"; };
 		DB720CA822C1396B00ED116A /* BaseFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFlowController.swift; sourceTree = "<group>"; };
@@ -1272,10 +1294,16 @@
 		DB720F5222C4CD1C00ED116A /* PollsPollCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsPollCell.swift; sourceTree = "<group>"; };
 		DB720F5322C4CD1C00ED116A /* PollsChoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsChoiceCell.swift; sourceTree = "<group>"; };
 		DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesListActionProvider.swift; sourceTree = "<group>"; };
+		DB72281122CE309000341565 /* SideMenuAccountsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuAccountsProvider.swift; sourceTree = "<group>"; };
 		DB72281322CF546200341565 /* CreateRedeemFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRedeemFlowController.swift; sourceTree = "<group>"; };
 		DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountCreateRedeemRequest.swift; sourceTree = "<group>"; };
 		DBCA02D722D5EB8900503025 /* AcceptRedeemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemModel.swift; sourceTree = "<group>"; };
 		DBCA02D922D5EB9800503025 /* AcceptRedeemWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemWorker.swift; sourceTree = "<group>"; };
+		DBCA02DE22D7354100503025 /* TabBarGlobalNavigationTabBarProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarGlobalNavigationTabBarProvider.swift; sourceTree = "<group>"; };
+		DBCA02E022D73D2200503025 /* TabBarGlobalContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarGlobalContentProvider.swift; sourceTree = "<group>"; };
+		DBCA02E222D787B600503025 /* SettingsTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextCell.swift; sourceTree = "<group>"; };
+		DBCA02E422D78DE500503025 /* acknowledgements.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = acknowledgements.markdown; sourceTree = "<group>"; };
+		DBCA02E622D885B500503025 /* SettingsBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBaseCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1305,6 +1333,28 @@
 				B5AD850E3986FEE4CD13E7C4 /* Pods-TokenD-Plus.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		DB363DFE22DCDB8C00F5761C /* FacilitiesList */ = {
+			isa = PBXGroup;
+			children = (
+				DB363E0422DCDBB700F5761C /* FacilitiesListConfigurator.swift */,
+				DB363E0322DCDBB700F5761C /* FacilitiesListInteractor.swift */,
+				DB363E0122DCDBB700F5761C /* FacilitiesListModels.swift */,
+				DB363DFF22DCDBB700F5761C /* FacilitiesListPresenter.swift */,
+				DB363E0022DCDBB700F5761C /* FacilitiesListRouting.swift */,
+				DB363E0222DCDBB700F5761C /* FacilitiesListViewController.swift */,
+				DB363E0B22DCE0F900F5761C /* Views */,
+			);
+			path = FacilitiesList;
+			sourceTree = "<group>";
+		};
+		DB363E0B22DCE0F900F5761C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DB363E0C22DCE13800F5761C /* FacilityCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		DB72097722C1347100ED116A = {
@@ -1337,6 +1387,7 @@
 		DB72099522C1347D00ED116A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DBCA02E422D78DE500503025 /* acknowledgements.markdown */,
 				DB720F1E22C210A200ED116A /* APIConfiguration.plist */,
 				DB72098F22C1347200ED116A /* Info.plist */,
 				DB72098A22C1347200ED116A /* Assets.xcassets */,
@@ -1376,6 +1427,7 @@
 				DB720B1E22C1396B00ED116A /* Dashboard */,
 				DB720B9822C1396B00ED116A /* DepositScene */,
 				DB720AFB22C1396B00ED116A /* ExploreTokens */,
+				DB363DFE22DCDB8C00F5761C /* FacilitiesList */,
 				DB720A0222C1396B00ED116A /* Fees */,
 				DB720A3D22C1396B00ED116A /* MarkdownViewer */,
 				DB720F4322C4CD1C00ED116A /* Polls */,
@@ -1432,9 +1484,11 @@
 			isa = PBXGroup;
 			children = (
 				DB7209A122C1396B00ED116A /* SettingsActionCell.swift */,
-				DB7209A222C1396B00ED116A /* SettingsLoadingCell.swift */,
+				DBCA02E622D885B500503025 /* SettingsBaseCell.swift */,
 				DB7209A322C1396B00ED116A /* SettingsBoolCell.swift */,
+				DB7209A222C1396B00ED116A /* SettingsLoadingCell.swift */,
 				DB7209A422C1396B00ED116A /* SettingsPushCell.swift */,
+				DBCA02E222D787B600503025 /* SettingsTextCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1866,14 +1920,14 @@
 		DB720A7322C1396B00ED116A /* TradeOffers */ = {
 			isa = PBXGroup;
 			children = (
-				DB720A7422C1396B00ED116A /* TradeOffersModels.swift */,
-				DB720A7522C1396B00ED116A /* TradeOffersInteractor.swift */,
-				DB720A7622C1396B00ED116A /* TradeOffersRouting.swift */,
-				DB720A7722C1396B00ED116A /* Workers */,
-				DB720A8222C1396B00ED116A /* TradeOffersPresenter.swift */,
-				DB720A8322C1396B00ED116A /* Views */,
 				DB720A8522C1396B00ED116A /* TradeOffersConfigurator.swift */,
+				DB720A7522C1396B00ED116A /* TradeOffersInteractor.swift */,
+				DB720A7422C1396B00ED116A /* TradeOffersModels.swift */,
+				DB720A8222C1396B00ED116A /* TradeOffersPresenter.swift */,
+				DB720A7622C1396B00ED116A /* TradeOffersRouting.swift */,
 				DB720A8622C1396B00ED116A /* TradeOffersViewController.swift */,
+				DB720A8322C1396B00ED116A /* Views */,
+				DB720A7722C1396B00ED116A /* Workers */,
 			);
 			path = TradeOffers;
 			sourceTree = "<group>";
@@ -2032,6 +2086,7 @@
 			children = (
 				DB720ABE22C1396B00ED116A /* TabBarTabProviderProtocol.swift */,
 				DB720ABF22C1396B00ED116A /* TabBarDashboardTabProvider.swift */,
+				DBCA02DE22D7354100503025 /* TabBarGlobalNavigationTabBarProvider.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -2174,14 +2229,14 @@
 		DB720B1022C1396B00ED116A /* TradesList */ = {
 			isa = PBXGroup;
 			children = (
-				DB720B1122C1396B00ED116A /* TradesListInteractor.swift */,
-				DB720B1222C1396B00ED116A /* TradesListViewController.swift */,
-				DB720B1322C1396B00ED116A /* TradesListPresenter.swift */,
-				DB720B1422C1396B00ED116A /* TradesListModels.swift */,
-				DB720B1522C1396B00ED116A /* View */,
 				DB720B1722C1396B00ED116A /* TradesListConfigurator.swift */,
-				DB720B1822C1396B00ED116A /* Workers */,
+				DB720B1122C1396B00ED116A /* TradesListInteractor.swift */,
+				DB720B1422C1396B00ED116A /* TradesListModels.swift */,
+				DB720B1322C1396B00ED116A /* TradesListPresenter.swift */,
 				DB720B1D22C1396B00ED116A /* TradesListRouting.swift */,
+				DB720B1222C1396B00ED116A /* TradesListViewController.swift */,
+				DB720B1522C1396B00ED116A /* View */,
+				DB720B1822C1396B00ED116A /* Workers */,
 			);
 			path = TradesList;
 			sourceTree = "<group>";
@@ -2304,6 +2359,7 @@
 			children = (
 				DB720B4622C1396B00ED116A /* TabBarContentProvider.swift */,
 				DB720B4722C1396B00ED116A /* TabBarDashboardContentProvider.swift */,
+				DBCA02E022D73D2200503025 /* TabBarGlobalContentProvider.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -2387,6 +2443,7 @@
 				DB720B6A22C1396B00ED116A /* SideMenuRouting.swift */,
 				DB720B6622C1396B00ED116A /* SideMenuViewController.swift */,
 				DB720B6B22C1396B00ED116A /* Views */,
+				DB72281022CE305500341565 /* Workers */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -2717,9 +2774,9 @@
 			isa = PBXGroup;
 			children = (
 				DB720C0322C1396B00ED116A /* FlexibleHeaderContainerViewController.swift */,
-				DB720C0422C1396B00ED116A /* QR */,
-				DB720C0722C1396B00ED116A /* RootNavigationViewController.swift */,
 				DB720C0822C1396B00ED116A /* NavigationController.swift */,
+				DB720C0722C1396B00ED116A /* RootNavigationViewController.swift */,
+				DB720C0422C1396B00ED116A /* QR */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -3160,13 +3217,14 @@
 			children = (
 				DB28C4BA22D35B4C005362FD /* AcceptRedeemFlowController.swift */,
 				DB720C9B22C1396B00ED116A /* AuthenticatorAuthFlowController.swift */,
+				DB720CA522C1396B00ED116A /* BalancesListFlowController.swift */,
 				DB720CA822C1396B00ED116A /* BaseFlowController.swift */,
 				DB720C9E22C1396B00ED116A /* BaseSignedInFlowController.swift */,
 				DB720F3922C2537300ED116A /* CompaniesListFlowController.swift */,
 				DB720CA022C1396B00ED116A /* CompanyFlowController.swift */,
 				DB72281322CF546200341565 /* CreateRedeemFlowController.swift */,
-				DB720CA522C1396B00ED116A /* DashboardFlowController.swift */,
 				DB720C9822C1396B00ED116A /* ExploreTokensFlowController.swift */,
+				DB363E0E22DDCE9800F5761C /* FacilitiesFlowController.swift */,
 				DB720C9922C1396B00ED116A /* LaunchFlowController.swift */,
 				DB720CA322C1396B00ED116A /* LocalAuthFlowController.swift */,
 				DB720C9F22C1396B00ED116A /* PermissionRequestFlowController.swift */,
@@ -3250,6 +3308,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DB72281022CE305500341565 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DB72281122CE309000341565 /* SideMenuAccountsProvider.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		DBCA02D622D5E7C300503025 /* AcceptRedeemWorker */ = {
 			isa = PBXGroup;
 			children = (
@@ -3322,6 +3388,7 @@
 				DB720F2222C210BB00ED116A /* Localizable.strings in Resources */,
 				DB72098E22C1347200ED116A /* LaunchScreen.storyboard in Resources */,
 				DB72098B22C1347200ED116A /* Assets.xcassets in Resources */,
+				DBCA02E522D78DE600503025 /* acknowledgements.markdown in Resources */,
 				DB720F1F22C210A300ED116A /* APIConfiguration.plist in Resources */,
 				DB720ED822C1396C00ED116A /* BXFStaticTableViewButtonCell.xib in Resources */,
 			);
@@ -3412,6 +3479,7 @@
 				DB720D9522C1396B00ED116A /* TabBarRouting.swift in Sources */,
 				DB720D4D22C1396B00ED116A /* ChartEmptyView.swift in Sources */,
 				DB720CC422C1396B00ED116A /* BalancePickerModels.swift in Sources */,
+				DBCA02E722D885B500503025 /* SettingsBaseCell.swift in Sources */,
 				DB720CED22C1396B00ED116A /* VerifyEmailVerifyWorkerProtocol.swift in Sources */,
 				DB720DB622C1396B00ED116A /* SendPaymentAmountEnterAmountView.swift in Sources */,
 				DB720DF122C1396C00ED116A /* DashboardPaymentsPlugInAmountFormatter.swift in Sources */,
@@ -3439,7 +3507,9 @@
 				DB720ECE22C1396C00ED116A /* OrderBookTableViewCellModel.swift in Sources */,
 				DB28C4A922CFB79A005362FD /* ReceiveAddressHeader.swift in Sources */,
 				DB720DFC22C1396C00ED116A /* DashboardModels.swift in Sources */,
+				DB363E0522DCDBB700F5761C /* FacilitiesListPresenter.swift in Sources */,
 				DB720E4F22C1396C00ED116A /* DepositSceneAddressManager.swift in Sources */,
+				DB363E0822DCDBB700F5761C /* FacilitiesListViewController.swift in Sources */,
 				DB720EF522C1396C00ED116A /* KeychainDataProvider.swift in Sources */,
 				DB720D8B22C1396B00ED116A /* TransactionDetailsDateFormatterProtocol.swift in Sources */,
 				DB720EFA22C1396C00ED116A /* AuthKeychainManager.swift in Sources */,
@@ -3490,7 +3560,9 @@
 				DB720CD422C1396B00ED116A /* SaleOverviewFundedValueFormatter.swift in Sources */,
 				DB720F1022C1396C00ED116A /* BaseSignedInFlowController.swift in Sources */,
 				DB720DD522C1396C00ED116A /* ExploreTokensViewController.swift in Sources */,
+				DB363E0622DCDBB700F5761C /* FacilitiesListRouting.swift in Sources */,
 				DB720DD222C1396C00ED116A /* ExploreTokensTokenColoringProviderProtocol.swift in Sources */,
+				DB363E0A22DCDBB700F5761C /* FacilitiesListConfigurator.swift in Sources */,
 				DB720DD322C1396C00ED116A /* ExploreTokensSceneBalanceCreatorProtocol.swift in Sources */,
 				DB720DD122C1396C00ED116A /* ExploreTokensSceneTokensFetcher.swift in Sources */,
 				DB720E4E22C1396C00ED116A /* DepositSceneErrorFormatter.swift in Sources */,
@@ -3538,6 +3610,7 @@
 				DB720F5D22C4CD1C00ED116A /* PollsInteractor.swift in Sources */,
 				DB720E8722C1396C00ED116A /* main.swift in Sources */,
 				DB720E0D22C1396C00ED116A /* AssetPickerAssetsFetcher.swift in Sources */,
+				DB363E0F22DDCE9800F5761C /* FacilitiesFlowController.swift in Sources */,
 				DB720CCA22C1396B00ED116A /* BalancePickerRouting.swift in Sources */,
 				DB720E0A22C1396C00ED116A /* AssetPickerModels.swift in Sources */,
 				DB720DE022C1396C00ED116A /* TradesListModels.swift in Sources */,
@@ -3561,6 +3634,7 @@
 				DB720CFD22C1396B00ED116A /* SaleListCell.swift in Sources */,
 				DB720DBD22C1396B00ED116A /* ConfirmationSceneModels.swift in Sources */,
 				DB720E7222C1396C00ED116A /* SaleDetailsLoadingView.swift in Sources */,
+				DB72281222CE309000341565 /* SideMenuAccountsProvider.swift in Sources */,
 				DB720DFF22C1396C00ED116A /* DashboardPlugInsProvider.swift in Sources */,
 				DB720EFE22C1396C00ED116A /* TransactionSender.swift in Sources */,
 				DB720EB622C1396C00ED116A /* FeeLoader.swift in Sources */,
@@ -3609,6 +3683,7 @@
 				DB720E8022C1396C00ED116A /* BalanceHeaderRouting.swift in Sources */,
 				DB720ECF22C1396C00ED116A /* ScrollableStackView.swift in Sources */,
 				DB720ED722C1396C00ED116A /* BXFStaticTableViewButtonCell.swift in Sources */,
+				DB363E0722DCDBB700F5761C /* FacilitiesListModels.swift in Sources */,
 				DB720E7622C1396C00ED116A /* BiometricsAuthPresenter.swift in Sources */,
 				DB720D2B22C1396B00ED116A /* RecoverySeedViewController.swift in Sources */,
 				DB720DD422C1396C00ED116A /* ExploreTokensSceneTokensFetcherProtocol.swift in Sources */,
@@ -3636,7 +3711,7 @@
 				DB720DCB22C1396C00ED116A /* ConfirmationTitleBoolSwitchView.swift in Sources */,
 				DB720E5D22C1396C00ED116A /* TransactionsListScenePaymentsFetcher.swift in Sources */,
 				DB720E3C22C1396C00ED116A /* BalancesListInteractor.swift in Sources */,
-				DB720F1722C1396C00ED116A /* DashboardFlowController.swift in Sources */,
+				DB720F1722C1396C00ED116A /* BalancesListFlowController.swift in Sources */,
 				DB720E9122C1396C00ED116A /* String+QueueLabel.swift in Sources */,
 				DB720DF222C1396C00ED116A /* DashboardPaymentsPlugInBalancesFetcherProtocol.swift in Sources */,
 				DB720DCA22C1396C00ED116A /* ConfirmationTitleTextView.swift in Sources */,
@@ -3648,6 +3723,7 @@
 				DB720E9422C1396C00ED116A /* UIViewController+ChildViewController.swift in Sources */,
 				DB720E5522C1396C00ED116A /* DepositScenePresenter.swift in Sources */,
 				DB720D9D22C1396B00ED116A /* TabBarInteractor.swift in Sources */,
+				DB363E0D22DCE13800F5761C /* FacilityCell.swift in Sources */,
 				DB720E6722C1396C00ED116A /* TransactionsListViewController.swift in Sources */,
 				DB720DB722C1396B00ED116A /* SendPaymentAmountBalanceView.swift in Sources */,
 				DB720E7D22C1396C00ED116A /* BalanceHeaderConfigurator.swift in Sources */,
@@ -3703,6 +3779,8 @@
 				DB720E8122C1396C00ED116A /* BalanceHeaderModels.swift in Sources */,
 				DB720CAE22C1396B00ED116A /* SettingsConfigurator.swift in Sources */,
 				DB720F1422C1396C00ED116A /* WalletDetailsFlowController.swift in Sources */,
+				DBCA02E322D787B600503025 /* SettingsTextCell.swift in Sources */,
+				DB363E0922DCDBB700F5761C /* FacilitiesListInteractor.swift in Sources */,
 				DB720CF822C1396B00ED116A /* SalesPresenter.swift in Sources */,
 				DB720EB922C1396C00ED116A /* PermissionsManager.swift in Sources */,
 				DB720E3B22C1396C00ED116A /* BalancesListPresenter.swift in Sources */,
@@ -3749,6 +3827,7 @@
 				DB720CC722C1396B00ED116A /* BalancePickerPresenter.swift in Sources */,
 				DB720D5722C1396B00ED116A /* SendPaymentDestinationRouting.swift in Sources */,
 				DB720EB422C1396C00ED116A /* QRCodeGenerationOperation.swift in Sources */,
+				DBCA02E122D73D2200503025 /* TabBarGlobalContentProvider.swift in Sources */,
 				DB720CF422C1396B00ED116A /* TabsContainerPresenter.swift in Sources */,
 				DB720ED922C1396C00ED116A /* BXFLabelWithInsets.swift in Sources */,
 				DB720DDE22C1396C00ED116A /* TradesListViewController.swift in Sources */,
@@ -3859,6 +3938,7 @@
 				DB720D2322C1396B00ED116A /* AuthenticatorAuthConfigurator.swift in Sources */,
 				DB720ED122C1396C00ED116A /* BXFStaticTableViewInputCell.swift in Sources */,
 				DB720DEC22C1396C00ED116A /* DashboardPaymentsPlugInViewController.swift in Sources */,
+				DBCA02DF22D7354100503025 /* TabBarGlobalNavigationTabBarProvider.swift in Sources */,
 				DB720CD622C1396B00ED116A /* SaleOverviewRouting.swift in Sources */,
 				DB720DE422C1396C00ED116A /* TradesListAmountFormatterProtocol.swift in Sources */,
 				DB720F2B22C2286C00ED116A /* CompaniesListRouting.swift in Sources */,

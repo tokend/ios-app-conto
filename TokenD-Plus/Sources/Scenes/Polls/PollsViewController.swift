@@ -71,6 +71,16 @@ extension Polls {
         
         // MARK: - Private
         
+        private func updateContentOffset(offset: CGPoint) {
+            if offset.y > 0 {
+                self.routing?.showShadow()
+            } else {
+                self.routing?.hideShadow()
+            }
+        }
+        
+        // MARK: - Setup
+        
         private func setupView() {
             self.view.backgroundColor = Theme.Colors.containerBackgroundColor
         }
@@ -100,6 +110,14 @@ extension Polls {
             )
             self.tableView.dataSource = self
             self.tableView.separatorStyle = .none
+            self.tableView
+                .rx
+                .contentOffset
+                .asDriver()
+                .drive(onNext: { [weak self] (offset) in
+                    self?.updateContentOffset(offset: offset)
+                })
+                .disposed(by: self.disposeBag)
         }
         
         private func setupLayout() {

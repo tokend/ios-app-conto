@@ -37,7 +37,9 @@ extension Settings {
                         cellModel = SettingsPushCell.Model(
                             title: cellData.title,
                             identifier: cellData.identifier,
-                            icon: cellData.icon
+                            icon: cellData.icon,
+                            topSeparator: cellData.topSeparator,
+                            bottomSeparator: cellData.bottomSeparator
                         )
                         
                     case .boolCell(let state):
@@ -45,14 +47,18 @@ extension Settings {
                             title: cellData.title,
                             identifier: cellData.identifier,
                             icon: cellData.icon,
-                            state: state
+                            state: state,
+                            topSeparator: cellData.topSeparator,
+                            bottomSeparator: cellData.bottomSeparator
                         )
                         
                     case .loading:
                         cellModel = SettingsLoadingCell.Model(
                             title: cellData.title,
                             identifier: cellData.identifier,
-                            icon: cellData.icon
+                            icon: cellData.icon,
+                            topSeparator: cellData.topSeparator,
+                            bottomSeparator: cellData.bottomSeparator
                         )
                         
                     case .reload:
@@ -60,7 +66,17 @@ extension Settings {
                             title: cellData.title,
                             identifier: cellData.identifier,
                             icon: cellData.icon,
-                            buttonTitle: Localized(.reload)
+                            buttonTitle: Localized(.reload),
+                            topSeparator: cellData.topSeparator,
+                            bottomSeparator: cellData.bottomSeparator
+                            
+                        )
+                    case .text:
+                        cellModel = SettingsTextCell.Model(
+                            title: cellData.title,
+                            topSeparator: cellData.topSeparator,
+                            bottomSeparator: cellData.bottomSeparator,
+                            identifier: cellData.identifier
                         )
                     }
                     

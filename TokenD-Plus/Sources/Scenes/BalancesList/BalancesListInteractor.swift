@@ -259,7 +259,6 @@ extension BalancesList.Interactor: BalancesList.BusinessLogic {
                 self?.updateSections()
             })
             .disposed(by: self.disposeBag)
-        
     }
     
     public func onPieChartBalanceSelected(request: Event.PieChartBalanceSelected.Request) {
