@@ -47,17 +47,33 @@ extension TabBar {
                 identifier: Localized(.settings),
                 isSelectable: true
             )
-            
-            let otherActions = self.getOtherActions()
+            let sendTab = Model.TabItem(
+                title: Localized(.send),
+                image: Assets.sendIcon.image,
+                identifier: Localized(.send),
+                isSelectable: false
+            )
+            let receiveTab = Model.TabItem(
+                title: Localized(.receive),
+                image: Assets.receive.image,
+                identifier: Localized(.receive),
+                isSelectable: false
+            )
             let otherTab = Model.TabItem(
                 title: Localized(.other),
                 image: Assets.menuIcon.image,
-                actions: otherActions,
                 identifier: Localized(.other),
-                isSelectable: false
+                isSelectable: true
             )
             
-            return [balancesTab, salesTab, pollsTab, settingsTab, otherTab]
+            return [
+                balancesTab,
+                salesTab,
+                pollsTab,
+                sendTab,
+                receiveTab,
+                otherTab
+            ]
         }
         
         private func getOtherActions() -> [Model.ActionModel] {

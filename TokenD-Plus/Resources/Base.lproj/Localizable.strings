@@ -102,6 +102,7 @@
 "corrupted_keychain_data" = "Corrupted keychain data";
 "create_balance" = "Create balance";
 "create_order" = "Create order";
+"create_redeem" = "Create redemption";
 "credit_card" = "Credit card";
 "cvv" = "CVV";
 "dashboard" = "Dashboard";

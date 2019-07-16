@@ -105,6 +105,7 @@ enum LocKey: String {
     case corrupted_keychain_data
     case create_balance
     case create_order
+    case create_redeem
     case credit_card
     case cvv
     case dashboard

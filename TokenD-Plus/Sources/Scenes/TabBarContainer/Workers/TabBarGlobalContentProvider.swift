@@ -130,9 +130,9 @@ extension TabBarContainer {
             let balancesTab = self.getBalancesTab()
             let salesTab = self.getSalesTab()
             let pollsTab = self.getPollsTab()
-            let settingsTab = self.getSettingsTab()
+            let otherTab = self.getOtehrTab()
             
-            return [balancesTab, salesTab, pollsTab, settingsTab]
+            return [balancesTab, salesTab, pollsTab, otherTab]
         }
         
         // MARK: - Balances Tab
@@ -243,23 +243,25 @@ extension TabBarContainer {
             })
         }
         
-        // MARK: - Settings Tab
+        // MARK: - Other Tab
         
-        private func getSettingsTab() -> TabsContainer.Model.TabModel {
+        private func getOtehrTab() -> TabsContainer.Model.TabModel {
             let navigationController = NavigationController()
             self.addSubscriptionTo(navigationController: navigationController)
-            self.runSettingsFlow(navigationController: navigationController)
+            self.runOtherFlow(navigationController: navigationController)
             
             return TabsContainer.Model.TabModel(
-                title: Localized(.settings),
+                title: Localized(.other),
                 content: .viewController(navigationController.getViewController()),
-                identifier: Localized(.settings)
+                identifier: Localized(.other)
             )
         }
         
-        private func runSettingsFlow(navigationController: NavigationControllerProtocol) {
-            let settingsflow = SettingsFlowController(
+        private func runOtherFlow(navigationController: NavigationControllerProtocol) {
+            let facilitiesFlow = FacilitiesFlowController(
                 navigationController: navigationController,
+                ownerAccountId: self.ownerAccountId,
+                backToCompanies: self.backToCompanies,
                 onSignOut: self.onSignOut,
                 appController: self.appController,
                 flowControllerStack: self.flowControllerStack,
@@ -270,8 +272,8 @@ extension TabBarContainer {
                 rootNavigation: self.rootNavigation
             )
             
-            self.flowControllers.append(settingsflow)
-            settingsflow.run(showRootScreen: { (vc) in
+            self.flowControllers.append(facilitiesFlow)
+            facilitiesFlow.run(showRootScreen: { (vc) in
                 navigationController.pushViewController(vc, animated: true)
             })
         }
