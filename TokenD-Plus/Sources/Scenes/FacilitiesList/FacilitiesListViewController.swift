@@ -117,14 +117,8 @@ extension FacilitiesList.ViewController: UITableViewDelegate {
         let model = self.sections[indexPath.section].items[indexPath.row]
         switch model.type {
             
-        case .acceptRedeem:
-            self.routing?.showAcceptRedeem()
-            
         case .companies:
             self.routing?.showCompanies()
-            
-        case .redeem:
-            self.routing?.showCreateRedeem()
             
         case .settings:
             self.routing?.showSettings()

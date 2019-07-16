@@ -23,10 +23,8 @@ extension FacilitiesList.Model {
         let type: FacilityType
         
         public enum FacilityType {
-            case acceptRedeem
             case companies
             case settings
-            case redeem
         }
     }
     

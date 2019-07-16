@@ -66,21 +66,6 @@ class FacilitiesFlowController: BaseSignedInFlowController {
             ownerAccountId: self.ownerAccountId
         )
         let routing = FacilitiesList.Routing(
-            showCreateRedeem:  { [weak self] in
-                guard let navigationController = self?.navigationController else {
-                    return
-                }
-                self?.runCreateRedeemFlow(
-                    navigationController: navigationController,
-                    balanceId: nil
-                )
-            },
-            showAcceptRedeem: { [weak self] in
-                guard let navigationController = self?.navigationController else {
-                    return
-                }
-                self?.runAcceptRedeemFlow(navigationController: navigationController)
-            },
             showSettings: { [weak self] in
                 guard let navigationController = self?.navigationController else {
                     return
