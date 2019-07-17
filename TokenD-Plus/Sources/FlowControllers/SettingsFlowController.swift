@@ -120,6 +120,9 @@ class SettingsFlowController: BaseSignedInFlowController {
         case .changePassword:
             self.showChangePasswordScreen()
             
+        case .language:
+            break
+            
         case .licenses:
             self.showLicenses()
             

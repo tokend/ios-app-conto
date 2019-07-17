@@ -14,6 +14,7 @@ enum Settings {
         case verification
         case changePassword
         case termsOfService
+        case language
         case licenses
         case fees
         case signOut

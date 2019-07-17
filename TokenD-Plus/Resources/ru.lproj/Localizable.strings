@@ -46,7 +46,7 @@
 "balance_colon" = "Balance:";
 "balance_is_not_created" = "$(asset) balance is not created";
 "balance_is_not_created_replace_asset" = "asset";
-"balances" = "Balances";
+"balances" = "Балансы";
 "bank_account" = "Bank account";
 "bank_address" = "Bank address";
 "bank_address_colon" = "Bank address:";
@@ -88,7 +88,6 @@
 "choose_email" = "Choose email";
 "close_time" = "Close time";
 "code" = "Code";
-"common" = "Common";
 "companies" = "Companies";
 "confirm" = "Confirm";
 "confirm_new_password" = "Confirm New Password";
@@ -282,7 +281,6 @@
 "issuance" = "Issuance";
 "issued" = "Issued";
 "keychaindataprovider_should_always_provide_key" = "KeychainDataProvider should always provide key";
-"language" = "Language";
 "last_name" = "Last name";
 "loading" = "Loading...";
 "locked" = "Locked";
@@ -450,7 +448,7 @@
 "settings" = "Settings";
 "show_key" = "Show key";
 "side_title" = "Side title";
-"sign_in" = "Sign in";
+"sign_in" = "Войти";
 "sign_in_now" = "Sign in now";
 "sign_in_via" = "Sign in via ";
 "sign_in_with_authenticator" = "Sign in with Authenticator";

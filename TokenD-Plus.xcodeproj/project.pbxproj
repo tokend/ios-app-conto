@@ -25,8 +25,18 @@
 		DB363E0D22DCE13800F5761C /* FacilityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0C22DCE13800F5761C /* FacilityCell.swift */; };
 		DB363E0F22DDCE9800F5761C /* FacilitiesFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0E22DDCE9800F5761C /* FacilitiesFlowController.swift */; };
 		DB363E1222DF505900F5761C /* Business+Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E1122DF505900F5761C /* Business+Logo.swift */; };
+		DB363E1822DF6CCA00F5761C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB363E1422DF6CCA00F5761C /* LaunchScreen.storyboard */; };
+		DB363E1922DF6CCA00F5761C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB363E1622DF6CCA00F5761C /* Localizable.strings */; };
+		DB363E2322DF711200F5761C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB363E2122DF711200F5761C /* Localizable.strings */; };
+		DB363E2822DF715D00F5761C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB363E2622DF715D00F5761C /* Localizable.strings */; };
+		DB363E3022DF764700F5761C /* LanguagesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2A22DF764700F5761C /* LanguagesListPresenter.swift */; };
+		DB363E3122DF764700F5761C /* LanguagesListRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2B22DF764700F5761C /* LanguagesListRouting.swift */; };
+		DB363E3222DF764700F5761C /* LanguagesListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2C22DF764700F5761C /* LanguagesListModels.swift */; };
+		DB363E3322DF764700F5761C /* LanguagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2D22DF764700F5761C /* LanguagesListViewController.swift */; };
+		DB363E3422DF764700F5761C /* LanguagesListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2E22DF764700F5761C /* LanguagesListInteractor.swift */; };
+		DB363E3522DF764700F5761C /* LanguagesListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2F22DF764700F5761C /* LanguagesListConfigurator.swift */; };
+		DB363E3822DF77BE00F5761C /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E3722DF77BE00F5761C /* LanguageCell.swift */; };
 		DB72098B22C1347200ED116A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB72098A22C1347200ED116A /* Assets.xcassets */; };
-		DB72098E22C1347200ED116A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB72098C22C1347200ED116A /* LaunchScreen.storyboard */; };
 		DB720CAA22C1396B00ED116A /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099922C1396B00ED116A /* SettingsModels.swift */; };
 		DB720CAB22C1396B00ED116A /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099A22C1396B00ED116A /* SettingsInteractor.swift */; };
 		DB720CAC22C1396B00ED116A /* SettingsRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099B22C1396B00ED116A /* SettingsRouting.swift */; };
@@ -618,7 +628,6 @@
 		DB720F1B22C1396C00ED116A /* LocKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA922C1396B00ED116A /* LocKey.swift */; };
 		DB720F1D22C13DD600ED116A /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F1C22C13DD500ED116A /* UserDataManager.swift */; };
 		DB720F1F22C210A300ED116A /* APIConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB720F1E22C210A200ED116A /* APIConfiguration.plist */; };
-		DB720F2222C210BB00ED116A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB720F2022C210BB00ED116A /* Localizable.strings */; };
 		DB720F2A22C2286C00ED116A /* CompaniesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F2422C2286C00ED116A /* CompaniesListPresenter.swift */; };
 		DB720F2B22C2286C00ED116A /* CompaniesListRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F2522C2286C00ED116A /* CompaniesListRouting.swift */; };
 		DB720F2C22C2286C00ED116A /* CompaniesListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720F2622C2286C00ED116A /* CompaniesListModels.swift */; };
@@ -676,9 +685,20 @@
 		DB363E0C22DCE13800F5761C /* FacilityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilityCell.swift; sourceTree = "<group>"; };
 		DB363E0E22DDCE9800F5761C /* FacilitiesFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesFlowController.swift; sourceTree = "<group>"; };
 		DB363E1122DF505900F5761C /* Business+Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business+Logo.swift"; sourceTree = "<group>"; };
+		DB363E1522DF6CCA00F5761C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DB363E1722DF6CCA00F5761C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Localizable.strings; sourceTree = "<group>"; };
+		DB363E2222DF711200F5761C /* uk-UA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "uk-UA"; path = Localizable.strings; sourceTree = "<group>"; };
+		DB363E2422DF714E00F5761C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ../ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DB363E2722DF715D00F5761C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
+		DB363E2A22DF764700F5761C /* LanguagesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListPresenter.swift; sourceTree = "<group>"; };
+		DB363E2B22DF764700F5761C /* LanguagesListRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListRouting.swift; sourceTree = "<group>"; };
+		DB363E2C22DF764700F5761C /* LanguagesListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListModels.swift; sourceTree = "<group>"; };
+		DB363E2D22DF764700F5761C /* LanguagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListViewController.swift; sourceTree = "<group>"; };
+		DB363E2E22DF764700F5761C /* LanguagesListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListInteractor.swift; sourceTree = "<group>"; };
+		DB363E2F22DF764700F5761C /* LanguagesListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListConfigurator.swift; sourceTree = "<group>"; };
+		DB363E3722DF77BE00F5761C /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
 		DB72098022C1347100ED116A /* TokenD-Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TokenD-Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB72098A22C1347200ED116A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DB72098D22C1347200ED116A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB72098F22C1347200ED116A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB72099922C1396B00ED116A /* SettingsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 		DB72099A22C1396B00ED116A /* SettingsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
@@ -1271,7 +1291,6 @@
 		DB720CA922C1396B00ED116A /* LocKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocKey.swift; sourceTree = "<group>"; };
 		DB720F1C22C13DD500ED116A /* UserDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		DB720F1E22C210A200ED116A /* APIConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIConfiguration.plist; sourceTree = "<group>"; };
-		DB720F2122C210BB00ED116A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DB720F2422C2286C00ED116A /* CompaniesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListPresenter.swift; sourceTree = "<group>"; };
 		DB720F2522C2286C00ED116A /* CompaniesListRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListRouting.swift; sourceTree = "<group>"; };
 		DB720F2622C2286C00ED116A /* CompaniesListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListModels.swift; sourceTree = "<group>"; };
@@ -1367,6 +1386,53 @@
 			path = ResourcesExtensions;
 			sourceTree = "<group>";
 		};
+		DB363E1322DF6CCA00F5761C /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				DB363E1422DF6CCA00F5761C /* LaunchScreen.storyboard */,
+				DB363E1622DF6CCA00F5761C /* Localizable.strings */,
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		DB363E1F22DF703300F5761C /* uk-UA.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				DB363E2122DF711200F5761C /* Localizable.strings */,
+			);
+			path = "uk-UA.lproj";
+			sourceTree = "<group>";
+		};
+		DB363E2522DF715D00F5761C /* ru.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				DB363E2622DF715D00F5761C /* Localizable.strings */,
+			);
+			path = ru.lproj;
+			sourceTree = "<group>";
+		};
+		DB363E2922DF761200F5761C /* LanguagesList */ = {
+			isa = PBXGroup;
+			children = (
+				DB363E2F22DF764700F5761C /* LanguagesListConfigurator.swift */,
+				DB363E2E22DF764700F5761C /* LanguagesListInteractor.swift */,
+				DB363E2C22DF764700F5761C /* LanguagesListModels.swift */,
+				DB363E2A22DF764700F5761C /* LanguagesListPresenter.swift */,
+				DB363E2B22DF764700F5761C /* LanguagesListRouting.swift */,
+				DB363E2D22DF764700F5761C /* LanguagesListViewController.swift */,
+				DB363E3622DF77A600F5761C /* Views */,
+			);
+			path = LanguagesList;
+			sourceTree = "<group>";
+		};
+		DB363E3622DF77A600F5761C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DB363E3722DF77BE00F5761C /* LanguageCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		DB72097722C1347100ED116A = {
 			isa = PBXGroup;
 			children = (
@@ -1397,12 +1463,13 @@
 		DB72099522C1347D00ED116A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DB363E2522DF715D00F5761C /* ru.lproj */,
+				DB363E1F22DF703300F5761C /* uk-UA.lproj */,
+				DB363E1322DF6CCA00F5761C /* Base.lproj */,
 				DBCA02E422D78DE500503025 /* acknowledgements.markdown */,
 				DB720F1E22C210A200ED116A /* APIConfiguration.plist */,
 				DB72098F22C1347200ED116A /* Info.plist */,
 				DB72098A22C1347200ED116A /* Assets.xcassets */,
-				DB72098C22C1347200ED116A /* LaunchScreen.storyboard */,
-				DB720F2022C210BB00ED116A /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1439,6 +1506,7 @@
 				DB720AFB22C1396B00ED116A /* ExploreTokens */,
 				DB363DFE22DCDB8C00F5761C /* FacilitiesList */,
 				DB720A0222C1396B00ED116A /* Fees */,
+				DB363E2922DF761200F5761C /* LanguagesList */,
 				DB720A3D22C1396B00ED116A /* MarkdownViewer */,
 				DB720F4322C4CD1C00ED116A /* Polls */,
 				DB720B6F22C1396B00ED116A /* ReceiveAddress */,
@@ -3380,6 +3448,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"uk-UA",
+				ru,
 			);
 			mainGroup = DB72097722C1347100ED116A;
 			productRefGroup = DB72098122C1347100ED116A /* Products */;
@@ -3396,10 +3466,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB720F2222C210BB00ED116A /* Localizable.strings in Resources */,
-				DB72098E22C1347200ED116A /* LaunchScreen.storyboard in Resources */,
 				DB72098B22C1347200ED116A /* Assets.xcassets in Resources */,
 				DBCA02E522D78DE600503025 /* acknowledgements.markdown in Resources */,
+				DB363E1822DF6CCA00F5761C /* LaunchScreen.storyboard in Resources */,
+				DB363E2322DF711200F5761C /* Localizable.strings in Resources */,
+				DB363E1922DF6CCA00F5761C /* Localizable.strings in Resources */,
+				DB363E2822DF715D00F5761C /* Localizable.strings in Resources */,
 				DB720F1F22C210A300ED116A /* APIConfiguration.plist in Resources */,
 				DB720ED822C1396C00ED116A /* BXFStaticTableViewButtonCell.xib in Resources */,
 			);
@@ -3494,6 +3566,7 @@
 				DB720CED22C1396B00ED116A /* VerifyEmailVerifyWorkerProtocol.swift in Sources */,
 				DB720DB622C1396B00ED116A /* SendPaymentAmountEnterAmountView.swift in Sources */,
 				DB720DF122C1396C00ED116A /* DashboardPaymentsPlugInAmountFormatter.swift in Sources */,
+				DB363E3522DF764700F5761C /* LanguagesListConfigurator.swift in Sources */,
 				DB720F3822C2361100ED116A /* CompaniesListEmptyView.swift in Sources */,
 				DB720F1D22C13DD600ED116A /* UserDataManager.swift in Sources */,
 				DB720D7A22C1396B00ED116A /* CreateOfferRouting.swift in Sources */,
@@ -3544,6 +3617,8 @@
 				DB720D2022C1396B00ED116A /* AuthAppAvailibilityChecker.swift in Sources */,
 				DB720EB522C1396C00ED116A /* QRCodeGenerator.swift in Sources */,
 				DB720E8222C1396C00ED116A /* BalanceHeaderBalanceFetcher.swift in Sources */,
+				DB363E3322DF764700F5761C /* LanguagesListViewController.swift in Sources */,
+				DB363E3822DF77BE00F5761C /* LanguageCell.swift in Sources */,
 				DB720D3222C1396B00ED116A /* MarkdownViewerPresenter.swift in Sources */,
 				DB720E1B22C1396C00ED116A /* RegisterSceneSignUpBuilderProtocol.swift in Sources */,
 				DB720E5022C1396C00ED116A /* DepositSceneDateFormatter.swift in Sources */,
@@ -3715,6 +3790,7 @@
 				DB720CD822C1396B00ED116A /* SaleOverviewViewController.swift in Sources */,
 				DB720F1322C1396C00ED116A /* QRCodeReaderFlowController.swift in Sources */,
 				DB720EDE22C1396C00ED116A /* BXFStaticTableViewInfoSection.swift in Sources */,
+				DB363E3122DF764700F5761C /* LanguagesListRouting.swift in Sources */,
 				DB720EFD22C1396C00ED116A /* KeychainAccountsModel.swift in Sources */,
 				DB720D6F22C1396B00ED116A /* BalanceHeaderWithPickerPresenter.swift in Sources */,
 				DB720E6222C1396C00ED116A /* TransactionsListAmountFormatter.swift in Sources */,
@@ -3735,6 +3811,7 @@
 				DB720E5522C1396C00ED116A /* DepositScenePresenter.swift in Sources */,
 				DB720D9D22C1396B00ED116A /* TabBarInteractor.swift in Sources */,
 				DB363E0D22DCE13800F5761C /* FacilityCell.swift in Sources */,
+				DB363E3222DF764700F5761C /* LanguagesListModels.swift in Sources */,
 				DB720E6722C1396C00ED116A /* TransactionsListViewController.swift in Sources */,
 				DB720DB722C1396B00ED116A /* SendPaymentAmountBalanceView.swift in Sources */,
 				DB720E7D22C1396C00ED116A /* BalanceHeaderConfigurator.swift in Sources */,
@@ -3798,6 +3875,7 @@
 				DB720EBE22C1396C00ED116A /* ValueFormatter.swift in Sources */,
 				DB720E4522C1396C00ED116A /* BalancesListBalanceCell.swift in Sources */,
 				DB720EA322C1396C00ED116A /* RootNavigationViewController.swift in Sources */,
+				DB363E3422DF764700F5761C /* LanguagesListInteractor.swift in Sources */,
 				DB720F1222C1396C00ED116A /* CompanyFlowController.swift in Sources */,
 				DB720E2B22C1396C00ED116A /* ReceiveAddressRouting.swift in Sources */,
 				DB720DF622C1396C00ED116A /* DashboardPendingOffersPreviewPlugInViewController.swift in Sources */,
@@ -4069,6 +4147,7 @@
 				DB720DAF22C1396B00ED116A /* SendPaymentAmountInteractor.swift in Sources */,
 				DB720CF922C1396B00ED116A /* SalesViewController.swift in Sources */,
 				DB720CF222C1396B00ED116A /* TabsContainerContentProvider.swift in Sources */,
+				DB363E3022DF764700F5761C /* LanguagesListPresenter.swift in Sources */,
 				DB720E0022C1396C00ED116A /* DashboardPlugInsProviderProtocol.swift in Sources */,
 				DB720CBA22C1396B00ED116A /* SaleInvestDataProvider.swift in Sources */,
 				DB720D5922C1396B00ED116A /* SendPaymentDestinationContactCell.swift in Sources */,
@@ -4104,18 +4183,35 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DB72098C22C1347200ED116A /* LaunchScreen.storyboard */ = {
+		DB363E1422DF6CCA00F5761C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DB72098D22C1347200ED116A /* Base */,
+				DB363E1522DF6CCA00F5761C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		DB720F2022C210BB00ED116A /* Localizable.strings */ = {
+		DB363E1622DF6CCA00F5761C /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DB720F2122C210BB00ED116A /* Base */,
+				DB363E1722DF6CCA00F5761C /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		DB363E2122DF711200F5761C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB363E2222DF711200F5761C /* uk-UA */,
+				DB363E2422DF714E00F5761C /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		DB363E2622DF715D00F5761C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB363E2722DF715D00F5761C /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

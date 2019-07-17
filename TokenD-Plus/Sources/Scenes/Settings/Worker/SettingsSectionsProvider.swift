@@ -141,6 +141,21 @@ extension Settings {
         }
         
         private func createSections() -> [Model.SectionModel] {
+            let languageCell = Model.CellModel(
+                title: Localized(.language),
+                icon: Assets.language.image,
+                cellType: .disclosureCell,
+                topSeparator: .line,
+                bottomSeparator: .line,
+                identifier: .language
+            )
+            
+            let commonSection = Model.SectionModel(
+                title: Localized(.common),
+                cells: [languageCell],
+                description: ""
+            )
+            
             let accountIdCell = Model.CellModel(
                 title: Localized(.account_capitalized),
                 icon: Assets.verificationIcon.image,
@@ -284,6 +299,7 @@ extension Settings {
             )
             
             return [
+                commonSection,
                 acountSection,
                 securitySection,
                 termsSection,
