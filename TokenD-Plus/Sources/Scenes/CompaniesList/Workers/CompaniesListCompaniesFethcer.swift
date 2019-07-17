@@ -20,70 +20,62 @@ extension CompaniesList {
         private let errors: PublishRelay<Swift.Error> = PublishRelay()
         
         private let accountsApi: AccountsApiV3
+        private let apiConfiguration: APIConfigurationModel
         private let userDataProvider: UserDataProviderProtocol
         
         // MARK: -
         
         init(
             accountsApi: AccountsApiV3,
+            apiConfiguration: APIConfigurationModel,
             userDataProvider: UserDataProviderProtocol
             ) {
             
             self.accountsApi = accountsApi
+            self.apiConfiguration = apiConfiguration
             self.userDataProvider = userDataProvider
         }
         
         // MARK: - Private
         
         private func loadCompanies() {
-            let uaHardware = Model.Company.init(
-                accountId: "GBA4EX43M25UPV4WIE6RRMQOFTWXZZRIPFAI5VPY6Z2ZVVXVWZ6NEOOB",
-                name: "UA Hardware",
-                imageUrl: URL(string: "https://pbs.twimg.com/profile_images/515290194946183168/zSW1LhVc.png")!
+            self.loadingStatus.accept(.loading)
+            self.accountsApi.requestBusinesses(
+                accountId: self.userDataProvider.walletData.accountId,
+                completion: { [weak self] (result) in
+                    self?.loadingStatus.accept(.loaded)
+                    switch result {
+                        
+                    case .failure(let error):
+                        self?.errors.accept(error)
+                        
+                    case .success(let document):
+                        guard let businesses = document.data else {
+                            self?.errors.accept(Model.Error.companiesNotFound)
+                            return
+                        }
+                        self?.convertToCompanies(businesses: businesses)
+                    }
+                }
             )
-            
-            let pubLolek = Model.Company.init(
-                accountId: "GDLWLDE33BN7SG6V4P63V2HFA56JYRMODESBLR2JJ5F3ITNQDUVKS2JE",
-                name: "Pub Lolek",
-                imageUrl: URL(string: "https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/2352370/910/607/m1/fpnw/wm0/beer-mug-dwg_prvw-.jpg?1488440459&s=525e7ba48e0a83ea6dcb09b4cae6440f")!
-            )
-            self.companies.accept([uaHardware, pubLolek])
+        }
+        
+        private func convertToCompanies(businesses: [BusinessResource]) {
+            let companies = businesses.map { (resource) -> Model.Company in
+                var imageUrl: URL?
+                if let logoDetails = resource.logoDetails {
+                    let logoPath = self.apiConfiguration.storageEndpoint/logoDetails.key
+                    imageUrl = URL(string: logoPath)
+                }
+                return Model.Company(
+                    accountId: resource.accountId,
+                    name: resource.name,
+                    imageUrl: imageUrl
+                )
+            }
+            self.companies.accept(companies)
         }
     }
-    
-    //    private func loadCompanies() {
-    //        self.loadingStatus.accept(.loading)
-    //        self.accountsApi.requestBusinesses(
-    //            accountId: self.userDataProvider.walletData.accountId,
-    //            completion: { [weak self] (result) in
-    //        self.loadingStatus.accept(.loaded)
-    //                switch result {
-    //
-    //                case .failure(let error):
-    //                    self?.errors.accept(error)
-    //
-    //                case .success(let document):
-    //                    guard let businesses = document.data else {
-    //                        self?.errors.accept(Model.Error.companiesNotFound)
-    //                        return
-    //                    }
-    //                    self?.convertToCompanies(businesses: businesses)
-    //                }
-    //            }
-    //        )
-    //    }
-    //
-    //    private func convertToCompanies(businesses: [BusinessResource]) {
-    //        let companies = businesses.map { (resource) -> Model.Company in
-    //            return Model.Company(
-    //                accountId: resource.accountId,
-    //                name: resource.name,
-    //                imageUrl: URL(string: resource.logoLink)
-    //            )
-    //        }
-    //        self.companies.accept(companies)
-    //    }
-    //}
 }
 
 extension CompaniesList.CompaniesFetcher: CompaniesList.CompaniesFetcherProtocol {
@@ -102,4 +94,23 @@ extension CompaniesList.CompaniesFetcher: CompaniesList.CompaniesFetcherProtocol
     }
 }
 
+extension BusinessResource {
+    
+    public struct Logo: Decodable {
+        let key: String
+    }
+    
+    var logoDetails: Logo? {
+        guard let jsonData = self.logoJSON.data(using: .utf8) else {
+            return nil
+        }
+        
+        guard let logo = try? JSONDecoder().decode(
+            Logo.self,
+            from: jsonData
+            ) else { return nil }
+        
+        return logo
+    }
+}
 

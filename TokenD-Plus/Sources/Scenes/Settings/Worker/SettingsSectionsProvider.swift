@@ -149,12 +149,12 @@ extension Settings {
                 identifier: .accountId
             )
             
-            let seedCell = Model.CellModel(
-                title: Localized(.export_seed),
-                icon: Assets.seed.image,
-                cellType: .disclosureCell,
-                identifier: .seed
-            )
+//            let seedCell = Model.CellModel(
+//                title: Localized(.export_seed),
+//                icon: Assets.seed.image,
+//                cellType: .disclosureCell,
+//                identifier: .seed
+//            )
             
             let feesCell = Model.CellModel(
                 title: Localized(.fees),
@@ -166,7 +166,7 @@ extension Settings {
             
             let acountSection = Model.SectionModel(
                 title: Localized(.account),
-                cells: [accountIdCell, seedCell, feesCell],
+                cells: [accountIdCell, feesCell],
                 description: ""
             )
             

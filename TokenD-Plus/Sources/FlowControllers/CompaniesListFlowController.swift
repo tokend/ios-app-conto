@@ -115,6 +115,7 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         
         let companiesFetcher = CompaniesList.CompaniesFetcher(
             accountsApi: self.flowControllerStack.apiV3.accountsApi,
+            apiConfiguration: self.flowControllerStack.apiConfigurationModel,
             userDataProvider: self.userDataProvider
         )
         let routing = CompaniesList.Routing(

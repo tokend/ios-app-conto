@@ -34,10 +34,13 @@ extension CompaniesList {
             
             return models.map({ (model) -> CompanyCell.ViewModel in
                 let companyColor = TokenColoringProvider.shared.coloringForCode(model.name)
+                let firstCharacter = model.name.first ?? Character("")
+                let companyAbbreviation = "\(firstCharacter)".uppercased()
                 return CompanyCell.ViewModel(
                     companyColor: companyColor,
                     companyImageUrl: model.imageUrl,
                     companyName: model.name,
+                    companyAbbreviation: companyAbbreviation,
                     accountId: model.accountId
                 )
             })

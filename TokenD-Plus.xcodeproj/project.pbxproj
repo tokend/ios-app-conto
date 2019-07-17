@@ -24,6 +24,7 @@
 		DB363E0A22DCDBB700F5761C /* FacilitiesListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0422DCDBB700F5761C /* FacilitiesListConfigurator.swift */; };
 		DB363E0D22DCE13800F5761C /* FacilityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0C22DCE13800F5761C /* FacilityCell.swift */; };
 		DB363E0F22DDCE9800F5761C /* FacilitiesFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0E22DDCE9800F5761C /* FacilitiesFlowController.swift */; };
+		DB363E1222DF505900F5761C /* Business+Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E1122DF505900F5761C /* Business+Logo.swift */; };
 		DB72098B22C1347200ED116A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB72098A22C1347200ED116A /* Assets.xcassets */; };
 		DB72098E22C1347200ED116A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB72098C22C1347200ED116A /* LaunchScreen.storyboard */; };
 		DB720CAA22C1396B00ED116A /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099922C1396B00ED116A /* SettingsModels.swift */; };
@@ -674,6 +675,7 @@
 		DB363E0422DCDBB700F5761C /* FacilitiesListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesListConfigurator.swift; sourceTree = "<group>"; };
 		DB363E0C22DCE13800F5761C /* FacilityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilityCell.swift; sourceTree = "<group>"; };
 		DB363E0E22DDCE9800F5761C /* FacilitiesFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesFlowController.swift; sourceTree = "<group>"; };
+		DB363E1122DF505900F5761C /* Business+Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business+Logo.swift"; sourceTree = "<group>"; };
 		DB72098022C1347100ED116A /* TokenD-Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TokenD-Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB72098A22C1347200ED116A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB72098D22C1347200ED116A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1355,6 +1357,14 @@
 				DB363E0C22DCE13800F5761C /* FacilityCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		DB363E1022DF502B00F5761C /* ResourcesExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				DB363E1122DF505900F5761C /* Business+Logo.swift */,
+			);
+			path = ResourcesExtensions;
 			sourceTree = "<group>";
 		};
 		DB72097722C1347100ED116A = {
@@ -3144,6 +3154,7 @@
 				DB720C7622C1396B00ED116A /* TransactionsHistoryRepo.swift */,
 				DB720C6E22C1396B00ED116A /* WalletRepo.swift */,
 				DB720C6F22C1396B00ED116A /* PollsRepo */,
+				DB363E1022DF502B00F5761C /* ResourcesExtensions */,
 			);
 			path = Repos;
 			sourceTree = "<group>";
@@ -3845,6 +3856,7 @@
 				DB720E2622C1396C00ED116A /* SideMenuHeaderView.swift in Sources */,
 				DB720F1522C1396C00ED116A /* LocalAuthFlowController.swift in Sources */,
 				DB720E4022C1396C00ED116A /* BalancesListAmountFormatter.swift in Sources */,
+				DB363E1222DF505900F5761C /* Business+Logo.swift in Sources */,
 				DB720F0422C1396C00ED116A /* SettingsManager.swift in Sources */,
 				DB720EE022C1396C00ED116A /* DynamicTableView.swift in Sources */,
 				DB720E6A22C1396C00ED116A /* TransactionsListTableViewCell.swift in Sources */,
