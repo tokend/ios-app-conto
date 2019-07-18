@@ -47,7 +47,7 @@ extension BalancesList {
         
         private func updateSections() {
             let headerSection = self.getHeaderSectionModel()
-            let chartSection = self.getChartSectionModel()
+            //let chartSection = self.getChartSectionModel()
             let balancesSection = self.getBalancesSectionModel()
             
             let response = Event.SectionsUpdated.Response(

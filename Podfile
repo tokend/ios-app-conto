@@ -30,7 +30,6 @@ def main_app_pods
   pod 'Fabric'
   pod 'Crashlytics'
   
-  pod 'SideMenuController', git: 'https://github.com/tokend/SideMenuController.git'
   pod 'Charts', git: 'https://github.com/tokend/Charts.git'
   pod 'Floaty', git: 'https://github.com/tokend/Floaty.git'
   pod 'UICircularProgressRing'
@@ -50,16 +49,16 @@ target 'TokenD-Plus' do
     #   end
     # end
 
-    swift3Targets = ['SideMenuController']
+#    swift3Targets = ['SideMenuController']
+#
+#    installer.pods_project.targets.each do |target|
+#      next unless swift3Targets.include? target.name
+#
+#      target.build_configurations.each do |config|
+#        config.build_settings['SWIFT_VERSION'] = '3.2'
+#      end
+#    end
 
-    installer.pods_project.targets.each do |target|
-      next unless swift3Targets.include? target.name
-
-      target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '3.2'
-      end
-    end
-    
     swift4Targets = ['QRCodeReader.swift', 'ActionsList']
     
     installer.pods_project.targets.each do |target|
