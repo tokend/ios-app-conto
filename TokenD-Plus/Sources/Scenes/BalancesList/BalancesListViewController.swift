@@ -10,7 +10,6 @@ public protocol BalancesListDisplayLogic: class {
     func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel)
     func displayPieChartEntriesChanged(viewModel: Event.PieChartEntriesChanged.ViewModel)
     func displayPieChartBalanceSelected(viewModel: Event.PieChartBalanceSelected.ViewModel)
-    func displayActionsDidChange(viewModel: Event.ActionsDidChange.ViewModel)
 }
 
 extension BalancesList {
@@ -278,41 +277,6 @@ extension BalancesList.ViewController: BalancesList.DisplayLogic {
         udpdatedChartViewModel.legendCells = viewModel.legendCells
         udpdatedChartViewModel.setup(cell: chartCell)
         self.sections[indexPath.section].cells[indexPath.row] = udpdatedChartViewModel
-    }
-    
-    public func displayActionsDidChange(viewModel: Event.ActionsDidChange.ViewModel) {
-//        let actions = viewModel.models.map { [weak self] (item) -> ActionsListDefaultButtonModel in
-//            
-//            let action: (ActionsListDefaultButtonModel) -> Void = { (model) in
-//                self?.actionsList?.dismiss({
-//                    switch item.actionType {
-//                        
-//                    case .acceptRedeem:
-//                        self?.routing?.showAcceptRedeem()
-//                        
-//                    case .receive:
-//                        self?.routing?.showReceive()
-//                        
-//                    case .createRedeem:
-//                        self?.routing?.showCreateRedeem()
-//                        
-//                    case .send:
-//                        self?.routing?.showSendPayment()
-//                    }
-//                })
-//            }
-//            let actionModel = ActionsListDefaultButtonModel(
-//                localizedTitle: item.title,
-//                image: item.image,
-//                action: action,
-//                isEnabled: true
-//            )
-//            actionModel.appearance.backgroundColor = Theme.Colors.clear
-//            actionModel.appearance.tint = Theme.Colors.accentColor
-//            return actionModel
-//        }
-//        
-//        self.actions = actions
     }
 }
 

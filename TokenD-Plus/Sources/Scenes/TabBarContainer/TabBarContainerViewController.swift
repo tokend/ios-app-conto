@@ -113,6 +113,12 @@ extension TabBarContainer {
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
         
+        public override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
+            
+            self.tabBar?.view.invalidateIntrinsicContentSize()
+        }
+        
         // MARK: - Public
         
         public func setSelectedContentWithIdentifier(idetifier: TabIdentifier) {
@@ -124,17 +130,19 @@ extension TabBarContainer {
             self.tabBar?.view.isUserInteractionEnabled = true
             self.tabBar?.view.snp.remakeConstraints({ (make) in
                 make.leading.trailing.equalToSuperview()
-                make.bottom.equalTo(self.view.safeArea.bottom)
+                make.bottom.equalToSuperview()
             })
             if self.viewDidAppear {
                 UIView.animate(withDuration: 0.25, animations: {
                     self.view.setNeedsLayout()
                     self.view.layoutIfNeeded()
+                    self.tabBar?.view.isHidden = false
                 })
             }
         }
         
         public func hideTabBar() {
+            self.tabBar?.view.isHidden = true
             self.tabBar?.view.isUserInteractionEnabled = false
             if self.viewDidAppear {
                 self.tabBar?.view.snp.remakeConstraints({ (make) in
@@ -174,7 +182,6 @@ extension TabBarContainer {
         private func setupBarTapGestureRecognizer() {
             self.barTapRecognizer.cancelsTouchesInView = false
             self.barTapRecognizer.numberOfTapsRequired = 1
-            self.barTapRecognizer.delaysTouchesBegan = true
             self.tabBar?.view.addGestureRecognizer(self.barTapRecognizer)
         }
         
@@ -185,6 +192,8 @@ extension TabBarContainer {
                 make.leading.trailing.equalToSuperview()
                 make.bottom.equalTo(self.view.safeArea.bottom)
             }
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
         }
         
         private func updateSubviews() {
@@ -205,6 +214,8 @@ extension TabBarContainer {
                     make.edges.equalToSuperview()
                 }
             }
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
         }
     }
 }

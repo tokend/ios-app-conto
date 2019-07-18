@@ -49,11 +49,6 @@ extension RegisterScene {
         // MARK: - Private
         
         private func setupSignInState() {
-            let serverField = Model.Field(
-                type: .scanServerInfo,
-                text: self.registerWorker.getServerInfoTitle(),
-                editable: false
-            )
             let emailField = Model.Field(
                 type: .text(purpose: .email),
                 text: self.getEmail()
@@ -65,18 +60,13 @@ extension RegisterScene {
             
             self.sceneModel = Model.SceneModel(
                 state: .signIn,
-                fields: [serverField, emailField, passwordField],
+                fields: [emailField, passwordField],
                 subActions: [.signUp],
                 termsUrl: self.sceneModel.termsUrl
             )
         }
         
         private func setupSignUpState() {
-            let serverField = Model.Field(
-                type: .scanServerInfo,
-                text: self.registerWorker.getServerInfoTitle(),
-                editable: false
-            )
             let emailField = Model.Field(
                 type: .text(purpose: .email),
                 text: self.getEmail()
@@ -97,7 +87,7 @@ extension RegisterScene {
             
             self.sceneModel = Model.SceneModel(
                 state: .signUp,
-                fields: [serverField, emailField, passwordField, confirmPasswordField],
+                fields: [emailField, passwordField, confirmPasswordField],
                 subActions: subActions,
                 termsUrl: self.sceneModel.termsUrl
             )

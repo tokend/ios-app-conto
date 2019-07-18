@@ -1826,13 +1826,13 @@
 		DB720A3422C1396B00ED116A /* RecoverySeed */ = {
 			isa = PBXGroup;
 			children = (
-				DB720A3522C1396B00ED116A /* RecoverySeedInteractor.swift */,
-				DB720A3622C1396B00ED116A /* RecoverySeedRouting.swift */,
-				DB720A3722C1396B00ED116A /* Workers */,
-				DB720A3922C1396B00ED116A /* RecoverySeedViewController.swift */,
 				DB720A3A22C1396B00ED116A /* RecoverySeedConfigurator.swift */,
-				DB720A3B22C1396B00ED116A /* RecoverySeedPresenter.swift */,
+				DB720A3522C1396B00ED116A /* RecoverySeedInteractor.swift */,
 				DB720A3C22C1396B00ED116A /* RecoverySeedModels.swift */,
+				DB720A3B22C1396B00ED116A /* RecoverySeedPresenter.swift */,
+				DB720A3622C1396B00ED116A /* RecoverySeedRouting.swift */,
+				DB720A3922C1396B00ED116A /* RecoverySeedViewController.swift */,
+				DB720A3722C1396B00ED116A /* Workers */,
 			);
 			path = RecoverySeed;
 			sourceTree = "<group>";

@@ -77,19 +77,19 @@ extension BalancesList {
             let updatedBalances = self.balances.compactMap { (details) -> Model.Balance? in
                 var iconUrl: URL?
                 var assetName: String?
-                if let asset = self.assets.first(where: { (asset) -> Bool in
+                
+                guard let asset = self.assets.first(where: { (asset) -> Bool in
                     return details.asset == asset.code
-                }) {
-                    guard asset.owner == self.ownerAccountId else {
-                        return nil
-                    }
-                    if let name = asset.defaultDetails?.name {
-                        assetName = name
-                    }
-                    if let key = asset.defaultDetails?.logo?.key {
-                        let imageKey = ImagesUtility.ImageKey.key(key)
-                        iconUrl = self.imageUtility.getImageURL(imageKey)
-                    }
+                }),
+                asset.owner == self.ownerAccountId else {
+                    return nil
+                }
+                if let name = asset.defaultDetails?.name {
+                    assetName = name
+                }
+                if let key = asset.defaultDetails?.logo?.key {
+                    let imageKey = ImagesUtility.ImageKey.key(key)
+                    iconUrl = self.imageUtility.getImageURL(imageKey)
                 }
                 
                 return Model.Balance(
