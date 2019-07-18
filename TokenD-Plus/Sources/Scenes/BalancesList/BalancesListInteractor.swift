@@ -47,7 +47,7 @@ extension BalancesList {
         
         private func updateSections() {
             let headerSection = self.getHeaderSectionModel()
-            let chartSection = self.getChartSectionModel()
+            //let chartSection = self.getChartSectionModel()
             let balancesSection = self.getBalancesSectionModel()
             
             let response = Event.SectionsUpdated.Response(
@@ -58,12 +58,6 @@ extension BalancesList {
                 ]
             )
             self.presenter.presentSectionsUpdated(response: response)
-        }
-        
-        private func updateActions() {
-            let actions = self.actionProvider.getActions()
-            let response = Event.ActionsDidChange.Response(models: actions)
-            self.presenter.presentActionsDidChange(response: response)
         }
         
         // MARK: - Header
@@ -243,7 +237,6 @@ extension BalancesList {
 extension BalancesList.Interactor: BalancesList.BusinessLogic {
     
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
-        self.updateActions()
         self.balancesFetcher
             .observeLoadingStatus()
             .subscribe(onNext: { [weak self] (status) in

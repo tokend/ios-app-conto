@@ -74,7 +74,6 @@ PODS:
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
   - RxSwift (4.5.0)
-  - SideMenuController (0.2.4)
   - SnapKit (4.2.0)
   - SwiftKeychainWrapper (3.0.1)
   - TokenDSDK (3.1.0-rc.10):
@@ -115,7 +114,6 @@ DEPENDENCIES:
   - QRCodeReader.swift (= 8.1.1)
   - RxCocoa (~> 4.1)
   - RxSwift (~> 4.1)
-  - SideMenuController (from `https://github.com/tokend/SideMenuController.git`)
   - SnapKit (~> 4.0)
   - SwiftKeychainWrapper (= 3.0.1)
   - TokenDSDK (= 3.1.0-rc.10)
@@ -161,8 +159,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/tokend/Charts.git
   Floaty:
     :git: https://github.com/tokend/Floaty.git
-  SideMenuController:
-    :git: https://github.com/tokend/SideMenuController.git
 
 CHECKOUT OPTIONS:
   Charts:
@@ -171,9 +167,6 @@ CHECKOUT OPTIONS:
   Floaty:
     :commit: a96eb9b1aafccd419e4ba7005c778c099344dd17
     :git: https://github.com/tokend/Floaty.git
-  SideMenuController:
-    :commit: a69b0c5704353ed5c35eb7df21d37f094e7582bf
-    :git: https://github.com/tokend/SideMenuController.git
 
 SPEC CHECKSUMS:
   ActionsList: ab6cf254d259ccb921fbdee139ef6171fb9976ac
@@ -200,13 +193,12 @@ SPEC CHECKSUMS:
   QRCodeReader.swift: b164a681887de276d405ff02bce854d82cd6360b
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
-  SideMenuController: 4c47fe044a8a0f13edf2ecb73fc90b2d82dcf392
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   TokenDSDK: a8d22a74b6754cbd8c06a1f3cc4a900e4292d459
   TokenDWallet: 0f415dc845b38227bd99602e341258ec4dda4a32
   UICircularProgressRing: 0ff679b05a17f15ad6301a7886686837b8c301a9
 
-PODFILE CHECKSUM: b335e3ff4a6f85dffb0d883e7842b31b25089009
+PODFILE CHECKSUM: 6b2f595fbe44307c43c04e75438a359c830d727e
 
 COCOAPODS: 1.6.1
