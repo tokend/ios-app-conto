@@ -5,7 +5,7 @@
 	<key>api_endpoint</key>
 	<string>http://13.53.82.202:8000/_/api/</string>
 	<key>storage_endpoint</key>
-	<string>https://s3.eu-west-1.amazonaws.com/demo-identity-storage-festive-colden</string>
+	<string>http://13.53.82.202:8000/_/storage/api</string>
 	<key>terms_address</key>
 	<string>https://demo.tokend.io/terms</string>
 	<key>kyc</key>

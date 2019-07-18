@@ -500,10 +500,8 @@
 		DB720E9822C1396C00ED116A /* Hashable+Iterate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720BFA22C1396B00ED116A /* Hashable+Iterate.swift */; };
 		DB720E9922C1396C00ED116A /* UIView+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720BFB22C1396B00ED116A /* UIView+Loading.swift */; };
 		DB720E9A22C1396C00ED116A /* UISegmentedControl+FillWithSegments.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720BFC22C1396B00ED116A /* UISegmentedControl+FillWithSegments.swift */; };
-		DB720E9B22C1396C00ED116A /* NumberFormatter+Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720BFD22C1396B00ED116A /* NumberFormatter+Decimal.swift */; };
 		DB720E9C22C1396C00ED116A /* UIViewController+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720BFE22C1396B00ED116A /* UIViewController+Nib.swift */; };
 		DB720E9D22C1396C00ED116A /* TokenDWallet.PublicKey+base32EncodedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720BFF22C1396B00ED116A /* TokenDWallet.PublicKey+base32EncodedString.swift */; };
-		DB720E9E22C1396C00ED116A /* SideMenuController+RootContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C0022C1396B00ED116A /* SideMenuController+RootContent.swift */; };
 		DB720E9F22C1396C00ED116A /* UIResponder+First.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C0122C1396B00ED116A /* UIResponder+First.swift */; };
 		DB720EA022C1396C00ED116A /* FlexibleHeaderContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C0322C1396B00ED116A /* FlexibleHeaderContainerViewController.swift */; };
 		DB720EA122C1396C00ED116A /* QRCodeReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C0522C1396B00ED116A /* QRCodeReaderView.swift */; };
@@ -1163,10 +1161,8 @@
 		DB720BFA22C1396B00ED116A /* Hashable+Iterate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Hashable+Iterate.swift"; sourceTree = "<group>"; };
 		DB720BFB22C1396B00ED116A /* UIView+Loading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Loading.swift"; sourceTree = "<group>"; };
 		DB720BFC22C1396B00ED116A /* UISegmentedControl+FillWithSegments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+FillWithSegments.swift"; sourceTree = "<group>"; };
-		DB720BFD22C1396B00ED116A /* NumberFormatter+Decimal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Decimal.swift"; sourceTree = "<group>"; };
 		DB720BFE22C1396B00ED116A /* UIViewController+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Nib.swift"; sourceTree = "<group>"; };
 		DB720BFF22C1396B00ED116A /* TokenDWallet.PublicKey+base32EncodedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TokenDWallet.PublicKey+base32EncodedString.swift"; sourceTree = "<group>"; };
-		DB720C0022C1396B00ED116A /* SideMenuController+RootContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SideMenuController+RootContent.swift"; sourceTree = "<group>"; };
 		DB720C0122C1396B00ED116A /* UIResponder+First.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+First.swift"; sourceTree = "<group>"; };
 		DB720C0322C1396B00ED116A /* FlexibleHeaderContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeaderContainerViewController.swift; sourceTree = "<group>"; };
 		DB720C0522C1396B00ED116A /* QRCodeReaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReaderView.swift; sourceTree = "<group>"; };
@@ -1894,13 +1890,13 @@
 		DB720A3422C1396B00ED116A /* RecoverySeed */ = {
 			isa = PBXGroup;
 			children = (
-				DB720A3522C1396B00ED116A /* RecoverySeedInteractor.swift */,
-				DB720A3622C1396B00ED116A /* RecoverySeedRouting.swift */,
-				DB720A3722C1396B00ED116A /* Workers */,
-				DB720A3922C1396B00ED116A /* RecoverySeedViewController.swift */,
 				DB720A3A22C1396B00ED116A /* RecoverySeedConfigurator.swift */,
-				DB720A3B22C1396B00ED116A /* RecoverySeedPresenter.swift */,
+				DB720A3522C1396B00ED116A /* RecoverySeedInteractor.swift */,
 				DB720A3C22C1396B00ED116A /* RecoverySeedModels.swift */,
+				DB720A3B22C1396B00ED116A /* RecoverySeedPresenter.swift */,
+				DB720A3622C1396B00ED116A /* RecoverySeedRouting.swift */,
+				DB720A3922C1396B00ED116A /* RecoverySeedViewController.swift */,
+				DB720A3722C1396B00ED116A /* Workers */,
 			);
 			path = RecoverySeed;
 			sourceTree = "<group>";
@@ -2827,8 +2823,6 @@
 				DB720BEB22C1396B00ED116A /* Bundle+Version.swift */,
 				DB28C4BC22D38C18005362FD /* Data+Bytes.swift */,
 				DB720BFA22C1396B00ED116A /* Hashable+Iterate.swift */,
-				DB720BFD22C1396B00ED116A /* NumberFormatter+Decimal.swift */,
-				DB720C0022C1396B00ED116A /* SideMenuController+RootContent.swift */,
 				DB720BF122C1396B00ED116A /* SnapKit+Extension.swift */,
 				DB720BEE22C1396B00ED116A /* String+Index.swift */,
 				DB720BF322C1396B00ED116A /* String+QueueLabel.swift */,
@@ -3580,7 +3574,6 @@
 				DB720D7322C1396B00ED116A /* BalanceHeaderWithPickerBalancesFetcher.swift in Sources */,
 				DB720DCC22C1396C00ED116A /* ExploreTokensPresenter.swift in Sources */,
 				DB720F0022C1396C00ED116A /* WalletDataSerializable.swift in Sources */,
-				DB720E9B22C1396C00ED116A /* NumberFormatter+Decimal.swift in Sources */,
 				DB720D4522C1396B00ED116A /* ChartConfigurator.swift in Sources */,
 				DB720CFE22C1396B00ED116A /* SaleEmptyView.swift in Sources */,
 				DB720F0722C1396C00ED116A /* AppController+OpenUrlSubscriber.swift in Sources */,
@@ -4018,7 +4011,6 @@
 				DB720D9422C1396B00ED116A /* TransactionDetailsCell.swift in Sources */,
 				DB720F5F22C4CD1C00ED116A /* PollsNavigationTitleView.swift in Sources */,
 				DB720D9022C1396B00ED116A /* TransactionDetailsPendingOfferSectionsProvider.swift in Sources */,
-				DB720E9E22C1396C00ED116A /* SideMenuController+RootContent.swift in Sources */,
 				DB720EF122C1396C00ED116A /* AppController+UserActivitySubscribers.swift in Sources */,
 				DB720EE222C1396C00ED116A /* DynamicTableViewDataSourceDelegate.swift in Sources */,
 				DB720EEA22C1396C00ED116A /* AccountRepo.swift in Sources */,

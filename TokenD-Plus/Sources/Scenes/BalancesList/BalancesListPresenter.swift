@@ -7,7 +7,6 @@ public protocol BalancesListPresentationLogic {
     func presentLoadingStatusDidChange(response: Event.LoadingStatusDidChange.Response)
     func presentPieChartEntriesChanged(response: Event.PieChartEntriesChanged.Response)
     func presentPieChartBalanceSelected(response: Event.PieChartBalanceSelected.Response)
-    func presentActionsDidChange(response: Event.ActionsDidChange.Response)
 }
 
 extension BalancesList {
@@ -212,13 +211,6 @@ extension BalancesList.Presenter: BalancesList.PresentationLogic {
         )
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displayPieChartBalanceSelected(viewModel: viewModel)
-        }
-    }
-    
-    public func presentActionsDidChange(response: Event.ActionsDidChange.Response) {
-        let viewModel = response
-        self.presenterDispatch.display { (displayLogic) in
-            displayLogic.displayActionsDidChange(viewModel: viewModel)
         }
     }
 }

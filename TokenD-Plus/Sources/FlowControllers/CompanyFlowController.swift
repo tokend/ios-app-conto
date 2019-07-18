@@ -1,5 +1,4 @@
 import UIKit
-import SideMenuController
 import TokenDWallet
 
 class CompanyFlowController: BaseSignedInFlowController {
