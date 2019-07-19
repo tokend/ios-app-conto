@@ -70,6 +70,7 @@ extension RegisterScene {
         // MARK: - SignOutWorker
         
         func performSignOut(completion: @escaping () -> Void) {
+            
             self.userDataManager.clearAllData()
             self.keychainManager.clearAllData()
             

@@ -194,15 +194,11 @@ class BalancesListFlowController: BaseSignedInFlowController {
             imageUtility: imageUtility,
             balanceId: selectedBalanceId
         )
-        let headerRateProvider: BalanceHeader.RateProviderProtocol = RateProvider(
-            assetPairsRepo: self.reposController.assetPairsRepo
-        )
         let container = SharedSceneBuilder.createBalanceDetailsScene(
             transactionsFetcher: transactionsFetcher,
             actionProvider: actionProvider,
             transactionsRouting: transactionsRouting,
             viewConfig: viewConfig,
-            headerRateProvider: headerRateProvider,
             balanceFetcher: balanceFetcher,
             balanceId: selectedBalanceId
         )
