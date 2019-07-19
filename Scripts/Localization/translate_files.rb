@@ -33,11 +33,11 @@ def parse_file(lines, dictionary)
 end
 
 # # ANDROID SRC LOCALIZATION FILES
-source_en_file_path = 'Source/strings_en.xml'
+source_en_file_path = 'Source/strings_ru.xml'
 source_ru_file_path = 'Source/strings_ua.xml'
 #
 # IOS LOCALIZATION FILES
-source_localization_file_path = "./../../TokenD-Plus/Resources/Base.lproj/Localizable.strings"
+source_localization_file_path = "./../../TokenD-Plus/Resources/ru.lproj/Localizable.strings"
 target_file_path = './../../TokenD-Plus/Resources/uk-UA.lproj/Localizable.strings'
 
 source_content_en = File.read(source_en_file_path)
