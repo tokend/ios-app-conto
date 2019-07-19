@@ -162,6 +162,12 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             rootNavigation: self.rootNavigation,
             companyName: companyName,
             ownerAccountId: ownerAccountId,
+            updateLanguageContent: { [weak self] in
+                self?.runCompanyFlow(
+                    ownerAccountId: ownerAccountId,
+                    companyName: companyName
+                )
+            },
             onSignOut: self.onSignOut,
             onBackToCompanies: { [weak self] in
                 self?.run()

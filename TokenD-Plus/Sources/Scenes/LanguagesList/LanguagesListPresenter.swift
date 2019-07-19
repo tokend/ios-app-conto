@@ -4,6 +4,7 @@ public protocol LanguagesListPresentationLogic {
     typealias Event = LanguagesList.Event
     
     func presentViewDidLoad(response: Event.ViewDidLoad.Response)
+    func presentLanguageChanged(response: Event.LanguageChanged.Response)
 }
 
 extension LanguagesList {
@@ -38,6 +39,21 @@ extension LanguagesList.Presenter: LanguagesList.PresentationLogic {
         let viewModel = Event.ViewDidLoad.ViewModel(languages: cells)
         self.presenterDispatch.display { displayLogic in
             displayLogic.displayViewDidLoad(viewModel: viewModel)
+        }
+    }
+    
+    public func presentLanguageChanged(response: Event.LanguageChanged.Response) {
+        let viewModel: Event.LanguageChanged.ViewModel
+        switch response {
+            
+        case .failure(let error):
+            viewModel = .failure(error.localizedDescription)
+            
+        case .success:
+            viewModel = .success
+        }
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displayLanguageChanged(viewModel: viewModel)
         }
     }
 }

@@ -2,6 +2,7 @@ import Foundation
 
 extension LanguagesList {
     public struct Routing {
-//        public let onBackAction: () -> Void
+        let showError: (String) -> Void
+        let onLanguageChanged: () -> Void
     }
 }

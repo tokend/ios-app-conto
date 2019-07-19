@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A456E9D8F6860BA2357882C2 /* libPods-TokenD-Plus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */; };
+		DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */; };
+		DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */; };
 		DB28C4A722CFAF58005362FD /* ReceiveAddressRedeemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */; };
 		DB28C4A922CFB79A005362FD /* ReceiveAddressHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A822CFB79A005362FD /* ReceiveAddressHeader.swift */; };
 		DB28C4BB22D35B4C005362FD /* AcceptRedeemFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4BA22D35B4C005362FD /* AcceptRedeemFlowController.swift */; };
@@ -666,6 +668,8 @@
 		0E666969207E5FC77A1609F5 /* Pods-TokenD-Plus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.debug.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.debug.xcconfig"; sourceTree = "<group>"; };
 		51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TokenD-Plus.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AD850E3986FEE4CD13E7C4 /* Pods-TokenD-Plus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.release.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.release.xcconfig"; sourceTree = "<group>"; };
+		DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListChangeLanguageWorker.swift; sourceTree = "<group>"; };
+		DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWorker.swift; sourceTree = "<group>"; };
 		DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressRedeemManager.swift; sourceTree = "<group>"; };
 		DB28C4A822CFB79A005362FD /* ReceiveAddressHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressHeader.swift; sourceTree = "<group>"; };
 		DB28C4BA22D35B4C005362FD /* AcceptRedeemFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemFlowController.swift; sourceTree = "<group>"; };
@@ -1352,6 +1356,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		DB0AFD2C22E0A31400FB39FF /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
+		DB0AFD3022E1CC1A00FB39FF /* NotificationCenterWorker */ = {
+			isa = PBXGroup;
+			children = (
+				DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */,
+			);
+			path = NotificationCenterWorker;
+			sourceTree = "<group>";
+		};
 		DB363DFE22DCDB8C00F5761C /* FacilitiesList */ = {
 			isa = PBXGroup;
 			children = (
@@ -1417,6 +1437,7 @@
 				DB363E2B22DF764700F5761C /* LanguagesListRouting.swift */,
 				DB363E2D22DF764700F5761C /* LanguagesListViewController.swift */,
 				DB363E3622DF77A600F5761C /* Views */,
+				DB0AFD2C22E0A31400FB39FF /* Workers */,
 			);
 			path = LanguagesList;
 			sourceTree = "<group>";
@@ -1459,13 +1480,13 @@
 		DB72099522C1347D00ED116A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DB363E2522DF715D00F5761C /* ru.lproj */,
-				DB363E1F22DF703300F5761C /* uk-UA.lproj */,
-				DB363E1322DF6CCA00F5761C /* Base.lproj */,
 				DBCA02E422D78DE500503025 /* acknowledgements.markdown */,
 				DB720F1E22C210A200ED116A /* APIConfiguration.plist */,
 				DB72098F22C1347200ED116A /* Info.plist */,
 				DB72098A22C1347200ED116A /* Assets.xcassets */,
+				DB363E1322DF6CCA00F5761C /* Base.lproj */,
+				DB363E2522DF715D00F5761C /* ru.lproj */,
+				DB363E1F22DF703300F5761C /* uk-UA.lproj */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1747,14 +1768,14 @@
 		DB7209F522C1396B00ED116A /* Sales */ = {
 			isa = PBXGroup;
 			children = (
-				DB7209F622C1396B00ED116A /* SalesModels.swift */,
-				DB7209F722C1396B00ED116A /* SalesRouting.swift */,
 				DB7209F822C1396B00ED116A /* SalesConfigurator.swift */,
-				DB7209F922C1396B00ED116A /* SalesPresenter.swift */,
-				DB7209FA22C1396B00ED116A /* SalesViewController.swift */,
 				DB7209FB22C1396B00ED116A /* SalesInteractor.swift */,
-				DB7209FC22C1396B00ED116A /* Workers */,
+				DB7209F622C1396B00ED116A /* SalesModels.swift */,
+				DB7209F922C1396B00ED116A /* SalesPresenter.swift */,
+				DB7209F722C1396B00ED116A /* SalesRouting.swift */,
+				DB7209FA22C1396B00ED116A /* SalesViewController.swift */,
 				DB7209FF22C1396B00ED116A /* Views */,
+				DB7209FC22C1396B00ED116A /* Workers */,
 			);
 			path = Sales;
 			sourceTree = "<group>";
@@ -2883,6 +2904,7 @@
 				DB720C1822C1396B00ED116A /* ChartCardValueFormatter */,
 				DB720C2122C1396B00ED116A /* ClientRedirections */,
 				DB720C2822C1396B00ED116A /* FeeLoader */,
+				DB0AFD3022E1CC1A00FB39FF /* NotificationCenterWorker */,
 				DB720C1622C1396B00ED116A /* PasswordValidator */,
 				DB720C2522C1396B00ED116A /* QRCodeGenerator */,
 				DB720C1A22C1396B00ED116A /* RateProvider */,
@@ -4080,6 +4102,7 @@
 				DB720ED422C1396C00ED116A /* BXFInteractiveLabel.swift in Sources */,
 				DB720D7C22C1396B00ED116A /* CreateOfferConfigurator.swift in Sources */,
 				DB720E9222C1396C00ED116A /* Array+IndexInBounds.swift in Sources */,
+				DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */,
 				DB720E5A22C1396C00ED116A /* TransactionsListSceneDateFormatter.swift in Sources */,
 				DB720D8922C1396B00ED116A /* TransactionDetailsConfigurator.swift in Sources */,
 				DB720D7022C1396B00ED116A /* BalanceHeaderWithPickerConfigurator.swift in Sources */,
@@ -4169,6 +4192,7 @@
 				DB720CE322C1396B00ED116A /* UpdatePasswordConfigurator.swift in Sources */,
 				DB720EF322C1396C00ED116A /* UserDataProvider.swift in Sources */,
 				DB28C4C122D38EFE005362FD /* Array+Numeric.swift in Sources */,
+				DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -406,7 +406,7 @@
     <string name="receive_title">Получение</string>
     <string name="asset_details">Детали актива</string>
     <string name="template_asset">Актив: %1$s</string>
-    <string name="remove_vote_action">Удалить голос</string>
+    <string name="remove_vote_action">÷</string>
     <string name="vote_action">Проголосовать</string>
     <string name="no_polls_found">Опросов нет</string>
     <string name="vote_has_been_submitted">Голос принят</string>

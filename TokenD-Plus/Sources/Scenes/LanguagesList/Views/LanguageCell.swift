@@ -63,7 +63,7 @@ extension LanguagesList {
             }
             
             private func setupTitleLabel() {
-                self.titleLabel.font = Theme.Fonts.plainTextFont
+                self.titleLabel.font = Theme.Fonts.largePlainTextFont
                 self.titleLabel.textColor = Theme.Colors.textOnContentBackgroundColor
                 self.titleLabel.textAlignment = .left
             }
@@ -73,7 +73,7 @@ extension LanguagesList {
                 
                 self.titleLabel.snp.makeConstraints { (make) in
                     make.leading.trailing.equalToSuperview().inset(self.sideInset)
-                    make.top.bottom.equalToSuperview()
+                    make.top.bottom.equalToSuperview().inset(self.topInset)
                 }
             }
         }

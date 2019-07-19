@@ -34,11 +34,11 @@ end
 
 # # ANDROID SRC LOCALIZATION FILES
 source_en_file_path = 'Source/strings_en.xml'
-source_ru_file_path = 'Source/strings_ru.xml'
+source_ru_file_path = 'Source/strings_ua.xml'
 #
 # IOS LOCALIZATION FILES
 source_localization_file_path = "./../../TokenD-Plus/Resources/Base.lproj/Localizable.strings"
-target_file_path = 'Localizable.strings'
+target_file_path = './../../TokenD-Plus/Resources/uk-UA.lproj/Localizable.strings'
 
 source_content_en = File.read(source_en_file_path)
 source_content_ru = File.read(source_ru_file_path)
@@ -69,7 +69,7 @@ $dictionary_en.each_key { |key|
   end
 }
 
-loc_keys_string = ""
+loc_keys_string = "// Localized strings\n\n"
 
 source_localization_content = File.read(source_localization_file_path)
 source_localization_content.encode!('UTF-8')
@@ -92,9 +92,7 @@ source_localization_content_lines.each { |line|
     end
     loc_keys_string += string_to_write
 }
-puts loc_keys_string
 
-
-# target_file = File.open(target_file_path, 'w')
-# target_file.write(loc_keys_string)
-# target_file.close
+target_file = File.open(target_file_path, 'w')
+target_file.write(loc_keys_string)
+target_file.close

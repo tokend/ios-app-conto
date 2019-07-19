@@ -51,6 +51,8 @@ extension FacilitiesList {
             self.setupTableView()
             self.setupLayout()
             
+            self.observeLanguageChanges()
+            
             let request = Event.ViewDidLoad.Request()
             self.interactorDispatch?.sendRequest { businessLogic in
                 businessLogic.onViewDidLoad(request: request)
@@ -58,6 +60,21 @@ extension FacilitiesList {
         }
         
         // MARK: - Private
+        
+        private func observeLanguageChanges() {
+            NotificationCenterUtil.instance.addObserver(
+                forName: Notification.Name("LCLLanguageChangeNotification"),
+                using: { [weak self] notification in
+                    DispatchQueue.main.async {
+                        self?.navigationItem.title = Localized(.other)
+                        let request = Event.ViewDidLoad.Request()
+                        self?.interactorDispatch?.sendRequest { businessLogic in
+                            businessLogic.onViewDidLoad(request: request)
+                        }
+                    }
+                }
+            )
+        }
         
         private func setupTableView() {
             self.tableView.backgroundColor = Theme.Colors.containerBackgroundColor

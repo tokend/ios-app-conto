@@ -42,8 +42,9 @@ extension Settings {
             
             self.setupView()
             self.setupTableView()
-            
             self.setupLayout()
+            
+            self.observeLanguageChanges()
             
             let request = Settings.Event.ViewDidLoad.Request()
             self.interactorDispatch?.sendRequest { businessLogic in
@@ -63,6 +64,19 @@ extension Settings {
         
         private func setupView() {
             self.view.backgroundColor = Theme.Colors.containerBackgroundColor
+        }
+        
+        private func observeLanguageChanges() {
+            NotificationCenterUtil.instance.addObserver(
+                forName: Notification.Name("LCLLanguageChangeNotification"),
+                using: { [weak self] notification in
+                    self?.navigationItem.title = Localized(.settings)
+                    let request = Settings.Event.ViewDidLoad.Request()
+                    self?.interactorDispatch?.sendRequest { businessLogic in
+                        businessLogic.onViewDidLoad(request: request)
+                    }
+                }
+            )
         }
         
         private func setupTableView() {

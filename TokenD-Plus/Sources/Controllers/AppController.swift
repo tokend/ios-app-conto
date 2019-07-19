@@ -303,6 +303,19 @@ class AppController {
             rootNavigation: rootNavigation,
             companyName: companyName,
             ownerAccountId: ownerAccountId,
+            updateLanguageContent: { [weak self] in
+                self?.runCompanyFlow(
+                    appController: appController,
+                    flowControllerStack: flowControllerStack,
+                    reposController: reposController,
+                    managersController: managersController,
+                    userDataProvider: userDataProvider,
+                    keychainDataProvider: keychainDataProvider,
+                    rootNavigation: rootNavigation,
+                    companyName: companyName,
+                    ownerAccountId: ownerAccountId
+                )
+            },
             onSignOut:  { [weak self] in
                 self?.initiateSignOut()
             },

@@ -63,6 +63,8 @@ extension Polls {
             self.setupTableView()
             self.setupLayout()
             
+            self.observeLanguageChanges()
+            
             let request = Event.ViewDidLoad.Request()
             self.interactorDispatch?.sendRequest { businessLogic in
                 businessLogic.onViewDidLoad(request: request)
@@ -70,6 +72,21 @@ extension Polls {
         }
         
         // MARK: - Private
+        
+        private func observeLanguageChanges() {
+            NotificationCenterUtil.instance.addObserver(
+                forName: Notification.Name("LCLLanguageChangeNotification"),
+                using: { [weak self] notification in
+                    DispatchQueue.main.async {
+                        self?.navigationItem.title = Localized(.polls)
+                        let request = Event.RefreshInitiated.Request()
+                        self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                            businessLogic.onRefreshInitiated(request: request)
+                        })
+                    }
+                }
+            )
+        }
         
         private func updateContentOffset(offset: CGPoint) {
             if offset.y > 0 {

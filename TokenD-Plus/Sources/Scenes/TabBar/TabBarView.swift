@@ -47,6 +47,8 @@ extension TabBar {
             super.init(frame: frame)
             
             self.setupView()
+            
+            self.observeLanguageChanges()
         }
         
         required init?(coder aDecoder: NSCoder) {
@@ -54,6 +56,20 @@ extension TabBar {
         }
         
         // MARK: - Private
+        
+        private func observeLanguageChanges() {
+            NotificationCenterUtil.instance.addObserver(
+                forName: Notification.Name("LCLLanguageChangeNotification"),
+                using: { [weak self] notification in
+                    DispatchQueue.main.async {
+                        let request = Event.ViewDidLoad.Request()
+                        self?.interactorDispatch?.sendRequest { businessLogic in
+                            businessLogic.onViewDidLoad(request: request)
+                        }
+                    }
+                }
+            )
+        }
         
         private func setupView() {
             self.tintColor = Theme.Colors.accentColor

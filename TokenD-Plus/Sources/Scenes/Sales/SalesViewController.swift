@@ -69,6 +69,7 @@ extension Sales {
             self.setupNavigationBar()
             self.setupLayout()
             
+            self.observeLanguageChanges()
             self.observeTableViewSizeChanges()
             self.observeLoadMoreIndicator()
             
@@ -76,6 +77,21 @@ extension Sales {
             self.interactorDispatch?.sendRequest { businessLogic in
                 businessLogic.onViewDidLoad(request: request)
             }
+        }
+        
+        private func observeLanguageChanges() {
+            NotificationCenterUtil.instance.addObserver(
+                forName: Notification.Name("LCLLanguageChangeNotification"),
+                using: { [weak self] notification in
+                    DispatchQueue.main.async {
+                        self?.navigationItem.title = Localized(.sales)
+                        let request = Event.DidInitiateRefresh.Request()
+                        self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                            businessLogic.onDidInitiateRefresh(request: request)
+                        })
+                    }
+                }
+            )
         }
         
         override func observeValue(

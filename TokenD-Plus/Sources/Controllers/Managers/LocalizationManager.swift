@@ -2,8 +2,15 @@ import UIKit
 
 class LocalizationManager {
     
+    // MARK: - Public properties
+    
+    public static let languageKey: String = "language"
+    
+    // MARK: - Private properties
+    
     private static let userDefaults = UserDefaults.standard
-    private static let langKey: String = "language"
+    
+    // MARK: - Public
     
     static func localizedString(key: LocKey) -> String {
         let bundle = LocalizationManager.getBundle()
@@ -82,9 +89,11 @@ class LocalizationManager {
         return localizedString
     }
     
+    // MARK: - Private
+    
     private static func getBundle() -> Bundle {
         var bundle = Bundle.main
-        if let language =  LocalizationManager.userDefaults.string(forKey: LocalizationManager.langKey),
+        if let language =  LocalizationManager.userDefaults.string(forKey: LocalizationManager.languageKey),
             let customBundlePath = bundle.path(forResource: language, ofType: "lproj"),
             let customBundle = Bundle(path: customBundlePath) {
             

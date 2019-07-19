@@ -4,6 +4,7 @@ public protocol LanguagesListDisplayLogic: class {
     typealias Event = LanguagesList.Event
     
     func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel)
+    func displayLanguageChanged(viewModel: Event.LanguageChanged.ViewModel)
 }
 
 extension LanguagesList {
@@ -49,10 +50,18 @@ extension LanguagesList {
         public override func viewDidLoad() {
             super.viewDidLoad()
             
+            self.setupView()
+            self.setupTableView()
+            self.setupLayout()
+            
             let request = Event.ViewDidLoad.Request()
             self.interactorDispatch?.sendRequest { businessLogic in
                 businessLogic.onViewDidLoad(request: request)
             }
+        }
+        
+        private func setupView() {
+            self.view.backgroundColor = Theme.Colors.containerBackgroundColor
         }
         
         private func setupTableView() {
@@ -80,7 +89,19 @@ extension LanguagesList {
 extension LanguagesList.ViewController: LanguagesList.DisplayLogic {
     
     public func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel) {
-        
+        self.cells = viewModel.languages
+        self.tableView.reloadData()
+    }
+    
+    public func displayLanguageChanged(viewModel: Event.LanguageChanged.ViewModel) {
+        switch viewModel {
+            
+        case .failure(let message):
+            self.routing?.showError(message)
+            
+        case .success:
+            self.routing?.onLanguageChanged()
+        }
     }
 }
 
@@ -105,6 +126,11 @@ extension LanguagesList.ViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
+        let model = self.cells[indexPath.row]
         
+        let request = Event.LanguageChanged.Request(languageCode: model.code)
+        self.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+            businessLogic.onLanguageChanged(request: request)
+        })
     }
 }

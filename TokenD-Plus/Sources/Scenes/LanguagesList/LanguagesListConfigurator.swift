@@ -6,13 +6,17 @@ extension LanguagesList {
         
         public static func configure(
             viewController: ViewController,
+            changeLanguageWorker: ChangeLanguageWorkerProtocol,
             routing: Routing?,
             onDeinit: DeinitCompletion = nil
             ) {
             
             let presenterDispatch = PresenterDispatch(displayLogic: viewController)
             let presenter = Presenter(presenterDispatch: presenterDispatch)
-            let interactor = Interactor(presenter: presenter)
+            let interactor = Interactor(
+                presenter: presenter,
+                changeLanguageWorker: changeLanguageWorker
+            )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)
             viewController.inject(
                 interactorDispatch: interactorDispatch,

@@ -4,6 +4,7 @@ public protocol LanguagesListBusinessLogic {
     typealias Event = LanguagesList.Event
     
     func onViewDidLoad(request: Event.ViewDidLoad.Request)
+    func onLanguageChanged(request: Event.LanguageChanged.Request)
 }
 
 extension LanguagesList {
@@ -18,11 +19,17 @@ extension LanguagesList {
         // MARK: - Private properties
         
         private let presenter: PresentationLogic
+        private let changeLanguageWorker: ChangeLanguageWorkerProtocol
         
         // MARK: -
         
-        public init(presenter: PresentationLogic) {
+        public init(
+            presenter: PresentationLogic,
+            changeLanguageWorker: ChangeLanguageWorkerProtocol
+            ) {
+            
             self.presenter = presenter
+            self.changeLanguageWorker = changeLanguageWorker
         }
     }
 }
@@ -32,7 +39,7 @@ extension LanguagesList.Interactor: LanguagesList.BusinessLogic {
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
         let english = Model.Language(
             name: "English",
-            code: "en"
+            code: "Base"
         )
         let russian = Model.Language(
             name: "Русский",
@@ -45,5 +52,22 @@ extension LanguagesList.Interactor: LanguagesList.BusinessLogic {
         let cells: [Model.Language] = [english, russian, ukrainian]
         let response = Event.ViewDidLoad.Response(languages: cells)
         self.presenter.presentViewDidLoad(response: response)
+    }
+    
+    public func onLanguageChanged(request: Event.LanguageChanged.Request) {
+        self.changeLanguageWorker.changeLanguage(
+            code: request.languageCode,
+            completion: { [weak self] (result) in
+                let response: Event.LanguageChanged.Response
+                switch result {
+                    
+                case .failure(let error):
+                    response = .failure(error)
+                    
+                case .success:
+                    response = .success
+                }
+                self?.presenter.presentLanguageChanged(response: response)
+        })
     }
 }

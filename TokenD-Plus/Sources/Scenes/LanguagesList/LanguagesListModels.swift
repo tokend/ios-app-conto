@@ -38,4 +38,18 @@ extension LanguagesList.Event {
             let languages: [LanguagesList.LanguageCell.ViewModel]
         }
     }
+    
+    public struct LanguageChanged {
+        public struct Request {
+            let languageCode: String
+        }
+        public enum Response {
+            case success
+            case failure(Swift.Error)
+        }
+        public enum ViewModel {
+            case success
+            case failure(String)
+        }
+    }
 }
