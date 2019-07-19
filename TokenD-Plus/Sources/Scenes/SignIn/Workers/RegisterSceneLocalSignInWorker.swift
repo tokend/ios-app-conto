@@ -7,16 +7,19 @@ extension RegisterScene {
         
         // MARK: - Private properties
         
+        private let settingsManager: SettingsManagerProtocol
         private let userDataManager: UserDataManagerProtocol
         private let keychainManager: KeychainManagerProtocol
         
         // MARK: -
         
         init(
+            settingsManager: SettingsManagerProtocol,
             userDataManager: UserDataManagerProtocol,
             keychainManager: KeychainManagerProtocol
             ) {
             
+            self.settingsManager = settingsManager
             self.userDataManager = userDataManager
             self.keychainManager = keychainManager
         }
@@ -70,7 +73,7 @@ extension RegisterScene {
         // MARK: - SignOutWorker
         
         func performSignOut(completion: @escaping () -> Void) {
-            
+            self.settingsManager.cleanAccountRelatedInfo()
             self.userDataManager.clearAllData()
             self.keychainManager.clearAllData()
             

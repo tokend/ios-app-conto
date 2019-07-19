@@ -30,7 +30,6 @@
 		DB363E1822DF6CCA00F5761C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB363E1422DF6CCA00F5761C /* LaunchScreen.storyboard */; };
 		DB363E1922DF6CCA00F5761C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB363E1622DF6CCA00F5761C /* Localizable.strings */; };
 		DB363E2322DF711200F5761C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB363E2122DF711200F5761C /* Localizable.strings */; };
-		DB363E2822DF715D00F5761C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB363E2622DF715D00F5761C /* Localizable.strings */; };
 		DB363E3022DF764700F5761C /* LanguagesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2A22DF764700F5761C /* LanguagesListPresenter.swift */; };
 		DB363E3122DF764700F5761C /* LanguagesListRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2B22DF764700F5761C /* LanguagesListRouting.swift */; };
 		DB363E3222DF764700F5761C /* LanguagesListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2C22DF764700F5761C /* LanguagesListModels.swift */; };
@@ -691,7 +690,6 @@
 		DB363E1722DF6CCA00F5761C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Localizable.strings; sourceTree = "<group>"; };
 		DB363E2222DF711200F5761C /* uk-UA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "uk-UA"; path = Localizable.strings; sourceTree = "<group>"; };
 		DB363E2422DF714E00F5761C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ../ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DB363E2722DF715D00F5761C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
 		DB363E2A22DF764700F5761C /* LanguagesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListPresenter.swift; sourceTree = "<group>"; };
 		DB363E2B22DF764700F5761C /* LanguagesListRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListRouting.swift; sourceTree = "<group>"; };
 		DB363E2C22DF764700F5761C /* LanguagesListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListModels.swift; sourceTree = "<group>"; };
@@ -1419,14 +1417,6 @@
 			path = "uk-UA.lproj";
 			sourceTree = "<group>";
 		};
-		DB363E2522DF715D00F5761C /* ru.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				DB363E2622DF715D00F5761C /* Localizable.strings */,
-			);
-			path = ru.lproj;
-			sourceTree = "<group>";
-		};
 		DB363E2922DF761200F5761C /* LanguagesList */ = {
 			isa = PBXGroup;
 			children = (
@@ -1485,7 +1475,6 @@
 				DB72098F22C1347200ED116A /* Info.plist */,
 				DB72098A22C1347200ED116A /* Assets.xcassets */,
 				DB363E1322DF6CCA00F5761C /* Base.lproj */,
-				DB363E2522DF715D00F5761C /* ru.lproj */,
 				DB363E1F22DF703300F5761C /* uk-UA.lproj */,
 			);
 			path = Resources;
@@ -3487,7 +3476,6 @@
 				DB363E1822DF6CCA00F5761C /* LaunchScreen.storyboard in Resources */,
 				DB363E2322DF711200F5761C /* Localizable.strings in Resources */,
 				DB363E1922DF6CCA00F5761C /* Localizable.strings in Resources */,
-				DB363E2822DF715D00F5761C /* Localizable.strings in Resources */,
 				DB720F1F22C210A300ED116A /* APIConfiguration.plist in Resources */,
 				DB720ED822C1396C00ED116A /* BXFStaticTableViewButtonCell.xib in Resources */,
 			);
@@ -4220,14 +4208,6 @@
 			children = (
 				DB363E2222DF711200F5761C /* uk-UA */,
 				DB363E2422DF714E00F5761C /* ru */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		DB363E2622DF715D00F5761C /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DB363E2722DF715D00F5761C /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

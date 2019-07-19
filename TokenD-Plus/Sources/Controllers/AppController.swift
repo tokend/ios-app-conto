@@ -374,6 +374,7 @@ class AppController {
     
     private func performSignOut(completion: (() -> Void)? = nil) {
         let signOutWorker = RegisterScene.LocalSignInWorker(
+            settingsManager: self.flowControllerStack.settingsManager,
             userDataManager: self.userDataManager,
             keychainManager: self.keychainManager
         )

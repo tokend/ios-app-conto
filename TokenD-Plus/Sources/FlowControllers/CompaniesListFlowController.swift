@@ -203,6 +203,7 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     
     private func performSignOut() {
         let signOutWorker = RegisterScene.LocalSignInWorker(
+            settingsManager: self.flowControllerStack.settingsManager,
             userDataManager: self.managersController.userDataManager,
             keychainManager: self.managersController.keychainManager
         )

@@ -137,6 +137,7 @@ class LocalAuthFlowController: BaseFlowController {
         )
         
         let localAuthWorker = RegisterScene.LocalSignInWorker(
+            settingsManager: self.flowControllerStack.settingsManager,
             userDataManager: self.userDataManager,
             keychainManager: self.keychainManager
         )

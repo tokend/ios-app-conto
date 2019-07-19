@@ -21,8 +21,18 @@ extension CompaniesList {
         
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
         private let emptyView: EmptyView.View = EmptyView.View()
+        private let refreshControl: UIRefreshControl = UIRefreshControl()
         
-        private var companies: [CompanyCell.ViewModel] = []
+        private var companies: [CompanyCell.ViewModel] = [] {
+            didSet {
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
+                }
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.tableView.reloadData()
+                })
+            }
+        }
         private let disposeBag: DisposeBag = DisposeBag()
         
         // MARK: -
@@ -55,6 +65,7 @@ extension CompaniesList {
             
             self.setupTableView()
             self.setupEmptyView()
+            self.setupRefreshControl()
             self.setupLayout()
             
             let request = Event.ViewDidLoad.Request()
@@ -74,6 +85,19 @@ extension CompaniesList {
         }
         
         // MARK: - Setup
+        
+        private func setupRefreshControl() {
+            self.refreshControl
+                .rx
+                .controlEvent(.valueChanged)
+                .subscribe(onNext: { [weak self] (_) in
+                    let request = Event.RefreshInitiated.Request()
+                    self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                        businessLogic.onRefreshInitiated(request: request)
+                    })
+                })
+                .disposed(by: self.disposeBag)
+        }
         
         private func setupTableView() {
             self.tableView.backgroundColor = Theme.Colors.contentBackgroundColor
@@ -101,6 +125,7 @@ extension CompaniesList {
         private func setupLayout() {
             self.view.addSubview(self.tableView)
             self.view.addSubview(self.emptyView)
+            self.tableView.addSubview(self.refreshControl)
             
             self.tableView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
@@ -121,7 +146,6 @@ extension CompaniesList.ViewController: CompaniesList.DisplayLogic {
         case .companies(let companies):
             self.emptyView.isHidden = true
             self.companies = companies
-            self.tableView.reloadData()
             
         case .empty(let message):
             self.emptyView.message = message

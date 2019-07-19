@@ -4,6 +4,8 @@ protocol SettingsManagerProtocol: class {
     var biometricsAuthEnabled: Bool { get set }
     var businessOwnerAccountId: String? { get set }
     var businessName: String? { get set }
+    
+    func cleanAccountRelatedInfo()
 }
 
 class SettingsManager {
@@ -83,4 +85,10 @@ class SettingsManager {
     }
 }
 
-extension SettingsManager: SettingsManagerProtocol {}
+extension SettingsManager: SettingsManagerProtocol {
+    
+    public func cleanAccountRelatedInfo() {
+        self.userDefaults.set(nil, forKey: SettingsManager.businessNameKey)
+        self.userDefaults.set(nil, forKey: SettingsManager.businessOwnerAccountIdKey)
+    }
+}
