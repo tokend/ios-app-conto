@@ -25,7 +25,16 @@ extension Polls {
         private let refreshControl: UIRefreshControl = UIRefreshControl()
         private let emptyView: EmptyView.View = EmptyView.View()
         
-        private var polls: [PollCell.ViewModel] = []
+        private var polls: [PollCell.ViewModel] = [] {
+            didSet {
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
+                }
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.tableView.reloadData()
+                })
+            }
+        }
         
         private let disposeBag: DisposeBag = DisposeBag()
         
@@ -165,7 +174,6 @@ extension Polls.ViewController: Polls.DisplayLogic {
         case .polls(let polls):
             self.emptyView.isHidden = true
             self.polls = polls
-            self.tableView.reloadData()
         }
     }
     
@@ -191,10 +199,13 @@ extension Polls.ViewController: Polls.DisplayLogic {
         switch viewModel {
             
         case .loaded:
-            self.refreshControl.endRefreshing()
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
+            }
+            self.routing?.hideLoading()
             
         case .loading:
-            self.refreshControl.beginRefreshing()
+            self.routing?.showLoading()
         }
     }
 }
