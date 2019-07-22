@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>api_endpoint</key>
-	<string>https://7a2a37bc.ngrok.io/_/api/</string>
+	<string>https://api.staging.conto.me/</string>
 	<key>storage_endpoint</key>
-	<string>https://7a2a37bc.ngrok.io/_/storage/api</string>
+	<string>https://s3.us-east-1.amazonaws.com/contostaging-identity-storage-festive-cannon</string>
 	<key>terms_address</key>
 	<string>https://demo.tokend.io/terms</string>
 	<key>kyc</key>
