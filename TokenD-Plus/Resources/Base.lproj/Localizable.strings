@@ -88,6 +88,7 @@
 "choose_email" = "Choose email";
 "close_time" = "Close time";
 "code" = "Code";
+"common" = "Common";
 "companies" = "Companies";
 "confirm" = "Confirm";
 "confirm_new_password" = "Confirm New Password";
@@ -281,6 +282,7 @@
 "issuance" = "Issuance";
 "issued" = "Issued";
 "keychaindataprovider_should_always_provide_key" = "KeychainDataProvider should always provide key";
+"language" = "Language";
 "last_name" = "Last name";
 "loading" = "Loading...";
 "locked" = "Locked";

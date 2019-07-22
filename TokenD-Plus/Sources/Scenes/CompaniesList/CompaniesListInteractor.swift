@@ -5,6 +5,7 @@ public protocol CompaniesListBusinessLogic {
     typealias Event = CompaniesList.Event
     
     func onViewDidLoad(request: Event.ViewDidLoad.Request)
+    func onRefreshInitiated(request: Event.RefreshInitiated.Request)
 }
 
 extension CompaniesList {
@@ -74,5 +75,9 @@ extension CompaniesList.Interactor: CompaniesList.BusinessLogic {
         self.observeCompanies()
         self.observeLoadingStatus()
         self.observeErrors()
+    }
+    
+    public func onRefreshInitiated(request: Event.RefreshInitiated.Request) {
+        self.companiesFetcher.reloadCompanies()
     }
 }

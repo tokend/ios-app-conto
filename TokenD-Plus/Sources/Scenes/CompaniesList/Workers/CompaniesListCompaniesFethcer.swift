@@ -6,6 +6,7 @@ public protocol CompaniesListCompaniesFetcherProtocol {
     func observeCompanies() -> Observable<[CompaniesList.Model.Company]>
     func observeLoadingStatus() -> Observable<CompaniesList.Model.LoadingStatus>
     func observeErrors() -> Observable<Swift.Error>
+    func reloadCompanies()
 }
 
 extension CompaniesList {
@@ -91,6 +92,10 @@ extension CompaniesList.CompaniesFetcher: CompaniesList.CompaniesFetcherProtocol
     
     public func observeErrors() -> Observable<Error> {
         return self.errors.asObservable()
+    }
+    
+    public func reloadCompanies() {
+        self.loadCompanies()
     }
 }
 

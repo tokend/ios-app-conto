@@ -26,19 +26,19 @@ extension TabBar {
             let balancesTab = Model.TabItem(
                 title: Localized(.balances),
                 image: Assets.amount.image,
-                identifier: Localized(.balances),
+                identifier: "balances",
                 isSelectable: true
             )
             let salesTab = Model.TabItem(
                 title: Localized(.sales),
                 image: Assets.exploreFundsIcon.image,
-                identifier: Localized(.sales),
+                identifier: "sales",
                 isSelectable: true
             )
             let pollsTab = Model.TabItem(
                 title: Localized(.polls),
                 image: Assets.polls.image,
-                identifier: Localized(.polls),
+                identifier: "polls",
                 isSelectable: true
             )
             let operationsActions = self.getActions()
@@ -46,13 +46,13 @@ extension TabBar {
                 title: Localized(.operations),
                 image: Assets.walletIcon.image,
                 actions: operationsActions,
-                identifier: Localized(.operations),
+                identifier: "operations",
                 isSelectable: false
             )
             let otherTab = Model.TabItem(
                 title: Localized(.other),
                 image: Assets.menuIcon.image,
-                identifier: Localized(.other),
+                identifier: "other",
                 isSelectable: true
             )
             
@@ -70,21 +70,21 @@ extension TabBar {
             let receiveAction = Model.ActionModel(
                 title: Localized(.receive),
                 icon: Assets.receive.image,
-                actionIdentifier: Localized(.receive)
+                actionIdentifier: "receive"
             )
             actions.append(receiveAction)
             
             let sendAction = Model.ActionModel(
                 title: Localized(.send),
                 icon: Assets.send.image,
-                actionIdentifier: Localized(.send)
+                actionIdentifier: "send"
             )
             actions.append(sendAction)
             
             let createRedeem = Model.ActionModel(
                 title: Localized(.redeem),
                 icon: Assets.redeem.image,
-                actionIdentifier: Localized(.redeem)
+                actionIdentifier: "redeem"
             )
             actions.append(createRedeem)
             

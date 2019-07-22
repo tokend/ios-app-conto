@@ -77,6 +77,8 @@ extension BalancesList {
             self.setupNavBarItems()
             self.setupLayout()
             
+            self.observeLanguageChanges()
+            
             let request = Event.ViewDidLoad.Request()
             self.interactorDispatch?.sendRequest { businessLogic in
                 businessLogic.onViewDidLoad(request: request)
@@ -84,6 +86,18 @@ extension BalancesList {
         }
         
         // MARK: - Private
+        
+        private func observeLanguageChanges() {
+            NotificationCenterUtil.instance.addObserver(
+                forName: Notification.Name("LCLLanguageChangeNotification"),
+                using: { [weak self] notification in
+                    DispatchQueue.main.async {
+                        self?.navigationItem.title = Localized(.balances)
+                        self?.tableView.reloadData()
+                    }
+                }
+            )
+        }
         
         private func showActions() {
             self.actionsList = self.button.createActionsList(

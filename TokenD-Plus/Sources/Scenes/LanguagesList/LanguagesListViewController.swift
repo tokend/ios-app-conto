@@ -1,25 +1,26 @@
 import UIKit
 
-public protocol FacilitiesListDisplayLogic: class {
-    typealias Event = FacilitiesList.Event
+public protocol LanguagesListDisplayLogic: class {
+    typealias Event = LanguagesList.Event
     
     func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel)
+    func displayLanguageChanged(viewModel: Event.LanguageChanged.ViewModel)
 }
 
-extension FacilitiesList {
-    public typealias DisplayLogic = FacilitiesListDisplayLogic
+extension LanguagesList {
+    public typealias DisplayLogic = LanguagesListDisplayLogic
     
-    @objc(FacilitiesListViewController)
+    @objc(LanguagesListViewController)
     public class ViewController: UIViewController {
         
-        public typealias Event = FacilitiesList.Event
-        public typealias Model = FacilitiesList.Model
+        public typealias Event = LanguagesList.Event
+        public typealias Model = LanguagesList.Model
         
         // MARK: - Private properties
         
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
         
-        private var sections: [Model.SectionViewModel] = []
+        private var cells: [LanguageCell.ViewModel] = []
         
         // MARK: -
         
@@ -48,10 +49,10 @@ extension FacilitiesList {
         
         public override func viewDidLoad() {
             super.viewDidLoad()
+            
+            self.setupView()
             self.setupTableView()
             self.setupLayout()
-            
-            self.observeLanguageChanges()
             
             let request = Event.ViewDidLoad.Request()
             self.interactorDispatch?.sendRequest { businessLogic in
@@ -59,21 +60,8 @@ extension FacilitiesList {
             }
         }
         
-        // MARK: - Private
-        
-        private func observeLanguageChanges() {
-            NotificationCenterUtil.instance.addObserver(
-                forName: Notification.Name("LCLLanguageChangeNotification"),
-                using: { [weak self] notification in
-                    DispatchQueue.main.async {
-                        self?.navigationItem.title = Localized(.other)
-                        let request = Event.ViewDidLoad.Request()
-                        self?.interactorDispatch?.sendRequest { businessLogic in
-                            businessLogic.onViewDidLoad(request: request)
-                        }
-                    }
-                }
-            )
+        private func setupView() {
+            self.view.backgroundColor = Theme.Colors.containerBackgroundColor
         }
         
         private func setupTableView() {
@@ -81,7 +69,7 @@ extension FacilitiesList {
             self.tableView.dataSource = self
             self.tableView.delegate = self
             self.tableView.register(classes: [
-                    FacilityCell.ViewModel.self
+                LanguageCell.ViewModel.self
                 ]
             )
             self.tableView.estimatedRowHeight = 44.0
@@ -98,47 +86,51 @@ extension FacilitiesList {
     }
 }
 
-extension FacilitiesList.ViewController: FacilitiesList.DisplayLogic {
+extension LanguagesList.ViewController: LanguagesList.DisplayLogic {
     
     public func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel) {
-        self.sections = viewModel.sections
+        self.cells = viewModel.languages
         self.tableView.reloadData()
+    }
+    
+    public func displayLanguageChanged(viewModel: Event.LanguageChanged.ViewModel) {
+        switch viewModel {
+            
+        case .failure(let message):
+            self.routing?.showError(message)
+            
+        case .success:
+            self.routing?.onLanguageChanged()
+        }
     }
 }
 
-extension FacilitiesList.ViewController: UITableViewDataSource {
+extension LanguagesList.ViewController: UITableViewDataSource {
     
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return self.sections.count
+        return self.cells.count == 0 ? 0 : 1
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.sections[section].items.count
+        return self.cells.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = self.sections[indexPath.section].items[indexPath.row]
+        let model = self.cells[indexPath.row]
         let cell = tableView.dequeueReusableCell(with: model, for: indexPath)
         return cell
     }
-    
-    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.sections[section].title
-    }
 }
 
-extension FacilitiesList.ViewController: UITableViewDelegate {
+extension LanguagesList.ViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
-        let model = self.sections[indexPath.section].items[indexPath.row]
-        switch model.type {
-            
-        case .companies:
-            self.routing?.showCompanies()
-            
-        case .settings:
-            self.routing?.showSettings()
-        }
+        let model = self.cells[indexPath.row]
+        
+        let request = Event.LanguageChanged.Request(languageCode: model.code)
+        self.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+            businessLogic.onLanguageChanged(request: request)
+        })
     }
 }

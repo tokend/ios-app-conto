@@ -91,6 +91,7 @@ enum LocKey: String {
     case choose_email
     case close_time
     case code
+    case common
     case companies
     case confirm
     case confirm_new_password
@@ -284,6 +285,7 @@ enum LocKey: String {
     case issuance
     case issued
     case keychaindataprovider_should_always_provide_key
+    case language
     case last_name
     case loading
     case locked

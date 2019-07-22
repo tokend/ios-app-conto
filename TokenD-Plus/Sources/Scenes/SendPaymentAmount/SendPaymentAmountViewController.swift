@@ -343,9 +343,11 @@ extension SendPaymentAmount.ViewController: SendPaymentAmount.DisplayLogic {
             self.routing?.onHideProgress()
             
         case .failed(let errorMessage):
+            self.routing?.onHideProgress()
             self.routing?.onShowError(errorMessage)
             
         case .succeeded(let sendModel):
+            self.routing?.onHideProgress()
             self.routing?.onSendAction?(sendModel)
         }
     }
@@ -359,6 +361,7 @@ extension SendPaymentAmount.ViewController: SendPaymentAmount.DisplayLogic {
             self.routing?.onHideProgress()
             
         case .failed(let errorMessage):
+            self.routing?.onHideProgress()
             self.routing?.onShowError(errorMessage)
             
         case .succeeded(let sendModel):

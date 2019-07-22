@@ -14,6 +14,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     // MARK: - Callbacks
     
     let onSignOut: () -> Void
+    let updateLanguageContent: () -> Void
     let onBackToCompanies: () -> Void
     
     // MARK: -
@@ -28,12 +29,14 @@ class CompanyFlowController: BaseSignedInFlowController {
         rootNavigation: RootNavigationProtocol,
         companyName: String,
         ownerAccountId: String,
+        updateLanguageContent: @escaping () -> Void,
         onSignOut: @escaping () -> Void,
         onBackToCompanies: @escaping () -> Void
         ) {
         
         self.companyName = companyName
         self.ownerAccountId = ownerAccountId
+        self.updateLanguageContent = updateLanguageContent
         self.onSignOut = onSignOut
         self.onBackToCompanies = onBackToCompanies
         
@@ -54,7 +57,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     public func run() {
         let tabBarContainer = self.setupTabsNavigationBarContainer()
-        self.navigationController.setViewControllers([tabBarContainer], animated: false)
+        self.navigationController.setViewControllers([tabBarContainer], animated: true)
         self.showHomeScreen()
     }
     
@@ -81,20 +84,20 @@ class CompanyFlowController: BaseSignedInFlowController {
         let hideTabBar: () -> Void = {
             tabBarContainer.hideTabBar()
         }
-        let backToCompanies: () -> Void = {
-            self.onBackToCompanies()
+        let backToCompanies: () -> Void = { [weak self] in
+            self?.onBackToCompanies()
         }
-        let showSendScene: () -> Void = {
-            self.showSendScene()
+        let showSendScene: () -> Void = { [weak self] in
+            self?.showSendScene()
         }
-        let showReceiveScene: () -> Void = {
-            self.showReceiveScene()
+        let showReceiveScene: () -> Void = { [weak self] in
+            self?.showReceiveScene()
         }
-        let showCreateRedeemScene: () -> Void = {
-            self.showCreateRedeemScene()
+        let showCreateRedeemScene: () -> Void = { [weak self] in
+            self?.showCreateRedeemScene()
         }
-        let acceptRedeemScene: () -> Void = {
-            self.showAcceptRedeemScene()
+        let acceptRedeemScene: () -> Void = { [weak self] in
+            self?.showAcceptRedeemScene()
         }
         let globalContentProvider = TabBarContainer.GlobalContentProvider(
             navigationController: self.navigationController,
@@ -104,6 +107,7 @@ class CompanyFlowController: BaseSignedInFlowController {
             showReceiveScene: showReceiveScene,
             showCreateRedeemScene: showCreateRedeemScene,
             showAcceptRedeemScene: acceptRedeemScene,
+            updateContentLanguage: self.updateLanguageContent,
             onSignOut: self.onSignOut,
             showTabBar: showTabBar,
             hideTabBar: hideTabBar,

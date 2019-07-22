@@ -1,30 +1,24 @@
 import Foundation
 
-extension BalanceHeader {
+extension LanguagesList {
     
     public enum Configurator {
         
-        static func configure(
-            view: View,
-            sceneModel: Model.SceneModel,
-            balanceFetcher: BalanceFetcherProtocol,
-            amountFormatter: AmountFormatterProtocol,
+        public static func configure(
+            viewController: ViewController,
+            changeLanguageWorker: ChangeLanguageWorkerProtocol,
             routing: Routing?,
             onDeinit: DeinitCompletion = nil
             ) {
             
-            let presenterDispatch = PresenterDispatch(displayLogic: view)
-            let presenter = Presenter(
-                presenterDispatch: presenterDispatch,
-                amountFormatter: amountFormatter
-            )
+            let presenterDispatch = PresenterDispatch(displayLogic: viewController)
+            let presenter = Presenter(presenterDispatch: presenterDispatch)
             let interactor = Interactor(
-                sceneModel: sceneModel,
                 presenter: presenter,
-                balanceFetcher: balanceFetcher
+                changeLanguageWorker: changeLanguageWorker
             )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)
-            view.inject(
+            viewController.inject(
                 interactorDispatch: interactorDispatch,
                 routing: routing,
                 onDeinit: onDeinit
@@ -33,9 +27,9 @@ extension BalanceHeader {
     }
 }
 
-extension BalanceHeader {
+extension LanguagesList {
     
-    @objc(BalanceHeaderInteractorDispatch)
+    @objc(LanguagesListInteractorDispatch)
     public class InteractorDispatch: NSObject {
         
         private let queue: DispatchQueue = DispatchQueue(
@@ -62,7 +56,7 @@ extension BalanceHeader {
         }
     }
     
-    @objc(BalanceHeaderPresenterDispatch)
+    @objc(LanguagesListPresenterDispatch)
     public class PresenterDispatch: NSObject {
         
         private weak var displayLogic: DisplayLogic?

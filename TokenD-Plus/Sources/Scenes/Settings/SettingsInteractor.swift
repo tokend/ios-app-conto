@@ -76,6 +76,7 @@ extension Settings.Interactor: Settings.BusinessLogic {
              .biometrics,
              .verification,
              .changePassword,
+             .language,
              .licenses:
             
             let response = Event.DidSelectCell.Response(

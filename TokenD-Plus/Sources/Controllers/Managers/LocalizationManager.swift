@@ -2,8 +2,19 @@ import UIKit
 
 class LocalizationManager {
     
+    // MARK: - Public properties
+    
+    public static let languageKey: String = "language"
+    
+    // MARK: - Private properties
+    
+    private static let userDefaults = UserDefaults.standard
+    
+    // MARK: - Public
+    
     static func localizedString(key: LocKey) -> String {
-        return NSLocalizedString(key.rawValue, comment: "")
+        let bundle = LocalizationManager.getBundle()
+        return NSLocalizedString(key.rawValue, bundle: bundle, value: "", comment: "")
     }
     
     static func localizedAttributedString(
@@ -56,7 +67,8 @@ class LocalizationManager {
     }
     
     static func localizedString(key: LocKey, replace: [LocKey: String]) -> String {
-        var localizedString = NSLocalizedString(key.rawValue, comment: "")
+        let bundle = LocalizationManager.getBundle()
+        var localizedString = NSLocalizedString(key.rawValue, bundle: bundle, value: "", comment: "")
         
         for (key, value) in replace {
             let keyValue = key.rawValue
@@ -75,6 +87,19 @@ class LocalizationManager {
         }
         
         return localizedString
+    }
+    
+    // MARK: - Private
+    
+    private static func getBundle() -> Bundle {
+        var bundle = Bundle.main
+        if let language =  LocalizationManager.userDefaults.string(forKey: LocalizationManager.languageKey),
+            let customBundlePath = bundle.path(forResource: language, ofType: "lproj"),
+            let customBundle = Bundle(path: customBundlePath) {
+            
+            bundle = customBundle
+        }
+        return bundle
     }
 }
 

@@ -1,5 +1,6 @@
 import Foundation
 import RxSwift
+import RxCocoa
 import TokenDWallet
 
 protocol SendPaymentBusinessLogic {
@@ -129,6 +130,7 @@ extension SendPaymentAmount {
         // MARK: - Send
         
         private func handleSendAction() {
+            self.presenter.presentPaymentAction(response: .loading)
             guard let balance = self.sceneModel.selectedBalance else {
                 self.presenter.presentPaymentAction(response: .failed(.noBalance))
                 return

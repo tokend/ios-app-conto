@@ -10,6 +10,7 @@ class FacilitiesFlowController: BaseSignedInFlowController {
     
     private let ownerAccountId: String
     private var backToCompanies: (() -> Void)
+    private var updateContentLanguage: (() -> Void)
     private var onSignOut: (() -> Void)
     
     // MARK: -
@@ -18,6 +19,7 @@ class FacilitiesFlowController: BaseSignedInFlowController {
         navigationController: NavigationControllerProtocol,
         ownerAccountId: String,
         backToCompanies: @escaping (() -> Void),
+        updateContentLanguage: @escaping (() -> Void),
         onSignOut: @escaping (() -> Void),
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
@@ -31,6 +33,7 @@ class FacilitiesFlowController: BaseSignedInFlowController {
         self.navigationController = navigationController
         self.ownerAccountId = ownerAccountId
         self.backToCompanies = backToCompanies
+        self.updateContentLanguage = updateContentLanguage
         self.onSignOut = onSignOut
         
         super.init(
@@ -86,6 +89,7 @@ class FacilitiesFlowController: BaseSignedInFlowController {
     private func runSettingsFlow(navigationController: NavigationControllerProtocol) {
         let settingsflow = SettingsFlowController(
             navigationController: navigationController,
+            updateContentLanguage: self.updateContentLanguage,
             onSignOut: self.onSignOut,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,

@@ -162,6 +162,12 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             rootNavigation: self.rootNavigation,
             companyName: companyName,
             ownerAccountId: ownerAccountId,
+            updateLanguageContent: { [weak self] in
+                self?.runCompanyFlow(
+                    ownerAccountId: ownerAccountId,
+                    companyName: companyName
+                )
+            },
             onSignOut: self.onSignOut,
             onBackToCompanies: { [weak self] in
                 self?.run()
@@ -197,6 +203,7 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     
     private func performSignOut() {
         let signOutWorker = RegisterScene.LocalSignInWorker(
+            settingsManager: self.flowControllerStack.settingsManager,
             userDataManager: self.managersController.userDataManager,
             keychainManager: self.managersController.keychainManager
         )

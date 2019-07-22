@@ -7,12 +7,14 @@ class SettingsFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol
+    private let updateContentLanguage: () -> Void
     private let onSignOut: () -> Void
     
     // MARK: -
     
     init(
         navigationController: NavigationControllerProtocol,
+        updateContentLanguage: @escaping () -> Void,
         onSignOut: @escaping () -> Void,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
@@ -24,6 +26,7 @@ class SettingsFlowController: BaseSignedInFlowController {
         ) {
         
         self.navigationController = navigationController
+        self.updateContentLanguage = updateContentLanguage
         self.onSignOut = onSignOut
         super.init(
             appController: appController,
@@ -67,19 +70,19 @@ class SettingsFlowController: BaseSignedInFlowController {
             }, hideShadow: { [weak self] in
                 self?.navigationController.hideShadow()
             },
-            showErrorMessage: { [weak self] errorMessage in
+               showErrorMessage: { [weak self] errorMessage in
                 self?.navigationController.showErrorMessage(errorMessage, completion: nil)
             },
-            onCellSelected: { [weak self] (cellIdentifier) in
+               onCellSelected: { [weak self] (cellIdentifier) in
                 self?.switchToSetting(cellIdentifier)
             },
-            onShowFees: { [weak self] in
+               onShowFees: { [weak self] in
                 self?.showFees()
             },
-            onShowTerms: { [weak self] (url) in
+               onShowTerms: { [weak self] (url) in
                 self?.showTermsOfService(url: url)
             },
-            onSignOut: { [weak self] in
+               onSignOut: { [weak self] in
                 self?.onSignOut()
         })
         
@@ -119,6 +122,9 @@ class SettingsFlowController: BaseSignedInFlowController {
             
         case .changePassword:
             self.showChangePasswordScreen()
+            
+        case .language:
+            self.showLanguagesListScene()
             
         case .licenses:
             self.showLicenses()
@@ -170,6 +176,34 @@ class SettingsFlowController: BaseSignedInFlowController {
         vc.navigationItem.title = title
         
         self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func showLanguagesListScene() {
+        let vc = self.setupLanguagesListScene()
+        vc.navigationItem.title = Localized(.language)
+        
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func setupLanguagesListScene() -> UIViewController {
+        let vc = LanguagesList.ViewController()
+        let changeLanguageWorker = LanguagesList.ChangeLanguageWorker()
+        let routing = LanguagesList.Routing(
+            showError: { [weak self] (message) in
+                self?.navigationController.showErrorMessage(
+                    message,
+                    completion: nil
+                )
+            }, onLanguageChanged: { [weak self] in
+                self?.navigationController.popViewController(true)
+        })
+        
+        LanguagesList.Configurator.configure(
+            viewController: vc,
+            changeLanguageWorker: changeLanguageWorker,
+            routing: routing
+        )
+        return vc
     }
     
     private func shareItems(_ items: [Any]) {

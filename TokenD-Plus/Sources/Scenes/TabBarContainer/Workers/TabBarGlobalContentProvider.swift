@@ -14,6 +14,7 @@ extension TabBarContainer {
         private let showReceiveScene: () -> Void
         private let showCreateRedeemScene: () -> Void
         private let showAcceptRedeemScene: () -> Void
+        private let updateContentLanguage: () -> Void
         private let onSignOut: () -> Void
         private let showTabBar: () -> Void
         private let hideTabBar: () -> Void
@@ -41,6 +42,7 @@ extension TabBarContainer {
             showReceiveScene: @escaping () -> Void,
             showCreateRedeemScene: @escaping () -> Void,
             showAcceptRedeemScene: @escaping () -> Void,
+            updateContentLanguage: @escaping () -> Void,
             onSignOut: @escaping () -> Void,
             showTabBar: @escaping () -> Void,
             hideTabBar: @escaping () -> Void,
@@ -60,6 +62,7 @@ extension TabBarContainer {
             self.showReceiveScene = showReceiveScene
             self.showCreateRedeemScene = showCreateRedeemScene
             self.showAcceptRedeemScene = showAcceptRedeemScene
+            self.updateContentLanguage = updateContentLanguage
             self.onSignOut = onSignOut
             self.showTabBar = showTabBar
             self.hideTabBar = hideTabBar
@@ -145,7 +148,7 @@ extension TabBarContainer {
             return TabsContainer.Model.TabModel(
                 title: Localized(.balances),
                 content: .viewController(navigationController.getViewController()),
-                identifier: Localized(.balances)
+                identifier: "balances"
             )
         }
         
@@ -184,7 +187,7 @@ extension TabBarContainer {
             return TabsContainer.Model.TabModel(
                 title: Localized(.sales),
                 content: .viewController(navigationController.getViewController()),
-                identifier: Localized(.sales)
+                identifier: "sales"
             )
         }
         
@@ -221,7 +224,7 @@ extension TabBarContainer {
             return TabsContainer.Model.TabModel(
                 title: Localized(.polls),
                 content: .viewController(navigationController.getViewController()),
-                identifier: Localized(.polls)
+                identifier: "polls"
             )
         }
         
@@ -253,7 +256,7 @@ extension TabBarContainer {
             return TabsContainer.Model.TabModel(
                 title: Localized(.other),
                 content: .viewController(navigationController.getViewController()),
-                identifier: Localized(.other)
+                identifier: "other"
             )
         }
         
@@ -262,6 +265,7 @@ extension TabBarContainer {
                 navigationController: navigationController,
                 ownerAccountId: self.ownerAccountId,
                 backToCompanies: self.backToCompanies,
+                updateContentLanguage: self.updateContentLanguage,
                 onSignOut: self.onSignOut,
                 appController: self.appController,
                 flowControllerStack: self.flowControllerStack,
@@ -298,15 +302,15 @@ extension TabBarContainer {
         // MARK: - Navigation
         
         private func handleAction(identifier: TabIdentifier) {
-            if identifier == Localized(.companies) {
+            if identifier == "companies" {
                  self.backToCompanies()
-            } else if identifier == Localized(.send) {
+            } else if identifier == "send" {
                 self.showSendScene()
-            } else if identifier == Localized(.receive) {
+            } else if identifier == "receive" {
                 self.showReceiveScene()
-            } else if identifier == Localized(.redeem) {
+            } else if identifier == "redeem" {
                 self.showCreateRedeemScene()
-            } else if identifier == Localized(.accept_redemption) {
+            } else if identifier == "accept_redemption" {
                 self.showAcceptRedeemScene()
             } else {
                 self.content?.setContentWithIdentifier(identifier)
