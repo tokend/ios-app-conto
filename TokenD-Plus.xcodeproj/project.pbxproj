@@ -163,13 +163,6 @@
 		DB720D2522C1396B00ED116A /* AuthenticatorAuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A3022C1396B00ED116A /* AuthenticatorAuthModels.swift */; };
 		DB720D2622C1396B00ED116A /* AuthenticatorAuthQRCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A3222C1396B00ED116A /* AuthenticatorAuthQRCell.swift */; };
 		DB720D2722C1396B00ED116A /* AuthenticatorAuthActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A3322C1396B00ED116A /* AuthenticatorAuthActionCell.swift */; };
-		DB720D2822C1396B00ED116A /* RecoverySeedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A3522C1396B00ED116A /* RecoverySeedInteractor.swift */; };
-		DB720D2922C1396B00ED116A /* RecoverySeedRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A3622C1396B00ED116A /* RecoverySeedRouting.swift */; };
-		DB720D2A22C1396B00ED116A /* RecoverySeedSignUpWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A3822C1396B00ED116A /* RecoverySeedSignUpWorker.swift */; };
-		DB720D2B22C1396B00ED116A /* RecoverySeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A3922C1396B00ED116A /* RecoverySeedViewController.swift */; };
-		DB720D2C22C1396B00ED116A /* RecoverySeedConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A3A22C1396B00ED116A /* RecoverySeedConfigurator.swift */; };
-		DB720D2D22C1396B00ED116A /* RecoverySeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A3B22C1396B00ED116A /* RecoverySeedPresenter.swift */; };
-		DB720D2E22C1396B00ED116A /* RecoverySeedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A3C22C1396B00ED116A /* RecoverySeedModels.swift */; };
 		DB720D2F22C1396B00ED116A /* MarkdownViewerRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A3E22C1396B00ED116A /* MarkdownViewerRouting.swift */; };
 		DB720D3022C1396B00ED116A /* MarkdownViewerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A3F22C1396B00ED116A /* MarkdownViewerConfigurator.swift */; };
 		DB720D3122C1396B00ED116A /* MarkdownViewerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720A4022C1396B00ED116A /* MarkdownViewerInteractor.swift */; };
@@ -825,13 +818,6 @@
 		DB720A3022C1396B00ED116A /* AuthenticatorAuthModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorAuthModels.swift; sourceTree = "<group>"; };
 		DB720A3222C1396B00ED116A /* AuthenticatorAuthQRCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorAuthQRCell.swift; sourceTree = "<group>"; };
 		DB720A3322C1396B00ED116A /* AuthenticatorAuthActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorAuthActionCell.swift; sourceTree = "<group>"; };
-		DB720A3522C1396B00ED116A /* RecoverySeedInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverySeedInteractor.swift; sourceTree = "<group>"; };
-		DB720A3622C1396B00ED116A /* RecoverySeedRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverySeedRouting.swift; sourceTree = "<group>"; };
-		DB720A3822C1396B00ED116A /* RecoverySeedSignUpWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverySeedSignUpWorker.swift; sourceTree = "<group>"; };
-		DB720A3922C1396B00ED116A /* RecoverySeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverySeedViewController.swift; sourceTree = "<group>"; };
-		DB720A3A22C1396B00ED116A /* RecoverySeedConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverySeedConfigurator.swift; sourceTree = "<group>"; };
-		DB720A3B22C1396B00ED116A /* RecoverySeedPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverySeedPresenter.swift; sourceTree = "<group>"; };
-		DB720A3C22C1396B00ED116A /* RecoverySeedModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverySeedModels.swift; sourceTree = "<group>"; };
 		DB720A3E22C1396B00ED116A /* MarkdownViewerRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownViewerRouting.swift; sourceTree = "<group>"; };
 		DB720A3F22C1396B00ED116A /* MarkdownViewerConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownViewerConfigurator.swift; sourceTree = "<group>"; };
 		DB720A4022C1396B00ED116A /* MarkdownViewerInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownViewerInteractor.swift; sourceTree = "<group>"; };
@@ -1516,7 +1502,6 @@
 				DB720A3D22C1396B00ED116A /* MarkdownViewer */,
 				DB720F4322C4CD1C00ED116A /* Polls */,
 				DB720B6F22C1396B00ED116A /* ReceiveAddress */,
-				DB720A3422C1396B00ED116A /* RecoverySeed */,
 				DB720BC222C1396B00ED116A /* SaleDetails */,
 				DB7209A622C1396B00ED116A /* SaleInvest */,
 				DB7209C522C1396B00ED116A /* SaleOverview */,
@@ -1895,28 +1880,6 @@
 				DB720A3322C1396B00ED116A /* AuthenticatorAuthActionCell.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		DB720A3422C1396B00ED116A /* RecoverySeed */ = {
-			isa = PBXGroup;
-			children = (
-				DB720A3A22C1396B00ED116A /* RecoverySeedConfigurator.swift */,
-				DB720A3522C1396B00ED116A /* RecoverySeedInteractor.swift */,
-				DB720A3C22C1396B00ED116A /* RecoverySeedModels.swift */,
-				DB720A3B22C1396B00ED116A /* RecoverySeedPresenter.swift */,
-				DB720A3622C1396B00ED116A /* RecoverySeedRouting.swift */,
-				DB720A3922C1396B00ED116A /* RecoverySeedViewController.swift */,
-				DB720A3722C1396B00ED116A /* Workers */,
-			);
-			path = RecoverySeed;
-			sourceTree = "<group>";
-		};
-		DB720A3722C1396B00ED116A /* Workers */ = {
-			isa = PBXGroup;
-			children = (
-				DB720A3822C1396B00ED116A /* RecoverySeedSignUpWorker.swift */,
-			);
-			path = Workers;
 			sourceTree = "<group>";
 		};
 		DB720A3D22C1396B00ED116A /* MarkdownViewer */ = {
@@ -3706,7 +3669,6 @@
 				DB720E3322C1396C00ED116A /* ReceiveAddressShareUtilProtocol.swift in Sources */,
 				DB720DEB22C1396C00ED116A /* DashboardPaymentsPlugInRouting.swift in Sources */,
 				DB720DF422C1396C00ED116A /* DashboardPaymentsPlugInRateProviderProtocol.swift in Sources */,
-				DB720D2922C1396B00ED116A /* RecoverySeedRouting.swift in Sources */,
 				DB720CEF22C1396B00ED116A /* TabsContainerInteractor.swift in Sources */,
 				DB720E2D22C1396C00ED116A /* ReceiveAddressInvoiceFormatter.swift in Sources */,
 				DB720F0E22C1396C00ED116A /* PollsFlowController.swift in Sources */,
@@ -3774,7 +3736,6 @@
 				DB720ED722C1396C00ED116A /* BXFStaticTableViewButtonCell.swift in Sources */,
 				DB363E0722DCDBB700F5761C /* FacilitiesListModels.swift in Sources */,
 				DB720E7622C1396C00ED116A /* BiometricsAuthPresenter.swift in Sources */,
-				DB720D2B22C1396B00ED116A /* RecoverySeedViewController.swift in Sources */,
 				DB720DD422C1396C00ED116A /* ExploreTokensSceneTokensFetcherProtocol.swift in Sources */,
 				DB720EC322C1396C00ED116A /* SharedViewsBuilder.swift in Sources */,
 				DB720DC722C1396C00ED116A /* WithdrawConfirmationSectionsProvider.swift in Sources */,
@@ -3830,7 +3791,6 @@
 				DB720E2422C1396C00ED116A /* SideMenuRouting.swift in Sources */,
 				DB720EC422C1396C00ED116A /* TitleValueCell.swift in Sources */,
 				DB720DC122C1396C00ED116A /* ConfirmationAmountFormatterProtocol.swift in Sources */,
-				DB720D2E22C1396B00ED116A /* RecoverySeedModels.swift in Sources */,
 				DB720E8B22C1396C00ED116A /* TokenDSDK.Asset+Identifier.swift in Sources */,
 				DB720F2F22C2286C00ED116A /* CompaniesListConfigurator.swift in Sources */,
 				DB720D1022C1396B00ED116A /* TokenDetailsDocumentURLBuilderProtocol.swift in Sources */,
@@ -3955,7 +3915,6 @@
 				DB720DC622C1396C00ED116A /* ConfirmationPercentFormatterProtocol.swift in Sources */,
 				DB720DBF22C1396C00ED116A /* SaleInvestConfirmationProvider.swift in Sources */,
 				DB720ED622C1396C00ED116A /* BXFStaticTableViewButtonCellModel.swift in Sources */,
-				DB720D2A22C1396B00ED116A /* RecoverySeedSignUpWorker.swift in Sources */,
 				DB720DF822C1396C00ED116A /* DashboardPendingOffersPreviewPlugInInteractor.swift in Sources */,
 				DB720E9A22C1396C00ED116A /* UISegmentedControl+FillWithSegments.swift in Sources */,
 				DB720E8622C1396C00ED116A /* AppDelegate.swift in Sources */,
@@ -3970,7 +3929,6 @@
 				DB720CF722C1396B00ED116A /* SalesConfigurator.swift in Sources */,
 				DB720CB322C1396B00ED116A /* SettingsPushCell.swift in Sources */,
 				DB720E4D22C1396C00ED116A /* DepositSceneDateFormatterProtocol.swift in Sources */,
-				DB720D2D22C1396B00ED116A /* RecoverySeedPresenter.swift in Sources */,
 				DB720CF322C1396B00ED116A /* TabsContainerViewController.swift in Sources */,
 				DB720DED22C1396C00ED116A /* DashboardPaymentsPlugInConfigurator.swift in Sources */,
 				DB720E0522C1396C00ED116A /* TabBarContainerConfigurator.swift in Sources */,
@@ -4043,13 +4001,11 @@
 				DB720EF922C1396C00ED116A /* LocalizationManager.swift in Sources */,
 				DB720D5E22C1396B00ED116A /* TradeOffersRouting.swift in Sources */,
 				DB720CF122C1396B00ED116A /* TabsContainerRouting.swift in Sources */,
-				DB720D2C22C1396B00ED116A /* RecoverySeedConfigurator.swift in Sources */,
 				DB720E1222C1396C00ED116A /* AssetPickerAssetCell.swift in Sources */,
 				DB720CE122C1396B00ED116A /* UpdatePasswordChangePasswordWorker.swift in Sources */,
 				DB720EDB22C1396C00ED116A /* BXFStaticTableViewSection.swift in Sources */,
 				DB720EF822C1396C00ED116A /* KeyboardController.swift in Sources */,
 				DB720ED522C1396C00ED116A /* BXFStaticTableView.swift in Sources */,
-				DB720D2822C1396B00ED116A /* RecoverySeedInteractor.swift in Sources */,
 				DB720DD022C1396C00ED116A /* ExploreTokensConfigurator.swift in Sources */,
 				DB720E4222C1396C00ED116A /* BalancesListLegendCell.swift in Sources */,
 				DB720E7722C1396C00ED116A /* BiometricsAuthViewController.swift in Sources */,

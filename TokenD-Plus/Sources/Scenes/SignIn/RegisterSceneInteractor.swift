@@ -287,7 +287,7 @@ extension RegisterScene {
                         self?.presenter.presentSignAction(response: .failed(.signUpRequestError(error)))
                         
                     case .succeeded(let model):
-                        self?.presenter.presentSignAction(response: .showRecoverySeed(model: model))
+                        self?.presenter.presentSignAction(response: .succeededSignUp(model: model))
                     }
             })
         }

@@ -159,7 +159,7 @@ class LocalAuthFlowController: BaseFlowController {
             },
             onUnverifiedEmail: { _ in },
             onPresentQRCodeReader: { _ in},
-            onShowRecoverySeed: { _ in },
+            onSuccessfulSignUp: { _ in },
             onRecovery: { [weak self] in
                 self?.showRecoveryScreen()
             },

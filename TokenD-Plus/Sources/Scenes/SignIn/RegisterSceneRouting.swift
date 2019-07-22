@@ -8,7 +8,7 @@ extension RegisterScene {
         let onSuccessfulLogin: (_ account: String) -> Void
         let onUnverifiedEmail: (_ walletId: String) -> Void
         let onPresentQRCodeReader: (_ completion: @escaping QRCodeReaderCompletion) -> Void
-        let onShowRecoverySeed: (_ model: TokenDRegisterWorker.SignUpModel) -> Void
+        let onSuccessfulSignUp: (_ model: TokenDRegisterWorker.SignUpModel) -> Void
         let onRecovery: () -> Void
         let onAuthenticatorSignIn: () -> Void
         let showDialogAlert: (
