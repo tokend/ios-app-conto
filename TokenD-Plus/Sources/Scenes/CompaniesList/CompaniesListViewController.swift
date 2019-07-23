@@ -20,7 +20,7 @@ extension CompaniesList {
         // MARK: - Private properties
         
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
-        private let emptyView: EmptyView.View = EmptyView.View()
+        private let emptyView: UILabel = SharedViewsBuilder.createEmptyLabel()
         private let refreshControl: UIRefreshControl = UIRefreshControl()
         
         private var companies: [CompanyCell.ViewModel] = [] {
@@ -64,7 +64,6 @@ extension CompaniesList {
             super.viewDidLoad()
             
             self.setupTableView()
-            self.setupEmptyView()
             self.setupRefreshControl()
             self.setupLayout()
             
@@ -102,12 +101,15 @@ extension CompaniesList {
         private func setupTableView() {
             self.tableView.backgroundColor = Theme.Colors.contentBackgroundColor
             self.tableView.separatorStyle = .none
+            self.tableView.estimatedRowHeight = UITableView.automaticDimension
+            self.tableView.rowHeight = UITableView.automaticDimension
             self.tableView.register(classes: [
                 CompanyCell.ViewModel.self
                 ]
             )
             self.tableView.delegate = self
             self.tableView.dataSource = self
+            self.tableView.refreshControl = self.refreshControl
             self.tableView
                 .rx
                 .contentOffset
@@ -118,14 +120,9 @@ extension CompaniesList {
                 .disposed(by: self.disposeBag)
         }
         
-        private func setupEmptyView() {
-            self.emptyView.isHidden = true
-        }
-        
         private func setupLayout() {
             self.view.addSubview(self.tableView)
             self.view.addSubview(self.emptyView)
-            self.tableView.addSubview(self.refreshControl)
             
             self.tableView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
@@ -144,11 +141,12 @@ extension CompaniesList.ViewController: CompaniesList.DisplayLogic {
         switch viewModel {
             
         case .companies(let companies):
-            self.emptyView.isHidden = true
             self.companies = companies
+            self.emptyView.isHidden = true
             
         case .empty(let message):
-            self.emptyView.message = message
+            self.companies = []
+            self.emptyView.text = message
             self.emptyView.isHidden = false
         }
     }
@@ -187,5 +185,13 @@ extension CompaniesList.ViewController: UITableViewDataSource {
         let model = self.companies[indexPath.section]
         let cell = tableView.dequeueReusableCell(with: model, for: indexPath)
         return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90.0
+    }
+    
+    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90.0
     }
 }

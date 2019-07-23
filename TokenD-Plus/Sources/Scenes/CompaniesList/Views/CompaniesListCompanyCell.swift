@@ -61,7 +61,7 @@ extension CompaniesList {
             static public let cardSize: CGSize = CGSize(width: 125.0, height: 75.0)
             static public let logoSize: CGFloat = 50.0
             static public let sideInset: CGFloat = 20.0
-            static public let topInset: CGFloat = 10.0
+            static public let topInset: CGFloat = 7.5
             
             // MARK: - Private properties
             

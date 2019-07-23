@@ -92,7 +92,7 @@ extension TabBar {
                 let acceptRedeem = Model.ActionModel(
                     title: Localized(.accept_redemption),
                     icon: Assets.scanQrIcon.image,
-                    actionIdentifier: Localized(.accept_redemption)
+                    actionIdentifier: "accept_redemption"
                 )
                 actions.append(acceptRedeem)
             }
