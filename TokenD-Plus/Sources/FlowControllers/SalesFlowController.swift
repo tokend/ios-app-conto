@@ -547,6 +547,7 @@ class SalesFlowController: BaseSignedInFlowController {
             storageUrl: self.flowControllerStack.apiConfigurationModel.storageEndpoint
         )
         let balancesFetcher = BalancePicker.BalancesFetcher(
+            ownerAccountId: self.ownerAccountId,
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
             imagesUtility: imageUtility,

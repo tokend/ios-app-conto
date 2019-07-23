@@ -58,6 +58,7 @@ class BaseSignedInFlowController: BaseFlowController {
     
     func runSendPaymentFlow(
         navigationController: NavigationControllerProtocol,
+        ownerAccountId: String,
         balanceId: String?,
         completion: @escaping (() -> Void)
         ) {
@@ -71,6 +72,7 @@ class BaseSignedInFlowController: BaseFlowController {
             userDataProvider: self.userDataProvider,
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation,
+            ownerAccountId: ownerAccountId,
             selectedBalanceId: balanceId
         )
         self.currentFlowController = flow
@@ -86,6 +88,7 @@ class BaseSignedInFlowController: BaseFlowController {
     
     func runWithdrawFlow(
         navigationController: NavigationControllerProtocol,
+        ownerAccountId: String,
         balanceId: String?,
         completion: @escaping (() -> Void)
         ) {
@@ -99,6 +102,7 @@ class BaseSignedInFlowController: BaseFlowController {
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation,
             navigationController: navigationController,
+            ownerAccountId: ownerAccountId,
             selectedBalanceId: balanceId
         )
         self.currentFlowController = flow
@@ -114,6 +118,7 @@ class BaseSignedInFlowController: BaseFlowController {
     
     func runCreateRedeemFlow(
         navigationController: NavigationControllerProtocol,
+        ownerAccountId: String,
         balanceId: String?
         ) {
         
@@ -126,6 +131,7 @@ class BaseSignedInFlowController: BaseFlowController {
             userDataProvider: self.userDataProvider,
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation,
+            ownerAccountId: ownerAccountId,
             selectedBalanceId: nil
         )
         self.currentFlowController = flow

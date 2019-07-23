@@ -13,6 +13,7 @@ extension BalancePicker {
         
         // MARK: - Private properties
         
+        private let ownerAccountId: String
         private let balancesRepo: BalancesRepo
         private let assetsRepo: AssetsRepo
         private let imagesUtility: ImagesUtility
@@ -28,12 +29,14 @@ extension BalancePicker {
         // MARK: -
         
         init(
+            ownerAccountId: String,
             balancesRepo: BalancesRepo,
             assetsRepo: AssetsRepo,
             imagesUtility: ImagesUtility,
             targetAssets: [String]
             ) {
             
+            self.ownerAccountId = ownerAccountId
             self.balancesRepo = balancesRepo
             self.assetsRepo = assetsRepo
             self.imagesUtility = imagesUtility
@@ -77,6 +80,7 @@ extension BalancePicker {
             self.balances.forEach { (balance) in
                 if let asset = self.assets.first(where: { (asset) -> Bool in
                     return asset.code == balance.asset
+                        && asset.owner == self.ownerAccountId
                         && self.targetAssets.contains(asset.code)
                         && balance.balance > 0
                 }) {

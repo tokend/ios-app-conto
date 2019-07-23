@@ -149,7 +149,7 @@ extension Fees {
                     make.top.equalTo(self.boundsLabel.snp.bottom).offset(topInset)
                 }
                 self.fixedValueLabel.snp.makeConstraints { (make) in
-                    make.leading.equalTo(self.percentValueLabel)
+                    make.leading.equalTo(self.fixedTitleLabel.snp.trailing).offset(sideInset)
                     make.trailing.equalToSuperview().inset(sideInset)
                     make.centerY.equalTo(self.fixedTitleLabel)
                 }

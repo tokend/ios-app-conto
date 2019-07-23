@@ -6,6 +6,7 @@ class WithdrawFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private var navigationController: NavigationControllerProtocol?
+    private let ownerAccountId: String
     private let selectedBalanceId: String?
     private let disposeBag: DisposeBag = DisposeBag()
     
@@ -22,9 +23,11 @@ class WithdrawFlowController: BaseSignedInFlowController {
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
         navigationController: NavigationControllerProtocol?,
+        ownerAccountId: String,
         selectedBalanceId: String? = nil
         ) {
         
+        self.ownerAccountId = ownerAccountId
         self.selectedBalanceId = selectedBalanceId
         self.navigationController = navigationController
         super.init(
@@ -390,6 +393,7 @@ class WithdrawFlowController: BaseSignedInFlowController {
             storageUrl: self.flowControllerStack.apiConfigurationModel.storageEndpoint
         )
         let balancesFetcher = BalancePicker.BalancesFetcher(
+            ownerAccountId: self.ownerAccountId,
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
             imagesUtility: imageUtility,

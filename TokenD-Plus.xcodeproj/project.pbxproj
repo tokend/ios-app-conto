@@ -1602,14 +1602,14 @@
 		DB7209B822C1396B00ED116A /* BalancePicker */ = {
 			isa = PBXGroup;
 			children = (
-				DB7209B922C1396B00ED116A /* BalancePickerModels.swift */,
-				DB7209BA22C1396B00ED116A /* BalancePickerViewController.swift */,
 				DB7209BB22C1396B00ED116A /* BalancePickerConfigurator.swift */,
-				DB7209BC22C1396B00ED116A /* BalancePickerPresenter.swift */,
-				DB7209BD22C1396B00ED116A /* Workers */,
-				DB7209C022C1396B00ED116A /* BalancePickerRouting.swift */,
 				DB7209C122C1396B00ED116A /* BalancePickerInteractor.swift */,
+				DB7209B922C1396B00ED116A /* BalancePickerModels.swift */,
+				DB7209BC22C1396B00ED116A /* BalancePickerPresenter.swift */,
+				DB7209C022C1396B00ED116A /* BalancePickerRouting.swift */,
+				DB7209BA22C1396B00ED116A /* BalancePickerViewController.swift */,
 				DB7209C222C1396B00ED116A /* Views */,
+				DB7209BD22C1396B00ED116A /* Workers */,
 			);
 			path = BalancePicker;
 			sourceTree = "<group>";
@@ -1775,14 +1775,14 @@
 		DB720A0222C1396B00ED116A /* Fees */ = {
 			isa = PBXGroup;
 			children = (
-				DB720A0322C1396B00ED116A /* FeesRouting.swift */,
+				DB720A0A22C1396B00ED116A /* FeesConfigurator.swift */,
+				DB720A0F22C1396B00ED116A /* FeesInteractor.swift */,
 				DB720A0422C1396B00ED116A /* FeesModels.swift */,
 				DB720A0522C1396B00ED116A /* FeesPresenter.swift */,
-				DB720A0622C1396B00ED116A /* Workers */,
-				DB720A0A22C1396B00ED116A /* FeesConfigurator.swift */,
-				DB720A0B22C1396B00ED116A /* Views */,
+				DB720A0322C1396B00ED116A /* FeesRouting.swift */,
 				DB720A0E22C1396B00ED116A /* FeesViewController.swift */,
-				DB720A0F22C1396B00ED116A /* FeesInteractor.swift */,
+				DB720A0B22C1396B00ED116A /* Views */,
+				DB720A0622C1396B00ED116A /* Workers */,
 			);
 			path = Fees;
 			sourceTree = "<group>";

@@ -7,14 +7,12 @@ class SettingsFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol
-    private let updateContentLanguage: () -> Void
     private let onSignOut: () -> Void
     
     // MARK: -
     
     init(
         navigationController: NavigationControllerProtocol,
-        updateContentLanguage: @escaping () -> Void,
         onSignOut: @escaping () -> Void,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
@@ -26,7 +24,6 @@ class SettingsFlowController: BaseSignedInFlowController {
         ) {
         
         self.navigationController = navigationController
-        self.updateContentLanguage = updateContentLanguage
         self.onSignOut = onSignOut
         super.init(
             appController: appController,

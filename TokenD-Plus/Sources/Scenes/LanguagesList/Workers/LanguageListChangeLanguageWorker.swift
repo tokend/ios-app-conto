@@ -35,9 +35,11 @@ extension LanguagesList {
             let accessibleLanguages = Bundle.main.localizations
             if accessibleLanguages.contains(code) {
                 self.userDefaults.set(code, forKey: self.languageKey)
-                NotificationCenterUtil
-                    .instance
-                    .postNotification(Notification.Name("LCLLanguageChangeNotification"))
+                DispatchQueue.main.async {
+                    NotificationCenterUtil
+                        .instance
+                        .postNotification(Notification.Name("LCLLanguageChangeNotification"))
+                }
                 completion(.success)
             } else {
                 completion(.failure(.languageNotFound))

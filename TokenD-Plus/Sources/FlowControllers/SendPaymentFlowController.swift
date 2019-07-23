@@ -6,6 +6,7 @@ class SendPaymentFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol
+    private let ownerAccountId: String
     private let selectedBalanceId: String?
     private let disposeBag: DisposeBag = DisposeBag()
     
@@ -22,11 +23,14 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
+        ownerAccountId: String,
         selectedBalanceId: String?
         ) {
         
         self.navigationController = navigationController
+        self.ownerAccountId = ownerAccountId
         self.selectedBalanceId = selectedBalanceId
+        
         
         super.init(
             appController: appController,
@@ -393,6 +397,7 @@ class SendPaymentFlowController: BaseSignedInFlowController {
             storageUrl: self.flowControllerStack.apiConfigurationModel.storageEndpoint
         )
         let balancesFetcher = BalancePicker.BalancesFetcher(
+            ownerAccountId: self.ownerAccountId,
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
             imagesUtility: imageUtility,

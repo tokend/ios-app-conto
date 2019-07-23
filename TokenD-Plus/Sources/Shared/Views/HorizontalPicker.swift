@@ -71,7 +71,7 @@ class HorizontalPicker: UIView {
         
         guard let scrollView = object as? UIScrollView,
             self.scrollView == scrollView,
-            keyPath == Localized(.bounds)
+            keyPath == "bounds"
             else {
                 super.observeValue(
                     forKeyPath: keyPath,
