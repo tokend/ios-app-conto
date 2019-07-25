@@ -161,9 +161,13 @@ extension ConfirmationScene {
                     shouldSign: false,
                     completion: { (result) in
                         switch result {
-                        case .succeeded:
-                            self.balancesRepo.reloadBalancesDetails()
-                            completion(.succeeded)
+                        case .succeeded(let response):
+                            if response.ledger < networkInfo.ledger {
+                                completion(.failed(.sendTransactionError(RedeemError.doubleSpend)))
+                            } else {
+                                self.balancesRepo.reloadBalancesDetails()
+                                completion(.succeeded)
+                            }
                         case .failed(let error):
                             completion(.failed(.sendTransactionError(error)))
                         }
@@ -258,6 +262,21 @@ extension ConfirmationScene.AcceptRedeemConfirmationSectionsProvider: Confirmati
                     networkInfo: networkInfo,
                     completion: completion
                 )
+            }
+        }
+    }
+}
+
+extension ConfirmationScene.AcceptRedeemConfirmationSectionsProvider {
+    
+    enum RedeemError: Swift.Error, LocalizedError {
+        case doubleSpend
+        
+        var errorDescription: String? {
+            switch self {
+                
+            case .doubleSpend:
+                return Localized(.the_redemption_has_been_already_completed)
             }
         }
     }

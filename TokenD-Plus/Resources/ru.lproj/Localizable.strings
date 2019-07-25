@@ -482,6 +482,7 @@
 "terms_of_service" = "Условия использования";
 "terms_of_service_not_agreed" = "Условия обслуживания не согласованы";
 "terms_of_use" = "Условия использования";
+"the_redemption_has_been_already_completed" = "Погашение уже выполнено, запрос недействителен";
 "there_is_not_any_company_where_you_are_a_client_yet" = "Компании не найдены";
 "there_is_not_any_user_with_such_an_email_was_found" = "Пользователь с таким email-ом не найден";
 "there_is_no_any_poll_for_chosen_company" = "Опросов нет";

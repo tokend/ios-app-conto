@@ -482,6 +482,7 @@
 "terms_of_service" = "Умови обслуговування";
 "terms_of_service_not_agreed" = "Умови обслуговування не узгоджені";
 "terms_of_use" = "Умови використання";
+"the_redemption_has_been_already_completed" = "Погашення вже виконано, запит не дійсний";
 "there_is_not_any_company_where_you_are_a_client_yet" = "Компанії не знайдено";
 "there_is_not_any_user_with_such_an_email_was_found" = "Користувача з таким email-ом не знайдено";
 "there_is_no_any_poll_for_chosen_company" = "Опитувань немає";
