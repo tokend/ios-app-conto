@@ -93,7 +93,10 @@ extension BalancesList {
                 using: { [weak self] notification in
                     DispatchQueue.main.async {
                         self?.navigationItem.title = Localized(.balances)
-                        self?.tableView.reloadData()
+                        let request = Event.RefreshInitiated.Request()
+                        self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                            businessLogic.onRefreshInitiated(request: request)
+                        })
                     }
                 }
             )

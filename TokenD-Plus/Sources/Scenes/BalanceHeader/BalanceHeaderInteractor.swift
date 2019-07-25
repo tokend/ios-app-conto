@@ -59,12 +59,11 @@ extension BalanceHeader {
             
             let balanceAmount = Event.Model.Amount(
                 value: balance.balance.value,
-                asset: balance.balance.asset
+                assetName: balance.balance.assetName
             )
             
             let response = Event.BalanceUpdated.Response(
                 balanceAmount: balanceAmount,
-                rateAmount: balance.convertedBalance,
                 iconUrl: balance.iconUrl
             )
             self.presenter.presentBalanceUpdated(response: response)

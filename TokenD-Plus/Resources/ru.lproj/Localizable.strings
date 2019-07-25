@@ -35,7 +35,7 @@
 "at_date_replace_date" = "date";
 "authenticator" = "Аутентификатор";
 "available" = "Доступно";
-"available_amount" = "Доступно: $(amount)";
+"available_amount" = "$(amount) доступно";
 "available_amount_replace_amount" = "amount";
 "available_colon" = "Доступно:";
 "available_assets_for_this_operations" = "Подходящие активы для этих операций не найдены";

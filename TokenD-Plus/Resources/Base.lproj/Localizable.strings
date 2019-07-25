@@ -35,7 +35,7 @@
 "at_date_replace_date" = "date";
 "authenticator" = "Authenticator";
 "available" = "Available";
-"available_amount" = "Available: $(amount)";
+"available_amount" = "$(amount) available";
 "available_amount_replace_amount" = "amount";
 "available_colon" = "Available:";
 "available_assets_for_this_operations" = "Available assets for this operations were not found";

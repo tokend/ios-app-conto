@@ -4,7 +4,10 @@ import UIKit
 
 protocol FlexibleHeaderContainerHeaderViewProtocol {
     
-    typealias OnTitleTextDidChangeCallback = (String) -> Void
+    typealias OnTitleTextDidChangeCallback = (
+        _ title: String,
+        _ subtitle: String
+        ) -> Void
     typealias OnTitleAlphaDidChangeCallback = (CGFloat) -> Void
     
     var view: UIView { get } // should be the same between calls
@@ -43,7 +46,7 @@ class FlexibleHeaderContainerViewController: UIViewController {
     
     // MARK: - Private properties
     
-    private let titleLabel: UILabel = UILabel()
+    private let titleView: TitleView = TitleView()
     private var scrolledToTop: Bool = false
     
     // MARK: - Public properties
@@ -88,10 +91,7 @@ class FlexibleHeaderContainerViewController: UIViewController {
     }
     
     private func setupTitleLabel() {
-        self.titleLabel.font = Theme.Fonts.navigationBarBoldFont
-        self.titleLabel.textAlignment = .center
-        self.titleLabel.textColor = Theme.Colors.textOnMainColor
-        self.navigationItem.titleView = self.titleLabel
+        self.navigationItem.titleView = self.titleView
     }
     
     private func setupHeaderView() {
@@ -105,15 +105,15 @@ class FlexibleHeaderContainerViewController: UIViewController {
         headerView.titleAlphaDidChange = { [weak self] (alpha) in
             let titleAlpha = min(1, max(0, alpha))
             let fromColor = titleAlpha == 0 ? UIColor.clear : Theme.Colors.mainColor
-            self?.titleLabel.textColor = UIColor.interpolate(
+            self?.titleView.textColor = UIColor.interpolate(
                 from: fromColor,
                 to: Theme.Colors.textOnMainColor,
                 with: titleAlpha
             )
         }
-        headerView.titleTextDidChange = { [weak self] (text) in
-            self?.titleLabel.text = text
-            self?.titleLabel.sizeToFit()
+        headerView.titleTextDidChange = { [weak self] (title, subtitle) in
+            self?.titleView.set(title: title, subtitle: subtitle)
+            self?.titleView.sizeToFit()
         }
     }
     

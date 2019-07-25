@@ -24,12 +24,11 @@ extension BalanceHeader.Model {
     public struct Balance {
         let balance: Amount
         let iconUrl: URL?
-        let convertedBalance: Amount
     }
     
     public struct Amount {
         let value: Decimal
-        let asset: String
+        let assetName: String
     }
     
     public enum ImageRepresentation {
@@ -53,13 +52,13 @@ extension BalanceHeader.Event {
         
         public struct Response {
             let balanceAmount: Model.Amount
-            let rateAmount: Model.Amount?
             let iconUrl: URL?
         }
         
         public struct ViewModel {
+            let assetName: String
             let balance: String
-            let rate: String?
+            let title: String
             let imageRepresentation: Model.ImageRepresentation
         }
     }

@@ -30,21 +30,13 @@ extension BalanceHeader {
             self.presenterDispatch = presenterDispatch
             self.amountFormatter = amountFormatter
         }
-        
-        private func getRateStringFromRate(_ rate: Model.Amount?) -> String? {
-            if let rate = rate {
-                return self.amountFormatter.formatRate(rate)
-            }
-            return nil
-        }
     }
 }
 
 extension BalanceHeader.Presenter: BalanceHeader.PresentationLogic {
     
     public func presentBalanceUpdated(response: Event.BalanceUpdated.Response) {
-        let balance = self.amountFormatter.formatBalance(response.balanceAmount)
-        let rate = self.getRateStringFromRate(response.rateAmount)
+        let balance = self.amountFormatter.assetAmountToString(response.balanceAmount.value)
         var imageRepresentation: Model.ImageRepresentation
         
         if let url = response.iconUrl {
@@ -52,17 +44,19 @@ extension BalanceHeader.Presenter: BalanceHeader.PresentationLogic {
         } else {
             let abbreviationColor = TokenColoringProvider
                 .shared
-                .coloringForCode(response.balanceAmount.asset)
+                .coloringForCode(response.balanceAmount.assetName)
             
-            let abbreviationCode = response.balanceAmount.asset.first?.description ?? ""
+            let abbreviationCode = response.balanceAmount.assetName.first?.description ?? ""
             imageRepresentation = .abbreviation(
                 text: abbreviationCode,
                 color: abbreviationColor
             )
         }
+        let title = "\(response.balanceAmount.assetName)\n\(balance)"
         let viewModel = Event.BalanceUpdated.ViewModel(
+            assetName: response.balanceAmount.assetName,
             balance: balance,
-            rate: rate,
+            title: title,
             imageRepresentation: imageRepresentation
         )
         self.presenterDispatch.display { (displayLogic) in

@@ -46,14 +46,14 @@ extension BalancesList {
         // MARK: - Private
         
         private func updateSections() {
-            let headerSection = self.getHeaderSectionModel()
-            //let chartSection = self.getChartSectionModel()
+            // let headerSection = self.getHeaderSectionModel()
+            // let chartSection = self.getChartSectionModel()
             let balancesSection = self.getBalancesSectionModel()
             
             let response = Event.SectionsUpdated.Response(
                 sections: [
-                    headerSection,
-                    //chartSection,
+                    // headerSection,
+                    // chartSection,
                     balancesSection
                 ]
             )
