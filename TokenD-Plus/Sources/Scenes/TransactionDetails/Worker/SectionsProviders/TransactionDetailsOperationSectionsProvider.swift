@@ -649,13 +649,14 @@ extension TransactionDetails {
             
             switch details.operationDetailsRelatedToBalance {
                 
-            case .opCreateIssuanceRequestDetails(let resource):
-                let referenceCell = TransactionDetails.Model.CellModel(
-                    title: resource.reference,
-                    hint: Localized(.reference),
-                    identifier: .reference
-                )
-                detailsCells.append(referenceCell)
+            case .opCreateIssuanceRequestDetails:
+//                let referenceCell = TransactionDetails.Model.CellModel(
+//                    title: resource.reference,
+//                    hint: Localized(.reference),
+//                    identifier: .reference
+//                )
+//                detailsCells.append(referenceCell)
+                return []
                 
             case .opPaymentDetails(let resource):
                 guard balanceChangeEffect as? EffectChargedResource != nil else {

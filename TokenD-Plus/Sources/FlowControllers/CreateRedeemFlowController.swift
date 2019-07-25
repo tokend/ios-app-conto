@@ -65,7 +65,8 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
         let balanceDetailsLoader = SendPaymentAmount.BalanceDetailsLoaderWorker(
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
-            operation: .handleRedeem
+            operation: .handleRedeem,
+            ownerAccountId: self.ownerAccountId
         )
         let amountConverter = AmountConverter()
         let createRedeemRequestWorker = SendPaymentAmount.CreateRedeemRequestWorker(

@@ -87,7 +87,8 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         let balanceDetailsLoader = SendPaymentAmount.BalanceDetailsLoaderWorker(
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
-            operation: .handleSend
+            operation: .handleSend,
+            ownerAccountId: self.ownerAccountId
         )
         
         let amountFormatter = SendPaymentAmount.AmountFormatter()
@@ -248,6 +249,7 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         
         let sectionsProvider = ConfirmationScene.SendPaymentConfirmationSectionsProvider(
             sendPaymentModel: paymentModel,
+            balancesRepo: self.reposController.balancesRepo,
             transactionSender: self.managersController.transactionSender,
             networkInfoFetcher: self.reposController.networkInfoRepo,
             amountFormatter: amountFormatter,

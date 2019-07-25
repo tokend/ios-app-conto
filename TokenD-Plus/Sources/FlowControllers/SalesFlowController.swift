@@ -465,6 +465,7 @@ class SalesFlowController: BaseSignedInFlowController {
         
         let sectionsProvider = ConfirmationScene.SaleInvestConfirmationProvider(
             saleInvestModel: saleInvestModel,
+            balancesRepo: self.reposController.balancesRepo,
             transactionSender: self.managersController.transactionSender,
             networkInfoFetcher: self.reposController.networkInfoRepo,
             amountFormatter: amountFormatter,

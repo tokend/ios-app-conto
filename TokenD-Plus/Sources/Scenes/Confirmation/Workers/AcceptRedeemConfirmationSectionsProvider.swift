@@ -17,6 +17,7 @@ extension ConfirmationScene {
         
         private let redeemModel: Model.RedeemModel
         private let generalApi: GeneralApi
+        private let balancesRepo: BalancesRepo
         private let transactionSender: TransactionSender
         private let networkInfoFetcher: NetworkInfoFetcher
         private let userDataProvider: UserDataProviderProtocol
@@ -37,6 +38,7 @@ extension ConfirmationScene {
         init(
             redeemModel: Model.RedeemModel,
             generalApi: GeneralApi,
+            balancesRepo: BalancesRepo,
             transactionSender: TransactionSender,
             networkInfoFetcher: NetworkInfoFetcher,
             amountFormatter: AmountFormatterProtocol,
@@ -48,6 +50,7 @@ extension ConfirmationScene {
             
             self.redeemModel = redeemModel
             self.generalApi = generalApi
+            self.balancesRepo = balancesRepo
             self.transactionSender = transactionSender
             self.networkInfoFetcher = networkInfoFetcher
             self.userDataProvider = userDataProvider
@@ -159,6 +162,7 @@ extension ConfirmationScene {
                     completion: { (result) in
                         switch result {
                         case .succeeded:
+                            self.balancesRepo.reloadBalancesDetails()
                             completion(.succeeded)
                         case .failed(let error):
                             completion(.failed(.sendTransactionError(error)))

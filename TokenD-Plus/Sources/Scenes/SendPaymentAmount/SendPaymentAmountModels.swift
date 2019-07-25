@@ -440,7 +440,7 @@ extension SendPaymentAmount.Model.ViewConfig {
     
     static func redeemViewConfig() -> SendPaymentAmount.Model.ViewConfig {
         let actionButtonTitle = NSAttributedString(
-            string: Localized(.confirm),
+            string: Localized(.continue_capitalized),
             attributes: [
                 .font: Theme.Fonts.actionButtonFont,
                 .foregroundColor: Theme.Colors.textOnAccentColor

@@ -133,6 +133,7 @@ extension BalanceHeader {
             self.rateLabel.minimumScaleFactor = 0.1
             self.rateLabel.numberOfLines = 1
             self.rateLabel.textAlignment = .center
+            self.rateLabel.isHidden = true
         }
         
         private func setupIconContainerView() {

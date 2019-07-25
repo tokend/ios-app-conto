@@ -90,9 +90,9 @@ extension SendPaymentDestination {
                     case .failed(let error):
                         response = .failure(message: error.localizedDescription)
                         
-                    case .succeeded(let recipientAddress):
-                        self?.sceneModel.recipientAddress = recipientAddress
-                        response = .success(recipientAddress)
+                    case .succeeded:
+                        self?.sceneModel.recipientAddress = email
+                        response = .success(email)
                     }
                     self?.presenter.presentSelectedContact(response: response)
             })

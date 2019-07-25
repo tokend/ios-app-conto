@@ -185,6 +185,7 @@ extension ConfirmationScene {
                                 switch result {
                                     
                                 case .succeeded:
+                                    self?.balancesRepo.reloadBalancesDetails()
                                     completion(.succeeded)
                                     
                                 case .failed(let error):

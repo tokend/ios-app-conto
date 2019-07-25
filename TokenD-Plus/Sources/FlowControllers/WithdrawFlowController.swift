@@ -81,7 +81,8 @@ class WithdrawFlowController: BaseSignedInFlowController {
         let balanceDetailsLoader = SendPaymentAmount.BalanceDetailsLoaderWorker(
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
-            operation: .handleWithdraw
+            operation: .handleWithdraw,
+            ownerAccountId: self.ownerAccountId
         )
         
         let amountFormatter = SendPaymentAmount.AmountFormatter()
@@ -256,6 +257,7 @@ class WithdrawFlowController: BaseSignedInFlowController {
         
         let sectionsProvider = ConfirmationScene.WithdrawConfirmationSectionsProvider(
             withdrawModel: withdrawModel,
+            balancesRepo: self.reposController.balancesRepo,
             transactionSender: self.managersController.transactionSender,
             networkInfoFetcher: self.reposController.networkInfoRepo,
             amountFormatter: amountFormatter,

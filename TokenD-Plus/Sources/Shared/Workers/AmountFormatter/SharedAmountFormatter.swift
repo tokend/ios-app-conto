@@ -25,7 +25,7 @@ public class SharedAmountFormatter: NSObject {
     
     public func assetAmountToString(_ amount: Decimal) -> String {
         self.assetNumberFormatter.maximumFractionDigits = SharedAmountFormatter.maxFractionDigits
-        return self.assetNumberFormatter.string(from: NSNumber(nonretainedObject: amount)) ?? "\(amount)"
+        return self.assetNumberFormatter.string(from: amount as NSNumber) ?? "\(amount)"
     }
     
     public func assetAmountToString(_ amount: Decimal, currency: String) -> String {
@@ -34,7 +34,7 @@ public class SharedAmountFormatter: NSObject {
     
     public func percentToString(value: Decimal) -> String {
         self.assetNumberFormatter.maximumFractionDigits = SharedAmountFormatter.maxFractionDigits
-        return self.assetNumberFormatter.string(from: NSNumber(nonretainedObject: value)) ?? "\(value)"
+        return self.assetNumberFormatter.string(from: value as NSNumber) ?? "\(value)"
     }
     
     // MARK: - Private
@@ -52,7 +52,7 @@ public class SharedAmountFormatter: NSObject {
         }
         
         if abs(decimal) < 1000 {
-            let formatted = numberFormatter.string(from: NSNumber(nonretainedObject: decimal))
+            let formatted = numberFormatter.string(from: decimal as NSNumber)
             return formatted ?? "\(decimal)"
         }
         
@@ -65,7 +65,7 @@ public class SharedAmountFormatter: NSObject {
         let roundedNumber: Double = round(multiplier * num / pow(1000.0, Double(exp))) / multiplier
         let decimalRoundedNumber: Decimal = Decimal(roundedNumber)
         
-        let formatted = numberFormatter.string(from: NSNumber(nonretainedObject: decimalRoundedNumber))
+        let formatted = numberFormatter.string(from: decimalRoundedNumber as NSNumber)
         return (formatted ?? "\(decimalRoundedNumber)") + "\(units[exp-1])"
     }
     
