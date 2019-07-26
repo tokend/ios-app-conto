@@ -105,8 +105,7 @@ extension AssetPicker {
             private func setupIconView() {
                 self.iconView.backgroundColor = Theme.Colors.contentBackgroundColor
                 self.iconView.layer.cornerRadius = self.iconSize / 2
-                self.iconView.layer.masksToBounds = true
-                self.iconView.contentMode = .scaleAspectFit
+                self.iconView.clipsToBounds = true
             }
             
             private func setupAbbreviationView() {
