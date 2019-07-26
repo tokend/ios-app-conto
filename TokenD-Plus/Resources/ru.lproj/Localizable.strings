@@ -319,6 +319,7 @@
 "no_movements" = "Операции не найдены";
 "no_open_sales" = "Кампании не найдены";
 "no_opportunities" = "Возможности не найдены";
+"no_orders" = "Ордеров нет";
 "no_payments" = "Платежи не найдены";
 "no_pending_orders" = "Нет активных ордеров";
 "no_personal_address" = "Личный $(assets_asset) адрес не найден";
@@ -488,6 +489,8 @@
 "there_is_no_any_poll_for_chosen_company" = "Опросов нет";
 "there_is_no_progress_history_yet" = "Нет истории прогресса";
 "this_feature_will_be" = "This feature will be available once you have any asset that can be deposited";
+"this_orders_allow_you_to_buy" = "Это предложения прямой покупки $(asset) за внешние активы без необходимости депозита";
+"this_orders_allow_you_to_buy_replace_asset" = "asset";
 "this_seed_is_the_only_way" = "This seed is the only way to recover your account in case of password loss. You will not be able to get it later.";
 "to" = "На $(address)";
 "to_account" = "На аккаунт";
@@ -553,6 +556,8 @@
 "wallet" = "Кошелёк";
 "we_do_not_know_your_seed" = "Мы не знаем ваш секретный ключ";
 "week" = "Неделя";
+"with_one_for" = "C 1 $(asset) за";
+"with_one_for_replace_asset" = "asset";
 "withdraw" = "Вывод";
 "withdraw_amount" = "Сумма вывода";
 "withdraw_destination" = "Адрес";

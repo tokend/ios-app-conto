@@ -38,6 +38,15 @@
 		DB363E3522DF764700F5761C /* LanguagesListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2F22DF764700F5761C /* LanguagesListConfigurator.swift */; };
 		DB363E3822DF77BE00F5761C /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E3722DF77BE00F5761C /* LanguageCell.swift */; };
 		DB4AE2BD22E9F6D5001D0883 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2BC22E9F6D5001D0883 /* TitleView.swift */; };
+		DB4AE2C522EB3B8F001D0883 /* AtomicSwapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2BF22EB3B8F001D0883 /* AtomicSwapPresenter.swift */; };
+		DB4AE2C622EB3B8F001D0883 /* AtomicSwapRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2C022EB3B8F001D0883 /* AtomicSwapRouting.swift */; };
+		DB4AE2C722EB3B8F001D0883 /* AtomicSwapModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2C122EB3B8F001D0883 /* AtomicSwapModels.swift */; };
+		DB4AE2C822EB3B8F001D0883 /* AtomicSwapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2C222EB3B8F001D0883 /* AtomicSwapViewController.swift */; };
+		DB4AE2C922EB3B8F001D0883 /* AtomicSwapInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2C322EB3B8F001D0883 /* AtomicSwapInteractor.swift */; };
+		DB4AE2CA22EB3B8F001D0883 /* AtomicSwapConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2C422EB3B8F001D0883 /* AtomicSwapConfigurator.swift */; };
+		DB4AE2CD22EB3D60001D0883 /* AtomicSwapAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2CC22EB3D60001D0883 /* AtomicSwapAlertView.swift */; };
+		DB4AE2CF22EB4DC7001D0883 /* AtomicSwapInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2CE22EB4DC6001D0883 /* AtomicSwapInfoCell.swift */; };
+		DB4AE2D222EB6403001D0883 /* AtomicSwapAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2D122EB6403001D0883 /* AtomicSwapAmountFormatter.swift */; };
 		DB72098B22C1347200ED116A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB72098A22C1347200ED116A /* Assets.xcassets */; };
 		DB720CAA22C1396B00ED116A /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099922C1396B00ED116A /* SettingsModels.swift */; };
 		DB720CAB22C1396B00ED116A /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099A22C1396B00ED116A /* SettingsInteractor.swift */; };
@@ -692,6 +701,15 @@
 		DB363E2F22DF764700F5761C /* LanguagesListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListConfigurator.swift; sourceTree = "<group>"; };
 		DB363E3722DF77BE00F5761C /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
 		DB4AE2BC22E9F6D5001D0883 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		DB4AE2BF22EB3B8F001D0883 /* AtomicSwapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapPresenter.swift; sourceTree = "<group>"; };
+		DB4AE2C022EB3B8F001D0883 /* AtomicSwapRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapRouting.swift; sourceTree = "<group>"; };
+		DB4AE2C122EB3B8F001D0883 /* AtomicSwapModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapModels.swift; sourceTree = "<group>"; };
+		DB4AE2C222EB3B8F001D0883 /* AtomicSwapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapViewController.swift; sourceTree = "<group>"; };
+		DB4AE2C322EB3B8F001D0883 /* AtomicSwapInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapInteractor.swift; sourceTree = "<group>"; };
+		DB4AE2C422EB3B8F001D0883 /* AtomicSwapConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapConfigurator.swift; sourceTree = "<group>"; };
+		DB4AE2CC22EB3D60001D0883 /* AtomicSwapAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapAlertView.swift; sourceTree = "<group>"; };
+		DB4AE2CE22EB4DC6001D0883 /* AtomicSwapInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapInfoCell.swift; sourceTree = "<group>"; };
+		DB4AE2D122EB6403001D0883 /* AtomicSwapAmountFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapAmountFormatter.swift; sourceTree = "<group>"; };
 		DB72098022C1347100ED116A /* TokenD-Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TokenD-Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB72098A22C1347200ED116A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB72098F22C1347200ED116A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1428,6 +1446,38 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DB4AE2BE22EB3B6A001D0883 /* AtomicSwap */ = {
+			isa = PBXGroup;
+			children = (
+				DB4AE2C422EB3B8F001D0883 /* AtomicSwapConfigurator.swift */,
+				DB4AE2C322EB3B8F001D0883 /* AtomicSwapInteractor.swift */,
+				DB4AE2C122EB3B8F001D0883 /* AtomicSwapModels.swift */,
+				DB4AE2BF22EB3B8F001D0883 /* AtomicSwapPresenter.swift */,
+				DB4AE2C022EB3B8F001D0883 /* AtomicSwapRouting.swift */,
+				DB4AE2C222EB3B8F001D0883 /* AtomicSwapViewController.swift */,
+				DB4AE2CB22EB3D33001D0883 /* Views */,
+				DB4AE2D022EB63E7001D0883 /* Workers */,
+			);
+			path = AtomicSwap;
+			sourceTree = "<group>";
+		};
+		DB4AE2CB22EB3D33001D0883 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DB4AE2CC22EB3D60001D0883 /* AtomicSwapAlertView.swift */,
+				DB4AE2CE22EB4DC6001D0883 /* AtomicSwapInfoCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DB4AE2D022EB63E7001D0883 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DB4AE2D122EB6403001D0883 /* AtomicSwapAmountFormatter.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		DB72097722C1347100ED116A = {
 			isa = PBXGroup;
 			children = (
@@ -1484,6 +1534,7 @@
 		DB72099722C1396B00ED116A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DB4AE2BE22EB3B6A001D0883 /* AtomicSwap */,
 				DB720B4822C1396B00ED116A /* AssetPicker */,
 				DB720A2322C1396B00ED116A /* AuthenticatorAuth */,
 				DB720BD922C1396B00ED116A /* BalanceHeader */,
@@ -3523,6 +3574,8 @@
 				DB720D8F22C1396B00ED116A /* TransactionDetailsInvestmentSectionsProvider.swift in Sources */,
 				DB720D1422C1396B00ED116A /* TokenDetailsFetcher.swift in Sources */,
 				DB28C4C522D48D61005362FD /* AcceptRedeemConfirmationSectionsProvider.swift in Sources */,
+				DB4AE2C622EB3B8F001D0883 /* AtomicSwapRouting.swift in Sources */,
+				DB4AE2CF22EB4DC7001D0883 /* AtomicSwapInfoCell.swift in Sources */,
 				DB720F1122C1396C00ED116A /* PermissionRequestFlowController.swift in Sources */,
 				DB720D8C22C1396B00ED116A /* TransactionDetailsEmailFetcher.swift in Sources */,
 				DB720E9F22C1396C00ED116A /* UIResponder+First.swift in Sources */,
@@ -3692,6 +3745,7 @@
 				DB720DFF22C1396C00ED116A /* DashboardPlugInsProvider.swift in Sources */,
 				DB720EFE22C1396C00ED116A /* TransactionSender.swift in Sources */,
 				DB720EB622C1396C00ED116A /* FeeLoader.swift in Sources */,
+				DB4AE2C822EB3B8F001D0883 /* AtomicSwapViewController.swift in Sources */,
 				DB720E0222C1396C00ED116A /* TabBarContainerPresenter.swift in Sources */,
 				DB720D0522C1396B00ED116A /* FeesConfigurator.swift in Sources */,
 				DB720CC122C1396B00ED116A /* SaleInvestEnterInvestAmountView.swift in Sources */,
@@ -3726,6 +3780,7 @@
 				DB720EA922C1396C00ED116A /* BalanceBinder.swift in Sources */,
 				DB720CDD22C1396B00ED116A /* UpdatePasswordViewController.swift in Sources */,
 				DB720E3522C1396C00ED116A /* ReceiveAddressQRCell.swift in Sources */,
+				DB4AE2C722EB3B8F001D0883 /* AtomicSwapModels.swift in Sources */,
 				DB720DF722C1396C00ED116A /* DashboardPendingOffersPreviewPlugInRouting.swift in Sources */,
 				DB720DF322C1396C00ED116A /* DashboardPaymentsPlugInBalancesFetcher.swift in Sources */,
 				DB720E6822C1396C00ED116A /* TransactionsListConfigurator.swift in Sources */,
@@ -3762,6 +3817,7 @@
 				DB720D6F22C1396B00ED116A /* BalanceHeaderWithPickerPresenter.swift in Sources */,
 				DB720E6222C1396C00ED116A /* TransactionsListAmountFormatter.swift in Sources */,
 				DB720EAF22C1396C00ED116A /* AmountConverter.swift in Sources */,
+				DB4AE2D222EB6403001D0883 /* AtomicSwapAmountFormatter.swift in Sources */,
 				DB720DCB22C1396C00ED116A /* ConfirmationTitleBoolSwitchView.swift in Sources */,
 				DB720E5D22C1396C00ED116A /* TransactionsListScenePaymentsFetcher.swift in Sources */,
 				DB720E3C22C1396C00ED116A /* BalancesListInteractor.swift in Sources */,
@@ -3828,6 +3884,7 @@
 				DB720EF722C1396C00ED116A /* ExternalSystemBalancesManager.swift in Sources */,
 				DB720DC422C1396C00ED116A /* ConfirmationPercentFormatter.swift in Sources */,
 				DB720E5822C1396C00ED116A /* TransactionsListSceneDateFormatterProtocol.swift in Sources */,
+				DB4AE2CA22EB3B8F001D0883 /* AtomicSwapConfigurator.swift in Sources */,
 				DB720CD522C1396B00ED116A /* SaleOverviewModels.swift in Sources */,
 				DB720E2F22C1396C00ED116A /* ReceiveAddressManagerProtocol.swift in Sources */,
 				DB720E8122C1396C00ED116A /* BalanceHeaderModels.swift in Sources */,
@@ -3894,6 +3951,7 @@
 				DB720D2122C1396B00ED116A /* AuthRequestKeyFetcher.swift in Sources */,
 				DB720E9022C1396C00ED116A /* UIColor+Hex.swift in Sources */,
 				DBCA02DA22D5EB9800503025 /* AcceptRedeemWorker.swift in Sources */,
+				DB4AE2C522EB3B8F001D0883 /* AtomicSwapPresenter.swift in Sources */,
 				DB720EC522C1396C00ED116A /* HorizontalPicker.swift in Sources */,
 				DB720D5622C1396B00ED116A /* SendPaymentDestinationRecipientAddressResolver.swift in Sources */,
 				DB720DFE22C1396C00ED116A /* DashboardRouting.swift in Sources */,
@@ -4075,6 +4133,7 @@
 				DB720E5922C1396C00ED116A /* TransactionListActionProvider.swift in Sources */,
 				DB720D4622C1396B00ED116A /* ChartPresenter.swift in Sources */,
 				DB720E5422C1396C00ED116A /* DepositSceneViewController.swift in Sources */,
+				DB4AE2C922EB3B8F001D0883 /* AtomicSwapInteractor.swift in Sources */,
 				DB720F0322C1396C00ED116A /* ApplicationEventsController.swift in Sources */,
 				DB720DB322C1396B00ED116A /* SendPaymentAmountFeeOverviewer.swift in Sources */,
 				DB720D3322C1396B00ED116A /* MarkdownViewerViewController.swift in Sources */,
@@ -4084,6 +4143,7 @@
 				DB720E3D22C1396C00ED116A /* BalancesListDataProvider.swift in Sources */,
 				DB720EC722C1396C00ED116A /* TradesView.swift in Sources */,
 				DB720D0822C1396B00ED116A /* FeesViewController.swift in Sources */,
+				DB4AE2CD22EB3D60001D0883 /* AtomicSwapAlertView.swift in Sources */,
 				DB720EB222C1396C00ED116A /* ClientRedirectsModel.swift in Sources */,
 				DB720D0922C1396B00ED116A /* FeesInteractor.swift in Sources */,
 				DB720D1722C1396B00ED116A /* TokenDetailsTokenDocumentCell.swift in Sources */,

@@ -31,6 +31,7 @@ enum Assets: String {
     case history = "History icon"
     case icon = "Icon"
     case incoming = "Incoming"
+    case info = "Info"
     case inviteAFriendIcon = "Invite a friend icon"
     case language = "Language"
     case logo = "Logo"

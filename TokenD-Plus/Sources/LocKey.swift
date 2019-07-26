@@ -322,6 +322,7 @@ enum LocKey: String {
     case no_movements
     case no_open_sales
     case no_opportunities
+    case no_orders
     case no_payments
     case no_pending_orders
     case no_personal_address
@@ -491,6 +492,8 @@ enum LocKey: String {
     case there_is_no_any_poll_for_chosen_company
     case there_is_no_progress_history_yet
     case this_feature_will_be
+    case this_orders_allow_you_to_buy
+    case this_orders_allow_you_to_buy_replace_asset
     case this_seed_is_the_only_way
     case to
     case to_account
@@ -556,6 +559,8 @@ enum LocKey: String {
     case wallet
     case we_do_not_know_your_seed
     case week
+    case with_one_for
+    case with_one_for_replace_asset
     case withdraw
     case withdraw_amount
     case withdraw_destination
