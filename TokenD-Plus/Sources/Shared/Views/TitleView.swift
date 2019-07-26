@@ -28,8 +28,8 @@ public class TitleView: UIView {
         
         self.setupView()
         self.setupLabelsContainer()
-        self.setupPollsLabel()
-        self.setupAssetLabel()
+        self.setupTitleLabel()
+        self.setupSubtitleLabel()
         self.setupLayout()
     }
     
@@ -38,8 +38,8 @@ public class TitleView: UIView {
         
         self.setupView()
         self.setupLabelsContainer()
-        self.setupPollsLabel()
-        self.setupAssetLabel()
+        self.setupTitleLabel()
+        self.setupSubtitleLabel()
         self.setupLayout()
     }
     
@@ -60,14 +60,14 @@ public class TitleView: UIView {
         self.labelsContainer.backgroundColor = Theme.Colors.contentBackgroundColor
     }
     
-    private func setupPollsLabel() {
+    private func setupTitleLabel() {
         self.titleLabel.backgroundColor = Theme.Colors.contentBackgroundColor
         self.titleLabel.font = Theme.Fonts.plainBoldTextFont
         self.titleLabel.text = Localized(.polls)
         self.titleLabel.textAlignment = .center
     }
     
-    private func setupAssetLabel() {
+    private func setupSubtitleLabel() {
         self.subtitleLabel.backgroundColor = Theme.Colors.contentBackgroundColor
         self.subtitleLabel.textColor = Theme.Colors.separatorOnContentBackgroundColor
         self.subtitleLabel.font = Theme.Fonts.plainTextFont
