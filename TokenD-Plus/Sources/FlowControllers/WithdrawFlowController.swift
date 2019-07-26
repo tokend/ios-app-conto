@@ -165,7 +165,8 @@ class WithdrawFlowController: BaseSignedInFlowController {
         
         let sceneModel = SendPaymentDestination.Model.SceneModel(
             feeType: .withdraw,
-            operation: .handleWithdraw
+            operation: .handleWithdraw,
+            accountEmail: self.userDataProvider.account
         )
         sceneModel.amount = withdrawAmountModel.amount
         sceneModel.selectedBalance = withdrawAmountModel.senderBalance

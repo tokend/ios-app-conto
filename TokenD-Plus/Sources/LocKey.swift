@@ -570,6 +570,7 @@ enum LocKey: String {
     case yesterday_at_replace_hours
     case you_can_grant_permissions
     case you_cannot_accept_redeem_of_the_asset_that_you_do_not_own
+    case you_cannot_send_payment_to_yourself
     case you_have_already_invested
     case you_have_no_depositable_assets
     case your_account_is_approved

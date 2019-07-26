@@ -15,7 +15,7 @@ extension TransactionsListScene {
         private lazy var titleDateFormatter: Foundation.DateFormatter = {
             let formatter = Foundation.DateFormatter()
             formatter.locale = Locale(identifier: self.localeIdentifier)
-            formatter.dateFormat = "MMMM yyyy"
+            formatter.dateFormat = "LLLL yyyy"
             return formatter
         }()
         private lazy var transactionDateFormatter: Foundation.DateFormatter = {

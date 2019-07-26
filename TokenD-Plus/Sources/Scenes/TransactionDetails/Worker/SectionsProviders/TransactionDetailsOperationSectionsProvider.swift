@@ -499,7 +499,7 @@ extension TransactionDetails {
             switch balanceChangeEffect.effectBalanceChangeType {
                 
             case .effectCharged:
-                effectCellValue = Localized(.charged)
+                effectCellValue = Localized(.sent)
                 identifier = .charged
                 
             case .effectChargedFromLocked:
@@ -507,7 +507,7 @@ extension TransactionDetails {
                 identifier = .charged
                 
             case .effectFunded:
-                effectCellValue = Localized(.funded)
+                effectCellValue = Localized(.received)
                 identifier = .received
                 
             case .effectIssued:

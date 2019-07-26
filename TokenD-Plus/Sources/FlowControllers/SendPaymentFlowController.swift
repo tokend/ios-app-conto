@@ -192,7 +192,8 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         
         let sceneModel = SendPaymentDestination.Model.SceneModel(
             feeType: .payment,
-            operation: .handleSend
+            operation: .handleSend,
+            accountEmail: self.userDataProvider.account
         )
         
         SendPaymentDestination.Configurator.configure(

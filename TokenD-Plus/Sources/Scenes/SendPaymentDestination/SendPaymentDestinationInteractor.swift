@@ -105,6 +105,11 @@ extension SendPaymentDestination {
                     return
             }
             
+            guard recipientAddress != self.sceneModel.accountEmail else {
+                self.presenter.presentPaymentAction(response: .error(.itIsForbiddenToSendToYourself))
+                return
+            }
+            
             self.loadingStatus.accept(.loading)
             self.recipientAddressResolver.resolve(
                 recipientAddress: recipientAddress,
