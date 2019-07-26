@@ -6,6 +6,7 @@ class WithdrawFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private var navigationController: NavigationControllerProtocol?
+    private let ownerAccountId: String
     private let selectedBalanceId: String?
     private let disposeBag: DisposeBag = DisposeBag()
     
@@ -22,9 +23,11 @@ class WithdrawFlowController: BaseSignedInFlowController {
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
         navigationController: NavigationControllerProtocol?,
+        ownerAccountId: String,
         selectedBalanceId: String? = nil
         ) {
         
+        self.ownerAccountId = ownerAccountId
         self.selectedBalanceId = selectedBalanceId
         self.navigationController = navigationController
         super.init(
@@ -78,7 +81,8 @@ class WithdrawFlowController: BaseSignedInFlowController {
         let balanceDetailsLoader = SendPaymentAmount.BalanceDetailsLoaderWorker(
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
-            operation: .handleWithdraw
+            operation: .handleWithdraw,
+            ownerAccountId: self.ownerAccountId
         )
         
         let amountFormatter = SendPaymentAmount.AmountFormatter()
@@ -161,7 +165,8 @@ class WithdrawFlowController: BaseSignedInFlowController {
         
         let sceneModel = SendPaymentDestination.Model.SceneModel(
             feeType: .withdraw,
-            operation: .handleWithdraw
+            operation: .handleWithdraw,
+            accountEmail: self.userDataProvider.account
         )
         sceneModel.amount = withdrawAmountModel.amount
         sceneModel.selectedBalance = withdrawAmountModel.senderBalance
@@ -253,6 +258,7 @@ class WithdrawFlowController: BaseSignedInFlowController {
         
         let sectionsProvider = ConfirmationScene.WithdrawConfirmationSectionsProvider(
             withdrawModel: withdrawModel,
+            balancesRepo: self.reposController.balancesRepo,
             transactionSender: self.managersController.transactionSender,
             networkInfoFetcher: self.reposController.networkInfoRepo,
             amountFormatter: amountFormatter,
@@ -390,6 +396,7 @@ class WithdrawFlowController: BaseSignedInFlowController {
             storageUrl: self.flowControllerStack.apiConfigurationModel.storageEndpoint
         )
         let balancesFetcher = BalancePicker.BalancesFetcher(
+            ownerAccountId: self.ownerAccountId,
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
             imagesUtility: imageUtility,

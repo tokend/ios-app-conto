@@ -6,7 +6,7 @@ extension BalancesList {
     public enum BalanceCell {
         
         public struct ViewModel: CellViewModel {
-            let code: String
+            let assetName: String
             let imageRepresentation: BalancesList.Model.ImageRepresentation
             let balance: String
             let abbreviationBackgroundColor: UIColor
@@ -15,7 +15,7 @@ extension BalancesList {
             let cellIdentifier: Model.CellIdentifier
             
             public func setup(cell: Cell) {
-                cell.code = self.code
+                cell.assetName = self.assetName
                 cell.imageRepresentation = self.imageRepresentation
                 cell.balance = self.balance
                 cell.abbreviationBackgroundColor = self.abbreviationBackgroundColor
@@ -31,6 +31,11 @@ extension BalancesList {
             var code: String? {
                 get { return self.codeLabel.text }
                 set { self.codeLabel.text = newValue }
+            }
+            
+            var assetName: String? {
+                get { return self.nameLabel.text }
+                set { self.nameLabel.text = newValue }
             }
             
             var imageRepresentation: BalancesList.Model.ImageRepresentation? {
@@ -115,7 +120,7 @@ extension BalancesList {
             
             private func setupNameLabel() {
                 self.nameLabel.backgroundColor = Theme.Colors.contentBackgroundColor
-                self.nameLabel.font = Theme.Fonts.plainTextFont
+                self.nameLabel.font = Theme.Fonts.largeTitleFont
             }
             
             private func setupBalanceLabel() {
@@ -126,8 +131,8 @@ extension BalancesList {
             private func setupIconView() {
                 self.iconView.backgroundColor = Theme.Colors.contentBackgroundColor
                 self.iconView.layer.cornerRadius = self.iconSize / 2
-                self.iconView.layer.masksToBounds = true
-                self.iconView.contentMode = .scaleAspectFit
+                self.iconView.layer.masksToBounds = false
+                self.iconView.clipsToBounds = true
             }
             
             private func setupAbbreviationView() {
@@ -148,7 +153,7 @@ extension BalancesList {
                 self.addSubview(self.abbreviationView)
                 self.abbreviationView.addSubview(self.abbreviationLabel)
                 self.addSubview(self.iconView)
-                self.addSubview(self.codeLabel)
+                self.addSubview(self.nameLabel)
                 self.addSubview(self.balanceLabel)
                 self.addSubview(self.separator)
                 
@@ -166,7 +171,7 @@ extension BalancesList {
                     make.edges.equalTo(self.abbreviationView)
                 }
                 
-                self.codeLabel.snp.makeConstraints { (make) in
+                self.nameLabel.snp.makeConstraints { (make) in
                     make.leading.equalTo(self.abbreviationView.snp.trailing).offset(self.sideInset)
                     make.trailing.equalToSuperview().inset(self.sideInset)
                     make.centerY.equalTo(self.abbreviationView.snp.centerY).offset(-self.topInset)
@@ -179,7 +184,7 @@ extension BalancesList {
                 }
                 
                 self.separator.snp.makeConstraints { (make) in
-                    make.leading.equalTo(self.codeLabel)
+                    make.leading.equalTo(self.nameLabel)
                     make.trailing.bottom.equalToSuperview()
                     make.height.equalTo(1.0 / UIScreen.main.scale)
                 }

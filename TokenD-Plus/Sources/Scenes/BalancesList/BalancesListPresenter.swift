@@ -111,9 +111,12 @@ extension BalancesList.Presenter: BalancesList.PresentationLogic {
                 switch cell {
                     
                 case .balance(let balanceModel):
-                    let balance = self.amountFormatter.formatAmount(
-                        balanceModel.balance,
-                        currency: balanceModel.code
+                    let balance = self.amountFormatter.assetAmountToString(balanceModel.balance)
+                    let balanceToShow = Localized(
+                        .available_amount,
+                        replace: [
+                            .available_amount_replace_amount: balance
+                        ]
                     )
                     
                     let abbreviationBackgroundColor = TokenColoringProvider.shared.coloringForCode(balanceModel.code)
@@ -125,9 +128,9 @@ extension BalancesList.Presenter: BalancesList.PresentationLogic {
                         imageRepresentation = .image(url)
                     }
                     let balanceViewModel = BalancesList.BalanceCell.ViewModel(
-                        code: balanceModel.code,
+                        assetName: balanceModel.assetName,
                         imageRepresentation: imageRepresentation,
-                        balance: balance,
+                        balance: balanceToShow,
                         abbreviationBackgroundColor: abbreviationBackgroundColor,
                         abbreviationText: abbreviationText,
                         balanceId: balanceModel.balanceId,

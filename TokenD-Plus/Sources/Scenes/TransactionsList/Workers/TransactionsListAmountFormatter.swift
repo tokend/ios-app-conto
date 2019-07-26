@@ -5,6 +5,7 @@ protocol TransactionsListSceneAmountFormatterProtocol {
         _ amount: TransactionsListScene.Model.Amount,
         isIncome: Bool?
         ) -> String
+    func assetAmountToString(_ amount: Decimal) -> String
 }
 
 extension TransactionsListScene {

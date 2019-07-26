@@ -71,6 +71,7 @@ extension SendPaymentAmount {
         }
         
         private func setupTextField() {
+            self.textField.placeholder = Localized(.description_optional)
             self.textField.backgroundColor = Theme.Colors.contentBackgroundColor
             self.textField.autocorrectionType = .no
             

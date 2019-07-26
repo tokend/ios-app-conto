@@ -14,7 +14,6 @@ extension TabBarContainer {
         private let showReceiveScene: () -> Void
         private let showCreateRedeemScene: () -> Void
         private let showAcceptRedeemScene: () -> Void
-        private let updateContentLanguage: () -> Void
         private let onSignOut: () -> Void
         private let showTabBar: () -> Void
         private let hideTabBar: () -> Void
@@ -42,7 +41,6 @@ extension TabBarContainer {
             showReceiveScene: @escaping () -> Void,
             showCreateRedeemScene: @escaping () -> Void,
             showAcceptRedeemScene: @escaping () -> Void,
-            updateContentLanguage: @escaping () -> Void,
             onSignOut: @escaping () -> Void,
             showTabBar: @escaping () -> Void,
             hideTabBar: @escaping () -> Void,
@@ -62,7 +60,6 @@ extension TabBarContainer {
             self.showReceiveScene = showReceiveScene
             self.showCreateRedeemScene = showCreateRedeemScene
             self.showAcceptRedeemScene = showAcceptRedeemScene
-            self.updateContentLanguage = updateContentLanguage
             self.onSignOut = onSignOut
             self.showTabBar = showTabBar
             self.hideTabBar = hideTabBar
@@ -131,11 +128,12 @@ extension TabBarContainer {
         
         private func getTabs() -> [TabsContainer.Model.TabModel] {
             let balancesTab = self.getBalancesTab()
-            let salesTab = self.getSalesTab()
-            let pollsTab = self.getPollsTab()
-            let otherTab = self.getOtehrTab()
+            let settingsTab = self.getSettingsTab()
+            // let salesTab = self.getSalesTab()
+            // let pollsTab = self.getPollsTab()
+            // let otherTab = self.getOtehrTab()
             
-            return [balancesTab, salesTab, pollsTab, otherTab]
+            return [balancesTab, settingsTab]
         }
         
         // MARK: - Balances Tab
@@ -265,7 +263,6 @@ extension TabBarContainer {
                 navigationController: navigationController,
                 ownerAccountId: self.ownerAccountId,
                 backToCompanies: self.backToCompanies,
-                updateContentLanguage: self.updateContentLanguage,
                 onSignOut: self.onSignOut,
                 appController: self.appController,
                 flowControllerStack: self.flowControllerStack,
@@ -278,6 +275,39 @@ extension TabBarContainer {
             
             self.flowControllers.append(facilitiesFlow)
             facilitiesFlow.run(showRootScreen: { (vc) in
+                navigationController.pushViewController(vc, animated: true)
+            })
+        }
+        
+        // MARK: - Settings Tab
+        
+        private func getSettingsTab() -> TabsContainer.Model.TabModel {
+            let navigationController = NavigationController()
+            self.addSubscriptionTo(navigationController: navigationController)
+            self.runSettingsFlow(navigationController: navigationController)
+            
+            return TabsContainer.Model.TabModel(
+                title: Localized(.settings),
+                content: .viewController(navigationController.getViewController()),
+                identifier: "settings"
+            )
+        }
+        
+        private func runSettingsFlow(navigationController: NavigationControllerProtocol) {
+            let serringsFlow = SettingsFlowController(
+                navigationController: navigationController,
+                onSignOut: self.onSignOut,
+                appController: self.appController,
+                flowControllerStack: self.flowControllerStack,
+                reposController: self.reposController,
+                managersController: self.managersController,
+                userDataProvider: self.userDataProvider,
+                keychainDataProvider: self.keychainDataProvider,
+                rootNavigation: self.rootNavigation
+            )
+            
+            self.flowControllers.append(serringsFlow)
+            serringsFlow.run(showRootScreen: { (vc) in
                 navigationController.pushViewController(vc, animated: true)
             })
         }

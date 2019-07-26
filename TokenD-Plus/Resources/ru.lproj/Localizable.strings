@@ -35,7 +35,7 @@
 "at_date_replace_date" = "date";
 "authenticator" = "Аутентификатор";
 "available" = "Доступно";
-"available_amount" = "Доступно: $(amount)";
+"available_amount" = "$(amount) доступно";
 "available_amount_replace_amount" = "amount";
 "available_colon" = "Доступно:";
 "available_assets_for_this_operations" = "Подходящие активы для этих операций не найдены";
@@ -482,6 +482,7 @@
 "terms_of_service" = "Условия использования";
 "terms_of_service_not_agreed" = "Условия обслуживания не согласованы";
 "terms_of_use" = "Условия использования";
+"the_redemption_has_been_already_completed" = "Погашение уже выполнено, запрос недействителен";
 "there_is_not_any_company_where_you_are_a_client_yet" = "Компании не найдены";
 "there_is_not_any_user_with_such_an_email_was_found" = "Пользователь с таким email-ом не найден";
 "there_is_no_any_poll_for_chosen_company" = "Опросов нет";
@@ -535,7 +536,7 @@
 "upper_bound" = "Верхняя граница";
 "up_to" = "До $(amount)";
 "up_to_replace_amount" = "amount";
-"use_this_qr_code_to_redeem" = "Используйте этот QR код чтобы погасить $(amount).\nЗаметьте, он можеть быть использован только для одного погашения.";
+"use_this_qr_code_to_redeem" = "Используйте этот QR код чтобы погасить $(amount)";
 "use_this_qr_code_to_redeem_replace_amount" = "amount";
 "userdataprovider_should_always_provide_walletdata" = "UserDataProvider should always provide walletData";
 "verification" = "Верификация";
@@ -566,6 +567,7 @@
 "yesterday_at_replace_hours" = "hours";
 "you_can_grant_permissions" = "Вы можете предоставить доступ в настройках приложения, которые находятся в Системных Настройках. Хотите открыть настройки?";
 "you_cannot_accept_redeem_of_the_asset_that_you_do_not_own" = "Вы можете принимать погашения только созданых вами активов";
+"you_cannot_send_payment_to_yourself" = "Вы не можете отправлять платёж самому себе";
 "you_have_already_invested" = "Вы уже вложили:";
 "you_have_no_depositable_assets" = "У Вас нет активов для которых доступен депозит";
 "your_account_is_approved" = "Ваш аккаунт одобрен. Все действия которые требуют верификацию теперь доступны";

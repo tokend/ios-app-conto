@@ -6,6 +6,7 @@ class SendPaymentFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol
+    private let ownerAccountId: String
     private let selectedBalanceId: String?
     private let disposeBag: DisposeBag = DisposeBag()
     
@@ -22,11 +23,14 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
+        ownerAccountId: String,
         selectedBalanceId: String?
         ) {
         
         self.navigationController = navigationController
+        self.ownerAccountId = ownerAccountId
         self.selectedBalanceId = selectedBalanceId
+        
         
         super.init(
             appController: appController,
@@ -83,7 +87,8 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         let balanceDetailsLoader = SendPaymentAmount.BalanceDetailsLoaderWorker(
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
-            operation: .handleSend
+            operation: .handleSend,
+            ownerAccountId: self.ownerAccountId
         )
         
         let amountFormatter = SendPaymentAmount.AmountFormatter()
@@ -187,7 +192,8 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         
         let sceneModel = SendPaymentDestination.Model.SceneModel(
             feeType: .payment,
-            operation: .handleSend
+            operation: .handleSend,
+            accountEmail: self.userDataProvider.account
         )
         
         SendPaymentDestination.Configurator.configure(
@@ -244,6 +250,7 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         
         let sectionsProvider = ConfirmationScene.SendPaymentConfirmationSectionsProvider(
             sendPaymentModel: paymentModel,
+            balancesRepo: self.reposController.balancesRepo,
             transactionSender: self.managersController.transactionSender,
             networkInfoFetcher: self.reposController.networkInfoRepo,
             amountFormatter: amountFormatter,
@@ -393,6 +400,7 @@ class SendPaymentFlowController: BaseSignedInFlowController {
             storageUrl: self.flowControllerStack.apiConfigurationModel.storageEndpoint
         )
         let balancesFetcher = BalancePicker.BalancesFetcher(
+            ownerAccountId: self.ownerAccountId,
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
             imagesUtility: imageUtility,

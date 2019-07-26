@@ -27,7 +27,7 @@ extension BalanceHeader {
         
         private let labelsStackView: UIStackView = UIStackView()
         private let balanceLabel: UILabel = UILabel()
-        private let rateLabel: UILabel = UILabel()
+        private let amountLabel: UILabel = UILabel()
         
         private let iconSize: CGFloat = 60.0
         
@@ -103,7 +103,7 @@ extension BalanceHeader {
         private func commonInit() {
             self.setupView()
             self.setupBalanceLabel()
-            self.setupRateLabel()
+            self.setupAmountLabel()
             self.setupIconContainerView()
             self.setupIconView()
             self.setupAbbreviationView()
@@ -118,7 +118,7 @@ extension BalanceHeader {
         }
         
         private func setupBalanceLabel() {
-            self.balanceLabel.font = Theme.Fonts.flexibleHeaderTitleFont
+            self.balanceLabel.font = Theme.Fonts.plainTextFont
             self.balanceLabel.textColor = Theme.Colors.textOnMainColor
             self.balanceLabel.adjustsFontSizeToFitWidth = true
             self.balanceLabel.minimumScaleFactor = 0.1
@@ -126,13 +126,13 @@ extension BalanceHeader {
             self.balanceLabel.textAlignment = .center
         }
         
-        private func setupRateLabel() {
-            self.rateLabel.font = Theme.Fonts.plainTextFont
-            self.rateLabel.textColor = Theme.Colors.textOnMainColor
-            self.rateLabel.adjustsFontSizeToFitWidth = true
-            self.rateLabel.minimumScaleFactor = 0.1
-            self.rateLabel.numberOfLines = 1
-            self.rateLabel.textAlignment = .center
+        private func setupAmountLabel() {
+            self.amountLabel.font = Theme.Fonts.flexibleHeaderTitleFont
+            self.amountLabel.textColor = Theme.Colors.textOnMainColor
+            self.amountLabel.adjustsFontSizeToFitWidth = true
+            self.amountLabel.minimumScaleFactor = 0.1
+            self.amountLabel.numberOfLines = 1
+            self.amountLabel.textAlignment = .center
         }
         
         private func setupIconContainerView() {
@@ -166,7 +166,7 @@ extension BalanceHeader {
         private func setupLayout() {
             self.addSubview(self.iconContainerView)
             self.addSubview(self.balanceLabel)
-            self.addSubview(self.rateLabel)
+            self.addSubview(self.amountLabel)
             
             self.abbreviationView.addSubview(self.abbreviationLabel)
             self.iconContainerView.addSubview(self.abbreviationView)
@@ -193,14 +193,14 @@ extension BalanceHeader {
                 make.top.equalTo(self.iconContainerView.snp.bottom).offset(10.0)
             }
             
-            self.rateLabel.snp.makeConstraints { (make) in
+            self.amountLabel.snp.makeConstraints { (make) in
                 make.leading.trailing.equalToSuperview()
                 make.top.equalTo(self.balanceLabel.snp.bottom).offset(5.0)
             }
         }
         
         private func setRate(_ rate: String?) {
-            self.rateLabel.text = rate
+            self.amountLabel.text = rate
         }
         
         private func handleCollapseChange() {
@@ -216,7 +216,7 @@ extension BalanceHeader {
             let rateLabelPercentPercent: CGFloat = 0.95
             let currentDisappearRateDiff = percent - rateLabelDisappearPercent
             let appearDisappearRateDiff = rateLabelPercentPercent - rateLabelDisappearPercent
-            self.rateLabel.alpha = max((currentDisappearRateDiff) / (appearDisappearRateDiff), 0)
+            self.amountLabel.alpha = max((currentDisappearRateDiff) / (appearDisappearRateDiff), 0)
             
             let iconLabelDisappearPercent: CGFloat = 0.25
             let iconLabelPercentPercent: CGFloat = 0.75
@@ -237,9 +237,9 @@ extension BalanceHeader {
 extension BalanceHeader.View: BalanceHeader.DisplayLogic {
     
     public func displayBalanceUpdated(viewModel: Event.BalanceUpdated.ViewModel) {
-        self.balanceLabel.text = viewModel.balance
-        self.rateLabel.text = viewModel.rate
-        self.titleTextDidChange?(viewModel.balance)
+        self.balanceLabel.text = viewModel.assetName
+        self.amountLabel.text = viewModel.balance
+        self.titleTextDidChange?(viewModel.title, viewModel.balance)
         self.updateImageRepresentation(imageRepresenation: viewModel.imageRepresentation)
     }
 }

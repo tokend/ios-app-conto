@@ -29,18 +29,18 @@ extension TabBar {
                 identifier: "balances",
                 isSelectable: true
             )
-            let salesTab = Model.TabItem(
-                title: Localized(.sales),
-                image: Assets.exploreFundsIcon.image,
-                identifier: "sales",
-                isSelectable: true
-            )
-            let pollsTab = Model.TabItem(
-                title: Localized(.polls),
-                image: Assets.polls.image,
-                identifier: "polls",
-                isSelectable: true
-            )
+//            let salesTab = Model.TabItem(
+//                title: Localized(.sales),
+//                image: Assets.exploreFundsIcon.image,
+//                identifier: "sales",
+//                isSelectable: true
+//            )
+//            let pollsTab = Model.TabItem(
+//                title: Localized(.polls),
+//                image: Assets.polls.image,
+//                identifier: "polls",
+//                isSelectable: true
+//            )
             let operationsActions = self.getActions()
             let operationsTab = Model.TabItem(
                 title: Localized(.operations),
@@ -49,19 +49,32 @@ extension TabBar {
                 identifier: "operations",
                 isSelectable: false
             )
-            let otherTab = Model.TabItem(
-                title: Localized(.other),
-                image: Assets.menuIcon.image,
-                identifier: "other",
+            let settingsTab = Model.TabItem(
+                title: Localized(.settings),
+                image: Assets.settingsIcon.image,
+                identifier: "settings",
                 isSelectable: true
             )
+            let companiesTab = Model.TabItem(
+                title: Localized(.companies),
+                image: Assets.companies.image,
+                identifier: "companies",
+                isSelectable: false
+            )
+//            let otherTab = Model.TabItem(
+//                title: Localized(.other),
+//                image: Assets.menuIcon.image,
+//                identifier: "other",
+//                isSelectable: true
+//            )
             
             return [
                 balancesTab,
-                salesTab,
-                pollsTab,
+//                salesTab,
+//                pollsTab,
                 operationsTab,
-                otherTab
+                settingsTab,
+                companiesTab
             ]
         }
         

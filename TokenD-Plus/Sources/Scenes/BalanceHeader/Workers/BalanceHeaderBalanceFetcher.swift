@@ -73,33 +73,31 @@ extension BalanceHeader {
         }
         
         private func updateBalance() {
-            guard let balance = self.balances.first(where: { (balance) -> Bool in
-                return balance.balanceId == self.balanceId
-            }) else {
-                return
+            guard
+                let balance = self.balances.first(where: { (balance) -> Bool in
+                    return balance.balanceId == self.balanceId
+                }),
+                let asset = self.assets.first(where: { (asset) -> Bool in
+                    return asset.code == balance.asset
+                }),
+                let assetName = asset.defaultDetails?.name else {
+                    return
             }
             
             var iconUrl: URL?
-            if let asset = self.assets.first(where: { (asset) -> Bool in
-                return asset.code == balance.asset
-            }), let key = asset.defaultDetails?.logo?.key {
-                
+            if let key = asset.defaultDetails?.logo?.key {
                 let imageKey = ImagesUtility.ImageKey.key(key)
                 iconUrl = self.imageUtility.getImageURL(imageKey)
             }
             
             let amount = BalanceHeader.Model.Amount(
                 value: balance.balance,
-                asset: balance.asset
+                assetName: assetName
             )
-            let convertedBalance = BalanceHeader.Model.Amount(
-                value: balance.convertedBalance,
-                asset: self.rateAsset
-            )
+            
             let updatedBalance = Model.Balance(
                 balance: amount,
-                iconUrl: iconUrl,
-                convertedBalance: convertedBalance
+                iconUrl: iconUrl
             )
             self.balance.accept(updatedBalance)
         }

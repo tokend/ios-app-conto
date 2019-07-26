@@ -48,9 +48,8 @@ extension TransactionsListScene {
                         
                         let attributes = self.getTransactionAttributes(effect: transaction.amountEffect)
                         
-                        let amount: String = self.amountFormatter.formatAmount(
-                            transaction.amount,
-                            isIncome: nil
+                        let amount: String = self.amountFormatter.assetAmountToString(
+                            transaction.amount.value
                         )
                         
                         let counterparty: String? = transaction.counterparty
@@ -101,7 +100,7 @@ extension TransactionsListScene {
             switch effect {
                 
             case .charged:
-                title = Localized(.charged)
+                title = Localized(.sent)
                 icon = Assets.outgoing.image
                 iconTint = Theme.Colors.negativeColor
                 amountColor = Theme.Colors.negativeAmountColor
@@ -113,7 +112,7 @@ extension TransactionsListScene {
                 amountColor = Theme.Colors.negativeAmountColor
                 
             case .funded:
-                title = Localized(.funded)
+                title = Localized(.received)
                 icon = Assets.incoming.image
                 iconTint = Theme.Colors.positiveColor
                 amountColor = Theme.Colors.positiveAmountColor

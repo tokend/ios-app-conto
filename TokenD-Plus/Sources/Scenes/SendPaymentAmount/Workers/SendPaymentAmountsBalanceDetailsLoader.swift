@@ -38,18 +38,21 @@ extension SendPaymentAmount {
         private let balancesRepo: BalancesRepo
         private let assetsRepo: AssetsRepo
         private let operation: SendPaymentAmount.Model.Operation
+        private let ownerAccountId: String
         
         // MARK: -
         
         init(
             balancesRepo: BalancesRepo,
             assetsRepo: AssetsRepo,
-            operation: SendPaymentAmount.Model.Operation
+            operation: SendPaymentAmount.Model.Operation,
+            ownerAccountId: String
             ) {
             
             self.balancesRepo = balancesRepo
             self.assetsRepo = assetsRepo
             self.operation = operation
+            self.ownerAccountId = ownerAccountId
         }
         
         // MARK: - Private
@@ -59,9 +62,11 @@ extension SendPaymentAmount {
             ) -> [SendPaymentAmount.Model.BalanceDetails] {
             
             return balances.filter { [weak self] (balance) -> Bool in
-                if let asset = self?.assetsRepo.assetsValue.first(where: { (asset) -> Bool in
-                    asset.code == balance.asset
-                }) {
+                if let ownerAccountId = self?.ownerAccountId,
+                    let asset = self?.assetsRepo.assetsValue.first(where: { (asset) -> Bool in
+                        asset.code == balance.asset &&
+                            asset.owner == ownerAccountId
+                    }) {
                     return Int32(asset.policy) & AssetPolicy.withdrawable.rawValue == AssetPolicy.withdrawable.rawValue
                 }
                 return false
@@ -98,8 +103,18 @@ extension SendPaymentAmount.BalanceDetailsLoaderWorker: SendPaymentAmount.Balanc
             case .handleSend,
                  .handleRedeem:
                 
-                return balances.filter({ (balance) -> Bool in
-                    return balance.balance > 0
+                return balances.filter({ [weak self] (balance) -> Bool in
+                    if let ownerAccountId = self?.ownerAccountId,
+                        let asset = self?.assetsRepo.assetsValue.first(where: { (asset) -> Bool in
+                            asset.code == balance.asset &&
+                                asset.owner == ownerAccountId
+                        }) {
+                        
+                        return balance.balance > 0 &&
+                            asset.owner == ownerAccountId
+                    } else {
+                        return false
+                    }
                 })
                 
             case .handleWithdraw:

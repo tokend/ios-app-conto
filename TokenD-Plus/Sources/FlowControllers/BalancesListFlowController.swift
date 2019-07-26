@@ -156,6 +156,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
             showSendPayment: { [weak self] (balanceId) in
                 self?.runSendPaymentFlow(
                     navigationController: navigationController,
+                    ownerAccountId: self?.ownerAccountId ?? "",
                     balanceId: balanceId,
                     completion: { [weak self] in
                         self?.showMovements()
@@ -164,6 +165,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
             showWithdraw: { [weak self] (balanceId) in
                 self?.runWithdrawFlow(
                     navigationController: navigationController,
+                    ownerAccountId: self?.ownerAccountId ?? "",
                     balanceId: balanceId,
                     completion: { [weak self] in
                         self?.showMovements()

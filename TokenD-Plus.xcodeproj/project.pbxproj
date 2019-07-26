@@ -37,6 +37,7 @@
 		DB363E3422DF764700F5761C /* LanguagesListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2E22DF764700F5761C /* LanguagesListInteractor.swift */; };
 		DB363E3522DF764700F5761C /* LanguagesListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2F22DF764700F5761C /* LanguagesListConfigurator.swift */; };
 		DB363E3822DF77BE00F5761C /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E3722DF77BE00F5761C /* LanguageCell.swift */; };
+		DB4AE2BD22E9F6D5001D0883 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2BC22E9F6D5001D0883 /* TitleView.swift */; };
 		DB72098B22C1347200ED116A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB72098A22C1347200ED116A /* Assets.xcassets */; };
 		DB720CAA22C1396B00ED116A /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099922C1396B00ED116A /* SettingsModels.swift */; };
 		DB720CAB22C1396B00ED116A /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099A22C1396B00ED116A /* SettingsInteractor.swift */; };
@@ -690,6 +691,7 @@
 		DB363E2E22DF764700F5761C /* LanguagesListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListInteractor.swift; sourceTree = "<group>"; };
 		DB363E2F22DF764700F5761C /* LanguagesListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListConfigurator.swift; sourceTree = "<group>"; };
 		DB363E3722DF77BE00F5761C /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
+		DB4AE2BC22E9F6D5001D0883 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		DB72098022C1347100ED116A /* TokenD-Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TokenD-Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB72098A22C1347200ED116A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB72098F22C1347200ED116A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1602,14 +1604,14 @@
 		DB7209B822C1396B00ED116A /* BalancePicker */ = {
 			isa = PBXGroup;
 			children = (
-				DB7209B922C1396B00ED116A /* BalancePickerModels.swift */,
-				DB7209BA22C1396B00ED116A /* BalancePickerViewController.swift */,
 				DB7209BB22C1396B00ED116A /* BalancePickerConfigurator.swift */,
-				DB7209BC22C1396B00ED116A /* BalancePickerPresenter.swift */,
-				DB7209BD22C1396B00ED116A /* Workers */,
-				DB7209C022C1396B00ED116A /* BalancePickerRouting.swift */,
 				DB7209C122C1396B00ED116A /* BalancePickerInteractor.swift */,
+				DB7209B922C1396B00ED116A /* BalancePickerModels.swift */,
+				DB7209BC22C1396B00ED116A /* BalancePickerPresenter.swift */,
+				DB7209C022C1396B00ED116A /* BalancePickerRouting.swift */,
+				DB7209BA22C1396B00ED116A /* BalancePickerViewController.swift */,
 				DB7209C222C1396B00ED116A /* Views */,
+				DB7209BD22C1396B00ED116A /* Workers */,
 			);
 			path = BalancePicker;
 			sourceTree = "<group>";
@@ -1775,14 +1777,14 @@
 		DB720A0222C1396B00ED116A /* Fees */ = {
 			isa = PBXGroup;
 			children = (
-				DB720A0322C1396B00ED116A /* FeesRouting.swift */,
+				DB720A0A22C1396B00ED116A /* FeesConfigurator.swift */,
+				DB720A0F22C1396B00ED116A /* FeesInteractor.swift */,
 				DB720A0422C1396B00ED116A /* FeesModels.swift */,
 				DB720A0522C1396B00ED116A /* FeesPresenter.swift */,
-				DB720A0622C1396B00ED116A /* Workers */,
-				DB720A0A22C1396B00ED116A /* FeesConfigurator.swift */,
-				DB720A0B22C1396B00ED116A /* Views */,
+				DB720A0322C1396B00ED116A /* FeesRouting.swift */,
 				DB720A0E22C1396B00ED116A /* FeesViewController.swift */,
-				DB720A0F22C1396B00ED116A /* FeesInteractor.swift */,
+				DB720A0B22C1396B00ED116A /* Views */,
+				DB720A0622C1396B00ED116A /* Workers */,
 			);
 			path = Fees;
 			sourceTree = "<group>";
@@ -3050,15 +3052,16 @@
 		DB720C3D22C1396B00ED116A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DB720C3E22C1396B00ED116A /* TextFieldView.swift */,
-				DB720C3F22C1396B00ED116A /* SharedViewsBuilder.swift */,
-				DB720C4022C1396B00ED116A /* TitleValueCell.swift */,
 				DB720C4122C1396B00ED116A /* HorizontalPicker.swift */,
-				DB720C4222C1396B00ED116A /* TradeViews */,
 				DB720C4F22C1396B00ED116A /* ScrollableStackView.swift */,
-				DB720C5022C1396B00ED116A /* BXFStaticTableView */,
+				DB720C3F22C1396B00ED116A /* SharedViewsBuilder.swift */,
 				DB720C6222C1396B00ED116A /* TableViewStickyHeader.swift */,
+				DB720C3E22C1396B00ED116A /* TextFieldView.swift */,
+				DB720C4022C1396B00ED116A /* TitleValueCell.swift */,
+				DB720C5022C1396B00ED116A /* BXFStaticTableView */,
 				DB720C6322C1396B00ED116A /* DynamicTableView */,
+				DB720C4222C1396B00ED116A /* TradeViews */,
+				DB4AE2BC22E9F6D5001D0883 /* TitleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4017,6 +4020,7 @@
 				DB720DEA22C1396C00ED116A /* DashboardPaymentsPlugInInteractor.swift in Sources */,
 				DB720DBA22C1396B00ED116A /* ConfirmationSceneRouting.swift in Sources */,
 				DB720CBE22C1396B00ED116A /* SaleInvestAmountFormatter.swift in Sources */,
+				DB4AE2BD22E9F6D5001D0883 /* TitleView.swift in Sources */,
 				DB720E3E22C1396C00ED116A /* BalancesListPieChartColorsProvider.swift in Sources */,
 				DB720DB022C1396B00ED116A /* SendPaymentAmountFeeLoader.swift in Sources */,
 				DB720E1422C1396C00ED116A /* RegisterSceneRouting.swift in Sources */,

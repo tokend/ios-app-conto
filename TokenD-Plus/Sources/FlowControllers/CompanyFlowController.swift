@@ -107,7 +107,6 @@ class CompanyFlowController: BaseSignedInFlowController {
             showReceiveScene: showReceiveScene,
             showCreateRedeemScene: showCreateRedeemScene,
             showAcceptRedeemScene: acceptRedeemScene,
-            updateContentLanguage: self.updateLanguageContent,
             onSignOut: self.onSignOut,
             showTabBar: showTabBar,
             hideTabBar: hideTabBar,
@@ -135,6 +134,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     private func showCreateRedeemScene() {
         self.runCreateRedeemFlow(
             navigationController: self.navigationController,
+            ownerAccountId: self.ownerAccountId,
             balanceId: nil
         )
     }
@@ -146,6 +146,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     private func showSendScene() {
         self.runSendPaymentFlow(
             navigationController: self.navigationController,
+            ownerAccountId: self.ownerAccountId,
             balanceId: nil,
             completion: { [weak self] in
                 _ = self?.navigationController.popToRootViewController(animated: true)

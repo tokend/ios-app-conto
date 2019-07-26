@@ -172,6 +172,7 @@ class ExploreTokensFlowController: BaseSignedInFlowController {
             showSendPayment: { [weak self] (balanceId) in
                 self?.runSendPaymentFlow(
                     navigationController: navigationController,
+                    ownerAccountId: "",
                     balanceId: balanceId,
                     completion: { [weak self] in
                         self?.goBackToWalletScene()
@@ -180,6 +181,7 @@ class ExploreTokensFlowController: BaseSignedInFlowController {
             showWithdraw: { [weak self] (balanceId) in
                 self?.runWithdrawFlow(
                     navigationController: navigationController,
+                    ownerAccountId: self?.ownerAccountId ?? "",
                     balanceId: balanceId,
                     completion: { [weak self] in
                         self?.goBackToWalletScene()

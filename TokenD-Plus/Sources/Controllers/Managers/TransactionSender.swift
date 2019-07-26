@@ -27,7 +27,7 @@ public class TransactionSender {
     
     public enum SendTransactionResult {
         
-        case succeeded
+        case succeeded(TransactionResponse)
         case failed(Swift.Error)
     }
     public func sendTransaction(
@@ -44,9 +44,9 @@ public class TransactionSender {
         ) { (result) in
             switch result {
                 
-            case .success:
+            case .success(let response):
                 self.transactionActionRelay.accept(())
-                completion(.succeeded)
+                completion(.succeeded(response))
                 
             case .failure(let error):
                 completion(.failed(error))

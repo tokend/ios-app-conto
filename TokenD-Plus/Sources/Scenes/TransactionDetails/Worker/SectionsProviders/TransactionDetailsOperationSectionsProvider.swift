@@ -499,7 +499,7 @@ extension TransactionDetails {
             switch balanceChangeEffect.effectBalanceChangeType {
                 
             case .effectCharged:
-                effectCellValue = Localized(.charged)
+                effectCellValue = Localized(.sent)
                 identifier = .charged
                 
             case .effectChargedFromLocked:
@@ -507,7 +507,7 @@ extension TransactionDetails {
                 identifier = .charged
                 
             case .effectFunded:
-                effectCellValue = Localized(.funded)
+                effectCellValue = Localized(.received)
                 identifier = .received
                 
             case .effectIssued:
@@ -649,13 +649,14 @@ extension TransactionDetails {
             
             switch details.operationDetailsRelatedToBalance {
                 
-            case .opCreateIssuanceRequestDetails(let resource):
-                let referenceCell = TransactionDetails.Model.CellModel(
-                    title: resource.reference,
-                    hint: Localized(.reference),
-                    identifier: .reference
-                )
-                detailsCells.append(referenceCell)
+            case .opCreateIssuanceRequestDetails:
+//                let referenceCell = TransactionDetails.Model.CellModel(
+//                    title: resource.reference,
+//                    hint: Localized(.reference),
+//                    identifier: .reference
+//                )
+//                detailsCells.append(referenceCell)
+                return []
                 
             case .opPaymentDetails(let resource):
                 guard balanceChangeEffect as? EffectChargedResource != nil else {

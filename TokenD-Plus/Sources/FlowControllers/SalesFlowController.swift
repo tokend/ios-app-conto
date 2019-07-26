@@ -465,6 +465,7 @@ class SalesFlowController: BaseSignedInFlowController {
         
         let sectionsProvider = ConfirmationScene.SaleInvestConfirmationProvider(
             saleInvestModel: saleInvestModel,
+            balancesRepo: self.reposController.balancesRepo,
             transactionSender: self.managersController.transactionSender,
             networkInfoFetcher: self.reposController.networkInfoRepo,
             amountFormatter: amountFormatter,
@@ -547,6 +548,7 @@ class SalesFlowController: BaseSignedInFlowController {
             storageUrl: self.flowControllerStack.apiConfigurationModel.storageEndpoint
         )
         let balancesFetcher = BalancePicker.BalancesFetcher(
+            ownerAccountId: self.ownerAccountId,
             balancesRepo: self.reposController.balancesRepo,
             assetsRepo: self.reposController.assetsRepo,
             imagesUtility: imageUtility,

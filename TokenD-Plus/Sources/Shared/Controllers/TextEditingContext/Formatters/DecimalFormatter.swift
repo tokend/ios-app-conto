@@ -32,7 +32,9 @@ class DecimalFormatter: ValueFormatter<Decimal> {
             if valueDecimal == 0 && self.emptyZeroValue {
                 return ""
             }
-            return DecimalFormatter.numberFormatter.string(from: NSNumber(nonretainedObject: valueDecimal))
+            
+            return DecimalFormatter.numberFormatter.string(from: valueDecimal as NSNumber
+            )
         } else {
             return nil
         }

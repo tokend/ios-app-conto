@@ -142,7 +142,7 @@ extension SendPaymentAmount {
             }
             
             let amount = self.sceneModel.amount
-            guard balance.balance > amount else {
+            guard balance.balance >= amount else {
                 self.presenter.presentPaymentAction(response: .failed(.insufficientFunds))
                 return
             }
@@ -233,7 +233,7 @@ extension SendPaymentAmount {
             }
             
             let amount = self.sceneModel.amount
-            guard balance.balance > amount else {
+            guard balance.balance >= amount else {
                 self.presenter.presentRedeemAction(response: .failed(.insufficientFunds))
                 return
             }

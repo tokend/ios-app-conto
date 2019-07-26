@@ -22,6 +22,9 @@ public extension SendPaymentDestination.Model {
     typealias BalanceDetails = SendPaymentAmount.Model.BalanceDetails
     
     class SceneModel {
+        
+        // MARK: - Public properties
+        
         public var selectedBalance: BalanceDetails?
         public var senderFee: FeeModel?
         public var recipientAddress: String?
@@ -30,16 +33,21 @@ public extension SendPaymentDestination.Model {
         public var amount: Decimal = 0.0
         public let operation: Operation
         public let feeType: FeeType
+        public let accountEmail: String
+        
+        // MARK: -
         
         init(
             feeType: FeeType,
             operation: Operation,
-            recipientAddress: String? = nil
+            recipientAddress: String? = nil,
+            accountEmail: String
             ) {
             
             self.operation = operation
             self.recipientAddress = recipientAddress
             self.feeType = feeType
+            self.accountEmail = accountEmail
         }
     }
     
@@ -257,6 +265,7 @@ extension SendPaymentDestination.Event.PaymentAction {
     public enum DestinationError: Error, LocalizedError {
         case emptyRecipientAddress
         case failedToResolveRecipientAddress(RecipientAddressResolverResult.AddressResolveError)
+        case itIsForbiddenToSendToYourself
         case other(Error)
         
         // MARK: - LocalizedError
@@ -274,6 +283,9 @@ extension SendPaymentDestination.Event.PaymentAction {
                         .failed_to_resolve_recipient_address_replace_message: message
                     ]
                 )
+                
+            case .itIsForbiddenToSendToYourself:
+                return Localized(.you_cannot_send_payment_to_yourself)
                 
             case .other(let error):
                 let message = error.localizedDescription
