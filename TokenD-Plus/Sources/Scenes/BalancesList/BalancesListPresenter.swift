@@ -120,7 +120,7 @@ extension BalancesList.Presenter: BalancesList.PresentationLogic {
                     )
                     
                     let abbreviationBackgroundColor = TokenColoringProvider.shared.coloringForCode(balanceModel.code)
-                    let abbreviation = balanceModel.code.first
+                    let abbreviation = balanceModel.assetName.first
                     let abbreviationText = abbreviation?.description ?? ""
                     
                     var imageRepresentation = Model.ImageRepresentation.abbreviation

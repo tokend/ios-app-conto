@@ -64,7 +64,8 @@ extension CompaniesList {
         private func convertToCompanies(businesses: [BusinessResource]) {
             let companies = businesses.map { (resource) -> Model.Company in
                 var imageUrl: URL?
-                if let logoDetails = resource.logoDetails {
+                if let logoDetails = resource.logoDetails,
+                    logoDetails.key != "" {
                     let logoPath = self.apiConfiguration.storageEndpoint/logoDetails.key
                     imageUrl = URL(string: logoPath)
                 }
