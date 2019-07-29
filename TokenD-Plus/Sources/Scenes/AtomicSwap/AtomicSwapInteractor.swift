@@ -52,7 +52,13 @@ extension AtomicSwap.Interactor: AtomicSwap.BusinessLogic {
             available: Model.Amount.init(asset: "SHR", value: 28),
             prices: [
                 Model.Amount(asset: "UAH", value: 30),
-                Model.Amount(asset: "USD", value: 1.4)
+                Model.Amount(asset: "USD", value: 1.4),
+                Model.Amount(asset: "ksabdaiucdunU", value: 1.4),
+                Model.Amount(asset: "TYR", value: 1.4),
+                Model.Amount(asset: "TYR", value: 1.4),
+                Model.Amount(asset: "TYR", value: 1.4),
+                Model.Amount(asset: "TYR", value: 1.4),
+                Model.Amount(asset: "TYR", value: 1.4)
             ]
         )
         let headerCell = Model.Cell.header(Model.Header(asset: "SHR"))

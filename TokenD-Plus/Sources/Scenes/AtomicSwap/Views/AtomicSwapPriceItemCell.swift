@@ -59,7 +59,7 @@ extension AtomicSwap {
             
             private func setupContainer() {
                 self.container.backgroundColor = Theme.Colors.contentBackgroundColor
-                self.container.layer.cornerRadius = 20.0
+                self.container.layer.cornerRadius = 8.0
                 self.container.layer.borderWidth = 0.75
                 self.container.layer.borderColor = Theme.Colors.separatorOnContentBackgroundColor.cgColor
             }
@@ -67,8 +67,6 @@ extension AtomicSwap {
             private func setupPriceLabel() {
                 self.priceLabel.backgroundColor = Theme.Colors.contentBackgroundColor
                 self.priceLabel.font = Theme.Fonts.plainTextFont
-                self.priceLabel.textColor = Theme.Colors.separatorOnContentBackgroundColor
-                self.priceLabel.numberOfLines = 0
             }
             
             private func setupLayout() {

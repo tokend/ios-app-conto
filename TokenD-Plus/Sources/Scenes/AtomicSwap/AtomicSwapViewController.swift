@@ -159,18 +159,7 @@ extension AtomicSwap.ViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         let model = self.cells[indexPath.section]
         if model as? AtomicSwap.AskCell.ViewModel != nil {
-            return 220.0
-        } else if model as? AtomicSwap.InfoCell.ViewModel != nil {
             return 120.0
-        } else {
-            return 44.0
-        }
-    }
-    
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model = self.cells[indexPath.section]
-        if model as? AtomicSwap.AskCell.ViewModel != nil {
-            return 220.0
         } else if model as? AtomicSwap.InfoCell.ViewModel != nil {
             return 120.0
         } else {

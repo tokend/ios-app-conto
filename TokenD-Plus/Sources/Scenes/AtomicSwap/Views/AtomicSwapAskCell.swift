@@ -56,8 +56,9 @@ extension AtomicSwap {
             private let priceTextLabel: UILabel = UILabel()
             private let pricesCollection: UICollectionView = UICollectionView(
                 frame: .zero,
-                collectionViewLayout: UICollectionViewFlowLayout()
+                collectionViewLayout: .init()
             )
+            private let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
             
             private let actionButton: UIButton = UIButton()
             
@@ -88,6 +89,7 @@ extension AtomicSwap {
                 self.setupAvailableTextLabel()
                 self.setupPriceContainer()
                 self.setupPriceTextLabel()
+                self.setupPriceCollectionLayout()
                 self.setupPriceCollection()
                 self.setupActionButton()
                 self.setupLayout()
@@ -133,6 +135,11 @@ extension AtomicSwap {
                 self.priceTextLabel.font = Theme.Fonts.smallTextFont
             }
             
+            private func setupPriceCollectionLayout() {
+                self.flowLayout.estimatedItemSize = CGSize(width: 75, height: 20)
+                self.flowLayout.minimumInteritemSpacing = 3.0
+            }
+            
             private func setupPriceCollection() {
                 self.pricesCollection.backgroundColor = Theme.Colors.contentBackgroundColor
                 self.pricesCollection.register(classes: [
@@ -141,11 +148,19 @@ extension AtomicSwap {
                 )
                 self.pricesCollection.dataSource = self
                 self.pricesCollection.delegate = self
+                self.pricesCollection.isScrollEnabled = false
+                self.pricesCollection.setCollectionViewLayout(
+                    self.flowLayout,
+                    animated: false
+                )
             }
             
             private func setupActionButton() {
                 self.actionButton.backgroundColor = Theme.Colors.contentBackgroundColor
-                self.actionButton.setTitle(Localized(.buy_action), for: .normal)
+                self.actionButton.setTitle(
+                    Localized(.buy_action),
+                    for: .normal
+                )
                 self.actionButton.setTitleColor(
                     Theme.Colors.accentColor,
                     for: .normal
@@ -175,23 +190,24 @@ extension AtomicSwap {
                 self.priceContainer.addSubview(self.priceTextLabel)
                 self.priceContainer.addSubview(self.pricesCollection)
                 
-                
                 // MARK: - Layout cardView
                 
                 self.cardView.snp.makeConstraints { (make) in
                     make.leading.trailing.equalToSuperview().inset(self.sideInset)
+                    make.top.bottom.equalToSuperview()
                 }
                 
                 self.availableContainer.snp.makeConstraints { (make) in
                     make.leading.equalToSuperview().inset(self.sideInset)
                     make.top.equalToSuperview().inset(self.topInset)
-                    make.bottom.equalTo(self.actionButton.snp.top)
+                    make.bottom.lessThanOrEqualTo(self.actionButton.snp.top)
                 }
                 
                 self.priceContainer.snp.makeConstraints { (make) in
                     make.leading.equalTo(self.availableContainer.snp.trailing).offset(self.sideInset)
                     make.trailing.equalToSuperview().inset(self.sideInset)
-                    make.top.bottom.equalToSuperview().inset(self.topInset)
+                    make.top.equalToSuperview().inset(self.topInset)
+                    make.bottom.equalToSuperview()
                 }
                 
                 self.actionButton.snp.makeConstraints { (make) in
@@ -208,17 +224,8 @@ extension AtomicSwap {
                 self.availableTextLabel.snp.makeConstraints { (make) in
                     make.leading.trailing.bottom.equalToSuperview()
                     make.top.equalTo(self.availableAmountLabel.snp.bottom)
-                    make.bottom.lessThanOrEqualToSuperview()
+                    make.bottom.equalToSuperview()
                 }
-                
-                self.availableContainer.setContentHuggingPriority(
-                    .defaultHigh,
-                    for: .horizontal
-                )
-                self.availableContainer.setContentCompressionResistancePriority(
-                    .defaultLow,
-                    for: .horizontal
-                )
                 
                 // MARK: - Layout Price container
                 
@@ -229,17 +236,8 @@ extension AtomicSwap {
                 self.pricesCollection.snp.makeConstraints { (make) in
                     make.leading.trailing.equalToSuperview()
                     make.top.equalTo(self.priceTextLabel.snp.bottom).offset(self.topInset)
-                    make.bottom.equalToSuperview()
+                    make.bottom.equalToSuperview().inset(self.topInset)
                 }
-                
-                self.priceContainer.setContentHuggingPriority(
-                    .defaultLow,
-                    for: .horizontal
-                )
-                self.priceContainer.setContentCompressionResistancePriority(
-                    .defaultHigh,
-                    for: .horizontal
-                )
             }
         }
     }
