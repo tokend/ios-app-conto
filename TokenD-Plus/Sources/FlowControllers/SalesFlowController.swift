@@ -6,7 +6,7 @@ class SalesFlowController: BaseSignedInFlowController {
     
     // MARK: - Private properties
     
-    private let navigationController: NavigationControllerProtocol
+    private let navigationController: NavigationControllerProtocol = NavigationController()
     private let ownerAccountId: String
     private let disposeBag: DisposeBag = DisposeBag()
     
@@ -15,7 +15,6 @@ class SalesFlowController: BaseSignedInFlowController {
     // MARK: -
     
     init(
-        navigationController: NavigationControllerProtocol,
         ownerAccountId: String,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
@@ -26,7 +25,6 @@ class SalesFlowController: BaseSignedInFlowController {
         rootNavigation: RootNavigationProtocol
         ) {
         
-        self.navigationController = navigationController
         self.ownerAccountId = ownerAccountId
         super.init(
             appController: appController,

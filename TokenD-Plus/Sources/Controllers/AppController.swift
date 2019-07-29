@@ -301,23 +301,12 @@ class AppController {
             userDataProvider: userDataProvider,
             keychainDataProvider: keychainDataProvider,
             rootNavigation: rootNavigation,
-            companyName: companyName,
             ownerAccountId: ownerAccountId,
-            updateLanguageContent: { [weak self] in
-                self?.runCompanyFlow(
-                    appController: appController,
-                    flowControllerStack: flowControllerStack,
-                    reposController: reposController,
-                    managersController: managersController,
-                    userDataProvider: userDataProvider,
-                    keychainDataProvider: keychainDataProvider,
-                    rootNavigation: rootNavigation,
-                    companyName: companyName,
-                    ownerAccountId: ownerAccountId
-                )
-            },
+            companyName: companyName,
             onSignOut:  { [weak self] in
                 self?.initiateSignOut()
+            }, onLocalAuthRecoverySucceeded: {
+                self.runLaunchFlow()
             },
             onBackToCompanies: { [weak self] in
                 self?.runCompanyListFlowController(

@@ -160,15 +160,12 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             userDataProvider: self.userDataProvider,
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation,
-            companyName: companyName,
             ownerAccountId: ownerAccountId,
-            updateLanguageContent: { [weak self] in
-                self?.runCompanyFlow(
-                    ownerAccountId: ownerAccountId,
-                    companyName: companyName
-                )
-            },
+            companyName: companyName,
             onSignOut: self.onSignOut,
+            onLocalAuthRecoverySucceeded: {
+                
+            },
             onBackToCompanies: { [weak self] in
                 self?.run()
         })

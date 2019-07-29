@@ -6,13 +6,12 @@ class SettingsFlowController: BaseSignedInFlowController {
     
     // MARK: - Private properties
     
-    private let navigationController: NavigationControllerProtocol
+    private let navigationController: NavigationControllerProtocol = NavigationController()
     private let onSignOut: () -> Void
     
     // MARK: -
     
     init(
-        navigationController: NavigationControllerProtocol,
         onSignOut: @escaping () -> Void,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
@@ -23,7 +22,6 @@ class SettingsFlowController: BaseSignedInFlowController {
         rootNavigation: RootNavigationProtocol
         ) {
         
-        self.navigationController = navigationController
         self.onSignOut = onSignOut
         super.init(
             appController: appController,

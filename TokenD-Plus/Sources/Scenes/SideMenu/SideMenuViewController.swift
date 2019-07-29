@@ -2,7 +2,6 @@ import UIKit
 
 protocol SideMenuDisplayLogic: class {
     func displayViewDidLoad(viewModel: SideMenu.Event.ViewDidLoad.ViewModel)
-    func displayAccountChanged(viewModel: SideMenu.Event.AccountChanged.ViewModel)
 }
 
 extension SideMenu {
@@ -19,7 +18,11 @@ extension SideMenu {
             style: .grouped
         )
         
-        private var sections: [Model.SectionViewModel] = []
+        private var sections: [[SideMenuTableViewCell.Model]] = [] {
+            didSet {
+                self.reloadTable()
+            }
+        }
         
         // MARK: - Injections
         
@@ -53,30 +56,11 @@ extension SideMenu {
             self.headerView.iconImage = headerModel.icon
             self.headerView.title = headerModel.title
             self.headerView.subTitle = headerModel.subTitle
-            self.headerView.onPickerClicked = { () in
-                let isCurrentlyExpanded = self.sections[0].isExpanded
-                self.sections[0].isExpanded = !isCurrentlyExpanded
-                self.updateSections()
-            }
-        }
-        
-        private func updateSections() {
-            var indexPaths: [IndexPath] = []
-            self.sections[0].items.indices.forEach { (row) in
-                let indexPath = IndexPath(row: row, section: 0)
-                indexPaths.append(indexPath)
-            }
-            
-            if self.sections[0].isExpanded {
-                self.tableView.insertRows(at: indexPaths, with: .fade)
-            } else {
-                self.tableView.deleteRows(at: indexPaths, with: .fade)
-            }
         }
         
         private func setupView() {
             self.view.backgroundColor = Theme.Colors.mainColor
-            
+    
             self.setupHeaderView()
             self.setupSeparatorView()
             self.setupTableView()
@@ -137,46 +121,27 @@ extension SideMenu {
 // MARK: - DisplayLogic
 
 extension SideMenu.ViewController: SideMenu.DisplayLogic {
-    
     func displayViewDidLoad(viewModel: SideMenu.Event.ViewDidLoad.ViewModel) {
         self.updateHeaderWithModel(viewModel.header)
         self.sections = viewModel.sections
-        self.reloadTable()
-    }
-    
-    func displayAccountChanged(viewModel: SideMenu.Event.AccountChanged.ViewModel) {
-        self.routing?.onAccountChanged(
-            viewModel.ownerAccountId,
-            viewModel.companyName
-        )
-        self.headerView.title = viewModel.companyName
     }
 }
 
 // MARK: - UITableViewDelegate
 
 extension SideMenu.ViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let cellModel = self.sections[indexPath.section].items[indexPath.row] as? SideMenuTableViewCell.Model {
-            cellModel.onClick?()
-            if indexPath.section == 0 {
-                self.sections[0].isExpanded = false
-                self.headerView.setExpanded(isExpanded: false)
-                self.updateSections()
-            }
-        }
+        let cellModel = self.sections[indexPath.section][indexPath.row]
+        cellModel.onClick?()
     }
 }
 
 // MARK: - UITableViewDataSource
 
 extension SideMenu.ViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.sections[section].isExpanded ?
-            self.sections[section].items.count : 0
+        return self.sections[section].count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -185,7 +150,7 @@ extension SideMenu.ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard section > 0 else { return nil }
-        
+
         let headerView = UITableViewHeaderFooterView()
         let separatorView = UIView()
         headerView.addSubview(separatorView)
@@ -204,7 +169,7 @@ extension SideMenu.ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = self.sections[indexPath.section].items[indexPath.row]
+        let model = self.sections[indexPath.section][indexPath.row]
         let cell = tableView.dequeueReusableCell(with: model, for: indexPath)
         
         return cell
