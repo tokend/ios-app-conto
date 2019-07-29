@@ -47,6 +47,18 @@ extension AtomicSwap.Interactor: AtomicSwap.BusinessLogic {
     
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
         self.observeLoadingStatus()
+        
+        let ask = Model.Ask(
+            available: Model.Amount.init(asset: "SHR", value: 28),
+            prices: [
+                Model.Amount(asset: "UAH", value: 30),
+                Model.Amount(asset: "USD", value: 1.4)
+            ]
+        )
+        let headerCell = Model.Cell.header(Model.Header(asset: "SHR"))
+        let askCell = Model.Cell.ask(ask)
+        let response = Event.SceneDidUpdate.Response.cells(cells: [headerCell, askCell])
+        self.presenter.presentSceneDidUpdate(response: response)
     }
     
     public func onRefreshInitiated(request: Event.RefreshInitiated.Request) {

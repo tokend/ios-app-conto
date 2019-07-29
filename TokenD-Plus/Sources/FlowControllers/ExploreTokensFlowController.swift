@@ -195,6 +195,11 @@ class ExploreTokensFlowController: BaseSignedInFlowController {
             },
             showReceive: { [weak self] in
                 self?.showReceiveScene(navigationController: navigationController)
+            }, showBuy: { [weak self] (asset) in
+                self?.runAtomicSwapFlow(
+                    navigationController: navigationController,
+                    asset: asset
+                )
             },
             showShadow: { [weak self] in
                 self?.navigationController.showShadow()

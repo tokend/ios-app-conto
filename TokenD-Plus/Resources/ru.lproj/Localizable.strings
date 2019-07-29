@@ -38,6 +38,7 @@
 "available_amount" = "$(amount) доступно";
 "available_amount_replace_amount" = "amount";
 "available_colon" = "Доступно:";
+"available_lowercase" = "доступно";
 "available_assets_for_this_operations" = "Подходящие активы для этих операций не найдены";
 "available_date" = "Доступно: $(formatted)";
 "available_date_replace_formatted" = "formatted";
@@ -61,6 +62,9 @@
 "bought" = "Куплено";
 "bounds" = "границы";
 "buy" = "Покупка";
+"buy_action" = "КУПИТЬ";
+"buy_asset" = "Покупка $(asset)";
+"buy_asset_replace_asset" = "asset";
 "can_be_traded_on_secondary_market" = " - Может торговаться на вторичном рынке";
 "can_be_transfered" = " - Может пересылаться";
 "can_be_withdrawn" = " - Может выводиться";

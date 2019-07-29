@@ -41,6 +41,7 @@ enum LocKey: String {
     case available_amount
     case available_amount_replace_amount
     case available_colon
+    case available_lowercase
     case available_assets_for_this_operations
     case available_date
     case available_date_replace_formatted
@@ -64,6 +65,9 @@ enum LocKey: String {
     case bought
     case bounds
     case buy
+    case buy_action
+    case buy_asset
+    case buy_asset_replace_asset
     case can_be_traded_on_secondary_market
     case can_be_transfered
     case can_be_withdrawn

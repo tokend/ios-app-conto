@@ -7,12 +7,12 @@ extension AtomicSwap {
         
         public struct ViewModel: CellViewModel {
             let availableAmount: String
-            let priceAmount: String
+            let pricesAmounts: [PriceCell.ViewModel]
             let baseAsset: String
             
             public func setup(cell: View) {
                 cell.availableAmount = self.availableAmount
-                cell.priceAmount = self.priceAmount
+                cell.pricesAmounts = self.pricesAmounts
                 cell.baseAsset = self.baseAsset
             }
         }
@@ -23,12 +23,7 @@ extension AtomicSwap {
             
             var availableAmount: String? {
                 get { return self.availableAmountLabel.text}
-                set { self.availableAmountLabel.text = self.availableAmount }
-            }
-            
-            var priceAmount: String? {
-                get { return self.priceAmountLabel.text }
-                set { self.priceAmountLabel.text = self.priceAmount }
+                set { self.availableAmountLabel.text = newValue }
             }
             
             var baseAsset: String? {
@@ -36,8 +31,14 @@ extension AtomicSwap {
                 set { self.priceTextLabel.text = Localized(
                     .with_one_for,
                     replace: [
-                        .with_one_for_replace_asset: self.baseAsset ?? ""
+                        .with_one_for_replace_asset: newValue ?? ""
                     ])
+                }
+            }
+            
+            var pricesAmounts: [PriceCell.ViewModel] = [] {
+                didSet {
+                    self.pricesCollection.reloadData()
                 }
             }
             
@@ -53,8 +54,10 @@ extension AtomicSwap {
             
             private let priceContainer: UIView = UIView()
             private let priceTextLabel: UILabel = UILabel()
-            private let priceAmountContainer: UIView = UIView()
-            private let priceAmountLabel: UILabel = UILabel()
+            private let pricesCollection: UICollectionView = UICollectionView(
+                frame: .zero,
+                collectionViewLayout: UICollectionViewFlowLayout()
+            )
             
             private let actionButton: UIButton = UIButton()
             
@@ -85,8 +88,7 @@ extension AtomicSwap {
                 self.setupAvailableTextLabel()
                 self.setupPriceContainer()
                 self.setupPriceTextLabel()
-                self.setupPriceAmountContainer()
-                self.setupPriceAmountLabel()
+                self.setupPriceCollection()
                 self.setupActionButton()
                 self.setupLayout()
             }
@@ -109,14 +111,14 @@ extension AtomicSwap {
             
             private func setupAvailableAmountLabel() {
                 self.availableAmountLabel.backgroundColor = Theme.Colors.contentBackgroundColor
-                self.availableAmountLabel.font = Theme.Fonts.largeTitleFont
+                self.availableAmountLabel.font = Theme.Fonts.hugeTitleFont
                 self.availableAmountLabel.textAlignment = .center
             }
             
             private func setupAvailableTextLabel() {
                 self.availableTextLabel.backgroundColor = Theme.Colors.contentBackgroundColor
-                self.availableTextLabel.text = Localized(.available)
-                self.availableTextLabel.textColor = Theme.Colors.neutralColor
+                self.availableTextLabel.text = Localized(.available_lowercase)
+                self.availableTextLabel.textColor = Theme.Colors.separatorOnContentBackgroundColor
                 self.availableTextLabel.font = Theme.Fonts.smallTextFont
                 self.availableTextLabel.textAlignment = .center
             }
@@ -127,29 +129,29 @@ extension AtomicSwap {
             
             private func setupPriceTextLabel() {
                 self.priceTextLabel.backgroundColor = Theme.Colors.contentBackgroundColor
-                self.priceTextLabel.textColor = Theme.Colors.neutralColor
+                self.priceTextLabel.textColor = Theme.Colors.separatorOnContentBackgroundColor
                 self.priceTextLabel.font = Theme.Fonts.smallTextFont
             }
             
-            private func setupPriceAmountContainer() {
-                self.priceAmountContainer.backgroundColor = Theme.Colors.contentBackgroundColor
-                self.priceAmountContainer.layer.borderWidth = 0.75
-                self.priceAmountContainer.layer.borderColor = Theme.Colors.separatorOnContentBackgroundColor.cgColor
-                self.priceAmountContainer.layer.cornerRadius = 2.0
-            }
-            
-            private func setupPriceAmountLabel() {
-                self.priceAmountLabel.backgroundColor = Theme.Colors.contentBackgroundColor
-                self.priceAmountLabel.font = Theme.Fonts.plainTextFont
+            private func setupPriceCollection() {
+                self.pricesCollection.backgroundColor = Theme.Colors.contentBackgroundColor
+                self.pricesCollection.register(classes: [
+                        PriceCell.ViewModel.self
+                    ]
+                )
+                self.pricesCollection.dataSource = self
+                self.pricesCollection.delegate = self
             }
             
             private func setupActionButton() {
                 self.actionButton.backgroundColor = Theme.Colors.contentBackgroundColor
-                self.actionButton.setTitle(Localized(.buy), for: .normal)
+                self.actionButton.setTitle(Localized(.buy_action), for: .normal)
                 self.actionButton.setTitleColor(
                     Theme.Colors.accentColor,
                     for: .normal
                 )
+                self.actionButton.contentEdgeInsets.top = 20.0
+                self.actionButton.titleLabel?.font = Theme.Fonts.actionButtonFont
                 self.actionButton
                     .rx
                     .tap
@@ -171,9 +173,8 @@ extension AtomicSwap {
                 self.availableContainer.addSubview(self.availableTextLabel)
                 
                 self.priceContainer.addSubview(self.priceTextLabel)
-                self.priceContainer.addSubview(self.priceAmountContainer)
+                self.priceContainer.addSubview(self.pricesCollection)
                 
-                self.priceAmountContainer.addSubview(self.priceAmountLabel)
                 
                 // MARK: - Layout cardView
                 
@@ -184,18 +185,18 @@ extension AtomicSwap {
                 self.availableContainer.snp.makeConstraints { (make) in
                     make.leading.equalToSuperview().inset(self.sideInset)
                     make.top.equalToSuperview().inset(self.topInset)
-                    make.bottom.equalTo(self.priceContainer)
+                    make.bottom.equalTo(self.actionButton.snp.top)
                 }
                 
                 self.priceContainer.snp.makeConstraints { (make) in
                     make.leading.equalTo(self.availableContainer.snp.trailing).offset(self.sideInset)
                     make.trailing.equalToSuperview().inset(self.sideInset)
-                    make.top.equalToSuperview().inset(self.topInset)
+                    make.top.bottom.equalToSuperview().inset(self.topInset)
                 }
                 
                 self.actionButton.snp.makeConstraints { (make) in
                     make.leading.equalToSuperview().inset(self.sideInset)
-                    make.bottom.equalToSuperview().inset(self.topInset)
+                    make.bottom.equalToSuperview().inset(self.sideInset)
                 }
                 
                 // MARK: - Layout Available container
@@ -207,6 +208,7 @@ extension AtomicSwap {
                 self.availableTextLabel.snp.makeConstraints { (make) in
                     make.leading.trailing.bottom.equalToSuperview()
                     make.top.equalTo(self.availableAmountLabel.snp.bottom)
+                    make.bottom.lessThanOrEqualToSuperview()
                 }
                 
                 self.availableContainer.setContentHuggingPriority(
@@ -224,9 +226,10 @@ extension AtomicSwap {
                     make.leading.trailing.top.equalToSuperview()
                 }
                 
-                self.priceAmountContainer.snp.makeConstraints { (make) in
-                    make.leading.trailing.bottom.equalToSuperview()
-                    make.top.equalTo(self.priceTextLabel.snp.bottom)
+                self.pricesCollection.snp.makeConstraints { (make) in
+                    make.leading.trailing.equalToSuperview()
+                    make.top.equalTo(self.priceTextLabel.snp.bottom).offset(self.topInset)
+                    make.bottom.equalToSuperview()
                 }
                 
                 self.priceContainer.setContentHuggingPriority(
@@ -237,13 +240,29 @@ extension AtomicSwap {
                     .defaultHigh,
                     for: .horizontal
                 )
-                
-                // MARK: - Layout Price amount container
-                
-                self.priceAmountLabel.snp.makeConstraints { (make) in
-                    make.edges.equalToSuperview()
-                }
             }
         }
     }
+}
+
+extension AtomicSwap.AskCell.View: UICollectionViewDataSource {
+    
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return self.pricesAmounts.isEmpty ? 0 : 1
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.pricesAmounts.count
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let model = self.pricesAmounts[indexPath.row]
+        let cell = self.pricesCollection.dequeueReusableCell(with: model, for: indexPath)
+        return cell
+    }
+    
+}
+
+extension AtomicSwap.AskCell.View: UICollectionViewDelegate  {
+    
 }

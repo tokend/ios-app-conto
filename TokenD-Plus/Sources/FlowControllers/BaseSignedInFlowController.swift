@@ -162,6 +162,30 @@ class BaseSignedInFlowController: BaseFlowController {
         })
     }
     
+    func runAtomicSwapFlow(
+        navigationController: NavigationControllerProtocol,
+        asset: String
+        ) {
+        
+        let flow = AtomicSwapFlowController(
+            navigationController: navigationController,
+            asset: asset,
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider,
+            rootNavigation: self.rootNavigation
+        )
+        self.currentFlowController = flow
+        flow.run(
+            showRootScreen: { (vc) in
+                navigationController.pushViewController(vc, animated: true)
+        })
+    }
+    
+    
     func showDepositScreen(
         navigationController: NavigationControllerProtocol,
         assetId: String?

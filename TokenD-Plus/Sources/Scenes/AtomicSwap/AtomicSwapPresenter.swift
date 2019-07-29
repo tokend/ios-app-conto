@@ -32,6 +32,19 @@ extension AtomicSwap {
             self.amountFormatter = amountFormatter
         }
         
+        // MARK: - Private
+        
+        private func getPriceItems(prices: [Model.QuoteAmount]) -> [PriceCell.ViewModel] {
+            let pricesViewModels = prices.map { (price) -> PriceCell.ViewModel in
+                let amount = self.amountFormatter.formatAmount(
+                    price.value,
+                    currency: price.asset
+                )
+                return PriceCell.ViewModel(amount: amount)
+            }
+            return pricesViewModels
+        }
+        
         private func getCellViewModels(models: [Model.Cell]) -> [CellViewAnyModel] {
             let cellViewModels = models.map { (model) -> CellViewAnyModel in
                 let viewModel: CellViewAnyModel
@@ -39,13 +52,10 @@ extension AtomicSwap {
                     
                 case .ask(let ask):
                     let availableAmount = self.amountFormatter.assetAmountToString(ask.available.value)
-                    let priceAmount = self.amountFormatter.formatAmount(
-                        ask.price.value,
-                        currency: ask.price.asset
-                    )
-                    viewModel = AskCell.ViewModel.init(
+                    let pricesAmounts = self.getPriceItems(prices: ask.prices)
+                    viewModel = AskCell.ViewModel(
                         availableAmount: availableAmount,
-                        priceAmount: priceAmount,
+                        pricesAmounts: pricesAmounts,
                         baseAsset: ask.available.asset
                     )
                     

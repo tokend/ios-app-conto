@@ -38,6 +38,7 @@
 "available_amount" = "$(amount) доступно";
 "available_amount_replace_amount" = "amount";
 "available_colon" = "Доступно:";
+"available_lowercase" = "доступно";
 "available_assets_for_this_operations" = "Відповідні активи для цих операцій не знайдені";
 "available_date" = "Доступно: $(formatted)";
 "available_date_replace_formatted" = "formatted";
@@ -61,6 +62,9 @@
 "bought" = "Куплено";
 "bounds" = "межі";
 "buy" = "Купівля";
+"buy_action" = "КУПИТИ";
+"buy_asset" = "Купівля $(asset)";
+"buy_asset_replace_asset" = "asset";
 "can_be_traded_on_secondary_market" = " - Може торгуватися";
 "can_be_transfered" = " - Може пересилатися";
 "can_be_withdrawn" = " - Може виводитися";

@@ -15,13 +15,16 @@ public enum AtomicSwap {
 // MARK: - Models
 
 extension AtomicSwap.Model {
+    typealias BaseAmount = Amount
+    typealias QuoteAmount = Amount
+    
     public struct SceneModel {
         let asset: String
     }
     
     public struct Ask {
-        let available: Amount
-        let price: Amount
+        let available: BaseAmount
+        let prices: [QuoteAmount]
     }
     
     public struct Header {

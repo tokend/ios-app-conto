@@ -440,6 +440,9 @@ extension TransactionsListScene.ViewController: TransactionsListScene.DisplayLog
                         
                     case .withdraw(let balanceId):
                         self?.routing?.showWithdraw(balanceId)
+                        
+                    case .buy(let asset):
+                        self?.routing?.showBuy(asset)
                     }
                 })
             }
@@ -447,7 +450,7 @@ extension TransactionsListScene.ViewController: TransactionsListScene.DisplayLog
                 localizedTitle: item.title,
                 image: item.image,
                 action: action,
-                isEnabled: true
+                isEnabled: item.enabled
             )
             actionModel.appearance.backgroundColor = Theme.Colors.clear
             actionModel.appearance.tint = Theme.Colors.accentColor

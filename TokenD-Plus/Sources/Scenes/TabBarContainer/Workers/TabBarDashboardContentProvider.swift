@@ -188,6 +188,7 @@ extension TabBarContainer {
                 showWithdraw: { _ in },
                 showDeposit: { _ in },
                 showReceive: {},
+                showBuy: { _ in },
                 showShadow: { [weak self] in
                     self?.showShadow()
                 }, hideShadow: { [weak self] in

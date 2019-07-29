@@ -38,6 +38,7 @@
 "available_amount" = "$(amount) available";
 "available_amount_replace_amount" = "amount";
 "available_colon" = "Available:";
+"available_lowercase" = "available";
 "available_assets_for_this_operations" = "Available assets for this operations were not found";
 "available_date" = "Available: $(formatted)";
 "available_date_replace_formatted" = "formatted";
@@ -61,6 +62,9 @@
 "bought" = "Bought";
 "bounds" = "bounds";
 "buy" = "Buy";
+"buy_action" = "BUY";
+"buy_asset" = "Buy $(asset)";
+"buy_asset_replace_asset" = "asset";
 "can_be_traded_on_secondary_market" = " - Can be traded on secondary market";
 "can_be_transfered" = " - Can be transfered";
 "can_be_withdrawn" = " - Can be withdrawn";

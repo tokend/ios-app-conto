@@ -77,6 +77,7 @@ extension TransactionsListScene.Model {
     }
     
     enum ActionType {
+        case buy(asset: String)
         case deposit(assetId: String)
         case receive
         case send(balanceId: String)
