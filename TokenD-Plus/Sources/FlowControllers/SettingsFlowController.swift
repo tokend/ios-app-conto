@@ -43,6 +43,15 @@ class SettingsFlowController: BaseSignedInFlowController {
     // MARK: - Private
     
     private func showSettingsScreen(showRootScreen: ((_ vc: UIViewController) -> Void)) {
+        
+        let vc = self.setupSettings()
+        vc.navigationItem.title = Localized(.settings)
+        
+        self.navigationController.setViewControllers([vc], animated: false)
+        showRootScreen(self.navigationController.getViewController())
+    }
+    
+    private func setupSettings() -> UIViewController {
         let vc = Settings.ViewController()
         
         let sectionsProvider = Settings.SettingsSectionsProvider(
@@ -91,9 +100,7 @@ class SettingsFlowController: BaseSignedInFlowController {
             sectionsProvider: sectionsProvider,
             routing: rounting
         )
-        
-        vc.navigationItem.title = Localized(.settings)
-        showRootScreen(vc)
+        return vc
     }
     
     private func switchToSetting(_ identifier: Settings.CellIdentifier) {

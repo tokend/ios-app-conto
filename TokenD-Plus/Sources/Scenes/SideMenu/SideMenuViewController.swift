@@ -40,6 +40,8 @@ extension SideMenu {
             super.viewDidLoad()
             self.setupView()
             
+            self.observeLanguageChanges()
+            
             let request = SideMenu.Event.ViewDidLoad.Request()
             self.interactorDispatch?.sendRequest { businessLogic in
                 businessLogic.onViewDidLoad(request: request)
@@ -47,6 +49,34 @@ extension SideMenu {
         }
         
         // MARK: - Private
+        
+        private func observeLanguageChanges() {
+            NotificationCenterUtil.instance.addObserver(
+                forName: Notification.Name("LCLLanguageChangeNotification"),
+                using: { [weak self] notification in
+                    DispatchQueue.main.async {
+                        let request = Event.LanguageChanged.Request()
+                        self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                            businessLogic.onViewDidLoad(request: request)
+                        })
+                    }
+                }
+            )
+        }
+        
+        private func handleAction(identifier: Model.Identifier) {
+            switch identifier {
+                
+            case .balances:
+                self.routing?.showBalances()
+                
+            case .companies:
+                self.routing?.showCompanies()
+                
+            case .settings:
+                self.routing?.showSettings()
+            }
+        }
         
         private func reloadTable() {
             self.tableView.reloadData()
@@ -133,7 +163,7 @@ extension SideMenu.ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let cellModel = self.sections[indexPath.section][indexPath.row]
-        cellModel.onClick?()
+        self.handleAction(identifier: cellModel.identifier)
     }
 }
 

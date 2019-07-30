@@ -133,47 +133,31 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private func setupSideMenu() {
         let headerModel = SideMenu.Model.HeaderModel(
-            icon: #imageLiteral(resourceName: "Icon").withRenderingMode(.alwaysTemplate),
-            title: self.getSideMenuHeaderTitle(),
-            subTitle: self.userDataProvider.userEmail
+            icon: Assets.logo.image,
+            title: self.userDataProvider.userEmail,
+            subTitle: self.companyName
         )
-        
-        let sections: [[SideMenu.Model.MenuItem]] = [
-            [
-                SideMenu.Model.MenuItem(
-                    iconImage: Assets.exploreFundsIcon.image,
-                    title: Localized(.sales),
-                    onSelected: { [weak self] in
-                        self?.runSaleFlow()
-                }),
-                SideMenu.Model.MenuItem(
-                    iconImage: Assets.polls.image,
-                    title: Localized(.polls),
-                    onSelected: { [weak self] in
-                        self?.runPollsFlow()
-                }),
-                SideMenu.Model.MenuItem(
-                    iconImage: Assets.settingsIcon.image,
-                    title: Localized(.settings),
-                    onSelected: { [weak self] in
-                        self?.runSettingsFlow()
-                })
-            ]
-        ]
+        let sections: [[SideMenu.Model.MenuItem]] = []
         
         SideMenu.Configurator.configure(
             viewController: self.sideMenuViewController,
             header: headerModel,
             sections: sections,
-            routing: SideMenu.Routing()
+            routing: SideMenu.Routing(
+                showBalances: { [weak self] in
+                    self?.runBalancesFlow()
+                },
+                showSettings: { [weak self] in
+                    self?.runSettingsFlow()
+                },
+                showCompanies: { [weak self] in
+                    self?.onBackToCompanies()
+            })
         )
         
         self.sideNavigationController.embed(sideViewController: self.sideMenuViewController)
         self.runReposPreload()
-    }
-    
-    private func getSideMenuHeaderTitle() -> String {
-        return AppInfoUtils.getValue(.bundleDisplayName, Localized(.tokend))
+        self.runBalancesFlow()
     }
     
     // MARK: - Side Menu Navigation
@@ -183,8 +167,9 @@ class CompanyFlowController: BaseSignedInFlowController {
         _ = self.reposController.balancesRepo.observeBalancesDetails()
     }
     
-    private func runWalletFlow(selectedBalanceId: String) {
-        let walletDetailsFlowController = WalletDetailsFlowController(
+    private func runBalancesFlow() {
+        let balancesFlow = BalancesListFlowController(
+            ownerAccountId: self.ownerAccountId,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
             reposController: self.reposController,
@@ -193,13 +178,11 @@ class CompanyFlowController: BaseSignedInFlowController {
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation
         )
-        self.currentFlowController = walletDetailsFlowController
-        walletDetailsFlowController.run(
+        self.currentFlowController = balancesFlow
+        balancesFlow.run(
             showRootScreen: { [weak self] (vc) in
                 self?.sideNavigationController.embed(centerViewController: vc)
-            },
-            selectedBalanceId: selectedBalanceId
-        )
+        })
     }
     
     private func runSendPaymentFlow() {
@@ -222,9 +205,8 @@ class CompanyFlowController: BaseSignedInFlowController {
                 navigationController.setViewControllers([vc], animated: false)
                 self?.sideNavigationController.embed(centerViewController: navigationController)
             },
-            onShowMovements: { [weak self] in
-                
-        })
+            onShowMovements: { }
+        )
     }
     
     private func runSettingsFlow() {
@@ -260,9 +242,8 @@ class CompanyFlowController: BaseSignedInFlowController {
             showRootScreen: { [weak self] (vc) in
                 self?.sideNavigationController.embed(centerViewController: vc)
             },
-            onShowMovements: { [weak self] in
-                
-        })
+            onShowMovements: {}
+        )
     }
     
     private func runPollsFlow() {

@@ -20,6 +20,12 @@ extension SideMenu.Model {
         let subTitle: String?
     }
     
+    enum Identifier {
+        case balances
+        case companies
+        case settings
+    }
+    
     class SceneModel {
         
         var sections: [[MenuItem]]
@@ -29,28 +35,10 @@ extension SideMenu.Model {
         }
     }
     
-    class MenuItem {
-        
-        typealias OnSelected = (() -> Void)
-        
+    struct MenuItem {
         let iconImage: UIImage?
-        var title: String
-        
-        var onSelected: OnSelected?
-        
-        // MARK: -
-        
-        init(
-            iconImage: UIImage,
-            title: String,
-            onSelected: OnSelected?
-            ) {
-            
-            self.iconImage = iconImage
-            self.title = title
-            
-            self.onSelected = onSelected
-        }
+        let title: String
+        let identifier: Identifier
     }
 }
 
@@ -72,4 +60,6 @@ extension SideMenu.Event {
             let sections: [[SideMenuTableViewCell.Model]]
         }
     }
+    
+    typealias LanguageChanged = ViewDidLoad
 }

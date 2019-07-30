@@ -24,7 +24,7 @@ extension SideMenu {
                     let cellModel = CellModel(
                         icon: menuItem.iconImage,
                         title: menuItem.title,
-                        onClick: menuItem.onSelected
+                        identifier: menuItem.identifier
                     )
                     
                     return cellModel

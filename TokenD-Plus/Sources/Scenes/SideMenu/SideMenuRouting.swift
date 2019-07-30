@@ -1,5 +1,9 @@
 import Foundation
 
 extension SideMenu {
-    struct Routing { }
+    struct Routing {
+        let showBalances: () -> Void
+        let showSettings: () -> Void
+        let showCompanies: () -> Void
+    }
 }

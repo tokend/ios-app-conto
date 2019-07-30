@@ -5,7 +5,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
     
     // MARK: - Private
     
-    private let navigationController: NavigationControllerProtocol
+    private let navigationController: NavigationControllerProtocol = NavigationController()
     private weak var dashboardScene: BalancesList.ViewController?
     private var operationCompletionScene: UIViewController {
         return self.dashboardScene ?? UIViewController()
@@ -16,7 +16,6 @@ class BalancesListFlowController: BaseSignedInFlowController {
     // MARK: -
     
     init(
-        navigationController: NavigationControllerProtocol,
         ownerAccountId: String,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
@@ -27,7 +26,6 @@ class BalancesListFlowController: BaseSignedInFlowController {
         rootNavigation: RootNavigationProtocol
         ) {
         
-        self.navigationController = navigationController
         self.ownerAccountId = ownerAccountId
         super.init(
             appController: appController,
@@ -43,14 +41,10 @@ class BalancesListFlowController: BaseSignedInFlowController {
     // MARK: - Public
     
     public func run(
-        showRootScreen: ((_ vc: UIViewController) -> Void),
-        selectedTabIdentifier: TabsContainer.Model.TabIdentifier?
+        showRootScreen: ((_ vc: UIViewController) -> Void)
         ) {
         
-        self.showDashboardScreen(
-            showRootScreen: showRootScreen,
-            selectedTabIdentifier: selectedTabIdentifier
-        )
+        self.showDashboardScreen(showRootScreen: showRootScreen)
     }
     
     // MARK: - Private
@@ -63,10 +57,17 @@ class BalancesListFlowController: BaseSignedInFlowController {
     }
     
     private func showDashboardScreen(
-        showRootScreen: ((_ vc: UIViewController) -> Void),
-        selectedTabIdentifier: TabsContainer.Model.TabIdentifier?
+        showRootScreen: ((_ vc: UIViewController) -> Void)
         ) {
         
+        let vc = self.setupBalancesListScene()
+        vc.navigationItem.title = Localized(.balances)
+        
+        self.navigationController.setViewControllers([vc], animated: false)
+        showRootScreen(self.navigationController.getViewController())
+    }
+    
+    private func setupBalancesListScene() -> UIViewController {
         let vc = BalancesList.ViewController()
         let sceneModel = BalancesList.Model.SceneModel(
             balances: [],
@@ -89,7 +90,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
         let actionProvider = BalancesList.ActionProvider(
             originalAccountId: self.userDataProvider.walletData.accountId,
             ownerAccountId: ownerAccountId
-            )
+        )
         let colorsProvider = BalancesList.PieChartColorsProvider()
         
         let routing = BalancesList.Routing(
@@ -107,7 +108,34 @@ class BalancesListFlowController: BaseSignedInFlowController {
             },
             hideShadow: { [weak self] in
                 self?.navigationController.hideShadow()
-            })
+            },
+            showReceive: { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.showReceiveScene(navigationController: strongSelf.navigationController)
+            },
+            showCreateRedeem: { [weak self] in
+                guard let strongSelf = self else { return }
+                self?.runCreateRedeemFlow(
+                    navigationController: strongSelf.navigationController,
+                    ownerAccountId: strongSelf.ownerAccountId,
+                    balanceId: nil
+                )
+        },
+            showAcceptRedeem: { [weak self] in
+                guard let strongSelf = self else { return }
+                self?.runAcceptRedeemFlow(navigationController: strongSelf.navigationController)
+            },
+            showSendPayment: { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.runSendPaymentFlow(
+                    navigationController: strongSelf.navigationController,
+                    ownerAccountId: strongSelf.ownerAccountId,
+                    balanceId: nil,
+                    completion: {
+                        strongSelf.showMovements()
+                })
+            }
+        )
         
         BalancesList.Configurator.configure(
             viewController: vc,
@@ -121,10 +149,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
         )
         
         self.dashboardScene = vc
-        
-        vc.navigationItem.title = Localized(.balances)
-        
-        showRootScreen(vc)
+        return vc
     }
     
     private func showPaymentsFor(selectedBalanceId: String) {
