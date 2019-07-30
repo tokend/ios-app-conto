@@ -278,7 +278,7 @@ class AppController {
                 self?.runLaunchFlow()
         })
         self.currentFlowController = flowController
-        flowController.run()
+        flowController.run(showRootScreen: nil)
     }
     
     private func runCompanyFlow(

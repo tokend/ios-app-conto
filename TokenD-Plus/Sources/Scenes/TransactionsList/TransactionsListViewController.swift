@@ -429,17 +429,17 @@ extension TransactionsListScene.ViewController: TransactionsListScene.DisplayLog
                 self?.actionsList?.dismiss({
                     switch item.type {
                         
-                    case .deposit(let assetId):
-                        self?.routing?.showDeposit(assetId)
+                    case .acceptRedeem:
+                        self?.routing?.showAcceptRedeem()
+                        
+                    case .createRedeem(let balanceId):
+                        self?.routing?.showCreateReedeem(balanceId)
                         
                     case .receive:
                         self?.routing?.showReceive()
                         
                     case .send(let balanceId):
                         self?.routing?.showSendPayment(balanceId)
-                        
-                    case .withdraw(let balanceId):
-                        self?.routing?.showWithdraw(balanceId)
                     }
                 })
             }

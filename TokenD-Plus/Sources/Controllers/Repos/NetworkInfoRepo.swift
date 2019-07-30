@@ -78,18 +78,14 @@ public class NetworkInfoRepo {
 extension NetworkInfoRepo: NetworkInfoFetcher {
     
     public func fetchNetworkInfo(_ completion: @escaping (NetworkInfoFetcherResult) -> Void) {
-        if let info = self.networkInfo {
-            completion(.succeeded(info))
-        } else {
-            self.loadNetworkInfo { (result) in
-                switch result {
-                    
-                case .failed(let error):
-                    completion(.failed(error))
-                    
-                case .succeeded(let info):
-                    completion(.succeeded(info))
-                }
+        self.loadNetworkInfo { (result) in
+            switch result {
+                
+            case .failed(let error):
+                completion(.failed(error))
+                
+            case .succeeded(let info):
+                completion(.succeeded(info))
             }
         }
     }

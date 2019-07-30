@@ -137,6 +137,7 @@ extension BalancesList.BalancesFetcher: BalancesList.BalancesFetcherProtocol {
     }
     
     func reloadBalances() {
+        self.assetsRepo.reloadAssets()
         self.balancesRepo.reloadBalancesDetails()
     }
 }

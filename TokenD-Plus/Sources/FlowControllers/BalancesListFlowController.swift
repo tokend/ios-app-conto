@@ -6,9 +6,13 @@ class BalancesListFlowController: BaseSignedInFlowController {
     // MARK: - Private
     
     private let navigationController: NavigationControllerProtocol = NavigationController()
-    private weak var dashboardScene: BalancesList.ViewController?
-    private var operationCompletionScene: UIViewController {
-        return self.dashboardScene ?? UIViewController()
+    private weak var balancesScene: BalancesList.ViewController?
+    private var balancesCompletionScene: UIViewController {
+        return self.balancesScene ?? UIViewController()
+    }
+    private weak var balanceDetailsScene: FlexibleHeaderContainerViewController?
+    private var balanceDetailsCompletionScene: UIViewController {
+        return self.balanceDetailsScene ?? UIViewController()
     }
     private let ownerAccountId: String
     private let disposeBag: DisposeBag = DisposeBag()
@@ -49,9 +53,16 @@ class BalancesListFlowController: BaseSignedInFlowController {
     
     // MARK: - Private
     
-    private func showMovements() {
+    private func backToBalances() {
         _ = self.navigationController.popToViewController(
-            self.operationCompletionScene,
+            self.balancesCompletionScene,
+            animated: true
+        )
+    }
+    
+    private func backToBalanceDetails() {
+        _ = self.navigationController.popToViewController(
+            self.balanceDetailsCompletionScene,
             animated: true
         )
     }
@@ -132,7 +143,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
                     ownerAccountId: strongSelf.ownerAccountId,
                     balanceId: nil,
                     completion: {
-                        strongSelf.showMovements()
+                        strongSelf.backToBalances()
                 })
             }
         )
@@ -148,7 +159,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
             routing: routing
         )
         
-        self.dashboardScene = vc
+        self.balancesScene = vc
         return vc
     }
     
@@ -163,7 +174,8 @@ class BalancesListFlowController: BaseSignedInFlowController {
         
         let actionProvider = TransactionsListScene.ActionProvider(
             assetsRepo: self.reposController.assetsRepo,
-            balancesRepo: self.reposController.balancesRepo
+            balancesRepo: self.reposController.balancesRepo,
+            originalAccountId: self.userDataProvider.walletData.accountId
         )
         
         let viewConfig = TransactionsListScene.Model.ViewConfig(actionButtonIsHidden: false)
@@ -184,23 +196,18 @@ class BalancesListFlowController: BaseSignedInFlowController {
                     ownerAccountId: self?.ownerAccountId ?? "",
                     balanceId: balanceId,
                     completion: { [weak self] in
-                        self?.showMovements()
+                        self?.backToBalanceDetails()
                 })
             },
-            showWithdraw: { [weak self] (balanceId) in
-                self?.runWithdrawFlow(
+            showCreateReedeem: { [weak self] (balanceId) in
+                self?.runCreateRedeemFlow(
                     navigationController: navigationController,
                     ownerAccountId: self?.ownerAccountId ?? "",
-                    balanceId: balanceId,
-                    completion: { [weak self] in
-                        self?.showMovements()
-                })
-            },
-            showDeposit: { [weak self] (asset) in
-                self?.showDepositScreen(
-                    navigationController: navigationController,
-                    assetId: asset
+                    balanceId: balanceId
                 )
+            },
+            showAcceptRedeem: { [weak self] in
+                self?.runAcceptRedeemFlow(navigationController: navigationController)
             },
             showReceive: { [weak self] in
                 self?.showReceiveScene(navigationController: navigationController)
@@ -229,6 +236,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
             balanceFetcher: balanceFetcher,
             balanceId: selectedBalanceId
         )
+        self.balanceDetailsScene = container
         self.navigationController.pushViewController(container, animated: true)
     }
     
@@ -243,7 +251,8 @@ class BalancesListFlowController: BaseSignedInFlowController {
         
         let actionProvider = TransactionsListScene.ActionProvider(
             assetsRepo: self.reposController.assetsRepo,
-            balancesRepo: self.reposController.balancesRepo
+            balancesRepo: self.reposController.balancesRepo,
+            originalAccountId: self.userDataProvider.walletData.accountId
         )
         
         let viewConfig = TransactionsListScene.Model.ViewConfig(actionButtonIsHidden: true)
@@ -253,8 +262,8 @@ class BalancesListFlowController: BaseSignedInFlowController {
                 self?.showPendingOfferDetailsScreen(offerId: identifier)
             },
             showSendPayment: { _ in },
-            showWithdraw: { _ in },
-            showDeposit: { _ in },
+            showCreateReedeem: { _ in },
+            showAcceptRedeem: { },
             showReceive: { },
             showShadow: { [weak self] in
                 self?.navigationController.showShadow()
@@ -295,24 +304,6 @@ class BalancesListFlowController: BaseSignedInFlowController {
             title: Localized(.pending_order_details)
         )
         self.navigationController.pushViewController(vc, animated: true)
-    }
-    
-    private func runExploreTokensFlow() {
-        let exploreTokensFlowController = ExploreTokensFlowController(
-            navigationController: self.navigationController,
-            ownerAccountId: self.ownerAccountId,
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation
-        )
-        self.currentFlowController = exploreTokensFlowController
-        exploreTokensFlowController.run(showRootScreen: { [weak self] (vc) in
-            self?.navigationController.pushViewController(vc, animated: true)
-        })
     }
     
     private func shareItems(_ items: [Any]) {

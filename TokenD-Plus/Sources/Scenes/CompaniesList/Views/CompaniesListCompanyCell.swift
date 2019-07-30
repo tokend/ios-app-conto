@@ -28,7 +28,6 @@ extension CompaniesList {
             public var companyColor: UIColor? {
                 get { return self.cardView.backgroundColor }
                 set {
-                    self.cardView.backgroundColor = newValue
                     self.companyAbbreviationLabel.textColor = newValue
                 }
             }
@@ -127,10 +126,7 @@ extension CompaniesList {
             }
             
             private func setupCompanyImageView() {
-                self.companyImageView.layer.cornerRadius = View.logoSize / 2.0
-                self.companyImageView.layer.masksToBounds = true
                 self.companyImageView.clipsToBounds = true
-                self.companyImageView.contentMode = .scaleAspectFit
                 self.companyImageView.backgroundColor = Theme.Colors.contentBackgroundColor
             }
             
@@ -159,8 +155,7 @@ extension CompaniesList {
                 
                 
                 self.imageContainer.snp.makeConstraints { (make) in
-                    make.center.equalToSuperview()
-                    make.width.height.equalTo(View.logoSize)
+                    make.edges.equalToSuperview()
                 }
                 
                 self.companyImageView.snp.makeConstraints { (make) in

@@ -155,7 +155,8 @@ class ExploreTokensFlowController: BaseSignedInFlowController {
         )
         let actionProvider = TransactionsListScene.ActionProvider(
             assetsRepo: self.reposController.assetsRepo,
-            balancesRepo: self.reposController.balancesRepo
+            balancesRepo: self.reposController.balancesRepo,
+            originalAccountId: self.userDataProvider.walletData.accountId
         )
         let viewConfig = TransactionsListScene.Model.ViewConfig(actionButtonIsHidden: false)
         
@@ -177,21 +178,6 @@ class ExploreTokensFlowController: BaseSignedInFlowController {
                     completion: { [weak self] in
                         self?.goBackToWalletScene()
                 })
-            },
-            showWithdraw: { [weak self] (balanceId) in
-                self?.runWithdrawFlow(
-                    navigationController: navigationController,
-                    ownerAccountId: self?.ownerAccountId ?? "",
-                    balanceId: balanceId,
-                    completion: { [weak self] in
-                        self?.goBackToWalletScene()
-                })
-            },
-            showDeposit: { [weak self] (asset) in
-                self?.showDepositScreen(
-                    navigationController: navigationController,
-                    assetId: asset
-                )
             },
             showReceive: { [weak self] in
                 self?.showReceiveScene(navigationController: navigationController)

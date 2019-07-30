@@ -18,6 +18,7 @@ extension ConfirmationScene {
         // MARK: - Private properties
         
         private let sendPaymentModel: Model.SendPaymentModel
+        private let historyRepo: TransactionsHistoryRepo
         private let balancesRepo: BalancesRepo
         private let transactionSender: TransactionSender
         private let networkInfoFetcher: NetworkInfoFetcher
@@ -32,6 +33,7 @@ extension ConfirmationScene {
         
         init(
             sendPaymentModel: Model.SendPaymentModel,
+            historyRepo: TransactionsHistoryRepo,
             balancesRepo: BalancesRepo,
             transactionSender: TransactionSender,
             networkInfoFetcher: NetworkInfoFetcher,
@@ -40,7 +42,9 @@ extension ConfirmationScene {
             amountConverter: AmountConverterProtocol,
             percentFormatter: PercentFormatterProtocol
             ) {
+            
             self.sendPaymentModel = sendPaymentModel
+            self.historyRepo = historyRepo
             self.balancesRepo = balancesRepo
             self.transactionSender = transactionSender
             self.networkInfoFetcher = networkInfoFetcher
@@ -122,6 +126,7 @@ extension ConfirmationScene {
                 ) { (result) in
                     switch result {
                     case .succeeded:
+                        self.historyRepo.reloadTransactions()
                         self.balancesRepo.reloadBalancesDetails()
                         completion(.succeeded)
                     case .failed(let error):

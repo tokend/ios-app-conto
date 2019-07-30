@@ -1,4 +1,5 @@
 import UIKit
+import RxSwift
 
 protocol SideMenuDisplayLogic: class {
     func displayViewDidLoad(viewModel: SideMenu.Event.ViewDidLoad.ViewModel)
@@ -17,6 +18,8 @@ extension SideMenu {
             frame: CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0),
             style: .grouped
         )
+        private let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
+        private let disposeBag: DisposeBag = DisposeBag()
         
         private var sections: [[SideMenuTableViewCell.Model]] = [] {
             didSet {
@@ -93,6 +96,7 @@ extension SideMenu {
     
             self.setupHeaderView()
             self.setupSeparatorView()
+            self.setupTapGestureRecognizer()
             self.setupTableView()
             
             self.setupLayout()
@@ -101,6 +105,7 @@ extension SideMenu {
         private func setupHeaderView() {
             
         }
+        
         
         private func setupSeparatorView() {
             self.separatorView.backgroundColor = Theme.Colors.separatorOnMainColor
@@ -123,10 +128,23 @@ extension SideMenu {
             self.tableView.tableFooterView = footerView
         }
         
+        private func setupTapGestureRecognizer() {
+            self.tapRecognizer
+                .rx
+                .event
+                .asDriver()
+                .drive(onNext: { [weak self] (_) in
+                    self?.routing?.showReceive()
+                })
+                .disposed(by: self.disposeBag)
+        }
+        
         private func setupLayout() {
             self.view.addSubview(self.headerView)
             self.view.addSubview(self.separatorView)
             self.view.addSubview(self.tableView)
+            
+            self.headerView.addGestureRecognizer(self.tapRecognizer)
             
             self.headerView.snp.makeConstraints { (make) in
                 make.top.equalTo(self.view.safeArea.top)

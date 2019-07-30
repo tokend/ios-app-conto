@@ -190,8 +190,6 @@ extension TabBarContainer {
                     self?.onDidSelectItemWithIdentifier(identifier, balanceId)
                 },
                 showSendPayment: { _ in },
-                showWithdraw: { _ in },
-                showDeposit: { _ in },
                 showReceive: {},
                 showShadow: { [weak self] in
                     self?.showShadow()

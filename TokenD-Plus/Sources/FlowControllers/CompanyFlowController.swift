@@ -151,8 +151,11 @@ class CompanyFlowController: BaseSignedInFlowController {
                     self?.runSettingsFlow()
                 },
                 showCompanies: { [weak self] in
-                    self?.onBackToCompanies()
-            })
+                    self?.runCompanyListFlow()
+                },
+                showReceive: { [weak self] in
+                    self?.showReceiveScene()
+                })
         )
         
         self.sideNavigationController.embed(sideViewController: self.sideMenuViewController)
@@ -261,6 +264,35 @@ class CompanyFlowController: BaseSignedInFlowController {
         flow.run(showRootScreen: { [weak self] (vc) in
             self?.sideNavigationController.embed(centerViewController: vc)
         })
+    }
+    
+    private func runCompanyListFlow() {
+        let flowController = CompaniesListFlowController(
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider,
+            rootNavigation: self.rootNavigation,
+            onSignOut: { [weak self] in
+                self?.initiateSignOut()
+            },
+            onLocalAuthRecoverySucceeded: { [weak self] in
+                self?.onLocalAuthRecoverySucceeded()
+        })
+        self.currentFlowController = flowController
+        flowController.run(showRootScreen: { [weak self] (vc) in
+            self?.sideNavigationController.embed(centerViewController: vc)
+        })
+    }
+    
+    private func showReceiveScene() {
+        let navigationController = NavigationController()
+        self.showReceiveScene(navigationController: navigationController)
+        self.sideNavigationController.embed(
+            centerViewController: navigationController.getViewController()
+        )
     }
     
     // MARK: - Sign Out

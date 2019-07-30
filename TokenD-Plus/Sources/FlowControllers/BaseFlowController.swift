@@ -499,9 +499,7 @@ extension BaseFlowController: FlowControllerProtocol {
                 handler(result)
         })
         self.currentFlowController = flow
-        DispatchQueue.main.async {
-            flow.run()
-        }
+        flow.run()
     }
     
     func presentContactEmailPicker(

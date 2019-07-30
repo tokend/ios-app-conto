@@ -110,10 +110,7 @@ public class BalancesRepo {
     // MARK: - Public
     
     func observeBalancesDetails() -> Observable<[BalanceState]> {
-        if self.shouldInitiateLoad {
-            self.shouldInitiateLoad = false
-            self.reloadBalancesDetails()
-        }
+        self.reloadBalancesDetails()
         return self.balancesDetails.asObservable()
     }
     

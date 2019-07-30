@@ -352,7 +352,6 @@
 		DB720E0522C1396C00ED116A /* TabBarContainerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B4322C1396B00ED116A /* TabBarContainerConfigurator.swift */; };
 		DB720E0622C1396C00ED116A /* TabBarContainerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B4422C1396B00ED116A /* TabBarContainerModels.swift */; };
 		DB720E0722C1396C00ED116A /* TabBarContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B4622C1396B00ED116A /* TabBarContentProvider.swift */; };
-		DB720E0822C1396C00ED116A /* TabBarDashboardContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B4722C1396B00ED116A /* TabBarDashboardContentProvider.swift */; };
 		DB720E0922C1396C00ED116A /* AssetPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B4922C1396B00ED116A /* AssetPickerViewController.swift */; };
 		DB720E0A22C1396C00ED116A /* AssetPickerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B4A22C1396B00ED116A /* AssetPickerModels.swift */; };
 		DB720E0B22C1396C00ED116A /* AssetPickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B4B22C1396B00ED116A /* AssetPickerPresenter.swift */; };
@@ -602,7 +601,6 @@
 		DB720F0722C1396C00ED116A /* AppController+OpenUrlSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C9422C1396B00ED116A /* AppController+OpenUrlSubscriber.swift */; };
 		DB720F0822C1396C00ED116A /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C9522C1396B00ED116A /* AppController.swift */; };
 		DB720F0922C1396C00ED116A /* ReposController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C9622C1396B00ED116A /* ReposController.swift */; };
-		DB720F0A22C1396C00ED116A /* ExploreTokensFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C9822C1396B00ED116A /* ExploreTokensFlowController.swift */; };
 		DB720F0B22C1396C00ED116A /* LaunchFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C9922C1396B00ED116A /* LaunchFlowController.swift */; };
 		DB720F0C22C1396C00ED116A /* SendPaymentFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C9A22C1396B00ED116A /* SendPaymentFlowController.swift */; };
 		DB720F0D22C1396C00ED116A /* AuthenticatorAuthFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C9B22C1396B00ED116A /* AuthenticatorAuthFlowController.swift */; };
@@ -612,11 +610,9 @@
 		DB720F1122C1396C00ED116A /* PermissionRequestFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C9F22C1396B00ED116A /* PermissionRequestFlowController.swift */; };
 		DB720F1222C1396C00ED116A /* CompanyFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA022C1396B00ED116A /* CompanyFlowController.swift */; };
 		DB720F1322C1396C00ED116A /* QRCodeReaderFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA122C1396B00ED116A /* QRCodeReaderFlowController.swift */; };
-		DB720F1422C1396C00ED116A /* WalletDetailsFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA222C1396B00ED116A /* WalletDetailsFlowController.swift */; };
 		DB720F1522C1396C00ED116A /* LocalAuthFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA322C1396B00ED116A /* LocalAuthFlowController.swift */; };
 		DB720F1622C1396C00ED116A /* SalesFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA422C1396B00ED116A /* SalesFlowController.swift */; };
 		DB720F1722C1396C00ED116A /* BalancesListFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA522C1396B00ED116A /* BalancesListFlowController.swift */; };
-		DB720F1822C1396C00ED116A /* TradeFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA622C1396B00ED116A /* TradeFlowController.swift */; };
 		DB720F1922C1396C00ED116A /* WithdrawFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA722C1396B00ED116A /* WithdrawFlowController.swift */; };
 		DB720F1A22C1396C00ED116A /* BaseFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA822C1396B00ED116A /* BaseFlowController.swift */; };
 		DB720F1B22C1396C00ED116A /* LocKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720CA922C1396B00ED116A /* LocKey.swift */; };
@@ -1006,7 +1002,6 @@
 		DB720B4322C1396B00ED116A /* TabBarContainerConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarContainerConfigurator.swift; sourceTree = "<group>"; };
 		DB720B4422C1396B00ED116A /* TabBarContainerModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarContainerModels.swift; sourceTree = "<group>"; };
 		DB720B4622C1396B00ED116A /* TabBarContentProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarContentProvider.swift; sourceTree = "<group>"; };
-		DB720B4722C1396B00ED116A /* TabBarDashboardContentProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarDashboardContentProvider.swift; sourceTree = "<group>"; };
 		DB720B4922C1396B00ED116A /* AssetPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetPickerViewController.swift; sourceTree = "<group>"; };
 		DB720B4A22C1396B00ED116A /* AssetPickerModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetPickerModels.swift; sourceTree = "<group>"; };
 		DB720B4B22C1396B00ED116A /* AssetPickerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetPickerPresenter.swift; sourceTree = "<group>"; };
@@ -1256,7 +1251,6 @@
 		DB720C9422C1396B00ED116A /* AppController+OpenUrlSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppController+OpenUrlSubscriber.swift"; sourceTree = "<group>"; };
 		DB720C9522C1396B00ED116A /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		DB720C9622C1396B00ED116A /* ReposController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposController.swift; sourceTree = "<group>"; };
-		DB720C9822C1396B00ED116A /* ExploreTokensFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreTokensFlowController.swift; sourceTree = "<group>"; };
 		DB720C9922C1396B00ED116A /* LaunchFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchFlowController.swift; sourceTree = "<group>"; };
 		DB720C9A22C1396B00ED116A /* SendPaymentFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendPaymentFlowController.swift; sourceTree = "<group>"; };
 		DB720C9B22C1396B00ED116A /* AuthenticatorAuthFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorAuthFlowController.swift; sourceTree = "<group>"; };
@@ -1266,11 +1260,9 @@
 		DB720C9F22C1396B00ED116A /* PermissionRequestFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionRequestFlowController.swift; sourceTree = "<group>"; };
 		DB720CA022C1396B00ED116A /* CompanyFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyFlowController.swift; sourceTree = "<group>"; };
 		DB720CA122C1396B00ED116A /* QRCodeReaderFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReaderFlowController.swift; sourceTree = "<group>"; };
-		DB720CA222C1396B00ED116A /* WalletDetailsFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletDetailsFlowController.swift; sourceTree = "<group>"; };
 		DB720CA322C1396B00ED116A /* LocalAuthFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAuthFlowController.swift; sourceTree = "<group>"; };
 		DB720CA422C1396B00ED116A /* SalesFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesFlowController.swift; sourceTree = "<group>"; };
 		DB720CA522C1396B00ED116A /* BalancesListFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListFlowController.swift; sourceTree = "<group>"; };
-		DB720CA622C1396B00ED116A /* TradeFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeFlowController.swift; sourceTree = "<group>"; };
 		DB720CA722C1396B00ED116A /* WithdrawFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawFlowController.swift; sourceTree = "<group>"; };
 		DB720CA822C1396B00ED116A /* BaseFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFlowController.swift; sourceTree = "<group>"; };
 		DB720CA922C1396B00ED116A /* LocKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocKey.swift; sourceTree = "<group>"; };
@@ -2402,7 +2394,6 @@
 			isa = PBXGroup;
 			children = (
 				DB720B4622C1396B00ED116A /* TabBarContentProvider.swift */,
-				DB720B4722C1396B00ED116A /* TabBarDashboardContentProvider.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -3267,7 +3258,6 @@
 				DB720F3922C2537300ED116A /* CompaniesListFlowController.swift */,
 				DB720CA022C1396B00ED116A /* CompanyFlowController.swift */,
 				DB72281322CF546200341565 /* CreateRedeemFlowController.swift */,
-				DB720C9822C1396B00ED116A /* ExploreTokensFlowController.swift */,
 				DB363E0E22DDCE9800F5761C /* FacilitiesFlowController.swift */,
 				DB720C9922C1396B00ED116A /* LaunchFlowController.swift */,
 				DB720CA322C1396B00ED116A /* LocalAuthFlowController.swift */,
@@ -3277,8 +3267,6 @@
 				DB720CA422C1396B00ED116A /* SalesFlowController.swift */,
 				DB720C9A22C1396B00ED116A /* SendPaymentFlowController.swift */,
 				DB720C9D22C1396B00ED116A /* SettingsFlowController.swift */,
-				DB720CA622C1396B00ED116A /* TradeFlowController.swift */,
-				DB720CA222C1396B00ED116A /* WalletDetailsFlowController.swift */,
 				DB720CA722C1396B00ED116A /* WithdrawFlowController.swift */,
 			);
 			path = FlowControllers;
@@ -3818,7 +3806,6 @@
 				DB720E2F22C1396C00ED116A /* ReceiveAddressManagerProtocol.swift in Sources */,
 				DB720E8122C1396C00ED116A /* BalanceHeaderModels.swift in Sources */,
 				DB720CAE22C1396B00ED116A /* SettingsConfigurator.swift in Sources */,
-				DB720F1422C1396C00ED116A /* WalletDetailsFlowController.swift in Sources */,
 				DBCA02E322D787B600503025 /* SettingsTextCell.swift in Sources */,
 				DB363E0922DCDBB700F5761C /* FacilitiesListInteractor.swift in Sources */,
 				DB720CF822C1396B00ED116A /* SalesPresenter.swift in Sources */,
@@ -3906,7 +3893,6 @@
 				DB720DF822C1396C00ED116A /* DashboardPendingOffersPreviewPlugInInteractor.swift in Sources */,
 				DB720E9A22C1396C00ED116A /* UISegmentedControl+FillWithSegments.swift in Sources */,
 				DB720E8622C1396C00ED116A /* AppDelegate.swift in Sources */,
-				DB720F0A22C1396C00ED116A /* ExploreTokensFlowController.swift in Sources */,
 				DB720D9B22C1396B00ED116A /* TabBarConfigurator.swift in Sources */,
 				DB720F3622C22A5300ED116A /* CompaniesListCompaniesFethcer.swift in Sources */,
 				DB720E1722C1396C00ED116A /* RegisterSceneConfigurator.swift in Sources */,
@@ -4084,7 +4070,6 @@
 				DB720D5A22C1396B00ED116A /* SendPaymentDestinationEmptyCell.swift in Sources */,
 				DB720D4C22C1396B00ED116A /* ChartViewController.swift in Sources */,
 				DB720F2D22C2286C00ED116A /* CompaniesListViewController.swift in Sources */,
-				DB720E0822C1396C00ED116A /* TabBarDashboardContentProvider.swift in Sources */,
 				DB720D6822C1396B00ED116A /* TradeOffersTradesFetcher.swift in Sources */,
 				DB720DE722C1396C00ED116A /* TradesListRouting.swift in Sources */,
 				DB720EED22C1396C00ED116A /* AssetsRepo.swift in Sources */,
@@ -4111,7 +4096,6 @@
 				DB720E7022C1396C00ED116A /* SaleDetailsRouting.swift in Sources */,
 				DB720CF622C1396B00ED116A /* SalesRouting.swift in Sources */,
 				DB720E7822C1396C00ED116A /* BiometricsAuthInteractor.swift in Sources */,
-				DB720F1822C1396C00ED116A /* TradeFlowController.swift in Sources */,
 				DB720CEA22C1396B00ED116A /* VerifyEmailConfigurator.swift in Sources */,
 				DB720E7922C1396C00ED116A /* BiometricsAuthWorker.swift in Sources */,
 				DB720D8122C1396B00ED116A /* CreateOfferFeeLoaderProtocol.swift in Sources */,
