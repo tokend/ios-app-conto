@@ -44,6 +44,13 @@ extension SideMenu {
                         identifier: .companies
                     )
                 ],
+                [
+                    SideMenu.Model.MenuItem(
+                        iconImage: Assets.heart.image,
+                        title: Localized(.contribute),
+                        identifier: .contribute
+                    )
+                ]
             ]
             
             return sections

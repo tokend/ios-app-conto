@@ -444,17 +444,11 @@ extension TransactionDetails {
                         self.fetchEmail(accountId: toAccountId)
                     }
                     
-                    let accountToCell = TransactionDetails.Model.CellModel(
-                        title: toAccountId,
-                        hint: Localized(.recipient),
-                        identifier: .recipient
-                    )
                     emailCell = TransactionDetails.Model.CellModel(
                         title: self.counterpartyEmail ?? Localized(.loading),
                         hint: Localized(.recipients_email),
                         identifier: .email
                     )
-                    cells.append(accountToCell)
                 } else if balanceChangeEffect as? EffectFundedResource != nil,
                     let fromAccount = payment.accountFrom,
                     let fromAccountId = fromAccount.id {
@@ -463,17 +457,11 @@ extension TransactionDetails {
                         self.fetchEmail(accountId: fromAccountId)
                     }
                     
-                    let accountFromCell = TransactionDetails.Model.CellModel(
-                        title: fromAccountId,
-                        hint: Localized(.sender),
-                        identifier: .sender
-                    )
                     emailCell = TransactionDetails.Model.CellModel(
                         title: self.counterpartyEmail ?? Localized(.loading),
                         hint: Localized(.senders_email),
                         identifier: .email
                     )
-                    cells.append(accountFromCell)
                 }
                 if let cell = emailCell {
                     cells.append(cell)

@@ -105,7 +105,9 @@ class CompanyFlowController: BaseSignedInFlowController {
                 },
                 showReceive: { [weak self] in
                     self?.showReceiveScene()
-            })
+                }, showContribute: { [weak self] in
+                    self?.showContribute()
+                })
         )
         
         self.sideNavigationController.embed(sideViewController: self.sideMenuViewController)
@@ -218,6 +220,18 @@ class CompanyFlowController: BaseSignedInFlowController {
         self.showReceiveScene(navigationController: navigationController)
         self.sideNavigationController.embed(
             centerViewController: navigationController.getViewController()
+        )
+    }
+    
+    private func showContribute() {
+        guard let contributeAddress = self.flowControllerStack.apiConfigurationModel.contributeUrl,
+        let contributeUrl = URL(string: contributeAddress) else {
+            return
+        }
+        UIApplication.shared.open(
+            contributeUrl,
+            options: [:],
+            completionHandler: nil
         )
     }
     

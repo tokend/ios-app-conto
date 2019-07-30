@@ -24,6 +24,7 @@ extension SideMenu.Model {
         case balances
         case companies
         case settings
+        case contribute
     }
     
     class SceneModel {

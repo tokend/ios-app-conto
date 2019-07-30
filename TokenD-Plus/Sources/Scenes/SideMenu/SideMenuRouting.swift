@@ -6,5 +6,6 @@ extension SideMenu {
         let showSettings: () -> Void
         let showCompanies: () -> Void
         let showReceive: () -> Void
+        let showContribute: () -> Void
     }
 }

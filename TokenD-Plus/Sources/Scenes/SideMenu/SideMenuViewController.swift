@@ -76,6 +76,9 @@ extension SideMenu {
             case .companies:
                 self.routing?.showCompanies()
                 
+            case .contribute:
+                self.routing?.showContribute()
+                
             case .settings:
                 self.routing?.showSettings()
             }

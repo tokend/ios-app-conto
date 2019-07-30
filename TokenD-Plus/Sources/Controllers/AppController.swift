@@ -134,13 +134,20 @@ class AppController {
         if let mainAccount = self.userDataManager.getMainAccount(),
             let walletData = self.userDataManager.getWalletData(account: mainAccount) {
             
-            let apiConfigurationModel = APIConfigurationModel(
-                storageEndpoint: walletData.network.storageUrl,
-                apiEndpoint: walletData.network.rootUrl,
-                termsAddress: self.flowControllerStack.apiConfigurationModel.termsAddress,
-                webClient: nil,
-                downloadUrl: nil
-            )
+            let apiConfigurationModel: APIConfigurationModel
+            if let model = try? APIConfigurationFetcher.fetchApiConfigurationFromPlist("APIConfiguration") {
+                apiConfigurationModel = model
+            } else {
+                apiConfigurationModel = APIConfigurationModel(
+                    storageEndpoint: walletData.network.storageUrl,
+                    apiEndpoint: walletData.network.rootUrl,
+                    contributeUrl: nil,
+                    termsAddress: self.flowControllerStack.apiConfigurationModel.termsAddress,
+                    webClient: nil,
+                    downloadUrl: nil
+                )
+            }
+            
             self.updateFlowControllerStack(apiConfigurationModel, self.keychainManager)
         }
         
