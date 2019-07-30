@@ -172,9 +172,6 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             onSignOut: self.onSignOut,
             onLocalAuthRecoverySucceeded: { [weak self] in
                 self?.onLocalAuthRecoverySucceeded()
-            },
-            onBackToCompanies: { [weak self] in
-                //self?.run()
         })
         self.currentFlowController = flow
         flow.run()

@@ -6,9 +6,6 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     // MARK: - Public properties
     
-    static let userActionsTimeout: TimeInterval = 15 * 60
-    static let backgroundTimeout: TimeInterval = 15 * 60
-    
     private(set) var isAuthorized: Bool = true
     
     // MARK: - Private properties
@@ -17,10 +14,6 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private let sideMenuViewController = SideMenu.ViewController()
     
-    private var localAuthFlow: LocalAuthFlowController?
-    private var timeoutSubscribeToken: TimerUIApplication.SubscribeToken = TimerUIApplication.SubscribeTokenInvalid
-    private var backgroundTimer: Timer?
-    private var backgroundToken: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier.invalid
     private let ownerAccountId: String
     private let companyName: String
     
@@ -28,7 +21,6 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     let onSignOut: () -> Void
     let onLocalAuthRecoverySucceeded: () -> Void
-    let onBackToCompanies: () -> Void
     
     // MARK: -
     
@@ -43,15 +35,13 @@ class CompanyFlowController: BaseSignedInFlowController {
         ownerAccountId: String,
         companyName: String,
         onSignOut: @escaping () -> Void,
-        onLocalAuthRecoverySucceeded: @escaping () -> Void,
-        onBackToCompanies: @escaping () -> Void
+        onLocalAuthRecoverySucceeded: @escaping () -> Void
         ) {
         
         self.ownerAccountId = ownerAccountId
         self.companyName = companyName
         self.onSignOut = onSignOut
         self.onLocalAuthRecoverySucceeded = onLocalAuthRecoverySucceeded
-        self.onBackToCompanies = onBackToCompanies
         
         SideMenuController.preferences.drawing.menuButtonImage = Assets.menuIcon.image
         SideMenuController.preferences.drawing.menuButtonWidth = 35
@@ -70,17 +60,6 @@ class CompanyFlowController: BaseSignedInFlowController {
             keychainDataProvider: keychainDataProvider,
             rootNavigation: rootNavigation
         )
-        
-        self.timeoutSubscribeToken = TimerUIApplication.subscribeForTimeoutNotification(handler: { [weak self] in
-            self?.isAuthorized = false
-            self?.stopUserActivityTimer()
-            _ = self?.checkIsAuthorized()
-        })
-    }
-    
-    deinit {
-        TimerUIApplication.unsubscribeFromTimeoutNotification(self.timeoutSubscribeToken)
-        self.timeoutSubscribeToken = TimerUIApplication.SubscribeTokenInvalid
     }
     
     // MARK: - Public
@@ -88,35 +67,6 @@ class CompanyFlowController: BaseSignedInFlowController {
     public func run() {
         self.setupSideMenu()
         self.showHomeScreen()
-        self.startUserActivityTimer()
-    }
-    
-    // MARK: - Overridden
-    
-    override func applicationDidEnterBackground() {
-        guard self.localAuthFlow == nil else { return }
-        
-        self.startBackgroundTimer()
-    }
-    
-    override func applicationWillEnterForeground() {
-        guard self.localAuthFlow == nil else { return }
-        
-        self.stopBackgroundTimer()
-    }
-    
-    override func applicationWillResignActive() {
-        guard self.localAuthFlow == nil else { return }
-        
-        self.rootNavigation.showBackgroundCover()
-    }
-    
-    override func applicationDidBecomeActive() {
-        self.rootNavigation.hideBackgroundCover()
-        
-        if self.checkIsAuthorized() {
-            self.currentFlowController?.applicationDidBecomeActive()
-        }
     }
     
     // MARK: - Private
@@ -155,7 +105,7 @@ class CompanyFlowController: BaseSignedInFlowController {
                 },
                 showReceive: { [weak self] in
                     self?.showReceiveScene()
-                })
+            })
         )
         
         self.sideNavigationController.embed(sideViewController: self.sideMenuViewController)
@@ -186,30 +136,6 @@ class CompanyFlowController: BaseSignedInFlowController {
             showRootScreen: { [weak self] (vc) in
                 self?.sideNavigationController.embed(centerViewController: vc)
         })
-    }
-    
-    private func runSendPaymentFlow() {
-        let navigationController = NavigationController()
-        let flow = SendPaymentFlowController(
-            navigationController: navigationController,
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider,
-            rootNavigation: self.rootNavigation,
-            ownerAccountId: self.ownerAccountId,
-            selectedBalanceId: nil
-        )
-        self.currentFlowController = flow
-        flow.run(
-            showRootScreen: { [weak self] (vc) in
-                navigationController.setViewControllers([vc], animated: false)
-                self?.sideNavigationController.embed(centerViewController: navigationController)
-            },
-            onShowMovements: { }
-        )
     }
     
     private func runSettingsFlow() {
@@ -330,74 +256,5 @@ class CompanyFlowController: BaseSignedInFlowController {
         signOutWorker.performSignOut(completion: { [weak self] in
             self?.onSignOut()
         })
-    }
-    
-    // MARK: - Timeout management
-    
-    private func startUserActivityTimer() {
-        TimerUIApplication.startIdleTimer()
-    }
-    
-    private func stopUserActivityTimer() {
-        TimerUIApplication.stopIdleTimer()
-    }
-    
-    private func startBackgroundTimer() {
-        self.backgroundToken = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-        self.backgroundTimer = Timer.scheduledTimer(
-            withTimeInterval: CompanyFlowController.backgroundTimeout,
-            repeats: false,
-            block: { [weak self] _ in
-                self?.isAuthorized = false
-                self?.stopBackgroundTimer()
-        })
-    }
-    
-    private func stopBackgroundTimer() {
-        self.backgroundTimer?.invalidate()
-        self.backgroundTimer = nil
-        UIApplication.shared.endBackgroundTask(self.backgroundToken)
-        self.backgroundToken = UIBackgroundTaskIdentifier.invalid
-    }
-    
-    private func checkIsAuthorized() -> Bool {
-        if !self.isAuthorized && UIApplication.shared.applicationState == .active {
-            self.runLocalAuthByTimeout()
-            return false
-        }
-        
-        return true
-    }
-    
-    private func runLocalAuthByTimeout() {
-        guard self.localAuthFlow == nil else {
-            return
-        }
-        
-        let flow = LocalAuthFlowController(
-            account: self.userDataProvider.account,
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            rootNavigation: self.rootNavigation,
-            userDataManager: self.managersController.userDataManager,
-            keychainManager: self.managersController.keychainManager,
-            onAuthorized: { [weak self] in
-                self?.onLocalAuthSucceded()
-            },
-            onRecoverySucceeded: { [weak self] in
-                self?.onLocalAuthRecoverySucceeded()
-            },
-            onSignOut: { [weak self] in
-                self?.onSignOut()
-        })
-        self.localAuthFlow = flow
-        flow.run(showRootScreen: nil)
-    }
-    
-    private func onLocalAuthSucceded() {
-        self.isAuthorized = true
-        self.localAuthFlow = nil
-        self.showHomeScreen()
-        self.startUserActivityTimer()
     }
 }

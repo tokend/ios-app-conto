@@ -307,17 +307,6 @@ class AppController {
                 self?.initiateSignOut()
             }, onLocalAuthRecoverySucceeded: {
                 self.runLaunchFlow()
-            },
-            onBackToCompanies: { [weak self] in
-                self?.runCompanyListFlowController(
-                    appController: appController,
-                    flowControllerStack: flowControllerStack,
-                    reposController: reposController,
-                    managersController: managersController,
-                    userDataProvider: userDataProvider,
-                    keychainDataProvider: keychainDataProvider,
-                    rootNavigation: rootNavigation
-                )
         })
         self.currentFlowController = companyFlow
         companyFlow.run()
