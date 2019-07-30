@@ -202,6 +202,8 @@ extension BalancesList {
             self.tableView.dataSource = self
             self.tableView.separatorStyle = .none
             self.tableView.sectionFooterHeight = 0.0
+            self.tableView.estimatedRowHeight = UITableView.automaticDimension
+            self.tableView.rowHeight = UITableView.automaticDimension
             self.tableView
                 .rx
                 .contentOffset
@@ -302,6 +304,14 @@ extension BalancesList.ViewController: UITableViewDelegate {
         if let balancesModel = model as? BalancesList.BalanceCell.ViewModel {
             self.routing?.onBalanceSelected(balancesModel.balanceId)
         }
+    }
+    
+    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90.0
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90.0
     }
 }
 
