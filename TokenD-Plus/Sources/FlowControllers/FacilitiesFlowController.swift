@@ -85,7 +85,6 @@ class FacilitiesFlowController: BaseSignedInFlowController {
     
     private func runSettingsFlow(navigationController: NavigationControllerProtocol) {
         let settingsflow = SettingsFlowController(
-            navigationController: navigationController,
             onSignOut: self.onSignOut,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,

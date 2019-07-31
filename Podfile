@@ -30,6 +30,7 @@ def main_app_pods
   pod 'Fabric'
   pod 'Crashlytics'
   
+  pod 'SideMenuController', git: 'https://github.com/tokend/SideMenuController.git'
   pod 'Charts', git: 'https://github.com/tokend/Charts.git'
   pod 'Floaty', git: 'https://github.com/tokend/Floaty.git'
   pod 'UICircularProgressRing'

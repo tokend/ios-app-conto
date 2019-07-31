@@ -143,7 +143,12 @@ extension TabBarContainer {
                     self?.showShadow()
                 }, hideShadow: { [weak self] in
                     self?.hideShadow()
-            })
+                },
+                   showReceive: {},
+                   showCreateRedeem: {},
+                   showAcceptRedeem: {},
+                   showSendPayment: {}
+            )
             
             let actionProvider = BalancesList.ActionProvider(
                 originalAccountId: self.originalAccountId,
@@ -185,8 +190,6 @@ extension TabBarContainer {
                     self?.onDidSelectItemWithIdentifier(identifier, balanceId)
                 },
                 showSendPayment: { _ in },
-                showWithdraw: { _ in },
-                showDeposit: { _ in },
                 showReceive: {},
                 showBuy: { _ in },
                 showShadow: { [weak self] in

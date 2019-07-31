@@ -72,6 +72,7 @@ extension RegisterScene {
             let newConfiguration = APIConfigurationModel(
                 storageEndpoint: serverInfo.storage,
                 apiEndpoint: serverInfo.api,
+                contributeUrl: serverInfo.contributionUrl,
                 termsAddress: serverInfo.terms,
                 webClient: serverInfo.web,
                 downloadUrl: serverInfo.download

@@ -57,10 +57,7 @@ public class AssetsRepo {
     // MARK: - Public
     
     public func observeAssets() -> Observable<[Asset]> {
-        if self.shouldInitiateLoad {
-            self.shouldInitiateLoad = false
-            self.reloadAssets()
-        }
+        self.reloadAssets()
         return self.assets.asObservable()
     }
     

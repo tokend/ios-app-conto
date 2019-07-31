@@ -132,7 +132,7 @@ class BaseSignedInFlowController: BaseFlowController {
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation,
             ownerAccountId: ownerAccountId,
-            selectedBalanceId: nil
+            selectedBalanceId: balanceId
         )
         self.currentFlowController = flow
         flow.run(

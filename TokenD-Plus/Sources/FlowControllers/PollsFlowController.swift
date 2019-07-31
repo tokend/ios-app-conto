@@ -6,14 +6,13 @@ class PollsFlowController: BaseSignedInFlowController {
     
     // MARK: - Private properties
     
-    private let navigationController: NavigationControllerProtocol
+    private let navigationController: NavigationControllerProtocol = NavigationController()
     private let ownerAccountId: String
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: -
     
     init(
-        navigationController: NavigationControllerProtocol,
         ownerAccountId: String,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
@@ -24,7 +23,6 @@ class PollsFlowController: BaseSignedInFlowController {
         rootNavigation: RootNavigationProtocol
         ) {
         
-        self.navigationController = navigationController
         self.ownerAccountId = ownerAccountId
         
         super.init(

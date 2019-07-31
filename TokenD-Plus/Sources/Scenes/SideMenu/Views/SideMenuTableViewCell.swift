@@ -8,7 +8,7 @@ enum SideMenuTableViewCell {
         
         let icon: UIImage?
         let title: String
-        let onClick: OnClickCallback?
+        let identifier: SideMenu.Model.Identifier
         
         func setup(cell: View) {
             cell.icon = self.icon

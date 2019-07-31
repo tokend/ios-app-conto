@@ -134,13 +134,20 @@ class AppController {
         if let mainAccount = self.userDataManager.getMainAccount(),
             let walletData = self.userDataManager.getWalletData(account: mainAccount) {
             
-            let apiConfigurationModel = APIConfigurationModel(
-                storageEndpoint: walletData.network.storageUrl,
-                apiEndpoint: walletData.network.rootUrl,
-                termsAddress: self.flowControllerStack.apiConfigurationModel.termsAddress,
-                webClient: nil,
-                downloadUrl: nil
-            )
+            let apiConfigurationModel: APIConfigurationModel
+            if let model = try? APIConfigurationFetcher.fetchApiConfigurationFromPlist("APIConfiguration") {
+                apiConfigurationModel = model
+            } else {
+                apiConfigurationModel = APIConfigurationModel(
+                    storageEndpoint: walletData.network.storageUrl,
+                    apiEndpoint: walletData.network.rootUrl,
+                    contributeUrl: nil,
+                    termsAddress: self.flowControllerStack.apiConfigurationModel.termsAddress,
+                    webClient: nil,
+                    downloadUrl: nil
+                )
+            }
+            
             self.updateFlowControllerStack(apiConfigurationModel, self.keychainManager)
         }
         
@@ -278,7 +285,7 @@ class AppController {
                 self?.runLaunchFlow()
         })
         self.currentFlowController = flowController
-        flowController.run()
+        flowController.run(showRootScreen: nil)
     }
     
     private func runCompanyFlow(
@@ -301,34 +308,12 @@ class AppController {
             userDataProvider: userDataProvider,
             keychainDataProvider: keychainDataProvider,
             rootNavigation: rootNavigation,
-            companyName: companyName,
             ownerAccountId: ownerAccountId,
-            updateLanguageContent: { [weak self] in
-                self?.runCompanyFlow(
-                    appController: appController,
-                    flowControllerStack: flowControllerStack,
-                    reposController: reposController,
-                    managersController: managersController,
-                    userDataProvider: userDataProvider,
-                    keychainDataProvider: keychainDataProvider,
-                    rootNavigation: rootNavigation,
-                    companyName: companyName,
-                    ownerAccountId: ownerAccountId
-                )
-            },
+            companyName: companyName,
             onSignOut:  { [weak self] in
                 self?.initiateSignOut()
-            },
-            onBackToCompanies: { [weak self] in
-                self?.runCompanyListFlowController(
-                    appController: appController,
-                    flowControllerStack: flowControllerStack,
-                    reposController: reposController,
-                    managersController: managersController,
-                    userDataProvider: userDataProvider,
-                    keychainDataProvider: keychainDataProvider,
-                    rootNavigation: rootNavigation
-                )
+            }, onLocalAuthRecoverySucceeded: {
+                self.runLaunchFlow()
         })
         self.currentFlowController = companyFlow
         companyFlow.run()

@@ -60,6 +60,12 @@ extension BalancesList {
             self.presenter.presentSectionsUpdated(response: response)
         }
         
+        private func updateActions() {
+            let actions = self.actionProvider.getActions()
+            let response = Event.ActionsDidChange.Response(models: actions)
+            self.presenter.presentActionsDidChange(response: response)
+        }
+        
         // MARK: - Header
         
         private func getHeaderSectionModel() -> Model.SectionModel {
@@ -252,6 +258,8 @@ extension BalancesList.Interactor: BalancesList.BusinessLogic {
                 self?.updateSections()
             })
             .disposed(by: self.disposeBag)
+        
+        self.updateActions()
     }
     
     public func onPieChartBalanceSelected(request: Event.PieChartBalanceSelected.Request) {

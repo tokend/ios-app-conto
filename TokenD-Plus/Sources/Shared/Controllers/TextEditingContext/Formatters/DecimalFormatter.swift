@@ -50,11 +50,14 @@ class DecimalFormatter: ValueFormatter<Decimal> {
             return nil
         }
         
-        let decimalSeparatorCheck = string
-            .components(separatedBy: self.decimalSeparator)
-            .count <= 2
+        let components = string.components(separatedBy: self.decimalSeparator)
+        let decimalSeparatorCheck = components.count <= 2
         
         guard decimalSeparatorCheck else {
+            return nil
+        }
+        
+        if components.count == 2 && components[1].count > 6 {
             return nil
         }
         

@@ -120,6 +120,7 @@ extension RegisterScene.Model {
     struct ServerInfoParsed: Decodable {
         let api: String
         let storage: String
+        let contributionUrl: String?
         let kyc: String
         let terms: String?
         let web: String?

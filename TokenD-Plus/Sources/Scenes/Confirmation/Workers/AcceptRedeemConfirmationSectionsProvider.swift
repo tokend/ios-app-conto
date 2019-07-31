@@ -17,6 +17,7 @@ extension ConfirmationScene {
         
         private let redeemModel: Model.RedeemModel
         private let generalApi: GeneralApi
+        private let reposController: ReposController
         private let balancesRepo: BalancesRepo
         private let transactionSender: TransactionSender
         private let networkInfoFetcher: NetworkInfoFetcher
@@ -27,6 +28,7 @@ extension ConfirmationScene {
         private let originalAccountId: String
         private let sectionsRelay: BehaviorRelay<[ConfirmationScene.Model.SectionModel]> = BehaviorRelay(value: [])
         
+        private var historyRepo: TransactionsHistoryRepo?
         private var requestorEmail: String? {
             didSet {
                 self.loadConfirmationSections()
@@ -38,6 +40,7 @@ extension ConfirmationScene {
         init(
             redeemModel: Model.RedeemModel,
             generalApi: GeneralApi,
+            reposController: ReposController,
             balancesRepo: BalancesRepo,
             transactionSender: TransactionSender,
             networkInfoFetcher: NetworkInfoFetcher,
@@ -50,6 +53,7 @@ extension ConfirmationScene {
             
             self.redeemModel = redeemModel
             self.generalApi = generalApi
+            self.reposController = reposController
             self.balancesRepo = balancesRepo
             self.transactionSender = transactionSender
             self.networkInfoFetcher = networkInfoFetcher
@@ -59,10 +63,20 @@ extension ConfirmationScene {
             self.percentFormatter = percentFormatter
             self.originalAccountId = originalAccountId
             
+            self.tryToInitHistoryRepo()
             self.fetchRequestor()
         }
         
         // MARK: - Private
+        
+        private func tryToInitHistoryRepo() {
+            guard let balance = self.balancesRepo.balancesDetailsValue.first(where: { (state) -> Bool in
+                return state.asset == self.redeemModel.asset
+            }), case let .created(details) = balance else {
+                return
+            }
+            self.historyRepo = self.reposController.getTransactionsHistoryRepo(for: details.balanceId)
+        }
         
         private func fetchRequestor() {
             self.generalApi.requestIdentities(
@@ -165,6 +179,7 @@ extension ConfirmationScene {
                             if response.ledger < networkInfo.ledger {
                                 completion(.failed(.sendTransactionError(RedeemError.doubleSpend)))
                             } else {
+                                self.historyRepo?.reloadTransactions()
                                 self.balancesRepo.reloadBalancesDetails()
                                 completion(.succeeded)
                             }

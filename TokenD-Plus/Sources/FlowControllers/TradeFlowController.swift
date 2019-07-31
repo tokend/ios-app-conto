@@ -220,7 +220,8 @@ class TradeFlowController: BaseSignedInFlowController {
         
         let actionProvider = TransactionsListScene.ActionProvider(
             assetsRepo: self.reposController.assetsRepo,
-            balancesRepo: self.reposController.balancesRepo
+            balancesRepo: self.reposController.balancesRepo,
+            originalAccountId: self.userDataProvider.walletData.accountId
         )
         
         let transactionsListRouting = TransactionsListScene.Routing(
@@ -232,8 +233,6 @@ class TradeFlowController: BaseSignedInFlowController {
                 )
             },
             showSendPayment: { _ in },
-            showWithdraw: { _ in },
-            showDeposit: { _ in },
             showReceive: { },
             showBuy: { _ in },
             showShadow: { [weak self] in

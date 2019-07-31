@@ -105,6 +105,7 @@ enum LocKey: String {
     case contacts
     case continue_capitalized
     case conto
+    case contribute
     case copied
     case copy
     case corrupted_keychain_data

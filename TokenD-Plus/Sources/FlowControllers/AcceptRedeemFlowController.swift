@@ -128,6 +128,7 @@ class AcceptRedeemFlowController: BaseSignedInFlowController {
         let sectionsProvider = ConfirmationScene.AcceptRedeemConfirmationSectionsProvider(
             redeemModel: redeemModel,
             generalApi: self.flowControllerStack.api.generalApi,
+            reposController: self.reposController,
             balancesRepo: self.reposController.balancesRepo,
             transactionSender: self.managersController.transactionSender,
             networkInfoFetcher: self.reposController.networkInfoRepo,

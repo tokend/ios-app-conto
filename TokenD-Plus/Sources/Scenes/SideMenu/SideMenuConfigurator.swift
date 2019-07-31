@@ -7,7 +7,6 @@ extension SideMenu {
             viewController: ViewController,
             header: Model.HeaderModel,
             sections: [[Model.MenuItem]],
-            accountsProvider: AccountsProviderProtocol,
             routing: Routing?
             ) {
             
@@ -18,8 +17,7 @@ extension SideMenu {
             let interactor = Interactor(
                 presenter: presenter,
                 headerModel: header,
-                sceneModel: sceneModel,
-                accountsProvider: accountsProvider
+                sceneModel: sceneModel
             )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)
             viewController.inject(interactorDispatch: interactorDispatch, routing: routing)
