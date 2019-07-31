@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>api_endpoint</key>
-	<string>https://api.staging.conto.me/</string>
+	<string>https://api.conto.me</string>
 	<key>storage_endpoint</key>
-	<string>https://s3.eu-north-1.amazonaws.com/contostaging-identity-storage-festive-cannon-2</string>
+	<string>https://s3.eu-north-1.amazonaws.com/conto-identity-storage-ecstatic-beaver</string>
+	<key>contribute_url</key>
+	<string>https://github.com/tokend/ios-app-loyalty</string>
 	<key>terms_address</key>
 	<string>https://demo.tokend.io/terms</string>
 	<key>kyc</key>

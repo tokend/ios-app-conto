@@ -60,17 +60,19 @@ class QRCodeReaderFlowController: BaseFlowController {
     }
     
     private func presentQRCodeReaderOnPermissionGranted() {
-        let reader = QRCodeReaderViewController(builder: QRCodeReaderViewControllerBuilder {
-            $0.readerView = QRCodeReaderContainer(displayable: QRCodeReaderView())
-            $0.showOverlayView = true
-            $0.showSwitchCameraButton = false
-            $0.showTorchButton = true
-            $0.handleOrientationChange = false
-            $0.cancelButtonTitle = ""
-            
-        })
-        reader.delegate = self
-        self.presentingViewController.present(reader, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let reader = QRCodeReaderViewController(builder: QRCodeReaderViewControllerBuilder {
+                $0.readerView = QRCodeReaderContainer(displayable: QRCodeReaderView())
+                $0.showOverlayView = true
+                $0.showSwitchCameraButton = false
+                $0.showTorchButton = true
+                $0.handleOrientationChange = false
+                $0.cancelButtonTitle = ""
+                
+            })
+            reader.delegate = self
+            self.presentingViewController.present(reader, animated: true, completion: nil)
+        }
     }
 }
 

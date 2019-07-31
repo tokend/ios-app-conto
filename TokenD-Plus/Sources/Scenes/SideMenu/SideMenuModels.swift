@@ -20,6 +20,13 @@ extension SideMenu.Model {
         let subTitle: String?
     }
     
+    enum Identifier {
+        case balances
+        case companies
+        case settings
+        case contribute
+    }
+    
     class SceneModel {
         
         var sections: [[MenuItem]]
@@ -29,74 +36,31 @@ extension SideMenu.Model {
         }
     }
     
-    class MenuItem {
-        
-        typealias OnSelected = (() -> Void)
-        
+    struct MenuItem {
         let iconImage: UIImage?
-        var title: String
-        
-        var onSelected: OnSelected?
-        
-        // MARK: -
-        
-        init(
-            iconImage: UIImage,
-            title: String,
-            onSelected: OnSelected?
-            ) {
-            
-            self.iconImage = iconImage
-            self.title = title
-            
-            self.onSelected = onSelected
-        }
-    }
-    
-    struct SectionModel {
-        let items: [MenuItem]
-        var isExpanded: Bool
-    }
-    
-    struct SectionViewModel {
-        let items: [CellViewAnyModel]
-        var isExpanded: Bool
-    }
-    
-    struct AccountItem {
-        let name: String
-        let image: UIImage
-        let ownerAccountId: String
+        let title: String
+        let identifier: Identifier
     }
 }
 
 // MARK: - Events
 
 extension SideMenu.Event {
-    typealias Model = SideMenu.Model
-    
     enum ViewDidLoad {
         struct Request {
             
         }
         
         struct Response {
-            let header: Model.HeaderModel
-            let sections: [Model.SectionModel]
+            let header: SideMenu.Model.HeaderModel
+            let sections: [[SideMenu.Model.MenuItem]]
         }
         
         struct ViewModel {
-            let header: Model.HeaderModel
-            let sections: [Model.SectionViewModel]
+            let header: SideMenu.Model.HeaderModel
+            let sections: [[SideMenuTableViewCell.Model]]
         }
     }
     
-    enum AccountChanged {
-        
-        struct Response {
-            let ownerAccountId: String
-            let companyName: String
-        }
-        typealias ViewModel = Response
-    }
+    typealias LanguageChanged = ViewDidLoad
 }

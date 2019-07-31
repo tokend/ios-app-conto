@@ -24,19 +24,19 @@ extension BalancesList {
         
         public func getActions() -> [BalancesList.Model.ActionModel] {
             var actions: [BalancesList.Model.ActionModel] = []
-            let sendAction = Model.ActionModel(
-                title: Localized(.send),
-                image: Assets.send.image,
-                actionType: .send
-            )
-            actions.append(sendAction)
-            
             let receiveAction = Model.ActionModel(
                 title: Localized(.receive),
                 image: Assets.receive.image,
                 actionType: .receive
             )
             actions.append(receiveAction)
+            
+            let sendAction = Model.ActionModel(
+                title: Localized(.send),
+                image: Assets.send.image,
+                actionType: .send
+            )
+            actions.append(sendAction)
             
             let createRedeem = Model.ActionModel(
                 title: Localized(.redeem),

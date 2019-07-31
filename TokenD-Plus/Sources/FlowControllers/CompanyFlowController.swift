@@ -1,21 +1,26 @@
 import UIKit
 import TokenDWallet
+import SideMenuController
 
 class CompanyFlowController: BaseSignedInFlowController {
     
+    // MARK: - Public properties
+    
+    private(set) var isAuthorized: Bool = true
+    
     // MARK: - Private properties
     
-    private let navigationController: NavigationControllerProtocol = NavigationController()
-    private var companyName: String
-    private var ownerAccountId: String
+    private let sideNavigationController: SideMenuController
     
-    private var flowControllers: [FlowControllerProtocol] = []
+    private let sideMenuViewController = SideMenu.ViewController()
+    
+    private let ownerAccountId: String
+    private let companyName: String
     
     // MARK: - Callbacks
     
     let onSignOut: () -> Void
-    let updateLanguageContent: () -> Void
-    let onBackToCompanies: () -> Void
+    let onLocalAuthRecoverySucceeded: () -> Void
     
     // MARK: -
     
@@ -27,20 +32,24 @@ class CompanyFlowController: BaseSignedInFlowController {
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
-        companyName: String,
         ownerAccountId: String,
-        updateLanguageContent: @escaping () -> Void,
+        companyName: String,
         onSignOut: @escaping () -> Void,
-        onBackToCompanies: @escaping () -> Void
+        onLocalAuthRecoverySucceeded: @escaping () -> Void
         ) {
         
-        self.companyName = companyName
         self.ownerAccountId = ownerAccountId
-        self.updateLanguageContent = updateLanguageContent
+        self.companyName = companyName
         self.onSignOut = onSignOut
-        self.onBackToCompanies = onBackToCompanies
+        self.onLocalAuthRecoverySucceeded = onLocalAuthRecoverySucceeded
         
-        self.navigationController.setNavigationBarHidden(true, animated: false)
+        SideMenuController.preferences.drawing.menuButtonImage = Assets.menuIcon.image
+        SideMenuController.preferences.drawing.menuButtonWidth = 35
+        SideMenuController.preferences.drawing.centerPanelShadow = true
+        SideMenuController.preferences.animating.statusBarBehaviour = .horizontalPan
+        SideMenuController.preferences.animating.transitionAnimator = nil
+        
+        self.sideNavigationController = SideMenuController()
         
         super.init(
             appController: appController,
@@ -56,18 +65,15 @@ class CompanyFlowController: BaseSignedInFlowController {
     // MARK: - Public
     
     public func run() {
-        let tabBarContainer = self.setupTabsNavigationBarContainer()
-        self.navigationController.setViewControllers([tabBarContainer], animated: true)
+        self.setupSideMenu()
         self.showHomeScreen()
     }
-    
-    // MARK: - Overridden
     
     // MARK: - Private
     
     private func showHomeScreen() {
         self.rootNavigation.setRootContent(
-            self.navigationController,
+            self.sideNavigationController,
             transition: .fade,
             animated: true
         )
@@ -75,135 +81,39 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     // MARK: - Setup
     
-    private func setupTabsNavigationBarContainer() -> UIViewController {
-        let tabBarContainer = TabBarContainer.ViewController()
+    private func setupSideMenu() {
+        let headerModel = SideMenu.Model.HeaderModel(
+            icon: Assets.logo.image,
+            title: self.userDataProvider.userEmail,
+            subTitle: self.companyName
+        )
+        let sections: [[SideMenu.Model.MenuItem]] = []
         
-        let showTabBar: () -> Void = {
-            tabBarContainer.showTabBar()
-        }
-        let hideTabBar: () -> Void = {
-            tabBarContainer.hideTabBar()
-        }
-        let backToCompanies: () -> Void = { [weak self] in
-            self?.onBackToCompanies()
-        }
-        let showSendScene: () -> Void = { [weak self] in
-            self?.showSendScene()
-        }
-        let showReceiveScene: () -> Void = { [weak self] in
-            self?.showReceiveScene()
-        }
-        let showCreateRedeemScene: () -> Void = { [weak self] in
-            self?.showCreateRedeemScene()
-        }
-        let acceptRedeemScene: () -> Void = { [weak self] in
-            self?.showAcceptRedeemScene()
-        }
-        let globalContentProvider = TabBarContainer.GlobalContentProvider(
-            navigationController: self.navigationController,
-            ownerAccountId: self.ownerAccountId,
-            backToCompanies: backToCompanies,
-            showSendScene: showSendScene,
-            showReceiveScene: showReceiveScene,
-            showCreateRedeemScene: showCreateRedeemScene,
-            showAcceptRedeemScene: acceptRedeemScene,
-            onSignOut: self.onSignOut,
-            showTabBar: showTabBar,
-            hideTabBar: hideTabBar,
-            appController: self.appController,
-            flowControllerStack: self.flowControllerStack,
-            rootNavigation: self.rootNavigation,
-            reposController: self.reposController,
-            managersController: self.managersController,
-            userDataProvider: self.userDataProvider,
-            keychainDataProvider: self.keychainDataProvider
+        SideMenu.Configurator.configure(
+            viewController: self.sideMenuViewController,
+            header: headerModel,
+            sections: sections,
+            routing: SideMenu.Routing(
+                showBalances: { [weak self] in
+                    self?.runBalancesFlow()
+                },
+                showSettings: { [weak self] in
+                    self?.runSettingsFlow()
+                },
+                showCompanies: { [weak self] in
+                    self?.runCompanyListFlow()
+                },
+                showReceive: { [weak self] in
+                    self?.showReceiveScene()
+                },
+                showContribute: { [weak self] in
+                    self?.showContribute()
+            })
         )
         
-        let routing = TabBarContainer.Routing()
-        
-        TabBarContainer.Configurator.configure(
-            viewController: tabBarContainer,
-            contentProvider: globalContentProvider,
-            routing: routing
-        )
+        self.sideNavigationController.embed(sideViewController: self.sideMenuViewController)
         self.runReposPreload()
-        
-        return tabBarContainer
-    }
-    
-    private func showCreateRedeemScene() {
-        self.runCreateRedeemFlow(
-            navigationController: self.navigationController,
-            ownerAccountId: self.ownerAccountId,
-            balanceId: nil
-        )
-    }
-    
-    private func showAcceptRedeemScene() {
-        self.runAcceptRedeemFlow(navigationController: self.navigationController)
-    }
-    
-    private func showSendScene() {
-        self.runSendPaymentFlow(
-            navigationController: self.navigationController,
-            ownerAccountId: self.ownerAccountId,
-            balanceId: nil,
-            completion: { [weak self] in
-                _ = self?.navigationController.popToRootViewController(animated: true)
-        })
-    }
-    
-    private func showReceiveScene() {
-        let vc = ReceiveAddress.ViewController()
-        
-        let addressManager = ReceiveAddress.ReceiveAddressManager(
-            accountId: self.userDataProvider.walletData.accountId,
-            email: self.userDataProvider.account
-        )
-        
-        let viewConfig = ReceiveAddress.Model.ViewConfig(
-            copiedLocalizationKey: Localized(.copied),
-            tableViewTopInset: 24,
-            headerAppearence: .hidden
-        )
-        
-        let sceneModel = ReceiveAddress.Model.SceneModel()
-        
-        let qrCodeGenerator = QRCodeGenerator()
-        let shareUtil = ReceiveAddress.ReceiveAddressShareUtil(
-            qrCodeGenerator: qrCodeGenerator
-        )
-        
-        let invoiceFormatter = ReceiveAddress.InvoiceFormatter()
-        
-        let routing = ReceiveAddress.Routing(
-            onCopy: { (stringToCopy) in
-                UIPasteboard.general.string = stringToCopy
-        },
-            onShare: { [weak self] (itemsToShare) in
-                self?.shareItems(itemsToShare)
-        })
-        
-        ReceiveAddress.Configurator.configure(
-            viewController: vc,
-            viewConfig: viewConfig,
-            sceneModel: sceneModel,
-            addressManager: addressManager,
-            shareUtil: shareUtil,
-            qrCodeGenerator: qrCodeGenerator,
-            invoiceFormatter: invoiceFormatter,
-            routing: routing
-        )
-        
-        vc.navigationItem.title = Localized(.account_capitalized)
-        vc.tabBarItem.title = Localized(.receive)
-        vc.tabBarItem.image = Assets.receive.image
-        
-        self.navigationController.pushViewController(vc, animated: true)
-    }
-    
-    private func getSideMenuHeaderTitle() -> String {
-        return AppInfoUtils.getValue(.bundleDisplayName, Localized(.tokend))
+        self.runBalancesFlow()
     }
     
     // MARK: - Side Menu Navigation
@@ -213,8 +123,153 @@ class CompanyFlowController: BaseSignedInFlowController {
         _ = self.reposController.balancesRepo.observeBalancesDetails()
     }
     
-    private func shareItems(_ items: [Any]) {
-        let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        self.navigationController.present(activity, animated: true, completion: nil)
+    private func runBalancesFlow() {
+        let balancesFlow = BalancesListFlowController(
+            ownerAccountId: self.ownerAccountId,
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider,
+            rootNavigation: self.rootNavigation
+        )
+        self.currentFlowController = balancesFlow
+        balancesFlow.run(
+            showRootScreen: { [weak self] (vc) in
+                self?.sideNavigationController.embed(centerViewController: vc)
+        })
+    }
+    
+    private func runSettingsFlow() {
+        let flow = SettingsFlowController(
+            onSignOut: self.onSignOut,
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider,
+            rootNavigation: self.rootNavigation
+        )
+        self.currentFlowController = flow
+        flow.run(showRootScreen: { [weak self] (vc) in
+            self?.sideNavigationController.embed(centerViewController: vc)
+        })
+    }
+    
+    private func runSaleFlow() {
+        let flow = SalesFlowController(
+            ownerAccountId: self.ownerAccountId,
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider,
+            rootNavigation: self.rootNavigation
+        )
+        self.currentFlowController = flow
+        flow.run(
+            showRootScreen: { [weak self] (vc) in
+                self?.sideNavigationController.embed(centerViewController: vc)
+            },
+            onShowMovements: {}
+        )
+    }
+    
+    private func runPollsFlow() {
+        let flow = PollsFlowController(
+            ownerAccountId: self.ownerAccountId,
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider,
+            rootNavigation: self.rootNavigation
+        )
+        self.currentFlowController = flow
+        flow.run(showRootScreen: { [weak self] (vc) in
+            self?.sideNavigationController.embed(centerViewController: vc)
+        })
+    }
+    
+    private func runCompanyListFlow() {
+        let flowController = CompaniesListFlowController(
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider,
+            rootNavigation: self.rootNavigation,
+            onSignOut: { [weak self] in
+                self?.initiateSignOut()
+            },
+            onLocalAuthRecoverySucceeded: { [weak self] in
+                self?.onLocalAuthRecoverySucceeded()
+        })
+        self.currentFlowController = flowController
+        flowController.run(showRootScreen: { [weak self] (vc) in
+            self?.sideNavigationController.embed(centerViewController: vc)
+        })
+    }
+    
+    private func showReceiveScene() {
+        let navigationController = NavigationController()
+        self.showReceiveScene(navigationController: navigationController)
+        self.sideNavigationController.embed(
+            centerViewController: navigationController.getViewController()
+        )
+    }
+    
+    private func showContribute() {
+        guard let contributeAddress = self.flowControllerStack.apiConfigurationModel.contributeUrl,
+            let contributeUrl = URL(string: contributeAddress) else {
+                return
+        }
+        UIApplication.shared.open(
+            contributeUrl,
+            options: [:],
+            completionHandler: nil
+        )
+    }
+    
+    // MARK: - Sign Out
+    
+    private func initiateSignOut() {
+        let alert = UIAlertController(
+            title: Localized(.sign_out),
+            message: Localized(.are_you_sure_you_want_to_sign_out),
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(
+            title: Localized(.sign_out_and_erase),
+            style: .default,
+            handler: { [weak self] _ in
+                self?.performSignOut()
+        }))
+        
+        alert.addAction(UIAlertAction(
+            title: Localized(.cancel),
+            style: .cancel,
+            handler: nil
+        ))
+        
+        self.sideNavigationController.present(alert, animated: true, completion: nil)
+    }
+    
+    private func performSignOut() {
+        let signOutWorker = RegisterScene.LocalSignInWorker(
+            settingsManager: self.managersController.settingsManager,
+            userDataManager: self.managersController.userDataManager,
+            keychainManager: self.managersController.keychainManager
+        )
+        
+        signOutWorker.performSignOut(completion: { [weak self] in
+            self?.onSignOut()
+        })
     }
 }

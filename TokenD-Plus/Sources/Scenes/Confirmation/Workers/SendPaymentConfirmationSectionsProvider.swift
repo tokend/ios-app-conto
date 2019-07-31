@@ -18,6 +18,8 @@ extension ConfirmationScene {
         // MARK: - Private properties
         
         private let sendPaymentModel: Model.SendPaymentModel
+        private let generalApi: GeneralApi
+        private let historyRepo: TransactionsHistoryRepo
         private let balancesRepo: BalancesRepo
         private let transactionSender: TransactionSender
         private let networkInfoFetcher: NetworkInfoFetcher
@@ -28,10 +30,18 @@ extension ConfirmationScene {
         private let sectionsRelay: BehaviorRelay<[ConfirmationScene.Model.SectionModel]> = BehaviorRelay(value: [])
         private var payRecipientFeeCellState: Bool = true
         
+        private var requestorEmail: String? {
+            didSet {
+                self.loadConfirmationSections()
+            }
+        }
+        
         // MARK: -
         
         init(
             sendPaymentModel: Model.SendPaymentModel,
+            generalApi: GeneralApi,
+            historyRepo: TransactionsHistoryRepo,
             balancesRepo: BalancesRepo,
             transactionSender: TransactionSender,
             networkInfoFetcher: NetworkInfoFetcher,
@@ -40,7 +50,10 @@ extension ConfirmationScene {
             amountConverter: AmountConverterProtocol,
             percentFormatter: PercentFormatterProtocol
             ) {
+            
             self.sendPaymentModel = sendPaymentModel
+            self.generalApi = generalApi
+            self.historyRepo = historyRepo
             self.balancesRepo = balancesRepo
             self.transactionSender = transactionSender
             self.networkInfoFetcher = networkInfoFetcher
@@ -48,9 +61,27 @@ extension ConfirmationScene {
             self.amountFormatter = amountFormatter
             self.amountConverter = amountConverter
             self.percentFormatter = percentFormatter
+            
+            self.fetchRequestor()
         }
         
         // MARK: - Private
+        
+        private func fetchRequestor() {
+            self.generalApi.requestIdentities(
+                filter: .accountId(self.sendPaymentModel.recipientAccountId),
+                completion: { [weak self] (result) in
+                    switch result {
+                    case .failed:
+                        self?.requestorEmail = Localized(.undefined)
+                        
+                    case .succeeded(let identities):
+                        if let identity = identities.first {
+                            self?.requestorEmail = identity.attributes.email
+                        }
+                    }
+            })
+        }
         
         private func confirmationSendPayment(
             networkInfo: NetworkInfoModel,
@@ -122,6 +153,7 @@ extension ConfirmationScene {
                 ) { (result) in
                     switch result {
                     case .succeeded:
+                        self.historyRepo.reloadTransactions()
                         self.balancesRepo.reloadBalancesDetails()
                         completion(.succeeded)
                     case .failed(let error):
@@ -162,13 +194,14 @@ extension ConfirmationScene.SendPaymentConfirmationSectionsProvider: Confirmatio
     func loadConfirmationSections() {
         var sections: [ConfirmationScene.Model.SectionModel] = []
         var destinationCells: [ConfirmationScene.Model.CellModel] = []
-        let recipientCell = ConfirmationScene.Model.CellModel(
-            hint: Localized(.recipient),
-            cellType: .text(value: self.sendPaymentModel.recipientAccountId),
+        
+        let recipient = self.requestorEmail ?? Localized(.loading)
+        let recepientCell = ConfirmationScene.Model.CellModel(
+            hint: Localized(.recipients_email),
+            cellType: .text(value: recipient),
             identifier: .recipient
         )
-        destinationCells.append(recipientCell)
-        
+        destinationCells.append(recepientCell)
         if !self.sendPaymentModel.description.isEmpty {
             let descriptionCell = ConfirmationScene.Model.CellModel(
                 hint: Localized(.description),

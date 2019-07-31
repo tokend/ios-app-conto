@@ -22,6 +22,8 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     private var backgroundTimer: Timer?
     private var backgroundToken: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier.invalid
     
+    private var showRootScreen: ((UIViewController) -> Void)?
+    
     // MARK: -
     
     init(
@@ -90,7 +92,8 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     
     // MARK: - Public
     
-    public func run() {
+    public func run(showRootScreen: ((UIViewController) -> Void)?) {
+        self.showRootScreen = showRootScreen
         self.showCompaniesScreen()
         self.startUserActivityTimer()
     }
@@ -103,11 +106,15 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         vc.navigationItem.title = Localized(.companies)
         self.navigationController.setViewControllers([vc], animated: false)
         
-        self.rootNavigation.setRootContent(
-            self.navigationController,
-            transition: .fade,
-            animated: true
-        )
+        if let showRootScreen = self.showRootScreen {
+            showRootScreen(self.navigationController.getViewController())
+        } else {
+            self.rootNavigation.setRootContent(
+                self.navigationController,
+                transition: .fade,
+                animated: true
+            )
+        }
     }
     
     private func setupCompaniesScreen() -> UIViewController {
@@ -160,17 +167,11 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             userDataProvider: self.userDataProvider,
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation,
-            companyName: companyName,
             ownerAccountId: ownerAccountId,
-            updateLanguageContent: { [weak self] in
-                self?.runCompanyFlow(
-                    ownerAccountId: ownerAccountId,
-                    companyName: companyName
-                )
-            },
+            companyName: companyName,
             onSignOut: self.onSignOut,
-            onBackToCompanies: { [weak self] in
-                self?.run()
+            onLocalAuthRecoverySucceeded: { [weak self] in
+                self?.onLocalAuthRecoverySucceeded()
         })
         self.currentFlowController = flow
         flow.run()

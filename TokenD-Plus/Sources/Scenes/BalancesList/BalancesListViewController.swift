@@ -10,6 +10,7 @@ public protocol BalancesListDisplayLogic: class {
     func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel)
     func displayPieChartEntriesChanged(viewModel: Event.PieChartEntriesChanged.ViewModel)
     func displayPieChartBalanceSelected(viewModel: Event.PieChartBalanceSelected.ViewModel)
+    func displayActionsDidChange(viewModel: Event.ActionsDidChange.ViewModel)
 }
 
 extension BalancesList {
@@ -72,6 +73,7 @@ extension BalancesList {
             super.viewDidLoad()
             
             self.setupView()
+            self.setupFab()
             self.setupRefreshControl()
             self.setupTableView()
             self.setupNavBarItems()
@@ -103,11 +105,7 @@ extension BalancesList {
         }
         
         private func showActions() {
-            self.actionsList = self.button.createActionsList(
-                withColor: Theme.Colors.clear,
-                font: nil,
-                delegate: nil
-            )
+            self.actionsList = self.fab.createActionsList()
             self.actions.forEach { (action) in
                 self.actionsList?.add(action: action)
             }
@@ -204,6 +202,8 @@ extension BalancesList {
             self.tableView.dataSource = self
             self.tableView.separatorStyle = .none
             self.tableView.sectionFooterHeight = 0.0
+            self.tableView.estimatedRowHeight = UITableView.automaticDimension
+            self.tableView.rowHeight = UITableView.automaticDimension
             self.tableView
                 .rx
                 .contentOffset
@@ -305,6 +305,14 @@ extension BalancesList.ViewController: UITableViewDelegate {
             self.routing?.onBalanceSelected(balancesModel.balanceId)
         }
     }
+    
+    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90.0
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90.0
+    }
 }
 
 extension BalancesList.ViewController: UITableViewDataSource {
@@ -330,5 +338,37 @@ extension BalancesList.ViewController: UITableViewDataSource {
             }
         }
         return cell
+    }
+    
+    public func displayActionsDidChange(viewModel: Event.ActionsDidChange.ViewModel) {
+        
+        self.actions = viewModel.models.map({ (action) -> ActionsListDefaultButtonModel in
+            
+            let actionModel = ActionsListDefaultButtonModel(
+                localizedTitle: action.title,
+                image: action.image,
+                action: { [weak self] (_) in
+                    self?.actionsList?.dismiss({
+                        switch action.actionType {
+                            
+                        case .acceptRedeem:
+                            self?.routing?.showAcceptRedeem()
+                            
+                        case .createRedeem:
+                            self?.routing?.showCreateRedeem()
+                            
+                        case .receive:
+                            self?.routing?.showReceive()
+                            
+                        case .send:
+                            self?.routing?.showSendPayment()
+                        }
+                    })
+                },
+                isEnabled: true
+            )
+            actionModel.appearance.tint = Theme.Colors.accentColor
+            return actionModel
+        })
     }
 }
