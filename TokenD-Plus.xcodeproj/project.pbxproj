@@ -39,6 +39,8 @@
 		DB363E3822DF77BE00F5761C /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E3722DF77BE00F5761C /* LanguageCell.swift */; };
 		DB4AE2BD22E9F6D5001D0883 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2BC22E9F6D5001D0883 /* TitleView.swift */; };
 		DB4AE2E922EF5DF1001D0883 /* SideMenuController+RootContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2E822EF5DF0001D0883 /* SideMenuController+RootContent.swift */; };
+		DB4AE2F022F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2EF22F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift */; };
+		DB4AE2F222F2066E001D0883 /* CompaniesListAccountIdValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2F122F2066E001D0883 /* CompaniesListAccountIdValidator.swift */; };
 		DB72098B22C1347200ED116A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB72098A22C1347200ED116A /* Assets.xcassets */; };
 		DB720CAA22C1396B00ED116A /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099922C1396B00ED116A /* SettingsModels.swift */; };
 		DB720CAB22C1396B00ED116A /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099A22C1396B00ED116A /* SettingsInteractor.swift */; };
@@ -687,6 +689,8 @@
 		DB363E3722DF77BE00F5761C /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
 		DB4AE2BC22E9F6D5001D0883 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		DB4AE2E822EF5DF0001D0883 /* SideMenuController+RootContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SideMenuController+RootContent.swift"; sourceTree = "<group>"; };
+		DB4AE2EF22F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListAddCompanyWorker.swift; sourceTree = "<group>"; };
+		DB4AE2F122F2066E001D0883 /* CompaniesListAccountIdValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListAccountIdValidator.swift; sourceTree = "<group>"; };
 		DB72098022C1347100ED116A /* TokenD-Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TokenD-Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB72098A22C1347200ED116A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB72098F22C1347200ED116A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -3291,6 +3295,8 @@
 			isa = PBXGroup;
 			children = (
 				DB720F3522C22A5300ED116A /* CompaniesListCompaniesFethcer.swift */,
+				DB4AE2EF22F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift */,
+				DB4AE2F122F2066E001D0883 /* CompaniesListAccountIdValidator.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -3526,6 +3532,7 @@
 				DB720F0022C1396C00ED116A /* WalletDataSerializable.swift in Sources */,
 				DB720D4522C1396B00ED116A /* ChartConfigurator.swift in Sources */,
 				DB720CFE22C1396B00ED116A /* SaleEmptyView.swift in Sources */,
+				DB4AE2F222F2066E001D0883 /* CompaniesListAccountIdValidator.swift in Sources */,
 				DB720F0722C1396C00ED116A /* AppController+OpenUrlSubscriber.swift in Sources */,
 				DB720E8F22C1396C00ED116A /* SnapKit+Extension.swift in Sources */,
 				DB720E1822C1396C00ED116A /* RegisterSceneRegisterWorker.swift in Sources */,
@@ -3608,6 +3615,7 @@
 				DB720DD722C1396C00ED116A /* WalletRecoveryRouting.swift in Sources */,
 				DB720E0B22C1396C00ED116A /* AssetPickerPresenter.swift in Sources */,
 				DB720E1922C1396C00ED116A /* RegisterSceneWorkersProtocols.swift in Sources */,
+				DB4AE2F022F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift in Sources */,
 				DB720D5822C1396B00ED116A /* SendPaymentDestinationViewController.swift in Sources */,
 				DB720E8A22C1396C00ED116A /* Array+IndexOf.swift in Sources */,
 				DB720D6122C1396B00ED116A /* TradeOffersDateFormatter.swift in Sources */,

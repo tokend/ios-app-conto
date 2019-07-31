@@ -15,12 +15,14 @@ class BalancesListFlowController: BaseSignedInFlowController {
         return self.balanceDetailsScene ?? UIViewController()
     }
     private let ownerAccountId: String
+    private let companyName: String
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: -
     
     init(
         ownerAccountId: String,
+        companyName: String,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
         reposController: ReposController,
@@ -31,6 +33,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
         ) {
         
         self.ownerAccountId = ownerAccountId
+        self.companyName = companyName
         super.init(
             appController: appController,
             flowControllerStack: flowControllerStack,
@@ -72,7 +75,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
         ) {
         
         let vc = self.setupBalancesListScene()
-        vc.navigationItem.title = Localized(.balances)
+        vc.navigationItem.title = companyName
         
         self.navigationController.setViewControllers([vc], animated: false)
         showRootScreen(self.navigationController.getViewController())

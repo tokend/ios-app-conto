@@ -6,7 +6,10 @@ extension CompaniesList {
         
         public static func configure(
             viewController: ViewController,
+            sceneModel: Model.SceneModel,
             companiesFetcher: CompaniesFetcherProtocol,
+            addCompanyWorker: AddCompanyWorkerProtocol,
+            accountIdValidator: AccountIdValidatorProtocol,
             routing: Routing?,
             onDeinit: DeinitCompletion = nil
             ) {
@@ -15,7 +18,10 @@ extension CompaniesList {
             let presenter = Presenter(presenterDispatch: presenterDispatch)
             let interactor = Interactor(
                 presenter: presenter,
-                companiesFetcher: companiesFetcher
+                sceneModel: sceneModel,
+                companiesFetcher: companiesFetcher,
+                addCompanyWorker: addCompanyWorker,
+                accountIdValidator: accountIdValidator
             )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)
             viewController.inject(

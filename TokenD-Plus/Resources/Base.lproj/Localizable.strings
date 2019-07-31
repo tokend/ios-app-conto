@@ -258,6 +258,7 @@
 "insufficient_funds" = "Insufficient funds";
 "invalid_account_id" = "Invalid account id";
 "invalid_account_id_or_email" = "Invalid account id or email";
+"invalid_company_account_id" = "Invalid company account id";
 "invalid_redeem_asset" = "Invalid redeem asset";
 "invalid_redeem_request" = "Invalid redeem request";
 "invalid_sender_account_id" = "Invalid sender account id";
@@ -483,6 +484,7 @@
 "terms_of_service" = "Terms of Service";
 "terms_of_service_not_agreed" = "Terms of Service not agreed";
 "terms_of_use" = "Terms of use";
+"the_company_has_been_successfully_added" = "The company has been successfully added";
 "the_redemption_has_been_already_completed" = "The redemption has already been completed, the request is invalid";
 "there_is_not_any_company_where_you_are_a_client_yet" = "There is not any company where you are a client yet";
 "there_is_not_any_user_with_such_an_email_was_found" = "There is not any user with such an email was found";
@@ -566,6 +568,8 @@
 "yes" = "Yes";
 "yesterday_at" = "yesterday at $(hours)";
 "yesterday_at_replace_hours" = "hours";
+"you_are_already_client_of_the_business" = "You are already the client of the $(business_name)";
+"you_are_already_client_of_the_business_replace_business_name" = "business_name";
 "you_can_grant_permissions" = "You can grant permissions from app Settings in System Preferences. Would you like to open Settings?";
 "you_cannot_accept_redeem_of_the_asset_that_you_do_not_own" = "You cannot accept the redemption of the asset that you do not own";
 "you_cannot_send_payment_to_yourself" = "You can not send payment to yourself";

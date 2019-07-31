@@ -258,6 +258,7 @@
 "insufficient_funds" = "Недостаточно средств";
 "invalid_account_id" = "Неверный ID аккаунта";
 "invalid_account_id_or_email" = "Неверный ID аккаунта или email";
+"invalid_company_account_id" = "Неверный ID компании";
 "invalid_redeem_asset" = "Неверный актив погашения";
 "invalid_redeem_request" = "Неверный запрос погашения";
 "invalid_sender_account_id" = "Неверный аккаунт ID отправителя";
@@ -483,6 +484,7 @@
 "terms_of_service" = "Условия использования";
 "terms_of_service_not_agreed" = "Условия обслуживания не согласованы";
 "terms_of_use" = "Условия использования";
+"the_company_has_been_successfully_added" = "Компания была успешно добавлена";
 "the_redemption_has_been_already_completed" = "Погашение уже выполнено, запрос недействителен";
 "there_is_not_any_company_where_you_are_a_client_yet" = "Компании не найдены";
 "there_is_not_any_user_with_such_an_email_was_found" = "Пользователь с таким email-ом не найден";
@@ -566,6 +568,8 @@
 "yes" = "Да";
 "yesterday_at" = "вчера в $(hours)";
 "yesterday_at_replace_hours" = "hours";
+"you_are_already_client_of_the_business" = "Вы уже являетесь клиентом $(business_name)";
+"you_are_already_client_of_the_business_replace_business_name" = "business_name";
 "you_can_grant_permissions" = "Вы можете предоставить доступ в настройках приложения, которые находятся в Системных Настройках. Хотите открыть настройки?";
 "you_cannot_accept_redeem_of_the_asset_that_you_do_not_own" = "Вы можете принимать погашения только созданых вами активов";
 "you_cannot_send_payment_to_yourself" = "Вы не можете отправлять платёж самому себе";

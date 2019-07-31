@@ -261,6 +261,7 @@ enum LocKey: String {
     case insufficient_funds
     case invalid_account_id
     case invalid_account_id_or_email
+    case invalid_company_account_id
     case invalid_redeem_asset
     case invalid_redeem_request
     case invalid_sender_account_id
@@ -486,6 +487,7 @@ enum LocKey: String {
     case terms_of_service
     case terms_of_service_not_agreed
     case terms_of_use
+    case the_company_has_been_successfully_added
     case the_redemption_has_been_already_completed
     case there_is_not_any_company_where_you_are_a_client_yet
     case there_is_not_any_user_with_such_an_email_was_found
@@ -569,6 +571,8 @@ enum LocKey: String {
     case yes
     case yesterday_at
     case yesterday_at_replace_hours
+    case you_are_already_client_of_the_business
+    case you_are_already_client_of_the_business_replace_business_name
     case you_can_grant_permissions
     case you_cannot_accept_redeem_of_the_asset_that_you_do_not_own
     case you_cannot_send_payment_to_yourself

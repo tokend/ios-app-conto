@@ -120,11 +120,17 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     private func setupCompaniesScreen() -> UIViewController {
         let vc = CompaniesList.ViewController()
         
+        let sceneModel = CompaniesList.Model.SceneModel(companies: [])
         let companiesFetcher = CompaniesList.CompaniesFetcher(
             accountsApi: self.flowControllerStack.apiV3.accountsApi,
             apiConfiguration: self.flowControllerStack.apiConfigurationModel,
             userDataProvider: self.userDataProvider
         )
+        let addCompanyWorker = CompaniesList.AddCompanyWorker(
+            accountApiV3: self.flowControllerStack.apiV3.accountsApi,
+            originalAccountId: self.userDataProvider.walletData.accountId
+        )
+        let accountIdValidator = CompaniesList.AccountIdValidator()
         let routing = CompaniesList.Routing(
             showLoading: { [weak self] in
                 self?.navigationController.showProgress()
@@ -144,10 +150,31 @@ class CompaniesListFlowController: BaseSignedInFlowController {
                     ownerAccountId: accountId,
                     companyName: companyName
                 )
+            },
+               showError: { [weak self] (message) in
+                    self?.navigationController.showErrorMessage(
+                        message,
+                        completion: nil
+                )
+            }, showSuccessMessage: { [weak self] (message) in
+                guard let present = self?.navigationController.getPresentViewControllerClosure() else {
+                    return
+                }
+                self?.showSuccessMessage(
+                    title: Localized(.success),
+                    message: message,
+                    completion: nil,
+                    presentViewController: present
+                )
+            }, onPresentQRCodeReader: { [weak self] (completion) in
+                self?.presentQRCodeReader(completion: completion)
         })
         CompaniesList.Configurator.configure(
             viewController: vc,
+            sceneModel: sceneModel,
             companiesFetcher: companiesFetcher,
+            addCompanyWorker: addCompanyWorker,
+            accountIdValidator: accountIdValidator,
             routing: routing
         )
         
@@ -211,6 +238,21 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         
         signOutWorker.performSignOut(completion: { [weak self] in
             self?.onSignOut()
+        })
+    }
+    
+    private func presentQRCodeReader(completion: @escaping CompaniesList.QRCodeReaderCompletion) {
+        self.runQRCodeReaderFlow(
+            presentingViewController: self.navigationController.getViewController(),
+            handler: { result in
+                switch result {
+                    
+                case .canceled:
+                    completion(.canceled)
+                    
+                case .success(let value, let metadataType):
+                    completion(.success(value: value, metadataType: metadataType))
+                }
         })
     }
     

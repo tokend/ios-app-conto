@@ -6,6 +6,7 @@ public protocol CompaniesListDisplayLogic: class {
     
     func displaySceneUpdated(viewModel: Event.SceneUpdated.ViewModel)
     func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel)
+    func displayAddBusinessAction(viewModel: Event.AddBusinessAction.ViewModel)
 }
 
 extension CompaniesList {
@@ -22,6 +23,12 @@ extension CompaniesList {
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
         private let emptyView: UILabel = SharedViewsBuilder.createEmptyLabel()
         private let refreshControl: UIRefreshControl = UIRefreshControl()
+        private let addAccountItem: UIBarButtonItem = UIBarButtonItem(
+            image: Assets.plusIcon.image,
+            style: .plain,
+            target: nil,
+            action: nil
+        )
         
         private var companies: [CompanyCell.ViewModel] = [] {
             didSet {
@@ -64,6 +71,7 @@ extension CompaniesList {
             super.viewDidLoad()
             
             self.setupTableView()
+            self.setupAddAccountItem()
             self.setupRefreshControl()
             self.setupLayout()
             
@@ -120,6 +128,31 @@ extension CompaniesList {
                 .disposed(by: self.disposeBag)
         }
         
+        private func setupAddAccountItem() {
+            self.addAccountItem
+                .rx
+                .tap
+                .asDriver()
+                .drive(onNext: { [weak self] (_) in
+                    self?.routing?.onPresentQRCodeReader({ [weak self] (result) in
+                        switch result {
+                            
+                        case .canceled:
+                            break
+                            
+                        case .success(let accountId, _):
+                            let request = Event.AddBusinessAction.Request(accountId: accountId)
+                            self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                                businessLogic.onAddBusinessAction(request: request)
+                            })
+                        }
+                        
+                    })
+                })
+                .disposed(by: self.disposeBag)
+            self.navigationItem.rightBarButtonItem = self.addAccountItem
+        }
+        
         private func setupLayout() {
             self.view.addSubview(self.tableView)
             self.view.addSubview(self.emptyView)
@@ -159,6 +192,18 @@ extension CompaniesList.ViewController: CompaniesList.DisplayLogic {
             
         case .loading:
             self.routing?.showLoading()
+        }
+    }
+    
+    public func displayAddBusinessAction(viewModel: Event.AddBusinessAction.ViewModel) {
+        self.routing?.hideLoading()
+        switch viewModel {
+            
+        case .error(let message):
+            self.routing?.showError(message)
+            
+        case .success(let message):
+            self.routing?.showSuccessMessage(message)
         }
     }
 }

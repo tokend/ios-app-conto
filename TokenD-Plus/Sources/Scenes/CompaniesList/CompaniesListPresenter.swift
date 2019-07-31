@@ -5,6 +5,7 @@ public protocol CompaniesListPresentationLogic {
     
     func presentSceneUpdated(response: Event.SceneUpdated.Response)
     func presentLoadingStatusDidChange(response: Event.LoadingStatusDidChange.Response)
+    func presentAddBusinessAction(response: Event.AddBusinessAction.Response)
 }
 
 extension CompaniesList {
@@ -75,6 +76,20 @@ extension CompaniesList.Presenter: CompaniesList.PresentationLogic {
             displayLogic.displayLoadingStatusDidChange(viewModel: viewModel)
         }
     }
+    
+    public func presentAddBusinessAction(response: Event.AddBusinessAction.Response) {
+        let viewModel: Event.AddBusinessAction.ViewModel
+        switch response {
+        case .error(let error):
+            viewModel = .error(error.localizedDescription)
+            
+        case .success:
+            viewModel = .success(Localized(.the_company_has_been_successfully_added))
+        }
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displayAddBusinessAction(viewModel: viewModel)
+        }
+    }
 }
 
 extension CompaniesList.Model.Error: LocalizedError {
@@ -84,6 +99,17 @@ extension CompaniesList.Model.Error: LocalizedError {
             
         case .companiesNotFound:
             return Localized(.failed_to_fetch_companies)
+            
+        case .clientAlreadyHasBusiness(let businessName):
+            return Localized(
+                .you_are_already_client_of_the_business,
+                replace: [
+                    .you_are_already_client_of_the_business_replace_business_name: businessName
+                ]
+            )
+            
+        case .invalidAccountId:
+            return Localized(.invalid_company_account_id)
         }
     }
 }
