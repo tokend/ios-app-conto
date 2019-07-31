@@ -466,14 +466,6 @@ extension TransactionDetails {
                 if let cell = emailCell {
                     cells.append(cell)
                 }
-                if !payment.subject.isEmpty {
-                    let subjectCell = TransactionDetails.Model.CellModel(
-                        title: payment.subject,
-                        hint: Localized(.description),
-                        identifier: .reference
-                    )
-                    cells.append(subjectCell)
-                }
                 
             case .opCreateAMLAlertRequestDetails,
                  .opPayoutDetails,
@@ -646,19 +638,9 @@ extension TransactionDetails {
             switch details.operationDetailsRelatedToBalance {
                 
             case .opCreateIssuanceRequestDetails:
-                //                let referenceCell = TransactionDetails.Model.CellModel(
-                //                    title: resource.reference,
-                //                    hint: Localized(.reference),
-                //                    identifier: .reference
-                //                )
-                //                detailsCells.append(referenceCell)
                 return []
                 
             case .opPaymentDetails(let resource):
-                guard balanceChangeEffect as? EffectChargedResource != nil else {
-                    return []
-                }
-                
                 if resource.sourcePayForDestination {
                     let senderPaysCell = TransactionDetails.Model.CellModel(
                         title: Localized(.recipients_fee_has_been_paid),
