@@ -15,7 +15,6 @@ extension TransactionDetails {
                 .value(forKey: LocalizationManager.languageKey) as? String ?? "en"
             return languageKey
         }()
-
         
         // MARK: -
         

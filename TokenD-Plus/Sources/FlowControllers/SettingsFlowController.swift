@@ -43,7 +43,6 @@ class SettingsFlowController: BaseSignedInFlowController {
     // MARK: - Private
     
     private func showSettingsScreen(showRootScreen: ((_ vc: UIViewController) -> Void)) {
-        
         let vc = self.setupSettings()
         vc.navigationItem.title = Localized(.settings)
         

@@ -70,8 +70,7 @@ extension ConfirmationScene {
         // MARK: - Private
         
         private func tryToInitHistoryRepo() {
-            guard let balance = self.balancesRepo.balancesDetailsValue.first(
-                where: { (state) -> Bool in
+            guard let balance = self.balancesRepo.balancesDetailsValue.first(where: { (state) -> Bool in
                 return state.asset == self.redeemModel.asset
             }), case let .created(details) = balance else {
                 return

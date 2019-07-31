@@ -96,7 +96,7 @@ extension SideMenu {
         
         private func setupView() {
             self.view.backgroundColor = Theme.Colors.mainColor
-    
+            
             self.setupHeaderView()
             self.setupSeparatorView()
             self.setupTapGestureRecognizer()
@@ -108,7 +108,6 @@ extension SideMenu {
         private func setupHeaderView() {
             
         }
-        
         
         private func setupSeparatorView() {
             self.separatorView.backgroundColor = Theme.Colors.separatorOnMainColor
@@ -172,6 +171,7 @@ extension SideMenu {
 // MARK: - DisplayLogic
 
 extension SideMenu.ViewController: SideMenu.DisplayLogic {
+    
     func displayViewDidLoad(viewModel: SideMenu.Event.ViewDidLoad.ViewModel) {
         self.updateHeaderWithModel(viewModel.header)
         self.sections = viewModel.sections
@@ -181,6 +181,7 @@ extension SideMenu.ViewController: SideMenu.DisplayLogic {
 // MARK: - UITableViewDelegate
 
 extension SideMenu.ViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let cellModel = self.sections[indexPath.section][indexPath.row]
@@ -191,6 +192,7 @@ extension SideMenu.ViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 
 extension SideMenu.ViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.sections[section].count
     }
@@ -201,7 +203,7 @@ extension SideMenu.ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard section > 0 else { return nil }
-
+        
         let headerView = UITableViewHeaderFooterView()
         let separatorView = UIView()
         headerView.addSubview(separatorView)
