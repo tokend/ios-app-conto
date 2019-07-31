@@ -432,6 +432,9 @@ extension TransactionsListScene.ViewController: TransactionsListScene.DisplayLog
                     case .acceptRedeem:
                         self?.routing?.showAcceptRedeem()
                         
+                    case .buy(let asset):
+                        self?.routing?.showBuy(asset)
+                        
                     case .createRedeem(let balanceId):
                         self?.routing?.showCreateReedeem(balanceId)
                         

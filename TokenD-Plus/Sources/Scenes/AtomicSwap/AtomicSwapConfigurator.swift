@@ -6,6 +6,8 @@ extension AtomicSwap {
         
         public static func configure(
             viewController: ViewController,
+            asksFetcher: AsksFetcherProtocol,
+            sceneModel: Model.SceneModel,
             amountFormatter: AmountFormatterProtocol,
             routing: Routing?,
             onDeinit: DeinitCompletion = nil
@@ -16,7 +18,11 @@ extension AtomicSwap {
                 presenterDispatch: presenterDispatch,
                 amountFormatter: amountFormatter
             )
-            let interactor = Interactor(presenter: presenter)
+            let interactor = Interactor(
+                presenter: presenter,
+                asksFetcher: asksFetcher,
+                sceneModel: sceneModel
+            )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)
             viewController.inject(
                 interactorDispatch: interactorDispatch,

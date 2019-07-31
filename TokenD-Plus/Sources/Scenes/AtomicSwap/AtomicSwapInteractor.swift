@@ -21,17 +21,37 @@ extension AtomicSwap {
         // MARK: - Private properties
         
         private let presenter: PresentationLogic
+        private let asksFetcher: AsksFetcherProtocol
+        private var sceneModel: Model.SceneModel
+        
         private let loadingStatus: BehaviorRelay<Model.LoadingStatus> = BehaviorRelay(value: .loaded)
         
         private let disposeBag: DisposeBag = DisposeBag()
         
         // MARK: -
         
-        public init(presenter: PresentationLogic) {
+        public init(
+            presenter: PresentationLogic,
+            asksFetcher: AsksFetcherProtocol,
+            sceneModel: Model.SceneModel
+            ) {
+            
             self.presenter = presenter
+            self.asksFetcher = asksFetcher
+            self.sceneModel = sceneModel
         }
         
         // MARK: - Private
+        
+        private func observeAsks() {
+            self.asksFetcher
+                .observeAsks()
+                .subscribe(onNext: { [weak self] (asks) in
+                    self?.sceneModel.asks = asks
+                    self?.updateScene()
+                })
+            .disposed(by: self.disposeBag)
+        }
         
         private func observeLoadingStatus() {
             self.loadingStatus
@@ -40,6 +60,30 @@ extension AtomicSwap {
                 })
                 .disposed(by: self.disposeBag)
         }
+        
+        private func updateScene() {
+            guard !self.sceneModel.asks.isEmpty else {
+                self.presenter.presentSceneDidUpdate(response: .empty)
+                return
+            }
+            
+            var cells: [Model.Cell] = []
+            let headerCell = self.getHeaderCell()
+            cells.append(headerCell)
+            
+            self.sceneModel.asks.forEach { (ask) in
+                let askCell = Model.Cell.ask(ask)
+                cells.append(askCell)
+            }
+            
+            let response = Event.SceneDidUpdate.Response.cells(cells: cells)
+            self.presenter.presentSceneDidUpdate(response: response)
+        }
+        
+        private func getHeaderCell() -> Model.Cell {
+            let header = Model.Header(asset: self.sceneModel.asset)
+            return .header(header)
+        }
     }
 }
 
@@ -47,24 +91,7 @@ extension AtomicSwap.Interactor: AtomicSwap.BusinessLogic {
     
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
         self.observeLoadingStatus()
-        
-        let ask = Model.Ask(
-            available: Model.Amount.init(asset: "SHR", value: 28),
-            prices: [
-                Model.Amount(asset: "UAH", value: 30),
-                Model.Amount(asset: "USD", value: 1.4),
-                Model.Amount(asset: "ksabdaiucdunU", value: 1.4),
-                Model.Amount(asset: "TYR", value: 1.4),
-                Model.Amount(asset: "TYR", value: 1.4),
-                Model.Amount(asset: "TYR", value: 1.4),
-                Model.Amount(asset: "TYR", value: 1.4),
-                Model.Amount(asset: "TYR", value: 1.4)
-            ]
-        )
-        let headerCell = Model.Cell.header(Model.Header(asset: "SHR"))
-        let askCell = Model.Cell.ask(ask)
-        let response = Event.SceneDidUpdate.Response.cells(cells: [headerCell, askCell])
-        self.presenter.presentSceneDidUpdate(response: response)
+        self.observeAsks()
     }
     
     public func onRefreshInitiated(request: Event.RefreshInitiated.Request) {

@@ -55,6 +55,12 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     
     private func setupAtomicSwapScene() -> UIViewController {
         let vc = AtomicSwap.ViewController()
+        let asksRepo = self.reposController.getAtomicSwapAsksRepo(for: self.asset)
+        let asksFetcher = AtomicSwap.AsksFetcher(asksRepo: asksRepo)
+        let sceneModel = AtomicSwap.Model.SceneModel(
+            asset: self.asset,
+            asks: []
+        )
         let amountFormatter = AtomicSwap.AmountFormatter()
         
         let routing = AtomicSwap.Routing(
@@ -69,10 +75,15 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         },
             hideShadow: { [weak self] in
                 self?.navigationController.hideShadow()
+            },
+            onBuyAction: { [weak self] (ask) in
+                
         })
         
         AtomicSwap.Configurator.configure(
             viewController: vc,
+            asksFetcher: asksFetcher,
+            sceneModel: sceneModel,
             amountFormatter: amountFormatter,
             routing: routing
         )

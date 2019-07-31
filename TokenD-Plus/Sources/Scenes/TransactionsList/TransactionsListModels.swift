@@ -77,8 +77,9 @@ extension TransactionsListScene.Model {
     }
     
     enum ActionType {
-        case createRedeem(balanceId: String)
         case acceptRedeem
+        case buy(asset: String)
+        case createRedeem(balanceId: String)
         case receive
         case send(balanceId: String)
     }

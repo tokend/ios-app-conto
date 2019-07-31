@@ -20,9 +20,11 @@ extension AtomicSwap.Model {
     
     public struct SceneModel {
         let asset: String
+        var asks: [Ask]
     }
     
     public struct Ask {
+        let id: String
         let available: BaseAmount
         let prices: [QuoteAmount]
     }

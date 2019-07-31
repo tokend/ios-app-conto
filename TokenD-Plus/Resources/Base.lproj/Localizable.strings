@@ -42,6 +42,7 @@
 "available_assets_for_this_operations" = "Available assets for this operations were not found";
 "available_date" = "Available: $(formatted)";
 "available_date_replace_formatted" = "formatted";
+"available_for_buy" = "Available_for_buy";
 "back" = "Back";
 "back_to_companies" = "Back to companies";
 "balance_colon" = "Balance:";

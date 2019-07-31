@@ -37,6 +37,8 @@ public extension SendPaymentAmount.Model {
     struct ViewConfig {
         let descriptionIsHidden: Bool
         let actionButtonTitle: NSAttributedString
+        let pickerIsAvailable: Bool
+        let balanceTitle: String
     }
     
     struct SceneViewModel {
@@ -419,7 +421,9 @@ extension SendPaymentAmount.Model.ViewConfig {
         
         return SendPaymentAmount.Model.ViewConfig(
             descriptionIsHidden: false,
-            actionButtonTitle: actionButtonTitle
+            actionButtonTitle: actionButtonTitle,
+            pickerIsAvailable: true,
+            balanceTitle: Localized(.balance_colon)
         )
     }
     
@@ -434,7 +438,9 @@ extension SendPaymentAmount.Model.ViewConfig {
         
         return SendPaymentAmount.Model.ViewConfig(
             descriptionIsHidden: true,
-            actionButtonTitle: actionButtonTitle
+            actionButtonTitle: actionButtonTitle,
+            pickerIsAvailable: true,
+            balanceTitle: Localized(.balance_colon)
         )
     }
     
@@ -449,7 +455,26 @@ extension SendPaymentAmount.Model.ViewConfig {
         
         return SendPaymentAmount.Model.ViewConfig(
             descriptionIsHidden: true,
-            actionButtonTitle: actionButtonTitle
+            actionButtonTitle: actionButtonTitle,
+            pickerIsAvailable: true,
+            balanceTitle: Localized(.balance_colon)
+        )
+    }
+    
+    static func atomicSwapViewConfig() -> SendPaymentAmount.Model.ViewConfig {
+        let actionButtonTitle = NSAttributedString(
+            string: Localized(.continue_capitalized),
+            attributes: [
+                .font: Theme.Fonts.actionButtonFont,
+                .foregroundColor: Theme.Colors.textOnAccentColor
+            ]
+        )
+        
+        return SendPaymentAmount.Model.ViewConfig(
+            descriptionIsHidden: true,
+            actionButtonTitle: actionButtonTitle,
+            pickerIsAvailable: false,
+            balanceTitle: Localized(.balance_colon)
         )
     }
 }

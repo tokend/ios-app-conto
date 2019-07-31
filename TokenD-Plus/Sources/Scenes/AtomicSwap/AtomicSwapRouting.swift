@@ -6,5 +6,6 @@ extension AtomicSwap {
         let hideLoading: () -> Void
         let showShadow: () -> Void
         let hideShadow: () -> Void
+        let onBuyAction: (_ model: Model.Ask) -> Void
     }
 }

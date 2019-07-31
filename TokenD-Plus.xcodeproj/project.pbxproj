@@ -50,6 +50,8 @@
 		DB4AE2D422EEDC69001D0883 /* AtomicSwapFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2D322EEDC69001D0883 /* AtomicSwapFlowController.swift */; };
 		DB4AE2D622EEE795001D0883 /* AtomicSwapPriceItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2D522EEE795001D0883 /* AtomicSwapPriceItemCell.swift */; };
 		DB4AE2E922EF5DF1001D0883 /* SideMenuController+RootContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2E822EF5DF0001D0883 /* SideMenuController+RootContent.swift */; };
+		DB4AE2EB22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2EA22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift */; };
+		DB4AE2EE22F1A308001D0883 /* AtomicSwapAsksRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2ED22F1A308001D0883 /* AtomicSwapAsksRepo.swift */; };
 		DB72098B22C1347200ED116A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB72098A22C1347200ED116A /* Assets.xcassets */; };
 		DB720CAA22C1396B00ED116A /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099922C1396B00ED116A /* SettingsModels.swift */; };
 		DB720CAB22C1396B00ED116A /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099A22C1396B00ED116A /* SettingsInteractor.swift */; };
@@ -709,6 +711,8 @@
 		DB4AE2D322EEDC69001D0883 /* AtomicSwapFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapFlowController.swift; sourceTree = "<group>"; };
 		DB4AE2D522EEE795001D0883 /* AtomicSwapPriceItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapPriceItemCell.swift; sourceTree = "<group>"; };
 		DB4AE2E822EF5DF0001D0883 /* SideMenuController+RootContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SideMenuController+RootContent.swift"; sourceTree = "<group>"; };
+		DB4AE2EA22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapAsksFetcher.swift; sourceTree = "<group>"; };
+		DB4AE2ED22F1A308001D0883 /* AtomicSwapAsksRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapAsksRepo.swift; sourceTree = "<group>"; };
 		DB72098022C1347100ED116A /* TokenD-Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TokenD-Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB72098A22C1347200ED116A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB72098F22C1347200ED116A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1467,8 +1471,17 @@
 			isa = PBXGroup;
 			children = (
 				DB4AE2D122EB6403001D0883 /* AtomicSwapAmountFormatter.swift */,
+				DB4AE2EA22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift */,
 			);
 			path = Workers;
+			sourceTree = "<group>";
+		};
+		DB4AE2EC22F1A2E6001D0883 /* AtomicSwapAsksRepo */ = {
+			isa = PBXGroup;
+			children = (
+				DB4AE2ED22F1A308001D0883 /* AtomicSwapAsksRepo.swift */,
+			);
+			path = AtomicSwapAsksRepo;
 			sourceTree = "<group>";
 		};
 		DB72097722C1347100ED116A = {
@@ -3233,6 +3246,7 @@
 				DB720C7822C1396B00ED116A /* SalesRepo.swift */,
 				DB720C7622C1396B00ED116A /* TransactionsHistoryRepo.swift */,
 				DB720C6E22C1396B00ED116A /* WalletRepo.swift */,
+				DB4AE2EC22F1A2E6001D0883 /* AtomicSwapAsksRepo */,
 				DB720C6F22C1396B00ED116A /* PollsRepo */,
 				DB363E1022DF502B00F5761C /* ResourcesExtensions */,
 			);
@@ -3633,6 +3647,7 @@
 				DB720E6B22C1396C00ED116A /* SaleDetailsModels.swift in Sources */,
 				DB720E5B22C1396C00ED116A /* TransactionsListSceneMovementsProvider.swift in Sources */,
 				DB720E0122C1396C00ED116A /* TabBarContainerRouting.swift in Sources */,
+				DB4AE2EE22F1A308001D0883 /* AtomicSwapAsksRepo.swift in Sources */,
 				DB720DB522C1396B00ED116A /* SendPaymentAmountTitleTextEditView.swift in Sources */,
 				DB720E8822C1396C00ED116A /* SharedSceneBuilder.swift in Sources */,
 				DB720EE922C1396C00ED116A /* PollsRepo.swift in Sources */,
@@ -3897,6 +3912,7 @@
 				DB720D4B22C1396B00ED116A /* ChartDateFormatter.swift in Sources */,
 				DB720F6022C4CD1C00ED116A /* PollsPollCell.swift in Sources */,
 				DB720DC922C1396C00ED116A /* ConfirmationSceneBaseCell.swift in Sources */,
+				DB4AE2EB22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift in Sources */,
 				DB720EE822C1396C00ED116A /* PollResource+Details.swift in Sources */,
 				DB720D1322C1396B00ED116A /* TokenDetailsTokenColoringProviderProtocol.swift in Sources */,
 				DB720D6922C1396B00ED116A /* TradeOffersPresenter.swift in Sources */,
