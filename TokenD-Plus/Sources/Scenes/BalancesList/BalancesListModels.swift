@@ -147,12 +147,15 @@ extension BalancesList.Event {
     }
     
     public enum SectionsUpdated {
-        public struct Response {
-            let sections: [Model.SectionModel]
+        public enum Response {
+            case sections(sections: [Model.SectionModel])
+            case empty
+            case error(Error)
         }
         
-        public struct ViewModel {
-            let sections: [Model.SectionViewModel]
+        public enum ViewModel {
+            case sections(sections: [Model.SectionViewModel])
+            case empty(String)
         }
     }
     

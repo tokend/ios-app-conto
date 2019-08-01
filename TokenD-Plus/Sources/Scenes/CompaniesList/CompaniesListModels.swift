@@ -5,6 +5,8 @@ public enum CompaniesList {
     // MARK: - Typealiases
     
     public typealias DeinitCompletion = ((_ vc: UIViewController) -> Void)?
+    public typealias QRCodeReaderCompletion = (_ result: Model.QRCodeReaderResult) -> Void
+    public typealias AddCompanyCompletion = (Model.AddCompanyResult) -> Void
     
     // MARK: -
     
@@ -15,6 +17,10 @@ public enum CompaniesList {
 // MARK: - Models
 
 extension CompaniesList.Model {
+    
+    public struct SceneModel {
+        var companies: [Company]
+    }
     
     public struct Company {
         let accountId: String
@@ -29,6 +35,19 @@ extension CompaniesList.Model {
     
     public enum Error: Swift.Error {
         case companiesNotFound
+        case companyNotFound
+        case clientAlreadyHasBusiness(businessName: String)
+        case invalidAccountId
+    }
+    
+    public enum QRCodeReaderResult {
+        case canceled
+        case success(value: String, metadataType: String)
+    }
+    
+    public enum AddCompanyResult {
+        case success
+        case error
     }
 }
 
@@ -54,6 +73,28 @@ extension CompaniesList.Event {
             case companies([CompaniesList.CompanyCell.ViewModel])
             case empty(String)
         }
+    }
+    
+    public enum AddBusinessAction {
+        public struct Request {
+            let accountId: String
+        }
+        public enum Response {
+            case success(company: Model.Company)
+            case error(Swift.Error)
+        }
+        public enum ViewModel {
+            case success(company: Model.Company)
+            case error(String)
+        }
+    }
+    
+    public enum CompanyRecoignizeAction {
+        public enum Response {
+            case company(Model.Company)
+            case error(Swift.Error)
+        }
+        public typealias ViewModel = Response
     }
     
     public enum LoadingStatusDidChange {

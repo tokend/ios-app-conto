@@ -101,73 +101,88 @@ extension BalancesList {
             }
             return cellViewModels
         }
+        
+        private func getSectionViewModels(sections: [Model.SectionModel]) -> [Model.SectionViewModel] {
+            let sectionsViewModels = sections.map { (section) -> Model.SectionViewModel in
+                let cells = section.cells.map({ (cell) -> CellViewAnyModel in
+                    switch cell {
+                        
+                    case .balance(let balanceModel):
+                        let balance = self.amountFormatter.assetAmountToString(balanceModel.balance)
+                        let balanceToShow = Localized(
+                            .available_amount,
+                            replace: [
+                                .available_amount_replace_amount: balance
+                            ]
+                        )
+                        
+                        let abbreviationBackgroundColor = TokenColoringProvider.shared.coloringForCode(balanceModel.code)
+                        let abbreviation = balanceModel.assetName.first
+                        let abbreviationText = abbreviation?.description ?? ""
+                        
+                        var imageRepresentation = Model.ImageRepresentation.abbreviation
+                        if let url = balanceModel.iconUrl {
+                            imageRepresentation = .image(url)
+                        }
+                        let balanceViewModel = BalancesList.BalanceCell.ViewModel(
+                            assetName: balanceModel.assetName,
+                            imageRepresentation: imageRepresentation,
+                            balance: balanceToShow,
+                            abbreviationBackgroundColor: abbreviationBackgroundColor,
+                            abbreviationText: abbreviationText,
+                            balanceId: balanceModel.balanceId,
+                            cellIdentifier: .balances
+                        )
+                        return balanceViewModel
+                        
+                    case .header(let headerModel):
+                        let balanceTitle = self.amountFormatter.formatAmount(
+                            headerModel.balance,
+                            currency: headerModel.asset
+                        )
+                        let headerModel = BalancesList.HeaderCell.ViewModel(
+                            balance: balanceTitle,
+                            cellIdentifier: .header
+                        )
+                        return headerModel
+                        
+                    case .chart(let pieChartModel):
+                        let pieChartViewModel = self.getChartViewModel(model: pieChartModel)
+                        let legendCells = self.getLegendCellViewModels(
+                            cells: pieChartModel.legendCells,
+                            convertedAsset: pieChartModel.convertAsset
+                        )
+                        let chartViewModel = BalancesList.PieChartCell.ViewModel(
+                            chartViewModel: pieChartViewModel,
+                            legendCells: legendCells,
+                            cellIdentifier: .chart
+                        )
+                        return chartViewModel
+                    }
+                })
+                return Model.SectionViewModel(cells: cells)
+            }
+            return sectionsViewModels
+        }
     }
 }
 
 extension BalancesList.Presenter: BalancesList.PresentationLogic {
     
     public func presentSectionsUpdated(response: Event.SectionsUpdated.Response) {
-        let sections = response.sections.map { (section) -> Model.SectionViewModel in
-            let cells = section.cells.map({ (cell) -> CellViewAnyModel in
-                switch cell {
-                    
-                case .balance(let balanceModel):
-                    let balance = self.amountFormatter.assetAmountToString(balanceModel.balance)
-                    let balanceToShow = Localized(
-                        .available_amount,
-                        replace: [
-                            .available_amount_replace_amount: balance
-                        ]
-                    )
-                    
-                    let abbreviationBackgroundColor = TokenColoringProvider.shared.coloringForCode(balanceModel.code)
-                    let abbreviation = balanceModel.assetName.first
-                    let abbreviationText = abbreviation?.description ?? ""
-                    
-                    var imageRepresentation = Model.ImageRepresentation.abbreviation
-                    if let url = balanceModel.iconUrl {
-                        imageRepresentation = .image(url)
-                    }
-                    let balanceViewModel = BalancesList.BalanceCell.ViewModel(
-                        assetName: balanceModel.assetName,
-                        imageRepresentation: imageRepresentation,
-                        balance: balanceToShow,
-                        abbreviationBackgroundColor: abbreviationBackgroundColor,
-                        abbreviationText: abbreviationText,
-                        balanceId: balanceModel.balanceId,
-                        cellIdentifier: .balances
-                    )
-                    return balanceViewModel
-                    
-                case .header(let headerModel):
-                    let balanceTitle = self.amountFormatter.formatAmount(
-                        headerModel.balance,
-                        currency: headerModel.asset
-                    )
-                    let headerModel = BalancesList.HeaderCell.ViewModel(
-                        balance: balanceTitle,
-                        cellIdentifier: .header
-                        )
-                    return headerModel
-                    
-                case .chart(let pieChartModel):
-                    let pieChartViewModel = self.getChartViewModel(model: pieChartModel)
-                    let legendCells = self.getLegendCellViewModels(
-                        cells: pieChartModel.legendCells,
-                        convertedAsset: pieChartModel.convertAsset
-                    )
-                    let chartViewModel = BalancesList.PieChartCell.ViewModel(
-                        chartViewModel: pieChartViewModel,
-                        legendCells: legendCells,
-                        cellIdentifier: .chart
-                    )
-                    return chartViewModel
-                }
-            })
-            return Model.SectionViewModel(cells: cells)
+        let viewModel: Event.SectionsUpdated.ViewModel
+        switch response {
+            
+        case .empty:
+            viewModel = .empty(Localized(.no_balances))
+            
+        case .error(let error):
+            viewModel = .empty(error.localizedDescription)
+            
+        case .sections(let sections):
+            let sectionsViewModels = self.getSectionViewModels(sections: sections)
+            viewModel = .sections(sections: sectionsViewModels)
         }
-        
-        let viewModel = Event.SectionsUpdated.ViewModel(sections: sections)
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displaySectionsUpdated(viewModel: viewModel)
         }

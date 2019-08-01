@@ -8,7 +8,9 @@
 "account_capitalized" = "Акаунт";
 "account_id_or_email_colon" = "Акаунт ID або email:";
 "acknowledgements" = "Ліцензії відкритого ПЗ";
+"add" = "ДОДАТИ";
 "address_is_copied_to_pasteboard" = "Адресу скопійовано";
+"add_company" = "Додавання компанії";
 "already_have_an_account" = "Вже маєте акаунт? ";
 "aml_alert_request" = "AML alert request";
 "amount" = "Сума";
@@ -187,6 +189,7 @@
 "failed_to_decode_quote_balance_id" = "Не вдалося розкодувати ID баланса базового актива";
 "failed_to_encode_destination_address" = "Не вдалося закодувати адресу";
 "failed_to_encode_destination_data" = "Не вдалося закодувати дані";
+"failed_to_fetch_company" = "Не вдалося отримати компанію";
 "failed_to_fetch_companies" = "Не вдалося отримати компанії";
 "failed_to_fetch_fees" = "Не вдалося отримати комісію для отримувача";
 "failed_to_fetch_network_info" = "Не вдалося отримати інформацію про мережу";
@@ -258,6 +261,7 @@
 "insufficient_funds" = "Недостатньо коштів";
 "invalid_account_id" = "Невірний ID акаунта";
 "invalid_account_id_or_email" = "Невірний ID акаунта або email";
+"invalid_company_account_id" = "Невірний ID компанії";
 "invalid_redeem_asset" = "Невірний актив погашення";
 "invalid_redeem_request" = "Невірний запит погашения";
 "invalid_sender_account_id" = "Невірний акаунт ID відправника";
@@ -483,6 +487,7 @@
 "terms_of_service" = "Умови обслуговування";
 "terms_of_service_not_agreed" = "Умови обслуговування не узгоджені";
 "terms_of_use" = "Умови використання";
+"the_company_has_been_successfully_added" = "Компанія була успішно додана";
 "the_redemption_has_been_already_completed" = "Погашення вже виконано, запит не дійсний";
 "there_is_not_any_company_where_you_are_a_client_yet" = "Компанії не знайдено";
 "there_is_not_any_user_with_such_an_email_was_found" = "Користувача з таким email-ом не знайдено";
@@ -566,6 +571,8 @@
 "yes" = "Так";
 "yesterday_at" = "вчора у $(hours)";
 "yesterday_at_replace_hours" = "hours";
+"you_are_already_client_of_the_business" = "Ви вже є клієнт $(business_name)";
+"you_are_already_client_of_the_business_replace_business_name" = "business_name";
 "you_can_grant_permissions" = "Ви можете надати доступ в налаштуваннях програми, які знаходяться в Системних Налаштуваннях. Хочете відкрити налаштування?";
 "you_cannot_accept_redeem_of_the_asset_that_you_do_not_own" = "Ви можете приймати погашення лише створених вами активів";
 "you_cannot_send_payment_to_yourself" = "Ви не можете відправляти платіж самому собі";
