@@ -196,14 +196,30 @@ extension CompaniesList.ViewController: CompaniesList.DisplayLogic {
     }
     
     public func displayAddBusinessAction(viewModel: Event.AddBusinessAction.ViewModel) {
-        self.routing?.hideLoading()
+        
         switch viewModel {
             
         case .error(let message):
             self.routing?.showError(message)
             
-        case .success(let message):
-            self.routing?.showSuccessMessage(message)
+        case .success(let company):
+            let completion: CompaniesList.AddCompanyCompletion = { (result) in
+                switch result {
+                    
+                case .error:
+                    break
+                    
+                case .success:
+                    let request = Event.RefreshInitiated.Request()
+                    self.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                        businessLogic.onRefreshInitiated(request: request)
+                    })
+                }
+            }
+            self.routing?.onAddCompany(
+                company,
+                completion
+            )
         }
     }
 }

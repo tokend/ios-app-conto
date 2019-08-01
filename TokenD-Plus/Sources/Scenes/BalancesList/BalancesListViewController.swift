@@ -25,6 +25,7 @@ extension BalancesList {
         // MARK: - Private properties
         
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
+        private let emptyView: UILabel = SharedViewsBuilder.createEmptyLabel()
         private let fab: UIButton = UIButton()
         private let button: UIBarButtonItem = UIBarButtonItem(
             image: Assets.plusIcon.image,
@@ -76,6 +77,7 @@ extension BalancesList {
             self.setupFab()
             self.setupRefreshControl()
             self.setupTableView()
+            self.setupEmptyLabel()
             self.setupNavBarItems()
             self.setupLayout()
             
@@ -175,7 +177,6 @@ extension BalancesList {
         }
         
         private func setupRefreshControl() {
-            self.refreshControl.tintColor = Theme.Colors.contentBackgroundColor
             self.refreshControl
                 .rx
                 .controlEvent(.valueChanged)
@@ -203,6 +204,7 @@ extension BalancesList {
             self.tableView.sectionFooterHeight = 0.0
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
+            self.tableView.refreshControl = self.refreshControl
             self.tableView
                 .rx
                 .contentOffset
@@ -211,6 +213,10 @@ extension BalancesList {
                     self?.updateContentOffset(offset: offset)
                 })
                 .disposed(by: self.disposeBag)
+        }
+        
+        private func setupEmptyLabel() {
+            
         }
         
         private func setupFab() {
@@ -238,10 +244,13 @@ extension BalancesList {
         private func setupLayout() {
             self.view.addSubview(self.tableView)
             self.view.addSubview(self.fab)
-            
-            self.tableView.addSubview(self.refreshControl)
+            self.view.addSubview(self.emptyView)
             
             self.tableView.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
+            
+            self.emptyView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
             
@@ -257,8 +266,21 @@ extension BalancesList {
 extension BalancesList.ViewController: BalancesList.DisplayLogic {
     
     public func displaySectionsUpdated(viewModel: Event.SectionsUpdated.ViewModel) {
-        self.sections = viewModel.sections
-        self.tableView.reloadData()
+        switch viewModel {
+            
+        case .sections(let sections):
+            self.fab.isHidden = false
+            self.emptyView.isHidden = true
+            self.sections = sections
+            self.tableView.reloadData()
+            
+        case .empty(let text):
+            self.fab.isHidden = true
+            self.emptyView.text = text
+            self.emptyView.isHidden = false
+            self.sections = []
+            self.tableView.reloadData()
+        }
     }
     
     public func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel) {

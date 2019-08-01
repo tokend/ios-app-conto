@@ -8,7 +8,9 @@
 "account_capitalized" = "Аккаунт";
 "account_id_or_email_colon" = "Аккаунт ID или email:";
 "acknowledgements" = "Лицензии открытого ПО";
+"add" = "ДОБАВИТЬ";
 "address_is_copied_to_pasteboard" = "Адрес скопирован";
+"add_company" = "Добавление компании";
 "already_have_an_account" = "Уже имеете аккаунт? ";
 "aml_alert_request" = "AML alert request";
 "amount" = "Сумма";
@@ -187,6 +189,7 @@
 "failed_to_decode_quote_balance_id" = "Не удалось раскодировать ID баланса базового актива";
 "failed_to_encode_destination_address" = "Не удалось закодировать адрес";
 "failed_to_encode_destination_data" = "Не удалось закодировать данные";
+"failed_to_fetch_company" = "Не удалось получить компанию";
 "failed_to_fetch_companies" = "Не удалось получить компании";
 "failed_to_fetch_fees" = "Не удалось получить комиссию для получателя";
 "failed_to_fetch_network_info" = "Не удалось получить информацию о сети";

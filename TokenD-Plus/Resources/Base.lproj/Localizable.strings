@@ -8,7 +8,9 @@
 "account_capitalized" = "Account";
 "account_id_or_email_colon" = "Account ID or email:";
 "acknowledgements" = "Acknowledgements";
+"add" = "ADD";
 "address_is_copied_to_pasteboard" = "Address is copied to pasteboard";
+"add_company" = "Add company";
 "already_have_an_account" = "Already have an account? ";
 "aml_alert_request" = "AML alert request";
 "amount" = "Amount";
@@ -187,6 +189,7 @@
 "failed_to_decode_quote_balance_id" = "Failed to decode quote balance id";
 "failed_to_encode_destination_address" = "Failed to encode destination address";
 "failed_to_encode_destination_data" = "Failed to encode destination data";
+"failed_to_fetch_company" = "Failed to fetch company";
 "failed_to_fetch_companies" = "Failed to fetch companies";
 "failed_to_fetch_fees" = "Failed to fetch sender fee";
 "failed_to_fetch_network_info" = "Failed to fetch network info";

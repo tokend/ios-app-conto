@@ -80,11 +80,12 @@ extension CompaniesList.Presenter: CompaniesList.PresentationLogic {
     public func presentAddBusinessAction(response: Event.AddBusinessAction.Response) {
         let viewModel: Event.AddBusinessAction.ViewModel
         switch response {
+            
         case .error(let error):
             viewModel = .error(error.localizedDescription)
             
-        case .success:
-            viewModel = .success(Localized(.the_company_has_been_successfully_added))
+        case .success(let company):
+            viewModel = .success(company: company)
         }
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displayAddBusinessAction(viewModel: viewModel)
@@ -96,6 +97,9 @@ extension CompaniesList.Model.Error: LocalizedError {
     
     public var errorDescription: String? {
         switch self {
+            
+        case .companyNotFound:
+            return Localized(.failed_to_fetch_company)
             
         case .companiesNotFound:
             return Localized(.failed_to_fetch_companies)

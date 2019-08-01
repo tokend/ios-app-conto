@@ -1,15 +1,13 @@
 import Foundation
 
-extension CompaniesList {
+extension AddCompany {
     
     public enum Configurator {
         
         public static func configure(
             viewController: ViewController,
             sceneModel: Model.SceneModel,
-            companiesFetcher: CompaniesFetcherProtocol,
-            companyRecognizer: CompanyRecognizerProtocol,
-            accountIdValidator: AccountIdValidatorProtocol,
+            addCompanyWorker: AddCompanyWorkerProtocol,
             routing: Routing?,
             onDeinit: DeinitCompletion = nil
             ) {
@@ -19,10 +17,8 @@ extension CompaniesList {
             let interactor = Interactor(
                 presenter: presenter,
                 sceneModel: sceneModel,
-                companiesFetcher: companiesFetcher,
-                companyRecognizer: companyRecognizer,
-                accountIdValidator: accountIdValidator
-            )
+                addCompanyWorker: addCompanyWorker
+                )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)
             viewController.inject(
                 interactorDispatch: interactorDispatch,
@@ -33,9 +29,9 @@ extension CompaniesList {
     }
 }
 
-extension CompaniesList {
+extension AddCompany {
     
-    @objc(CompaniesListInteractorDispatch)
+    @objc(AddCompanyInteractorDispatch)
     public class InteractorDispatch: NSObject {
         
         private let queue: DispatchQueue = DispatchQueue(
@@ -62,7 +58,7 @@ extension CompaniesList {
         }
     }
     
-    @objc(CompaniesListPresenterDispatch)
+    @objc(AddCompanyPresenterDispatch)
     public class PresenterDispatch: NSObject {
         
         private weak var displayLogic: DisplayLogic?

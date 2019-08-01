@@ -46,11 +46,15 @@ extension BalancesList {
         // MARK: - Private
         
         private func updateSections() {
+            guard !self.sceneModel.balances.isEmpty else {
+                self.presenter.presentSectionsUpdated(response: .empty)
+                return
+            }
             // let headerSection = self.getHeaderSectionModel()
             // let chartSection = self.getChartSectionModel()
             let balancesSection = self.getBalancesSectionModel()
             
-            let response = Event.SectionsUpdated.Response(
+            let response = Event.SectionsUpdated.Response.sections(
                 sections: [
                     // headerSection,
                     // chartSection,

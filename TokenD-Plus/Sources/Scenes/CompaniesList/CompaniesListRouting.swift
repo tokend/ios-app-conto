@@ -14,5 +14,9 @@ extension CompaniesList {
         let showError: (_ errorMessage: String) -> Void
         let showSuccessMessage: (_ message: String) -> Void
         let onPresentQRCodeReader: (_ completion: @escaping QRCodeReaderCompletion) -> Void
+        let onAddCompany: (
+        _ company: Model.Company,
+        _ completion: @escaping AddCompanyCompletion
+        ) -> Void
     }
 }

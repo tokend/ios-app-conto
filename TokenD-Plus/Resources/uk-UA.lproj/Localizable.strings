@@ -8,7 +8,9 @@
 "account_capitalized" = "Акаунт";
 "account_id_or_email_colon" = "Акаунт ID або email:";
 "acknowledgements" = "Ліцензії відкритого ПЗ";
+"add" = "ДОДАТИ";
 "address_is_copied_to_pasteboard" = "Адресу скопійовано";
+"add_company" = "Додавання компанії";
 "already_have_an_account" = "Вже маєте акаунт? ";
 "aml_alert_request" = "AML alert request";
 "amount" = "Сума";
@@ -187,6 +189,7 @@
 "failed_to_decode_quote_balance_id" = "Не вдалося розкодувати ID баланса базового актива";
 "failed_to_encode_destination_address" = "Не вдалося закодувати адресу";
 "failed_to_encode_destination_data" = "Не вдалося закодувати дані";
+"failed_to_fetch_company" = "Не вдалося отримати компанію";
 "failed_to_fetch_companies" = "Не вдалося отримати компанії";
 "failed_to_fetch_fees" = "Не вдалося отримати комісію для отримувача";
 "failed_to_fetch_network_info" = "Не вдалося отримати інформацію про мережу";

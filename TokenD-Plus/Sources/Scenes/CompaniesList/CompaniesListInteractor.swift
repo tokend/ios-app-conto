@@ -1,5 +1,6 @@
 import Foundation
 import RxSwift
+import RxCocoa
 
 public protocol CompaniesListBusinessLogic {
     typealias Event = CompaniesList.Event
@@ -23,9 +24,10 @@ extension CompaniesList {
         private let presenter: PresentationLogic
         private var sceneModel: Model.SceneModel
         private let companiesFetcher: CompaniesFetcherProtocol
-        private let addCompanyWorker: AddCompanyWorkerProtocol
+        private let companyRecognizer: CompanyRecognizerProtocol
         private let accountIdValidator: AccountIdValidatorProtocol
         
+        private let loadingStatus: BehaviorRelay<Model.LoadingStatus> = BehaviorRelay(value: .loaded)
         private let disposeBag: DisposeBag = DisposeBag()
         
         // MARK: -
@@ -34,18 +36,26 @@ extension CompaniesList {
             presenter: PresentationLogic,
             sceneModel: Model.SceneModel,
             companiesFetcher: CompaniesFetcherProtocol,
-            addCompanyWorker: AddCompanyWorkerProtocol,
+            companyRecognizer: CompanyRecognizerProtocol,
             accountIdValidator: AccountIdValidatorProtocol
             ) {
             
             self.presenter = presenter
             self.sceneModel = sceneModel
             self.companiesFetcher = companiesFetcher
-            self.addCompanyWorker = addCompanyWorker
+            self.companyRecognizer = companyRecognizer
             self.accountIdValidator = accountIdValidator
         }
         
         // MARK: - Private properties
+        
+        private func observeLoadingStatus() {
+            self.loadingStatus
+                .subscribe(onNext: { [weak self] (status) in
+                    self?.presenter.presentLoadingStatusDidChange(response: status)
+                })
+                .disposed(by: self.disposeBag)
+        }
         
         private func observeCompanies() {
             self.companiesFetcher
@@ -56,14 +66,14 @@ extension CompaniesList {
                     response = companies.isEmpty ? .empty : .companies(companies)
                     self?.presenter.presentSceneUpdated(response: response)
                 })
-            .disposed(by: self.disposeBag)
+                .disposed(by: self.disposeBag)
         }
         
-        private func observeLoadingStatus() {
+        private func observeRepoLoadingStatus() {
             self.companiesFetcher
                 .observeLoadingStatus()
                 .subscribe(onNext: { [weak self] (status) in
-                    self?.presenter.presentLoadingStatusDidChange(response: status)
+                    self?.loadingStatus.accept(status)
                 })
                 .disposed(by: self.disposeBag)
         }
@@ -83,8 +93,9 @@ extension CompaniesList {
 extension CompaniesList.Interactor: CompaniesList.BusinessLogic {
     
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
-        self.observeCompanies()
         self.observeLoadingStatus()
+        self.observeCompanies()
+        self.observeRepoLoadingStatus()
         self.observeErrors()
     }
     
@@ -93,12 +104,13 @@ extension CompaniesList.Interactor: CompaniesList.BusinessLogic {
     }
     
     public func onAddBusinessAction(request: Event.AddBusinessAction.Request) {
-        self.presenter.presentLoadingStatusDidChange(response: .loading)
+        self.loadingStatus.accept(.loading)
         guard self.accountIdValidator.isValid(accountId: request.accountId) else {
+            self.loadingStatus.accept(.loaded)
             self.presenter.presentAddBusinessAction(
                 response: .error(Model.Error.invalidAccountId)
             )
-                return
+            return
         }
         
         let company = self.sceneModel.companies.first(where: { (company) -> Bool in
@@ -106,27 +118,27 @@ extension CompaniesList.Interactor: CompaniesList.BusinessLogic {
         })
         
         guard company == nil else {
+            self.loadingStatus.accept(.loaded)
             self.presenter.presentAddBusinessAction(
                 response: .error(Model.Error.clientAlreadyHasBusiness(businessName: company?.name ?? ""))
             )
             return
         }
         
-        self.addCompanyWorker.addCompany(
-            businessAccountId: request.accountId,
+        self.companyRecognizer.recognizeCompany(
+            accountId: request.accountId,
             completion: { [weak self] (result) in
+                self?.loadingStatus.accept(.loaded)
                 let response: Event.AddBusinessAction.Response
                 switch result {
                     
                 case .failure(let error):
                     response = .error(error)
                     
-                case .success:
-                    response = .success
-                    self?.companiesFetcher.reloadCompanies()
+                case .success(let company):
+                    response = .success(company: company)
                 }
                 self?.presenter.presentAddBusinessAction(response: response)
-            }
-        )
+        })
     }
 }

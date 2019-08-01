@@ -11,7 +11,9 @@ enum LocKey: String {
     case account_capitalized
     case account_id_or_email_colon
     case acknowledgements
+    case add
     case address_is_copied_to_pasteboard
+    case add_company
     case already_have_an_account
     case aml_alert_request
     case amount
@@ -190,6 +192,7 @@ enum LocKey: String {
     case failed_to_decode_quote_balance_id
     case failed_to_encode_destination_address
     case failed_to_encode_destination_data
+    case failed_to_fetch_company
     case failed_to_fetch_companies
     case failed_to_fetch_fees
     case failed_to_fetch_network_info
