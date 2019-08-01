@@ -216,8 +216,8 @@ extension Settings {
                     identifier: .biometrics
                 )
                 securityCells.insert(biometricsAuthCell, at: 0)
-                tfaTopSeparator = .none
-                tfaPosition = 1
+//                tfaTopSeparator = .none
+//                tfaPosition = 1
             }
             
 //            let tfaCell = self.checkTFAEnabledState(topSeparator: tfaTopSeparator)
