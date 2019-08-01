@@ -60,6 +60,7 @@ extension CompaniesList {
         private func observeCompanies() {
             self.companiesFetcher
                 .observeCompanies()
+                .skip(1)
                 .subscribe(onNext: { [weak self] (companies) in
                     self?.sceneModel.companies = companies
                     let response: Event.SceneUpdated.Response

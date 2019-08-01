@@ -21,7 +21,7 @@ extension CompaniesList {
         // MARK: - Private properties
         
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
-        private let emptyView: UILabel = SharedViewsBuilder.createEmptyLabel()
+        private let emptyView: EmptyView.View = EmptyView.View()
         private let refreshControl: UIRefreshControl = UIRefreshControl()
         private let addAccountItem: UIBarButtonItem = UIBarButtonItem(
             image: Assets.plusIcon.image,
@@ -72,6 +72,7 @@ extension CompaniesList {
             
             self.setupTableView()
             self.setupAddAccountItem()
+            self.setupEmptyView()
             self.setupRefreshControl()
             self.setupLayout()
             
@@ -146,11 +147,35 @@ extension CompaniesList {
                                 businessLogic.onAddBusinessAction(request: request)
                             })
                         }
-                        
                     })
                 })
                 .disposed(by: self.disposeBag)
             self.navigationItem.rightBarButtonItem = self.addAccountItem
+        }
+        
+        private func setupEmptyView() {
+            self.emptyView.isHidden = true
+            self.emptyView.onRefresh = { [weak self] in
+                let request = Event.RefreshInitiated.Request()
+                self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                    businessLogic.onRefreshInitiated(request: request)
+                })
+            }
+            self.emptyView.onAddButtonClicked = { [weak self] in
+                self?.routing?.onPresentQRCodeReader({ (result) in
+                    switch result {
+                        
+                    case .canceled:
+                        break
+                        
+                    case .success(let accountId, _):
+                        let request = Event.AddBusinessAction.Request(accountId: accountId)
+                        self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                            businessLogic.onAddBusinessAction(request: request)
+                        })
+                    }
+                })
+            }
         }
         
         private func setupLayout() {
@@ -179,7 +204,7 @@ extension CompaniesList.ViewController: CompaniesList.DisplayLogic {
             
         case .empty(let message):
             self.companies = []
-            self.emptyView.text = message
+            self.emptyView.message = message
             self.emptyView.isHidden = false
         }
     }
