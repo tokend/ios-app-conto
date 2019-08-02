@@ -164,13 +164,6 @@ extension Settings {
                 identifier: .accountId
             )
             
-//            let seedCell = Model.CellModel(
-//                title: Localized(.export_seed),
-//                icon: Assets.seed.image,
-//                cellType: .disclosureCell,
-//                identifier: .seed
-//            )
-            
             let feesCell = Model.CellModel(
                 title: Localized(.fees),
                 icon: Assets.fee.image,
@@ -185,8 +178,8 @@ extension Settings {
                 description: ""
             )
             
-            var tfaTopSeparator: Model.CellModel.SeparatorStyle = .line
-            var tfaPosition: Int = 0
+//            var tfaTopSeparator: Model.CellModel.SeparatorStyle = .line
+//            var tfaPosition: Int = 0
             
             let changePassCell = Model.CellModel(
                 title: Localized(.change_password),
@@ -206,9 +199,10 @@ extension Settings {
                     title: Localized(.verification),
                     icon: Assets.verificationIcon.image,
                     cellType: .disclosureCell,
-                    bottomSeparator: .lineWithInset,
+                    bottomSeparator: .line,
                     identifier: .verification
                 )
+                securityCells[0].bottomSeparator = .lineWithInset
                 securityCells.insert(verificationCell, at: 1)
             }
             
@@ -222,12 +216,12 @@ extension Settings {
                     identifier: .biometrics
                 )
                 securityCells.insert(biometricsAuthCell, at: 0)
-                tfaTopSeparator = .none
-                tfaPosition = 1
+//                tfaTopSeparator = .none
+//                tfaPosition = 1
             }
             
-            let tfaCell = self.checkTFAEnabledState(topSeparator: tfaTopSeparator)
-            securityCells.insert(tfaCell, at: tfaPosition)
+//            let tfaCell = self.checkTFAEnabledState(topSeparator: tfaTopSeparator)
+//            securityCells.insert(tfaCell, at: tfaPosition)
             
             let securitySection = Model.SectionModel(
                 title: Localized(.security),

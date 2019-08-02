@@ -6,6 +6,7 @@ public protocol CompaniesListDisplayLogic: class {
     
     func displaySceneUpdated(viewModel: Event.SceneUpdated.ViewModel)
     func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel)
+    func displayAddBusinessAction(viewModel: Event.AddBusinessAction.ViewModel)
 }
 
 extension CompaniesList {
@@ -20,8 +21,14 @@ extension CompaniesList {
         // MARK: - Private properties
         
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
-        private let emptyView: UILabel = SharedViewsBuilder.createEmptyLabel()
+        private let emptyView: EmptyView.View = EmptyView.View()
         private let refreshControl: UIRefreshControl = UIRefreshControl()
+        private let addAccountItem: UIBarButtonItem = UIBarButtonItem(
+            image: Assets.plusIcon.image,
+            style: .plain,
+            target: nil,
+            action: nil
+        )
         
         private var companies: [CompanyCell.ViewModel] = [] {
             didSet {
@@ -64,6 +71,8 @@ extension CompaniesList {
             super.viewDidLoad()
             
             self.setupTableView()
+            self.setupAddAccountItem()
+            self.setupEmptyView()
             self.setupRefreshControl()
             self.setupLayout()
             
@@ -74,6 +83,27 @@ extension CompaniesList {
         }
         
         // MARK: - Private
+        
+        private func showCompaniesSreen(companies: [CompanyCell.ViewModel]) {
+            self.companies = companies
+            self.emptyView.isHidden = true
+        }
+        
+        private func showEmptyScreen(message: String) {
+            self.companies = []
+            self.emptyView.message = message
+            self.emptyView.showAddButton()
+            self.navigationItem.rightBarButtonItem = self.addAccountItem
+            self.emptyView.isHidden = false
+        }
+        
+        private func showErrorScreen(message: String) {
+            self.companies = []
+            self.emptyView.message = message
+            self.emptyView.hideAddButton()
+            self.navigationItem.rightBarButtonItem = nil
+            self.emptyView.isHidden = false
+        }
         
         private func updateContentOffset(offset: CGPoint) {
             if offset.y > 0 {
@@ -120,6 +150,55 @@ extension CompaniesList {
                 .disposed(by: self.disposeBag)
         }
         
+        private func setupAddAccountItem() {
+            self.addAccountItem
+                .rx
+                .tap
+                .asDriver()
+                .drive(onNext: { [weak self] (_) in
+                    self?.routing?.onPresentQRCodeReader({ [weak self] (result) in
+                        switch result {
+                            
+                        case .canceled:
+                            break
+                            
+                        case .success(let accountId, _):
+                            let request = Event.AddBusinessAction.Request(accountId: accountId)
+                            self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                                businessLogic.onAddBusinessAction(request: request)
+                            })
+                        }
+                    })
+                })
+                .disposed(by: self.disposeBag)
+            self.navigationItem.rightBarButtonItem = self.addAccountItem
+        }
+        
+        private func setupEmptyView() {
+            self.emptyView.isHidden = true
+            self.emptyView.onRefresh = { [weak self] in
+                let request = Event.RefreshInitiated.Request()
+                self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                    businessLogic.onRefreshInitiated(request: request)
+                })
+            }
+            self.emptyView.onAddButtonClicked = { [weak self] in
+                self?.routing?.onPresentQRCodeReader({ (result) in
+                    switch result {
+                        
+                    case .canceled:
+                        break
+                        
+                    case .success(let accountId, _):
+                        let request = Event.AddBusinessAction.Request(accountId: accountId)
+                        self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                            businessLogic.onAddBusinessAction(request: request)
+                        })
+                    }
+                })
+            }
+        }
+        
         private func setupLayout() {
             self.view.addSubview(self.tableView)
             self.view.addSubview(self.emptyView)
@@ -145,9 +224,10 @@ extension CompaniesList.ViewController: CompaniesList.DisplayLogic {
             self.emptyView.isHidden = true
             
         case .empty(let message):
-            self.companies = []
-            self.emptyView.text = message
-            self.emptyView.isHidden = false
+            self.showEmptyScreen(message: message)
+            
+        case .error(let message):
+            self.showErrorScreen(message: message)
         }
     }
     
@@ -159,6 +239,34 @@ extension CompaniesList.ViewController: CompaniesList.DisplayLogic {
             
         case .loading:
             self.routing?.showLoading()
+        }
+    }
+    
+    public func displayAddBusinessAction(viewModel: Event.AddBusinessAction.ViewModel) {
+        
+        switch viewModel {
+            
+        case .error(let message):
+            self.routing?.showError(message)
+            
+        case .success(let company):
+            let completion: CompaniesList.AddCompanyCompletion = { (result) in
+                switch result {
+                    
+                case .error:
+                    break
+                    
+                case .success:
+                    let request = Event.RefreshInitiated.Request()
+                    self.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                        businessLogic.onRefreshInitiated(request: request)
+                    })
+                }
+            }
+            self.routing?.onAddCompany(
+                company,
+                completion
+            )
         }
     }
 }

@@ -120,11 +120,17 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     private func setupCompaniesScreen() -> UIViewController {
         let vc = CompaniesList.ViewController()
         
+        let sceneModel = CompaniesList.Model.SceneModel(companies: [])
         let companiesFetcher = CompaniesList.CompaniesFetcher(
             accountsApi: self.flowControllerStack.apiV3.accountsApi,
             apiConfiguration: self.flowControllerStack.apiConfigurationModel,
             userDataProvider: self.userDataProvider
         )
+        let companyRecognizer = CompaniesList.CompanyRecognizer(
+            accountsApi: self.flowControllerStack.apiV3.accountsApi,
+            apiConfigurationModel: self.flowControllerStack.apiConfigurationModel
+        )
+        let accountIdValidator = CompaniesList.AccountIdValidator()
         let routing = CompaniesList.Routing(
             showLoading: { [weak self] in
                 self?.navigationController.showProgress()
@@ -144,10 +150,41 @@ class CompaniesListFlowController: BaseSignedInFlowController {
                     ownerAccountId: accountId,
                     companyName: companyName
                 )
+            },
+               showError: { [weak self] (message) in
+                self?.navigationController.showErrorMessage(
+                    message,
+                    completion: nil
+                )
+            }, showSuccessMessage: { [weak self] (message) in
+                guard let present = self?.navigationController.getPresentViewControllerClosure() else {
+                    return
+                }
+                self?.showSuccessMessage(
+                    title: Localized(.success),
+                    message: message,
+                    completion: nil,
+                    presentViewController: present
+                )
+            }, onPresentQRCodeReader: { [weak self] (completion) in
+                self?.presentQRCodeReader(completion: completion)
+            }, onAddCompany: { [weak self] (company,completion) in
+                let addCompany = AddCompany.Model.Company(
+                    accountId: company.accountId,
+                    name: company.name,
+                    logo: company.imageUrl
+                )
+                self?.showAddCompanyScene(
+                    company: addCompany,
+                    completion: completion
+                )
         })
         CompaniesList.Configurator.configure(
             viewController: vc,
+            sceneModel: sceneModel,
             companiesFetcher: companiesFetcher,
+            companyRecognizer: companyRecognizer,
+            accountIdValidator: accountIdValidator,
             routing: routing
         )
         
@@ -175,6 +212,73 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         })
         self.currentFlowController = flow
         flow.run()
+    }
+    
+    private func showAddCompanyScene(
+        company: AddCompany.Model.Company,
+        completion: @escaping (CompaniesList.AddCompanyCompletion)
+        ) {
+        
+        let vc = self.setupAddCompanyScene(company: company, completion: completion)
+        vc.navigationItem.title = Localized(.add_company)
+        
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func setupAddCompanyScene(
+        company: AddCompany.Model.Company,
+        completion: @escaping (CompaniesList.AddCompanyCompletion)
+        ) -> UIViewController {
+        
+        let vc = AddCompany.ViewController()
+        let sceneModel = AddCompany.Model.SceneModel(company: company)
+        let addCompanyWorker = AddCompany.AddCompanyWorker(
+            accountApiV3: self.flowControllerStack.apiV3.accountsApi,
+            originalAccountId: self.userDataProvider.walletData.accountId
+        )
+        let routing = AddCompany.Routing(
+            onAddActionResult: { [weak self] (result) in
+                switch result {
+                case .error(let error):
+                    completion(.error)
+                    self?.navigationController.showErrorMessage(
+                        error,
+                        completion: {
+                            self?.navigationController.popViewController(true)
+                    })
+                    
+                case .success(let message):
+                    completion(.success)
+                    guard let present = self?.navigationController.getPresentViewControllerClosure() else {
+                        return
+                    }
+                    self?.showSuccessMessage(
+                        title: Localized(.success),
+                        message: message,
+                        completion: {
+                            self?.navigationController.popViewController(true)
+                    },
+                        presentViewController: present
+                    )
+                }
+            },
+            onCancel: { [weak self] in
+                self?.navigationController.popViewController(true)
+            },
+            showLoading: { [weak self] in
+                self?.navigationController.showProgress()
+            },
+            hideLoading: { [weak self] in
+                self?.navigationController.hideProgress()
+        })
+        
+        AddCompany.Configurator.configure(
+            viewController: vc,
+            sceneModel: sceneModel,
+            addCompanyWorker: addCompanyWorker,
+            routing: routing
+        )
+        return vc
     }
     
     // MARK: - Sign out
@@ -211,6 +315,21 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         
         signOutWorker.performSignOut(completion: { [weak self] in
             self?.onSignOut()
+        })
+    }
+    
+    private func presentQRCodeReader(completion: @escaping CompaniesList.QRCodeReaderCompletion) {
+        self.runQRCodeReaderFlow(
+            presentingViewController: self.navigationController.getViewController(),
+            handler: { result in
+                switch result {
+                    
+                case .canceled:
+                    completion(.canceled)
+                    
+                case .success(let value, let metadataType):
+                    completion(.success(value: value, metadataType: metadataType))
+                }
         })
     }
     

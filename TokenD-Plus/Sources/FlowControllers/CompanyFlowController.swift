@@ -126,6 +126,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     private func runBalancesFlow() {
         let balancesFlow = BalancesListFlowController(
             ownerAccountId: self.ownerAccountId,
+            companyName: self.companyName,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
             reposController: self.reposController,
@@ -205,7 +206,7 @@ class CompanyFlowController: BaseSignedInFlowController {
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation,
             onSignOut: { [weak self] in
-                self?.initiateSignOut()
+                self?.onSignOut()
             },
             onLocalAuthRecoverySucceeded: { [weak self] in
                 self?.onLocalAuthRecoverySucceeded()

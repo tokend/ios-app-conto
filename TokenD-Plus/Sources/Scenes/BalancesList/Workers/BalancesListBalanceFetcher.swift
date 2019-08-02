@@ -102,7 +102,7 @@ extension BalancesList {
                     cellIdentifier: .balances
                 )}
                 .sorted(by: { (left, right) -> Bool in
-                    return left.convertedBalance > right.convertedBalance
+                    return left.balance > right.balance
                 })
             
             self.balancesRelay.accept(updatedBalances)

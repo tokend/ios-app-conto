@@ -39,7 +39,7 @@ extension LanguagesList.Interactor: LanguagesList.BusinessLogic {
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
         let english = Model.Language(
             name: "English",
-            code: "en"
+            code: "Base"
         )
         let russian = Model.Language(
             name: "Русский",

@@ -2,14 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>web_client</key>
+	<string>https://staging.conto.me</string>
 	<key>api_endpoint</key>
-	<string>https://baf9cd5c.ngrok.io/_/api/</string>
+	<string>https://api.staging.conto.me</string>
 	<key>storage_endpoint</key>
-	<string>https://baf9cd5c.ngrok.io/_/storage/api</string>
+	<string>https://s3.eu-north-1.amazonaws.com/contostaging-identity-storage-festive-cannon-2</string>
 	<key>contribute_url</key>
 	<string>https://github.com/tokend/ios-app-loyalty</string>
 	<key>terms_address</key>
-	<string>https://demo.tokend.io/terms</string>
+	<string>https://staging.conto.me/terms</string>
 	<key>kyc</key>
 	<string>https://demo.tokend.io/verification</string>
 </dict>

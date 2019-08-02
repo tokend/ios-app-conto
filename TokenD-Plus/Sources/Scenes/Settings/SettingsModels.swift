@@ -49,8 +49,8 @@ extension Settings.Model {
         let title: String
         let icon: UIImage
         let cellType: CellType
-        let topSeparator: SeparatorStyle
-        let bottomSeparator: SeparatorStyle
+        var topSeparator: SeparatorStyle
+        var bottomSeparator: SeparatorStyle
         let identifier: Settings.CellIdentifier
         
         init(

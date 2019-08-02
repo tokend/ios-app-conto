@@ -50,6 +50,16 @@
 		DB4AE2D422EEDC69001D0883 /* AtomicSwapFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2D322EEDC69001D0883 /* AtomicSwapFlowController.swift */; };
 		DB4AE2D622EEE795001D0883 /* AtomicSwapPriceItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2D522EEE795001D0883 /* AtomicSwapPriceItemCell.swift */; };
 		DB4AE2E922EF5DF1001D0883 /* SideMenuController+RootContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2E822EF5DF0001D0883 /* SideMenuController+RootContent.swift */; };
+		DB4AE2F022F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2EF22F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift */; };
+		DB4AE2F222F2066E001D0883 /* CompaniesListAccountIdValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2F122F2066E001D0883 /* CompaniesListAccountIdValidator.swift */; };
+		DB4AE2FA22F2DF38001D0883 /* AddCompanyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2F422F2DF38001D0883 /* AddCompanyPresenter.swift */; };
+		DB4AE2FB22F2DF38001D0883 /* AddCompanyRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2F522F2DF38001D0883 /* AddCompanyRouting.swift */; };
+		DB4AE2FC22F2DF38001D0883 /* AddCompanyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2F622F2DF38001D0883 /* AddCompanyModels.swift */; };
+		DB4AE2FD22F2DF38001D0883 /* AddCompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2F722F2DF38001D0883 /* AddCompanyViewController.swift */; };
+		DB4AE2FE22F2DF38001D0883 /* AddCompanyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2F822F2DF38001D0883 /* AddCompanyInteractor.swift */; };
+		DB4AE2FF22F2DF38001D0883 /* AddCompanyConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2F922F2DF38001D0883 /* AddCompanyConfigurator.swift */; };
+		DB4AE30422F2DFA7001D0883 /* AddCompanyAddCompanyWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE30322F2DFA7001D0883 /* AddCompanyAddCompanyWorker.swift */; };
+		DB4AE30622F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE30522F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift */; };
 		DB4AE2EB22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2EA22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift */; };
 		DB4AE2EE22F1A308001D0883 /* AtomicSwapAsksRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2ED22F1A308001D0883 /* AtomicSwapAsksRepo.swift */; };
 		DB72098B22C1347200ED116A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB72098A22C1347200ED116A /* Assets.xcassets */; };
@@ -711,6 +721,16 @@
 		DB4AE2D322EEDC69001D0883 /* AtomicSwapFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapFlowController.swift; sourceTree = "<group>"; };
 		DB4AE2D522EEE795001D0883 /* AtomicSwapPriceItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapPriceItemCell.swift; sourceTree = "<group>"; };
 		DB4AE2E822EF5DF0001D0883 /* SideMenuController+RootContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SideMenuController+RootContent.swift"; sourceTree = "<group>"; };
+		DB4AE2EF22F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListAddCompanyWorker.swift; sourceTree = "<group>"; };
+		DB4AE2F122F2066E001D0883 /* CompaniesListAccountIdValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListAccountIdValidator.swift; sourceTree = "<group>"; };
+		DB4AE2F422F2DF38001D0883 /* AddCompanyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompanyPresenter.swift; sourceTree = "<group>"; };
+		DB4AE2F522F2DF38001D0883 /* AddCompanyRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompanyRouting.swift; sourceTree = "<group>"; };
+		DB4AE2F622F2DF38001D0883 /* AddCompanyModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompanyModels.swift; sourceTree = "<group>"; };
+		DB4AE2F722F2DF38001D0883 /* AddCompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompanyViewController.swift; sourceTree = "<group>"; };
+		DB4AE2F822F2DF38001D0883 /* AddCompanyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompanyInteractor.swift; sourceTree = "<group>"; };
+		DB4AE2F922F2DF38001D0883 /* AddCompanyConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompanyConfigurator.swift; sourceTree = "<group>"; };
+		DB4AE30322F2DFA7001D0883 /* AddCompanyAddCompanyWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompanyAddCompanyWorker.swift; sourceTree = "<group>"; };
+		DB4AE30522F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListCompanyRecognizer.swift; sourceTree = "<group>"; };
 		DB4AE2EA22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapAsksFetcher.swift; sourceTree = "<group>"; };
 		DB4AE2ED22F1A308001D0883 /* AtomicSwapAsksRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapAsksRepo.swift; sourceTree = "<group>"; };
 		DB72098022C1347100ED116A /* TokenD-Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TokenD-Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1442,6 +1462,28 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DB4AE2F322F2DF16001D0883 /* AddCompany */ = {
+			isa = PBXGroup;
+			children = (
+				DB4AE2F922F2DF38001D0883 /* AddCompanyConfigurator.swift */,
+				DB4AE2F822F2DF38001D0883 /* AddCompanyInteractor.swift */,
+				DB4AE2F622F2DF38001D0883 /* AddCompanyModels.swift */,
+				DB4AE2F422F2DF38001D0883 /* AddCompanyPresenter.swift */,
+				DB4AE2F522F2DF38001D0883 /* AddCompanyRouting.swift */,
+				DB4AE2F722F2DF38001D0883 /* AddCompanyViewController.swift */,
+				DB4AE30022F2DF59001D0883 /* Workers */,
+			);
+			path = AddCompany;
+			sourceTree = "<group>";
+		};
+		DB4AE30022F2DF59001D0883 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DB4AE30322F2DFA7001D0883 /* AddCompanyAddCompanyWorker.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		DB4AE2BE22EB3B6A001D0883 /* AtomicSwap */ = {
 			isa = PBXGroup;
 			children = (
@@ -1540,6 +1582,7 @@
 		DB72099722C1396B00ED116A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DB4AE2F322F2DF16001D0883 /* AddCompany */,
 				DB720B4822C1396B00ED116A /* AssetPicker */,
 				DB4AE2BE22EB3B6A001D0883 /* AtomicSwap */,
 				DB720A2322C1396B00ED116A /* AuthenticatorAuth */,
@@ -3361,7 +3404,10 @@
 		DB720F3022C2289300ED116A /* Workers */ = {
 			isa = PBXGroup;
 			children = (
+				DB4AE2F122F2066E001D0883 /* CompaniesListAccountIdValidator.swift */,
+				DB4AE2EF22F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift */,
 				DB720F3522C22A5300ED116A /* CompaniesListCompaniesFethcer.swift */,
+				DB4AE30522F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -3558,6 +3604,7 @@
 				DB720EEE22C1396C00ED116A /* TransactionsHistoryRepo.swift in Sources */,
 				DB720CFC22C1396B00ED116A /* SalesSectionsProvider.swift in Sources */,
 				DB720E1322C1396C00ED116A /* RegisterSceneInteractor.swift in Sources */,
+				DB4AE2FB22F2DF38001D0883 /* AddCompanyRouting.swift in Sources */,
 				DB720EEB22C1396C00ED116A /* BalancesRepo.swift in Sources */,
 				DB720E1D22C1396C00ED116A /* RegisterSceneFieldView.swift in Sources */,
 				DB720D1A22C1396B00ED116A /* AuthenticatorAuthRouting.swift in Sources */,
@@ -3577,6 +3624,7 @@
 				DB720D0122C1396B00ED116A /* FeesPresenter.swift in Sources */,
 				DB720DAD22C1396B00ED116A /* SendPaymentAmountPresenter.swift in Sources */,
 				DB720D9522C1396B00ED116A /* TabBarRouting.swift in Sources */,
+				DB4AE2FF22F2DF38001D0883 /* AddCompanyConfigurator.swift in Sources */,
 				DB720D4D22C1396B00ED116A /* ChartEmptyView.swift in Sources */,
 				DB720CC422C1396B00ED116A /* BalancePickerModels.swift in Sources */,
 				DBCA02E722D885B500503025 /* SettingsBaseCell.swift in Sources */,
@@ -3599,9 +3647,11 @@
 				DB720F0022C1396C00ED116A /* WalletDataSerializable.swift in Sources */,
 				DB720D4522C1396B00ED116A /* ChartConfigurator.swift in Sources */,
 				DB720CFE22C1396B00ED116A /* SaleEmptyView.swift in Sources */,
+				DB4AE2F222F2066E001D0883 /* CompaniesListAccountIdValidator.swift in Sources */,
 				DB720F0722C1396C00ED116A /* AppController+OpenUrlSubscriber.swift in Sources */,
 				DB720E8F22C1396C00ED116A /* SnapKit+Extension.swift in Sources */,
 				DB720E1822C1396C00ED116A /* RegisterSceneRegisterWorker.swift in Sources */,
+				DB4AE2FC22F2DF38001D0883 /* AddCompanyModels.swift in Sources */,
 				DB720DFB22C1396C00ED116A /* DashboardPresenter.swift in Sources */,
 				DB720D6222C1396B00ED116A /* TradeOffersAmountFormatterProtocol.swift in Sources */,
 				DB720ECE22C1396C00ED116A /* OrderBookTableViewCellModel.swift in Sources */,
@@ -3641,6 +3691,7 @@
 				DB720E5022C1396C00ED116A /* DepositSceneDateFormatter.swift in Sources */,
 				DB720DBC22C1396B00ED116A /* ConfirmationSceneConfigurator.swift in Sources */,
 				DB720F0822C1396C00ED116A /* AppController.swift in Sources */,
+				DB4AE30422F2DFA7001D0883 /* AddCompanyAddCompanyWorker.swift in Sources */,
 				DB720CC522C1396B00ED116A /* BalancePickerViewController.swift in Sources */,
 				DB720CAC22C1396B00ED116A /* SettingsRouting.swift in Sources */,
 				DB720D6A22C1396B00ED116A /* TradeOffersTitleView.swift in Sources */,
@@ -3682,6 +3733,7 @@
 				DB720DD722C1396C00ED116A /* WalletRecoveryRouting.swift in Sources */,
 				DB720E0B22C1396C00ED116A /* AssetPickerPresenter.swift in Sources */,
 				DB720E1922C1396C00ED116A /* RegisterSceneWorkersProtocols.swift in Sources */,
+				DB4AE2F022F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift in Sources */,
 				DB720D5822C1396B00ED116A /* SendPaymentDestinationViewController.swift in Sources */,
 				DB4AE2D422EEDC69001D0883 /* AtomicSwapFlowController.swift in Sources */,
 				DB720E8A22C1396C00ED116A /* Array+IndexOf.swift in Sources */,
@@ -3755,6 +3807,7 @@
 				DB720D2F22C1396B00ED116A /* MarkdownViewerRouting.swift in Sources */,
 				DB720D5C22C1396B00ED116A /* TradeOffersModels.swift in Sources */,
 				DB720E5722C1396C00ED116A /* TransactionsListRouting.swift in Sources */,
+				DB4AE2FA22F2DF38001D0883 /* AddCompanyPresenter.swift in Sources */,
 				DB720EB322C1396C00ED116A /* BalancesFetcher.swift in Sources */,
 				DB720E1C22C1396C00ED116A /* RegisterSceneAggreeOnTermsView.swift in Sources */,
 				DB720DE522C1396C00ED116A /* TradesListAssetColoringProvider.swift in Sources */,
@@ -3763,6 +3816,7 @@
 				DB720F5B22C4CD1C00ED116A /* PollsPresenter.swift in Sources */,
 				DB720F2A22C2286C00ED116A /* CompaniesListPresenter.swift in Sources */,
 				DBCA02D822D5EB8900503025 /* AcceptRedeemModel.swift in Sources */,
+				DB4AE30622F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift in Sources */,
 				DB720D6E22C1396B00ED116A /* BalanceHeaderWithPickerRouting.swift in Sources */,
 				DB720E2E22C1396C00ED116A /* ExportSeedManager.swift in Sources */,
 				DB720E4422C1396C00ED116A /* BalancesListHeaderCell.swift in Sources */,
@@ -3812,6 +3866,7 @@
 				DB720EFD22C1396C00ED116A /* KeychainAccountsModel.swift in Sources */,
 				DB720D6F22C1396B00ED116A /* BalanceHeaderWithPickerPresenter.swift in Sources */,
 				DB720E6222C1396C00ED116A /* TransactionsListAmountFormatter.swift in Sources */,
+				DB4AE2FE22F2DF38001D0883 /* AddCompanyInteractor.swift in Sources */,
 				DB720EAF22C1396C00ED116A /* AmountConverter.swift in Sources */,
 				DB4AE2D222EB6403001D0883 /* AtomicSwapAmountFormatter.swift in Sources */,
 				DB720DCB22C1396C00ED116A /* ConfirmationTitleBoolSwitchView.swift in Sources */,
@@ -4087,6 +4142,7 @@
 				DB720EEC22C1396C00ED116A /* NetworkInfoRepo.swift in Sources */,
 				DB720F0922C1396C00ED116A /* ReposController.swift in Sources */,
 				DB72281622CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift in Sources */,
+				DB4AE2FD22F2DF38001D0883 /* AddCompanyViewController.swift in Sources */,
 				DB720E4722C1396C00ED116A /* BalancesListRouting.swift in Sources */,
 				DB720E8D22C1396C00ED116A /* UIColor+Interpolation.swift in Sources */,
 				DB720EDD22C1396C00ED116A /* BXFGroupedHeaderFooterLabel.swift in Sources */,
