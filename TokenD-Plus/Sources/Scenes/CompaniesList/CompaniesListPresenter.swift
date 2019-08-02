@@ -60,7 +60,7 @@ extension CompaniesList.Presenter: CompaniesList.PresentationLogic {
             viewModel = .companies(companiesViewModels)
             
         case .error(let error):
-            viewModel = .empty(error.localizedDescription)
+            viewModel = .error(error.localizedDescription)
             
         case .empty:
             viewModel = .empty(Localized(.there_is_not_any_company_where_you_are_a_client_yet))

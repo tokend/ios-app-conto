@@ -72,6 +72,7 @@ extension CompaniesList.Event {
         public enum ViewModel {
             case companies([CompaniesList.CompanyCell.ViewModel])
             case empty(String)
+            case error(String)
         }
     }
     

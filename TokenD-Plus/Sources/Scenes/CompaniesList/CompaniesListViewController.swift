@@ -84,6 +84,27 @@ extension CompaniesList {
         
         // MARK: - Private
         
+        private func showCompaniesSreen(companies: [CompanyCell.ViewModel]) {
+            self.companies = companies
+            self.emptyView.isHidden = true
+        }
+        
+        private func showEmptyScreen(message: String) {
+            self.companies = []
+            self.emptyView.message = message
+            self.emptyView.showAddButton()
+            self.navigationItem.rightBarButtonItem = self.addAccountItem
+            self.emptyView.isHidden = false
+        }
+        
+        private func showErrorScreen(message: String) {
+            self.companies = []
+            self.emptyView.message = message
+            self.emptyView.hideAddButton()
+            self.navigationItem.rightBarButtonItem = nil
+            self.emptyView.isHidden = false
+        }
+        
         private func updateContentOffset(offset: CGPoint) {
             if offset.y > 0 {
                 self.routing?.showShadow()
@@ -203,9 +224,10 @@ extension CompaniesList.ViewController: CompaniesList.DisplayLogic {
             self.emptyView.isHidden = true
             
         case .empty(let message):
-            self.companies = []
-            self.emptyView.message = message
-            self.emptyView.isHidden = false
+            self.showEmptyScreen(message: message)
+            
+        case .error(let message):
+            self.showErrorScreen(message: message)
         }
     }
     

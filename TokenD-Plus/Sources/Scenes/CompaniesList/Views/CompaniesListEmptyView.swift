@@ -52,6 +52,16 @@ extension CompaniesList {
                 fatalError("init(coder:) has not been implemented")
             }
             
+            // MARK: - Public
+            
+            func showAddButton() {
+                self.addCompanyButton.isHidden = false
+            }
+            
+            func hideAddButton() {
+                self.addCompanyButton.isHidden = true
+            }
+            
             // MARK: - Private
             
             private func commonInit() {
