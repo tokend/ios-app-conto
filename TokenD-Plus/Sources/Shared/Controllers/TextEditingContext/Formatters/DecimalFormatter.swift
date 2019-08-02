@@ -41,10 +41,14 @@ class DecimalFormatter: ValueFormatter<Decimal> {
     }
     
     override func valueFromString(_ string: String?) -> Decimal? {
-        guard let string = string else {
+        guard var string = string else {
             return nil
         }
         
+        string = string.replacingOccurrences(
+            of: ",",
+            with: self.decimalSeparator
+        )
         let invalidCharsRange = string.rangeOfCharacter(from: self.invalidCharSet)
         if invalidCharsRange != nil {
             return nil

@@ -388,6 +388,7 @@
 "percent_funded_replace_percent" = "percent";
 "permission_denied" = "В доступе отказано";
 "permissions_denied" = "В доступе отказано";
+"permission_for_contacts_denied" = "Доступ к контактам ограничен. Вы можете предоставить его в Системных настройках.";
 "personal_details" = "Личные детали";
 "photo_verification" = "Верификация фото";
 "physical_price" = "Физическая цена";

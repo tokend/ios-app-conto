@@ -388,6 +388,7 @@
 "percent_funded_replace_percent" = "percent";
 "permission_denied" = "У доступі відмовленно";
 "permissions_denied" = "У доступі відмовленно";
+"permission_for_contacts_denied" = "Доступ до контактів обмежено. Ви можете надати його у Системних налаштуваннях.";
 "personal_details" = "Особисті делталі";
 "photo_verification" = "Верифікація фото";
 "physical_price" = "Фізична ціна";

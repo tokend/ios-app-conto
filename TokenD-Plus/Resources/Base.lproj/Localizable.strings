@@ -388,6 +388,7 @@
 "percent_funded_replace_percent" = "percent";
 "permission_denied" = "Permission denied";
 "permissions_denied" = "Permissions Denied";
+"permission_for_contacts_denied" = "Permission for contacts access is denied. You can grant it in System Settings.";
 "personal_details" = "Personal details";
 "photo_verification" = "Photo verification";
 "physical_price" = "Physical price";

@@ -345,3 +345,16 @@ extension SendPaymentDestination.Event.WithdrawAction {
         }
     }
 }
+
+extension SendPaymentDestination.ContactsFetcherResult.FetchError: LocalizedError {
+    
+    public var errorDescription: String? {
+        switch  self {
+        case .other(let error):
+            return error.localizedDescription
+            
+        case .permissionIsNotGranted:
+            return Localized(.permission_for_contacts_denied)
+        }
+    }
+}
