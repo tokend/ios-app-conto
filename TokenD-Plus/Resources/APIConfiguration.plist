@@ -5,7 +5,7 @@
 	<key>web_client</key>
 	<string>https://staging.conto.me</string>
 	<key>api_endpoint</key>
-	<string>https://api.staging.conto.me/</string>
+	<string>https://api.staging.conto.me</string>
 	<key>storage_endpoint</key>
 	<string>https://s3.eu-north-1.amazonaws.com/contostaging-identity-storage-festive-cannon-2</string>
 	<key>contribute_url</key>
