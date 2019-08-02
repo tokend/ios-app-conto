@@ -384,6 +384,7 @@ enum LocKey: String {
     case percent_funded_replace_percent
     case permission_denied
     case permissions_denied
+    case permission_for_contacts_denied
     case personal_details
     case photo_verification
     case physical_price
