@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A456E9D8F6860BA2357882C2 /* libPods-TokenD-Plus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */; };
+		DB0461C222F45B4D0050D2BB /* SendPaymentAmountAtomicSwapBalanceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461C122F45B4D0050D2BB /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */; };
 		DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */; };
 		DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */; };
 		DB28C4A722CFAF58005362FD /* ReceiveAddressRedeemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */; };
@@ -50,6 +51,8 @@
 		DB4AE2D422EEDC69001D0883 /* AtomicSwapFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2D322EEDC69001D0883 /* AtomicSwapFlowController.swift */; };
 		DB4AE2D622EEE795001D0883 /* AtomicSwapPriceItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2D522EEE795001D0883 /* AtomicSwapPriceItemCell.swift */; };
 		DB4AE2E922EF5DF1001D0883 /* SideMenuController+RootContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2E822EF5DF0001D0883 /* SideMenuController+RootContent.swift */; };
+		DB4AE2EB22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2EA22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift */; };
+		DB4AE2EE22F1A308001D0883 /* AtomicSwapAsksRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2ED22F1A308001D0883 /* AtomicSwapAsksRepo.swift */; };
 		DB4AE2F022F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2EF22F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift */; };
 		DB4AE2F222F2066E001D0883 /* CompaniesListAccountIdValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2F122F2066E001D0883 /* CompaniesListAccountIdValidator.swift */; };
 		DB4AE2FA22F2DF38001D0883 /* AddCompanyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2F422F2DF38001D0883 /* AddCompanyPresenter.swift */; };
@@ -60,8 +63,6 @@
 		DB4AE2FF22F2DF38001D0883 /* AddCompanyConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2F922F2DF38001D0883 /* AddCompanyConfigurator.swift */; };
 		DB4AE30422F2DFA7001D0883 /* AddCompanyAddCompanyWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE30322F2DFA7001D0883 /* AddCompanyAddCompanyWorker.swift */; };
 		DB4AE30622F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE30522F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift */; };
-		DB4AE2EB22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2EA22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift */; };
-		DB4AE2EE22F1A308001D0883 /* AtomicSwapAsksRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2ED22F1A308001D0883 /* AtomicSwapAsksRepo.swift */; };
 		DB72098B22C1347200ED116A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB72098A22C1347200ED116A /* Assets.xcassets */; };
 		DB720CAA22C1396B00ED116A /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099922C1396B00ED116A /* SettingsModels.swift */; };
 		DB720CAB22C1396B00ED116A /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099A22C1396B00ED116A /* SettingsInteractor.swift */; };
@@ -678,6 +679,7 @@
 		0E666969207E5FC77A1609F5 /* Pods-TokenD-Plus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.debug.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.debug.xcconfig"; sourceTree = "<group>"; };
 		51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TokenD-Plus.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AD850E3986FEE4CD13E7C4 /* Pods-TokenD-Plus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.release.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.release.xcconfig"; sourceTree = "<group>"; };
+		DB0461C122F45B4D0050D2BB /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountAtomicSwapBalanceFetcher.swift; sourceTree = "<group>"; };
 		DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListChangeLanguageWorker.swift; sourceTree = "<group>"; };
 		DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWorker.swift; sourceTree = "<group>"; };
 		DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressRedeemManager.swift; sourceTree = "<group>"; };
@@ -721,6 +723,8 @@
 		DB4AE2D322EEDC69001D0883 /* AtomicSwapFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapFlowController.swift; sourceTree = "<group>"; };
 		DB4AE2D522EEE795001D0883 /* AtomicSwapPriceItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapPriceItemCell.swift; sourceTree = "<group>"; };
 		DB4AE2E822EF5DF0001D0883 /* SideMenuController+RootContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SideMenuController+RootContent.swift"; sourceTree = "<group>"; };
+		DB4AE2EA22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapAsksFetcher.swift; sourceTree = "<group>"; };
+		DB4AE2ED22F1A308001D0883 /* AtomicSwapAsksRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapAsksRepo.swift; sourceTree = "<group>"; };
 		DB4AE2EF22F1FD55001D0883 /* CompaniesListAddCompanyWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListAddCompanyWorker.swift; sourceTree = "<group>"; };
 		DB4AE2F122F2066E001D0883 /* CompaniesListAccountIdValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListAccountIdValidator.swift; sourceTree = "<group>"; };
 		DB4AE2F422F2DF38001D0883 /* AddCompanyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompanyPresenter.swift; sourceTree = "<group>"; };
@@ -731,8 +735,6 @@
 		DB4AE2F922F2DF38001D0883 /* AddCompanyConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompanyConfigurator.swift; sourceTree = "<group>"; };
 		DB4AE30322F2DFA7001D0883 /* AddCompanyAddCompanyWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompanyAddCompanyWorker.swift; sourceTree = "<group>"; };
 		DB4AE30522F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListCompanyRecognizer.swift; sourceTree = "<group>"; };
-		DB4AE2EA22F19F7E001D0883 /* AtomicSwapAsksFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapAsksFetcher.swift; sourceTree = "<group>"; };
-		DB4AE2ED22F1A308001D0883 /* AtomicSwapAsksRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapAsksRepo.swift; sourceTree = "<group>"; };
 		DB72098022C1347100ED116A /* TokenD-Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TokenD-Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB72098A22C1347200ED116A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB72098F22C1347200ED116A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1376,6 +1378,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		DB0461C022F45B0B0050D2BB /* BalancesFethcers */ = {
+			isa = PBXGroup;
+			children = (
+				DB720ADC22C1396B00ED116A /* SendPaymentAmountsBalanceDetailsLoader.swift */,
+				DB0461C122F45B4D0050D2BB /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */,
+			);
+			path = BalancesFethcers;
+			sourceTree = "<group>";
+		};
 		DB0AFD2C22E0A31400FB39FF /* Workers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1462,28 +1473,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		DB4AE2F322F2DF16001D0883 /* AddCompany */ = {
-			isa = PBXGroup;
-			children = (
-				DB4AE2F922F2DF38001D0883 /* AddCompanyConfigurator.swift */,
-				DB4AE2F822F2DF38001D0883 /* AddCompanyInteractor.swift */,
-				DB4AE2F622F2DF38001D0883 /* AddCompanyModels.swift */,
-				DB4AE2F422F2DF38001D0883 /* AddCompanyPresenter.swift */,
-				DB4AE2F522F2DF38001D0883 /* AddCompanyRouting.swift */,
-				DB4AE2F722F2DF38001D0883 /* AddCompanyViewController.swift */,
-				DB4AE30022F2DF59001D0883 /* Workers */,
-			);
-			path = AddCompany;
-			sourceTree = "<group>";
-		};
-		DB4AE30022F2DF59001D0883 /* Workers */ = {
-			isa = PBXGroup;
-			children = (
-				DB4AE30322F2DFA7001D0883 /* AddCompanyAddCompanyWorker.swift */,
-			);
-			path = Workers;
-			sourceTree = "<group>";
-		};
 		DB4AE2BE22EB3B6A001D0883 /* AtomicSwap */ = {
 			isa = PBXGroup;
 			children = (
@@ -1524,6 +1513,28 @@
 				DB4AE2ED22F1A308001D0883 /* AtomicSwapAsksRepo.swift */,
 			);
 			path = AtomicSwapAsksRepo;
+			sourceTree = "<group>";
+		};
+		DB4AE2F322F2DF16001D0883 /* AddCompany */ = {
+			isa = PBXGroup;
+			children = (
+				DB4AE2F922F2DF38001D0883 /* AddCompanyConfigurator.swift */,
+				DB4AE2F822F2DF38001D0883 /* AddCompanyInteractor.swift */,
+				DB4AE2F622F2DF38001D0883 /* AddCompanyModels.swift */,
+				DB4AE2F422F2DF38001D0883 /* AddCompanyPresenter.swift */,
+				DB4AE2F522F2DF38001D0883 /* AddCompanyRouting.swift */,
+				DB4AE2F722F2DF38001D0883 /* AddCompanyViewController.swift */,
+				DB4AE30022F2DF59001D0883 /* Workers */,
+			);
+			path = AddCompany;
+			sourceTree = "<group>";
+		};
+		DB4AE30022F2DF59001D0883 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DB4AE30322F2DFA7001D0883 /* AddCompanyAddCompanyWorker.swift */,
+			);
+			path = Workers;
 			sourceTree = "<group>";
 		};
 		DB72097722C1347100ED116A = {
@@ -2265,11 +2276,11 @@
 		DB720ADA22C1396B00ED116A /* Workers */ = {
 			isa = PBXGroup;
 			children = (
-				DB720ADB22C1396B00ED116A /* SendPaymentAmountFeeLoader.swift */,
-				DB720ADC22C1396B00ED116A /* SendPaymentAmountsBalanceDetailsLoader.swift */,
 				DB720ADD22C1396B00ED116A /* SendPaymentAmountAmountFormatter.swift */,
-				DB720ADE22C1396B00ED116A /* SendPaymentAmountFeeOverviewer.swift */,
 				DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */,
+				DB720ADB22C1396B00ED116A /* SendPaymentAmountFeeLoader.swift */,
+				DB720ADE22C1396B00ED116A /* SendPaymentAmountFeeOverviewer.swift */,
+				DB0461C022F45B0B0050D2BB /* BalancesFethcers */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -4031,6 +4042,7 @@
 				DB720E8622C1396C00ED116A /* AppDelegate.swift in Sources */,
 				DB720D9B22C1396B00ED116A /* TabBarConfigurator.swift in Sources */,
 				DB720F3622C22A5300ED116A /* CompaniesListCompaniesFethcer.swift in Sources */,
+				DB0461C222F45B4D0050D2BB /* SendPaymentAmountAtomicSwapBalanceFetcher.swift in Sources */,
 				DB720E1722C1396C00ED116A /* RegisterSceneConfigurator.swift in Sources */,
 				DB720E7C22C1396C00ED116A /* BiometricsAuthConfigurator.swift in Sources */,
 				DB720DFD22C1396C00ED116A /* DashboardConfigurator.swift in Sources */,

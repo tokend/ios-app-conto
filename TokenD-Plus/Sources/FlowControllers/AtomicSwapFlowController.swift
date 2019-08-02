@@ -77,7 +77,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
                 self?.navigationController.hideShadow()
             },
             onBuyAction: { [weak self] (ask) in
-                
+                self?.showAtomicSwapBuyScene(ask: ask)
         })
         
         AtomicSwap.Configurator.configure(
@@ -85,6 +85,82 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             asksFetcher: asksFetcher,
             sceneModel: sceneModel,
             amountFormatter: amountFormatter,
+            routing: routing
+        )
+        
+        return vc
+    }
+    
+    private func showAtomicSwapBuyScene(ask: AtomicSwap.Model.Ask) {
+        let vc = self.setupAtomicSwapBuyScreen(ask: ask)
+        
+        vc.navigationItem.title = Localized(
+            .buy_asset,
+            replace: [
+                .buy_asset_replace_asset: ask.available.asset
+            ]
+        )
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func setupAtomicSwapBuyScreen(ask: AtomicSwap.Model.Ask) -> SendPaymentAmount.ViewController {
+        let vc = SendPaymentAmount.ViewController()
+        
+        let buyPreposition = SendPaymentAmount.Model.BalanceDetails(
+            asset: ask.available.asset,
+            balance: ask.available.value,
+            balanceId: ""
+        )
+        let balanceDetailsLoader = SendPaymentAmount.AtomicSwapBalanceFetcherWorker(
+            buyPreposition: buyPreposition
+        )
+        
+        let amountFormatter = SendPaymentAmount.AmountFormatter()
+        
+        let feeLoader = FeeLoader(
+            generalApi: self.flowControllerStack.api.generalApi
+        )
+        let feeLoaderWorker = SendPaymentAmount.FeeLoaderWorker(
+            feeLoader: feeLoader
+        )
+        let feeOverviewer = SendPaymentAmount.FeeOverviewer(
+            generalApi: self.flowControllerStack.api.generalApi,
+            accountId: self.userDataProvider.walletData.accountId
+        )
+        
+        let sceneModel = SendPaymentAmount.Model.SceneModel(
+            feeType: .payment,
+            operation: .handleAtomicSwap(ask)
+        )
+        
+        let viewConfig = SendPaymentAmount.Model.ViewConfig.atomicSwapViewConfig()
+        
+        let routing = SendPaymentAmount.Routing(
+            onShowProgress: { [weak self] in
+                self?.navigationController.showProgress()
+            },
+            onHideProgress: { [weak self] in
+                self?.navigationController.hideProgress()
+            },
+            onShowError: { [weak self] (errorMessage) in
+                self?.navigationController.showErrorMessage(errorMessage, completion: nil)
+            },
+            onPresentPicker: { (_, _) in },
+            onSendAction: { _ in },
+            onShowWithdrawDestination: nil,
+            onShowRedeem: nil,
+            showFeesOverview: { _, _ in })
+        
+        SendPaymentAmount.Configurator.configure(
+            viewController: vc,
+            senderAccountId: self.userDataProvider.walletData.accountId,
+            selectedBalanceId: nil,
+            sceneModel: sceneModel,
+            balanceDetailsLoader: balanceDetailsLoader,
+            amountFormatter: amountFormatter,
+            feeLoader: feeLoaderWorker,
+            feeOverviewer: feeOverviewer,
+            viewConfig: viewConfig,
             routing: routing
         )
         

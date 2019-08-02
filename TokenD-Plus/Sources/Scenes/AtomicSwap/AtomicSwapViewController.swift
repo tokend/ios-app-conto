@@ -6,6 +6,7 @@ public protocol AtomicSwapDisplayLogic: class {
     
     func displaySceneDidUpdate(viewModel: Event.SceneDidUpdate.ViewModel)
     func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel)
+    func displayBuyAction(viewModel: Event.BuyAction.ViewModel)
 }
 
 extension AtomicSwap {
@@ -152,6 +153,10 @@ extension AtomicSwap.ViewController: AtomicSwap.DisplayLogic {
             self.routing?.showLoading()
         }
     }
+    
+    public func displayBuyAction(viewModel: Event.BuyAction.ViewModel) {
+        self.routing?.onBuyAction(viewModel.ask)
+    }
 }
 
 extension AtomicSwap.ViewController: UITableViewDelegate {
@@ -182,9 +187,15 @@ extension AtomicSwap.ViewController: UITableViewDataSource {
         let model = self.cells[indexPath.section]
         let cell = self.tableView.dequeueReusableCell(with: model, for: indexPath)
         
-        if let askCell = cell as? AtomicSwap.AskCell.View {
+        if
+            let askModel = model as? AtomicSwap.AskCell.ViewModel,
+            let askCell = cell as? AtomicSwap.AskCell.View {
+            
             askCell.onAction = {
-                
+                let request = Event.BuyAction.Request(id: askModel.id)
+                self.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                    businessLogic.onBuyAction(request: request)
+                })
             }
         }
         return cell

@@ -7,6 +7,7 @@ public protocol AtomicSwapBusinessLogic {
     
     func onViewDidLoad(request: Event.ViewDidLoad.Request)
     func onRefreshInitiated(request: Event.RefreshInitiated.Request)
+    func onBuyAction(request: Event.BuyAction.Request)
 }
 
 extension AtomicSwap {
@@ -95,6 +96,17 @@ extension AtomicSwap.Interactor: AtomicSwap.BusinessLogic {
     }
     
     public func onRefreshInitiated(request: Event.RefreshInitiated.Request) {
+        self.asksFetcher
+    }
+    
+    public func onBuyAction(request: Event.BuyAction.Request) {
+        guard let ask = self.sceneModel.asks.first(where: { (sceneAsk) -> Bool in
+            return sceneAsk.id == request.id
+        }) else {
+            return
+        }
         
+        let response = Event.BuyAction.Response(ask: ask)
+        self.presenter.presentBuyAction(response: response)
     }
 }

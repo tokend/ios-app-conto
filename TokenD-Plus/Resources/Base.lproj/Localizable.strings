@@ -15,6 +15,7 @@
 "aml_alert_request" = "AML alert request";
 "amount" = "Amount";
 "amount_colon" = "Amount:";
+"amount_is_too_big" = "Amount is too big";
 "amount_newline" = "Amount\n$(base)";
 "amount_newline_replace_base" = "base";
 "amount_sent" = "Amount sent";
@@ -44,7 +45,7 @@
 "available_assets_for_this_operations" = "Available assets for this operations were not found";
 "available_date" = "Available: $(formatted)";
 "available_date_replace_formatted" = "formatted";
-"available_for_buy" = "Available_for_buy";
+"available_for_buy" = "Available for buy:";
 "back" = "Back";
 "back_to_companies" = "Back to companies";
 "balance_colon" = "Balance:";

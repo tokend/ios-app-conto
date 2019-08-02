@@ -255,6 +255,28 @@ extension SendPaymentAmount {
             })
         }
         
+        private func handleAtomicSwapBuy(ask: Model.Ask) {
+            guard let balance = self.sceneModel.selectedBalance else {
+                return
+            }
+            
+            guard self.sceneModel.amount > 0 else {
+                self.presenter.presentAtomicSwapBuyAction(response: .failed(.emptyAmount))
+                return
+            }
+            
+            let amount = self.sceneModel.amount
+            guard balance.balance >= amount else {
+                self.presenter.presentAtomicSwapBuyAction(response: .failed(.bidMoreThanAsk))
+                return
+            }
+            
+            let askModel = Model.AskModel(ask: ask, amount: amount)
+            self.presenter.presentAtomicSwapBuyAction(
+                response: .succeeded(askModel)
+            )
+        }
+        
         enum LoadFeesResult {
             case succeeded(senderFee: Model.FeeModel, recipientFee: Model.FeeModel)
             case failed(SendPaymentAmountFeeLoaderResult.FeeLoaderError)
@@ -429,6 +451,9 @@ extension SendPaymentAmount.Interactor: SendPaymentAmount.BusinessLogic {
             
         case .handleWithdraw:
             self.handleWithdrawSendAction()
+            
+        case .handleAtomicSwap(let ask):
+            self.handleAtomicSwapBuy(ask: ask)
         }
     }
     

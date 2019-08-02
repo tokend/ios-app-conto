@@ -77,6 +77,16 @@ extension AtomicSwap.Event {
         public struct Request {}
     }
     
+    public enum BuyAction {
+        public struct Request {
+            let id: String
+        }
+        public struct Response {
+            let ask: Model.Ask
+        }
+        public typealias ViewModel = Response
+    }
+    
     public enum LoadingStatusDidChange {
         public typealias Request = Model.LoadingStatus
         public typealias Response = Model.LoadingStatus

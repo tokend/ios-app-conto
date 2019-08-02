@@ -6,6 +6,7 @@ extension AtomicSwap {
     enum AskCell {
         
         public struct ViewModel: CellViewModel {
+            let id: String
             let availableAmount: String
             let pricesAmounts: [PriceCell.ViewModel]
             let baseAsset: String

@@ -15,6 +15,7 @@
 "aml_alert_request" = "AML alert request";
 "amount" = "Сумма";
 "amount_colon" = "Сумма:";
+"amount_is_too_big" = "Сумма слишком большая";
 "amount_newline" = "Сумма\n$(base)";
 "amount_newline_replace_base" = "base";
 "amount_sent" = "Платёж отправлен";
@@ -40,6 +41,7 @@
 "available_amount" = "$(amount) доступно";
 "available_amount_replace_amount" = "amount";
 "available_colon" = "Доступно:";
+"available_for_buy" = "Доступно для покупки:";
 "available_lowercase" = "доступно";
 "available_assets_for_this_operations" = "Подходящие активы для этих операций не найдены";
 "available_date" = "Доступно: $(formatted)";

@@ -18,6 +18,7 @@ enum LocKey: String {
     case aml_alert_request
     case amount
     case amount_colon
+    case amount_is_too_big
     case amount_newline
     case amount_newline_replace_base
     case amount_sent
@@ -47,6 +48,7 @@ enum LocKey: String {
     case available_assets_for_this_operations
     case available_date
     case available_date_replace_formatted
+    case available_for_buy
     case back
     case back_to_companies
     case balance_colon

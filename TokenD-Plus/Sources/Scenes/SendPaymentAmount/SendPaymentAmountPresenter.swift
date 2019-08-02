@@ -12,6 +12,7 @@ protocol SendPaymentPresentationLogic {
     func presentPaymentAction(response: Event.PaymentAction.Response)
     func presentWithdrawAction(response: Event.WithdrawAction.Response)
     func presentRedeemAction(response: Event.RedeemAction.Response)
+    func presentAtomicSwapBuyAction(response: Event.AtomicSwapBuyAction.Response)
     func presentFeeOverviewAvailability(response: Event.FeeOverviewAvailability.Response)
     func presentFeeOverviewAction(response: Event.FeeOverviewAction.Response)
 }
@@ -204,6 +205,22 @@ extension SendPaymentAmount.Presenter: SendPaymentAmount.PresentationLogic {
         
         self.presenterDispatch.display { displayLogic in
             displayLogic.displayRedeemAction(viewModel: viewModel)
+        }
+    }
+    
+    func presentAtomicSwapBuyAction(response: Event.AtomicSwapBuyAction.Response) {
+        let viewModel: Event.AtomicSwapBuyAction.ViewModel
+        switch response {
+            
+        case .failed(let error):
+            viewModel = .failed(errorMessage: error.localizedDescription)
+            
+        case .succeeded(let askModel):
+            viewModel = .succeeded(askModel)
+        }
+        
+        self.presenterDispatch.display { displayLogic in
+            displayLogic.displayAtomicSwapBuyAction(viewModel: viewModel)
         }
     }
     

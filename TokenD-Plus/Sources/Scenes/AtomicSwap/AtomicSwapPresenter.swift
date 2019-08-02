@@ -5,6 +5,7 @@ public protocol AtomicSwapPresentationLogic {
     
     func presentSceneDidUpdate(response: Event.SceneDidUpdate.Response)
     func presentLoadingStatusDidChange(response: Event.LoadingStatusDidChange.Response)
+    func presentBuyAction(response: Event.BuyAction.Response)
 }
 
 extension AtomicSwap {
@@ -54,6 +55,7 @@ extension AtomicSwap {
                     let availableAmount = self.amountFormatter.assetAmountToString(ask.available.value)
                     let pricesAmounts = self.getPriceItems(prices: ask.prices)
                     viewModel = AskCell.ViewModel(
+                        id: ask.id,
                         availableAmount: availableAmount,
                         pricesAmounts: pricesAmounts,
                         baseAsset: ask.available.asset
@@ -95,6 +97,13 @@ extension AtomicSwap.Presenter: AtomicSwap.PresentationLogic {
         let viewModel = response
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displayLoadingStatusDidChange(viewModel: viewModel)
+        }
+    }
+    
+    public func presentBuyAction(response: Event.BuyAction.Response) {
+        let viewModel = response
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displayBuyAction(viewModel: viewModel)
         }
     }
 }
