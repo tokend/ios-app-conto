@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		A456E9D8F6860BA2357882C2 /* libPods-TokenD-Plus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */; };
 		DB0461C222F45B4D0050D2BB /* SendPaymentAmountAtomicSwapBalanceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461C122F45B4D0050D2BB /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */; };
+		DB0461CC22F48F130050D2BB /* PaymentMethodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461C622F48F130050D2BB /* PaymentMethodPresenter.swift */; };
+		DB0461CD22F48F130050D2BB /* PaymentMethodRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461C722F48F130050D2BB /* PaymentMethodRouting.swift */; };
+		DB0461CE22F48F130050D2BB /* PaymentMethodModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461C822F48F130050D2BB /* PaymentMethodModels.swift */; };
+		DB0461CF22F48F130050D2BB /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461C922F48F130050D2BB /* PaymentMethodViewController.swift */; };
+		DB0461D022F48F130050D2BB /* PaymentMethodInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461CA22F48F130050D2BB /* PaymentMethodInteractor.swift */; };
+		DB0461D122F48F130050D2BB /* PaymentMethodConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461CB22F48F130050D2BB /* PaymentMethodConfigurator.swift */; };
+		DB0461D522F4A2260050D2BB /* PaymentMethodMethodsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461D422F4A2260050D2BB /* PaymentMethodMethodsFetcher.swift */; };
 		DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */; };
 		DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */; };
 		DB28C4A722CFAF58005362FD /* ReceiveAddressRedeemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */; };
@@ -680,6 +687,13 @@
 		51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TokenD-Plus.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AD850E3986FEE4CD13E7C4 /* Pods-TokenD-Plus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.release.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.release.xcconfig"; sourceTree = "<group>"; };
 		DB0461C122F45B4D0050D2BB /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountAtomicSwapBalanceFetcher.swift; sourceTree = "<group>"; };
+		DB0461C622F48F130050D2BB /* PaymentMethodPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodPresenter.swift; sourceTree = "<group>"; };
+		DB0461C722F48F130050D2BB /* PaymentMethodRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodRouting.swift; sourceTree = "<group>"; };
+		DB0461C822F48F130050D2BB /* PaymentMethodModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodModels.swift; sourceTree = "<group>"; };
+		DB0461C922F48F130050D2BB /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
+		DB0461CA22F48F130050D2BB /* PaymentMethodInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodInteractor.swift; sourceTree = "<group>"; };
+		DB0461CB22F48F130050D2BB /* PaymentMethodConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodConfigurator.swift; sourceTree = "<group>"; };
+		DB0461D422F4A2260050D2BB /* PaymentMethodMethodsFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodMethodsFetcher.swift; sourceTree = "<group>"; };
 		DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListChangeLanguageWorker.swift; sourceTree = "<group>"; };
 		DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWorker.swift; sourceTree = "<group>"; };
 		DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressRedeemManager.swift; sourceTree = "<group>"; };
@@ -1387,6 +1401,36 @@
 			path = BalancesFethcers;
 			sourceTree = "<group>";
 		};
+		DB0461C522F48EED0050D2BB /* PaymentMethod */ = {
+			isa = PBXGroup;
+			children = (
+				DB0461CB22F48F130050D2BB /* PaymentMethodConfigurator.swift */,
+				DB0461CA22F48F130050D2BB /* PaymentMethodInteractor.swift */,
+				DB0461C822F48F130050D2BB /* PaymentMethodModels.swift */,
+				DB0461C622F48F130050D2BB /* PaymentMethodPresenter.swift */,
+				DB0461C722F48F130050D2BB /* PaymentMethodRouting.swift */,
+				DB0461C922F48F130050D2BB /* PaymentMethodViewController.swift */,
+				DB0461D222F490C30050D2BB /* Views */,
+				DB0461D322F4A2030050D2BB /* Workers */,
+			);
+			path = PaymentMethod;
+			sourceTree = "<group>";
+		};
+		DB0461D222F490C30050D2BB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DB0461D322F4A2030050D2BB /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DB0461D422F4A2260050D2BB /* PaymentMethodMethodsFetcher.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		DB0AFD2C22E0A31400FB39FF /* Workers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1613,6 +1657,7 @@
 				DB720A0222C1396B00ED116A /* Fees */,
 				DB363E2922DF761200F5761C /* LanguagesList */,
 				DB720A3D22C1396B00ED116A /* MarkdownViewer */,
+				DB0461C522F48EED0050D2BB /* PaymentMethod */,
 				DB720F4322C4CD1C00ED116A /* Polls */,
 				DB720B6F22C1396B00ED116A /* ReceiveAddress */,
 				DB720BC222C1396B00ED116A /* SaleDetails */,
@@ -3677,6 +3722,7 @@
 				DB720F1B22C1396C00ED116A /* LocKey.swift in Sources */,
 				DB720DDB22C1396C00ED116A /* WalletRecoveryInteractor.swift in Sources */,
 				DB720D8422C1396B00ED116A /* TransactionDetailsInteractor.swift in Sources */,
+				DB0461CF22F48F130050D2BB /* PaymentMethodViewController.swift in Sources */,
 				DB720DE322C1396C00ED116A /* TradesListAssetPairsFetcher.swift in Sources */,
 				DB720E6F22C1396C00ED116A /* SaleDetailsDataProvider.swift in Sources */,
 				DB720D1822C1396B00ED116A /* TokenDetailsCardCell.swift in Sources */,
@@ -3695,6 +3741,7 @@
 				DB720EB522C1396C00ED116A /* QRCodeGenerator.swift in Sources */,
 				DB720E8222C1396C00ED116A /* BalanceHeaderBalanceFetcher.swift in Sources */,
 				DB363E3322DF764700F5761C /* LanguagesListViewController.swift in Sources */,
+				DB0461CD22F48F130050D2BB /* PaymentMethodRouting.swift in Sources */,
 				DB363E3822DF77BE00F5761C /* LanguageCell.swift in Sources */,
 				DB4AE2E922EF5DF1001D0883 /* SideMenuController+RootContent.swift in Sources */,
 				DB720D3222C1396B00ED116A /* MarkdownViewerPresenter.swift in Sources */,
@@ -3772,6 +3819,7 @@
 				DB720F0B22C1396C00ED116A /* LaunchFlowController.swift in Sources */,
 				DB720E4B22C1396C00ED116A /* DepositSceneConfigurator.swift in Sources */,
 				DB720ECD22C1396C00ED116A /* OrderBookTableView.swift in Sources */,
+				DB0461CE22F48F130050D2BB /* PaymentMethodModels.swift in Sources */,
 				DB720E7B22C1396C00ED116A /* BiometricsAuthRouting.swift in Sources */,
 				DB720E2222C1396C00ED116A /* SideMenuModels.swift in Sources */,
 				DB720CE922C1396B00ED116A /* VerifyEmailInteractor.swift in Sources */,
@@ -3787,6 +3835,7 @@
 				DB720DF422C1396C00ED116A /* DashboardPaymentsPlugInRateProviderProtocol.swift in Sources */,
 				DB720CEF22C1396B00ED116A /* TabsContainerInteractor.swift in Sources */,
 				DB720E2D22C1396C00ED116A /* ReceiveAddressInvoiceFormatter.swift in Sources */,
+				DB0461D022F48F130050D2BB /* PaymentMethodInteractor.swift in Sources */,
 				DB720F0E22C1396C00ED116A /* PollsFlowController.swift in Sources */,
 				DB720E3222C1396C00ED116A /* ReceiveAddressShareUtil.swift in Sources */,
 				DB720E2022C1396C00ED116A /* SideMenuViewController.swift in Sources */,
@@ -4035,6 +4084,7 @@
 				DB720D7B22C1396B00ED116A /* CreateOfferViewController.swift in Sources */,
 				DB720CB822C1396B00ED116A /* SaleInvestConfigurator.swift in Sources */,
 				DB720DC622C1396C00ED116A /* ConfirmationPercentFormatterProtocol.swift in Sources */,
+				DB0461D122F48F130050D2BB /* PaymentMethodConfigurator.swift in Sources */,
 				DB720DBF22C1396C00ED116A /* SaleInvestConfirmationProvider.swift in Sources */,
 				DB720ED622C1396C00ED116A /* BXFStaticTableViewButtonCellModel.swift in Sources */,
 				DB720DF822C1396C00ED116A /* DashboardPendingOffersPreviewPlugInInteractor.swift in Sources */,
@@ -4158,6 +4208,7 @@
 				DB720E4722C1396C00ED116A /* BalancesListRouting.swift in Sources */,
 				DB720E8D22C1396C00ED116A /* UIColor+Interpolation.swift in Sources */,
 				DB720EDD22C1396C00ED116A /* BXFGroupedHeaderFooterLabel.swift in Sources */,
+				DB0461D522F4A2260050D2BB /* PaymentMethodMethodsFetcher.swift in Sources */,
 				DB720E9322C1396C00ED116A /* UITableView+LastCell.swift in Sources */,
 				DB720CAD22C1396B00ED116A /* SettingsPresenter.swift in Sources */,
 				DB720EA122C1396C00ED116A /* QRCodeReaderView.swift in Sources */,
@@ -4238,6 +4289,7 @@
 				DB720D7622C1396B00ED116A /* BalanceHeaderWithPickerView.swift in Sources */,
 				DB720E2322C1396C00ED116A /* SideMenuInteractor.swift in Sources */,
 				DB720D1922C1396B00ED116A /* TokenDetailsRouting.swift in Sources */,
+				DB0461CC22F48F130050D2BB /* PaymentMethodPresenter.swift in Sources */,
 				DB720D4E22C1396B00ED116A /* ChartInteractor.swift in Sources */,
 				DB720CEE22C1396B00ED116A /* TabsContainerConfigurator.swift in Sources */,
 				DB720ECA22C1396C00ED116A /* OrderBookCard.swift in Sources */,

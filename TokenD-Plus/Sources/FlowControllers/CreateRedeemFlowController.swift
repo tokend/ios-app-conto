@@ -115,6 +115,7 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
                 )
             },
             onSendAction: nil,
+            onAtomicSwapBuyAction: nil,
             onShowWithdrawDestination: nil,
             onShowRedeem: { [weak self] (redeemModel) in
                 self?.showRedeemQrScene(redeemModel: redeemModel)

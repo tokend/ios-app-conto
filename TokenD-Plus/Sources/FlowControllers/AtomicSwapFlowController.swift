@@ -147,6 +147,9 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             },
             onPresentPicker: { (_, _) in },
             onSendAction: { _ in },
+            onAtomicSwapBuyAction: { [weak self] (ask) in
+                self?.showPaymentMethodScene()
+            },
             onShowWithdrawDestination: nil,
             onShowRedeem: nil,
             showFeesOverview: { _, _ in })
@@ -167,4 +170,22 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         return vc
     }
     
+    
+    private func showPaymentMethodScene() {
+        let vc = self.setupPaymentMethodScene()
+        vc.navigationItem.title = Localized(.payment_amount)
+        
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func setupPaymentMethodScene() -> UIViewController {
+        let vc = PaymentMethod.ViewController()
+        let routing = PaymentMethod.Routing()
+        
+        PaymentMethod.Configurator.configure(
+            viewController: vc,
+            routing: routing
+        )
+        return vc
+    }
 }

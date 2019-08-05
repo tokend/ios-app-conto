@@ -401,7 +401,7 @@ extension SendPaymentAmount.ViewController: SendPaymentAmount.DisplayLogic {
             self.routing?.onShowError(errorMessage)
             
         case .succeeded(let ask):
-            print("Success")
+            self.routing?.onAtomicSwapBuyAction?(ask)
         }
     }
     

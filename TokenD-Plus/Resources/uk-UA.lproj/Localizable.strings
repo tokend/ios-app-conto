@@ -375,6 +375,7 @@
 "payment" = "Платіж";
 "payment_amount" = "Сума платежу";
 "payment_destination" = "Відправка";
+"payment_method" = "Спосіб оплати";
 "payout" = "Виплата";
 "pending" = "Активний";
 "pending_investment" = "Активні інвестиції";

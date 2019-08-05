@@ -375,6 +375,7 @@
 "payment" = "Payment";
 "payment_amount" = "Payment amount";
 "payment_destination" = "Payment destination";
+"payment_method" = "Payment method";
 "payout" = "Payout";
 "pending" = "Pending";
 "pending_investment" = "Pending contribution";
