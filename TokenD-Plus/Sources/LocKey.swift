@@ -31,6 +31,7 @@ enum LocKey: String {
     case are_you_sure_you_want_to_sign_out
     case ask_base
     case ask_base_replace_base
+    case ask_is_not_found
     case asset
     case asset_balance_is_not_found
     case asset_colon
@@ -116,6 +117,7 @@ enum LocKey: String {
     case copy
     case corrupted_keychain_data
     case create_balance
+    case create_bid_request_is_not_found
     case create_order
     case create_redeem
     case credit_card
@@ -185,6 +187,7 @@ enum LocKey: String {
     case expires_at
     case expires_at_replace_date
     case export_seed
+    case external_details_are_not_found
     case failed
     case failed_to_build_kdf_params
     case failed_to_build_transaction
@@ -200,8 +203,10 @@ enum LocKey: String {
     case failed_to_decode_quote_balance_id
     case failed_to_encode_destination_address
     case failed_to_encode_destination_data
+    case failed_to_fetch_ask_id
     case failed_to_fetch_company
     case failed_to_fetch_companies
+    case failed_to_fetch_create_bid_request
     case failed_to_fetch_fees
     case failed_to_fetch_network_info
     case failed_to_fetch_sender_account
@@ -223,6 +228,7 @@ enum LocKey: String {
     case failed_to_save_key_and_wallet_data
     case failed_to_save_network_info
     case failed_to_scan_server_info
+    case failed_to_send_transaction
     case failed_to_sign_transaction
     case fatal_error
     case fee
@@ -381,6 +387,7 @@ enum LocKey: String {
     case payment_amount
     case payment_destination
     case payment_method
+    case payment_rejected
     case payout
     case pending
     case pending_investment

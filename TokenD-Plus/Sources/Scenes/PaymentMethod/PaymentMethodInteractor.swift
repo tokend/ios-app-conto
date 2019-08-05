@@ -1,4 +1,6 @@
 import Foundation
+import RxCocoa
+import RxSwift
 
 public protocol PaymentMethodBusinessLogic {
     typealias Event = PaymentMethod.Event
@@ -6,6 +8,7 @@ public protocol PaymentMethodBusinessLogic {
     func onViewDidLoad(request: Event.ViewDidLoad.Request)
     func onSelectPaymentMethod(request: Event.SelectPaymentMethod.Request)
     func onPaymentMethodSelected(request: Event.PaymentMethodSelected.Request)
+    func onPaymentAction(request: Event.PaymentAction.Request)
 }
 
 extension PaymentMethod {
@@ -21,22 +24,36 @@ extension PaymentMethod {
         
         private let presenter: PresentationLogic
         private let paymentMethodsFetcher: PaymentMethodsFetcherProtocol
+        private let paymentWorker: PaymentWorkerProtocol
         private var sceneModel: Model.SceneModel
+        
+        private let loadingStatus: BehaviorRelay<Model.LoadingStatus> = BehaviorRelay(value: .loaded)
+        private let disposeBag: DisposeBag = DisposeBag()
         
         // MARK: -
         
         public init(
             presenter: PresentationLogic,
             paymentMethodsFetcher: PaymentMethodsFetcherProtocol,
+            paymentWorker: PaymentWorkerProtocol,
             sceneModel: Model.SceneModel
             ) {
             
             self.presenter = presenter
             self.paymentMethodsFetcher = paymentMethodsFetcher
+            self.paymentWorker = paymentWorker
             self.sceneModel = sceneModel
         }
         
         // MARK: - Private
+        
+        private func observeLoadingStatus() {
+            self.loadingStatus
+                .subscribe(onNext: { [weak self] (status) in
+                    self?.presenter.presentLoadingStatusDidChange(response: status)
+                })
+                .disposed(by: self.disposeBag)
+        }
         
         private func setSelectedMethod() {
             guard let selectedMethod = self.sceneModel.selectedPaymentMethod else {
@@ -59,6 +76,7 @@ extension PaymentMethod {
 extension PaymentMethod.Interactor: PaymentMethod.BusinessLogic {
     
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
+        self.observeLoadingStatus()
         self.sceneModel.methods = self.paymentMethodsFetcher.fetchPaymentMetods(
             baseAmount: self.sceneModel.baseAmount
         )
@@ -86,5 +104,28 @@ extension PaymentMethod.Interactor: PaymentMethod.BusinessLogic {
         
         let response = Event.PaymentMethodSelected.Response(method: method)
         self.presenter.presentPaymentMethodSelected(response: response)
+    }
+    
+    public func onPaymentAction(request: Event.PaymentAction.Request) {
+        guard let selectedPaymentMethod = self.sceneModel.selectedPaymentMethod else {
+            return
+        }
+        self.loadingStatus.accept(.loading)
+        self.paymentWorker.performPayment(
+            quoteAsset: selectedPaymentMethod.asset,
+            completion: { [weak self] (result) in
+                self?.loadingStatus.accept(.loaded)
+                let response: Event.PaymentAction.Response
+                switch result {
+                    
+                case .failure(let error):
+                    response = .error(error)
+                    
+                case .success(let invoce):
+                    response = .invoce(invoce)
+                }
+                self?.presenter.presentPaymentAction(response: response)
+            }
+        )
     }
 }

@@ -7,6 +7,8 @@ public protocol PaymentMethodDisplayLogic: class {
     func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel)
     func displaySelectPaymentMethod(viewModel: Event.SelectPaymentMethod.ViewModel)
     func displayPaymentMethodSelected(viewModel: Event.PaymentMethodSelected.ViewModel)
+    func displayPaymentAction(viewModel: Event.PaymentAction.ViewModel)
+    func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel)
 }
 
 extension PaymentMethod {
@@ -158,8 +160,11 @@ extension PaymentMethod {
                 .rx
                 .tap
                 .asDriver()
-                .drive(onNext: { (_) in
-                    
+                .drive(onNext: { [weak self] (_) in
+                    let request = Event.PaymentAction.Request()
+                    self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                        businessLogic.onPaymentAction(request: request)
+                    })
                 })
                 .disposed(by: self.disposeBag)
         }
@@ -246,5 +251,28 @@ extension PaymentMethod.ViewController: PaymentMethod.DisplayLogic {
     public func displayPaymentMethodSelected(viewModel: Event.PaymentMethodSelected.ViewModel) {
         self.assetLabel.text = viewModel.method.asset
         self.toPayLabel.text = viewModel.method.toPayAmount
+    }
+    
+    public func displayPaymentAction(viewModel: Event.PaymentAction.ViewModel) {
+        switch viewModel {
+            
+        case .error(let error):
+            self.routing?.showError(error)
+            
+        case .invoce(let invoice):
+            //self.routing?.showAtomicSwapInvoice(invoice)
+            break
+        }
+    }
+    
+    public func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel) {
+        switch viewModel {
+            
+        case .loaded:
+            self.routing?.hideLoading()
+            
+        case .loading:
+            self.routing?.showLoading()
+        }
     }
 }

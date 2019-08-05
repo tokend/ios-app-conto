@@ -7,6 +7,7 @@ extension PaymentMethod {
         public static func configure(
             viewController: ViewController,
             paymentMethodsFetcher: PaymentMethodsFetcherProtocol,
+            paymentWorker: PaymentWorkerProtocol,
             sceneModel: Model.SceneModel,
             amountFormatter: AmountFormatterProtocol,
             routing: Routing?,
@@ -21,6 +22,7 @@ extension PaymentMethod {
             let interactor = Interactor(
                 presenter: presenter,
                 paymentMethodsFetcher: paymentMethodsFetcher,
+                paymentWorker: paymentWorker,
                 sceneModel: sceneModel
             )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)

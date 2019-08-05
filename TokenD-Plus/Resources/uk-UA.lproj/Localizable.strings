@@ -28,6 +28,7 @@
 "are_you_sure_you_want_to_sign_out" = "Ви впевнені що хочете Вийти и очистити усі дані з пристрою?";
 "ask_base" = "Аск ($(base))";
 "ask_base_replace_base" = "base";
+"ask_is_not_found" = "Аск не знайдено";
 "asset" = "Актив";
 "asset_balance_is_not_found" = "Баланс актива не знайдено";
 "asset_colon" = "Актив: $(code)";
@@ -113,6 +114,7 @@
 "copy" = "Копіювати";
 "corrupted_keychain_data" = "Цілістність даних зі сховища пошкоджена";
 "create_balance" = "Створити баланс";
+"create_bid_request_is_not_found" = "Запит на створення бiда не знайдено";
 "create_order" = "Створити ордер";
 "create_redeem" = "Погашення";
 "credit_card" = "Кредитна картка";
@@ -182,6 +184,7 @@
 "expires_at" = "\n\nЗавершується: $(date)";
 "expires_at_replace_date" = "date";
 "export_seed" = "Експортувати секретний ключ";
+"external_details_are_not_found" = "Деталей платежу не знайдено";
 "failed" = "Невдача";
 "failed_to_build_kdf_params" = "Не вдалося зібрати kdf параметри";
 "failed_to_build_transaction" = "Не вдалося зібрати транзакцію";
@@ -197,8 +200,10 @@
 "failed_to_decode_quote_balance_id" = "Не вдалося розкодувати ID баланса базового актива";
 "failed_to_encode_destination_address" = "Не вдалося закодувати адресу";
 "failed_to_encode_destination_data" = "Не вдалося закодувати дані";
+"failed_to_fetch_ask_id" = "Не вдалося отримати ідентифікатор аска";
 "failed_to_fetch_company" = "Не вдалося отримати компанію";
 "failed_to_fetch_companies" = "Не вдалося отримати компанії";
+"failed_to_fetch_create_bid_request" = "Не вдалося отримати запит на створення бiда";
 "failed_to_fetch_fees" = "Не вдалося отримати комісію для отримувача";
 "failed_to_fetch_network_info" = "Не вдалося отримати інформацію про мережу";
 "failed_to_fetch_sender_account" = "Не вдалося отрмати акаунт відправника";
@@ -220,6 +225,7 @@
 "failed_to_save_key_and_wallet_data" = "Не вдалося зберегти ключ та дані про гаманець";
 "failed_to_save_network_info" = "Не вдалося зберегти дані про мережу";
 "failed_to_scan_server_info" = "Failed to scan server info";
+"failed_to_send_transaction" = "Не вдалося відпроавити транзакцію";
 "failed_to_sign_transaction" = "Не вдалося підписати транзакцію";
 "fatal_error" = "Fatal Error";
 "fee" = "Комісія";
@@ -378,6 +384,7 @@
 "payment_amount" = "Сума платежу";
 "payment_destination" = "Відправка";
 "payment_method" = "Спосіб оплати";
+"payment_rejected" = "Оплату скасовано";
 "payout" = "Виплата";
 "pending" = "Активний";
 "pending_investment" = "Активні інвестиції";

@@ -25,6 +25,7 @@
 		DB0461F022F82EBC0050D2BB /* PaymentMethodPickerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461EA22F82EBB0050D2BB /* PaymentMethodPickerModels.swift */; };
 		DB0461F322F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461F222F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift */; };
 		DB0461F622F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461F522F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift */; };
+		DB0461F822F840320050D2BB /* PaymentMethodPaymentWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461F722F840320050D2BB /* PaymentMethodPaymentWorker.swift */; };
 		DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */; };
 		DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */; };
 		DB28C4A722CFAF58005362FD /* ReceiveAddressRedeemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */; };
@@ -712,6 +713,7 @@
 		DB0461EA22F82EBB0050D2BB /* PaymentMethodPickerModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerModels.swift; sourceTree = "<group>"; };
 		DB0461F222F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerMethodCell.swift; sourceTree = "<group>"; };
 		DB0461F522F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerAmountFormatter.swift; sourceTree = "<group>"; };
+		DB0461F722F840320050D2BB /* PaymentMethodPaymentWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodPaymentWorker.swift; sourceTree = "<group>"; };
 		DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListChangeLanguageWorker.swift; sourceTree = "<group>"; };
 		DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWorker.swift; sourceTree = "<group>"; };
 		DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressRedeemManager.swift; sourceTree = "<group>"; };
@@ -1446,6 +1448,7 @@
 			children = (
 				DB0461D422F4A2260050D2BB /* PaymentMethodMethodsFetcher.swift */,
 				DB0461D622F820FB0050D2BB /* PaymentMethodAmountFormatter.swift */,
+				DB0461F722F840320050D2BB /* PaymentMethodPaymentWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -4141,6 +4144,7 @@
 				DB0461D122F48F130050D2BB /* PaymentMethodConfigurator.swift in Sources */,
 				DB720DBF22C1396C00ED116A /* SaleInvestConfirmationProvider.swift in Sources */,
 				DB720ED622C1396C00ED116A /* BXFStaticTableViewButtonCellModel.swift in Sources */,
+				DB0461F822F840320050D2BB /* PaymentMethodPaymentWorker.swift in Sources */,
 				DB720DF822C1396C00ED116A /* DashboardPendingOffersPreviewPlugInInteractor.swift in Sources */,
 				DB720E9A22C1396C00ED116A /* UISegmentedControl+FillWithSegments.swift in Sources */,
 				DB720E8622C1396C00ED116A /* AppDelegate.swift in Sources */,

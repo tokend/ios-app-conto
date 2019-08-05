@@ -180,27 +180,51 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     
     private func setupPaymentMethodScene(askModel: SendPaymentAmount.Model.AskModel) -> UIViewController {
         let vc = PaymentMethod.ViewController()
+        
         let paymentMethodsFetcher = PaymentMethod.AtomicSwapAsksPaymentMethodsFetcher(
             quoteAssets: askModel.ask.prices
         )
+        let amountConverter = AmountConverter()
+        
+        let paymentWorker = PaymentMethod.AtomicSwapPaymentWorker(
+            accountsApi: self.flowControllerStack.apiV3.accountsApi,
+            requestsApi: self.flowControllerStack.apiV3.requetsApi,
+            networkFetcher: self.reposController.networkInfoRepo,
+            transactionSender: self.managersController.transactionSender,
+            amountConverter: amountConverter,
+            askModel: askModel,
+            originalAccountId: self.userDataProvider.walletData.accountId
+        )
+        
         let sceneModel = PaymentMethod.Model.SceneModel(
             baseAsset: askModel.ask.available.asset,
             baseAmount: askModel.amount,
             methods: [],
             selectedPaymentMethod: nil
         )
+        
         let amountFormatter = PaymentMethod.AmountFormatter()
+        
         let routing = PaymentMethod.Routing(
             onPickPaymentMethod: { [weak self] (methods, completion) in
                 self?.showPaymentMethodPickerScene(
                     methods: methods,
                     completion: completion
                 )
+            }, showError: { [weak self] (message) in
+                self?.navigationController.showErrorMessage(message, completion: nil)
+            }, showAtomicSwapInvoice: { [weak self] (model) in
+                
+            }, showLoading: { [weak self] in
+                self?.navigationController.showProgress()
+            }, hideLoading: { [weak self] in
+                self?.navigationController.hideProgress()
         })
         
         PaymentMethod.Configurator.configure(
             viewController: vc,
             paymentMethodsFetcher: paymentMethodsFetcher,
+            paymentWorker: paymentWorker,
             sceneModel: sceneModel,
             amountFormatter: amountFormatter,
             routing: routing

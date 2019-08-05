@@ -15,6 +15,7 @@ public enum PaymentMethod {
 // MARK: - Models
 
 extension PaymentMethod.Model {
+    public typealias AskModel = SendPaymentAmount.Model.AskModel
     
     public struct SceneModel {
         let baseAsset: String
@@ -35,6 +36,35 @@ extension PaymentMethod.Model {
     public struct PaymentMethodViewModel {
         let asset: String
         let toPayAmount: String
+    }
+    
+    public struct AtomicSwapInvoice {
+        let address: String
+        let asset: String
+        let amount: Decimal
+    }
+    
+    public struct AtomicSwapFiatPayment {
+        let secret: String
+        let id: String
+    }
+    
+    public enum PaymentError: Swift.Error {
+        case failedToFecthAskId
+        case askIsNotFound
+        case failedToDecodeSourceAccountId
+        case failedToBuildTransaction
+        case failedToSendTransaction
+        case failedToFetchCreateBidRequest
+        case createBidRequestIsNotFound
+        case externalDetailsAreNotFound
+        case paymentIsRejected
+        case other(Error)
+    }
+    
+    public enum LoadingStatus {
+        case loaded
+        case loading
     }
 }
 
@@ -58,6 +88,18 @@ extension PaymentMethod.Event {
         }
     }
     
+    public enum PaymentAction {
+        public struct Request {}
+        public enum Response {
+            case invoce(Model.AtomicSwapFiatPayment)
+            case error(Error)
+        }
+        public enum ViewModel {
+            case invoce(Model.AtomicSwapFiatPayment)
+            case error(String)
+        }
+    }
+    
     public enum SelectPaymentMethod {
         public struct Request {}
         public struct Response {
@@ -76,5 +118,10 @@ extension PaymentMethod.Event {
         public struct ViewModel {
             let method: Model.PaymentMethodViewModel
         }
+    }
+    
+    public enum LoadingStatusDidChange {
+        public typealias Response = Model.LoadingStatus
+        public typealias ViewModel = Model.LoadingStatus
     }
 }

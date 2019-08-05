@@ -28,6 +28,7 @@
 "are_you_sure_you_want_to_sign_out" = "Вы уверены что хотите Выйти и очистить все данные с устройства?";
 "ask_base" = "Аск ($(base))";
 "ask_base_replace_base" = "base";
+"ask_is_not_found" = "Аск не найден";
 "asset" = "Актив";
 "asset_balance_is_not_found" = "Баланс актива не найден";
 "asset_colon" = "Актив: $(code)";
@@ -113,6 +114,7 @@
 "copy" = "Копировать";
 "corrupted_keychain_data" = "Целостность данных из хранилища повреждена";
 "create_balance" = "Создать баланс";
+"create_bid_request_is_not_found" = "Запрос на создание бида не найден";
 "create_order" = "Создать ордер";
 "create_redeem" = "Погашение";
 "credit_card" = "Кредитная карта";
@@ -182,6 +184,7 @@
 "expires_at" = "\n\nИстекает: $(date)";
 "expires_at_replace_date" = "date";
 "export_seed" = "Экспортировать секретный ключ";
+"external_details_are_not_found" = "Детали платежа не найдены";
 "failed" = "Неудача";
 "failed_to_build_kdf_params" = "Не удалось собрать kdf параметры";
 "failed_to_build_transaction" = "Не удалось собрать транзакцию";
@@ -197,8 +200,10 @@
 "failed_to_decode_quote_balance_id" = "Не удалось раскодировать ID баланса базового актива";
 "failed_to_encode_destination_address" = "Не удалось закодировать адрес";
 "failed_to_encode_destination_data" = "Не удалось закодировать данные";
+"failed_to_fetch_ask_id" = "Не удалось получить идентификатор аска";
 "failed_to_fetch_company" = "Не удалось получить компанию";
 "failed_to_fetch_companies" = "Не удалось получить компании";
+"failed_to_fetch_create_bid_request" = "Не удалось получить запрос на создание бида";
 "failed_to_fetch_fees" = "Не удалось получить комиссию для получателя";
 "failed_to_fetch_network_info" = "Не удалось получить информацию о сети";
 "failed_to_fetch_sender_account" = "Не удалось получить аккаунт отправителя";
@@ -220,6 +225,7 @@
 "failed_to_save_key_and_wallet_data" = "Не удалось сохранить ключ и данные кошельке";
 "failed_to_save_network_info" = "Не удалось сохранить данные о сети";
 "failed_to_scan_server_info" = "Failed to scan server info";
+"failed_to_send_transaction" = "Не удалось отправить транзакцию";
 "failed_to_sign_transaction" = "Не удалось подписать транзакцию";
 "fatal_error" = "Fatal Error";
 "fee" = "Комиссия";
@@ -378,6 +384,7 @@
 "payment_amount" = "Сумма платежа";
 "payment_destination" = "Отправка";
 "payment_method" = "Способ оплаты";
+"payment_rejected" = "Платеж отклонен";
 "payout" = "Выплата";
 "pending" = "Активный";
 "pending_investment" = "Активные инвестиции";

@@ -137,7 +137,7 @@ extension AtomicSwap {
             }
             
             private func setupPriceCollectionLayout() {
-                self.flowLayout.estimatedItemSize = CGSize(width: 75, height: 20)
+                self.flowLayout.estimatedItemSize = CGSize(width: 50, height: 20)
                 self.flowLayout.minimumInteritemSpacing = 3.0
             }
             

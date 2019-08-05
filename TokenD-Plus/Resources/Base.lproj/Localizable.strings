@@ -28,6 +28,7 @@
 "are_you_sure_you_want_to_sign_out" = "Are you sure you want to Sign Out and Erase All Data from device?";
 "ask_base" = "Ask ($(base))";
 "ask_base_replace_base" = "base";
+"ask_is_not_found" = "Ask is not found";
 "asset" = "Asset";
 "asset_balance_is_not_found" = "Asset balance is not found";
 "asset_colon" = "Asset: $(code)";
@@ -113,6 +114,7 @@
 "copy" = "Copy";
 "corrupted_keychain_data" = "Corrupted keychain data";
 "create_balance" = "Create balance";
+"create_bid_request_is_not_found" = "Bid creation request is not found";
 "create_order" = "Create order";
 "create_redeem" = "Create redemption";
 "credit_card" = "Credit card";
@@ -182,6 +184,7 @@
 "expires_at" = "\n\nExpires at: $(date)";
 "expires_at_replace_date" = "date";
 "export_seed" = "Export seed";
+"external_details_are_not_found" = "Payment details are not found";
 "failed" = "Failed";
 "failed_to_build_kdf_params" = "Failed to build kdf params";
 "failed_to_build_transaction" = "Failed to build transaction";
@@ -197,8 +200,10 @@
 "failed_to_decode_quote_balance_id" = "Failed to decode quote balance id";
 "failed_to_encode_destination_address" = "Failed to encode destination address";
 "failed_to_encode_destination_data" = "Failed to encode destination data";
+"failed_to_fetch_ask_id" = "Failed to fetch ask id";
 "failed_to_fetch_company" = "Failed to fetch company";
 "failed_to_fetch_companies" = "Failed to fetch companies";
+"failed_to_fetch_create_bid_request" = "Failed to fetch create bid request";
 "failed_to_fetch_fees" = "Failed to fetch sender fee";
 "failed_to_fetch_network_info" = "Failed to fetch network info";
 "failed_to_fetch_sender_account" = "Failed to fetch sender account";
@@ -220,6 +225,7 @@
 "failed_to_save_key_and_wallet_data" = "Failed to save key and wallet data";
 "failed_to_save_network_info" = "Failed to save network info";
 "failed_to_scan_server_info" = "Failed to scan server info";
+"failed_to_send_transaction" = "Failed to send transaction";
 "failed_to_sign_transaction" = "Failed to sign transaction";
 "fatal_error" = "Fatal Error";
 "fee" = "Fee";
@@ -378,6 +384,7 @@
 "payment_amount" = "Payment amount";
 "payment_destination" = "Payment destination";
 "payment_method" = "Payment method";
+"payment_rejected" = "Payment rejected";
 "payout" = "Payout";
 "pending" = "Pending";
 "pending_investment" = "Pending contribution";

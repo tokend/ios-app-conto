@@ -8,7 +8,7 @@ public class AtomicSwapAsksRepo {
     
     // MARK: - Private properties
     
-    private let quoteAssets: String = "quote_assets"
+    private let quoteAssetsInclude: String = "quote_assets"
     
     private let atomicSwapApi: AtomicSwapApiV3
     private let baseAsset: String
@@ -101,7 +101,7 @@ public class AtomicSwapAsksRepo {
         self.loadingStatus.accept(.loading)
         _ = self.atomicSwapApi.requestAtomicSwapAsks(
             filters: filter,
-            include: [self.quoteAssets],
+            include: [self.quoteAssetsInclude],
             pagination: self.pagination,
             onRequestBuilt: { [weak self] (request) in
                 self?.prevRequest = request

@@ -6,6 +6,8 @@ public protocol PaymentMethodPresentationLogic {
     func presentViewDidLoad(response: Event.ViewDidLoad.Response)
     func presentSelectPaymentMethod(response: Event.SelectPaymentMethod.Response)
     func presentPaymentMethodSelected(response: Event.PaymentMethodSelected.Response)
+    func presentPaymentAction(response: Event.PaymentAction.Response)
+    func presentLoadingStatusDidChange(response: Event.LoadingStatusDidChange.Response)
 }
 
 extension PaymentMethod {
@@ -95,6 +97,65 @@ extension PaymentMethod.Presenter: PaymentMethod.PresentationLogic {
         let viewModel = Event.PaymentMethodSelected.ViewModel(method: method)
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displayPaymentMethodSelected(viewModel: viewModel)
+        }
+    }
+    
+    public func presentPaymentAction(response: Event.PaymentAction.Response) {
+        let viewModel: Event.PaymentAction.ViewModel
+        
+        switch response {
+        case .error(let error):
+            viewModel = .error(error.localizedDescription)
+            
+        case .invoce(let invoice):
+            viewModel = .invoce(invoice)
+        }
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displayPaymentAction(viewModel: viewModel)
+        }
+    }
+    
+    public func presentLoadingStatusDidChange(response: Event.LoadingStatusDidChange.Response) {
+        let viewModel = response
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displayLoadingStatusDidChange(viewModel: viewModel)
+        }
+    }
+}
+
+extension PaymentMethod.Model.PaymentError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+            
+        case .askIsNotFound:
+            return Localized(.ask_is_not_found)
+            
+        case .createBidRequestIsNotFound:
+            return Localized(.create_bid_request_is_not_found)
+            
+        case .externalDetailsAreNotFound:
+            return Localized(.external_details_are_not_found)
+            
+        case .failedToBuildTransaction:
+            return Localized(.failed_to_build_transaction)
+            
+        case .failedToDecodeSourceAccountId:
+            return Localized(.failed_to_decode_account_id)
+            
+        case .failedToFecthAskId:
+            return Localized(.failed_to_fetch_ask_id)
+            
+        case .failedToFetchCreateBidRequest:
+            return Localized(.failed_to_fetch_create_bid_request)
+            
+        case .failedToSendTransaction:
+            return Localized(.failed_to_send_transaction)
+            
+        case .other(let error):
+            return error.localizedDescription
+            
+        case .paymentIsRejected:
+            return Localized(.payment_rejected)
         }
     }
 }
