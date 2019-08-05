@@ -1,12 +1,11 @@
 import Foundation
 
-extension PaymentMethod {
+extension PaymentMethodPicker {
     
     public enum Configurator {
         
         public static func configure(
             viewController: ViewController,
-            paymentMethodsFetcher: PaymentMethodsFetcherProtocol,
             sceneModel: Model.SceneModel,
             amountFormatter: AmountFormatterProtocol,
             routing: Routing?,
@@ -20,7 +19,6 @@ extension PaymentMethod {
                 )
             let interactor = Interactor(
                 presenter: presenter,
-                paymentMethodsFetcher: paymentMethodsFetcher,
                 sceneModel: sceneModel
             )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)
@@ -33,9 +31,9 @@ extension PaymentMethod {
     }
 }
 
-extension PaymentMethod {
+extension PaymentMethodPicker {
     
-    @objc(PaymentMethodInteractorDispatch)
+    @objc(PaymentMethodPickerInteractorDispatch)
     public class InteractorDispatch: NSObject {
         
         private let queue: DispatchQueue = DispatchQueue(
@@ -62,7 +60,7 @@ extension PaymentMethod {
         }
     }
     
-    @objc(PaymentMethodPresenterDispatch)
+    @objc(PaymentMethodPickerPresenterDispatch)
     public class PresenterDispatch: NSObject {
         
         private weak var displayLogic: DisplayLogic?

@@ -19,6 +19,8 @@
 "amount_newline" = "Сума\n$(base)";
 "amount_newline_replace_base" = "base";
 "amount_sent" = "Платіж відправлено";
+"amount_to_pay" = "$(amount) до сплати";
+"amount_to_pay_replace_amount" = "amount";
 "annual_return" = "Щорічне повернення";
 "app_name" = "TokenD Real Estate";
 "are_you_sure_you_want_to_cancel_investment" = "Ви впевнені що хочете скасувати вклад?";

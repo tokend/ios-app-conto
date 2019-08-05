@@ -2,6 +2,9 @@ import Foundation
 
 extension PaymentMethod {
     public struct Routing {
-//        public let onBackAction: () -> Void
+        let onPickPaymentMethod: (
+        _ methods: [Model.PaymentMethod],
+        _ completion: (@escaping(_ asset: String) -> Void)
+        ) -> Void
     }
 }

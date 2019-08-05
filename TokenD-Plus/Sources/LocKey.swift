@@ -22,6 +22,8 @@ enum LocKey: String {
     case amount_newline
     case amount_newline_replace_base
     case amount_sent
+    case amount_to_pay
+    case amount_to_pay_replace_amount
     case annual_return
     case app_name
     case are_you_sure_you_want_to_cancel_investment

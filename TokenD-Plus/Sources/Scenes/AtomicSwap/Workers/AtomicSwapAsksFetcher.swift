@@ -7,6 +7,7 @@ public protocol AtomicSwapAsksFetcherProtocol {
     func observeAsks() -> Observable<[AtomicSwap.Model.Ask]>
     func observeErrors() -> Observable<Swift.Error>
     func observeLoadingStatus() -> Observable<AtomicSwap.Model.LoadingStatus>
+    func reloadAsks()
 }
 
 extension AtomicSwap {
@@ -101,6 +102,10 @@ extension AtomicSwap.AsksFetcher: AtomicSwap.AsksFetcherProtocol {
     public func observeLoadingStatus() -> Observable<AtomicSwap.Model.LoadingStatus> {
         self.observeRepoLoadingStatus()
         return self.loadingStatus.asObservable()
+    }
+    
+    public func reloadAsks() {
+        self.asksRepo.reloadAsks()
     }
 }
 

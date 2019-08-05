@@ -147,8 +147,8 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             },
             onPresentPicker: { (_, _) in },
             onSendAction: { _ in },
-            onAtomicSwapBuyAction: { [weak self] (ask) in
-                self?.showPaymentMethodScene()
+            onAtomicSwapBuyAction: { [weak self] (askModel) in
+                self?.showPaymentMethodScene(askModel: askModel)
             },
             onShowWithdrawDestination: nil,
             onShowRedeem: nil,
@@ -171,19 +171,100 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     }
     
     
-    private func showPaymentMethodScene() {
-        let vc = self.setupPaymentMethodScene()
+    private func showPaymentMethodScene(askModel: SendPaymentAmount.Model.AskModel) {
+        let vc = self.setupPaymentMethodScene(askModel: askModel)
         vc.navigationItem.title = Localized(.payment_amount)
         
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    private func setupPaymentMethodScene() -> UIViewController {
+    private func setupPaymentMethodScene(askModel: SendPaymentAmount.Model.AskModel) -> UIViewController {
         let vc = PaymentMethod.ViewController()
-        let routing = PaymentMethod.Routing()
+        let paymentMethodsFetcher = PaymentMethod.AtomicSwapAsksPaymentMethodsFetcher(
+            quoteAssets: askModel.ask.prices
+        )
+        let sceneModel = PaymentMethod.Model.SceneModel(
+            baseAsset: askModel.ask.available.asset,
+            baseAmount: askModel.amount,
+            methods: [],
+            selectedPaymentMethod: nil
+        )
+        let amountFormatter = PaymentMethod.AmountFormatter()
+        let routing = PaymentMethod.Routing(
+            onPickPaymentMethod: { [weak self] (methods, completion) in
+                self?.showPaymentMethodPickerScene(
+                    methods: methods,
+                    completion: completion
+                )
+        })
         
         PaymentMethod.Configurator.configure(
             viewController: vc,
+            paymentMethodsFetcher: paymentMethodsFetcher,
+            sceneModel: sceneModel,
+            amountFormatter: amountFormatter,
+            routing: routing
+        )
+        return vc
+    }
+    
+    private func showPaymentMethodPickerScene(
+        methods: [PaymentMethod.Model.PaymentMethod],
+        completion: (@escaping(_ asset: String) -> Void)
+        ) {
+        
+        let navController = NavigationController()
+        
+        let vc = self.setupPaymentMethodPickerScene(
+            methods: methods,
+            completion: completion
+        )
+        vc.navigationItem.title = Localized(.payment_method)
+        let closeBarItem = UIBarButtonItem(
+            title: Localized(.back),
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        closeBarItem
+            .rx
+            .tap
+            .asDriver()
+            .drive(onNext: { _ in
+                navController
+                    .getViewController()
+                    .dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: self.disposeBag)
+        
+        vc.navigationItem.leftBarButtonItem = closeBarItem
+        navController.setViewControllers([vc], animated: false)
+        
+        self.navigationController.present(
+            navController.getViewController(),
+            animated: true,
+            completion: nil
+        )
+    }
+    
+    private func setupPaymentMethodPickerScene(
+      methods: [PaymentMethod.Model.PaymentMethod],
+      completion: (@escaping(_ asset: String) -> Void)
+        ) -> UIViewController {
+        
+        let vc = PaymentMethodPicker.ViewController()
+        let sceneModel = PaymentMethodPicker.Model.SceneModel(
+            methods: methods
+        )
+        let amountFormatter = PaymentMethodPicker.AmountFormatter()
+        let routing = PaymentMethodPicker.Routing(
+            onPaymentMethodPicked: { (asset) in
+                completion(asset)
+        })
+        PaymentMethodPicker.Configurator.configure(
+            viewController: vc,
+            sceneModel: sceneModel,
+            amountFormatter: amountFormatter,
             routing: routing
         )
         return vc

@@ -16,6 +16,15 @@
 		DB0461D022F48F130050D2BB /* PaymentMethodInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461CA22F48F130050D2BB /* PaymentMethodInteractor.swift */; };
 		DB0461D122F48F130050D2BB /* PaymentMethodConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461CB22F48F130050D2BB /* PaymentMethodConfigurator.swift */; };
 		DB0461D522F4A2260050D2BB /* PaymentMethodMethodsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461D422F4A2260050D2BB /* PaymentMethodMethodsFetcher.swift */; };
+		DB0461D722F820FB0050D2BB /* PaymentMethodAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461D622F820FB0050D2BB /* PaymentMethodAmountFormatter.swift */; };
+		DB0461EB22F82EBC0050D2BB /* PaymentMethodPickerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461E522F82EBB0050D2BB /* PaymentMethodPickerConfigurator.swift */; };
+		DB0461EC22F82EBC0050D2BB /* PaymentMethodPickerRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461E622F82EBB0050D2BB /* PaymentMethodPickerRouting.swift */; };
+		DB0461ED22F82EBC0050D2BB /* PaymentMethodPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461E722F82EBB0050D2BB /* PaymentMethodPickerViewController.swift */; };
+		DB0461EE22F82EBC0050D2BB /* PaymentMethodPickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461E822F82EBB0050D2BB /* PaymentMethodPickerPresenter.swift */; };
+		DB0461EF22F82EBC0050D2BB /* PaymentMethodPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461E922F82EBB0050D2BB /* PaymentMethodPickerInteractor.swift */; };
+		DB0461F022F82EBC0050D2BB /* PaymentMethodPickerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461EA22F82EBB0050D2BB /* PaymentMethodPickerModels.swift */; };
+		DB0461F322F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461F222F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift */; };
+		DB0461F622F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461F522F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift */; };
 		DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */; };
 		DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */; };
 		DB28C4A722CFAF58005362FD /* ReceiveAddressRedeemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */; };
@@ -694,6 +703,15 @@
 		DB0461CA22F48F130050D2BB /* PaymentMethodInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodInteractor.swift; sourceTree = "<group>"; };
 		DB0461CB22F48F130050D2BB /* PaymentMethodConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodConfigurator.swift; sourceTree = "<group>"; };
 		DB0461D422F4A2260050D2BB /* PaymentMethodMethodsFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodMethodsFetcher.swift; sourceTree = "<group>"; };
+		DB0461D622F820FB0050D2BB /* PaymentMethodAmountFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodAmountFormatter.swift; sourceTree = "<group>"; };
+		DB0461E522F82EBB0050D2BB /* PaymentMethodPickerConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerConfigurator.swift; sourceTree = "<group>"; };
+		DB0461E622F82EBB0050D2BB /* PaymentMethodPickerRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerRouting.swift; sourceTree = "<group>"; };
+		DB0461E722F82EBB0050D2BB /* PaymentMethodPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerViewController.swift; sourceTree = "<group>"; };
+		DB0461E822F82EBB0050D2BB /* PaymentMethodPickerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerPresenter.swift; sourceTree = "<group>"; };
+		DB0461E922F82EBB0050D2BB /* PaymentMethodPickerInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerInteractor.swift; sourceTree = "<group>"; };
+		DB0461EA22F82EBB0050D2BB /* PaymentMethodPickerModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerModels.swift; sourceTree = "<group>"; };
+		DB0461F222F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerMethodCell.swift; sourceTree = "<group>"; };
+		DB0461F522F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerAmountFormatter.swift; sourceTree = "<group>"; };
 		DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListChangeLanguageWorker.swift; sourceTree = "<group>"; };
 		DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWorker.swift; sourceTree = "<group>"; };
 		DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressRedeemManager.swift; sourceTree = "<group>"; };
@@ -1427,6 +1445,38 @@
 			isa = PBXGroup;
 			children = (
 				DB0461D422F4A2260050D2BB /* PaymentMethodMethodsFetcher.swift */,
+				DB0461D622F820FB0050D2BB /* PaymentMethodAmountFormatter.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
+		DB0461D822F82E400050D2BB /* PaymentMethodPicker */ = {
+			isa = PBXGroup;
+			children = (
+				DB0461E522F82EBB0050D2BB /* PaymentMethodPickerConfigurator.swift */,
+				DB0461E922F82EBB0050D2BB /* PaymentMethodPickerInteractor.swift */,
+				DB0461EA22F82EBB0050D2BB /* PaymentMethodPickerModels.swift */,
+				DB0461E822F82EBB0050D2BB /* PaymentMethodPickerPresenter.swift */,
+				DB0461E622F82EBB0050D2BB /* PaymentMethodPickerRouting.swift */,
+				DB0461E722F82EBB0050D2BB /* PaymentMethodPickerViewController.swift */,
+				DB0461F122F831000050D2BB /* Views */,
+				DB0461F422F833790050D2BB /* Workers */,
+			);
+			path = PaymentMethodPicker;
+			sourceTree = "<group>";
+		};
+		DB0461F122F831000050D2BB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DB0461F222F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DB0461F422F833790050D2BB /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DB0461F522F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -1658,6 +1708,7 @@
 				DB363E2922DF761200F5761C /* LanguagesList */,
 				DB720A3D22C1396B00ED116A /* MarkdownViewer */,
 				DB0461C522F48EED0050D2BB /* PaymentMethod */,
+				DB0461D822F82E400050D2BB /* PaymentMethodPicker */,
 				DB720F4322C4CD1C00ED116A /* Polls */,
 				DB720B6F22C1396B00ED116A /* ReceiveAddress */,
 				DB720BC222C1396B00ED116A /* SaleDetails */,
@@ -3672,6 +3723,7 @@
 				DB720D1422C1396B00ED116A /* TokenDetailsFetcher.swift in Sources */,
 				DB28C4C522D48D61005362FD /* AcceptRedeemConfirmationSectionsProvider.swift in Sources */,
 				DB4AE2C622EB3B8F001D0883 /* AtomicSwapRouting.swift in Sources */,
+				DB0461EC22F82EBC0050D2BB /* PaymentMethodPickerRouting.swift in Sources */,
 				DB4AE2CF22EB4DC7001D0883 /* AtomicSwapInfoCell.swift in Sources */,
 				DB720F1122C1396C00ED116A /* PermissionRequestFlowController.swift in Sources */,
 				DB720D8C22C1396B00ED116A /* TransactionDetailsEmailFetcher.swift in Sources */,
@@ -3889,6 +3941,7 @@
 				DB720D8622C1396B00ED116A /* TransactionDetailsPresenter.swift in Sources */,
 				DB720EA922C1396C00ED116A /* BalanceBinder.swift in Sources */,
 				DB720CDD22C1396B00ED116A /* UpdatePasswordViewController.swift in Sources */,
+				DB0461EB22F82EBC0050D2BB /* PaymentMethodPickerConfigurator.swift in Sources */,
 				DB720E3522C1396C00ED116A /* ReceiveAddressQRCell.swift in Sources */,
 				DB4AE2C722EB3B8F001D0883 /* AtomicSwapModels.swift in Sources */,
 				DB720DF722C1396C00ED116A /* DashboardPendingOffersPreviewPlugInRouting.swift in Sources */,
@@ -3942,6 +3995,7 @@
 				DB720ECC22C1396C00ED116A /* OrderBookTableViewSellCell.swift in Sources */,
 				DB720D4722C1396B00ED116A /* ChartRouting.swift in Sources */,
 				DB720E9422C1396C00ED116A /* UIViewController+ChildViewController.swift in Sources */,
+				DB0461EE22F82EBC0050D2BB /* PaymentMethodPickerPresenter.swift in Sources */,
 				DB720E5522C1396C00ED116A /* DepositScenePresenter.swift in Sources */,
 				DB720D9D22C1396B00ED116A /* TabBarInteractor.swift in Sources */,
 				DB363E0D22DCE13800F5761C /* FacilityCell.swift in Sources */,
@@ -4152,12 +4206,14 @@
 				DB720F5F22C4CD1C00ED116A /* PollsNavigationTitleView.swift in Sources */,
 				DB720D9022C1396B00ED116A /* TransactionDetailsPendingOfferSectionsProvider.swift in Sources */,
 				DB720EF122C1396C00ED116A /* AppController+UserActivitySubscribers.swift in Sources */,
+				DB0461F022F82EBC0050D2BB /* PaymentMethodPickerModels.swift in Sources */,
 				DB720EE222C1396C00ED116A /* DynamicTableViewDataSourceDelegate.swift in Sources */,
 				DB720EEA22C1396C00ED116A /* AccountRepo.swift in Sources */,
 				DB720CFA22C1396B00ED116A /* SalesInteractor.swift in Sources */,
 				DB720CB722C1396B00ED116A /* SaleInvestModels.swift in Sources */,
 				DB720E6622C1396C00ED116A /* TransactionsListInteractor.swift in Sources */,
 				DB720D2322C1396B00ED116A /* AuthenticatorAuthConfigurator.swift in Sources */,
+				DB0461D722F820FB0050D2BB /* PaymentMethodAmountFormatter.swift in Sources */,
 				DB720ED122C1396C00ED116A /* BXFStaticTableViewInputCell.swift in Sources */,
 				DB720DEC22C1396C00ED116A /* DashboardPaymentsPlugInViewController.swift in Sources */,
 				DB720CD622C1396B00ED116A /* SaleOverviewRouting.swift in Sources */,
@@ -4191,6 +4247,7 @@
 				DB4AE2BD22E9F6D5001D0883 /* TitleView.swift in Sources */,
 				DB720E3E22C1396C00ED116A /* BalancesListPieChartColorsProvider.swift in Sources */,
 				DB720DB022C1396B00ED116A /* SendPaymentAmountFeeLoader.swift in Sources */,
+				DB0461EF22F82EBC0050D2BB /* PaymentMethodPickerInteractor.swift in Sources */,
 				DB720E1422C1396C00ED116A /* RegisterSceneRouting.swift in Sources */,
 				DB720CC622C1396B00ED116A /* BalancePickerConfigurator.swift in Sources */,
 				DB720D0722C1396B00ED116A /* FeesFeeCell.swift in Sources */,
@@ -4238,6 +4295,7 @@
 				DB720D5122C1396B00ED116A /* SendPaymentDestinationModels.swift in Sources */,
 				DB720EBD22C1396C00ED116A /* PrecisedFormatter.swift in Sources */,
 				DB720D9322C1396B00ED116A /* TransactionDetailsTransactionProvider.swift in Sources */,
+				DB0461F622F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift in Sources */,
 				DB720E4A22C1396C00ED116A /* DepositSceneInteractor.swift in Sources */,
 				DB720D7522C1396B00ED116A /* BalanceHeaderWithPickerBalancesFetcherProtocol.swift in Sources */,
 				DB720CB622C1396B00ED116A /* SaleInvestRouting.swift in Sources */,
@@ -4252,6 +4310,7 @@
 				DB720E9C22C1396C00ED116A /* UIViewController+Nib.swift in Sources */,
 				DB720E4322C1396C00ED116A /* BalancesListPieChartCell.swift in Sources */,
 				DB720CDF22C1396B00ED116A /* UpdatePasswordSubmitWorkerProtocol.swift in Sources */,
+				DB0461F322F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift in Sources */,
 				DB720E3D22C1396C00ED116A /* BalancesListDataProvider.swift in Sources */,
 				DB720EC722C1396C00ED116A /* TradesView.swift in Sources */,
 				DB720D0822C1396B00ED116A /* FeesViewController.swift in Sources */,
@@ -4296,6 +4355,7 @@
 				DB720F6122C4CD1C00ED116A /* PollsChoiceCell.swift in Sources */,
 				DB720EAE22C1396C00ED116A /* RateProvider.swift in Sources */,
 				DB720E9822C1396C00ED116A /* Hashable+Iterate.swift in Sources */,
+				DB0461ED22F82EBC0050D2BB /* PaymentMethodPickerViewController.swift in Sources */,
 				DB720CB422C1396B00ED116A /* SettingsViewController.swift in Sources */,
 				DB720E7022C1396C00ED116A /* SaleDetailsRouting.swift in Sources */,
 				DB720CF622C1396B00ED116A /* SalesRouting.swift in Sources */,

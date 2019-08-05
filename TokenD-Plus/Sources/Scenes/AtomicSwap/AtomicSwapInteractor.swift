@@ -96,7 +96,7 @@ extension AtomicSwap.Interactor: AtomicSwap.BusinessLogic {
     }
     
     public func onRefreshInitiated(request: Event.RefreshInitiated.Request) {
-        self.asksFetcher
+        self.asksFetcher.reloadAsks()
     }
     
     public func onBuyAction(request: Event.BuyAction.Request) {

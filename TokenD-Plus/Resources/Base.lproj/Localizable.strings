@@ -19,6 +19,8 @@
 "amount_newline" = "Amount\n$(base)";
 "amount_newline_replace_base" = "base";
 "amount_sent" = "Amount sent";
+"amount_to_pay" = "$(amount) to pay";
+"amount_to_pay_replace_amount" = "amount";
 "annual_return" = "Annual return";
 "app_name" = "TokenD Real Estate";
 "are_you_sure_you_want_to_cancel_investment" = "Are you sure you want to cancel contribution?";
