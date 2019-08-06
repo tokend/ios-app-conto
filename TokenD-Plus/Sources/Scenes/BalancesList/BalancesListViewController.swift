@@ -35,7 +35,18 @@ extension BalancesList {
         )
         private let refreshControl: UIRefreshControl = UIRefreshControl()
         
-        private var sections: [Model.SectionViewModel] = []
+        private var sections: [Model.SectionViewModel] = [] {
+            didSet {
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
+                }
+                UIView.animate(
+                    withDuration: 0.5,
+                    animations: {
+                        self.tableView.reloadData()
+                })
+            }
+        }
         
         private var actions: [ActionsListDefaultButtonModel] = []
         private var actionsList: ActionsListModel?
@@ -181,7 +192,6 @@ extension BalancesList {
                 .rx
                 .controlEvent(.valueChanged)
                 .subscribe(onNext: { [weak self] (_) in
-                    self?.refreshControl.endRefreshing()
                     let request = Event.RefreshInitiated.Request()
                     self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
                         businessLogic.onRefreshInitiated(request: request)
@@ -201,7 +211,6 @@ extension BalancesList {
             self.tableView.delegate = self
             self.tableView.dataSource = self
             self.tableView.separatorStyle = .none
-            self.tableView.sectionFooterHeight = 0.0
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.tableView.refreshControl = self.refreshControl
@@ -272,14 +281,12 @@ extension BalancesList.ViewController: BalancesList.DisplayLogic {
             self.fab.isHidden = false
             self.emptyView.isHidden = true
             self.sections = sections
-            self.tableView.reloadData()
             
         case .empty(let text):
             self.fab.isHidden = true
             self.emptyView.text = text
             self.emptyView.isHidden = false
             self.sections = []
-            self.tableView.reloadData()
         }
     }
     
