@@ -182,6 +182,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         let vc = PaymentMethod.ViewController()
         
         let paymentMethodsFetcher = PaymentMethod.AtomicSwapAsksPaymentMethodsFetcher(
+            networkFecther: self.reposController.networkInfoRepo,
             quoteAssets: askModel.ask.prices
         )
         let amountConverter = AmountConverter()
@@ -213,8 +214,8 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
                 )
             }, showError: { [weak self] (message) in
                 self?.navigationController.showErrorMessage(message, completion: nil)
-            }, showAtomicSwapInvoice: { [weak self] (model) in
-                
+            }, showAtomicSwapInvoice: { [weak self] (invoice) in
+                self?.showAtomicSwapQrScene(atomicSwapInvoice: invoice)
             }, showLoading: { [weak self] in
                 self?.navigationController.showProgress()
             }, hideLoading: { [weak self] in
@@ -292,5 +293,62 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             routing: routing
         )
         return vc
+    }
+    
+    private func showAtomicSwapQrScene(
+        atomicSwapInvoice: PaymentMethod.Model.AtomicSwapInvoiceViewModel
+        ) {
+        
+        let vc = ReceiveAddress.ViewController()
+        
+        let header = Localized(
+            .send_to_this_address,
+            replace: [
+                .send_to_this_address_replace_amount: atomicSwapInvoice.amount
+            ]
+        )
+        let viewConfig = ReceiveAddress.Model.ViewConfig(
+            copiedLocalizationKey: Localized(.copied),
+            tableViewTopInset: 24,
+            headerAppearence: .withText(header),
+            qrValueAppearence: .hidden
+        )
+        
+        let sceneModel = ReceiveAddress.Model.SceneModel()
+        
+        let qrCodeGenerator = QRCodeGenerator()
+        let addressManager = ReceiveAddress.AtomicSwapManager(
+            address: atomicSwapInvoice.address
+        )
+        let shareUtil = ReceiveAddress.ReceiveAddressShareUtil(
+            qrCodeGenerator: qrCodeGenerator
+        )
+        let invoiceFormatter = ReceiveAddress.InvoiceFormatter()
+        
+        let routing = ReceiveAddress.Routing(
+            onCopy: { (stringToCopy) in
+                UIPasteboard.general.string = stringToCopy
+        },
+            onShare: { [weak self] (itemsToShare) in
+                self?.shareItems(itemsToShare)
+        })
+        
+        ReceiveAddress.Configurator.configure(
+            viewController: vc,
+            viewConfig: viewConfig,
+            sceneModel: sceneModel,
+            addressManager: addressManager,
+            shareUtil: shareUtil,
+            qrCodeGenerator: qrCodeGenerator,
+            invoiceFormatter: invoiceFormatter,
+            routing: routing
+        )
+        
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func shareItems(_ items: [Any]) {
+        let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        self.navigationController.present(activity, animated: true, completion: nil)
     }
 }

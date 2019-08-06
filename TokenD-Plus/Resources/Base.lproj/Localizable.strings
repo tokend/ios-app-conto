@@ -462,6 +462,8 @@
 "selfie_with_verification_code" = "Selfie with verification code";
 "sell" = "Sell";
 "send" = "Send";
+"send_to_this_address" = "Send $(amount) to this address";
+"send_to_this_address_replace_amount" = "amount";
 "send_transaction_error" = "Send transaction error: $(message)";
 "send_transaction_error_replace_message" = "message";
 "sender" = "Sender";

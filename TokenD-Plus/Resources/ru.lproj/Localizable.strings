@@ -462,6 +462,8 @@
 "selfie_with_verification_code" = "Сделайте селфи с кодом верификации";
 "sell" = "Продажа";
 "send" = "Отправка";
+"send_to_this_address" = "Отправьте $(amount) на этот адрес";
+"send_to_this_address_replace_amount" = "amount";
 "send_transaction_error" = "Ошибка при отправке транзакции: $(message)";
 "send_transaction_error_replace_message" = "message";
 "sender" = "Отправитель";

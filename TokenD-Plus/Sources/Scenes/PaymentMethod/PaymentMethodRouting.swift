@@ -7,7 +7,7 @@ extension PaymentMethod {
         _ completion: (@escaping(_ asset: String) -> Void)
         ) -> Void
         let showError: (_ message: String) -> Void
-        let showAtomicSwapInvoice: (Model.AtomicSwapInvoice) -> Void
+        let showAtomicSwapInvoice: (Model.AtomicSwapInvoiceViewModel) -> Void
         let showLoading: () -> Void
         let hideLoading: () -> Void
     }

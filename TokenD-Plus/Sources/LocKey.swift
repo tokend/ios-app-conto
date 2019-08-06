@@ -465,6 +465,8 @@ enum LocKey: String {
     case selfie_with_verification_code
     case sell
     case send
+    case send_to_this_address
+    case send_to_this_address_replace_amount
     case send_transaction_error
     case send_transaction_error_replace_message
     case sender

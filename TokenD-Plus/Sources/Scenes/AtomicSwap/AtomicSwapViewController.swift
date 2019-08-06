@@ -95,9 +95,8 @@ extension AtomicSwap {
             )
             self.tableView.delegate = self
             self.tableView.dataSource = self
-            self.tableView.estimatedRowHeight = UITableView.automaticDimension
-            self.tableView.rowHeight = UITableView.automaticDimension
             self.tableView.separatorStyle = .none
+            self.tableView.refreshControl = self.refreshControl
         }
         
         private func setupRefreshControl() {
@@ -166,7 +165,7 @@ extension AtomicSwap.ViewController: UITableViewDelegate {
         if model as? AtomicSwap.AskCell.ViewModel != nil {
             return 120.0
         } else if model as? AtomicSwap.InfoCell.ViewModel != nil {
-            return 120.0
+            return 70.0
         } else {
             return 44.0
         }

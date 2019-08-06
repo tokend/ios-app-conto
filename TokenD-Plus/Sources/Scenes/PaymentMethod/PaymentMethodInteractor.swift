@@ -55,6 +55,16 @@ extension PaymentMethod {
                 .disposed(by: self.disposeBag)
         }
         
+        private func updateScene() {
+            self.setSelectedMethod()
+            let response = Event.ViewDidLoad.Response(
+                baseAsset: self.sceneModel.baseAsset,
+                baseAmount: self.sceneModel.baseAmount,
+                selectedMethod: self.sceneModel.selectedPaymentMethod
+            )
+            self.presenter.presentViewDidLoad(response: response)
+        }
+        
         private func setSelectedMethod() {
             guard let selectedMethod = self.sceneModel.selectedPaymentMethod else {
                 self.setFirstMethodSelected()
@@ -77,16 +87,14 @@ extension PaymentMethod.Interactor: PaymentMethod.BusinessLogic {
     
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
         self.observeLoadingStatus()
-        self.sceneModel.methods = self.paymentMethodsFetcher.fetchPaymentMetods(
-            baseAmount: self.sceneModel.baseAmount
-        )
-        self.setSelectedMethod()
-        let response = Event.ViewDidLoad.Response(
-            baseAsset: self.sceneModel.baseAsset,
+        self.loadingStatus.accept(.loading)
+        self.paymentMethodsFetcher.fetchPaymentMetods(
             baseAmount: self.sceneModel.baseAmount,
-            selectedMethod: self.sceneModel.selectedPaymentMethod
-        )
-        self.presenter.presentViewDidLoad(response: response)
+            completion: { [weak self] (methods) in
+                self?.loadingStatus.accept(.loaded)
+                self?.sceneModel.methods = methods
+                self?.updateScene()
+        })
     }
     
     public func onSelectPaymentMethod(request: Event.SelectPaymentMethod.Request) {
@@ -113,6 +121,7 @@ extension PaymentMethod.Interactor: PaymentMethod.BusinessLogic {
         self.loadingStatus.accept(.loading)
         self.paymentWorker.performPayment(
             quoteAsset: selectedPaymentMethod.asset,
+            quoteAmount: selectedPaymentMethod.amount,
             completion: { [weak self] (result) in
                 self?.loadingStatus.accept(.loaded)
                 let response: Event.PaymentAction.Response

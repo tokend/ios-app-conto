@@ -40,6 +40,13 @@ extension AtomicSwap {
             var pricesAmounts: [PriceCell.ViewModel] = [] {
                 didSet {
                     self.pricesCollection.reloadData()
+                    self.layoutIfNeeded()
+                    self.pricesCollection.snp.remakeConstraints { (make) in
+                        make.leading.trailing.equalToSuperview()
+                        make.top.equalTo(self.priceTextLabel.snp.bottom).offset(self.topInset)
+                        make.bottom.lessThanOrEqualToSuperview().inset(self.topInset).priority(999)
+                        make.height.equalTo(self.pricesCollection.contentSize.height)
+                    }
                 }
             }
             
@@ -59,7 +66,7 @@ extension AtomicSwap {
                 frame: .zero,
                 collectionViewLayout: .init()
             )
-            private let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+            private let flowLayout: LeftAlignedCollectionViewFlowLayout = LeftAlignedCollectionViewFlowLayout()
             
             private let actionButton: UIButton = UIButton()
             
@@ -137,8 +144,10 @@ extension AtomicSwap {
             }
             
             private func setupPriceCollectionLayout() {
-                self.flowLayout.estimatedItemSize = CGSize(width: 50, height: 20)
-                self.flowLayout.minimumInteritemSpacing = 3.0
+                self.flowLayout.estimatedItemSize = CGSize(
+                    width: 80.0,
+                    height: 30.0
+                )
             }
             
             private func setupPriceCollection() {
@@ -148,7 +157,6 @@ extension AtomicSwap {
                     ]
                 )
                 self.pricesCollection.dataSource = self
-                self.pricesCollection.delegate = self
                 self.pricesCollection.isScrollEnabled = false
                 self.pricesCollection.setCollectionViewLayout(
                     self.flowLayout,
@@ -259,9 +267,4 @@ extension AtomicSwap.AskCell.View: UICollectionViewDataSource {
         let cell = self.pricesCollection.dequeueReusableCell(with: model, for: indexPath)
         return cell
     }
-    
-}
-
-extension AtomicSwap.AskCell.View: UICollectionViewDelegate  {
-    
 }

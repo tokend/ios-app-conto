@@ -260,8 +260,7 @@ extension PaymentMethod.ViewController: PaymentMethod.DisplayLogic {
             self.routing?.showError(error)
             
         case .invoce(let invoice):
-            //self.routing?.showAtomicSwapInvoice(invoice)
-            break
+            self.routing?.showAtomicSwapInvoice(invoice)
         }
     }
     

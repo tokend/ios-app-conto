@@ -4,11 +4,12 @@ import TokenDWallet
 
 public enum PaymentMethodPaymentResult {
     case failure(PaymentMethod.Model.PaymentError)
-    case success(PaymentMethod.Model.AtomicSwapFiatPayment)
+    case success(PaymentMethod.Model.AtomicSwapInvoice)
 }
 public protocol PaymentMethodPaymentWorkerProtocol {
     func performPayment(
         quoteAsset: String,
+        quoteAmount: Decimal,
         completion: @escaping(PaymentMethodPaymentResult) -> Void
     )
 }
@@ -60,6 +61,7 @@ extension PaymentMethod {
         
         private func fetchNetworkInfo(
             quoteAsset: String,
+            quoteAmount: Decimal,
             completion: @escaping(PaymentMethodPaymentResult) -> Void
             ) {
             
@@ -72,6 +74,7 @@ extension PaymentMethod {
                 case .succeeded(let networkInfo):
                     self?.buildBidTransaction(
                         networkInfo: networkInfo,
+                        quoteAmount: quoteAmount,
                         quoteAsset: quoteAsset,
                         completion: completion
                     )
@@ -81,6 +84,7 @@ extension PaymentMethod {
         
         private func buildBidTransaction(
             networkInfo: NetworkInfoModel,
+            quoteAmount: Decimal,
             quoteAsset: String,
             completion: @escaping(PaymentMethodPaymentResult) -> Void
             ) {
@@ -132,6 +136,7 @@ extension PaymentMethod {
             self.sendCreatBidRequestTransaction(
                 transactionModel: transaction,
                 networkInfo: networkInfo,
+                quoteAmount: quoteAmount,
                 quoteAsset: quoteAsset,
                 completion: completion
             )
@@ -140,6 +145,7 @@ extension PaymentMethod {
         private func sendCreatBidRequestTransaction(
             transactionModel: TransactionModel,
             networkInfo: NetworkInfoModel,
+            quoteAmount: Decimal,
             quoteAsset: String,
             completion: @escaping(PaymentMethodPaymentResult) -> Void
             ) {
@@ -155,6 +161,7 @@ extension PaymentMethod {
                     case .succeeded:
                         self?.fetchCreateBidRequest(
                             networkInfo: networkInfo,
+                            quoteAmount: quoteAmount,
                             quoteAsset: quoteAsset,
                             completion: completion
                         )
@@ -167,6 +174,7 @@ extension PaymentMethod {
         
         private func fetchCreateBidRequest(
             networkInfo: NetworkInfoModel,
+            quoteAmount: Decimal,
             quoteAsset: String,
             completion: @escaping(PaymentMethodPaymentResult) -> Void
             ) {
@@ -198,6 +206,7 @@ extension PaymentMethod {
                         self?.fetchAccountsRequest(
                             requestId: firstRequestId,
                             networkInfo: networkInfo,
+                            quoteAmount: quoteAmount,
                             quoteAsset: quoteAsset,
                             completion: completion
                         )
@@ -208,6 +217,7 @@ extension PaymentMethod {
         private func fetchAccountsRequest(
             requestId: String,
             networkInfo: NetworkInfoModel,
+            quoteAmount: Decimal,
             quoteAsset: String,
             completion: @escaping(PaymentMethodPaymentResult) -> Void
             ) {
@@ -234,6 +244,7 @@ extension PaymentMethod {
                             request: request,
                             requestId: requestId,
                             networkInfo: networkInfo,
+                            quoteAmount: quoteAmount,
                             quoteAsset: quoteAsset,
                             completion: completion
                         )
@@ -246,6 +257,7 @@ extension PaymentMethod {
             request: TokenDSDK.ReviewableRequestResource,
             requestId: String,
             networkInfo: NetworkInfoModel,
+            quoteAmount: Decimal,
             quoteAsset: String,
             completion: @escaping(PaymentMethodPaymentResult) -> Void
             ) {
@@ -257,7 +269,7 @@ extension PaymentMethod {
                     return
             }
             
-            guard let externalDetails = request.fiatDetails else {
+            guard let externalDetails = request.cryptoDetails else {
                     completion(.failure(.externalDetailsAreNotFound))
                     return
             }
@@ -269,6 +281,7 @@ extension PaymentMethod {
                         self?.fetchAccountsRequest(
                             requestId: requestId,
                             networkInfo: networkInfo,
+                            quoteAmount: quoteAmount,
                             quoteAsset: quoteAsset,
                             completion: completion
                         )
@@ -276,21 +289,16 @@ extension PaymentMethod {
                 return
             }
             
-//            let decimalAmount = self.amountConverter.convertUInt64ToDecimal(
-//                value: firstInvoice.amount,
-//                precision: networkInfo.precision
-//            )
-//            let atomicSwapInvoice = Model.AtomicSwapInvoice(
-//                address: firstInvoice.address,
-//                asset: firstInvoice.assetCode,
-//                amount: decimalAmount
-//            )
-            
-            let fiatPayment = Model.AtomicSwapFiatPayment(
-                secret: firstInvoice.stripeInvoice.clientSecret,
-                id: firstInvoice.stripeInvoice.id
+            let decimalAmount = self.amountConverter.convertUInt64ToDecimal(
+                value: firstInvoice.amount,
+                precision: networkInfo.precision
             )
-            completion(.success(fiatPayment))
+            let atomicSwapInvoice = Model.AtomicSwapInvoice(
+                address: firstInvoice.address,
+                asset: firstInvoice.assetCode,
+                amount: decimalAmount
+            )
+            completion(.success(atomicSwapInvoice))
         }
     }
 }
@@ -299,11 +307,13 @@ extension PaymentMethod.AtomicSwapPaymentWorker: PaymentMethod.PaymentWorkerProt
     
     public func performPayment(
         quoteAsset: String,
+        quoteAmount: Decimal,
         completion: @escaping(PaymentMethodPaymentResult) -> Void
         ) {
         
         self.fetchNetworkInfo(
             quoteAsset: quoteAsset,
+            quoteAmount: quoteAmount,
             completion: completion
         )
     }

@@ -55,7 +55,8 @@ extension AtomicSwap {
         }
         
         private func observeLoadingStatus() {
-            self.loadingStatus
+            self.asksFetcher
+                .observeLoadingStatus()
                 .subscribe(onNext: { [weak self] (status) in
                     self?.presenter.presentLoadingStatusDidChange(response: status)
                 })

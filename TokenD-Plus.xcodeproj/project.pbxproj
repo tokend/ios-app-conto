@@ -26,6 +26,8 @@
 		DB0461F322F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461F222F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift */; };
 		DB0461F622F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461F522F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift */; };
 		DB0461F822F840320050D2BB /* PaymentMethodPaymentWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461F722F840320050D2BB /* PaymentMethodPaymentWorker.swift */; };
+		DB04620C22F9A6520050D2BB /* ReceiveAddressAtomicSwapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04620B22F9A6520050D2BB /* ReceiveAddressAtomicSwapManager.swift */; };
+		DB04620E22F9B5100050D2BB /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04620D22F9B5100050D2BB /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */; };
 		DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */; };
 		DB28C4A722CFAF58005362FD /* ReceiveAddressRedeemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */; };
@@ -714,6 +716,8 @@
 		DB0461F222F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerMethodCell.swift; sourceTree = "<group>"; };
 		DB0461F522F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodPickerAmountFormatter.swift; sourceTree = "<group>"; };
 		DB0461F722F840320050D2BB /* PaymentMethodPaymentWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodPaymentWorker.swift; sourceTree = "<group>"; };
+		DB04620B22F9A6520050D2BB /* ReceiveAddressAtomicSwapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressAtomicSwapManager.swift; sourceTree = "<group>"; };
+		DB04620D22F9B5100050D2BB /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListChangeLanguageWorker.swift; sourceTree = "<group>"; };
 		DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWorker.swift; sourceTree = "<group>"; };
 		DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressRedeemManager.swift; sourceTree = "<group>"; };
@@ -2731,6 +2735,7 @@
 			isa = PBXGroup;
 			children = (
 				DB720B7722C1396B00ED116A /* ExportSeedManager.swift */,
+				DB04620B22F9A6520050D2BB /* ReceiveAddressAtomicSwapManager.swift */,
 				DB720B7622C1396B00ED116A /* ReceiveAddressInvoiceFormatter.swift */,
 				DB720B7A22C1396B00ED116A /* ReceiveAddressInvoiceFormatterProtocol.swift */,
 				DB720B7D22C1396B00ED116A /* ReceiveAddressManager.swift */,
@@ -3260,6 +3265,7 @@
 			isa = PBXGroup;
 			children = (
 				DB720C4122C1396B00ED116A /* HorizontalPicker.swift */,
+				DB04620D22F9B5100050D2BB /* LeftAlignedCollectionViewFlowLayout.swift */,
 				DB720C4F22C1396B00ED116A /* ScrollableStackView.swift */,
 				DB720C3F22C1396B00ED116A /* SharedViewsBuilder.swift */,
 				DB720C6222C1396B00ED116A /* TableViewStickyHeader.swift */,
@@ -3926,6 +3932,7 @@
 				DB720EB322C1396C00ED116A /* BalancesFetcher.swift in Sources */,
 				DB720E1C22C1396C00ED116A /* RegisterSceneAggreeOnTermsView.swift in Sources */,
 				DB720DE522C1396C00ED116A /* TradesListAssetColoringProvider.swift in Sources */,
+				DB04620C22F9A6520050D2BB /* ReceiveAddressAtomicSwapManager.swift in Sources */,
 				DB720EB722C1396C00ED116A /* ImagesUtility.swift in Sources */,
 				DB720D4822C1396B00ED116A /* ChartAmountFormatter.swift in Sources */,
 				DB720F5B22C4CD1C00ED116A /* PollsPresenter.swift in Sources */,
@@ -4310,6 +4317,7 @@
 				DB4AE2C922EB3B8F001D0883 /* AtomicSwapInteractor.swift in Sources */,
 				DB720F0322C1396C00ED116A /* ApplicationEventsController.swift in Sources */,
 				DB720DB322C1396B00ED116A /* SendPaymentAmountFeeOverviewer.swift in Sources */,
+				DB04620E22F9B5100050D2BB /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				DB720D3322C1396B00ED116A /* MarkdownViewerViewController.swift in Sources */,
 				DB720E9C22C1396C00ED116A /* UIViewController+Nib.swift in Sources */,
 				DB720E4322C1396C00ED116A /* BalancesListPieChartCell.swift in Sources */,

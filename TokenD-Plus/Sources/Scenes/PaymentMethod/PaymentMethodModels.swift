@@ -44,9 +44,17 @@ extension PaymentMethod.Model {
         let amount: Decimal
     }
     
+    public struct AtomicSwapInvoiceViewModel {
+        let address: String
+        let amount: String
+    }
+
+    
     public struct AtomicSwapFiatPayment {
         let secret: String
         let id: String
+        let asset: String
+        let amount: Decimal
     }
     
     public enum PaymentError: Swift.Error {
@@ -91,11 +99,11 @@ extension PaymentMethod.Event {
     public enum PaymentAction {
         public struct Request {}
         public enum Response {
-            case invoce(Model.AtomicSwapFiatPayment)
+            case invoce(Model.AtomicSwapInvoice)
             case error(Error)
         }
         public enum ViewModel {
-            case invoce(Model.AtomicSwapFiatPayment)
+            case invoce(Model.AtomicSwapInvoiceViewModel)
             case error(String)
         }
     }

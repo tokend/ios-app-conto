@@ -203,7 +203,8 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
         let viewConfig = ReceiveAddress.Model.ViewConfig(
             copiedLocalizationKey: Localized(.copied),
             tableViewTopInset: 24,
-            headerAppearence: .withText(header)
+            headerAppearence: .withText(header),
+            qrValueAppearence: .hidden
         )
         
         let sceneModel = ReceiveAddress.Model.SceneModel()
@@ -243,7 +244,6 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
         self.navigationController.present(activity, animated: true, completion: nil)
     }
 
-    
     // MARK: - Private
     
     private func showBalancePicker(

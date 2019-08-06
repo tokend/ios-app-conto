@@ -250,7 +250,8 @@ class BaseSignedInFlowController: BaseFlowController {
         let viewConfig = ReceiveAddress.Model.ViewConfig(
             copiedLocalizationKey: Localized(.copied),
             tableViewTopInset: 24,
-            headerAppearence: .hidden
+            headerAppearence: .hidden,
+            qrValueAppearence: .shown
         )
         
         let addressManager = ReceiveAddress.ReceiveAddressManager(
