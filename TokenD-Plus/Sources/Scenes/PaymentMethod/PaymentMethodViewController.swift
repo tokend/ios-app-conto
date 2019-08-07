@@ -38,7 +38,7 @@ extension PaymentMethod {
         private let topInset: CGFloat = 15.0
         
         private let buttonHeight: CGFloat = 55.0
-        private let iconSize: CGFloat = 24.0
+        private let iconSize: CGFloat = 36.0
         
         // MARK: -
         

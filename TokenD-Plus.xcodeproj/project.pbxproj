@@ -1434,17 +1434,9 @@
 				DB0461C622F48F130050D2BB /* PaymentMethodPresenter.swift */,
 				DB0461C722F48F130050D2BB /* PaymentMethodRouting.swift */,
 				DB0461C922F48F130050D2BB /* PaymentMethodViewController.swift */,
-				DB0461D222F490C30050D2BB /* Views */,
 				DB0461D322F4A2030050D2BB /* Workers */,
 			);
 			path = PaymentMethod;
-			sourceTree = "<group>";
-		};
-		DB0461D222F490C30050D2BB /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		DB0461D322F4A2030050D2BB /* Workers */ = {
