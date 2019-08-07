@@ -178,8 +178,8 @@ extension Settings {
                 description: ""
             )
             
-//            var tfaTopSeparator: Model.CellModel.SeparatorStyle = .line
-//            var tfaPosition: Int = 0
+            var tfaTopSeparator: Model.CellModel.SeparatorStyle = .line
+            var tfaPosition: Int = 0
             
             let changePassCell = Model.CellModel(
                 title: Localized(.change_password),
@@ -216,12 +216,12 @@ extension Settings {
                     identifier: .biometrics
                 )
                 securityCells.insert(biometricsAuthCell, at: 0)
-//                tfaTopSeparator = .none
-//                tfaPosition = 1
+                tfaTopSeparator = .none
+                tfaPosition = 1
             }
             
-//            let tfaCell = self.checkTFAEnabledState(topSeparator: tfaTopSeparator)
-//            securityCells.insert(tfaCell, at: tfaPosition)
+            let tfaCell = self.checkTFAEnabledState(topSeparator: tfaTopSeparator)
+            securityCells.insert(tfaCell, at: tfaPosition)
             
             let securitySection = Model.SectionModel(
                 title: Localized(.security),
@@ -632,9 +632,12 @@ extension Settings {
                     case .success(let factors):
                         let totpFactors = factors.getTOTPFactors()
                         if let totpFactor = totpFactors.first {
+                            guard let id = Int(totpFactor.id) else {
+                                return
+                            }
                             self?.tfaApi.deleteFactor(
                                 walletId: walletId,
-                                factorId: totpFactor.id,
+                                factorId: id,
                                 completion: { (deleteResult) in
                                     switch deleteResult {
                                         
@@ -678,10 +681,12 @@ extension Settings {
                 style: .default,
                 handler: { [weak self] _ in
                     UIPasteboard.general.string = response.attributes.secret
-                    
+                    guard let id = Int(response.id) else {
+                        return
+                    }
                     self?.updateTOTPFactor(
                         walletId: walletId,
-                        factorId: response.id,
+                        factorId: id,
                         priority: priority,
                         stopLoading: stopLoading,
                         completion: completion
@@ -696,10 +701,12 @@ extension Settings {
                     handler: { [weak self] _ in
                         UIPasteboard.general.string = response.attributes.secret
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                        
+                        guard let id = Int(response.id) else {
+                            return
+                        }
                         self?.updateTOTPFactor(
                             walletId: walletId,
-                            factorId: response.id,
+                            factorId: id,
                             priority: priority,
                             stopLoading: stopLoading,
                             completion: completion
