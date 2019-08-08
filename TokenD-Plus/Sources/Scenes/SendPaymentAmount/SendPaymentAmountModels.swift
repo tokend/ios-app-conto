@@ -532,6 +532,7 @@ extension SendPaymentAmount.Model.ViewConfig {
         )
         
         return SendPaymentAmount.Model.ViewConfig(
+            recipientAppearence: .hidden,
             descriptionIsHidden: true,
             actionButtonTitle: actionButtonTitle,
             pickerIsAvailable: false,

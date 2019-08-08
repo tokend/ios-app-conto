@@ -18,6 +18,7 @@ extension AtomicSwap {
         // MARK: - Private properties
         
         private let asksRepo: AtomicSwapAsksRepo
+        private let assetsRepo: AssetsRepo
         
         private let asks: BehaviorRelay<[Model.Ask]> = BehaviorRelay(value: [])
         private let loadingStatus: BehaviorRelay<Model.LoadingStatus> = BehaviorRelay(value: .loaded)
@@ -27,8 +28,13 @@ extension AtomicSwap {
         
         // MARK: -
         
-        init(asksRepo: AtomicSwapAsksRepo) {
+        init(
+            asksRepo: AtomicSwapAsksRepo,
+            assetsRepo: AssetsRepo
+            ) {
+            
             self.asksRepo = asksRepo
+            self.assetsRepo = assetsRepo
         }
         
         // MARK: - Private
@@ -51,15 +57,24 @@ extension AtomicSwap {
                 .disposed(by: self.disposeBag)
         }
         
+        private func getAssetName(code: String) -> String {
+            let asset = self.assetsRepo.assetsValue.first(where: { (asset) -> Bool in
+                return asset.code == code
+            })
+            return asset?.defaultDetails?.name ?? code
+        }
+        
         private func handleAskResources(resources: [AtomicSwapAskResource]) {
             let asks = resources.compactMap { (resource) -> Model.Ask? in
                 guard
                     let id = resource.id,
-                    let baseAsset = resource.baseAsset?.id else {
+                    let baseAsset = resource.baseAsset?.id,
+                    let baseAssetName = resource.baseAsset?.name else {
                         return nil
                 }
                 let available = Model.BaseAmount(
-                    asset: baseAsset,
+                    assetCode: baseAsset,
+                    assetName: baseAssetName,
                     value: resource.availableAmount
                 )
                 guard let quoteAssets = resource.quoteAssets else {
@@ -67,11 +82,13 @@ extension AtomicSwap {
                 }
                 
                 let prices = quoteAssets.compactMap({ (assetResource) -> Model.QuoteAmount? in
-                    guard let asset = assetResource.id else {
-                        return nil
+                    guard let assetCode = assetResource.id else {
+                            return nil
                     }
+                    let assetName = self.getAssetName(code: assetCode)
                     return Model.QuoteAmount(
-                        asset: asset,
+                        assetCode: assetCode,
+                        assetName: assetName,
                         value: assetResource.price
                     )
                 })

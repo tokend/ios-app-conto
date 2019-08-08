@@ -19,7 +19,8 @@ extension AtomicSwap.Model {
     typealias QuoteAmount = Amount
     
     public struct SceneModel {
-        let asset: String
+        let assetCode: String
+        let assetName: String
         var asks: [Ask]
     }
     
@@ -30,11 +31,12 @@ extension AtomicSwap.Model {
     }
     
     public struct Header {
-        let asset: String
+        let assetName: String
     }
     
     public struct Amount {
-        let asset: String
+        let assetCode: String
+        let assetName: String
         let value: Decimal
     }
     

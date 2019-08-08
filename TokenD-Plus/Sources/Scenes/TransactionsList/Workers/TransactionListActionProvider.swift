@@ -150,12 +150,6 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
             actions.append(receiveAction)
         }
         
-        guard let asset = self.assetsRepo.assetsValue.first(where: { (asset) in
-            return asset.code == details.asset
-        }) else {
-            return actions
-        }
-        
         if asset.owner == self.originalAccountId {
             let acceptRedeemAction = TransactionsListScene.ActionModel(
                 title: Localized(.accept_redemption),
@@ -173,17 +167,20 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
                 actions.append(createRedeemAction)
             }
         }
-let buyIsEnabled: Bool =
-Int32(asset.policy) & AssetPolicy.canBeBaseInAtomicSwap.rawValue
-== AssetPolicy.canBeBaseInAtomicSwap.rawValue
-let buyAction = TransactionsListScene.ActionModel(
-title: Localized(.buy),
-image: Assets.buy.image,
-enabled: buyIsEnabled,
-type: .buy(asset: asset.code)
-)
-actions.append(buyAction)
-
+        let buyIsEnabled: Bool =
+            Int32(asset.policy) & AssetPolicy.canBeBaseInAtomicSwap.rawValue
+                == AssetPolicy.canBeBaseInAtomicSwap.rawValue
+        let buyAction = TransactionsListScene.ActionModel(
+            title: Localized(.buy),
+            image: Assets.buy.image,
+            enabled: buyIsEnabled,
+            type: .buy(
+                assetCode: asset.code,
+                assetName: asset.defaultDetails?.name ?? asset.code
+            )
+        )
+        actions.append(buyAction)
+        
         return actions
     }
 }

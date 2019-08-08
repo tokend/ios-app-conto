@@ -63,7 +63,7 @@ extension PaymentMethod {
                 .map({ (price) -> PaymentMethod.Model.PaymentMethod in
                     let amount = price.value * baseAmount
                     return PaymentMethod.Model.PaymentMethod(
-                        asset: price.asset,
+                        asset: price.assetName,
                         amount: amount
                     )
                 })

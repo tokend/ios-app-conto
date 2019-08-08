@@ -18,7 +18,8 @@ extension PaymentMethod.Model {
     public typealias AskModel = SendPaymentAmount.Model.AskModel
     
     public struct SceneModel {
-        let baseAsset: String
+        let baseAssetCode: String
+        let baseAssetName: String
         let baseAmount: Decimal
         var methods: [PaymentMethod]
         var selectedPaymentMethod: PaymentMethod?
@@ -86,7 +87,7 @@ extension PaymentMethod.Event {
     public enum ViewDidLoad {
         public struct Request {}
         public struct Response {
-            let baseAsset: String
+            let baseAssetName: String
             let baseAmount: Decimal
             let selectedMethod: Model.PaymentMethod?
         }

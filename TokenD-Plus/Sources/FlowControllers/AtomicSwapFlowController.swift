@@ -6,14 +6,16 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol
-    private let asset: String
+    private let assetСode: String
+    private let assetName: String
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: -
     
     init(
         navigationController: NavigationControllerProtocol,
-        asset: String,
+        assetСode: String,
+        assetName: String,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
         reposController: ReposController,
@@ -24,7 +26,8 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         ) {
         
         self.navigationController = navigationController
-        self.asset = asset
+        self.assetСode = assetСode
+        self.assetName = assetName
         
         super.init(
             appController: appController,
@@ -45,7 +48,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         vc.navigationItem.title = Localized(
             .buy_asset,
             replace: [
-                .buy_asset_replace_asset: self.asset
+                .buy_asset_replace_asset: self.assetName
             ]
         )
         showRootScreen(vc)
@@ -55,10 +58,14 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     
     private func setupAtomicSwapScene() -> UIViewController {
         let vc = AtomicSwap.ViewController()
-        let asksRepo = self.reposController.getAtomicSwapAsksRepo(for: self.asset)
-        let asksFetcher = AtomicSwap.AsksFetcher(asksRepo: asksRepo)
+        let asksRepo = self.reposController.getAtomicSwapAsksRepo(for: self.assetСode)
+        let asksFetcher = AtomicSwap.AsksFetcher(
+            asksRepo: asksRepo,
+            assetsRepo: self.reposController.assetsRepo
+        )
         let sceneModel = AtomicSwap.Model.SceneModel(
-            asset: self.asset,
+            assetCode: self.assetСode,
+            assetName: self.assetName,
             asks: []
         )
         let amountFormatter = AtomicSwap.AmountFormatter()
@@ -97,7 +104,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         vc.navigationItem.title = Localized(
             .buy_asset,
             replace: [
-                .buy_asset_replace_asset: ask.available.asset
+                .buy_asset_replace_asset: ask.available.assetName
             ]
         )
         self.navigationController.pushViewController(vc, animated: true)
@@ -107,7 +114,8 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         let vc = SendPaymentAmount.ViewController()
         
         let buyPreposition = SendPaymentAmount.Model.BalanceDetails(
-            asset: ask.available.asset,
+            assetCode: ask.available.assetCode,
+            assetName: ask.available.assetName,
             balance: ask.available.value,
             balanceId: ""
         )
@@ -173,7 +181,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     
     private func showPaymentMethodScene(askModel: SendPaymentAmount.Model.AskModel) {
         let vc = self.setupPaymentMethodScene(askModel: askModel)
-        vc.navigationItem.title = Localized(.payment_amount)
+        vc.navigationItem.title = Localized(.payment_method)
         
         self.navigationController.pushViewController(vc, animated: true)
     }
@@ -198,7 +206,8 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         )
         
         let sceneModel = PaymentMethod.Model.SceneModel(
-            baseAsset: askModel.ask.available.asset,
+            baseAssetCode: askModel.ask.available.assetCode,
+            baseAssetName: askModel.ask.available.assetName,
             baseAmount: askModel.amount,
             methods: [],
             selectedPaymentMethod: nil

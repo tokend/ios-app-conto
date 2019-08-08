@@ -64,7 +64,7 @@ extension PaymentMethod.Presenter: PaymentMethod.PresentationLogic {
     public func presentViewDidLoad(response: Event.ViewDidLoad.Response) {
         let baseAmount = self.amountFormatter.formatAmount(
             response.baseAmount,
-            currency: response.baseAsset
+            currency: response.baseAssetName
         )
         let buyAmount = Localized(
             .buy_asset,

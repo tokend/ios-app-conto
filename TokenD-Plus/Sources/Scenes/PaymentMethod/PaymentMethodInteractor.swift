@@ -58,7 +58,7 @@ extension PaymentMethod {
         private func updateScene() {
             self.setSelectedMethod()
             let response = Event.ViewDidLoad.Response(
-                baseAsset: self.sceneModel.baseAsset,
+                baseAssetName: self.sceneModel.baseAssetName,
                 baseAmount: self.sceneModel.baseAmount,
                 selectedMethod: self.sceneModel.selectedPaymentMethod
             )

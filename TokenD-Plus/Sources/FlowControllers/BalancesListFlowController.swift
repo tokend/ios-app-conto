@@ -217,10 +217,11 @@ class BalancesListFlowController: BaseSignedInFlowController {
             showReceive: { [weak self] in
                 self?.showReceiveScene(navigationController: navigationController)
             },
-            showBuy: { [weak self] (asset) in
+            showBuy: { [weak self] (assetCode, assetName) in
                 self?.runAtomicSwapFlow(
                     navigationController: navigationController,
-                    asset: asset
+                    assetCode: assetCode,
+                    assetName: assetName
                 )
             },
             showShadow: { [weak self] in
@@ -276,7 +277,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
             showCreateReedeem: { _ in },
             showAcceptRedeem: { },
             showReceive: { },
-            showBuy: { _ in },
+            showBuy: { _, _ in },
             showShadow: { [weak self] in
                 self?.navigationController.showShadow()
             },

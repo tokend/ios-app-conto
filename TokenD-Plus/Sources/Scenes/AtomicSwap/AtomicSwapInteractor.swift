@@ -83,7 +83,7 @@ extension AtomicSwap {
         }
         
         private func getHeaderCell() -> Model.Cell {
-            let header = Model.Header(asset: self.sceneModel.asset)
+            let header = Model.Header(assetName: self.sceneModel.assetName)
             return .header(header)
         }
     }

@@ -137,7 +137,6 @@ extension PaymentMethod {
                 transactionModel: transaction,
                 networkInfo: networkInfo,
                 quoteAmount: quoteAmount,
-                quoteAsset: quoteAsset,
                 completion: completion
             )
         }
@@ -146,7 +145,6 @@ extension PaymentMethod {
             transactionModel: TransactionModel,
             networkInfo: NetworkInfoModel,
             quoteAmount: Decimal,
-            quoteAsset: String,
             completion: @escaping(PaymentMethodPaymentResult) -> Void
             ) {
             
@@ -162,7 +160,6 @@ extension PaymentMethod {
                         self?.fetchCreateBidRequest(
                             networkInfo: networkInfo,
                             quoteAmount: quoteAmount,
-                            quoteAsset: quoteAsset,
                             completion: completion
                         )
                     }
@@ -175,7 +172,6 @@ extension PaymentMethod {
         private func fetchCreateBidRequest(
             networkInfo: NetworkInfoModel,
             quoteAmount: Decimal,
-            quoteAsset: String,
             completion: @escaping(PaymentMethodPaymentResult) -> Void
             ) {
             
@@ -207,7 +203,6 @@ extension PaymentMethod {
                             requestId: firstRequestId,
                             networkInfo: networkInfo,
                             quoteAmount: quoteAmount,
-                            quoteAsset: quoteAsset,
                             completion: completion
                         )
                     }
@@ -218,7 +213,6 @@ extension PaymentMethod {
             requestId: String,
             networkInfo: NetworkInfoModel,
             quoteAmount: Decimal,
-            quoteAsset: String,
             completion: @escaping(PaymentMethodPaymentResult) -> Void
             ) {
             
@@ -245,7 +239,6 @@ extension PaymentMethod {
                             requestId: requestId,
                             networkInfo: networkInfo,
                             quoteAmount: quoteAmount,
-                            quoteAsset: quoteAsset,
                             completion: completion
                         )
                     }
@@ -258,7 +251,6 @@ extension PaymentMethod {
             requestId: String,
             networkInfo: NetworkInfoModel,
             quoteAmount: Decimal,
-            quoteAsset: String,
             completion: @escaping(PaymentMethodPaymentResult) -> Void
             ) {
             
@@ -282,7 +274,6 @@ extension PaymentMethod {
                             requestId: requestId,
                             networkInfo: networkInfo,
                             quoteAmount: quoteAmount,
-                            quoteAsset: quoteAsset,
                             completion: completion
                         )
                 })

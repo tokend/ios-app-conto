@@ -39,7 +39,7 @@ extension AtomicSwap {
             let pricesViewModels = prices.map { (price) -> PriceCell.ViewModel in
                 let amount = self.amountFormatter.formatAmount(
                     price.value,
-                    currency: price.asset
+                    currency: price.assetName
                 )
                 return PriceCell.ViewModel(amount: amount)
             }
@@ -58,11 +58,11 @@ extension AtomicSwap {
                         id: ask.id,
                         availableAmount: availableAmount,
                         pricesAmounts: pricesAmounts,
-                        baseAsset: ask.available.asset
+                        baseAsset: ask.available.assetName
                     )
                     
                 case .header(let header):
-                    viewModel = InfoCell.ViewModel(baseAsset: header.asset)
+                    viewModel = InfoCell.ViewModel(baseAsset: header.assetName)
                 }
                 return viewModel
             }
