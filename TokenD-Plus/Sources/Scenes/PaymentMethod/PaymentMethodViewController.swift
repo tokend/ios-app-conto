@@ -239,8 +239,8 @@ extension PaymentMethod.ViewController: PaymentMethod.DisplayLogic {
     
     public func displaySelectPaymentMethod(viewModel: Event.SelectPaymentMethod.ViewModel) {
         
-        let completion: (String) -> Void = { [weak self] (asset) in
-            let request = Event.PaymentMethodSelected.Request(asset: asset)
+        let completion: (String) -> Void = { [weak self] (assetName) in
+            let request = Event.PaymentMethodSelected.Request(assetName: assetName)
             self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
                 businessLogic.onPaymentMethodSelected(request: request)
             })

@@ -26,11 +26,12 @@ extension PaymentMethod.Model {
     }
     
     public struct PaymentMethod: Equatable {
-        let asset: String
+        let assetCode: String
+        let assetName: String
         let amount: Decimal
         
         public static func == (lhs: PaymentMethod, rhs: PaymentMethod) -> Bool {
-            return lhs.asset == rhs.asset
+            return lhs.assetCode == rhs.assetCode
         }
     }
     
@@ -119,7 +120,7 @@ extension PaymentMethod.Event {
     
     public enum PaymentMethodSelected {
         public struct Request {
-            let asset: String
+            let assetName: String
         }
         public struct Response {
             let method: Model.PaymentMethod

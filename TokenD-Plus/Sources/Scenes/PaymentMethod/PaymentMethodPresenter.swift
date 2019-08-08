@@ -46,7 +46,7 @@ extension PaymentMethod {
                 ]
             )
             return Model.PaymentMethodViewModel(
-                asset: method.asset,
+                asset: method.assetName,
                 toPayAmount: toPayAmount
             )
         }

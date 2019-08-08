@@ -44,7 +44,7 @@ extension PaymentMethodPicker {
                     ]
                 )
                 return MethodCell.ViewModel(
-                    asset: method.asset,
+                    asset: method.assetName,
                     toPayAmount: toPayAmount
                 )
             })

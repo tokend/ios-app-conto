@@ -104,7 +104,7 @@ extension PaymentMethod.Interactor: PaymentMethod.BusinessLogic {
     
     public func onPaymentMethodSelected(request: Event.PaymentMethodSelected.Request) {
         guard let method = self.sceneModel.methods.first(where: { (method) -> Bool in
-            return method.asset == request.asset
+            return method.assetName == request.assetName
         }) else {
             return
         }
@@ -120,7 +120,7 @@ extension PaymentMethod.Interactor: PaymentMethod.BusinessLogic {
         }
         self.loadingStatus.accept(.loading)
         self.paymentWorker.performPayment(
-            quoteAsset: selectedPaymentMethod.asset,
+            quoteAsset: selectedPaymentMethod.assetCode,
             quoteAmount: selectedPaymentMethod.amount,
             completion: { [weak self] (result) in
                 self?.loadingStatus.accept(.loaded)
