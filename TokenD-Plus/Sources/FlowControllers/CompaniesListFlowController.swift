@@ -117,6 +117,19 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         }
     }
     
+    private func showHomeScreen() {
+        let vc = self.setupCompaniesScreen()
+        
+        vc.navigationItem.title = Localized(.companies)
+        self.navigationController.setViewControllers([vc], animated: false)
+        
+        self.rootNavigation.setRootContent(
+            self.navigationController,
+            transition: .fade,
+            animated: true
+        )
+    }
+    
     private func setupCompaniesScreen() -> UIViewController {
         let vc = CompaniesList.ViewController()
         
@@ -398,7 +411,7 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     private func onLocalAuthSucceded() {
         self.isAuthorized = true
         self.localAuthFlow = nil
-        self.showCompaniesScreen()
+        self.showHomeScreen()
         self.startUserActivityTimer()
     }
 }
