@@ -22,6 +22,7 @@ extension AcceptRedeem {
         private let accountsApiV3: AccountsApiV3
         private let networkInfoFetcher: NetworkInfoFetcher
         private let amountConverter: AmountConverterProtocol
+        private let assetRepo: AssetsRepo
         private let redeemRequest: String
         private let originalAccountId: String
         
@@ -38,6 +39,7 @@ extension AcceptRedeem {
             accountsApiV3: AccountsApiV3,
             networkInfoFetcher: NetworkInfoFetcher,
             amountConverter: AmountConverterProtocol,
+            assetRepo: AssetsRepo,
             redeemRequest: String,
             originalAccountId: String,
             showProgress: (() -> Void)?,
@@ -47,6 +49,7 @@ extension AcceptRedeem {
             self.accountsApiV3 = accountsApiV3
             self.networkInfoFetcher = networkInfoFetcher
             self.amountConverter = amountConverter
+            self.assetRepo = assetRepo
             self.redeemRequest = redeemRequest
             self.originalAccountId = originalAccountId
             self.showProgress = showProgress
@@ -205,10 +208,14 @@ extension AcceptRedeem {
                 count: requestBytes.count
             )
             
+            let assetName = self.assetRepo.assetsValue.first { (reposAsset) -> Bool in
+                return reposAsset.code == asset
+            }?.defaultDetails?.name ?? asset
+            
             let acceptRedeemModel = Model.RedeemModel(
                 senderAccountId: senderAccountId,
                 senderBalanceId: senderBalanceId,
-                asset: asset,
+                assetName: assetName ,
                 inputAmount: inputAmount,
                 precisedAmount: precisedAmount,
                 salt: salt,

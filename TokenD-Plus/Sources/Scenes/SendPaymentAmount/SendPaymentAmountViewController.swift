@@ -161,7 +161,7 @@ extension SendPaymentAmount {
         
         private func setupRecipientLabel() {
             self.recipientLabel.backgroundColor = Theme.Colors.contentBackgroundColor
-            self.recipientLabel.font = Theme.Fonts.plainTextFont
+            self.recipientLabel.font = Theme.Fonts.largeTitleFont
             self.recipientLabel.textAlignment = .center
             self.recipientLabel.numberOfLines = 1
             self.recipientLabel.lineBreakMode = .byTruncatingMiddle
@@ -270,7 +270,7 @@ extension SendPaymentAmount {
             
             self.recipientLabel.snp.makeConstraints { (make) in
                 make.leading.trailing.equalToSuperview().inset(20.0)
-                make.top.equalToSuperview().inset(15.0)
+                make.top.equalToSuperview().inset(10.0)
             }
             
             self.inputAmountContainer.snp.makeConstraints { (make) in
