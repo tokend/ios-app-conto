@@ -159,7 +159,7 @@ extension SendPaymentDestination {
             
             let withdrawModel = Model.SendWithdrawModel(
                 senderBalanceId: balance.balanceId,
-                asset: balance.asset,
+                asset: balance.assetCode,
                 amount: amount,
                 recipientNickname: recipientAddress,
                 recipientAddress: recipientAddress,

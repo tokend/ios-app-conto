@@ -29,7 +29,6 @@ extension SendPaymentAmount {
         private let queue: DispatchQueue
         private let sceneModel: Model.SceneModel
         private let senderAccountId: String
-        private let selectedBalanceId: String?
         private let balanceDetailsLoader: BalanceDetailsLoader
         private let createRedeemRequestWorker: CreateRedeemRequestWorkerProtocol?
         
@@ -57,11 +56,19 @@ extension SendPaymentAmount {
             self.queue = queue
             self.sceneModel = sceneModel
             self.senderAccountId = senderAccountId
-            self.selectedBalanceId = selectedBalanceId
             self.balanceDetailsLoader = balanceDetailsLoader
             self.createRedeemRequestWorker = createRedeemRequestWorker
             self.feeLoader = feeLoader
             self.feeOverviewer = feeOverviewer
+            
+            if let selectedBalanceId = selectedBalanceId {
+                self.sceneModel.selectedBalance = Model.BalanceDetails(
+                    assetCode: "",
+                    assetName: "",
+                    balance: 0,
+                    balanceId: selectedBalanceId
+                )
+            }
         }
         
         // MARK: - Private
@@ -120,7 +127,7 @@ extension SendPaymentAmount {
         
         private func updateFeeOverviewAvailability() {
             let available = self.feeOverviewer.checkFeeExistanceFor(
-                asset: self.sceneModel.selectedBalance?.asset ?? "",
+                asset: self.sceneModel.selectedBalance?.assetCode ?? "",
                 feeType: self.sceneModel.feeType
             )
             let response = Event.FeeOverviewAvailability.Response(available: available)
@@ -153,7 +160,7 @@ extension SendPaymentAmount {
             }
             
             self.loadFees(
-                asset: balance.asset,
+                asset: balance.assetCode,
                 amount: amount,
                 accountId: recipientAddress,
                 completion: { result in
@@ -167,7 +174,7 @@ extension SendPaymentAmount {
                     case .succeeded(let senderFee, let recipientFee):
                         let sendPaymentModel = Model.SendPaymentModel(
                             senderBalanceId: balance.balanceId,
-                            asset: balance.asset,
+                            assetName: balance.assetName,
                             amount: amount,
                             recipientNickname: recipientAddress,
                             recipientAccountId: recipientAddress,
@@ -201,7 +208,7 @@ extension SendPaymentAmount {
             self.presenter.presentWithdrawAction(response: .loading)
             
             self.loadWithdrawFees(
-                asset: balance.asset,
+                asset: balance.assetCode,
                 amount: amount,
                 completion: { [weak self] (result) in
                     switch result {
@@ -212,7 +219,7 @@ extension SendPaymentAmount {
                     case .succeeded(let senderFee):
                         let sendWitdrawtModel = Model.SendWithdrawModel(
                             senderBalance: balance,
-                            asset: balance.asset,
+                            assetName: balance.assetName,
                             amount: amount,
                             senderFee: senderFee
                         )
@@ -238,7 +245,8 @@ extension SendPaymentAmount {
                 return
             }
             self.createRedeemRequestWorker?.createRedeemRequest(
-                asset: balance.asset,
+                assetCode: balance.assetCode,
+                assetName: balance.assetName,
                 amount: amount,
                 completion: { [weak self] (result) in
                     let response: Event.RedeemAction.Response
@@ -371,7 +379,7 @@ extension SendPaymentAmount.Interactor: SendPaymentAmount.BusinessLogic {
                     guard let strongSelf = self else { return }
                     
                     self?.balances = balanceDetails
-                    if let balanceId = self?.selectedBalanceId {
+                    if let balanceId = self?.sceneModel.selectedBalance?.balanceId {
                         self?.setBalanceSelected(balanceId)
                     } else {
                         self?.selectFirstBalance()
@@ -433,7 +441,7 @@ extension SendPaymentAmount.Interactor: SendPaymentAmount.BusinessLogic {
     }
     
     func onFeeOverviewAction(request: Event.FeeOverviewAction.Request) {
-        guard let asset = self.sceneModel.selectedBalance?.asset else {
+        guard let asset = self.sceneModel.selectedBalance?.assetCode else {
             return
         }
         let feeType = self.feeOverviewer.getSystemFeeType(feeType: self.sceneModel.feeType)
