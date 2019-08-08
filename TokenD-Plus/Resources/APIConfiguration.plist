@@ -5,9 +5,9 @@
 	<key>web_client</key>
 	<string>https://staging.conto.me</string>
 	<key>api_endpoint</key>
-	<string>https://api.staging.conto.me</string>
+	<string>https://53133ee4.ngrok.io/_/api/</string>
 	<key>storage_endpoint</key>
-	<string>https://s3.eu-north-1.amazonaws.com/contostaging-identity-storage-festive-cannon-2</string>
+	<string>https://53133ee4.ngrok.io/_/storage/api</string>
 	<key>contribute_url</key>
 	<string>https://github.com/tokend/ios-app-loyalty</string>
 	<key>terms_address</key>

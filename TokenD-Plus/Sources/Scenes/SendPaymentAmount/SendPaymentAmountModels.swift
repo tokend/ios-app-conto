@@ -35,6 +35,7 @@ public extension SendPaymentAmount.Model {
     }
     
     struct ViewConfig {
+        let recipientAppearence: RecipientAppearence
         let descriptionIsHidden: Bool
         let actionButtonTitle: NSAttributedString
     }
@@ -47,7 +48,8 @@ public extension SendPaymentAmount.Model {
     }
     
     struct BalanceDetails {
-        public let asset: String
+        public let assetCode: String
+        public let assetName: String
         public let balance: Decimal
         public let balanceId: String
     }
@@ -66,7 +68,7 @@ public extension SendPaymentAmount.Model {
     
     struct SendPaymentModel {
         public let senderBalanceId: String
-        public let asset: String
+        public let assetName: String
         public let amount: Decimal
         public let recipientNickname: String
         public let recipientAccountId: String
@@ -78,7 +80,7 @@ public extension SendPaymentAmount.Model {
     
     struct SendWithdrawModel {
         public let senderBalance: BalanceDetails
-        public let asset: String
+        public let assetName: String
         public let amount: Decimal
         public let senderFee: FeeModel
     }
@@ -86,7 +88,7 @@ public extension SendPaymentAmount.Model {
     struct ShowRedeemModel {
         let redeemRequest: String
         let amount: Decimal
-        let asset: String
+        let assetName: String
     }
     
     struct ShowRedeemViewModel {
@@ -104,6 +106,11 @@ public extension SendPaymentAmount.Model {
         case payment
         case offer
         case withdraw
+    }
+    
+    enum RecipientAppearence {
+        case hidden
+        case text(String)
     }
     
     struct FeeOverviewModel {
@@ -408,7 +415,7 @@ extension SendPaymentAmount.Model.BalanceDetails: Equatable {
 
 extension SendPaymentAmount.Model.ViewConfig {
     
-    static func sendPaymentViewConfig() -> SendPaymentAmount.Model.ViewConfig {
+    static func sendPaymentViewConfig(recipient: String) -> SendPaymentAmount.Model.ViewConfig {
         let actionButtonTitle = NSAttributedString(
             string: Localized(.confirm),
             attributes: [
@@ -417,7 +424,14 @@ extension SendPaymentAmount.Model.ViewConfig {
             ]
         )
         
+        let recipeintText = Localized(
+            .to,
+            replace: [
+                .to_replace_address : recipient
+            ]
+        )
         return SendPaymentAmount.Model.ViewConfig(
+            recipientAppearence: .text(recipeintText),
             descriptionIsHidden: false,
             actionButtonTitle: actionButtonTitle
         )
@@ -433,12 +447,13 @@ extension SendPaymentAmount.Model.ViewConfig {
         )
         
         return SendPaymentAmount.Model.ViewConfig(
+            recipientAppearence: .hidden,
             descriptionIsHidden: true,
             actionButtonTitle: actionButtonTitle
         )
     }
     
-    static func redeemViewConfig() -> SendPaymentAmount.Model.ViewConfig {
+    static func redeemViewConfig(business: String) -> SendPaymentAmount.Model.ViewConfig {
         let actionButtonTitle = NSAttributedString(
             string: Localized(.continue_capitalized),
             attributes: [
@@ -446,8 +461,14 @@ extension SendPaymentAmount.Model.ViewConfig {
                 .foregroundColor: Theme.Colors.textOnAccentColor
             ]
         )
-        
+        let businessText = Localized(
+            .for_code,
+            replace: [
+                .for_code_replace_code: business
+            ]
+        )
         return SendPaymentAmount.Model.ViewConfig(
+            recipientAppearence: .text(businessText),
             descriptionIsHidden: true,
             actionButtonTitle: actionButtonTitle
         )

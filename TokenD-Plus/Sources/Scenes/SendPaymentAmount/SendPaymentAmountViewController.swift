@@ -165,6 +165,16 @@ extension SendPaymentAmount {
             self.recipientLabel.textAlignment = .center
             self.recipientLabel.numberOfLines = 1
             self.recipientLabel.lineBreakMode = .byTruncatingMiddle
+            
+            guard let appearence = self.viewConfig?.recipientAppearence else {
+                return
+            }
+            switch appearence {
+            case .hidden:
+                self.recipientLabel.isHidden = true
+            case .text(let text):
+                self.recipientLabel.text = text
+            }
         }
         
         private func setupContainerView() {
@@ -295,7 +305,8 @@ extension SendPaymentAmount {
 extension SendPaymentAmount.ViewController: SendPaymentAmount.DisplayLogic {
     
     func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel) {
-        self.recipientLabel.text = viewModel.recipientInfo
+        // TODO: Remove
+        //self.recipientLabel.text = viewModel.recipientInfo
         self.updateWithSceneModel(viewModel.sceneModel)
     }
     

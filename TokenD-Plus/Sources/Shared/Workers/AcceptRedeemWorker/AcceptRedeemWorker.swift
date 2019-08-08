@@ -136,7 +136,8 @@ extension AcceptRedeem {
                         }
                         guard let balance = balances.first(where: { (balance) -> Bool in
                             return balance.asset?.id ?? "" == assetCode
-                        }), let senderBalanceId = balance.id else {
+                        }), let senderBalanceId = balance.id,
+                            let assetName = balance.asset?.name else {
                             
                             self?.hideProgress?()
                             completion(.failure(.failedToFindSenderBalance))
@@ -151,7 +152,7 @@ extension AcceptRedeem {
                         self?.buildRedeemModel(
                             networkInfo: networkInfo,
                             requestBytes: &requestBytes,
-                            asset: assetCode,
+                            asset: assetName,
                             senderAccountId: senderAccountId,
                             senderBalanceId: senderBalanceId,
                             completion: completion

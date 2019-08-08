@@ -6,6 +6,7 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol
+    private let companyName: String
     private let ownerAccountId: String
     private let selectedBalanceId: String?
     private let disposeBag: DisposeBag = DisposeBag()
@@ -21,11 +22,13 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
+        companyName: String,
         ownerAccountId: String,
         selectedBalanceId: String?
         ) {
         
         self.navigationController = navigationController
+        self.companyName = companyName
         self.ownerAccountId = ownerAccountId
         self.selectedBalanceId = selectedBalanceId
         
@@ -96,7 +99,7 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
             operation: .handleRedeem
         )
         
-        let viewConfig = SendPaymentAmount.Model.ViewConfig.redeemViewConfig()
+        let viewConfig = SendPaymentAmount.Model.ViewConfig.redeemViewConfig(business: self.companyName)
         
         let routing = SendPaymentAmount.Routing(
             onShowProgress: { [weak self] in

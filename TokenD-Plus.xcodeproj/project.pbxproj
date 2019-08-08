@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A456E9D8F6860BA2357882C2 /* libPods-TokenD-Plus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */; };
+		DB04621122FB14230050D2BB /* AssetResource+AssetName.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */; };
 		DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */; };
 		DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */; };
 		DB28C4A722CFAF58005362FD /* ReceiveAddressRedeemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */; };
@@ -665,6 +666,7 @@
 		0E666969207E5FC77A1609F5 /* Pods-TokenD-Plus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.debug.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.debug.xcconfig"; sourceTree = "<group>"; };
 		51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TokenD-Plus.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AD850E3986FEE4CD13E7C4 /* Pods-TokenD-Plus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.release.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.release.xcconfig"; sourceTree = "<group>"; };
+		DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetResource+AssetName.swift"; sourceTree = "<group>"; };
 		DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListChangeLanguageWorker.swift; sourceTree = "<group>"; };
 		DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWorker.swift; sourceTree = "<group>"; };
 		DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressRedeemManager.swift; sourceTree = "<group>"; };
@@ -1348,6 +1350,15 @@
 				B5AD850E3986FEE4CD13E7C4 /* Pods-TokenD-Plus.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		DB04620F22FB13FF0050D2BB /* AssetsRepo */ = {
+			isa = PBXGroup;
+			children = (
+				DB720C7522C1396B00ED116A /* AssetsRepo.swift */,
+				DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */,
+			);
+			path = AssetsRepo;
 			sourceTree = "<group>";
 		};
 		DB0AFD2C22E0A31400FB39FF /* Workers */ = {
@@ -3086,10 +3097,10 @@
 				DB720C6222C1396B00ED116A /* TableViewStickyHeader.swift */,
 				DB720C3E22C1396B00ED116A /* TextFieldView.swift */,
 				DB720C4022C1396B00ED116A /* TitleValueCell.swift */,
+				DB4AE2BC22E9F6D5001D0883 /* TitleView.swift */,
 				DB720C5022C1396B00ED116A /* BXFStaticTableView */,
 				DB720C6322C1396B00ED116A /* DynamicTableView */,
 				DB720C4222C1396B00ED116A /* TradeViews */,
-				DB4AE2BC22E9F6D5001D0883 /* TitleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3212,7 +3223,6 @@
 			children = (
 				DB720C7222C1396B00ED116A /* AccountRepo.swift */,
 				DB720C6D22C1396B00ED116A /* AssetPairsRepo.swift */,
-				DB720C7522C1396B00ED116A /* AssetsRepo.swift */,
 				DB720C7322C1396B00ED116A /* BalancesRepo.swift */,
 				DB720C6C22C1396B00ED116A /* MovementsRepo.swift */,
 				DB720C7422C1396B00ED116A /* NetworkInfoRepo.swift */,
@@ -3220,6 +3230,7 @@
 				DB720C7822C1396B00ED116A /* SalesRepo.swift */,
 				DB720C7622C1396B00ED116A /* TransactionsHistoryRepo.swift */,
 				DB720C6E22C1396B00ED116A /* WalletRepo.swift */,
+				DB04620F22FB13FF0050D2BB /* AssetsRepo */,
 				DB720C6F22C1396B00ED116A /* PollsRepo */,
 				DB363E1022DF502B00F5761C /* ResourcesExtensions */,
 			);
@@ -3836,6 +3847,7 @@
 				DB720DDF22C1396C00ED116A /* TradesListPresenter.swift in Sources */,
 				DB720DE222C1396C00ED116A /* TradesListConfigurator.swift in Sources */,
 				DB720D2722C1396B00ED116A /* AuthenticatorAuthActionCell.swift in Sources */,
+				DB04621122FB14230050D2BB /* AssetResource+AssetName.swift in Sources */,
 				DB28C4C322D39EE6005362FD /* Numeric+Bytes.swift in Sources */,
 				DB720D0C22C1396B00ED116A /* TokenDetailsPresenter.swift in Sources */,
 				DB720EA622C1396C00ED116A /* Theme.swift in Sources */,

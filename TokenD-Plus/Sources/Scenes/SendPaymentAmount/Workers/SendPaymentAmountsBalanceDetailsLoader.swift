@@ -64,13 +64,20 @@ extension SendPaymentAmount {
             return balances.filter { [weak self] (balance) -> Bool in
                 if let ownerAccountId = self?.ownerAccountId,
                     let asset = self?.assetsRepo.assetsValue.first(where: { (asset) -> Bool in
-                        asset.code == balance.asset &&
+                        return asset.code == balance.assetCode &&
                             asset.owner == ownerAccountId
                     }) {
                     return Int32(asset.policy) & AssetPolicy.withdrawable.rawValue == AssetPolicy.withdrawable.rawValue
                 }
                 return false
             }
+        }
+        
+        private func getAssetName(code: String) -> String {
+            let asset = self.assetsRepo.assetsValue.first(where: { (asset) -> Bool in
+                return asset.code == code
+            })
+            return asset?.defaultDetails?.name ?? code
         }
     }
 }
@@ -86,8 +93,10 @@ extension SendPaymentAmount.BalanceDetailsLoaderWorker: SendPaymentAmount.Balanc
                 switch balanceState {
                     
                 case .created(let balance):
+                    let assetName = self.getAssetName(code: balance.asset)
                     let balanceModel = BalanceDetails(
-                        asset: balance.asset,
+                        assetCode: balance.asset,
+                        assetName: assetName,
                         balance: balance.balance,
                         balanceId: balance.balanceId
                     )
@@ -106,7 +115,7 @@ extension SendPaymentAmount.BalanceDetailsLoaderWorker: SendPaymentAmount.Balanc
                 return balances.filter({ [weak self] (balance) -> Bool in
                     if let ownerAccountId = self?.ownerAccountId,
                         let asset = self?.assetsRepo.assetsValue.first(where: { (asset) -> Bool in
-                            asset.code == balance.asset &&
+                            return asset.code == balance.assetCode &&
                                 asset.owner == ownerAccountId
                         }) {
                         

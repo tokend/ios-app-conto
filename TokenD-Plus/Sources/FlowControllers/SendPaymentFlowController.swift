@@ -111,7 +111,7 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         )
         sceneModel.resolvedRecipientId = destination.recipientAccountId
         
-        let viewConfig = SendPaymentAmount.Model.ViewConfig.sendPaymentViewConfig()
+        let viewConfig = SendPaymentAmount.Model.ViewConfig.sendPaymentViewConfig(recipient: destination.recipientNickname)
         
         let routing = SendPaymentAmount.Routing(
             onShowProgress: { [weak self] in
@@ -238,7 +238,7 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         
         let paymentModel = ConfirmationScene.Model.SendPaymentModel(
             senderBalanceId: sendPaymentModel.senderBalanceId,
-            asset: sendPaymentModel.asset,
+            asset: sendPaymentModel.assetName,
             amount: sendPaymentModel.amount,
             recipientNickname: sendPaymentModel.recipientNickname,
             recipientAccountId: sendPaymentModel.recipientAccountId,

@@ -45,6 +45,13 @@ extension BalancePicker {
         
         // MARK: - Private
         
+        private func getAssetName(code: String) -> String {
+            let asset = self.assetsRepo.assetsValue.first(where: { (asset) -> Bool in
+                return asset.code == code
+            })
+            return asset?.defaultDetails?.name ?? code
+        }
+        
         private func observeBalancesRepo() {
             self.balancesRepo
                 .observeBalancesDetails()
@@ -78,10 +85,11 @@ extension BalancePicker {
             var balances: [Model.Balance] = []
             
             self.balances.forEach { (balance) in
+                let assetName = self.getAssetName(code: balance.asset)
                 if let asset = self.assets.first(where: { (asset) -> Bool in
                     return asset.code == balance.asset
                         && asset.owner == self.ownerAccountId
-                        && self.targetAssets.contains(asset.code)
+                        && self.targetAssets.contains(assetName)
                         && balance.balance > 0
                 }) {
                     let balance = Model.BalanceDetails(
@@ -94,7 +102,7 @@ extension BalancePicker {
                         iconUrl = self.imagesUtility.getImageURL(imageKey)
                     }
                     let balanceModel = Model.Balance(
-                        assetCode: asset.code,
+                        assetCode: assetName,
                         iconUrl: iconUrl,
                         details: balance
                     )
