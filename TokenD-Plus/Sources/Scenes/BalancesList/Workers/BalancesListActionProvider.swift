@@ -38,13 +38,6 @@ extension BalancesList {
             )
             actions.append(sendAction)
             
-            let createRedeem = Model.ActionModel(
-                title: Localized(.redeem),
-                image: Assets.redeem.image,
-                actionType: .createRedeem
-            )
-            actions.append(createRedeem)
-            
             if self.ownerAccountId == self.originalAccountId {
                 let acceptRedeem = Model.ActionModel(
                     title: Localized(.accept_redemption),
@@ -52,6 +45,13 @@ extension BalancesList {
                     actionType: .acceptRedeem
                 )
                 actions.append(acceptRedeem)
+            } else {
+                let createRedeem = Model.ActionModel(
+                    title: Localized(.redeem),
+                    image: Assets.redeem.image,
+                    actionType: .createRedeem
+                )
+                actions.append(createRedeem)
             }
             
             return actions

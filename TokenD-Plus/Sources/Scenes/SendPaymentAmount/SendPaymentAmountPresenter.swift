@@ -57,7 +57,7 @@ extension SendPaymentAmount {
             }
             
             let viewModel = Model.BalanceDetailsViewModel(
-                asset: balanceDetails.asset,
+                asset: balanceDetails.assetName,
                 balance: self.amountFormatter.assetAmountToString(balanceDetails.balance),
                 balanceId: balanceDetails.balanceId
             )
@@ -194,7 +194,7 @@ extension SendPaymentAmount.Presenter: SendPaymentAmount.PresentationLogic {
         case .succeeded(let redeemModel):
             let amount = self.amountFormatter.formatAmount(
                 redeemModel.amount,
-                currency: redeemModel.asset
+                currency: redeemModel.assetName
             )
             let redeemViewModel = Model.ShowRedeemViewModel(
                 redeemRequest: redeemModel.redeemRequest,

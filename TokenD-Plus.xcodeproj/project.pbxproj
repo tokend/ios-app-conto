@@ -8,26 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A456E9D8F6860BA2357882C2 /* libPods-TokenD-Plus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */; };
-		DB0461C222F45B4D0050D2BB /* SendPaymentAmountAtomicSwapBalanceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461C122F45B4D0050D2BB /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */; };
-		DB0461CC22F48F130050D2BB /* PaymentMethodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461C622F48F130050D2BB /* PaymentMethodPresenter.swift */; };
-		DB0461CD22F48F130050D2BB /* PaymentMethodRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461C722F48F130050D2BB /* PaymentMethodRouting.swift */; };
-		DB0461CE22F48F130050D2BB /* PaymentMethodModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461C822F48F130050D2BB /* PaymentMethodModels.swift */; };
-		DB0461CF22F48F130050D2BB /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461C922F48F130050D2BB /* PaymentMethodViewController.swift */; };
-		DB0461D022F48F130050D2BB /* PaymentMethodInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461CA22F48F130050D2BB /* PaymentMethodInteractor.swift */; };
-		DB0461D122F48F130050D2BB /* PaymentMethodConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461CB22F48F130050D2BB /* PaymentMethodConfigurator.swift */; };
-		DB0461D522F4A2260050D2BB /* PaymentMethodMethodsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461D422F4A2260050D2BB /* PaymentMethodMethodsFetcher.swift */; };
-		DB0461D722F820FB0050D2BB /* PaymentMethodAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461D622F820FB0050D2BB /* PaymentMethodAmountFormatter.swift */; };
-		DB0461EB22F82EBC0050D2BB /* PaymentMethodPickerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461E522F82EBB0050D2BB /* PaymentMethodPickerConfigurator.swift */; };
-		DB0461EC22F82EBC0050D2BB /* PaymentMethodPickerRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461E622F82EBB0050D2BB /* PaymentMethodPickerRouting.swift */; };
-		DB0461ED22F82EBC0050D2BB /* PaymentMethodPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461E722F82EBB0050D2BB /* PaymentMethodPickerViewController.swift */; };
-		DB0461EE22F82EBC0050D2BB /* PaymentMethodPickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461E822F82EBB0050D2BB /* PaymentMethodPickerPresenter.swift */; };
-		DB0461EF22F82EBC0050D2BB /* PaymentMethodPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461E922F82EBB0050D2BB /* PaymentMethodPickerInteractor.swift */; };
-		DB0461F022F82EBC0050D2BB /* PaymentMethodPickerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461EA22F82EBB0050D2BB /* PaymentMethodPickerModels.swift */; };
-		DB0461F322F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461F222F8311F0050D2BB /* PaymentMethodPickerMethodCell.swift */; };
-		DB0461F622F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461F522F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift */; };
-		DB0461F822F840320050D2BB /* PaymentMethodPaymentWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0461F722F840320050D2BB /* PaymentMethodPaymentWorker.swift */; };
-		DB04620C22F9A6520050D2BB /* ReceiveAddressAtomicSwapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04620B22F9A6520050D2BB /* ReceiveAddressAtomicSwapManager.swift */; };
-		DB04620E22F9B5100050D2BB /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04620D22F9B5100050D2BB /* LeftAlignedCollectionViewFlowLayout.swift */; };
+		DB04621122FB14230050D2BB /* AssetResource+AssetName.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */; };
 		DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */; };
 		DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */; };
 		DB28C4A722CFAF58005362FD /* ReceiveAddressRedeemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */; };
@@ -718,6 +699,7 @@
 		DB0461F722F840320050D2BB /* PaymentMethodPaymentWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodPaymentWorker.swift; sourceTree = "<group>"; };
 		DB04620B22F9A6520050D2BB /* ReceiveAddressAtomicSwapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressAtomicSwapManager.swift; sourceTree = "<group>"; };
 		DB04620D22F9B5100050D2BB /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetResource+AssetName.swift"; sourceTree = "<group>"; };
 		DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListChangeLanguageWorker.swift; sourceTree = "<group>"; };
 		DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWorker.swift; sourceTree = "<group>"; };
 		DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressRedeemManager.swift; sourceTree = "<group>"; };
@@ -1478,6 +1460,15 @@
 				DB0461F522F8338E0050D2BB /* PaymentMethodPickerAmountFormatter.swift */,
 			);
 			path = Workers;
+			sourceTree = "<group>";
+		};
+		DB04620F22FB13FF0050D2BB /* AssetsRepo */ = {
+			isa = PBXGroup;
+			children = (
+				DB720C7522C1396B00ED116A /* AssetsRepo.swift */,
+				DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */,
+			);
+			path = AssetsRepo;
 			sourceTree = "<group>";
 		};
 		DB0AFD2C22E0A31400FB39FF /* Workers */ = {
@@ -3389,7 +3380,6 @@
 			children = (
 				DB720C7222C1396B00ED116A /* AccountRepo.swift */,
 				DB720C6D22C1396B00ED116A /* AssetPairsRepo.swift */,
-				DB720C7522C1396B00ED116A /* AssetsRepo.swift */,
 				DB720C7322C1396B00ED116A /* BalancesRepo.swift */,
 				DB720C6C22C1396B00ED116A /* MovementsRepo.swift */,
 				DB720C7422C1396B00ED116A /* NetworkInfoRepo.swift */,
@@ -3398,6 +3388,7 @@
 				DB720C7622C1396B00ED116A /* TransactionsHistoryRepo.swift */,
 				DB720C6E22C1396B00ED116A /* WalletRepo.swift */,
 				DB4AE2EC22F1A2E6001D0883 /* AtomicSwapAsksRepo */,
+				DB04620F22FB13FF0050D2BB /* AssetsRepo */,
 				DB720C6F22C1396B00ED116A /* PollsRepo */,
 				DB363E1022DF502B00F5761C /* ResourcesExtensions */,
 			);
@@ -4030,6 +4021,7 @@
 				DB720DDF22C1396C00ED116A /* TradesListPresenter.swift in Sources */,
 				DB720DE222C1396C00ED116A /* TradesListConfigurator.swift in Sources */,
 				DB720D2722C1396B00ED116A /* AuthenticatorAuthActionCell.swift in Sources */,
+				DB04621122FB14230050D2BB /* AssetResource+AssetName.swift in Sources */,
 				DB28C4C322D39EE6005362FD /* Numeric+Bytes.swift in Sources */,
 				DB720D0C22C1396B00ED116A /* TokenDetailsPresenter.swift in Sources */,
 				DB720EA622C1396C00ED116A /* Theme.swift in Sources */,

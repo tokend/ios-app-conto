@@ -131,6 +131,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
                 guard let strongSelf = self else { return }
                 self?.runCreateRedeemFlow(
                     navigationController: strongSelf.navigationController,
+                    companyName: strongSelf.companyName,
                     ownerAccountId: strongSelf.ownerAccountId,
                     balanceId: nil
                 )
@@ -205,6 +206,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
             showCreateReedeem: { [weak self] (balanceId) in
                 self?.runCreateRedeemFlow(
                     navigationController: navigationController,
+                    companyName: self?.companyName ?? "",
                     ownerAccountId: self?.ownerAccountId ?? "",
                     balanceId: balanceId
                 )

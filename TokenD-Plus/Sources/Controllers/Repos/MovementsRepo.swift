@@ -30,6 +30,7 @@ class MovementsRepo {
     private let effect: String = "effect"
     private let operationDetails: String = "operation.details"
     private let operation: String = "operation"
+    private let asset: String = "asset"
     
     // MARK: - Public propeties
     
@@ -72,7 +73,7 @@ class MovementsRepo {
         self.loadingStatus.accept(.loading)
         self.api.requestHistory(
             filters: filters,
-            include: [self.effect, self.operationDetails, self.operation],
+            include: [self.effect, self.operationDetails, self.operation, self.asset],
             pagination: self.pagination,
             onRequestBuilt: { [weak self] (prevRequest) in
                 self?.prevRequest = prevRequest

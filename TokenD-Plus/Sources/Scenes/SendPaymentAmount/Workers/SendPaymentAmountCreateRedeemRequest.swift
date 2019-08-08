@@ -8,7 +8,8 @@ enum SendPaymentAmountCreateRedeemRequest {
 }
 protocol SendPaymentAmountCreateRedeemRequestWorkerProtocol {
     func createRedeemRequest(
-        asset: String,
+        assetCode: String,
+        assetName: String,
         amount: Decimal,
         completion: @escaping (SendPaymentAmountCreateRedeemRequest) -> Void
     )
@@ -50,7 +51,8 @@ extension SendPaymentAmount {
         // MARK: - Private
         
         private func requestNetworkInfo(
-            asset: String,
+            assetCode: String,
+            assetName: String,
             amount: Decimal,
             completion: @escaping (SendPaymentAmountCreateRedeemRequest) -> Void
             ) {
@@ -63,7 +65,8 @@ extension SendPaymentAmount {
                     
                 case .succeeded(let networkInfo):
                     self?.requestAsset(
-                        asset: asset,
+                        assetCode: assetCode,
+                        assetName: assetName,
                         amount: amount,
                         networkInfo: networkInfo,
                         completion: completion
@@ -73,7 +76,8 @@ extension SendPaymentAmount {
         }
         
         private func requestAsset(
-            asset: String,
+            assetCode: String,
+            assetName: String,
             amount: Decimal,
             networkInfo: NetworkInfoModel,
             completion: @escaping (SendPaymentAmountCreateRedeemRequest) -> Void
@@ -82,7 +86,7 @@ extension SendPaymentAmount {
             guard
                 let repoAsset = self.assetsRepo.assetsValue
                     .first(where: { (storedAsset) -> Bool in
-                        return storedAsset.code == asset
+                        return storedAsset.code == assetCode
                     }),
                 let balanceState = self.balancesRepo.balancesDetailsValue
                     .first(where: { (state) -> Bool in
@@ -94,7 +98,8 @@ extension SendPaymentAmount {
             }
             
             self.buildTransaction(
-                asset: asset,
+                assetCode: assetCode,
+                assetName: assetName,
                 amount: amount,
                 networkInfo: networkInfo,
                 ownerAccountId: repoAsset.owner,
@@ -104,7 +109,8 @@ extension SendPaymentAmount {
         }
         
         private func buildTransaction(
-            asset: String,
+            assetCode: String,
+            assetName: String,
             amount: Decimal,
             networkInfo: NetworkInfoModel,
             ownerAccountId: String,
@@ -178,7 +184,8 @@ extension SendPaymentAmount {
                 return
             }
             self.signTransaction(
-                asset: asset,
+                assetCode: assetCode,
+                assetName: assetName,
                 amount: amount,
                 convertedAmount: Int64(convertedAmount),
                 transaction: transaction,
@@ -187,7 +194,8 @@ extension SendPaymentAmount {
         }
         
         private func signTransaction(
-            asset: String,
+            assetCode: String,
+            assetName: String,
             amount: Decimal,
             convertedAmount: Int64,
             transaction: TransactionModel,
@@ -204,7 +212,8 @@ extension SendPaymentAmount {
                 return
             }
             self.createRedeemRequest(
-                asset: asset,
+                assetCode: assetCode,
+                assetName: assetName,
                 amount: amount,
                 convertedAmount: convertedAmount,
                 transaction: transaction,
@@ -213,7 +222,8 @@ extension SendPaymentAmount {
         }
         
         private func createRedeemRequest(
-            asset: String,
+            assetCode: String,
+            assetName: String,
             amount: Decimal,
             convertedAmount: Int64,
             transaction: TransactionModel,
@@ -226,9 +236,9 @@ extension SendPaymentAmount {
                 return
             }
             redeemBytes.append(contentsOf: sourceAccountIdData.data.bytes)
-            redeemBytes.append(contentsOf: Int32(asset.count).bytes)
+            redeemBytes.append(contentsOf: Int32(assetCode.count).bytes)
             
-            guard let assetData = asset.data(using: .utf8) else {
+            guard let assetData = assetCode.data(using: .utf8) else {
                 completion(.failure(.failedToGetAssetData))
                 return
             }
@@ -250,7 +260,7 @@ extension SendPaymentAmount {
             let redeemToShow = Model.ShowRedeemModel(
                 redeemRequest: redeemRequestData.base64EncodedString(),
                 amount: amount,
-                asset: asset
+                assetName: assetName
             )
             completion(.success(redeemToShow))
         }
@@ -260,13 +270,15 @@ extension SendPaymentAmount {
 extension SendPaymentAmount.CreateRedeemRequestWorker: SendPaymentAmount.CreateRedeemRequestWorkerProtocol {
     
     func createRedeemRequest(
-        asset: String,
+        assetCode: String,
+        assetName: String,
         amount: Decimal,
         completion: @escaping (SendPaymentAmountCreateRedeemRequest) -> Void
         ) {
         
         self.requestNetworkInfo(
-            asset: asset,
+            assetCode: assetCode,
+            assetName: assetName,
             amount: amount,
             completion: completion
         )

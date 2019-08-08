@@ -10,7 +10,7 @@ extension AcceptRedeem.Model {
     public struct RedeemModel {
         let senderAccountId: String
         let senderBalanceId: String
-        let asset: String
+        let assetName: String
         let inputAmount: Decimal
         let precisedAmount: UInt64
         let salt: UInt64

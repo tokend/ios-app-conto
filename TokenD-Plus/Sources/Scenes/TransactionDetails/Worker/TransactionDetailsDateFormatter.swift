@@ -10,17 +10,20 @@ extension TransactionDetails {
         
         private let userDefaults: UserDefaults = UserDefaults.standard
         
-        private lazy var localeIdentifier: String = {
-            let languageKey = self.userDefaults
-                .value(forKey: LocalizationManager.languageKey) as? String ?? "en"
-            return languageKey
+        private lazy var locale: Locale = {
+            if let languageKey = self.userDefaults
+                .value(forKey: LocalizationManager.languageKey) as? String {
+                return Locale(identifier: languageKey)
+            } else {
+                return Locale.autoupdatingCurrent
+            }
         }()
         
         // MARK: -
         
         public init() {
             self.dateFormatter = Foundation.DateFormatter()
-            self.dateFormatter.locale = Locale(identifier: self.localeIdentifier)
+            self.dateFormatter.locale = self.locale
             self.dateFormatter.dateFormat = "dd MMM yyyy h:mm a"
             self.dateFormatter.amSymbol = "AM"
             self.dateFormatter.pmSymbol = "PM"

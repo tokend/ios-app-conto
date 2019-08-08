@@ -77,7 +77,7 @@ extension TransactionDetails {
             ) -> [TransactionDetails.Model.SectionModel] {
             
             guard let assetResource = participantEffect.asset,
-                let asset = assetResource.id,
+                let asset = assetResource.name,
                 let details = operation.details else {
                     return []
             }
@@ -181,9 +181,9 @@ extension TransactionDetails {
             ) -> [TransactionDetails.Model.SectionModel] {
             
             guard let baseAssetResource = details.baseAsset,
-                let baseAsset = baseAssetResource.id,
+                let baseAsset = baseAssetResource.name,
                 let quoteAssetResource = details.quoteAsset,
-                let quoteAsset = quoteAssetResource.id else {
+                let quoteAsset = quoteAssetResource.name else {
                     return []
             }
             

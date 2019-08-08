@@ -118,6 +118,7 @@ class BaseSignedInFlowController: BaseFlowController {
     
     func runCreateRedeemFlow(
         navigationController: NavigationControllerProtocol,
+        companyName: String,
         ownerAccountId: String,
         balanceId: String?
         ) {
@@ -131,6 +132,7 @@ class BaseSignedInFlowController: BaseFlowController {
             userDataProvider: self.userDataProvider,
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation,
+            companyName: companyName,
             ownerAccountId: ownerAccountId,
             selectedBalanceId: balanceId
         )

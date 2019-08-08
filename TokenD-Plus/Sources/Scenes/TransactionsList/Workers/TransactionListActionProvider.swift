@@ -81,29 +81,31 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
                         image: Assets.paymentAction.image,
                         type: .send(balanceId: details.balanceId)
                     )
-                    let createRedeemAction = TransactionsListScene.ActionModel(
-                        title: Localized(.redeem),
-                        image: Assets.redeem.image,
-                        type: .createRedeem(balanceId: details.balanceId)
-                    )
                     actions.append(sendAction)
                     actions.append(receiveAction)
-                    actions.append(createRedeemAction)
+                    
+                    if asset.owner == self.originalAccountId {
+                        let acceptRedeemAction = TransactionsListScene.ActionModel(
+                            title: Localized(.accept_redemption),
+                            image: Assets.scanQrIcon.image,
+                            type: .acceptRedeem
+                        )
+                        actions.append(acceptRedeemAction)
+                    } else {
+                        let createRedeemAction = TransactionsListScene.ActionModel(
+                            title: Localized(.redeem),
+                            image: Assets.redeem.image,
+                            type: .createRedeem(balanceId: details.balanceId)
+                        )
+                        actions.append(createRedeemAction)
+                    }
                 }
+                
             case .creating:
                 break
             }
         } else {
             actions.append(receiveAction)
-        }
-        
-        if asset.owner == self.originalAccountId {
-            let acceptRedeemAction = TransactionsListScene.ActionModel(
-                title: Localized(.accept_redemption),
-                image: Assets.scanQrIcon.image,
-                type: .acceptRedeem
-            )
-            actions.append(acceptRedeemAction)
         }
         
         return actions
@@ -142,40 +144,46 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
                 image: Assets.paymentAction.image,
                 type: .send(balanceId: details.balanceId)
             )
-            let createRedeemAction = TransactionsListScene.ActionModel(
-                title: Localized(.redeem),
-                image: Assets.redeem.image,
-                type: .createRedeem(balanceId: details.balanceId)
-            )
             actions.append(sendAction)
             actions.append(receiveAction)
-            actions.append(createRedeemAction)
         } else {
             actions.append(receiveAction)
         }
         
-        let buyIsEnabled: Bool =
-            Int32(asset.policy) & AssetPolicy.canBeBaseInAtomicSwap.rawValue
-                == AssetPolicy.canBeBaseInAtomicSwap.rawValue
-        let buyAction = TransactionsListScene.ActionModel(
-            title: Localized(.buy),
-            image: Assets.buy.image,
-            enabled: buyIsEnabled,
-            type: .buy(asset: asset.code)
-        )
-        actions.append(buyAction)
+        guard let asset = self.assetsRepo.assetsValue.first(where: { (asset) in
+            return asset.code == details.asset
+        }) else {
+            return actions
+        }
         
-        if self.assetsRepo.assetsValue.first(where: { (asset) in
-            return asset.owner == self.originalAccountId
-        }) != nil {
+        if asset.owner == self.originalAccountId {
             let acceptRedeemAction = TransactionsListScene.ActionModel(
                 title: Localized(.accept_redemption),
                 image: Assets.scanQrIcon.image,
                 type: .acceptRedeem
             )
             actions.append(acceptRedeemAction)
+        } else {
+            if details.balance > 0 {
+                let createRedeemAction = TransactionsListScene.ActionModel(
+                    title: Localized(.redeem),
+                    image: Assets.redeem.image,
+                    type: .createRedeem(balanceId: details.balanceId)
+                )
+                actions.append(createRedeemAction)
+            }
         }
-        
+let buyIsEnabled: Bool =
+Int32(asset.policy) & AssetPolicy.canBeBaseInAtomicSwap.rawValue
+== AssetPolicy.canBeBaseInAtomicSwap.rawValue
+let buyAction = TransactionsListScene.ActionModel(
+title: Localized(.buy),
+image: Assets.buy.image,
+enabled: buyIsEnabled,
+type: .buy(asset: asset.code)
+)
+actions.append(buyAction)
+
         return actions
     }
 }

@@ -65,6 +65,7 @@ class AcceptRedeemFlowController: BaseSignedInFlowController {
             accountsApiV3: self.flowControllerStack.apiV3.accountsApi,
             networkInfoFetcher: self.reposController.networkInfoRepo,
             amountConverter: amountConverter,
+            assetRepo: self.reposController.assetsRepo,
             redeemRequest: request,
             originalAccountId: self.userDataProvider.walletData.accountId,
             showProgress: { [weak self] in
@@ -115,7 +116,7 @@ class AcceptRedeemFlowController: BaseSignedInFlowController {
         let redeemModel = ConfirmationScene.Model.RedeemModel(
             senderAccountId: redeemModel.senderAccountId,
             senderBalanceId: redeemModel.senderBalanceId,
-            asset: redeemModel.asset,
+            asset: redeemModel.assetName,
             inputAmount: redeemModel.inputAmount,
             precisedAmount: redeemModel.precisedAmount,
             salt: redeemModel.salt,
