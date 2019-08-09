@@ -94,6 +94,8 @@ extension TransactionsListScene {
             set { self.tableView.isScrollEnabled = newValue }
         }
         
+        var onRefreshInitiated: (() -> Void)?
+        
         // MARK: -
         
         var scrollViewDidScroll: OnScrollViewDidScroll?
@@ -323,6 +325,7 @@ extension TransactionsListScene {
                 let request = Event.DidInitiateRefresh.Request()
                 businessLogic.onDidInitiateRefresh(request: request)
             })
+            self.onRefreshInitiated?()
         }
         
         private func showRefresh(animated: Bool) {
