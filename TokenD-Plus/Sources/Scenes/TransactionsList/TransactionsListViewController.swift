@@ -93,6 +93,7 @@ extension TransactionsListScene {
             get { return self.tableView.isScrollEnabled }
             set { self.tableView.isScrollEnabled = newValue }
         }
+        var onRefreshInitiated: (() -> Void)?
         
         // MARK: -
         
@@ -323,6 +324,7 @@ extension TransactionsListScene {
                 let request = Event.DidInitiateRefresh.Request()
                 businessLogic.onDidInitiateRefresh(request: request)
             })
+            self.onRefreshInitiated?()
         }
         
         private func showRefresh(animated: Bool) {
