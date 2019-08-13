@@ -23,7 +23,7 @@ class LaunchFlowController: BaseFlowController {
         userDataManager: UserDataManagerProtocol,
         keychainManager: KeychainManagerProtocol,
         onAuthorized: @escaping (_ account: String) -> Void,
-        onSignOut: @escaping  () -> Void
+        onSignOut: @escaping () -> Void
         ) {
         
         self.userDataManager = userDataManager

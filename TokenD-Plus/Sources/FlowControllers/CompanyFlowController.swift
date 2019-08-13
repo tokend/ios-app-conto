@@ -18,8 +18,9 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     // MARK: - Callbacks
     
-    let onSignOut: () -> Void
-    let onLocalAuthRecoverySucceeded: () -> Void
+    private let onSignOut: () -> Void
+    private let onEnvironmentChanged: () -> Void
+    private let onLocalAuthRecoverySucceeded: () -> Void
     
     // MARK: -
     
@@ -33,11 +34,13 @@ class CompanyFlowController: BaseSignedInFlowController {
         rootNavigation: RootNavigationProtocol,
         company: CompaniesList.Model.Company,
         onSignOut: @escaping () -> Void,
+        onEnvironmentChanged: @escaping () -> Void,
         onLocalAuthRecoverySucceeded: @escaping () -> Void
         ) {
         
         self.company = company
         self.onSignOut = onSignOut
+        self.onEnvironmentChanged = onEnvironmentChanged
         self.onLocalAuthRecoverySucceeded = onLocalAuthRecoverySucceeded
         
         SideMenuController.preferences.drawing.menuButtonImage = Assets.menuIcon.image
@@ -141,6 +144,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     private func runSettingsFlow() {
         let flow = SettingsFlowController(
             onSignOut: self.onSignOut,
+            onEnvironmentChanged: self.onEnvironmentChanged,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
             reposController: self.reposController,
@@ -203,6 +207,9 @@ class CompanyFlowController: BaseSignedInFlowController {
             rootNavigation: self.rootNavigation,
             onSignOut: { [weak self] in
                 self?.onSignOut()
+            },
+            onEnvironmentChanged: { [weak self] in
+                self?.performSignOut()
             },
             onLocalAuthRecoverySucceeded: { [weak self] in
                 self?.onLocalAuthRecoverySucceeded()

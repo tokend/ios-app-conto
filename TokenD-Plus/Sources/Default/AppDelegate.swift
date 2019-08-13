@@ -18,17 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.rootNavigationController = RootNavigationViewController()
         
-        let apiConfiguration: APIConfigurationModel
-        do {
-            apiConfiguration = try APIConfigurationFetcher.fetchApiConfigurationFromPlist("APIConfiguration")
-        } catch let error {
-            let message = error.localizedDescription
-            fatalError("Failed to fetch apiConfiguration: \(message)")
-        }
+        let apiConfigurationModel = APIConfigurationModel.getLatestApiConfigutarion()
         
         self.appController = AppController(
             rootNavigation: self.rootNavigationController,
-            apiConfigurationModel: apiConfiguration,
+            apiConfigurationModel: apiConfigurationModel,
             launchOptions: launchOptions
         )
         self.rootNavigationController.appController = self.appController

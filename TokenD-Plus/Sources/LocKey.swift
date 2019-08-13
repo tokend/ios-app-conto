@@ -23,6 +23,8 @@ enum LocKey: String {
     case amount_sent
     case annual_return
     case app_name
+    case application_is_already_configured_for_this_environment
+    case application_is_already_configured_for_this_environment_replace_environment
     case are_you_sure_you_want_to_cancel_investment
     case are_you_sure_you_want_to_cancel_pending_offer
     case are_you_sure_you_want_to_sign_out
@@ -170,6 +172,7 @@ enum LocKey: String {
     case enter_swift_bic
     case enter_t
     case enter_t_replace_title
+    case environment
     case erase_all_data_and
     case error
     case error_while_formatting_orderbookid

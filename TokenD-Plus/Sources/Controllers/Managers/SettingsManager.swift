@@ -7,6 +7,8 @@ protocol SettingsManagerProtocol: class {
     var businessImageKey: String? { get set }
     var businessConversionAsset: String? { get set }
     
+    var environment: String? { get set }
+    
     func cleanAccountRelatedInfo()
 }
 
@@ -19,6 +21,7 @@ class SettingsManager {
     static let businessNameKey: String = "businessName"
     static let businessImageKey: String = "businessImage"
     static let businessConversionAssetKey: String = "businessConversionAsset"
+    static let environmentKey: String = "environment"
     
     var biometricsAuthEnabled: Bool {
         get {
@@ -62,6 +65,15 @@ class SettingsManager {
         }
         set {
             self.setBusinessConversionAsset(conversionAsset: newValue)
+        }
+    }
+    
+    var environment: String? {
+        get {
+            return self.getEnvironment()
+        }
+        set {
+            self.setEnvironment(environment: newValue)
         }
     }
     
@@ -120,6 +132,14 @@ class SettingsManager {
     
     private func setBusinessConversionAsset(conversionAsset: String?) {
         self.userDefaults.setValue(conversionAsset, forKey: SettingsManager.businessConversionAssetKey)
+    }
+    
+    private func getEnvironment() -> String? {
+        return self.userDefaults.string(forKey: SettingsManager.environmentKey)
+    }
+    
+    private func setEnvironment(environment: String?) {
+        self.userDefaults.setValue(environment, forKey: SettingsManager.environmentKey)
     }
 }
 

@@ -20,6 +20,8 @@
 "amount_sent" = "Amount sent";
 "annual_return" = "Annual return";
 "app_name" = "TokenD Real Estate";
+"application_is_already_configured_for_this_environment" = "Application is already configured for $(environment) environment";
+"application_is_already_configured_for_this_environment_replace_environment" = "environment";
 "are_you_sure_you_want_to_cancel_investment" = "Are you sure you want to cancel contribution?";
 "are_you_sure_you_want_to_cancel_pending_offer" = "Are you sure you want to cancel pending offer?";
 "are_you_sure_you_want_to_sign_out" = "Are you sure you want to Sign Out and Erase All Data from device?";
@@ -167,6 +169,7 @@
 "enter_swift_bic" = "Enter SWIFT/BIC";
 "enter_t" = "Enter $(title)";
 "enter_t_replace_title" = "title";
+"environment" = "Environment";
 "erase_all_data_and" = "Erase all data and ";
 "error" = "Error";
 "error_while_formatting_orderbookid" = "Error while formatting orderBookId";

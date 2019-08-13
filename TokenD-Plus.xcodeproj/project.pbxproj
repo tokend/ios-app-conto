@@ -26,7 +26,6 @@
 		DB363E0922DCDBB700F5761C /* FacilitiesListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0322DCDBB700F5761C /* FacilitiesListInteractor.swift */; };
 		DB363E0A22DCDBB700F5761C /* FacilitiesListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0422DCDBB700F5761C /* FacilitiesListConfigurator.swift */; };
 		DB363E0D22DCE13800F5761C /* FacilityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0C22DCE13800F5761C /* FacilityCell.swift */; };
-		DB363E0F22DDCE9800F5761C /* FacilitiesFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E0E22DDCE9800F5761C /* FacilitiesFlowController.swift */; };
 		DB363E1222DF505900F5761C /* Business+Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E1122DF505900F5761C /* Business+Logo.swift */; };
 		DB363E1822DF6CCA00F5761C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB363E1422DF6CCA00F5761C /* LaunchScreen.storyboard */; };
 		DB363E1922DF6CCA00F5761C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB363E1622DF6CCA00F5761C /* Localizable.strings */; };
@@ -655,6 +654,14 @@
 		DB72280A22CCBB4200341565 /* BalancesListActionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */; };
 		DB72281422CF546200341565 /* CreateRedeemFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281322CF546200341565 /* CreateRedeemFlowController.swift */; };
 		DB72281622CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */; };
+		DBC165412302F36D002A50F7 /* EnvironmentsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */; };
+		DBC165422302F36D002A50F7 /* EnvironmentsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */; };
+		DBC165432302F36D002A50F7 /* EnvironmentsListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */; };
+		DBC165442302F36D002A50F7 /* EnvironmentsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1653A2302F36D002A50F7 /* EnvironmentsListPresenter.swift */; };
+		DBC165452302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1653C2302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift */; };
+		DBC165462302F36D002A50F7 /* EnvironmentsListRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1653D2302F36D002A50F7 /* EnvironmentsListRouting.swift */; };
+		DBC165472302F36D002A50F7 /* EnvironmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1653F2302F36D002A50F7 /* EnvironmentCell.swift */; };
+		DBC165482302F36D002A50F7 /* EnvironmentsListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165402302F36D002A50F7 /* EnvironmentsListModels.swift */; };
 		DBCA02D822D5EB8900503025 /* AcceptRedeemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02D722D5EB8900503025 /* AcceptRedeemModel.swift */; };
 		DBCA02DA22D5EB9800503025 /* AcceptRedeemWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02D922D5EB9800503025 /* AcceptRedeemWorker.swift */; };
 		DBCA02E322D787B600503025 /* SettingsTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E222D787B600503025 /* SettingsTextCell.swift */; };
@@ -684,7 +691,6 @@
 		DB363E0322DCDBB700F5761C /* FacilitiesListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesListInteractor.swift; sourceTree = "<group>"; };
 		DB363E0422DCDBB700F5761C /* FacilitiesListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesListConfigurator.swift; sourceTree = "<group>"; };
 		DB363E0C22DCE13800F5761C /* FacilityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilityCell.swift; sourceTree = "<group>"; };
-		DB363E0E22DDCE9800F5761C /* FacilitiesFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilitiesFlowController.swift; sourceTree = "<group>"; };
 		DB363E1122DF505900F5761C /* Business+Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business+Logo.swift"; sourceTree = "<group>"; };
 		DB363E1522DF6CCA00F5761C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB363E1722DF6CCA00F5761C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Localizable.strings; sourceTree = "<group>"; };
@@ -1316,6 +1322,14 @@
 		DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesListActionProvider.swift; sourceTree = "<group>"; };
 		DB72281322CF546200341565 /* CreateRedeemFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRedeemFlowController.swift; sourceTree = "<group>"; };
 		DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountCreateRedeemRequest.swift; sourceTree = "<group>"; };
+		DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListInteractor.swift; sourceTree = "<group>"; };
+		DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListViewController.swift; sourceTree = "<group>"; };
+		DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListConfigurator.swift; sourceTree = "<group>"; };
+		DBC1653A2302F36D002A50F7 /* EnvironmentsListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListPresenter.swift; sourceTree = "<group>"; };
+		DBC1653C2302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentListChangeEnvironmentWorker.swift; sourceTree = "<group>"; };
+		DBC1653D2302F36D002A50F7 /* EnvironmentsListRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListRouting.swift; sourceTree = "<group>"; };
+		DBC1653F2302F36D002A50F7 /* EnvironmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentCell.swift; sourceTree = "<group>"; };
+		DBC165402302F36D002A50F7 /* EnvironmentsListModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListModels.swift; sourceTree = "<group>"; };
 		DBCA02D722D5EB8900503025 /* AcceptRedeemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemModel.swift; sourceTree = "<group>"; };
 		DBCA02D922D5EB9800503025 /* AcceptRedeemWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemWorker.swift; sourceTree = "<group>"; };
 		DBCA02E222D787B600503025 /* SettingsTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextCell.swift; sourceTree = "<group>"; };
@@ -1539,6 +1553,7 @@
 				DB720A9422C1396B00ED116A /* CreateOffer */,
 				DB720B1E22C1396B00ED116A /* Dashboard */,
 				DB720B9822C1396B00ED116A /* DepositScene */,
+				DBC165362302F36D002A50F7 /* EnvironmnentsList */,
 				DB720AFB22C1396B00ED116A /* ExploreTokens */,
 				DB363DFE22DCDB8C00F5761C /* FacilitiesList */,
 				DB720A0222C1396B00ED116A /* Fees */,
@@ -3312,7 +3327,6 @@
 				DB720F3922C2537300ED116A /* CompaniesListFlowController.swift */,
 				DB720CA022C1396B00ED116A /* CompanyFlowController.swift */,
 				DB72281322CF546200341565 /* CreateRedeemFlowController.swift */,
-				DB363E0E22DDCE9800F5761C /* FacilitiesFlowController.swift */,
 				DB720C9922C1396B00ED116A /* LaunchFlowController.swift */,
 				DB720CA322C1396B00ED116A /* LocalAuthFlowController.swift */,
 				DB720C9F22C1396B00ED116A /* PermissionRequestFlowController.swift */,
@@ -3393,6 +3407,37 @@
 				DB720F5122C4CD1C00ED116A /* PollsNavigationTitleView.swift */,
 				DB720F5222C4CD1C00ED116A /* PollsPollCell.swift */,
 				DB720F5322C4CD1C00ED116A /* PollsChoiceCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DBC165362302F36D002A50F7 /* EnvironmnentsList */ = {
+			isa = PBXGroup;
+			children = (
+				DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */,
+				DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */,
+				DBC165402302F36D002A50F7 /* EnvironmentsListModels.swift */,
+				DBC1653A2302F36D002A50F7 /* EnvironmentsListPresenter.swift */,
+				DBC1653D2302F36D002A50F7 /* EnvironmentsListRouting.swift */,
+				DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */,
+				DBC1653E2302F36D002A50F7 /* Views */,
+				DBC1653B2302F36D002A50F7 /* Workers */,
+			);
+			path = EnvironmnentsList;
+			sourceTree = "<group>";
+		};
+		DBC1653B2302F36D002A50F7 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DBC1653C2302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
+		DBC1653E2302F36D002A50F7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DBC1653F2302F36D002A50F7 /* EnvironmentCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3675,6 +3720,7 @@
 				DB720E8A22C1396C00ED116A /* Array+IndexOf.swift in Sources */,
 				DB720D6122C1396B00ED116A /* TradeOffersDateFormatter.swift in Sources */,
 				DB720EAB22C1396C00ED116A /* TokenColoringProvider.swift in Sources */,
+				DBC165482302F36D002A50F7 /* EnvironmentsListModels.swift in Sources */,
 				DB720E8522C1396C00ED116A /* BalanceHeaderView.swift in Sources */,
 				DB720E8422C1396C00ED116A /* BalanceHeaderRateProviderProtocol.swift in Sources */,
 				DB720CD222C1396B00ED116A /* SaleOverviewInvestedAmountFormatter.swift in Sources */,
@@ -3702,8 +3748,8 @@
 				DB720CE922C1396B00ED116A /* VerifyEmailInteractor.swift in Sources */,
 				DB720F5D22C4CD1C00ED116A /* PollsInteractor.swift in Sources */,
 				DB720E8722C1396C00ED116A /* main.swift in Sources */,
+				DBC165422302F36D002A50F7 /* EnvironmentsListViewController.swift in Sources */,
 				DB720E0D22C1396C00ED116A /* AssetPickerAssetsFetcher.swift in Sources */,
-				DB363E0F22DDCE9800F5761C /* FacilitiesFlowController.swift in Sources */,
 				DB720CCA22C1396B00ED116A /* BalancePickerRouting.swift in Sources */,
 				DB720E0A22C1396C00ED116A /* AssetPickerModels.swift in Sources */,
 				DB720DE022C1396C00ED116A /* TradesListModels.swift in Sources */,
@@ -3832,6 +3878,7 @@
 				DB720EA022C1396C00ED116A /* FlexibleHeaderContainerViewController.swift in Sources */,
 				DB720D8A22C1396B00ED116A /* TransactionDetailsAmountFormatter.swift in Sources */,
 				DB720E2422C1396C00ED116A /* SideMenuRouting.swift in Sources */,
+				DBC165412302F36D002A50F7 /* EnvironmentsListInteractor.swift in Sources */,
 				DB720EC422C1396C00ED116A /* TitleValueCell.swift in Sources */,
 				DB720DC122C1396C00ED116A /* ConfirmationAmountFormatterProtocol.swift in Sources */,
 				DB720E8B22C1396C00ED116A /* TokenDSDK.Asset+Identifier.swift in Sources */,
@@ -3841,6 +3888,7 @@
 				DB720EBC22C1396C00ED116A /* TextEditingContext.swift in Sources */,
 				DB720E4622C1396C00ED116A /* BalancesListViewController.swift in Sources */,
 				DB720E6022C1396C00ED116A /* TransactionsListSalesFetcher.swift in Sources */,
+				DBC165442302F36D002A50F7 /* EnvironmentsListPresenter.swift in Sources */,
 				DB720D7F22C1396B00ED116A /* CreateOfferAmountFormatter.swift in Sources */,
 				DB720EE422C1396C00ED116A /* CellViewModelProtocol.swift in Sources */,
 				DB720D8022C1396B00ED116A /* CreateOfferAmountFormatterProtocol.swift in Sources */,
@@ -3920,6 +3968,7 @@
 				DB720E7122C1396C00ED116A /* SaleDetailsGeneralContentView.swift in Sources */,
 				DB720DB922C1396B00ED116A /* ConfirmationScenePresenter.swift in Sources */,
 				DB720CC722C1396B00ED116A /* BalancePickerPresenter.swift in Sources */,
+				DBC165452302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift in Sources */,
 				DB720D5722C1396B00ED116A /* SendPaymentDestinationRouting.swift in Sources */,
 				DB720EB422C1396C00ED116A /* QRCodeGenerationOperation.swift in Sources */,
 				DB720CF422C1396B00ED116A /* TabsContainerPresenter.swift in Sources */,
@@ -3977,6 +4026,7 @@
 				DB720EFB22C1396C00ED116A /* KeychainManager.swift in Sources */,
 				DB720F0D22C1396C00ED116A /* AuthenticatorAuthFlowController.swift in Sources */,
 				DB720E3422C1396C00ED116A /* ReceiveAddressManager.swift in Sources */,
+				DBC165462302F36D002A50F7 /* EnvironmentsListRouting.swift in Sources */,
 				DB720D2622C1396B00ED116A /* AuthenticatorAuthQRCell.swift in Sources */,
 				DB720CC322C1396B00ED116A /* SaleInvestBalancesView.swift in Sources */,
 				DB720CCB22C1396B00ED116A /* BalancePickerInteractor.swift in Sources */,
@@ -3992,6 +4042,7 @@
 				DB720DE822C1396C00ED116A /* DashboardInteractor.swift in Sources */,
 				DB720CDC22C1396B00ED116A /* UpdatePasswordPresenter.swift in Sources */,
 				DB720D1622C1396B00ED116A /* TokenDetailsTokenSummaryCell.swift in Sources */,
+				DBC165472302F36D002A50F7 /* EnvironmentCell.swift in Sources */,
 				DB720E7422C1396C00ED116A /* SaleDetailsEmptyView.swift in Sources */,
 				DB720CEB22C1396B00ED116A /* VerifyEmailWorker.swift in Sources */,
 				DB720CAB22C1396B00ED116A /* SettingsInteractor.swift in Sources */,
@@ -4102,6 +4153,7 @@
 				DB720D6C22C1396B00ED116A /* TradeOffersViewController.swift in Sources */,
 				DB720DD922C1396C00ED116A /* WalletRecoveryPresenter.swift in Sources */,
 				DB28C4BD22D38C18005362FD /* Data+Bytes.swift in Sources */,
+				DBC165432302F36D002A50F7 /* EnvironmentsListConfigurator.swift in Sources */,
 				DB720EE122C1396C00ED116A /* DynamicContentTableViewCell.swift in Sources */,
 				DB720D5122C1396B00ED116A /* SendPaymentDestinationModels.swift in Sources */,
 				DB720EBD22C1396C00ED116A /* PrecisedFormatter.swift in Sources */,

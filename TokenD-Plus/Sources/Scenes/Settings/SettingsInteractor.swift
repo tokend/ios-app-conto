@@ -71,6 +71,7 @@ extension Settings.Interactor: Settings.BusinessLogic {
             self.presenter.presentShowTerms(response: response)
             
         case .accountId,
+             .environment,
              .seed,
              .tfa,
              .biometrics,

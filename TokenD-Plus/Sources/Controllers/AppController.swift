@@ -131,26 +131,10 @@ class AppController {
     // MARK: - Private
     
     private func runLaunchFlow() {
-        if let mainAccount = self.userDataManager.getMainAccount(),
-            let walletData = self.userDataManager.getWalletData(account: mainAccount) {
-            
-            let apiConfigurationModel: APIConfigurationModel
-            if let model = try? APIConfigurationFetcher.fetchApiConfigurationFromPlist("APIConfiguration") {
-                apiConfigurationModel = model
-            } else {
-                apiConfigurationModel = APIConfigurationModel(
-                    storageEndpoint: walletData.network.storageUrl,
-                    apiEndpoint: walletData.network.rootUrl,
-                    contributeUrl: nil,
-                    termsAddress: self.flowControllerStack.apiConfigurationModel.termsAddress,
-                    webClient: nil,
-                    downloadUrl: nil
-                )
-            }
-            
-            self.updateFlowControllerStack(apiConfigurationModel, self.keychainManager)
+        let latestApiConfugurationModel = APIConfigurationModel.getLatestApiConfigutarion()
+        if self.flowControllerStack.apiConfigurationModel != latestApiConfugurationModel {
+            self.updateFlowControllerStack(latestApiConfugurationModel, self.keychainManager)
         }
-        
         let launchFlowController = LaunchFlowController(
             appController: self,
             flowControllerStack: self.flowControllerStack,
@@ -293,6 +277,8 @@ class AppController {
             rootNavigation: self.rootNavigation,
             onSignOut: { [weak self] in
                 self?.initiateSignOut()
+            }, onEnvironmentChanged: { [weak self] in
+                self?.performSignOut()
             },
             onLocalAuthRecoverySucceeded: { [weak self] in
                 self?.runLaunchFlow()
@@ -323,7 +309,10 @@ class AppController {
             company: company,
             onSignOut:  { [weak self] in
                 self?.initiateSignOut()
-            }, onLocalAuthRecoverySucceeded: {
+            }, onEnvironmentChanged: { [weak self] in
+                self?.performSignOut()
+            },
+               onLocalAuthRecoverySucceeded: {
                 self.runLaunchFlow()
         })
         self.currentFlowController = companyFlow
