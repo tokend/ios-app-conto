@@ -287,6 +287,7 @@
 "issuance" = "Issuance";
 "issued" = "Issued";
 "keychaindataprovider_should_always_provide_key" = "KeychainDataProvider should always provide key";
+"kyc" = "KYC";
 "language" = "Language";
 "last_name" = "Last name";
 "loading" = "Loading...";
@@ -301,6 +302,7 @@
 "month" = "Month";
 "more_info" = "MORE INFO";
 "movements" = "Movements";
+"name" = "Name";
 "network_info_error" = "Network info error: $(message)";
 "network_info_error_replace_message" = "message";
 "never" = "never";
@@ -483,6 +485,7 @@
 "subtype" = "Subtype";
 "success" = "Success";
 "success_parameter_is_missing_or_invalid" = "'success' parameter is missing or invalid";
+"surname" = "Surname";
 "swift_bic" = "SWIFT/BIC";
 "swift_bic_colon" = "SWIFT/BIC:";
 "terms_of_service" = "Terms of Service";

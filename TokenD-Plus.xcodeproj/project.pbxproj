@@ -655,6 +655,14 @@
 		DB72280A22CCBB4200341565 /* BalancesListActionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */; };
 		DB72281422CF546200341565 /* CreateRedeemFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281322CF546200341565 /* CreateRedeemFlowController.swift */; };
 		DB72281622CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */; };
+		DBC165162302BA7A002A50F7 /* KYCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165102302BA78002A50F7 /* KYCViewController.swift */; };
+		DBC165172302BA7A002A50F7 /* KYCModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165112302BA79002A50F7 /* KYCModels.swift */; };
+		DBC165182302BA7A002A50F7 /* KYCPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165122302BA79002A50F7 /* KYCPresenter.swift */; };
+		DBC165192302BA7A002A50F7 /* KYCInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165132302BA79002A50F7 /* KYCInteractor.swift */; };
+		DBC1651A2302BA7A002A50F7 /* KYCRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165142302BA7A002A50F7 /* KYCRouting.swift */; };
+		DBC1651B2302BA7A002A50F7 /* KYCConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165152302BA7A002A50F7 /* KYCConfigurator.swift */; };
+		DBC1651E2302BCC0002A50F7 /* KYCField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1651D2302BCC0002A50F7 /* KYCField.swift */; };
+		DBC165212302C7E6002A50F7 /* AccountVerificationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165202302C7E6002A50F7 /* AccountVerificationChecker.swift */; };
 		DBCA02D822D5EB8900503025 /* AcceptRedeemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02D722D5EB8900503025 /* AcceptRedeemModel.swift */; };
 		DBCA02DA22D5EB9800503025 /* AcceptRedeemWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02D922D5EB9800503025 /* AcceptRedeemWorker.swift */; };
 		DBCA02E322D787B600503025 /* SettingsTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E222D787B600503025 /* SettingsTextCell.swift */; };
@@ -1316,6 +1324,14 @@
 		DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesListActionProvider.swift; sourceTree = "<group>"; };
 		DB72281322CF546200341565 /* CreateRedeemFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRedeemFlowController.swift; sourceTree = "<group>"; };
 		DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountCreateRedeemRequest.swift; sourceTree = "<group>"; };
+		DBC165102302BA78002A50F7 /* KYCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCViewController.swift; sourceTree = "<group>"; };
+		DBC165112302BA79002A50F7 /* KYCModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCModels.swift; sourceTree = "<group>"; };
+		DBC165122302BA79002A50F7 /* KYCPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPresenter.swift; sourceTree = "<group>"; };
+		DBC165132302BA79002A50F7 /* KYCInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCInteractor.swift; sourceTree = "<group>"; };
+		DBC165142302BA7A002A50F7 /* KYCRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCRouting.swift; sourceTree = "<group>"; };
+		DBC165152302BA7A002A50F7 /* KYCConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCConfigurator.swift; sourceTree = "<group>"; };
+		DBC1651D2302BCC0002A50F7 /* KYCField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCField.swift; sourceTree = "<group>"; };
+		DBC165202302C7E6002A50F7 /* AccountVerificationChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerificationChecker.swift; sourceTree = "<group>"; };
 		DBCA02D722D5EB8900503025 /* AcceptRedeemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemModel.swift; sourceTree = "<group>"; };
 		DBCA02D922D5EB9800503025 /* AcceptRedeemWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemWorker.swift; sourceTree = "<group>"; };
 		DBCA02E222D787B600503025 /* SettingsTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextCell.swift; sourceTree = "<group>"; };
@@ -1542,6 +1558,7 @@
 				DB720AFB22C1396B00ED116A /* ExploreTokens */,
 				DB363DFE22DCDB8C00F5761C /* FacilitiesList */,
 				DB720A0222C1396B00ED116A /* Fees */,
+				DBC165032302BA15002A50F7 /* KYC */,
 				DB363E2922DF761200F5761C /* LanguagesList */,
 				DB720A3D22C1396B00ED116A /* MarkdownViewer */,
 				DB720F4322C4CD1C00ED116A /* Polls */,
@@ -1705,14 +1722,14 @@
 		DB7209D222C1396B00ED116A /* UpdatePassword */ = {
 			isa = PBXGroup;
 			children = (
-				DB7209D322C1396B00ED116A /* UpdatePasswordModels.swift */,
-				DB7209D422C1396B00ED116A /* UpdatePasswordInteractor.swift */,
-				DB7209D522C1396B00ED116A /* UpdatePasswordRouting.swift */,
-				DB7209D622C1396B00ED116A /* UpdatePasswordPresenter.swift */,
-				DB7209D722C1396B00ED116A /* UpdatePasswordViewController.swift */,
-				DB7209D822C1396B00ED116A /* Worker */,
 				DB7209DE22C1396B00ED116A /* UpdatePasswordConfigurator.swift */,
+				DB7209D422C1396B00ED116A /* UpdatePasswordInteractor.swift */,
+				DB7209D322C1396B00ED116A /* UpdatePasswordModels.swift */,
+				DB7209D622C1396B00ED116A /* UpdatePasswordPresenter.swift */,
+				DB7209D522C1396B00ED116A /* UpdatePasswordRouting.swift */,
+				DB7209D722C1396B00ED116A /* UpdatePasswordViewController.swift */,
 				DB7209DF22C1396B00ED116A /* Views */,
+				DB7209D822C1396B00ED116A /* Worker */,
 			);
 			path = UpdatePassword;
 			sourceTree = "<group>";
@@ -2888,6 +2905,7 @@
 		DB720C0C22C1396B00ED116A /* Workers */ = {
 			isa = PBXGroup;
 			children = (
+				DBC1651F2302C7BA002A50F7 /* AccountVerificationChecker */,
 				DBCA02D622D5E7C300503025 /* AcceptRedeemWorker */,
 				DB720C1C22C1396B00ED116A /* AmountConverter */,
 				DB720C1222C1396B00ED116A /* AmountFormatter */,
@@ -3397,6 +3415,36 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DBC165032302BA15002A50F7 /* KYC */ = {
+			isa = PBXGroup;
+			children = (
+				DBC165152302BA7A002A50F7 /* KYCConfigurator.swift */,
+				DBC165132302BA79002A50F7 /* KYCInteractor.swift */,
+				DBC165112302BA79002A50F7 /* KYCModels.swift */,
+				DBC165122302BA79002A50F7 /* KYCPresenter.swift */,
+				DBC165142302BA7A002A50F7 /* KYCRouting.swift */,
+				DBC165102302BA78002A50F7 /* KYCViewController.swift */,
+				DBC1651C2302BCA8002A50F7 /* Views */,
+			);
+			path = KYC;
+			sourceTree = "<group>";
+		};
+		DBC1651C2302BCA8002A50F7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DBC1651D2302BCC0002A50F7 /* KYCField.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DBC1651F2302C7BA002A50F7 /* AccountVerificationChecker */ = {
+			isa = PBXGroup;
+			children = (
+				DBC165202302C7E6002A50F7 /* AccountVerificationChecker.swift */,
+			);
+			path = AccountVerificationChecker;
+			sourceTree = "<group>";
+		};
 		DBCA02D622D5E7C300503025 /* AcceptRedeemWorker */ = {
 			isa = PBXGroup;
 			children = (
@@ -3616,6 +3664,7 @@
 				DB72280A22CCBB4200341565 /* BalancesListActionProvider.swift in Sources */,
 				DB720E6C22C1396C00ED116A /* SaleDetailsPresenter.swift in Sources */,
 				DB720D7222C1396B00ED116A /* BalanceHeaderWithPickerAmountFormatterProtocol.swift in Sources */,
+				DBC165182302BA7A002A50F7 /* KYCPresenter.swift in Sources */,
 				DB720EE722C1396C00ED116A /* WalletRepo.swift in Sources */,
 				DB720D1122C1396B00ED116A /* TokenDetailsFetcherProtocol.swift in Sources */,
 				DB720D2022C1396B00ED116A /* AuthAppAvailibilityChecker.swift in Sources */,
@@ -3659,6 +3708,7 @@
 				DB720DD122C1396C00ED116A /* ExploreTokensSceneTokensFetcher.swift in Sources */,
 				DB720E4E22C1396C00ED116A /* DepositSceneErrorFormatter.swift in Sources */,
 				DB720E5322C1396C00ED116A /* DepositSceneAddressManagerProtocol.swift in Sources */,
+				DBC1651A2302BA7A002A50F7 /* KYCRouting.swift in Sources */,
 				DB720CEC22C1396B00ED116A /* VerifyEmailResendWorkerProtocol.swift in Sources */,
 				DB720CB022C1396B00ED116A /* SettingsActionCell.swift in Sources */,
 				DB720DC222C1396C00ED116A /* CreateOfferConfirmationSectionsProvider.swift in Sources */,
@@ -3729,6 +3779,7 @@
 				DB720DFF22C1396C00ED116A /* DashboardPlugInsProvider.swift in Sources */,
 				DB720EFE22C1396C00ED116A /* TransactionSender.swift in Sources */,
 				DB720EB622C1396C00ED116A /* FeeLoader.swift in Sources */,
+				DBC1651B2302BA7A002A50F7 /* KYCConfigurator.swift in Sources */,
 				DB720E0222C1396C00ED116A /* TabBarContainerPresenter.swift in Sources */,
 				DB720D0522C1396B00ED116A /* FeesConfigurator.swift in Sources */,
 				DB720CC122C1396B00ED116A /* SaleInvestEnterInvestAmountView.swift in Sources */,
@@ -3749,6 +3800,7 @@
 				DB720EB722C1396C00ED116A /* ImagesUtility.swift in Sources */,
 				DB720D4822C1396B00ED116A /* ChartAmountFormatter.swift in Sources */,
 				DB720F5B22C4CD1C00ED116A /* PollsPresenter.swift in Sources */,
+				DBC165172302BA7A002A50F7 /* KYCModels.swift in Sources */,
 				DB720F2A22C2286C00ED116A /* CompaniesListPresenter.swift in Sources */,
 				DBCA02D822D5EB8900503025 /* AcceptRedeemModel.swift in Sources */,
 				DB4AE30622F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift in Sources */,
@@ -3804,6 +3856,7 @@
 				DB720EAF22C1396C00ED116A /* AmountConverter.swift in Sources */,
 				DB720DCB22C1396C00ED116A /* ConfirmationTitleBoolSwitchView.swift in Sources */,
 				DB720E5D22C1396C00ED116A /* TransactionsListScenePaymentsFetcher.swift in Sources */,
+				DBC1651E2302BCC0002A50F7 /* KYCField.swift in Sources */,
 				DB720E3C22C1396C00ED116A /* BalancesListInteractor.swift in Sources */,
 				DB720F1722C1396C00ED116A /* BalancesListFlowController.swift in Sources */,
 				DB720E9122C1396C00ED116A /* String+QueueLabel.swift in Sources */,
@@ -3897,6 +3950,7 @@
 				DB720CB122C1396B00ED116A /* SettingsLoadingCell.swift in Sources */,
 				DB720E9722C1396C00ED116A /* Array+Take.swift in Sources */,
 				DB720D6622C1396B00ED116A /* TradeOffersChartsFetcher.swift in Sources */,
+				DBC165212302C7E6002A50F7 /* AccountVerificationChecker.swift in Sources */,
 				DB720D4B22C1396B00ED116A /* ChartDateFormatter.swift in Sources */,
 				DB720F6022C4CD1C00ED116A /* PollsPollCell.swift in Sources */,
 				DB720DC922C1396C00ED116A /* ConfirmationSceneBaseCell.swift in Sources */,
@@ -3956,6 +4010,7 @@
 				DB720CB822C1396B00ED116A /* SaleInvestConfigurator.swift in Sources */,
 				DB720DC622C1396C00ED116A /* ConfirmationPercentFormatterProtocol.swift in Sources */,
 				DB720DBF22C1396C00ED116A /* SaleInvestConfirmationProvider.swift in Sources */,
+				DBC165162302BA7A002A50F7 /* KYCViewController.swift in Sources */,
 				DB720ED622C1396C00ED116A /* BXFStaticTableViewButtonCellModel.swift in Sources */,
 				DB720DF822C1396C00ED116A /* DashboardPendingOffersPreviewPlugInInteractor.swift in Sources */,
 				DB720E9A22C1396C00ED116A /* UISegmentedControl+FillWithSegments.swift in Sources */,
@@ -4006,6 +4061,7 @@
 				DB720E1622C1396C00ED116A /* RegisterSceneViewController.swift in Sources */,
 				DB720D7E22C1396B00ED116A /* CreateOfferFeeLoader.swift in Sources */,
 				DB720CD322C1396B00ED116A /* SaleOverviewDataProvider.swift in Sources */,
+				DBC165192302BA7A002A50F7 /* KYCInteractor.swift in Sources */,
 				DB720D1F22C1396B00ED116A /* AuthRequestWorker.swift in Sources */,
 				DB720CD722C1396B00ED116A /* SaleOverviewPresenter.swift in Sources */,
 				DB720DBB22C1396B00ED116A /* ConfirmationSceneInteractor.swift in Sources */,

@@ -290,6 +290,7 @@ enum LocKey: String {
     case issuance
     case issued
     case keychaindataprovider_should_always_provide_key
+    case kyc
     case language
     case last_name
     case loading
@@ -304,6 +305,7 @@ enum LocKey: String {
     case month
     case more_info
     case movements
+    case name
     case network_info_error
     case network_info_error_replace_message
     case never
@@ -486,6 +488,7 @@ enum LocKey: String {
     case subtype
     case success
     case success_parameter_is_missing_or_invalid
+    case surname
     case swift_bic
     case swift_bic_colon
     case terms_of_service
