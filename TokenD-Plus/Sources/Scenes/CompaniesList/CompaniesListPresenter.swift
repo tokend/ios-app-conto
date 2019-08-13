@@ -6,6 +6,7 @@ public protocol CompaniesListPresentationLogic {
     func presentSceneUpdated(response: Event.SceneUpdated.Response)
     func presentLoadingStatusDidChange(response: Event.LoadingStatusDidChange.Response)
     func presentAddBusinessAction(response: Event.AddBusinessAction.Response)
+    func presentCompanyChosen(response: Event.CompanyChosen.Response)
 }
 
 extension CompaniesList {
@@ -89,6 +90,13 @@ extension CompaniesList.Presenter: CompaniesList.PresentationLogic {
         }
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displayAddBusinessAction(viewModel: viewModel)
+        }
+    }
+    
+    public func presentCompanyChosen(response: Event.CompanyChosen.Response) {
+        let viewModel = response
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displayCompanyChosen(viewModel: viewModel)
         }
     }
 }

@@ -14,15 +14,13 @@ class BalancesListFlowController: BaseSignedInFlowController {
     private var balanceDetailsCompletionScene: UIViewController {
         return self.balanceDetailsScene ?? UIViewController()
     }
-    private let ownerAccountId: String
-    private let companyName: String
+    private let company: CompaniesList.Model.Company
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: -
     
     init(
-        ownerAccountId: String,
-        companyName: String,
+        company: CompaniesList.Model.Company,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
         reposController: ReposController,
@@ -32,8 +30,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
         rootNavigation: RootNavigationProtocol
         ) {
         
-        self.ownerAccountId = ownerAccountId
-        self.companyName = companyName
+        self.company = company
         super.init(
             appController: appController,
             flowControllerStack: flowControllerStack,
@@ -75,7 +72,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
         ) {
         
         let vc = self.setupBalancesListScene()
-        vc.navigationItem.title = companyName
+        vc.navigationItem.title = self.company.name
         
         self.navigationController.setViewControllers([vc], animated: false)
         showRootScreen(self.navigationController.getViewController())
@@ -87,7 +84,8 @@ class BalancesListFlowController: BaseSignedInFlowController {
             balances: [],
             chartBalances: [],
             selectedChartBalance: nil,
-            convertedAsset: "USD"
+            imageUrl: company.imageUrl,
+            convertedAsset: company.conversionAsset
         )
         let amountFormatter = BalancesList.AmountFormatter()
         let percentFormatter = BalancesList.PercentFormatter()
@@ -96,14 +94,15 @@ class BalancesListFlowController: BaseSignedInFlowController {
             storageUrl: self.flowControllerStack.apiConfigurationModel.storageEndpoint
         )
         let balancesFetcher = BalancesList.BalancesFetcher(
-            balancesRepo: self.reposController.balancesRepo,
-            assetsRepo: self.reposController.assetsRepo,
-            ownerAccountId: self.ownerAccountId,
+            accountApiV3: self.flowControllerStack.apiV3.accountsApi,
+            ownerAccountId: self.company.accountId,
+            originalAccountId: self.userDataProvider.walletData.accountId,
+            conversionAsset: self.company.conversionAsset,
             imageUtility: imagesUtility
         )
         let actionProvider = BalancesList.ActionProvider(
             originalAccountId: self.userDataProvider.walletData.accountId,
-            ownerAccountId: ownerAccountId
+            ownerAccountId: self.company.accountId
         )
         let colorsProvider = BalancesList.PieChartColorsProvider()
         
@@ -131,8 +130,8 @@ class BalancesListFlowController: BaseSignedInFlowController {
                 guard let strongSelf = self else { return }
                 self?.runCreateRedeemFlow(
                     navigationController: strongSelf.navigationController,
-                    companyName: strongSelf.companyName,
-                    ownerAccountId: strongSelf.ownerAccountId,
+                    companyName: strongSelf.company.name,
+                    ownerAccountId: strongSelf.company.accountId,
                     balanceId: nil
                 )
         },
@@ -144,7 +143,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
                 guard let strongSelf = self else { return }
                 strongSelf.runSendPaymentFlow(
                     navigationController: strongSelf.navigationController,
-                    ownerAccountId: strongSelf.ownerAccountId,
+                    ownerAccountId: strongSelf.company.accountId,
                     balanceId: nil,
                     completion: {
                         strongSelf.backToBalances()
@@ -197,7 +196,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
             showSendPayment: { [weak self] (balanceId) in
                 self?.runSendPaymentFlow(
                     navigationController: navigationController,
-                    ownerAccountId: self?.ownerAccountId ?? "",
+                    ownerAccountId: self?.company.accountId ?? "",
                     balanceId: balanceId,
                     completion: { [weak self] in
                         self?.backToBalanceDetails()
@@ -206,8 +205,8 @@ class BalancesListFlowController: BaseSignedInFlowController {
             showCreateReedeem: { [weak self] (balanceId) in
                 self?.runCreateRedeemFlow(
                     navigationController: navigationController,
-                    companyName: self?.companyName ?? "",
-                    ownerAccountId: self?.ownerAccountId ?? "",
+                    companyName: self?.company.name ?? "",
+                    ownerAccountId: self?.company.accountId ?? "",
                     balanceId: balanceId
                 )
             },

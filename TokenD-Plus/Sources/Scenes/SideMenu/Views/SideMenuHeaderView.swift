@@ -6,6 +6,8 @@ extension SideMenu {
         // MARK: - Private properties
         
         private let iconImageView: UIImageView = UIImageView()
+        private let qrIconContainer: UIView = UIView()
+        private let qrIcon: UIImageView = UIImageView()
         private let titleLabel: UILabel = UILabel()
         private let subTitleLabel: UILabel = UILabel()
         private let appNameLoginSeparator: UIView = UIView()
@@ -14,6 +16,8 @@ extension SideMenu {
         
         let horizontalOffset: CGFloat = 15.0
         let verticalOffset: CGFloat = 6.0
+        
+        let qrIconSize: CGFloat = 27.5
         
         var iconImage: UIImage? {
             get { return self.iconImageView.image }
@@ -51,6 +55,8 @@ extension SideMenu {
             self.backgroundColor = UIColor.clear
             
             self.setupIconImageView()
+            self.setupQrIconContainer()
+            self.setupQrIcon()
             self.setupTitleLabel()
             self.setupSubTitleLabel()
             self.setupAppNameLoginSeparator()
@@ -63,6 +69,22 @@ extension SideMenu {
         private func setupIconImageView() {
             self.iconImageView.contentMode = .scaleAspectFit
             self.iconImageView.tintColor = Theme.Colors.darkAccentColor
+        }
+        
+        private func setupQrIcon() {
+            self.qrIcon.backgroundColor = Theme.Colors.contentBackgroundColor
+            self.qrIcon.tintColor = Theme.Colors.separatorOnContentBackgroundColor
+            self.qrIcon.layer.cornerRadius = self.qrIconSize / 2
+            self.qrIcon.image = Assets.scanQrIcon.image
+        }
+        
+        private func setupQrIconContainer() {
+            self.qrIconContainer.backgroundColor = Theme.Colors.contentBackgroundColor
+            self.qrIconContainer.layer.cornerRadius = self.qrIconSize / 2
+            self.qrIconContainer.layer.shadowColor = Theme.Colors.separatorOnContentBackgroundColor.cgColor
+            self.qrIconContainer.layer.shadowOpacity = 1
+            self.qrIconContainer.layer.shadowOffset = .zero
+            self.qrIconContainer.layer.shadowRadius = 2
         }
         
         private func setupTitleLabel() {
@@ -84,9 +106,12 @@ extension SideMenu {
         
         private func setupLayout() {
             self.addSubview(self.iconImageView)
+            self.addSubview(self.qrIconContainer)
             self.addSubview(self.appNameLoginSeparator)
             self.addSubview(self.titleLabel)
             self.addSubview(self.subTitleLabel)
+            
+            self.qrIconContainer.addSubview(self.qrIcon)
             
             self.updateLayout()
             
@@ -107,10 +132,27 @@ extension SideMenu {
                     make.leading.top.equalToSuperview()
                     make.size.equalTo(0.0)
                 }
+                self.qrIconContainer.snp.remakeConstraints { (make) in
+                    make.centerX.equalTo(self.iconImageView.snp.trailing)
+                    make.bottom.equalTo(self.iconImageView)
+                    make.size.equalTo(0.0)
+                }
+                self.qrIcon.snp.remakeConstraints { (make) in
+                    make.edges.equalToSuperview()
+                }
             } else {
                 self.iconImageView.snp.remakeConstraints { (make) in
                     make.leading.top.bottom.equalToSuperview().inset(self.horizontalOffset)
                     make.width.equalTo(self.iconImageView.snp.height)
+                }
+                self.qrIconContainer.snp.remakeConstraints { (make) in
+                    make.centerX.equalTo(self.iconImageView.snp.trailing).inset(10.0)
+                    make.bottom.equalTo(self.iconImageView)
+                    make.size.equalTo(self.qrIconSize)
+                }
+                
+                self.qrIcon.snp.remakeConstraints { (make) in
+                    make.edges.equalToSuperview().inset(5.0)
                 }
             }
             

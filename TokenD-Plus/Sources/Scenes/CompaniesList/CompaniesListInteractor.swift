@@ -8,6 +8,7 @@ public protocol CompaniesListBusinessLogic {
     func onViewDidLoad(request: Event.ViewDidLoad.Request)
     func onRefreshInitiated(request: Event.RefreshInitiated.Request)
     func onAddBusinessAction(request: Event.AddBusinessAction.Request)
+    func onCompanyChosen(request: Event.CompanyChosen.Request)
 }
 
 extension CompaniesList {
@@ -141,5 +142,13 @@ extension CompaniesList.Interactor: CompaniesList.BusinessLogic {
                 }
                 self?.presenter.presentAddBusinessAction(response: response)
         })
+    }
+    
+    public func onCompanyChosen(request: Event.CompanyChosen.Request) {
+        guard let company = self.sceneModel.companies.first(where: { (company) -> Bool in
+            return company.accountId == request.accountId
+        }) else { return }
+        let response = Event.CompanyChosen.Response(model: company)
+        self.presenter.presentCompanyChosen(response: response)
     }
 }

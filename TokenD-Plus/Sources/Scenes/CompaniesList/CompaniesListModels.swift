@@ -25,6 +25,7 @@ extension CompaniesList.Model {
     public struct Company {
         let accountId: String
         let name: String
+        let conversionAsset: String
         let imageUrl: URL?
     }
     
@@ -105,5 +106,15 @@ extension CompaniesList.Event {
     
     public enum RefreshInitiated {
         public struct Request {}
+    }
+    
+    public enum CompanyChosen {
+        public struct Request {
+            let accountId: String
+        }
+        public struct Response {
+            let model: Model.Company
+        }
+        public typealias ViewModel = Response
     }
 }

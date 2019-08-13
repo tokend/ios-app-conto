@@ -50,13 +50,13 @@ extension BalancesList {
                 self.presenter.presentSectionsUpdated(response: .empty)
                 return
             }
-            // let headerSection = self.getHeaderSectionModel()
+            let headerSection = self.getHeaderSectionModel()
             // let chartSection = self.getChartSectionModel()
             let balancesSection = self.getBalancesSectionModel()
             
             let response = Event.SectionsUpdated.Response.sections(
                 sections: [
-                    // headerSection,
+                    headerSection,
                     // chartSection,
                     balancesSection
                 ]
@@ -81,6 +81,7 @@ extension BalancesList {
             let headerModel = Model.Header(
                 balance: convertedBalance,
                 asset: self.sceneModel.convertedAsset,
+                imageUrl: self.sceneModel.imageUrl,
                 cellIdentifier: .header
             )
             let headerCell = Model.CellModel.header(headerModel)

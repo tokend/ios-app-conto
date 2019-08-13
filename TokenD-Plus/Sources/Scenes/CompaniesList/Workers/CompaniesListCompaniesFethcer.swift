@@ -24,6 +24,8 @@ extension CompaniesList {
         private let apiConfiguration: APIConfigurationModel
         private let userDataProvider: UserDataProviderProtocol
         
+        private let defaultConversionAsset: String = "UAH"
+        
         // MARK: -
         
         init(
@@ -69,9 +71,12 @@ extension CompaniesList {
                     let logoPath = self.apiConfiguration.storageEndpoint/logoDetails.key
                     imageUrl = URL(string: logoPath)
                 }
+                let conversionAsset = resource.statsQuoteAsset.isEmpty ?
+                self.defaultConversionAsset : resource.statsQuoteAsset
                 return Model.Company(
                     accountId: resource.accountId,
                     name: resource.name,
+                    conversionAsset: conversionAsset,
                     imageUrl: imageUrl
                 )
             }

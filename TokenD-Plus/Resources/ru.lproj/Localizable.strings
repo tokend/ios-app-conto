@@ -287,6 +287,7 @@
 "issuance" = "Эмиссия";
 "issued" = "Эмиссия";
 "keychaindataprovider_should_always_provide_key" = "KeychainDataProvider всегда должен предоставлять ключ";
+"kyc" = "KYC";
 "language" = "Язык";
 "last_name" = "Фамилия";
 "loading" = "Загрузка...";
@@ -301,6 +302,7 @@
 "month" = "Месяц";
 "more_info" = "Подробнее";
 "movements" = "Операции";
+"name" = "Имя";
 "network_info_error" = "Ошибка сети: $(message)";
 "network_info_error_replace_message" = "message";
 "never" = "никогда";
@@ -483,6 +485,7 @@
 "subtype" = "Подтип";
 "success" = "Успех";
 "success_parameter_is_missing_or_invalid" = "'success' parameter is missing or invalid";
+"surname" = "Фамилия";
 "swift_bic" = "SWIFT/BIC";
 "swift_bic_colon" = "SWIFT/BIC:";
 "terms_of_service" = "Условия использования";

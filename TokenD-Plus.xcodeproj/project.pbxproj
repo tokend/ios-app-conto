@@ -1705,14 +1705,14 @@
 		DB7209D222C1396B00ED116A /* UpdatePassword */ = {
 			isa = PBXGroup;
 			children = (
-				DB7209D322C1396B00ED116A /* UpdatePasswordModels.swift */,
-				DB7209D422C1396B00ED116A /* UpdatePasswordInteractor.swift */,
-				DB7209D522C1396B00ED116A /* UpdatePasswordRouting.swift */,
-				DB7209D622C1396B00ED116A /* UpdatePasswordPresenter.swift */,
-				DB7209D722C1396B00ED116A /* UpdatePasswordViewController.swift */,
-				DB7209D822C1396B00ED116A /* Worker */,
 				DB7209DE22C1396B00ED116A /* UpdatePasswordConfigurator.swift */,
+				DB7209D422C1396B00ED116A /* UpdatePasswordInteractor.swift */,
+				DB7209D322C1396B00ED116A /* UpdatePasswordModels.swift */,
+				DB7209D622C1396B00ED116A /* UpdatePasswordPresenter.swift */,
+				DB7209D522C1396B00ED116A /* UpdatePasswordRouting.swift */,
+				DB7209D722C1396B00ED116A /* UpdatePasswordViewController.swift */,
 				DB7209DF22C1396B00ED116A /* Views */,
+				DB7209D822C1396B00ED116A /* Worker */,
 			);
 			path = UpdatePassword;
 			sourceTree = "<group>";
