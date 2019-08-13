@@ -4,6 +4,8 @@ protocol SettingsManagerProtocol: class {
     var biometricsAuthEnabled: Bool { get set }
     var businessOwnerAccountId: String? { get set }
     var businessName: String? { get set }
+    var businessImageKey: String? { get set }
+    var businessConversionAsset: String? { get set }
     
     func cleanAccountRelatedInfo()
 }
@@ -15,6 +17,8 @@ class SettingsManager {
     static let biometricsAuthEnabledUserDefaultsKey: String = "biometricsAuthEnabled"
     static let businessOwnerAccountIdKey: String = "businessOwnerAccountId"
     static let businessNameKey: String = "businessName"
+    static let businessImageKey: String = "businessImage"
+    static let businessConversionAssetKey: String = "businessConversionAsset"
     
     var biometricsAuthEnabled: Bool {
         get {
@@ -40,6 +44,24 @@ class SettingsManager {
         }
         set {
             self.setBusinessName(name: newValue)
+        }
+    }
+    
+    var businessImageKey: String? {
+        get {
+            return self.getBusinessImageKey()
+        }
+        set {
+            self.setBusinessImageKey(imageKey: newValue)
+        }
+    }
+    
+    var businessConversionAsset: String? {
+        get {
+            return self.getBusinessConversionAsset()
+        }
+        set {
+            self.setBusinessConversionAsset(conversionAsset: newValue)
         }
     }
     
@@ -83,12 +105,30 @@ class SettingsManager {
     private func setBusinessName(name: String?) {
         self.userDefaults.setValue(name, forKey: SettingsManager.businessNameKey)
     }
+    
+    private func getBusinessImageKey() -> String? {
+        return self.userDefaults.string(forKey: SettingsManager.businessImageKey)
+    }
+    
+    private func setBusinessImageKey(imageKey: String?) {
+        self.userDefaults.setValue(imageKey, forKey: SettingsManager.businessImageKey)
+    }
+    
+    private func getBusinessConversionAsset() -> String? {
+        return self.userDefaults.string(forKey: SettingsManager.businessConversionAssetKey)
+    }
+    
+    private func setBusinessConversionAsset(conversionAsset: String?) {
+        self.userDefaults.setValue(conversionAsset, forKey: SettingsManager.businessConversionAssetKey)
+    }
 }
 
 extension SettingsManager: SettingsManagerProtocol {
     
     public func cleanAccountRelatedInfo() {
-        self.userDefaults.set(nil, forKey: SettingsManager.businessNameKey)
-        self.userDefaults.set(nil, forKey: SettingsManager.businessOwnerAccountIdKey)
+        self.businessOwnerAccountId = nil
+        self.businessName = nil
+        self.businessImageKey = nil
+        self.businessConversionAsset = nil
     }
 }

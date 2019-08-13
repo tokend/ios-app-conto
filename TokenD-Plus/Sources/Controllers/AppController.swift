@@ -234,8 +234,22 @@ class AppController {
         )
         
         if
-            let previousBusiness = self.flowControllerStack.settingsManager.businessOwnerAccountId,
+            let previousBusinessAccountId = self.flowControllerStack.settingsManager.businessOwnerAccountId,
             let previosBusinessName = self.flowControllerStack.settingsManager.businessName {
+            
+            var imageUrl: URL?
+            if let previosBusinessImageKey = self.flowControllerStack.settingsManager.businessImageKey {
+                
+                imageUrl = URL(string: previosBusinessImageKey)
+            }
+            let conversionAsset = self.flowControllerStack.settingsManager.businessConversionAsset ?? ""
+            
+            let company = CompaniesList.Model.Company(
+                accountId: previousBusinessAccountId,
+                name: previosBusinessName,
+                conversionAsset: conversionAsset,
+                imageUrl: imageUrl
+            )
             self.runCompanyFlow(
                 appController: self,
                 flowControllerStack: self.flowControllerStack,
@@ -244,8 +258,7 @@ class AppController {
                 userDataProvider: userDataProvider,
                 keychainDataProvider: keychainDataProvider,
                 rootNavigation: self.rootNavigation,
-                companyName: previosBusinessName,
-                ownerAccountId: previousBusiness
+                company: company
             )
         } else {
             self.runCompanyListFlowController(
@@ -296,8 +309,7 @@ class AppController {
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
-        companyName: String,
-        ownerAccountId: String
+        company: CompaniesList.Model.Company
         ) {
         
         let companyFlow = CompanyFlowController(
@@ -308,8 +320,7 @@ class AppController {
             userDataProvider: userDataProvider,
             keychainDataProvider: keychainDataProvider,
             rootNavigation: rootNavigation,
-            ownerAccountId: ownerAccountId,
-            companyName: companyName,
+            company: company,
             onSignOut:  { [weak self] in
                 self?.initiateSignOut()
             }, onLocalAuthRecoverySucceeded: {

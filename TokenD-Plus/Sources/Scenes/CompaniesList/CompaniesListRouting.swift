@@ -7,10 +7,7 @@ extension CompaniesList {
         let hideLoading: () -> Void
         let showShadow: () -> Void
         let hideShadow: () -> Void
-        let onCompanyChosen: (
-        _ ownerAccountId: String,
-        _ companyName: String
-        ) -> Void
+        let onCompanyChosen: (_ company: Model.Company) -> Void
         let showError: (_ errorMessage: String) -> Void
         let showSuccessMessage: (_ message: String) -> Void
         let onPresentQRCodeReader: (_ completion: @escaping QRCodeReaderCompletion) -> Void

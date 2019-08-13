@@ -14,8 +14,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private let sideMenuViewController = SideMenu.ViewController()
     
-    private let ownerAccountId: String
-    private let companyName: String
+    private let company: CompaniesList.Model.Company
     
     // MARK: - Callbacks
     
@@ -32,14 +31,12 @@ class CompanyFlowController: BaseSignedInFlowController {
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
-        ownerAccountId: String,
-        companyName: String,
+        company: CompaniesList.Model.Company,
         onSignOut: @escaping () -> Void,
         onLocalAuthRecoverySucceeded: @escaping () -> Void
         ) {
         
-        self.ownerAccountId = ownerAccountId
-        self.companyName = companyName
+        self.company = company
         self.onSignOut = onSignOut
         self.onLocalAuthRecoverySucceeded = onLocalAuthRecoverySucceeded
         
@@ -85,7 +82,7 @@ class CompanyFlowController: BaseSignedInFlowController {
         let headerModel = SideMenu.Model.HeaderModel(
             icon: Assets.logo.image,
             title: self.userDataProvider.userEmail,
-            subTitle: self.companyName
+            subTitle: self.company.name
         )
         let sections: [[SideMenu.Model.MenuItem]] = []
         
@@ -125,8 +122,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private func runBalancesFlow() {
         let balancesFlow = BalancesListFlowController(
-            ownerAccountId: self.ownerAccountId,
-            companyName: self.companyName,
+            company: self.company,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
             reposController: self.reposController,
@@ -161,7 +157,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private func runSaleFlow() {
         let flow = SalesFlowController(
-            ownerAccountId: self.ownerAccountId,
+            ownerAccountId: self.company.accountId,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
             reposController: self.reposController,
@@ -181,7 +177,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private func runPollsFlow() {
         let flow = PollsFlowController(
-            ownerAccountId: self.ownerAccountId,
+            ownerAccountId: self.company.accountId,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
             reposController: self.reposController,

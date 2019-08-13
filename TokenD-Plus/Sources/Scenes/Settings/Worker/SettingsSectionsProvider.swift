@@ -193,19 +193,6 @@ extension Settings {
                 changePassCell
             ]
             
-            let webClientAddress = self.apiConfigurationModel.webClient
-            if webClientAddress != nil {
-                let verificationCell = Model.CellModel(
-                    title: Localized(.verification),
-                    icon: Assets.verificationIcon.image,
-                    cellType: .disclosureCell,
-                    bottomSeparator: .line,
-                    identifier: .verification
-                )
-                securityCells[0].bottomSeparator = .lineWithInset
-                securityCells.insert(verificationCell, at: 1)
-            }
-            
             if let biometricsSettingInfo = self.getBiometricsSettingInfo() {
                 let biometricsAuthCell = Model.CellModel(
                     title: biometricsSettingInfo.title,

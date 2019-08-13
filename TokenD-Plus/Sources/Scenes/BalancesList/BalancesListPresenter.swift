@@ -141,6 +141,7 @@ extension BalancesList {
                             currency: headerModel.asset
                         )
                         let headerModel = BalancesList.HeaderCell.ViewModel(
+                            imageUrl: headerModel.imageUrl,
                             balance: balanceTitle,
                             cellIdentifier: .header
                         )

@@ -202,6 +202,9 @@ extension BalancesList {
             self.tableView.dataSource = self
             self.tableView.separatorStyle = .none
             self.tableView.sectionFooterHeight = 0.0
+            self.tableView.tableHeaderView = UIView(
+                frame: CGRect(x: 0, y: 0, width: 0, height: 0.1)
+            )
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.tableView.refreshControl = self.refreshControl
@@ -328,11 +331,27 @@ extension BalancesList.ViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90.0
+        let model = self.sections[indexPath.section].cells[indexPath.row]
+        
+        if model as? BalancesList.HeaderCell.ViewModel != nil {
+            return 120.0
+        } else if model as? BalancesList.BalanceCell.ViewModel != nil {
+            return 90.0
+        } else {
+            return 44.0
+        }
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90.0
+        let model = self.sections[indexPath.section].cells[indexPath.row]
+        
+        if model as? BalancesList.HeaderCell.ViewModel != nil {
+            return 120.0
+        } else if model as? BalancesList.BalanceCell.ViewModel != nil {
+            return 90.0
+        } else {
+            return 44.0
+        }
     }
 }
 
