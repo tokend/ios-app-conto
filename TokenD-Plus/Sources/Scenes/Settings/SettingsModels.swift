@@ -8,6 +8,7 @@ enum Settings {
     
     enum CellIdentifier: String {
         case accountId
+        case environment
         case seed
         case tfa
         case biometrics

@@ -15,6 +15,7 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     
     private let navigationController: NavigationControllerProtocol = NavigationController()
     private let onSignOut: () -> Void
+    private let onEnvironmentChanged: () -> Void
     private let onLocalAuthRecoverySucceeded: () -> Void
     
     private var localAuthFlow: LocalAuthFlowController?
@@ -35,10 +36,12 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
         onSignOut: @escaping (() -> Void),
+        onEnvironmentChanged: @escaping (() -> Void),
         onLocalAuthRecoverySucceeded: @escaping () -> Void
         ) {
         
         self.onSignOut = onSignOut
+        self.onEnvironmentChanged = onEnvironmentChanged
         self.onLocalAuthRecoverySucceeded = onLocalAuthRecoverySucceeded
         super.init(
             appController: appController,
@@ -201,6 +204,7 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             rootNavigation: self.rootNavigation,
             company: company,
             onSignOut: self.onSignOut,
+            onEnvironmentChanged: self.onEnvironmentChanged,
             onLocalAuthRecoverySucceeded: { [weak self] in
                 self?.onLocalAuthRecoverySucceeded()
         })

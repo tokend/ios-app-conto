@@ -20,6 +20,8 @@
 "amount_sent" = "Платіж відправлено";
 "annual_return" = "Щорічне повернення";
 "app_name" = "TokenD Real Estate";
+"application_is_already_configured_for_this_environment" = "Додаток вже налаштований на $(environment) оточення";
+"application_is_already_configured_for_this_environment_replace_environment" = "environment";
 "are_you_sure_you_want_to_cancel_investment" = "Ви впевнені що хочете скасувати вклад?";
 "are_you_sure_you_want_to_cancel_pending_offer" = "Ви впевнені що хочете скасувати активний ордер?";
 "are_you_sure_you_want_to_sign_out" = "Ви впевнені що хочете Вийти и очистити усі дані з пристрою?";
@@ -167,6 +169,7 @@
 "enter_swift_bic" = "Введите SWIFT/BIC";
 "enter_t" = "Введіть $(title)";
 "enter_t_replace_title" = "title";
+"environment" = "Оточення";
 "erase_all_data_and" = "Очистити усі дані та ";
 "error" = "Помилка";
 "error_while_formatting_orderbookid" = "Помилка в процессі формування orderBookId";

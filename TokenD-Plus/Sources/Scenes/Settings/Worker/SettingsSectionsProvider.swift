@@ -240,6 +240,21 @@ extension Settings {
                 description: ""
             )
             
+            let environmentCell = Model.CellModel(
+                title: Localized(.environment),
+                icon: Assets.earth.image,
+                cellType: .disclosureCell,
+                topSeparator: .line,
+                bottomSeparator: .line,
+                identifier: .environment
+            )
+            
+            let environmentSection = Model.SectionModel(
+                title: "",
+                cells: [environmentCell],
+                description: ""
+            )
+            
             let signOutCell = Model.CellModel(
                 title: Localized(.sign_out),
                 icon: Assets.signOutIcon.image,
@@ -284,6 +299,7 @@ extension Settings {
                 acountSection,
                 securitySection,
                 termsSection,
+                environmentSection,
                 signOutSection,
                 versionSection
             ]
