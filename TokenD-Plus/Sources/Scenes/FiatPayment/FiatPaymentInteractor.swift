@@ -36,11 +36,9 @@ extension FiatPayment {
 }
 
 extension FiatPayment.Interactor: FiatPayment.BusinessLogic {
+    
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
-        let response = Event.ViewDidLoad.Response(
-            amount: self.sceneModel.amount,
-            asset: self.sceneModel.asset
-        )
+        let response = Event.ViewDidLoad.Response(url: self.sceneModel.url)
         self.presenter.presentViewDidLoad(response: response)
     }
 }

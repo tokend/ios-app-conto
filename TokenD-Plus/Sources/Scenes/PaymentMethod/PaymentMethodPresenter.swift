@@ -108,15 +108,7 @@ extension PaymentMethod.Presenter: PaymentMethod.PresentationLogic {
             viewModel = .error(error.localizedDescription)
             
         case .invoce(let invoice):
-            let amount = self.amountFormatter.formatAmount(
-                invoice.amount,
-                currency: invoice.asset
-            )
-            let invoiceViewModel = Model.AtomicSwapInvoiceViewModel(
-                address: invoice.address,
-                amount: amount
-            )
-            viewModel = .invoce(invoiceViewModel)
+            viewModel = .invoce(invoice)
         }
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displayPaymentAction(viewModel: viewModel)

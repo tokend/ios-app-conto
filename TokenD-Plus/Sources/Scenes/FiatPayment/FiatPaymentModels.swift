@@ -17,10 +17,7 @@ public enum FiatPayment {
 extension FiatPayment.Model {
     
     public struct SceneModel {
-        let secret: String
-        let id: String
-        let asset: String
-        let amount: Decimal
+        let url: URL
     }
 }
 
@@ -34,11 +31,10 @@ extension FiatPayment.Event {
     public enum ViewDidLoad {
         public struct Request {}
         public struct Response {
-            let amount: Decimal
-            let asset: String
+            let url: URL
         }
         public struct ViewModel {
-            let amount: String
+            let request: URLRequest
         }
     }
 }

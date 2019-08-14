@@ -40,10 +40,8 @@ extension PaymentMethod.Model {
         let toPayAmount: String
     }
     
-    public struct AtomicSwapInvoice {
-        let address: String
-        let asset: String
-        let amount: Decimal
+    public struct AtomicSwapPaymentUrl {
+        let url: URL
     }
     
     public struct AtomicSwapInvoiceViewModel {
@@ -101,11 +99,11 @@ extension PaymentMethod.Event {
     public enum PaymentAction {
         public struct Request {}
         public enum Response {
-            case invoce(Model.AtomicSwapInvoice)
+            case invoce(Model.AtomicSwapPaymentUrl)
             case error(Error)
         }
         public enum ViewModel {
-            case invoce(Model.AtomicSwapInvoiceViewModel)
+            case invoce(Model.AtomicSwapPaymentUrl)
             case error(String)
         }
     }

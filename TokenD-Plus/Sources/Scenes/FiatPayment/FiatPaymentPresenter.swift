@@ -18,17 +18,11 @@ extension FiatPayment {
         // MARK: - Private properties
         
         private let presenterDispatch: PresenterDispatch
-        private let amountFormatter: AmountFormatterProtocol
         
         // MARK: -
         
-        public init(
-            presenterDispatch: PresenterDispatch,
-            amountFormatter: AmountFormatterProtocol
-            ) {
-            
+        public init(presenterDispatch: PresenterDispatch) {
             self.presenterDispatch = presenterDispatch
-            self.amountFormatter = amountFormatter
         }
     }
 }
@@ -36,11 +30,8 @@ extension FiatPayment {
 extension FiatPayment.Presenter: FiatPayment.PresentationLogic {
     
     public func presentViewDidLoad(response: Event.ViewDidLoad.Response) {
-        let amount = self.amountFormatter.assetAmountToString(
-            response.amount,
-            currency: response.asset
-        )
-        let viewModel = Event.ViewDidLoad.ViewModel(amount: amount)
+        let urlRequest = URLRequest(url: response.url)
+        let viewModel = Event.ViewDidLoad.ViewModel(request: urlRequest)
         self.presenterDispatch.display { displayLogic in
             displayLogic.displayViewDidLoad(viewModel: viewModel)
         }

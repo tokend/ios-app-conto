@@ -349,7 +349,9 @@ class CompanyFlowController: BaseSignedInFlowController {
             },
             onSignOut: { [weak self] in
                 self?.onSignOut()
-        })
+            },
+            onKYCFailed: {}
+        )
         self.localAuthFlow = flow
         flow.run(showRootScreen: nil)
     }

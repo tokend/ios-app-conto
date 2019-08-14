@@ -95,8 +95,6 @@ extension TransactionsListScene {
         }
         var onRefreshInitiated: (() -> Void)?
         
-        var onRefreshInitiated: (() -> Void)?
-        
         // MARK: -
         
         var scrollViewDidScroll: OnScrollViewDidScroll?

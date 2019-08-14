@@ -37,6 +37,13 @@
 		DB363E3422DF764700F5761C /* LanguagesListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2E22DF764700F5761C /* LanguagesListInteractor.swift */; };
 		DB363E3522DF764700F5761C /* LanguagesListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E2F22DF764700F5761C /* LanguagesListConfigurator.swift */; };
 		DB363E3822DF77BE00F5761C /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB363E3722DF77BE00F5761C /* LanguageCell.swift */; };
+		DB3DDBEC23044D1E0002E540 /* FiatPaymentInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3DDBE423044D1E0002E540 /* FiatPaymentInteractor.swift */; };
+		DB3DDBED23044D1E0002E540 /* FiatPaymentRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3DDBE523044D1E0002E540 /* FiatPaymentRouting.swift */; };
+		DB3DDBEE23044D1E0002E540 /* FiatPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3DDBE623044D1E0002E540 /* FiatPaymentViewController.swift */; };
+		DB3DDBEF23044D1E0002E540 /* FiatPaymentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3DDBE723044D1E0002E540 /* FiatPaymentModels.swift */; };
+		DB3DDBF023044D1E0002E540 /* FiatPaymentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3DDBE823044D1E0002E540 /* FiatPaymentPresenter.swift */; };
+		DB3DDBF123044D1E0002E540 /* FiatPaymentAmountConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3DDBEA23044D1E0002E540 /* FiatPaymentAmountConverter.swift */; };
+		DB3DDBF223044D1E0002E540 /* FiatPaymentConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3DDBEB23044D1E0002E540 /* FiatPaymentConfigurator.swift */; };
 		DB4AE2BD22E9F6D5001D0883 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2BC22E9F6D5001D0883 /* TitleView.swift */; };
 		DB4AE2C522EB3B8F001D0883 /* AtomicSwapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2BF22EB3B8F001D0883 /* AtomicSwapPresenter.swift */; };
 		DB4AE2C622EB3B8F001D0883 /* AtomicSwapRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE2C022EB3B8F001D0883 /* AtomicSwapRouting.swift */; };
@@ -667,23 +674,6 @@
 		DB72280A22CCBB4200341565 /* BalancesListActionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */; };
 		DB72281422CF546200341565 /* CreateRedeemFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281322CF546200341565 /* CreateRedeemFlowController.swift */; };
 		DB72281622CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */; };
-		DBC165412302F36D002A50F7 /* EnvironmentsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */; };
-		DBC165422302F36D002A50F7 /* EnvironmentsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */; };
-		DBC165432302F36D002A50F7 /* EnvironmentsListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */; };
-		DBC165442302F36D002A50F7 /* EnvironmentsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1653A2302F36D002A50F7 /* EnvironmentsListPresenter.swift */; };
-		DBC165452302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1653C2302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift */; };
-		DBC165462302F36D002A50F7 /* EnvironmentsListRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1653D2302F36D002A50F7 /* EnvironmentsListRouting.swift */; };
-		DBC165472302F36D002A50F7 /* EnvironmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1653F2302F36D002A50F7 /* EnvironmentCell.swift */; };
-		DBC165482302F36D002A50F7 /* EnvironmentsListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165402302F36D002A50F7 /* EnvironmentsListModels.swift */; };
-		DBC1655223035530002A50F7 /* KYCRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1654A23035530002A50F7 /* KYCRouting.swift */; };
-		DBC1655323035530002A50F7 /* KYCInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1654B23035530002A50F7 /* KYCInteractor.swift */; };
-		DBC1655423035530002A50F7 /* KYCPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1654C23035530002A50F7 /* KYCPresenter.swift */; };
-		DBC1655523035530002A50F7 /* KYCField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1654E23035530002A50F7 /* KYCField.swift */; };
-		DBC1655623035530002A50F7 /* KYCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1654F23035530002A50F7 /* KYCViewController.swift */; };
-		DBC1655723035530002A50F7 /* KYCModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1655023035530002A50F7 /* KYCModels.swift */; };
-		DBC1655823035530002A50F7 /* KYCConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1655123035530002A50F7 /* KYCConfigurator.swift */; };
-		DBC1655B230356C6002A50F7 /* KYCFormSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1655A230356C6002A50F7 /* KYCFormSender.swift */; };
-		DBC1655E2303FD2B002A50F7 /* AccountVerificationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1655D2303FD2A002A50F7 /* AccountVerificationChecker.swift */; };
 		DBA1F1FF22FC2D640027B8B5 /* PaymentMethodInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F1F522FC2D640027B8B5 /* PaymentMethodInteractor.swift */; };
 		DBA1F20022FC2D640027B8B5 /* PaymentMethodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F1F622FC2D640027B8B5 /* PaymentMethodPresenter.swift */; };
 		DBA1F20122FC2D640027B8B5 /* PaymentMethodConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F1F722FC2D640027B8B5 /* PaymentMethodConfigurator.swift */; };
@@ -704,6 +694,23 @@
 		DBA1F21C22FC2D9A0027B8B5 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F21B22FC2D9A0027B8B5 /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		DBA1F21E22FC2E800027B8B5 /* ReceiveAddressAtomicSwapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F21D22FC2E800027B8B5 /* ReceiveAddressAtomicSwapManager.swift */; };
 		DBA1F22022FC31D70027B8B5 /* SendPaymentAmountAtomicSwapBalanceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F21F22FC31D70027B8B5 /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */; };
+		DBC165412302F36D002A50F7 /* EnvironmentsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */; };
+		DBC165422302F36D002A50F7 /* EnvironmentsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */; };
+		DBC165432302F36D002A50F7 /* EnvironmentsListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */; };
+		DBC165442302F36D002A50F7 /* EnvironmentsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1653A2302F36D002A50F7 /* EnvironmentsListPresenter.swift */; };
+		DBC165452302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1653C2302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift */; };
+		DBC165462302F36D002A50F7 /* EnvironmentsListRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1653D2302F36D002A50F7 /* EnvironmentsListRouting.swift */; };
+		DBC165472302F36D002A50F7 /* EnvironmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1653F2302F36D002A50F7 /* EnvironmentCell.swift */; };
+		DBC165482302F36D002A50F7 /* EnvironmentsListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165402302F36D002A50F7 /* EnvironmentsListModels.swift */; };
+		DBC1655223035530002A50F7 /* KYCRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1654A23035530002A50F7 /* KYCRouting.swift */; };
+		DBC1655323035530002A50F7 /* KYCInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1654B23035530002A50F7 /* KYCInteractor.swift */; };
+		DBC1655423035530002A50F7 /* KYCPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1654C23035530002A50F7 /* KYCPresenter.swift */; };
+		DBC1655523035530002A50F7 /* KYCField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1654E23035530002A50F7 /* KYCField.swift */; };
+		DBC1655623035530002A50F7 /* KYCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1654F23035530002A50F7 /* KYCViewController.swift */; };
+		DBC1655723035530002A50F7 /* KYCModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1655023035530002A50F7 /* KYCModels.swift */; };
+		DBC1655823035530002A50F7 /* KYCConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1655123035530002A50F7 /* KYCConfigurator.swift */; };
+		DBC1655B230356C6002A50F7 /* KYCFormSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1655A230356C6002A50F7 /* KYCFormSender.swift */; };
+		DBC1655E2303FD2B002A50F7 /* AccountVerificationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1655D2303FD2A002A50F7 /* AccountVerificationChecker.swift */; };
 		DBCA02D822D5EB8900503025 /* AcceptRedeemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02D722D5EB8900503025 /* AcceptRedeemModel.swift */; };
 		DBCA02DA22D5EB9800503025 /* AcceptRedeemWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02D922D5EB9800503025 /* AcceptRedeemWorker.swift */; };
 		DBCA02E322D787B600503025 /* SettingsTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E222D787B600503025 /* SettingsTextCell.swift */; };
@@ -745,6 +752,13 @@
 		DB363E2E22DF764700F5761C /* LanguagesListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListInteractor.swift; sourceTree = "<group>"; };
 		DB363E2F22DF764700F5761C /* LanguagesListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesListConfigurator.swift; sourceTree = "<group>"; };
 		DB363E3722DF77BE00F5761C /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
+		DB3DDBE423044D1E0002E540 /* FiatPaymentInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiatPaymentInteractor.swift; sourceTree = "<group>"; };
+		DB3DDBE523044D1E0002E540 /* FiatPaymentRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiatPaymentRouting.swift; sourceTree = "<group>"; };
+		DB3DDBE623044D1E0002E540 /* FiatPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiatPaymentViewController.swift; sourceTree = "<group>"; };
+		DB3DDBE723044D1E0002E540 /* FiatPaymentModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiatPaymentModels.swift; sourceTree = "<group>"; };
+		DB3DDBE823044D1E0002E540 /* FiatPaymentPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiatPaymentPresenter.swift; sourceTree = "<group>"; };
+		DB3DDBEA23044D1E0002E540 /* FiatPaymentAmountConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiatPaymentAmountConverter.swift; sourceTree = "<group>"; };
+		DB3DDBEB23044D1E0002E540 /* FiatPaymentConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiatPaymentConfigurator.swift; sourceTree = "<group>"; };
 		DB4AE2BC22E9F6D5001D0883 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		DB4AE2BF22EB3B8F001D0883 /* AtomicSwapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapPresenter.swift; sourceTree = "<group>"; };
 		DB4AE2C022EB3B8F001D0883 /* AtomicSwapRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSwapRouting.swift; sourceTree = "<group>"; };
@@ -1377,23 +1391,6 @@
 		DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesListActionProvider.swift; sourceTree = "<group>"; };
 		DB72281322CF546200341565 /* CreateRedeemFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRedeemFlowController.swift; sourceTree = "<group>"; };
 		DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountCreateRedeemRequest.swift; sourceTree = "<group>"; };
-		DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListInteractor.swift; sourceTree = "<group>"; };
-		DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListViewController.swift; sourceTree = "<group>"; };
-		DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListConfigurator.swift; sourceTree = "<group>"; };
-		DBC1653A2302F36D002A50F7 /* EnvironmentsListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListPresenter.swift; sourceTree = "<group>"; };
-		DBC1653C2302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentListChangeEnvironmentWorker.swift; sourceTree = "<group>"; };
-		DBC1653D2302F36D002A50F7 /* EnvironmentsListRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListRouting.swift; sourceTree = "<group>"; };
-		DBC1653F2302F36D002A50F7 /* EnvironmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentCell.swift; sourceTree = "<group>"; };
-		DBC165402302F36D002A50F7 /* EnvironmentsListModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListModels.swift; sourceTree = "<group>"; };
-		DBC1654A23035530002A50F7 /* KYCRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCRouting.swift; sourceTree = "<group>"; };
-		DBC1654B23035530002A50F7 /* KYCInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCInteractor.swift; sourceTree = "<group>"; };
-		DBC1654C23035530002A50F7 /* KYCPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPresenter.swift; sourceTree = "<group>"; };
-		DBC1654E23035530002A50F7 /* KYCField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCField.swift; sourceTree = "<group>"; };
-		DBC1654F23035530002A50F7 /* KYCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCViewController.swift; sourceTree = "<group>"; };
-		DBC1655023035530002A50F7 /* KYCModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCModels.swift; sourceTree = "<group>"; };
-		DBC1655123035530002A50F7 /* KYCConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCConfigurator.swift; sourceTree = "<group>"; };
-		DBC1655A230356C6002A50F7 /* KYCFormSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCFormSender.swift; sourceTree = "<group>"; };
-		DBC1655D2303FD2A002A50F7 /* AccountVerificationChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountVerificationChecker.swift; sourceTree = "<group>"; };
 		DBA1F1F522FC2D640027B8B5 /* PaymentMethodInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodInteractor.swift; sourceTree = "<group>"; };
 		DBA1F1F622FC2D640027B8B5 /* PaymentMethodPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodPresenter.swift; sourceTree = "<group>"; };
 		DBA1F1F722FC2D640027B8B5 /* PaymentMethodConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodConfigurator.swift; sourceTree = "<group>"; };
@@ -1414,6 +1411,23 @@
 		DBA1F21B22FC2D9A0027B8B5 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		DBA1F21D22FC2E800027B8B5 /* ReceiveAddressAtomicSwapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveAddressAtomicSwapManager.swift; sourceTree = "<group>"; };
 		DBA1F21F22FC31D70027B8B5 /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountAtomicSwapBalanceFetcher.swift; sourceTree = "<group>"; };
+		DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListInteractor.swift; sourceTree = "<group>"; };
+		DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListViewController.swift; sourceTree = "<group>"; };
+		DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListConfigurator.swift; sourceTree = "<group>"; };
+		DBC1653A2302F36D002A50F7 /* EnvironmentsListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListPresenter.swift; sourceTree = "<group>"; };
+		DBC1653C2302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentListChangeEnvironmentWorker.swift; sourceTree = "<group>"; };
+		DBC1653D2302F36D002A50F7 /* EnvironmentsListRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListRouting.swift; sourceTree = "<group>"; };
+		DBC1653F2302F36D002A50F7 /* EnvironmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentCell.swift; sourceTree = "<group>"; };
+		DBC165402302F36D002A50F7 /* EnvironmentsListModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListModels.swift; sourceTree = "<group>"; };
+		DBC1654A23035530002A50F7 /* KYCRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCRouting.swift; sourceTree = "<group>"; };
+		DBC1654B23035530002A50F7 /* KYCInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCInteractor.swift; sourceTree = "<group>"; };
+		DBC1654C23035530002A50F7 /* KYCPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPresenter.swift; sourceTree = "<group>"; };
+		DBC1654E23035530002A50F7 /* KYCField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCField.swift; sourceTree = "<group>"; };
+		DBC1654F23035530002A50F7 /* KYCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCViewController.swift; sourceTree = "<group>"; };
+		DBC1655023035530002A50F7 /* KYCModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCModels.swift; sourceTree = "<group>"; };
+		DBC1655123035530002A50F7 /* KYCConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCConfigurator.swift; sourceTree = "<group>"; };
+		DBC1655A230356C6002A50F7 /* KYCFormSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCFormSender.swift; sourceTree = "<group>"; };
+		DBC1655D2303FD2A002A50F7 /* AccountVerificationChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountVerificationChecker.swift; sourceTree = "<group>"; };
 		DBCA02D722D5EB8900503025 /* AcceptRedeemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemModel.swift; sourceTree = "<group>"; };
 		DBCA02D922D5EB9800503025 /* AcceptRedeemWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemWorker.swift; sourceTree = "<group>"; };
 		DBCA02E222D787B600503025 /* SettingsTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextCell.swift; sourceTree = "<group>"; };
@@ -1552,6 +1566,28 @@
 				DB363E3722DF77BE00F5761C /* LanguageCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		DB3DDBE323044D1E0002E540 /* FiatPayment */ = {
+			isa = PBXGroup;
+			children = (
+				DB3DDBEB23044D1E0002E540 /* FiatPaymentConfigurator.swift */,
+				DB3DDBE423044D1E0002E540 /* FiatPaymentInteractor.swift */,
+				DB3DDBE723044D1E0002E540 /* FiatPaymentModels.swift */,
+				DB3DDBE823044D1E0002E540 /* FiatPaymentPresenter.swift */,
+				DB3DDBE523044D1E0002E540 /* FiatPaymentRouting.swift */,
+				DB3DDBE623044D1E0002E540 /* FiatPaymentViewController.swift */,
+				DB3DDBE923044D1E0002E540 /* Workers */,
+			);
+			path = FiatPayment;
+			sourceTree = "<group>";
+		};
+		DB3DDBE923044D1E0002E540 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DB3DDBEA23044D1E0002E540 /* FiatPaymentAmountConverter.swift */,
+			);
+			path = Workers;
 			sourceTree = "<group>";
 		};
 		DB4AE2BE22EB3B6A001D0883 /* AtomicSwap */ = {
@@ -1693,6 +1729,7 @@
 				DB720AFB22C1396B00ED116A /* ExploreTokens */,
 				DB363DFE22DCDB8C00F5761C /* FacilitiesList */,
 				DB720A0222C1396B00ED116A /* Fees */,
+				DB3DDBE323044D1E0002E540 /* FiatPayment */,
 				DBC1654923035530002A50F7 /* KYC */,
 				DB363E2922DF761200F5761C /* LanguagesList */,
 				DB720A3D22C1396B00ED116A /* MarkdownViewer */,
@@ -3555,6 +3592,61 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DBA1F1F422FC2D640027B8B5 /* PaymentMethod */ = {
+			isa = PBXGroup;
+			children = (
+				DBA1F1F722FC2D640027B8B5 /* PaymentMethodConfigurator.swift */,
+				DBA1F1F522FC2D640027B8B5 /* PaymentMethodInteractor.swift */,
+				DBA1F1FE22FC2D640027B8B5 /* PaymentMethodModels.swift */,
+				DBA1F1F622FC2D640027B8B5 /* PaymentMethodPresenter.swift */,
+				DBA1F1F922FC2D640027B8B5 /* PaymentMethodRouting.swift */,
+				DBA1F1F822FC2D640027B8B5 /* PaymentMethodViewController.swift */,
+				DBA1F1FA22FC2D640027B8B5 /* Workers */,
+			);
+			path = PaymentMethod;
+			sourceTree = "<group>";
+		};
+		DBA1F1FA22FC2D640027B8B5 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DBA1F1FB22FC2D640027B8B5 /* PaymentMethodMethodsFetcher.swift */,
+				DBA1F1FC22FC2D640027B8B5 /* PaymentMethodPaymentWorker.swift */,
+				DBA1F1FD22FC2D640027B8B5 /* PaymentMethodAmountFormatter.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
+		DBA1F20822FC2D7B0027B8B5 /* PaymentMethodPicker */ = {
+			isa = PBXGroup;
+			children = (
+				DBA1F20B22FC2D7B0027B8B5 /* PaymentMethodPickerConfigurator.swift */,
+				DBA1F20F22FC2D7B0027B8B5 /* PaymentMethodPickerInteractor.swift */,
+				DBA1F20A22FC2D7B0027B8B5 /* PaymentMethodPickerModels.swift */,
+				DBA1F20922FC2D7B0027B8B5 /* PaymentMethodPickerPresenter.swift */,
+				DBA1F20C22FC2D7B0027B8B5 /* PaymentMethodPickerRouting.swift */,
+				DBA1F21222FC2D7B0027B8B5 /* PaymentMethodPickerViewController.swift */,
+				DBA1F21022FC2D7B0027B8B5 /* Views */,
+				DBA1F20D22FC2D7B0027B8B5 /* Workers */,
+			);
+			path = PaymentMethodPicker;
+			sourceTree = "<group>";
+		};
+		DBA1F20D22FC2D7B0027B8B5 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DBA1F20E22FC2D7B0027B8B5 /* PaymentMethodPickerAmountFormatter.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
+		DBA1F21022FC2D7B0027B8B5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DBA1F21122FC2D7B0027B8B5 /* PaymentMethodPickerMethodCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		DBC165362302F36D002A50F7 /* EnvironmnentsList */ = {
 			isa = PBXGroup;
 			children = (
@@ -3623,61 +3715,6 @@
 				DBC1655D2303FD2A002A50F7 /* AccountVerificationChecker.swift */,
 			);
 			path = AccountVerificationChecker;
-			sourceTree = "<group>";
-		};
-		DBA1F1F422FC2D640027B8B5 /* PaymentMethod */ = {
-			isa = PBXGroup;
-			children = (
-				DBA1F1F722FC2D640027B8B5 /* PaymentMethodConfigurator.swift */,
-				DBA1F1F522FC2D640027B8B5 /* PaymentMethodInteractor.swift */,
-				DBA1F1FE22FC2D640027B8B5 /* PaymentMethodModels.swift */,
-				DBA1F1F622FC2D640027B8B5 /* PaymentMethodPresenter.swift */,
-				DBA1F1F922FC2D640027B8B5 /* PaymentMethodRouting.swift */,
-				DBA1F1F822FC2D640027B8B5 /* PaymentMethodViewController.swift */,
-				DBA1F1FA22FC2D640027B8B5 /* Workers */,
-			);
-			path = PaymentMethod;
-			sourceTree = "<group>";
-		};
-		DBA1F1FA22FC2D640027B8B5 /* Workers */ = {
-			isa = PBXGroup;
-			children = (
-				DBA1F1FB22FC2D640027B8B5 /* PaymentMethodMethodsFetcher.swift */,
-				DBA1F1FC22FC2D640027B8B5 /* PaymentMethodPaymentWorker.swift */,
-				DBA1F1FD22FC2D640027B8B5 /* PaymentMethodAmountFormatter.swift */,
-			);
-			path = Workers;
-			sourceTree = "<group>";
-		};
-		DBA1F20822FC2D7B0027B8B5 /* PaymentMethodPicker */ = {
-			isa = PBXGroup;
-			children = (
-				DBA1F20B22FC2D7B0027B8B5 /* PaymentMethodPickerConfigurator.swift */,
-				DBA1F20F22FC2D7B0027B8B5 /* PaymentMethodPickerInteractor.swift */,
-				DBA1F20A22FC2D7B0027B8B5 /* PaymentMethodPickerModels.swift */,
-				DBA1F20922FC2D7B0027B8B5 /* PaymentMethodPickerPresenter.swift */,
-				DBA1F20C22FC2D7B0027B8B5 /* PaymentMethodPickerRouting.swift */,
-				DBA1F21222FC2D7B0027B8B5 /* PaymentMethodPickerViewController.swift */,
-				DBA1F21022FC2D7B0027B8B5 /* Views */,
-				DBA1F20D22FC2D7B0027B8B5 /* Workers */,
-			);
-			path = PaymentMethodPicker;
-			sourceTree = "<group>";
-		};
-		DBA1F20D22FC2D7B0027B8B5 /* Workers */ = {
-			isa = PBXGroup;
-			children = (
-				DBA1F20E22FC2D7B0027B8B5 /* PaymentMethodPickerAmountFormatter.swift */,
-			);
-			path = Workers;
-			sourceTree = "<group>";
-		};
-		DBA1F21022FC2D7B0027B8B5 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				DBA1F21122FC2D7B0027B8B5 /* PaymentMethodPickerMethodCell.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		DBCA02D622D5E7C300503025 /* AcceptRedeemWorker */ = {
@@ -4012,6 +4049,7 @@
 				DBC1655523035530002A50F7 /* KYCField.swift in Sources */,
 				DB720CEF22C1396B00ED116A /* TabsContainerInteractor.swift in Sources */,
 				DB720E2D22C1396C00ED116A /* ReceiveAddressInvoiceFormatter.swift in Sources */,
+				DB3DDBED23044D1E0002E540 /* FiatPaymentRouting.swift in Sources */,
 				DB720F0E22C1396C00ED116A /* PollsFlowController.swift in Sources */,
 				DB720E3222C1396C00ED116A /* ReceiveAddressShareUtil.swift in Sources */,
 				DB720E2022C1396C00ED116A /* SideMenuViewController.swift in Sources */,
@@ -4040,6 +4078,7 @@
 				DB720D3422C1396B00ED116A /* MarkdownViewerModels.swift in Sources */,
 				DB720EB822C1396C00ED116A /* ContactEmailPickerHandler.swift in Sources */,
 				DB720DE922C1396C00ED116A /* DashboardViewController.swift in Sources */,
+				DB3DDBEF23044D1E0002E540 /* FiatPaymentModels.swift in Sources */,
 				DB720D0622C1396B00ED116A /* FeesCardCell.swift in Sources */,
 				DB720D2F22C1396B00ED116A /* MarkdownViewerRouting.swift in Sources */,
 				DB720D5C22C1396B00ED116A /* TradeOffersModels.swift in Sources */,
@@ -4057,7 +4096,9 @@
 				DB4AE30622F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift in Sources */,
 				DB720D6E22C1396B00ED116A /* BalanceHeaderWithPickerRouting.swift in Sources */,
 				DB720E2E22C1396C00ED116A /* ExportSeedManager.swift in Sources */,
+				DB3DDBEE23044D1E0002E540 /* FiatPaymentViewController.swift in Sources */,
 				DB720E4422C1396C00ED116A /* BalancesListHeaderCell.swift in Sources */,
+				DB3DDBF123044D1E0002E540 /* FiatPaymentAmountConverter.swift in Sources */,
 				DB720DB422C1396B00ED116A /* SendPaymentAmountViewController.swift in Sources */,
 				DB720CFB22C1396B00ED116A /* SalesInvestedAmountFormatter.swift in Sources */,
 				DB720EFC22C1396C00ED116A /* KeychainCodableAccountsV1.swift in Sources */,
@@ -4124,6 +4165,7 @@
 				DB720E9422C1396C00ED116A /* UIViewController+ChildViewController.swift in Sources */,
 				DB720E5522C1396C00ED116A /* DepositScenePresenter.swift in Sources */,
 				DB720D9D22C1396B00ED116A /* TabBarInteractor.swift in Sources */,
+				DB3DDBF223044D1E0002E540 /* FiatPaymentConfigurator.swift in Sources */,
 				DB363E0D22DCE13800F5761C /* FacilityCell.swift in Sources */,
 				DB363E3222DF764700F5761C /* LanguagesListModels.swift in Sources */,
 				DB720E6722C1396C00ED116A /* TransactionsListViewController.swift in Sources */,
@@ -4270,6 +4312,7 @@
 				DB720F5C22C4CD1C00ED116A /* PollsViewController.swift in Sources */,
 				DB720E0322C1396C00ED116A /* TabBarContainerInteractor.swift in Sources */,
 				DB720E8322C1396C00ED116A /* BalanceHeaderAmountFormatter.swift in Sources */,
+				DB3DDBF023044D1E0002E540 /* FiatPaymentPresenter.swift in Sources */,
 				DB720DC522C1396C00ED116A /* ConfirmationAmountFormatter.swift in Sources */,
 				DB720D9922C1396B00ED116A /* TabBarTabProviderProtocol.swift in Sources */,
 				DB720D7B22C1396B00ED116A /* CreateOfferViewController.swift in Sources */,
@@ -4374,6 +4417,7 @@
 				DB720E4222C1396C00ED116A /* BalancesListLegendCell.swift in Sources */,
 				DB720E7722C1396C00ED116A /* BiometricsAuthViewController.swift in Sources */,
 				DB720D5D22C1396B00ED116A /* TradeOffersInteractor.swift in Sources */,
+				DB3DDBEC23044D1E0002E540 /* FiatPaymentInteractor.swift in Sources */,
 				DB720CD122C1396B00ED116A /* SaleInfoTextFormatter.swift in Sources */,
 				DB720DCF22C1396C00ED116A /* ExploreTokensRouting.swift in Sources */,
 				DB720D7122C1396B00ED116A /* BalanceHeaderWithPickerAmountFormatter.swift in Sources */,

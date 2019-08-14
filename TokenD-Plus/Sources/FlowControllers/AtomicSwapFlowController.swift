@@ -223,8 +223,8 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
                 )
             }, showError: { [weak self] (message) in
                 self?.navigationController.showErrorMessage(message, completion: nil)
-            }, showAtomicSwapInvoice: { [weak self] (invoice) in
-                self?.showAtomicSwapQrScene(atomicSwapInvoice: invoice)
+            }, showAtomicSwapInvoice: { [weak self] (paymentUrl) in
+                self?.showFiatPaymentScene(url: paymentUrl.url)
             }, showLoading: { [weak self] in
                 self?.navigationController.showProgress()
             }, hideLoading: { [weak self] in
@@ -299,6 +299,26 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             viewController: vc,
             sceneModel: sceneModel,
             amountFormatter: amountFormatter,
+            routing: routing
+        )
+        return vc
+    }
+    
+    private func showFiatPaymentScene(url: URL) {
+        let vc = self.setupFiatPaymentScene(url: url)
+        vc.navigationItem.title = ""
+        
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func setupFiatPaymentScene(url: URL) -> UIViewController {
+        let vc = FiatPayment.ViewController()
+        let sceneModel = FiatPayment.Model.SceneModel(url: url)
+        let routing = FiatPayment.Routing()
+        
+        FiatPayment.Configurator.configure(
+            viewController: vc,
+            sceneModel: sceneModel,
             routing: routing
         )
         return vc

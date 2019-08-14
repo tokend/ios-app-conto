@@ -1,5 +1,4 @@
 import Foundation
-import Stripe
 
 extension FiatPayment {
     
@@ -8,16 +7,12 @@ extension FiatPayment {
         public static func configure(
             viewController: ViewController,
             sceneModel: Model.SceneModel,
-            amountFormatter: AmountFormatterProtocol,
             routing: Routing?,
             onDeinit: DeinitCompletion = nil
             ) {
             
             let presenterDispatch = PresenterDispatch(displayLogic: viewController)
-            let presenter = Presenter(
-                presenterDispatch: presenterDispatch,
-                amountFormatter: amountFormatter
-            )
+            let presenter = Presenter(presenterDispatch: presenterDispatch)
             let interactor = Interactor(
                 presenter: presenter,
                 sceneModel: sceneModel

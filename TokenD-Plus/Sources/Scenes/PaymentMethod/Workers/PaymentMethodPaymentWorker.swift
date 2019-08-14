@@ -4,7 +4,7 @@ import TokenDWallet
 
 public enum PaymentMethodPaymentResult {
     case failure(PaymentMethod.Model.PaymentError)
-    case success(PaymentMethod.Model.AtomicSwapInvoice)
+    case success(PaymentMethod.Model.AtomicSwapPaymentUrl)
 }
 public protocol PaymentMethodPaymentWorkerProtocol {
     func performPayment(
@@ -284,12 +284,13 @@ extension PaymentMethod {
                 value: firstInvoice.amount,
                 precision: networkInfo.precision
             )
-            let atomicSwapInvoice = Model.AtomicSwapInvoice(
-                address: firstInvoice.address,
-                asset: firstInvoice.assetCode,
-                amount: decimalAmount
-            )
-            completion(.success(atomicSwapInvoice))
+            
+//            let atomicSwapInvoice = Model.AtomicSwapPaymentUrl(
+//                address: firstInvoice.address,
+//                asset: firstInvoice.assetCode,
+//                amount: decimalAmount
+//            )
+//            completion(.success(atomicSwapInvoice))
         }
     }
 }
