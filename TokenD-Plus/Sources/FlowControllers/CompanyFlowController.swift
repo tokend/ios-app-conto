@@ -12,8 +12,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private let sideMenuViewController = SideMenu.ViewController()
     
-    private let ownerAccountId: String
-    private let companyName: String
+    private let company: CompaniesList.Model.Company
     
     private var localAuthFlow: LocalAuthFlowController?
     private var timeoutSubscribeToken: TimerUIApplication.SubscribeToken = TimerUIApplication.SubscribeTokenInvalid
@@ -22,8 +21,9 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     // MARK: - Callbacks
     
-    let onSignOut: () -> Void
-    let onLocalAuthRecoverySucceeded: () -> Void
+    private let onSignOut: () -> Void
+    private let onEnvironmentChanged: () -> Void
+    private let onLocalAuthRecoverySucceeded: () -> Void
     
     // MARK: -
     
@@ -35,15 +35,15 @@ class CompanyFlowController: BaseSignedInFlowController {
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
-        ownerAccountId: String,
-        companyName: String,
+        company: CompaniesList.Model.Company,
         onSignOut: @escaping () -> Void,
+        onEnvironmentChanged: @escaping () -> Void,
         onLocalAuthRecoverySucceeded: @escaping () -> Void
         ) {
         
-        self.ownerAccountId = ownerAccountId
-        self.companyName = companyName
+        self.company = company
         self.onSignOut = onSignOut
+        self.onEnvironmentChanged = onEnvironmentChanged
         self.onLocalAuthRecoverySucceeded = onLocalAuthRecoverySucceeded
         
         SideMenuController.preferences.drawing.menuButtonImage = Assets.menuIcon.image
@@ -100,7 +100,7 @@ class CompanyFlowController: BaseSignedInFlowController {
         let headerModel = SideMenu.Model.HeaderModel(
             icon: Assets.logo.image,
             title: self.userDataProvider.userEmail,
-            subTitle: self.companyName
+            subTitle: self.company.name
         )
         let sections: [[SideMenu.Model.MenuItem]] = []
         
@@ -140,8 +140,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private func runBalancesFlow() {
         let balancesFlow = BalancesListFlowController(
-            ownerAccountId: self.ownerAccountId,
-            companyName: self.companyName,
+            company: self.company,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
             reposController: self.reposController,
@@ -160,6 +159,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     private func runSettingsFlow() {
         let flow = SettingsFlowController(
             onSignOut: self.onSignOut,
+            onEnvironmentChanged: self.onEnvironmentChanged,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
             reposController: self.reposController,
@@ -176,7 +176,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private func runSaleFlow() {
         let flow = SalesFlowController(
-            ownerAccountId: self.ownerAccountId,
+            ownerAccountId: self.company.accountId,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
             reposController: self.reposController,
@@ -196,7 +196,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private func runPollsFlow() {
         let flow = PollsFlowController(
-            ownerAccountId: self.ownerAccountId,
+            ownerAccountId: self.company.accountId,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
             reposController: self.reposController,
@@ -222,6 +222,9 @@ class CompanyFlowController: BaseSignedInFlowController {
             rootNavigation: self.rootNavigation,
             onSignOut: { [weak self] in
                 self?.onSignOut()
+            },
+            onEnvironmentChanged: { [weak self] in
+                self?.performSignOut()
             },
             onLocalAuthRecoverySucceeded: { [weak self] in
                 self?.onLocalAuthRecoverySucceeded()

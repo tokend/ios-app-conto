@@ -7,6 +7,7 @@ public protocol CompaniesListDisplayLogic: class {
     func displaySceneUpdated(viewModel: Event.SceneUpdated.ViewModel)
     func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel)
     func displayAddBusinessAction(viewModel: Event.AddBusinessAction.ViewModel)
+    func displayCompanyChosen(viewModel: Event.CompanyChosen.ViewModel)
 }
 
 extension CompaniesList {
@@ -269,13 +270,20 @@ extension CompaniesList.ViewController: CompaniesList.DisplayLogic {
             )
         }
     }
+    
+    public func displayCompanyChosen(viewModel: Event.CompanyChosen.ViewModel) {
+        self.routing?.onCompanyChosen(viewModel.model)
+    }
 }
 
 extension CompaniesList.ViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = self.companies[indexPath.section]
-        self.routing?.onCompanyChosen(model.accountId, model.companyName)
+        let request = Event.CompanyChosen.Request(accountId: model.accountId)
+        self.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+            businessLogic.onCompanyChosen(request: request)
+        })
     }
 }
 

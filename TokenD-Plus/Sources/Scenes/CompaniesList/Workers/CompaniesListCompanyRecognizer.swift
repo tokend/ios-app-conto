@@ -22,6 +22,7 @@ extension CompaniesList {
         private let accountsApi: AccountsApiV3
         private let apiConfigurationModel: APIConfigurationModel
         private let companyIsNotFound: String = "404"
+        private let defaultQuoteAsset: String = "UAH"
         
         // MARK: -
         
@@ -49,9 +50,12 @@ extension CompaniesList {
                     imageUrl = URL(string: logoUrl)
             }
             
+            let conversionAsset = resource.statsQuoteAsset.isEmpty ?
+            self.defaultQuoteAsset : resource.statsQuoteAsset
             let company = Model.Company(
                 accountId: resource.accountId,
                 name: resource.name,
+                conversionAsset: conversionAsset,
                 imageUrl: imageUrl
             )
             completion(.success(company))

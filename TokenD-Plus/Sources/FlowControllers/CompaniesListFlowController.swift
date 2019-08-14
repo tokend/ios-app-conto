@@ -15,6 +15,7 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     
     private let navigationController: NavigationControllerProtocol = NavigationController()
     private let onSignOut: () -> Void
+    private let onEnvironmentChanged: () -> Void
     private let onLocalAuthRecoverySucceeded: () -> Void
     
     private var localAuthFlow: LocalAuthFlowController?
@@ -35,10 +36,12 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
         onSignOut: @escaping (() -> Void),
+        onEnvironmentChanged: @escaping (() -> Void),
         onLocalAuthRecoverySucceeded: @escaping () -> Void
         ) {
         
         self.onSignOut = onSignOut
+        self.onEnvironmentChanged = onEnvironmentChanged
         self.onLocalAuthRecoverySucceeded = onLocalAuthRecoverySucceeded
         super.init(
             appController: appController,
@@ -156,13 +159,12 @@ class CompaniesListFlowController: BaseSignedInFlowController {
                hideShadow: { [weak self] in
                 self?.navigationController.hideShadow()
             },
-               onCompanyChosen: { [weak self] (accountId, companyName) in
-                self?.flowControllerStack.settingsManager.businessOwnerAccountId = accountId
-                self?.flowControllerStack.settingsManager.businessName = companyName
-                self?.runCompanyFlow(
-                    ownerAccountId: accountId,
-                    companyName: companyName
-                )
+               onCompanyChosen: { [weak self] (company) in
+                self?.flowControllerStack.settingsManager.businessOwnerAccountId = company.accountId
+                self?.flowControllerStack.settingsManager.businessName = company.name
+                self?.flowControllerStack.settingsManager.businessConversionAsset = company.conversionAsset
+                self?.flowControllerStack.settingsManager.businessImageKey = company.imageUrl?.absoluteString
+                self?.runCompanyFlow(company: company)
             },
                showError: { [weak self] (message) in
                 self?.navigationController.showErrorMessage(
@@ -204,11 +206,7 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         return vc
     }
     
-    private func runCompanyFlow(
-        ownerAccountId: String,
-        companyName: String
-        ) {
-        
+    private func runCompanyFlow(company: CompaniesList.Model.Company) {
         let flow = CompanyFlowController(
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
@@ -217,9 +215,9 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             userDataProvider: self.userDataProvider,
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation,
-            ownerAccountId: ownerAccountId,
-            companyName: companyName,
+            company: company,
             onSignOut: self.onSignOut,
+            onEnvironmentChanged: self.onEnvironmentChanged,
             onLocalAuthRecoverySucceeded: { [weak self] in
                 self?.onLocalAuthRecoverySucceeded()
         })
@@ -403,7 +401,9 @@ class CompaniesListFlowController: BaseSignedInFlowController {
             },
             onSignOut: { [weak self] in
                 self?.onSignOut()
-        })
+            },
+            onKYCFailed: {}
+        )
         self.localAuthFlow = flow
         flow.run(showRootScreen: nil)
     }

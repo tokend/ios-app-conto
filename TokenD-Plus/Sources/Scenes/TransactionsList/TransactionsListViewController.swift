@@ -93,6 +93,7 @@ extension TransactionsListScene {
             get { return self.tableView.isScrollEnabled }
             set { self.tableView.isScrollEnabled = newValue }
         }
+        var onRefreshInitiated: (() -> Void)?
         
         var onRefreshInitiated: (() -> Void)?
         

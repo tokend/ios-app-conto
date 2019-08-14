@@ -40,6 +40,7 @@ extension BalancesList {
             let headerModel = Model.Header(
                 balance: convertedBalance,
                 asset: self.convertedAsset,
+                imageUrl: nil,
                 cellIdentifier: .header
             )
             let headerCell = Model.CellModel.header(headerModel)

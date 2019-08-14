@@ -23,6 +23,8 @@
 "amount_to_pay_replace_amount" = "amount";
 "annual_return" = "Щорічне повернення";
 "app_name" = "TokenD Real Estate";
+"application_is_already_configured_for_this_environment" = "Додаток вже налаштований на $(environment) оточення";
+"application_is_already_configured_for_this_environment_replace_environment" = "environment";
 "are_you_sure_you_want_to_cancel_investment" = "Ви впевнені що хочете скасувати вклад?";
 "are_you_sure_you_want_to_cancel_pending_offer" = "Ви впевнені що хочете скасувати активний ордер?";
 "are_you_sure_you_want_to_sign_out" = "Ви впевнені що хочете Вийти и очистити усі дані з пристрою?";
@@ -177,6 +179,7 @@
 "enter_swift_bic" = "Введите SWIFT/BIC";
 "enter_t" = "Введіть $(title)";
 "enter_t_replace_title" = "title";
+"environment" = "Оточення";
 "erase_all_data_and" = "Очистити усі дані та ";
 "error" = "Помилка";
 "error_while_formatting_orderbookid" = "Помилка в процессі формування orderBookId";
@@ -301,6 +304,11 @@
 "issuance" = "Емісія";
 "issued" = "Емісія";
 "keychaindataprovider_should_always_provide_key" = "KeychainDataProvider всегда должен предоставлять ключ";
+"kyc" = "KYC";
+"kyc_canceled" = "Ваш запит вiдмiнено";
+"kyc_pending" = "Ваш запит знаходиться у черзi на обробку.";
+"kyc_rejected" = "Ваш запит вiдхилино. Спробуйте ще раз.";
+"kyc_sent" = "KYC запит вiдправлено. Обробка може зайняти деякий час. Спробуйте зайте пiзнiше.";
 "language" = "Мова";
 "last_name" = "Призвіще";
 "loading" = "Завантаження...";
@@ -315,6 +323,7 @@
 "month" = "Місяць";
 "more_info" = "Детальніше";
 "movements" = "Операції";
+"name" = "Ім'я";
 "network_info_error" = "Помилка мережі: $(message)";
 "network_info_error_replace_message" = "message";
 "never" = "ніколи";
@@ -502,6 +511,7 @@
 "subtype" = "Підтип";
 "success" = "Успіх";
 "success_parameter_is_missing_or_invalid" = "'success' parameter is missing or invalid";
+"surname" = "Прізвище";
 "swift_bic" = "SWIFT/BIC";
 "swift_bic_colon" = "SWIFT/BIC:";
 "terms_of_service" = "Умови обслуговування";

@@ -131,26 +131,10 @@ class AppController {
     // MARK: - Private
     
     private func runLaunchFlow() {
-        if let mainAccount = self.userDataManager.getMainAccount(),
-            let walletData = self.userDataManager.getWalletData(account: mainAccount) {
-            
-            let apiConfigurationModel: APIConfigurationModel
-            if let model = try? APIConfigurationFetcher.fetchApiConfigurationFromPlist("APIConfiguration") {
-                apiConfigurationModel = model
-            } else {
-                apiConfigurationModel = APIConfigurationModel(
-                    storageEndpoint: walletData.network.storageUrl,
-                    apiEndpoint: walletData.network.rootUrl,
-                    contributeUrl: nil,
-                    termsAddress: self.flowControllerStack.apiConfigurationModel.termsAddress,
-                    webClient: nil,
-                    downloadUrl: nil
-                )
-            }
-            
-            self.updateFlowControllerStack(apiConfigurationModel, self.keychainManager)
+        let latestApiConfugurationModel = APIConfigurationModel.getLatestApiConfigutarion()
+        if self.flowControllerStack.apiConfigurationModel != latestApiConfugurationModel {
+            self.updateFlowControllerStack(latestApiConfugurationModel, self.keychainManager)
         }
-        
         let launchFlowController = LaunchFlowController(
             appController: self,
             flowControllerStack: self.flowControllerStack,
@@ -162,7 +146,10 @@ class AppController {
             },
             onSignOut: { [weak self] in
                 self?.initiateSignOut()
-        })
+            },
+            onKYCFailed: { [weak self] in
+                self?.performSignOut()
+            })
         self.currentFlowController = launchFlowController
         launchFlowController.start()
     }
@@ -234,8 +221,22 @@ class AppController {
         )
         
         if
-            let previousBusiness = self.flowControllerStack.settingsManager.businessOwnerAccountId,
+            let previousBusinessAccountId = self.flowControllerStack.settingsManager.businessOwnerAccountId,
             let previosBusinessName = self.flowControllerStack.settingsManager.businessName {
+            
+            var imageUrl: URL?
+            if let previosBusinessImageKey = self.flowControllerStack.settingsManager.businessImageKey {
+                
+                imageUrl = URL(string: previosBusinessImageKey)
+            }
+            let conversionAsset = self.flowControllerStack.settingsManager.businessConversionAsset ?? ""
+            
+            let company = CompaniesList.Model.Company(
+                accountId: previousBusinessAccountId,
+                name: previosBusinessName,
+                conversionAsset: conversionAsset,
+                imageUrl: imageUrl
+            )
             self.runCompanyFlow(
                 appController: self,
                 flowControllerStack: self.flowControllerStack,
@@ -244,8 +245,7 @@ class AppController {
                 userDataProvider: userDataProvider,
                 keychainDataProvider: keychainDataProvider,
                 rootNavigation: self.rootNavigation,
-                companyName: previosBusinessName,
-                ownerAccountId: previousBusiness
+                company: company
             )
         } else {
             self.runCompanyListFlowController(
@@ -280,6 +280,8 @@ class AppController {
             rootNavigation: self.rootNavigation,
             onSignOut: { [weak self] in
                 self?.initiateSignOut()
+            }, onEnvironmentChanged: { [weak self] in
+                self?.performSignOut()
             },
             onLocalAuthRecoverySucceeded: { [weak self] in
                 self?.runLaunchFlow()
@@ -296,8 +298,7 @@ class AppController {
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
-        companyName: String,
-        ownerAccountId: String
+        company: CompaniesList.Model.Company
         ) {
         
         let companyFlow = CompanyFlowController(
@@ -308,11 +309,13 @@ class AppController {
             userDataProvider: userDataProvider,
             keychainDataProvider: keychainDataProvider,
             rootNavigation: rootNavigation,
-            ownerAccountId: ownerAccountId,
-            companyName: companyName,
+            company: company,
             onSignOut:  { [weak self] in
                 self?.initiateSignOut()
-            }, onLocalAuthRecoverySucceeded: {
+            }, onEnvironmentChanged: { [weak self] in
+                self?.performSignOut()
+            },
+               onLocalAuthRecoverySucceeded: {
                 self.runLaunchFlow()
         })
         self.currentFlowController = companyFlow

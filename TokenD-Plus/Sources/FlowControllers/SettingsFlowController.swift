@@ -7,12 +7,15 @@ class SettingsFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol = NavigationController()
+    
     private let onSignOut: () -> Void
+    private let onEnvironmentChanged: () -> Void
     
     // MARK: -
     
     init(
         onSignOut: @escaping () -> Void,
+        onEnvironmentChanged: @escaping () -> Void,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
         reposController: ReposController,
@@ -23,6 +26,7 @@ class SettingsFlowController: BaseSignedInFlowController {
         ) {
         
         self.onSignOut = onSignOut
+        self.onEnvironmentChanged = onEnvironmentChanged
         super.init(
             appController: appController,
             flowControllerStack: flowControllerStack,
@@ -129,6 +133,9 @@ class SettingsFlowController: BaseSignedInFlowController {
             
         case .licenses:
             self.showLicenses()
+            
+        case .environment:
+            self.showEnvironmentListScene()
             
         default:
             break
@@ -359,6 +366,42 @@ class SettingsFlowController: BaseSignedInFlowController {
             routing: routing
         )
         
+        return vc
+    }
+    
+    private func showEnvironmentListScene() {
+        let vc = self.setupEnvironmentListScene()
+        
+        vc.navigationItem.title = Localized(.environment)
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func setupEnvironmentListScene() -> UIViewController {
+        let vc = EnvironmentsList.ViewController()
+        let changeEnvironmentWorker = EnvironmentsList.ChangeEnvironmentWorker()
+        let routing = EnvironmentsList.Routing(
+            onEnvironmentChanged: { [weak self] in
+                self?.onEnvironmentChanged()
+            },
+            showMessage: { [weak self] (message) in
+                guard let present = self?.navigationController.getPresentViewControllerClosure() else {
+                    return
+                }
+                self?.showDialog(
+                    title: message,
+                    message: nil,
+                    style: .alert,
+                    options: ["OK"],
+                    onSelected: { _ in },
+                    onCanceled: nil,
+                    presentViewController: present
+                )
+        })
+        EnvironmentsList.Configurator.configure(
+            viewController: vc,
+            changeEnvironmentWorker: changeEnvironmentWorker,
+            routing: routing
+        )
         return vc
     }
 }

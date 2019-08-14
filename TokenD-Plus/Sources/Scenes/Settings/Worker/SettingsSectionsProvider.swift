@@ -193,19 +193,6 @@ extension Settings {
                 changePassCell
             ]
             
-            let webClientAddress = self.apiConfigurationModel.webClient
-            if webClientAddress != nil {
-                let verificationCell = Model.CellModel(
-                    title: Localized(.verification),
-                    icon: Assets.verificationIcon.image,
-                    cellType: .disclosureCell,
-                    bottomSeparator: .line,
-                    identifier: .verification
-                )
-                securityCells[0].bottomSeparator = .lineWithInset
-                securityCells.insert(verificationCell, at: 1)
-            }
-            
             if let biometricsSettingInfo = self.getBiometricsSettingInfo() {
                 let biometricsAuthCell = Model.CellModel(
                     title: biometricsSettingInfo.title,
@@ -253,6 +240,21 @@ extension Settings {
                 description: ""
             )
             
+            let environmentCell = Model.CellModel(
+                title: Localized(.environment),
+                icon: Assets.earth.image,
+                cellType: .disclosureCell,
+                topSeparator: .line,
+                bottomSeparator: .line,
+                identifier: .environment
+            )
+            
+            let environmentSection = Model.SectionModel(
+                title: "",
+                cells: [environmentCell],
+                description: ""
+            )
+            
             let signOutCell = Model.CellModel(
                 title: Localized(.sign_out),
                 icon: Assets.signOutIcon.image,
@@ -297,6 +299,7 @@ extension Settings {
                 acountSection,
                 securitySection,
                 termsSection,
+                environmentSection,
                 signOutSection,
                 versionSection
             ]
