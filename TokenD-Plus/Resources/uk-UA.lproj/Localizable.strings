@@ -291,6 +291,10 @@
 "issued" = "Емісія";
 "keychaindataprovider_should_always_provide_key" = "KeychainDataProvider всегда должен предоставлять ключ";
 "kyc" = "KYC";
+"kyc_canceled" = "Ваш запит вiдмiнено";
+"kyc_pending" = "Ваш запит знаходиться у черзi на обробку.";
+"kyc_rejected" = "Ваш запит вiдхилино. Спробуйте ще раз.";
+"kyc_sent" = "KYC запит вiдправлено. Обробка може зайняти деякий час. Спробуйте зайте пiзнiше.";
 "language" = "Мова";
 "last_name" = "Призвіще";
 "loading" = "Завантаження...";

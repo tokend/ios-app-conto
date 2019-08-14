@@ -67,7 +67,7 @@ class AppController {
         )
         
         // TODO
-        // network.startLogger()
+        network.startLogger()
         
         let queue = DispatchQueue(label: "io.tokend.resources", qos: .background, attributes: .concurrent)
         let resourcePool = ResourcePool(
@@ -79,7 +79,7 @@ class AppController {
         )
         
         // TODO
-        // networkV3.startLogger()
+        networkV3.startLogger()
         
         self.keychainManager = KeychainManager()
         self.userDataManager = UserDataManager(keychainManager: self.keychainManager)
@@ -146,7 +146,10 @@ class AppController {
             },
             onSignOut: { [weak self] in
                 self?.initiateSignOut()
-        })
+            },
+            onKYCFailed: { [weak self] in
+                self?.performSignOut()
+            })
         self.currentFlowController = launchFlowController
         launchFlowController.start()
     }
