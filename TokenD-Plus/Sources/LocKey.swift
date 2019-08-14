@@ -294,6 +294,10 @@ enum LocKey: String {
     case issued
     case keychaindataprovider_should_always_provide_key
     case kyc
+    case kyc_canceled
+    case kyc_pending
+    case kyc_rejected
+    case kyc_sent
     case language
     case last_name
     case loading

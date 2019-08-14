@@ -11,8 +11,10 @@ class LaunchFlowController: BaseFlowController {
     private var keychainManager: KeychainManagerProtocol
     private let onAuthorized: (_ account: String) -> Void
     private let onSignOut: () -> Void
+    private let onKYCFailed: () -> Void
     
     private var submittedEmail: String?
+    private var kycChecker: AccountVerificationCheckerProtocol?
     
     // MARK: -
     
@@ -23,13 +25,15 @@ class LaunchFlowController: BaseFlowController {
         userDataManager: UserDataManagerProtocol,
         keychainManager: KeychainManagerProtocol,
         onAuthorized: @escaping (_ account: String) -> Void,
-        onSignOut: @escaping () -> Void
+        onSignOut: @escaping () -> Void,
+        onKYCFailed: @escaping () -> Void
         ) {
         
         self.userDataManager = userDataManager
         self.keychainManager = keychainManager
         self.onAuthorized = onAuthorized
         self.onSignOut = onSignOut
+        self.onKYCFailed = onKYCFailed
         
         super.init(
             appController: appController,
@@ -130,6 +134,9 @@ class LaunchFlowController: BaseFlowController {
             },
             onSignOut: { [weak self] in
                 self?.onSignOut()
+            },
+            onKYCFailed: { [weak self] in
+                self?.onKYCFailed()
         })
         self.currentFlowController = flow
         flow.run(showRootScreen: nil)
@@ -295,7 +302,7 @@ class LaunchFlowController: BaseFlowController {
             signUpRequestBuilder: signUpRequestBuilder,
             onSubmitEmail: { [weak self] (email) in
                 self?.submittedEmail = email
-            })
+        })
         
         let passwordValidator = PasswordValidator()
         
@@ -310,7 +317,7 @@ class LaunchFlowController: BaseFlowController {
                 self?.navigationController.showErrorMessage(errorMessage, completion: completion)
             },
             onSuccessfulLogin: { [weak self] (account) in
-                self?.onAuthorized(account)
+                self?.checkKYC(account: account)
             },
             onUnverifiedEmail: { [weak self] (walletId) in
                 self?.showVerifyEmailScreen(walletId: walletId)
@@ -360,6 +367,124 @@ class LaunchFlowController: BaseFlowController {
         
         vc.navigationItem.title = Localized(.conto)
         
+        return vc
+    }
+    
+    private func checkKYC(account: String) {
+        guard let walletData = VerifyEmailWorker.checkSavedWalletData(userDataManager: self.userDataManager)
+            else {
+                return
+        }
+        self.kycChecker = AccountVerificationChecker(
+            accountsApi: self.flowControllerStack.apiV3.accountsApi,
+            accountId: walletData.accountId,
+            showLoading: { [weak self] in
+                self?.navigationController.showProgress()
+            },
+            hideLoading: { [weak self] in
+                self?.navigationController.hideProgress()
+            },
+            completion: { [weak self] result in
+                switch result {
+                    
+                case .error(let error):
+                    self?.navigationController.showErrorMessage(
+                        error.localizedDescription,
+                        completion: nil
+                    )
+                    
+                case .message(let message):
+                    guard let presenter = self?.navigationController.getPresentViewControllerClosure() else {
+                        return
+                    }
+                    self?.showSuccessMessage(
+                        title: "",
+                        message: message,
+                        completion: nil,
+                        presentViewController: presenter
+                    )
+                    
+                case .unverified:
+                    self?.showKYCScene(
+                        account: account,
+                        accountId: walletData.accountId
+                    )
+                    
+                case .verified:
+                    self?.onAuthorized(account)
+                }
+        })
+        self.kycChecker?.checkAccount()
+    }
+    
+    private func showKYCScene(account: String, accountId: String) {
+        let vc = self.setupKYCScene(account: account, accountId: accountId)
+        
+        vc.navigationItem.title = Localized(.kyc)
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func setupKYCScene(account: String, accountId: String) -> UIViewController {
+        let vc = KYC.ViewController()
+        guard let keyChainDataProvider = KeychainDataProvider(
+            account: account,
+            keychainManager: self.keychainManager
+            ) else {
+                self.onKYCFailed()
+                return UIViewController()
+        }
+        let transactionSender = TransactionSender(
+            api: self.flowControllerStack.api.transactionsApi,
+            keychainDataProvider: keyChainDataProvider
+        )
+        let kycFormSender = KYC.KYCFormSender(
+            accountsApi: self.flowControllerStack.api.accountsApi,
+            accountsApiV3: self.flowControllerStack.apiV3.accountsApi,
+            keyValueApi: self.flowControllerStack.apiV3.keyValuesApi,
+            transactionSender: transactionSender,
+            networkFetcher: self.flowControllerStack.networkInfoFetcher,
+            originalAccountId: accountId
+        )
+        
+        let routing = KYC.Routing(
+            showLoading: { [weak self] in
+                self?.navigationController.showProgress()
+            },
+            hideLoading: { [weak self] in
+                self?.navigationController.hideProgress()
+            },
+            showError: { [weak self] (message) in
+                self?.navigationController.showErrorMessage(
+                    message,
+                    completion: { [weak self] in
+                        self?.onKYCFailed()
+                    }
+                )
+            },
+            showMessage: { [weak self] (message) in
+                guard let presenter = self?.navigationController.getPresentViewControllerClosure() else {
+                    return
+                }
+                self?.showSuccessMessage(
+                    title: Localized(.success),
+                    message: message,
+                    completion: { [weak self] in
+                        self?.onKYCFailed()
+                    },
+                    presentViewController: presenter
+                )
+            }, showValidationError: { [weak self] (message) in
+                self?.navigationController.showErrorMessage(
+                    message,
+                    completion: nil
+                )
+        })
+        
+        KYC.Configurator.configure(
+            viewController: vc,
+            kycFormSender: kycFormSender,
+            routing: routing
+        )
         return vc
     }
     

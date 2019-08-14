@@ -291,6 +291,10 @@
 "issued" = "Эмиссия";
 "keychaindataprovider_should_always_provide_key" = "KeychainDataProvider всегда должен предоставлять ключ";
 "kyc" = "KYC";
+"kyc_canceled" = "Ваш запрос отменен";
+"kyc_pending" = "Ваш запрос находится в очереди на оброботку.";
+"kyc_rejected" = "Ваш запрос был отклонен. Попробуйте еще раз.";
+"kyc_sent" = "KYC запрос отправлен. Обработка может занять некоторе время. Попробуйте зайте позже.";
 "language" = "Язык";
 "last_name" = "Фамилия";
 "loading" = "Загрузка...";

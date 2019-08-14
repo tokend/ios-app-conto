@@ -291,6 +291,10 @@
 "issued" = "Issued";
 "keychaindataprovider_should_always_provide_key" = "KeychainDataProvider should always provide key";
 "kyc" = "KYC";
+"kyc_canceled" = "Your request is canceled";
+"kyc_pending" = "Your request is waiting to be reviewed";
+"kyc_rejected" = "Your request has been rejected. Try again";
+"kyc_sent" = "KYC request is sent. It can take a time to aprove it. Try to sign in later";
 "language" = "Language";
 "last_name" = "Last name";
 "loading" = "Loading...";

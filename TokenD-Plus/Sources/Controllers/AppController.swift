@@ -146,7 +146,10 @@ class AppController {
             },
             onSignOut: { [weak self] in
                 self?.initiateSignOut()
-        })
+            },
+            onKYCFailed: { [weak self] in
+                self?.performSignOut()
+            })
         self.currentFlowController = launchFlowController
         launchFlowController.start()
     }
