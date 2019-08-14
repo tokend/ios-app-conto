@@ -390,9 +390,7 @@ class LaunchFlowController: BaseFlowController {
                 case .error(let error):
                     self?.navigationController.showErrorMessage(
                         error.localizedDescription,
-                        completion: { [weak self] in
-                            self?.onKYCFailed()
-                        }
+                        completion: nil
                     )
                     
                 case .message(let message):
@@ -402,9 +400,7 @@ class LaunchFlowController: BaseFlowController {
                     self?.showSuccessMessage(
                         title: "",
                         message: message,
-                        completion: { [weak self] in
-                            self?.onKYCFailed()
-                        },
+                        completion: nil,
                         presentViewController: presenter
                     )
                     
