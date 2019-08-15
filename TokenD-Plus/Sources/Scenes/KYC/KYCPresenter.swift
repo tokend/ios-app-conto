@@ -6,6 +6,7 @@ public protocol KYCPresentationLogic {
     
     func presentViewDidLoad(response: Event.ViewDidLoad.Response)
     func presentAction(response: Event.Action.Response)
+    func presentKYCApproved(response: Event.KYCApproved.Response)
 }
 
 extension KYC {
@@ -84,6 +85,13 @@ extension KYC.Presenter: KYC.PresentationLogic {
         }
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displayAction(viewModel: viewModel)
+        }
+    }
+    
+    public func presentKYCApproved(response: Event.KYCApproved.Response) {
+        let viewModel = response
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displayKYCApproved(viewModel: viewModel)
         }
     }
 }
