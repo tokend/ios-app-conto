@@ -81,6 +81,7 @@ extension BalancesList {
             let headerModel = Model.Header(
                 balance: convertedBalance,
                 asset: self.sceneModel.convertedAsset,
+                companyName: self.sceneModel.companyName,
                 imageUrl: self.sceneModel.imageUrl,
                 cellIdentifier: .header
             )

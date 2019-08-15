@@ -137,11 +137,16 @@ extension BalanceHeader {
         
         private func setupIconContainerView() {
             self.iconContainerView.layer.cornerRadius = self.iconSize / 2
+            self.iconContainerView.layer.borderWidth = 0.25
+            self.iconContainerView.layer.borderColor = Theme.Colors.separatorOnContentBackgroundColor.cgColor
         }
         
         private func setupIconView() {
             self.iconView.layer.cornerRadius = self.iconSize / 2
             self.iconView.clipsToBounds = true
+            self.iconView.contentMode = .scaleAspectFit
+            self.iconView.layer.borderWidth = 0.25
+            self.iconView.layer.borderColor = Theme.Colors.separatorOnContentBackgroundColor.cgColor
         }
         
         private func setupAbbreviationView() {

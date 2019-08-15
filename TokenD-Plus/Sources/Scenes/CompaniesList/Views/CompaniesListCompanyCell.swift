@@ -23,10 +23,14 @@ extension CompaniesList {
         
         public class View: UITableViewCell {
             
+            // MARK: - Private
+            
+            private var initialImageLoad: Bool = true
+            
             // MARK: - Public properties
             
             public var companyColor: UIColor? {
-                get { return self.cardView.backgroundColor }
+                get { return nil }
                 set {
                     self.companyAbbreviationLabel.textColor = newValue
                 }
@@ -35,14 +39,25 @@ extension CompaniesList {
             public var companyImageUrl: URL? {
                 didSet {
                     if let url = self.companyImageUrl {
-                        self.abbreviationContainer.isHidden = true
                         Nuke.loadImage(
                             with: url,
-                            into: self.companyImageView
-                        )
+                            into: self.companyImageView,
+                            completion: { [weak self] (response, error) in
+                                if error != nil {
+                                    self?.companyImageView.isHidden = true
+                                    self?.imageContainer.isHidden = false
+                                } else {
+                                    self?.companyImageView.isHidden = false
+                                    self?.imageContainer.isHidden = true
+                                }
+                                self?.initialImageLoad = false
+                        })
                     } else {
-                        self.abbreviationContainer.isHidden = false
-                        Nuke.cancelRequest(for: self.companyImageView)
+                        if self.initialImageLoad {
+                            self.companyImageView.isHidden = true
+                            self.imageContainer.isHidden = false
+                            Nuke.cancelRequest(for: self.companyImageView)
+                        }
                     }
                 }
             }
@@ -57,14 +72,13 @@ extension CompaniesList {
                 set { self.companyNameLabel.text = newValue }
             }
             
-            static public let cardSize: CGSize = CGSize(width: 125.0, height: 75.0)
-            static public let logoSize: CGFloat = 50.0
-            static public let sideInset: CGFloat = 20.0
-            static public let topInset: CGFloat = 7.5
+            
+            private let iconSize: CGFloat = 75.0
+            private let sideInset: CGFloat = 20.0
+            private let topInset: CGFloat = 7.5
             
             // MARK: - Private properties
             
-            private let cardView: UIView = UIView()
             private let imageContainer: UIView = UIView()
             private let abbreviationContainer: UIView = UIView()
             private let companyImageView: UIImageView = UIImageView()
@@ -77,7 +91,6 @@ extension CompaniesList {
                 super.init(style: style, reuseIdentifier: reuseIdentifier)
                 
                 self.setupView()
-                self.setupCardView()
                 self.setupImageContainer()
                 self.setupAbbreviationContainer()
                 self.setupAbbreviationLabel()
@@ -95,28 +108,17 @@ extension CompaniesList {
             private func setupView() {
                 self.backgroundColor = Theme.Colors.contentBackgroundColor
                 self.selectionStyle = .none
-                self.separatorInset = UIEdgeInsets(
-                    top: 0.0,
-                    left: View.sideInset * 2 + View.cardSize.width,
-                    bottom: 0.0,
-                    right: 0.0
-                )
-            }
-            
-            private func setupCardView() {
-                self.cardView.layer.cornerRadius = 5.0
-                self.cardView.layer.masksToBounds = true
             }
             
             private func setupImageContainer() {
-                self.imageContainer.backgroundColor = Theme.Colors.contentBackgroundColor
-                self.imageContainer.layer.cornerRadius = View.logoSize / 2
+                self.imageContainer.layer.cornerRadius = self.iconSize / 2
+                self.imageContainer.layer.borderWidth = 0.25
+                self.imageContainer.layer.borderColor = Theme.Colors.separatorOnContentBackgroundColor.cgColor
             }
             
             private func setupAbbreviationContainer() {
                 self.abbreviationContainer.backgroundColor = Theme.Colors.contentBackgroundColor
-                self.abbreviationContainer.layer.cornerRadius = View.logoSize / 2
-                self.abbreviationContainer.isHidden = true
+                self.abbreviationContainer.layer.cornerRadius = self.iconSize / 2
             }
             
             private func setupAbbreviationLabel() {
@@ -126,8 +128,12 @@ extension CompaniesList {
             }
             
             private func setupCompanyImageView() {
-                self.companyImageView.clipsToBounds = true
                 self.companyImageView.backgroundColor = Theme.Colors.contentBackgroundColor
+                self.companyImageView.contentMode = .scaleAspectFit
+                self.companyImageView.clipsToBounds = true
+                self.companyImageView.layer.cornerRadius = self.iconSize / 2
+                self.companyImageView.layer.borderWidth = 0.25
+                self.companyImageView.layer.borderColor = Theme.Colors.separatorOnContentBackgroundColor.cgColor
             }
             
             private func setupCompanyNameLabel() {
@@ -139,27 +145,21 @@ extension CompaniesList {
             }
             
             private func setupLayout() {
-                self.addSubview(self.cardView)
-                self.cardView.addSubview(self.imageContainer)
-                self.imageContainer.addSubview(self.companyImageView)
+                self.addSubview(self.imageContainer)
+                self.addSubview(self.companyImageView)
+                self.addSubview(self.companyNameLabel)
+                
                 self.imageContainer.addSubview(self.abbreviationContainer)
                 self.abbreviationContainer.addSubview(self.companyAbbreviationLabel)
                 
-                self.addSubview(self.companyNameLabel)
-                
-                self.cardView.snp.makeConstraints { (make) in
-                    make.leading.equalToSuperview().inset(View.sideInset)
-                    make.top.bottom.equalToSuperview().inset(View.topInset)
-                    make.size.equalTo(View.cardSize)
-                }
-                
-                
                 self.imageContainer.snp.makeConstraints { (make) in
-                    make.edges.equalToSuperview()
+                    make.leading.equalToSuperview().inset(self.sideInset)
+                    make.top.bottom.equalToSuperview().inset(self.topInset)
+                    make.height.width.equalTo(self.iconSize)
                 }
                 
                 self.companyImageView.snp.makeConstraints { (make) in
-                    make.edges.equalToSuperview()
+                    make.edges.equalTo(self.imageContainer)
                 }
                 
                 self.abbreviationContainer.snp.makeConstraints { (make) in
@@ -171,8 +171,8 @@ extension CompaniesList {
                 }
                 
                 self.companyNameLabel.snp.makeConstraints { (make) in
-                    make.leading.equalTo(self.cardView.snp.trailing).offset(View.sideInset)
-                    make.trailing.equalToSuperview().offset(View.sideInset)
+                    make.leading.equalTo(self.imageContainer.snp.trailing).offset(self.sideInset)
+                    make.trailing.equalToSuperview().offset(self.sideInset)
                     make.top.centerY.equalTo(self.companyImageView)
                 }
             }

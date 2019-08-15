@@ -22,6 +22,7 @@ extension BalancesList.Model {
         var selectedChartBalance: ChartBalance?
         let imageUrl: URL?
         let convertedAsset: String
+        let companyName: String
     }
     
     public struct SectionModel {
@@ -62,6 +63,7 @@ extension BalancesList.Model {
     public struct Header {
         let balance: Decimal
         let asset: String
+        let companyName: String
         let imageUrl: URL?
         let cellIdentifier: CellIdentifier
     }

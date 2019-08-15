@@ -131,12 +131,16 @@ extension BalancesList {
             private func setupIconView() {
                 self.iconView.backgroundColor = Theme.Colors.contentBackgroundColor
                 self.iconView.layer.cornerRadius = self.iconSize / 2
-                self.iconView.layer.masksToBounds = false
+                self.iconView.contentMode = .scaleAspectFit
                 self.iconView.clipsToBounds = true
+                self.iconView.layer.borderWidth = 0.25
+                self.iconView.layer.borderColor = Theme.Colors.separatorOnContentBackgroundColor.cgColor
             }
             
             private func setupAbbreviationView() {
                 self.abbreviationView.layer.cornerRadius = self.iconSize / 2
+                self.abbreviationView.layer.borderWidth = 0.25
+                self.abbreviationView.layer.borderColor = Theme.Colors.separatorOnContentBackgroundColor.cgColor
             }
             
             private func setupAbbreviationLabel() {

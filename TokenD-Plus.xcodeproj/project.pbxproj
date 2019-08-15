@@ -413,7 +413,6 @@
 		DB720E3A22C1396C00ED116A /* BalancesListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8822C1396B00ED116A /* BalancesListModels.swift */; };
 		DB720E3B22C1396C00ED116A /* BalancesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8922C1396B00ED116A /* BalancesListPresenter.swift */; };
 		DB720E3C22C1396C00ED116A /* BalancesListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8A22C1396B00ED116A /* BalancesListInteractor.swift */; };
-		DB720E3D22C1396C00ED116A /* BalancesListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8C22C1396B00ED116A /* BalancesListDataProvider.swift */; };
 		DB720E3E22C1396C00ED116A /* BalancesListPieChartColorsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8D22C1396B00ED116A /* BalancesListPieChartColorsProvider.swift */; };
 		DB720E3F22C1396C00ED116A /* BalancesListBalanceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8E22C1396B00ED116A /* BalancesListBalanceFetcher.swift */; };
 		DB720E4022C1396C00ED116A /* BalancesListAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8F22C1396B00ED116A /* BalancesListAmountFormatter.swift */; };
@@ -1091,7 +1090,6 @@
 		DB720B8822C1396B00ED116A /* BalancesListModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListModels.swift; sourceTree = "<group>"; };
 		DB720B8922C1396B00ED116A /* BalancesListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListPresenter.swift; sourceTree = "<group>"; };
 		DB720B8A22C1396B00ED116A /* BalancesListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListInteractor.swift; sourceTree = "<group>"; };
-		DB720B8C22C1396B00ED116A /* BalancesListDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListDataProvider.swift; sourceTree = "<group>"; };
 		DB720B8D22C1396B00ED116A /* BalancesListPieChartColorsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListPieChartColorsProvider.swift; sourceTree = "<group>"; };
 		DB720B8E22C1396B00ED116A /* BalancesListBalanceFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListBalanceFetcher.swift; sourceTree = "<group>"; };
 		DB720B8F22C1396B00ED116A /* BalancesListAmountFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListAmountFormatter.swift; sourceTree = "<group>"; };
@@ -2641,7 +2639,6 @@
 				DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */,
 				DB720B8F22C1396B00ED116A /* BalancesListAmountFormatter.swift */,
 				DB720B8E22C1396B00ED116A /* BalancesListBalanceFetcher.swift */,
-				DB720B8C22C1396B00ED116A /* BalancesListDataProvider.swift */,
 				DB720B9022C1396B00ED116A /* BalancesListPercentFormatter.swift */,
 				DB720B8D22C1396B00ED116A /* BalancesListPieChartColorsProvider.swift */,
 			);
@@ -4243,7 +4240,6 @@
 				DB720E9C22C1396C00ED116A /* UIViewController+Nib.swift in Sources */,
 				DB720E4322C1396C00ED116A /* BalancesListPieChartCell.swift in Sources */,
 				DB720CDF22C1396B00ED116A /* UpdatePasswordSubmitWorkerProtocol.swift in Sources */,
-				DB720E3D22C1396C00ED116A /* BalancesListDataProvider.swift in Sources */,
 				DB720EC722C1396C00ED116A /* TradesView.swift in Sources */,
 				DB720D0822C1396B00ED116A /* FeesViewController.swift in Sources */,
 				DB720EB222C1396C00ED116A /* ClientRedirectsModel.swift in Sources */,
