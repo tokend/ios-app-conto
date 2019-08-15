@@ -654,6 +654,13 @@
 		DB72280A22CCBB4200341565 /* BalancesListActionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */; };
 		DB72281422CF546200341565 /* CreateRedeemFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281322CF546200341565 /* CreateRedeemFlowController.swift */; };
 		DB72281622CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */; };
+		DBA3F3F623059E07008401B7 /* PhoneNumberPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F023059E07008401B7 /* PhoneNumberPresenter.swift */; };
+		DBA3F3F723059E07008401B7 /* PhoneNumberRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F123059E07008401B7 /* PhoneNumberRouting.swift */; };
+		DBA3F3F823059E07008401B7 /* PhoneNumberModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F223059E07008401B7 /* PhoneNumberModels.swift */; };
+		DBA3F3F923059E07008401B7 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F323059E07008401B7 /* PhoneNumberViewController.swift */; };
+		DBA3F3FA23059E07008401B7 /* PhoneNumberInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F423059E07008401B7 /* PhoneNumberInteractor.swift */; };
+		DBA3F3FB23059E07008401B7 /* PhoneNumberConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F523059E07008401B7 /* PhoneNumberConfigurator.swift */; };
+		DBA3F3FE2305A2D2008401B7 /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3FD2305A2D2008401B7 /* PhoneNumberFormatter.swift */; };
 		DBC165412302F36D002A50F7 /* EnvironmentsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */; };
 		DBC165422302F36D002A50F7 /* EnvironmentsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */; };
 		DBC165432302F36D002A50F7 /* EnvironmentsListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */; };
@@ -1331,6 +1338,13 @@
 		DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesListActionProvider.swift; sourceTree = "<group>"; };
 		DB72281322CF546200341565 /* CreateRedeemFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRedeemFlowController.swift; sourceTree = "<group>"; };
 		DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountCreateRedeemRequest.swift; sourceTree = "<group>"; };
+		DBA3F3F023059E07008401B7 /* PhoneNumberPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberPresenter.swift; sourceTree = "<group>"; };
+		DBA3F3F123059E07008401B7 /* PhoneNumberRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberRouting.swift; sourceTree = "<group>"; };
+		DBA3F3F223059E07008401B7 /* PhoneNumberModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberModels.swift; sourceTree = "<group>"; };
+		DBA3F3F323059E07008401B7 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
+		DBA3F3F423059E07008401B7 /* PhoneNumberInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInteractor.swift; sourceTree = "<group>"; };
+		DBA3F3F523059E07008401B7 /* PhoneNumberConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberConfigurator.swift; sourceTree = "<group>"; };
+		DBA3F3FD2305A2D2008401B7 /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
 		DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListInteractor.swift; sourceTree = "<group>"; };
 		DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListViewController.swift; sourceTree = "<group>"; };
 		DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListConfigurator.swift; sourceTree = "<group>"; };
@@ -1557,6 +1571,7 @@
 		DB72099722C1396B00ED116A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DBA3F3EF23059DCB008401B7 /* PhoneNumber */,
 				DB4AE2F322F2DF16001D0883 /* AddCompany */,
 				DB720B4822C1396B00ED116A /* AssetPicker */,
 				DB720A2322C1396B00ED116A /* AuthenticatorAuth */,
@@ -3106,9 +3121,10 @@
 		DB720C3622C1396B00ED116A /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
+				DB720C3922C1396B00ED116A /* DecimalFormatter.swift */,
+				DBA3F3FD2305A2D2008401B7 /* PhoneNumberFormatter.swift */,
 				DB720C3722C1396B00ED116A /* PrecisedFormatter.swift */,
 				DB720C3822C1396B00ED116A /* ValueFormatter.swift */,
-				DB720C3922C1396B00ED116A /* DecimalFormatter.swift */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -3430,6 +3446,27 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DBA3F3EF23059DCB008401B7 /* PhoneNumber */ = {
+			isa = PBXGroup;
+			children = (
+				DBA3F3F523059E07008401B7 /* PhoneNumberConfigurator.swift */,
+				DBA3F3F423059E07008401B7 /* PhoneNumberInteractor.swift */,
+				DBA3F3F223059E07008401B7 /* PhoneNumberModels.swift */,
+				DBA3F3F023059E07008401B7 /* PhoneNumberPresenter.swift */,
+				DBA3F3F123059E07008401B7 /* PhoneNumberRouting.swift */,
+				DBA3F3F323059E07008401B7 /* PhoneNumberViewController.swift */,
+				DBA3F3FC2305A268008401B7 /* Workers */,
+			);
+			path = PhoneNumber;
+			sourceTree = "<group>";
+		};
+		DBA3F3FC2305A268008401B7 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		DBC165362302F36D002A50F7 /* EnvironmnentsList */ = {
 			isa = PBXGroup;
 			children = (
@@ -3690,6 +3727,7 @@
 				DB720D4522C1396B00ED116A /* ChartConfigurator.swift in Sources */,
 				DB720CFE22C1396B00ED116A /* SaleEmptyView.swift in Sources */,
 				DB4AE2F222F2066E001D0883 /* CompaniesListAccountIdValidator.swift in Sources */,
+				DBA3F3F723059E07008401B7 /* PhoneNumberRouting.swift in Sources */,
 				DB720F0722C1396C00ED116A /* AppController+OpenUrlSubscriber.swift in Sources */,
 				DB720E8F22C1396C00ED116A /* SnapKit+Extension.swift in Sources */,
 				DB720E1822C1396C00ED116A /* RegisterSceneRegisterWorker.swift in Sources */,
@@ -3744,6 +3782,7 @@
 				DB720E0122C1396C00ED116A /* TabBarContainerRouting.swift in Sources */,
 				DB720DB522C1396B00ED116A /* SendPaymentAmountTitleTextEditView.swift in Sources */,
 				DB720E8822C1396C00ED116A /* SharedSceneBuilder.swift in Sources */,
+				DBA3F3F623059E07008401B7 /* PhoneNumberPresenter.swift in Sources */,
 				DB720EE922C1396C00ED116A /* PollsRepo.swift in Sources */,
 				DB720E0E22C1396C00ED116A /* AssetPickerAmountFormatter.swift in Sources */,
 				DB720E5222C1396C00ED116A /* DepositSceneAssetsFetcherProtocol.swift in Sources */,
@@ -3810,6 +3849,7 @@
 				DB720E2222C1396C00ED116A /* SideMenuModels.swift in Sources */,
 				DB720CE922C1396B00ED116A /* VerifyEmailInteractor.swift in Sources */,
 				DB720F5D22C4CD1C00ED116A /* PollsInteractor.swift in Sources */,
+				DBA3F3FA23059E07008401B7 /* PhoneNumberInteractor.swift in Sources */,
 				DB720E8722C1396C00ED116A /* main.swift in Sources */,
 				DBC165422302F36D002A50F7 /* EnvironmentsListViewController.swift in Sources */,
 				DB720E0D22C1396C00ED116A /* AssetPickerAssetsFetcher.swift in Sources */,
@@ -4057,6 +4097,7 @@
 				DB720E4022C1396C00ED116A /* BalancesListAmountFormatter.swift in Sources */,
 				DB363E1222DF505900F5761C /* Business+Logo.swift in Sources */,
 				DB720F0422C1396C00ED116A /* SettingsManager.swift in Sources */,
+				DBA3F3FB23059E07008401B7 /* PhoneNumberConfigurator.swift in Sources */,
 				DB720EE022C1396C00ED116A /* DynamicTableView.swift in Sources */,
 				DB720E6A22C1396C00ED116A /* TransactionsListTableViewCell.swift in Sources */,
 				DB720E2A22C1396C00ED116A /* ReceiveAddressInteractor.swift in Sources */,
@@ -4084,6 +4125,7 @@
 				DB720F2E22C2286C00ED116A /* CompaniesListInteractor.swift in Sources */,
 				DB720D2422C1396B00ED116A /* AuthenticatorAuthInteractor.swift in Sources */,
 				DB720CF722C1396B00ED116A /* SalesConfigurator.swift in Sources */,
+				DBA3F3FE2305A2D2008401B7 /* PhoneNumberFormatter.swift in Sources */,
 				DB720CB322C1396B00ED116A /* SettingsPushCell.swift in Sources */,
 				DB720E4D22C1396C00ED116A /* DepositSceneDateFormatterProtocol.swift in Sources */,
 				DB720CF322C1396B00ED116A /* TabsContainerViewController.swift in Sources */,
@@ -4107,6 +4149,7 @@
 				DB720E2922C1396C00ED116A /* ReceiveAddressViewController.swift in Sources */,
 				DB720D9C22C1396B00ED116A /* TabBarTabBarItem.swift in Sources */,
 				DB720DE822C1396C00ED116A /* DashboardInteractor.swift in Sources */,
+				DBA3F3F823059E07008401B7 /* PhoneNumberModels.swift in Sources */,
 				DB720CDC22C1396B00ED116A /* UpdatePasswordPresenter.swift in Sources */,
 				DB720D1622C1396B00ED116A /* TokenDetailsTokenSummaryCell.swift in Sources */,
 				DBC165472302F36D002A50F7 /* EnvironmentCell.swift in Sources */,
@@ -4120,6 +4163,7 @@
 				DB720EC122C1396C00ED116A /* ValueValidator.swift in Sources */,
 				DB720DBE22C1396C00ED116A /* ConfirmationSectionsProviderDummy.swift in Sources */,
 				DB720CF022C1396B00ED116A /* TabsContainerModels.swift in Sources */,
+				DBA3F3F923059E07008401B7 /* PhoneNumberViewController.swift in Sources */,
 				DB720CB222C1396B00ED116A /* SettingsBoolCell.swift in Sources */,
 				DB720CDB22C1396B00ED116A /* UpdatePasswordRouting.swift in Sources */,
 				DB720E1622C1396C00ED116A /* RegisterSceneViewController.swift in Sources */,
