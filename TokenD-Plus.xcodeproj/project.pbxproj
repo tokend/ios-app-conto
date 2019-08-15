@@ -694,6 +694,7 @@
 		DBA1F21C22FC2D9A0027B8B5 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F21B22FC2D9A0027B8B5 /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		DBA1F21E22FC2E800027B8B5 /* ReceiveAddressAtomicSwapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F21D22FC2E800027B8B5 /* ReceiveAddressAtomicSwapManager.swift */; };
 		DBA1F22022FC31D70027B8B5 /* SendPaymentAmountAtomicSwapBalanceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F21F22FC31D70027B8B5 /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */; };
+		DBA5738E230596A4007DBA2D /* PaymentMethodFiatPaymentSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5738D230596A4007DBA2D /* PaymentMethodFiatPaymentSender.swift */; };
 		DBC165412302F36D002A50F7 /* EnvironmentsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */; };
 		DBC165422302F36D002A50F7 /* EnvironmentsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */; };
 		DBC165432302F36D002A50F7 /* EnvironmentsListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */; };
@@ -1411,6 +1412,7 @@
 		DBA1F21B22FC2D9A0027B8B5 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		DBA1F21D22FC2E800027B8B5 /* ReceiveAddressAtomicSwapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveAddressAtomicSwapManager.swift; sourceTree = "<group>"; };
 		DBA1F21F22FC31D70027B8B5 /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountAtomicSwapBalanceFetcher.swift; sourceTree = "<group>"; };
+		DBA5738D230596A4007DBA2D /* PaymentMethodFiatPaymentSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodFiatPaymentSender.swift; sourceTree = "<group>"; };
 		DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListInteractor.swift; sourceTree = "<group>"; };
 		DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListViewController.swift; sourceTree = "<group>"; };
 		DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListConfigurator.swift; sourceTree = "<group>"; };
@@ -3611,6 +3613,7 @@
 				DBA1F1FB22FC2D640027B8B5 /* PaymentMethodMethodsFetcher.swift */,
 				DBA1F1FC22FC2D640027B8B5 /* PaymentMethodPaymentWorker.swift */,
 				DBA1F1FD22FC2D640027B8B5 /* PaymentMethodAmountFormatter.swift */,
+				DBA5738D230596A4007DBA2D /* PaymentMethodFiatPaymentSender.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -4153,6 +4156,7 @@
 				DB720DCB22C1396C00ED116A /* ConfirmationTitleBoolSwitchView.swift in Sources */,
 				DB720E5D22C1396C00ED116A /* TransactionsListScenePaymentsFetcher.swift in Sources */,
 				DB720E3C22C1396C00ED116A /* BalancesListInteractor.swift in Sources */,
+				DBA5738E230596A4007DBA2D /* PaymentMethodFiatPaymentSender.swift in Sources */,
 				DB720F1722C1396C00ED116A /* BalancesListFlowController.swift in Sources */,
 				DB720E9122C1396C00ED116A /* String+QueueLabel.swift in Sources */,
 				DB720DF222C1396C00ED116A /* DashboardPaymentsPlugInBalancesFetcherProtocol.swift in Sources */,

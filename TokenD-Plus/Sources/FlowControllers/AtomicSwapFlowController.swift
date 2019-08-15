@@ -193,6 +193,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             networkFecther: self.reposController.networkInfoRepo,
             quoteAssets: askModel.ask.prices
         )
+        let fiatPaymentSender = PaymentMethod.FiatPaymentSender()
         let amountConverter = AmountConverter()
         
         let paymentWorker = PaymentMethod.AtomicSwapPaymentWorker(
@@ -201,6 +202,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             networkFetcher: self.reposController.networkInfoRepo,
             transactionSender: self.managersController.transactionSender,
             amountConverter: amountConverter,
+            fiatPaymentSender: fiatPaymentSender,
             askModel: askModel,
             originalAccountId: self.userDataProvider.walletData.accountId
         )

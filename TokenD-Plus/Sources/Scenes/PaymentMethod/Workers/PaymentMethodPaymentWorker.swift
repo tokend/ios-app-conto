@@ -26,6 +26,7 @@ extension PaymentMethod {
         private let networkFetcher: NetworkInfoFetcher
         private let transactionSender: TransactionSender
         private let amountConverter: AmountConverterProtocol
+        private let paymentSender: PaymentSenderProtocol
         
         private let askModel: Model.AskModel
         private let originalAccountId: String
@@ -44,6 +45,7 @@ extension PaymentMethod {
             networkFetcher: NetworkInfoFetcher,
             transactionSender: TransactionSender,
             amountConverter: AmountConverterProtocol,
+            fiatPaymentSender: PaymentSenderProtocol,
             askModel: Model.AskModel,
             originalAccountId: String
             ) {
@@ -53,6 +55,7 @@ extension PaymentMethod {
             self.networkFetcher = networkFetcher
             self.transactionSender = transactionSender
             self.amountConverter = amountConverter
+            self.paymentSender = fiatPaymentSender
             self.askModel = askModel
             self.originalAccountId = originalAccountId
         }
@@ -133,165 +136,170 @@ extension PaymentMethod {
                 return
             }
             
-            self.sendCreatBidRequestTransaction(
-                transactionModel: transaction,
-                networkInfo: networkInfo,
-                quoteAmount: quoteAmount,
-                completion: completion
-            )
-        }
-        
-        private func sendCreatBidRequestTransaction(
-            transactionModel: TransactionModel,
-            networkInfo: NetworkInfoModel,
-            quoteAmount: Decimal,
-            completion: @escaping(PaymentMethodPaymentResult) -> Void
-            ) {
-            
-            guard let _ = try? self.transactionSender.sendTransaction(
-                transactionModel,
-                completion: { [weak self] (result) in
+            self.paymentSender.sendPayment(
+                completion: { result in
                     switch result {
                         
-                    case .failed(let error):
+                    case .error(let error):
                         completion(.failure(.other(error)))
                         
-                    case .succeeded:
-                        self?.fetchCreateBidRequest(
-                            networkInfo: networkInfo,
-                            quoteAmount: quoteAmount,
-                            completion: completion
-                        )
+                    case .success(let atomicSwapUrl):
+                        completion(.success(atomicSwapUrl))
                     }
-            }) else {
-                completion(.failure(.failedToSendTransaction))
-                return
-            }
+            })
         }
         
-        private func fetchCreateBidRequest(
-            networkInfo: NetworkInfoModel,
-            quoteAmount: Decimal,
-            completion: @escaping(PaymentMethodPaymentResult) -> Void
-            ) {
-            
-            let filter = RequestsFiltersV3.with(.requestor(self.originalAccountId))
-            let requestPagination = RequestPagination(
-                .single(index: 0, limit: 3, order: .descending)
-            )
-            
-            self.requestsApi.requestRequests(
-                filters: filter,
-                include: [self.requestDetails],
-                pagination: requestPagination,
-                onRequestBuilt: nil,
-                completion: { [weak self] (result) in
-                    switch result {
-                        
-                    case .failure(let error):
-                        completion(.failure(.other(error)))
-                        
-                    case .success(let document):
-                        guard let requests = document.data,
-                            let firstRequest = requests.first,
-                            let firstRequestId = firstRequest.id else {
-                                completion(.failure(.failedToFetchCreateBidRequest))
-                                return
-                        }
-                        
-                        self?.fetchAccountsRequest(
-                            requestId: firstRequestId,
-                            networkInfo: networkInfo,
-                            quoteAmount: quoteAmount,
-                            completion: completion
-                        )
-                    }
-                })
-        }
-        
-        private func fetchAccountsRequest(
-            requestId: String,
-            networkInfo: NetworkInfoModel,
-            quoteAmount: Decimal,
-            completion: @escaping(PaymentMethodPaymentResult) -> Void
-            ) {
-            
-            let requestPagination = RequestPagination(
-                .single(index: 0, limit: 3, order: .descending)
-            )
-            self.accountsApi.requestAccountRequest(
-                accountId: self.originalAccountId,
-                requestId: requestId,
-                pagination: requestPagination,
-                completion: { [weak self] (result) in
-                    switch result {
-                        
-                    case .failure(let error):
-                        completion(.failure(.other(error)))
-                        
-                    case .success(let document):
-                        guard let request = document.data else {
-                            completion(.failure(.createBidRequestIsNotFound))
-                            return
-                        }
-                        self?.handleAccountsRequest(
-                            request: request,
-                            requestId: requestId,
-                            networkInfo: networkInfo,
-                            quoteAmount: quoteAmount,
-                            completion: completion
-                        )
-                    }
-                }
-            )
-        }
-        
-        private func handleAccountsRequest(
-            request: TokenDSDK.ReviewableRequestResource,
-            requestId: String,
-            networkInfo: NetworkInfoModel,
-            quoteAmount: Decimal,
-            completion: @escaping(PaymentMethodPaymentResult) -> Void
-            ) {
-            
-            guard
-            request.stateI != ReviewableRequestState.permanentlyRejected.rawValue &&
-                request.stateI != ReviewableRequestState.rejected.rawValue else {
-                    completion(.failure(.paymentIsRejected))
-                    return
-            }
-            
-            guard let externalDetails = request.cryptoDetails else {
-                    completion(.failure(.externalDetailsAreNotFound))
-                    return
-            }
-            
-            guard let firstInvoice = externalDetails.data.first else {
-                self.dispatchQueue.asyncAfter(
-                    deadline: .now() + .milliseconds(1500),
-                    execute: { [weak self] in
-                        self?.fetchAccountsRequest(
-                            requestId: requestId,
-                            networkInfo: networkInfo,
-                            quoteAmount: quoteAmount,
-                            completion: completion
-                        )
-                })
-                return
-            }
-            
-            let decimalAmount = self.amountConverter.convertUInt64ToDecimal(
-                value: firstInvoice.amount,
-                precision: networkInfo.precision
-            )
-            
-//            let atomicSwapInvoice = Model.AtomicSwapPaymentUrl(
-//                address: firstInvoice.address,
-//                asset: firstInvoice.assetCode,
-//                amount: decimalAmount
+//        private func sendCreatBidRequestTransaction(
+//            transactionModel: TransactionModel,
+//            networkInfo: NetworkInfoModel,
+//            quoteAmount: Decimal,
+//            completion: @escaping(PaymentMethodPaymentResult) -> Void
+//            ) {
+//
+//            guard let _ = try? self.transactionSender.sendTransaction(
+//                transactionModel,
+//                completion: { [weak self] (result) in
+//                    switch result {
+//
+//                    case .failed(let error):
+//                        completion(.failure(.other(error)))
+//
+//                    case .succeeded:
+//                        self?.fetchCreateBidRequest(
+//                            networkInfo: networkInfo,
+//                            quoteAmount: quoteAmount,
+//                            completion: completion
+//                        )
+//                    }
+//            }) else {
+//                completion(.failure(.failedToSendTransaction))
+//                return
+//            }
+//        }
+//
+//        private func fetchCreateBidRequest(
+//            networkInfo: NetworkInfoModel,
+//            quoteAmount: Decimal,
+//            completion: @escaping(PaymentMethodPaymentResult) -> Void
+//            ) {
+//
+//            let filter = RequestsFiltersV3.with(.requestor(self.originalAccountId))
+//            let requestPagination = RequestPagination(
+//                .single(index: 0, limit: 3, order: .descending)
 //            )
-//            completion(.success(atomicSwapInvoice))
-        }
+//
+//            self.requestsApi.requestRequests(
+//                filters: filter,
+//                include: [self.requestDetails],
+//                pagination: requestPagination,
+//                onRequestBuilt: nil,
+//                completion: { [weak self] (result) in
+//                    switch result {
+//
+//                    case .failure(let error):
+//                        completion(.failure(.other(error)))
+//
+//                    case .success(let document):
+//                        guard let requests = document.data,
+//                            let firstRequest = requests.first,
+//                            let firstRequestId = firstRequest.id else {
+//                                completion(.failure(.failedToFetchCreateBidRequest))
+//                                return
+//                        }
+//
+//                        self?.fetchAccountsRequest(
+//                            requestId: firstRequestId,
+//                            networkInfo: networkInfo,
+//                            quoteAmount: quoteAmount,
+//                            completion: completion
+//                        )
+//                    }
+//                })
+//        }
+//
+//        private func fetchAccountsRequest(
+//            requestId: String,
+//            networkInfo: NetworkInfoModel,
+//            quoteAmount: Decimal,
+//            completion: @escaping(PaymentMethodPaymentResult) -> Void
+//            ) {
+//
+//            let requestPagination = RequestPagination(
+//                .single(index: 0, limit: 3, order: .descending)
+//            )
+//            self.accountsApi.requestAccountRequest(
+//                accountId: self.originalAccountId,
+//                requestId: requestId,
+//                pagination: requestPagination,
+//                completion: { [weak self] (result) in
+//                    switch result {
+//
+//                    case .failure(let error):
+//                        completion(.failure(.other(error)))
+//
+//                    case .success(let document):
+//                        guard let request = document.data else {
+//                            completion(.failure(.createBidRequestIsNotFound))
+//                            return
+//                        }
+//                        self?.handleAccountsRequest(
+//                            request: request,
+//                            requestId: requestId,
+//                            networkInfo: networkInfo,
+//                            quoteAmount: quoteAmount,
+//                            completion: completion
+//                        )
+//                    }
+//                }
+//            )
+//        }
+//
+//        private func handleAccountsRequest(
+//            request: TokenDSDK.ReviewableRequestResource,
+//            requestId: String,
+//            networkInfo: NetworkInfoModel,
+//            quoteAmount: Decimal,
+//            completion: @escaping(PaymentMethodPaymentResult) -> Void
+//            ) {
+//
+//            guard
+//            request.stateI != ReviewableRequestState.permanentlyRejected.rawValue &&
+//                request.stateI != ReviewableRequestState.rejected.rawValue else {
+//                    completion(.failure(.paymentIsRejected))
+//                    return
+//            }
+//
+//            guard let externalDetails = request.cryptoDetails else {
+//                    completion(.failure(.externalDetailsAreNotFound))
+//                    return
+//            }
+//
+//            guard let firstInvoice = externalDetails.data.first else {
+//                self.dispatchQueue.asyncAfter(
+//                    deadline: .now() + .milliseconds(1500),
+//                    execute: { [weak self] in
+//                        self?.fetchAccountsRequest(
+//                            requestId: requestId,
+//                            networkInfo: networkInfo,
+//                            quoteAmount: quoteAmount,
+//                            completion: completion
+//                        )
+//                })
+//                return
+//            }
+//
+//            let decimalAmount = self.amountConverter.convertUInt64ToDecimal(
+//                value: firstInvoice.amount,
+//                precision: networkInfo.precision
+//            )
+//
+////            let atomicSwapInvoice = Model.AtomicSwapPaymentUrl(
+////                address: firstInvoice.address,
+////                asset: firstInvoice.assetCode,
+////                amount: decimalAmount
+////            )
+////            completion(.success(atomicSwapInvoice))
+//        }
     }
 }
 
