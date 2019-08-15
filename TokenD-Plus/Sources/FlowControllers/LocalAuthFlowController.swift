@@ -301,6 +301,11 @@ class LocalAuthFlowController: BaseFlowController {
             originalAccountId: accountId
         )
         
+        let kycVerificationChecker = KYC.VerificationChecker(
+            accountsApi: self.flowControllerStack.apiV3.accountsApi,
+            accountId: accountId
+        )
+        
         let routing = KYC.Routing(
             showLoading: { [weak self] in
                 self?.navigationController.showProgress()
@@ -333,11 +338,15 @@ class LocalAuthFlowController: BaseFlowController {
                     message,
                     completion: nil
                 )
-        })
+            }, showOnApproved: { [weak self] in
+                self?.onAuthorized()
+            }
+        )
         
         KYC.Configurator.configure(
             viewController: vc,
             kycFormSender: kycFormSender,
+            kycVerificationChecker: kycVerificationChecker,
             routing: routing
         )
         return vc

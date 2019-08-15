@@ -106,7 +106,6 @@ extension KYC {
                             role: UInt64(role32),
                             completion: completion
                         )
-                        
                     }
             })
         }

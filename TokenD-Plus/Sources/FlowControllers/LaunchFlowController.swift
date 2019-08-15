@@ -446,6 +446,11 @@ class LaunchFlowController: BaseFlowController {
             originalAccountId: accountId
         )
         
+        let kycVerificationChecker = KYC.VerificationChecker(
+            accountsApi: self.flowControllerStack.apiV3.accountsApi,
+            accountId: accountId
+        )
+        
         let routing = KYC.Routing(
             showLoading: { [weak self] in
                 self?.navigationController.showProgress()
@@ -468,9 +473,7 @@ class LaunchFlowController: BaseFlowController {
                 self?.showSuccessMessage(
                     title: Localized(.success),
                     message: message,
-                    completion: { [weak self] in
-                        self?.onKYCFailed()
-                    },
+                    completion: nil,
                     presentViewController: presenter
                 )
             }, showValidationError: { [weak self] (message) in
@@ -478,11 +481,14 @@ class LaunchFlowController: BaseFlowController {
                     message,
                     completion: nil
                 )
+            }, showOnApproved: { [weak self] in
+                self?.onAuthorized(account)
         })
         
         KYC.Configurator.configure(
             viewController: vc,
             kycFormSender: kycFormSender,
+            kycVerificationChecker: kycVerificationChecker,
             routing: routing
         )
         return vc

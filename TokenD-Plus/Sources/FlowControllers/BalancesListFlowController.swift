@@ -85,7 +85,8 @@ class BalancesListFlowController: BaseSignedInFlowController {
             chartBalances: [],
             selectedChartBalance: nil,
             imageUrl: company.imageUrl,
-            convertedAsset: company.conversionAsset
+            convertedAsset: company.conversionAsset,
+            companyName: company.name
         )
         let amountFormatter = BalancesList.AmountFormatter()
         let percentFormatter = BalancesList.PercentFormatter()

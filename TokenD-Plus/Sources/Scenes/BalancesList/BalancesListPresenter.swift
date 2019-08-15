@@ -140,8 +140,17 @@ extension BalancesList {
                             headerModel.balance,
                             currency: headerModel.asset
                         )
+                        let abbreviationText: String
+                        if let firstLetter = headerModel.companyName.first {
+                            abbreviationText = "\(firstLetter)"
+                        } else {
+                            abbreviationText = "D"
+                        }
+                        let abbreviationColor = TokenColoringProvider.shared.coloringForCode(headerModel.companyName)
                         let headerModel = BalancesList.HeaderCell.ViewModel(
                             imageUrl: headerModel.imageUrl,
+                            abbreviationСolor: abbreviationColor,
+                            abbreviationText: abbreviationText,
                             balance: balanceTitle,
                             cellIdentifier: .header
                         )

@@ -21,17 +21,20 @@ extension KYC {
         
         private let presenter: PresentationLogic
         private let kycForSender: KYCFormSenderProtocol
+        private let kycVerificationChecker: KYCVerificationCheckerProtocol
         private var sceneModel: Model.SceneModel
         
         // MARK: -
         
         public init(
             presenter: PresentationLogic,
-            kycForSender: KYCFormSenderProtocol
+            kycForSender: KYCFormSenderProtocol,
+            kycVerificationChecker: KYCVerificationCheckerProtocol
             ) {
             
             self.presenter = presenter
             self.kycForSender = kycForSender
+            self.kycVerificationChecker = kycVerificationChecker
             self.sceneModel = Model.SceneModel(fields: [])
         }
         
@@ -64,6 +67,17 @@ extension KYC {
                 return field.type == fieldType
             })
             return field?.value
+        }
+        
+        private func startVerificationCheck() {
+            self.kycVerificationChecker
+                .startToCheck(completion: { [weak self] (result) in
+                    switch result {
+                    case .verified:
+                        let response = Event.KYCApproved.Response()
+                        self?.presenter.presentKYCApproved(response: response)
+                    }
+            })
         }
     }
 }
@@ -108,6 +122,7 @@ extension KYC.Interactor: KYC.BusinessLogic {
                     
                 case .success:
                     response = .success
+                    self?.startVerificationCheck()
                 }
                 self?.presenter.presentAction(response: response)
             }

@@ -86,4 +86,9 @@ extension KYC.Event {
             case failure(message: String)
         }
     }
+    
+    public enum KYCApproved {
+        public struct Response {}
+        public typealias ViewModel = Response
+    }
 }

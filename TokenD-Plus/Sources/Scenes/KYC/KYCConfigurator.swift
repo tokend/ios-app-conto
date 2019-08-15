@@ -7,6 +7,7 @@ extension KYC {
         public static func configure(
             viewController: ViewController,
             kycFormSender: KYCFormSenderProtocol,
+            kycVerificationChecker: KYCVerificationCheckerProtocol,
             routing: Routing?,
             onDeinit: DeinitCompletion = nil
             ) {
@@ -15,7 +16,8 @@ extension KYC {
             let presenter = Presenter(presenterDispatch: presenterDispatch)
             let interactor = Interactor(
                 presenter: presenter,
-                kycForSender: kycFormSender
+                kycForSender: kycFormSender,
+                kycVerificationChecker: kycVerificationChecker
             )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)
             viewController.inject(

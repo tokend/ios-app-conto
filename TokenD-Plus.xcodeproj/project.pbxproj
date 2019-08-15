@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A456E9D8F6860BA2357882C2 /* libPods-TokenD-Plus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */; };
+		DB00D973230456820041D773 /* KYCVerificationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D972230456820041D773 /* KYCVerificationChecker.swift */; };
 		DB04621122FB14230050D2BB /* AssetResource+AssetName.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */; };
 		DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */; };
 		DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */; };
@@ -432,7 +433,6 @@
 		DB720E3A22C1396C00ED116A /* BalancesListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8822C1396B00ED116A /* BalancesListModels.swift */; };
 		DB720E3B22C1396C00ED116A /* BalancesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8922C1396B00ED116A /* BalancesListPresenter.swift */; };
 		DB720E3C22C1396C00ED116A /* BalancesListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8A22C1396B00ED116A /* BalancesListInteractor.swift */; };
-		DB720E3D22C1396C00ED116A /* BalancesListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8C22C1396B00ED116A /* BalancesListDataProvider.swift */; };
 		DB720E3E22C1396C00ED116A /* BalancesListPieChartColorsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8D22C1396B00ED116A /* BalancesListPieChartColorsProvider.swift */; };
 		DB720E3F22C1396C00ED116A /* BalancesListBalanceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8E22C1396B00ED116A /* BalancesListBalanceFetcher.swift */; };
 		DB720E4022C1396C00ED116A /* BalancesListAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B8F22C1396B00ED116A /* BalancesListAmountFormatter.swift */; };
@@ -722,6 +722,7 @@
 		0E666969207E5FC77A1609F5 /* Pods-TokenD-Plus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.debug.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.debug.xcconfig"; sourceTree = "<group>"; };
 		51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TokenD-Plus.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AD850E3986FEE4CD13E7C4 /* Pods-TokenD-Plus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.release.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.release.xcconfig"; sourceTree = "<group>"; };
+		DB00D972230456820041D773 /* KYCVerificationChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCVerificationChecker.swift; sourceTree = "<group>"; };
 		DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetResource+AssetName.swift"; sourceTree = "<group>"; };
 		DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListChangeLanguageWorker.swift; sourceTree = "<group>"; };
 		DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWorker.swift; sourceTree = "<group>"; };
@@ -1149,7 +1150,6 @@
 		DB720B8822C1396B00ED116A /* BalancesListModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListModels.swift; sourceTree = "<group>"; };
 		DB720B8922C1396B00ED116A /* BalancesListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListPresenter.swift; sourceTree = "<group>"; };
 		DB720B8A22C1396B00ED116A /* BalancesListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListInteractor.swift; sourceTree = "<group>"; };
-		DB720B8C22C1396B00ED116A /* BalancesListDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListDataProvider.swift; sourceTree = "<group>"; };
 		DB720B8D22C1396B00ED116A /* BalancesListPieChartColorsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListPieChartColorsProvider.swift; sourceTree = "<group>"; };
 		DB720B8E22C1396B00ED116A /* BalancesListBalanceFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListBalanceFetcher.swift; sourceTree = "<group>"; };
 		DB720B8F22C1396B00ED116A /* BalancesListAmountFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalancesListAmountFormatter.swift; sourceTree = "<group>"; };
@@ -2797,7 +2797,6 @@
 				DB72280922CCBB4100341565 /* BalancesListActionProvider.swift */,
 				DB720B8F22C1396B00ED116A /* BalancesListAmountFormatter.swift */,
 				DB720B8E22C1396B00ED116A /* BalancesListBalanceFetcher.swift */,
-				DB720B8C22C1396B00ED116A /* BalancesListDataProvider.swift */,
 				DB720B9022C1396B00ED116A /* BalancesListPercentFormatter.swift */,
 				DB720B8D22C1396B00ED116A /* BalancesListPieChartColorsProvider.swift */,
 			);
@@ -3705,6 +3704,7 @@
 			isa = PBXGroup;
 			children = (
 				DBC1655A230356C6002A50F7 /* KYCFormSender.swift */,
+				DB00D972230456820041D773 /* KYCVerificationChecker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -4412,6 +4412,7 @@
 				DB720CE122C1396B00ED116A /* UpdatePasswordChangePasswordWorker.swift in Sources */,
 				DB720EDB22C1396C00ED116A /* BXFStaticTableViewSection.swift in Sources */,
 				DB720EF822C1396C00ED116A /* KeyboardController.swift in Sources */,
+				DB00D973230456820041D773 /* KYCVerificationChecker.swift in Sources */,
 				DB720ED522C1396C00ED116A /* BXFStaticTableView.swift in Sources */,
 				DB720DD022C1396C00ED116A /* ExploreTokensConfigurator.swift in Sources */,
 				DB720E4222C1396C00ED116A /* BalancesListLegendCell.swift in Sources */,
@@ -4490,7 +4491,6 @@
 				DB720E9C22C1396C00ED116A /* UIViewController+Nib.swift in Sources */,
 				DB720E4322C1396C00ED116A /* BalancesListPieChartCell.swift in Sources */,
 				DB720CDF22C1396B00ED116A /* UpdatePasswordSubmitWorkerProtocol.swift in Sources */,
-				DB720E3D22C1396C00ED116A /* BalancesListDataProvider.swift in Sources */,
 				DB720EC722C1396C00ED116A /* TradesView.swift in Sources */,
 				DB720D0822C1396B00ED116A /* FeesViewController.swift in Sources */,
 				DB4AE2CD22EB3D60001D0883 /* AtomicSwapAskCell.swift in Sources */,

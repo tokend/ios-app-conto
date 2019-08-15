@@ -6,6 +6,7 @@ public protocol KYCDisplayLogic: class {
     
     func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel)
     func displayAction(viewModel: Event.Action.ViewModel)
+    func displayKYCApproved(viewModel: Event.KYCApproved.ViewModel)
 }
 
 extension KYC {
@@ -130,5 +131,9 @@ extension KYC.ViewController: KYC.DisplayLogic {
             self.routing?.hideLoading()
             self.routing?.showValidationError(message)
         }
+    }
+    
+    public func displayKYCApproved(viewModel: Event.KYCApproved.ViewModel) {
+        self.routing?.showOnApproved()
     }
 }
