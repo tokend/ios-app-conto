@@ -461,6 +461,8 @@
 "senders_email" = "Sender's email";
 "sent" = "Sent";
 "server" = "Server";
+"set_phone_number" = "Set Phone number";
+"set_phone_number_hint" = "Add your phone number to the account to let your friends find you faster";
 "set_placeholder" = "Set placeholder";
 "set_up_2fa" = "Set up 2FA";
 "settings" = "Settings";

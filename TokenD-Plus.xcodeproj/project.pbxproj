@@ -12,6 +12,8 @@
 		DB04621122FB14230050D2BB /* AssetResource+AssetName.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */; };
 		DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */; };
 		DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */; };
+		DB1E97A82306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1E97A72306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift */; };
+		DB1E97AA2306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1E97A92306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift */; };
 		DB28C4A722CFAF58005362FD /* ReceiveAddressRedeemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */; };
 		DB28C4A922CFB79A005362FD /* ReceiveAddressHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A822CFB79A005362FD /* ReceiveAddressHeader.swift */; };
 		DB28C4BB22D35B4C005362FD /* AcceptRedeemFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4BA22D35B4C005362FD /* AcceptRedeemFlowController.swift */; };
@@ -693,6 +695,8 @@
 		DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetResource+AssetName.swift"; sourceTree = "<group>"; };
 		DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListChangeLanguageWorker.swift; sourceTree = "<group>"; };
 		DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWorker.swift; sourceTree = "<group>"; };
+		DB1E97A72306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberPhoneNumberValidator.swift; sourceTree = "<group>"; };
+		DB1E97A92306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberPhoneNumberSubmitWorker.swift; sourceTree = "<group>"; };
 		DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressRedeemManager.swift; sourceTree = "<group>"; };
 		DB28C4A822CFB79A005362FD /* ReceiveAddressHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressHeader.swift; sourceTree = "<group>"; };
 		DB28C4BA22D35B4C005362FD /* AcceptRedeemFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemFlowController.swift; sourceTree = "<group>"; };
@@ -3463,6 +3467,8 @@
 		DBA3F3FC2305A268008401B7 /* Workers */ = {
 			isa = PBXGroup;
 			children = (
+				DB1E97A72306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift */,
+				DB1E97A92306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -4000,6 +4006,7 @@
 				DB720DDF22C1396C00ED116A /* TradesListPresenter.swift in Sources */,
 				DB720DE222C1396C00ED116A /* TradesListConfigurator.swift in Sources */,
 				DB720D2722C1396B00ED116A /* AuthenticatorAuthActionCell.swift in Sources */,
+				DB1E97AA2306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift in Sources */,
 				DB04621122FB14230050D2BB /* AssetResource+AssetName.swift in Sources */,
 				DB28C4C322D39EE6005362FD /* Numeric+Bytes.swift in Sources */,
 				DB720D0C22C1396B00ED116A /* TokenDetailsPresenter.swift in Sources */,
@@ -4088,6 +4095,7 @@
 				DB720D1C22C1396B00ED116A /* AuthRequestQRCodeGenerator.swift in Sources */,
 				DB720D2122C1396B00ED116A /* AuthRequestKeyFetcher.swift in Sources */,
 				DB720E9022C1396C00ED116A /* UIColor+Hex.swift in Sources */,
+				DB1E97A82306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift in Sources */,
 				DBCA02DA22D5EB9800503025 /* AcceptRedeemWorker.swift in Sources */,
 				DB720EC522C1396C00ED116A /* HorizontalPicker.swift in Sources */,
 				DB720D5622C1396B00ED116A /* SendPaymentDestinationRecipientAddressResolver.swift in Sources */,

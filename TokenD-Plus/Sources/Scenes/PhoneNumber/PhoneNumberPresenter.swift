@@ -3,6 +3,7 @@ import Foundation
 public protocol PhoneNumberPresentationLogic {
     typealias Event = PhoneNumber.Event
     
+    func presentSetNumberAction(response: Event.SetNumberAction.Response)
 }
 
 extension PhoneNumber {
@@ -28,4 +29,18 @@ extension PhoneNumber {
 
 extension PhoneNumber.Presenter: PhoneNumber.PresentationLogic {
     
+    public func presentSetNumberAction(response: Event.SetNumberAction.Response) {
+        let viewModel: Event.SetNumberAction.ViewModel
+        switch response {
+            
+        case .error(let error):
+            viewModel = .error(error.localizedDescription)
+            
+        case .success:
+            viewModel = .success("Success")
+        }
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displaySetNumberAction(viewModel: viewModel)
+        }
+    }
 }

@@ -464,6 +464,8 @@ enum LocKey: String {
     case senders_email
     case sent
     case server
+    case set_phone_number
+    case set_phone_number_hint
     case set_placeholder
     case set_up_2fa
     case settings

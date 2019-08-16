@@ -417,11 +417,37 @@ class SettingsFlowController: BaseSignedInFlowController {
     private func setupPhoneNumberScene() -> UIViewController {
         let vc = PhoneNumber.ViewController()
         let sceneModel = PhoneNumber.Model.SceneModel()
-        let routing = PhoneNumber.Routing()
+        let numberValidator = PhoneNumber.PhoneNumberValidator()
+        let numberSubmitWorker = PhoneNumber.PhoneNumberSubmitWorker(
+            accountId: self.userDataProvider.walletData.accountId
+        )
+        let routing = PhoneNumber.Routing(
+            showError: { [weak self] (message) in
+                self?.navigationController.showErrorMessage(message, completion: nil)
+        },
+            showMessage: { [weak self] (message) in
+                guard let present = self?.navigationController.getPresentViewControllerClosure() else {
+                    return
+                }
+                self?.showSuccessMessage(
+                    title: Localized(.success),
+                    message: message,
+                    completion: nil,
+                    presentViewController: present
+                )
+        },
+            showLoading: { [weak self] in
+                self?.navigationController.showProgress()
+        },
+            hideLoading: { [weak self] in
+                self?.navigationController.hideProgress()
+        })
         
         PhoneNumber.Configurator.configure(
             viewController: vc,
             sceneModel: sceneModel,
+            numberValidator: numberValidator,
+            numberSubmitWorker: numberSubmitWorker,
             routing: routing
         )
         return vc

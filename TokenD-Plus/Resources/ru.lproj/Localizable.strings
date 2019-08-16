@@ -461,6 +461,8 @@
 "senders_email" = "Email отправителя";
 "sent" = "Отправлено";
 "server" = "Сервер";
+"set_phone_number" = "Установить номер телефона";
+"set_phone_number_hint" = "Добавьте ваш номер телефона к аккаунту чтобы ваши друзья могли быстрее вас найти";
 "set_placeholder" = "Set placeholder";
 "set_up_2fa" = "Настройка 2FA";
 "settings" = "Настройки";

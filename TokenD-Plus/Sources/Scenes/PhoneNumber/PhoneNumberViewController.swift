@@ -3,7 +3,8 @@ import RxSwift
 
 public protocol PhoneNumberDisplayLogic: class {
     typealias Event = PhoneNumber.Event
-    
+ 
+    func displaySetNumberAction(viewModel: Event.SetNumberAction.ViewModel)
 }
 
 extension PhoneNumber {
@@ -23,6 +24,7 @@ extension PhoneNumber {
         
         // MARK: - Private properties
         
+        private let hintLabel: UILabel = UILabel()
         private let plusLabel: UILabel = UILabel()
         private let numberField: TextFieldView = TextFieldView()
         private var numberEditingContext: TextEditingContext<String>?
@@ -32,7 +34,7 @@ extension PhoneNumber {
         
         private let disposeBag: DisposeBag = DisposeBag()
         
-        private let sideInset: CGFloat = 10.0
+        private let sideInset: CGFloat = 15.0
         private let topInset: CGFloat = 10.0
         private let buttonHeight: CGFloat = 45.0
         
@@ -61,12 +63,14 @@ extension PhoneNumber {
             super.viewDidLoad()
             
             self.setupView()
+            self.setupHintLabel()
             self.setupPlusLabel()
             self.setupNumberTextField()
             self.setupUnderlineView()
             self.setupSubmitButton()
-            self.observeKeyboard()
             self.setupLayout()
+            
+            self.observeKeyboard()
         }
         
         public override func viewDidAppear(_ animated: Bool) {
@@ -111,6 +115,13 @@ extension PhoneNumber {
             self.view.backgroundColor = Theme.Colors.contentBackgroundColor
         }
         
+        private func setupHintLabel() {
+            self.hintLabel.backgroundColor = Theme.Colors.contentBackgroundColor
+            self.hintLabel.text = Localized(.set_phone_number_hint)
+            self.hintLabel.font = Theme.Fonts.plainTextFont
+            self.hintLabel.numberOfLines = 0
+        }
+        
         private func setupPlusLabel() {
             self.plusLabel.backgroundColor = Theme.Colors.contentBackgroundColor
             self.plusLabel.text = "+"
@@ -147,7 +158,7 @@ extension PhoneNumber {
                 for: .normal
             )
             self.submitButton.setTitle(
-                Localized(.submit),
+                Localized(.set_phone_number),
                 for: .normal
             )
             self.submitButton.titleLabel?.font = Theme.Fonts.actionButtonFont
@@ -155,18 +166,28 @@ extension PhoneNumber {
                 .rx
                 .tap
                 .asDriver()
-                .drive(onNext: { (_) in
-                    
+                .drive(onNext: { [weak self] (_) in
+                    let request = Event.SetNumberAction.Request()
+                    self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                        businessLogic.onSetNumberAction(request: request)
+                    })
                 })
                 .disposed(by: self.disposeBag)
             
         }
         
         private func setupLayout() {
+            self.view.addSubview(self.hintLabel)
             self.view.addSubview(self.plusLabel)
             self.view.addSubview(self.numberField)
             self.view.addSubview(self.underlineView)
             self.view.addSubview(self.submitButton)
+            
+            
+            self.hintLabel.snp.makeConstraints { (make) in
+                make.leading.trailing.equalToSuperview().inset(self.sideInset)
+                make.top.equalToSuperview().inset(self.topInset * 3)
+            }
             
             self.plusLabel.snp.makeConstraints { (make) in
                 make.leading.equalToSuperview().inset(self.sideInset)
@@ -176,7 +197,7 @@ extension PhoneNumber {
             self.numberField.snp.makeConstraints { (make) in
                 make.leading.equalTo(self.plusLabel.snp.trailing).offset(self.sideInset/2)
                 make.trailing.equalToSuperview().inset(self.sideInset)
-                make.top.equalToSuperview().inset(self.topInset)
+                make.top.equalTo(self.hintLabel.snp.bottom).offset(self.topInset * 3)
                 make.height.equalTo(35.0)
             }
             
@@ -197,4 +218,14 @@ extension PhoneNumber {
 
 extension PhoneNumber.ViewController: PhoneNumber.DisplayLogic {
     
+    public func displaySetNumberAction(viewModel: Event.SetNumberAction.ViewModel) {
+        switch viewModel {
+            
+        case .error(let message):
+            self.routing?.showError(message)
+            
+        case .success(let message):
+            self.routing?.showMessage(message)
+        }
+    }
 }

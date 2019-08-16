@@ -19,6 +19,11 @@ extension PhoneNumber.Model {
     public struct SceneModel {
         var number: String?
     }
+    
+    public enum Error: Swift.Error {
+        case emptyNumber
+        case numberIsNotValid
+    }
 }
 
 // MARK: - Events
@@ -31,6 +36,20 @@ extension PhoneNumber.Event {
     public enum NumberEdited {
         public struct Request {
             let number: String?
+        }
+    }
+    
+    public enum SetNumberAction {
+        public struct Request {}
+        
+        public enum Response {
+            case success
+            case error(Swift.Error)
+        }
+        
+        public enum ViewModel {
+            case success(String)
+            case error(String)
         }
     }
 }
