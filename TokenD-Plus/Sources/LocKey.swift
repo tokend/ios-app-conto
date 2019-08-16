@@ -397,6 +397,7 @@ enum LocKey: String {
     case payment_destination
     case payment_method
     case payment_rejected
+    case payment_url_is_invalid
     case payout
     case pending
     case pending_investment

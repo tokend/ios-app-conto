@@ -73,13 +73,13 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         let routing = AtomicSwap.Routing(
             showLoading: { [weak self] in
                 self?.navigationController.showProgress()
-        },
+            },
             hideLoading: { [weak self] in
                 self?.navigationController.hideProgress()
-        },
+            },
             showShadow: { [weak self] in
                 self?.navigationController.showShadow()
-        },
+            },
             hideShadow: { [weak self] in
                 self?.navigationController.hideShadow()
             },
@@ -193,7 +193,10 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             networkFecther: self.reposController.networkInfoRepo,
             quoteAssets: askModel.ask.prices
         )
-        let fiatPaymentSender = PaymentMethod.FiatPaymentSender()
+        let fiatPaymentSender = PaymentMethod.FiatPaymentSender(
+            api: self.flowControllerStack.api.transactionsApi,
+            keychainDataProvider: self.keychainDataProvider
+        )
         let amountConverter = AmountConverter()
         
         let paymentWorker = PaymentMethod.AtomicSwapPaymentWorker(
@@ -284,8 +287,8 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     }
     
     private func setupPaymentMethodPickerScene(
-      methods: [PaymentMethod.Model.PaymentMethod],
-      completion: (@escaping(_ asset: String) -> Void)
+        methods: [PaymentMethod.Model.PaymentMethod],
+        completion: (@escaping(_ asset: String) -> Void)
         ) -> UIViewController {
         
         let vc = PaymentMethodPicker.ViewController()
@@ -316,7 +319,13 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     private func setupFiatPaymentScene(url: URL) -> UIViewController {
         let vc = FiatPayment.ViewController()
         let sceneModel = FiatPayment.Model.SceneModel(url: url)
-        let routing = FiatPayment.Routing()
+        let routing = FiatPayment.Routing(
+            showLoading: { [weak self] in
+                self?.navigationController.showProgress()
+            },
+            hideLoading: { [weak self] in
+                self?.navigationController.hideProgress()
+        })
         
         FiatPayment.Configurator.configure(
             viewController: vc,

@@ -156,6 +156,9 @@ extension PaymentMethod.Model.PaymentError: LocalizedError {
             
         case .paymentIsRejected:
             return Localized(.payment_rejected)
+            
+        case .paymentUrlIsInvalid:
+            return Localized(.payment_url_is_invalid)
         }
     }
 }

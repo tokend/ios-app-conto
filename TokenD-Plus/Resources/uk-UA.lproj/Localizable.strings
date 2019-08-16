@@ -394,6 +394,7 @@
 "payment_destination" = "Відправка";
 "payment_method" = "Спосіб оплати";
 "payment_rejected" = "Оплату скасовано";
+"payment_url_is_invalid" = "Посилання на платiж недійсне";
 "payout" = "Виплата";
 "pending" = "Активний";
 "pending_investment" = "Активні інвестиції";

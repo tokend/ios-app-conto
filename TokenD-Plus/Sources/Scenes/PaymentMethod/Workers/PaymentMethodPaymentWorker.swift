@@ -137,6 +137,7 @@ extension PaymentMethod {
             }
             
             self.paymentSender.sendPayment(
+                transaction: transaction,
                 completion: { result in
                     switch result {
                         

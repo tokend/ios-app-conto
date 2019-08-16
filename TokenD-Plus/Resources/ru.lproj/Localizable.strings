@@ -394,6 +394,7 @@
 "payment_destination" = "Отправка";
 "payment_method" = "Способ оплаты";
 "payment_rejected" = "Платеж отклонен";
+"payment_url_is_invalid" = "Ссылка на платеж недействительна";
 "payout" = "Выплата";
 "pending" = "Активный";
 "pending_investment" = "Активные инвестиции";

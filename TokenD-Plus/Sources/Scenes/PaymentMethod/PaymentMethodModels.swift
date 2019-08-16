@@ -67,6 +67,7 @@ extension PaymentMethod.Model {
         case createBidRequestIsNotFound
         case externalDetailsAreNotFound
         case paymentIsRejected
+        case paymentUrlIsInvalid
         case other(Error)
     }
     

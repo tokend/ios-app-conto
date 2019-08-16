@@ -1,4 +1,5 @@
 import UIKit
+import RxSwift
 
 public protocol FiatPaymentDisplayLogic: class {
     typealias Event = FiatPayment.Event
@@ -18,6 +19,7 @@ extension FiatPayment {
         // MARK: - Private properties
         
         private let webView: UIWebView = UIWebView()
+        private let disposeBag: DisposeBag = DisposeBag()
         
         // MARK: -
         
@@ -47,6 +49,8 @@ extension FiatPayment {
         public override func viewDidLoad() {
             super.viewDidLoad()
             
+            self.routing?.showLoading()
+            
             self.setupView()
             self.setupWebView()
             self.setupLayout()
@@ -66,6 +70,14 @@ extension FiatPayment {
         
         private func setupWebView() {
             self.webView.backgroundColor = Theme.Colors.contentBackgroundColor
+            self.webView
+                .rx
+                .didFinishLoad
+                .debounce(0.5, scheduler: MainScheduler.instance)
+                .subscribe(onNext: { [weak self] (_) in
+                    self?.routing?.hideLoading()
+                })
+                .disposed(by: self.disposeBag)
         }
         
         private func setupLayout() {
