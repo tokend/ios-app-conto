@@ -221,8 +221,10 @@ class BalancesListFlowController: BaseSignedInFlowController {
                 self?.runAtomicSwapFlow(
                     navigationController: navigationController,
                     assetCode: assetCode,
-                    assetName: assetName
-                )
+                    assetName: assetName,
+                    onCompleted: {
+                        self?.backToBalances()
+                })
             },
             showShadow: { [weak self] in
                 self?.navigationController.showShadow()

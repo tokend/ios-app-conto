@@ -8,6 +8,9 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     private let navigationController: NavigationControllerProtocol
     private let assetСode: String
     private let assetName: String
+    private let onCompleted: () -> Void
+    
+    
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: -
@@ -16,6 +19,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         navigationController: NavigationControllerProtocol,
         assetСode: String,
         assetName: String,
+        onCompleted: @escaping () -> Void,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
         reposController: ReposController,
@@ -28,6 +32,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         self.navigationController = navigationController
         self.assetСode = assetСode
         self.assetName = assetName
+        self.onCompleted = onCompleted
         
         super.init(
             appController: appController,
@@ -310,10 +315,37 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     }
     
     private func showFiatPaymentScene(url: URL) {
+        let navController = NavigationController()
         let vc = self.setupFiatPaymentScene(url: url)
         vc.navigationItem.title = ""
         
-        self.navigationController.pushViewController(vc, animated: true)
+        let doneButton = UIBarButtonItem(
+            title: Localized(.done),
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        doneButton
+            .rx
+            .tap
+            .asDriver()
+            .drive(onNext: { [weak self] (_) in
+                self?.reposController.balancesRepo.reloadBalancesDetails()
+                vc.dismiss(
+                    animated: true,
+                    completion: {
+                        self?.onCompleted()
+                })
+            })
+            .disposed(by: self.disposeBag)
+        vc.navigationItem.rightBarButtonItem = doneButton
+        navController.setViewControllers([vc], animated: false)
+        
+        self.navigationController.present(
+            navController.getViewController(),
+            animated: true,
+            completion: nil
+        )
     }
     
     private func setupFiatPaymentScene(url: URL) -> UIViewController {

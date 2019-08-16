@@ -52,7 +52,11 @@ extension AtomicSwap {
                 switch model {
                     
                 case .ask(let ask):
-                    let availableAmount = self.amountFormatter.assetAmountToString(ask.available.value)
+                    let availableAmount = self.amountFormatter.formatAmount(
+                        ask.available.value,
+                        currency: ""
+                    )
+                    
                     let pricesAmounts = self.getPriceItems(prices: ask.prices)
                     viewModel = AskCell.ViewModel(
                         id: ask.id,
