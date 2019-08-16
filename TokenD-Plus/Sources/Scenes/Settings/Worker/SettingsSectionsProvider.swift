@@ -164,17 +164,17 @@ extension Settings {
                 identifier: .accountId
             )
             
-            let feesCell = Model.CellModel(
-                title: Localized(.fees),
-                icon: Assets.fee.image,
+            let phoneCell = Model.CellModel(
+                title: Localized(.phone_number),
+                icon: Assets.phone.image,
                 cellType: .disclosureCell,
                 bottomSeparator: .line,
-                identifier: .fees
+                identifier: .phone
             )
             
             let acountSection = Model.SectionModel(
                 title: Localized(.account),
-                cells: [accountIdCell, feesCell],
+                cells: [accountIdCell, phoneCell],
                 description: ""
             )
             

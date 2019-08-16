@@ -395,6 +395,7 @@ enum LocKey: String {
     case permissions_denied
     case permission_for_contacts_denied
     case personal_details
+    case phone_number
     case photo_verification
     case physical_price
     case please_validate_this_seed

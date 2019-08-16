@@ -137,6 +137,9 @@ class SettingsFlowController: BaseSignedInFlowController {
         case .environment:
             self.showEnvironmentListScene()
             
+        case .phone:
+            self.showPhoneNumberScene()
+            
         default:
             break
         }
@@ -399,6 +402,26 @@ class SettingsFlowController: BaseSignedInFlowController {
         EnvironmentsList.Configurator.configure(
             viewController: vc,
             changeEnvironmentWorker: changeEnvironmentWorker,
+            routing: routing
+        )
+        return vc
+    }
+    
+    private func showPhoneNumberScene() {
+        let vc = self.setupPhoneNumberScene()
+        
+        vc.navigationItem.title = Localized(.phone_number)
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func setupPhoneNumberScene() -> UIViewController {
+        let vc = PhoneNumber.ViewController()
+        let sceneModel = PhoneNumber.Model.SceneModel()
+        let routing = PhoneNumber.Routing()
+        
+        PhoneNumber.Configurator.configure(
+            viewController: vc,
+            sceneModel: sceneModel,
             routing: routing
         )
         return vc

@@ -392,6 +392,7 @@
 "permissions_denied" = "В доступе отказано";
 "permission_for_contacts_denied" = "Доступ к контактам ограничен. Вы можете предоставить его в Системных настройках.";
 "personal_details" = "Личные детали";
+"phone_number" = "Номер телефона";
 "photo_verification" = "Верификация фото";
 "physical_price" = "Физическая цена";
 "please_validate_this_seed" = "Пожалуйста, проверьте ключ в поле ниже чтобы убедиться, что он скопирован правильно:";

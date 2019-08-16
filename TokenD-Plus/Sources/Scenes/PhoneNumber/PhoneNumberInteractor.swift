@@ -36,6 +36,6 @@ extension PhoneNumber {
 extension PhoneNumber.Interactor: PhoneNumber.BusinessLogic {
     
     public func onNumberEdited(request: Event.NumberEdited.Request) {
-        
+        self.sceneModel.number = request.number
     }
 }

@@ -392,6 +392,7 @@
 "permissions_denied" = "Permissions Denied";
 "permission_for_contacts_denied" = "Permission for contacts access is denied. You can grant it in System Settings.";
 "personal_details" = "Personal details";
+"phone_number" = "Phone number";
 "photo_verification" = "Photo verification";
 "physical_price" = "Physical price";
 "please_validate_this_seed" = "Please validate this seed in the field below to ensure that you copied it properly:";

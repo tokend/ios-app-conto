@@ -2,36 +2,22 @@ import Foundation
 
 class PhoneNumberFormatter: ValueFormatter<String> {
     
-    private let validChars
+    private let validCharacters: String = "0123456789"
     
     // MARK: - Override
     
-    override func valueFromString(_ string: String?) -> Decimal? {
-        guard var string = string else {
+    override func valueFromString(_ string: String?) -> String? {
+        guard let string = string else {
             return nil
         }
-        
-        string = string.replacingOccurrences(
-            of: ",",
-            with: self.decimalSeparator
-        )
-        let invalidCharsRange = string.rangeOfCharacter(from: self.invalidCharSet)
-        if invalidCharsRange != nil {
-            return nil
+        var isPhoneNumberValid = true
+        for number in string {
+            if !validCharacters.contains(number) {
+                isPhoneNumberValid = false
+                break
+            }
         }
         
-        let components = string.components(separatedBy: self.decimalSeparator)
-        let decimalSeparatorCheck = components.count <= 2
-        
-        guard decimalSeparatorCheck else {
-            return nil
-        }
-        
-        if components.count == 2 && components[1].count > 6 {
-            return nil
-        }
-        
-        let valueDecimal = Decimal(string: string)
-        return valueDecimal
+        return isPhoneNumberValid ? string : nil
     }
 }
