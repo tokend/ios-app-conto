@@ -1,5 +1,5 @@
 import Foundation
-
+import TokenDSDK
 
 public enum PhoneNumberSubmitResult {
     case success
@@ -19,14 +19,19 @@ extension PhoneNumber {
         
         // MARK: - Private properties
         
+        private let generalApi: GeneralApi
         private let accountId: String
         
         // MARK: -
         
-        init(accountId: String) {
+        init(
+            generalApi: GeneralApi,
+            accountId: String
+            ) {
+            
+            self.generalApi = generalApi
             self.accountId = accountId
         }
-        
     }
 }
 
@@ -37,6 +42,18 @@ extension PhoneNumber.PhoneNumberSubmitWorker: PhoneNumber.PhoneNumberSubmitWork
         completion: @escaping (PhoneNumberSubmitResult) -> Void
         ) {
         
-        
+        self.generalApi.requestSetPhone(
+            accountId: self.accountId,
+            phone: .init(phone: number),
+            completion: { (result) in
+                switch result {
+                    
+                case .failed(let error):
+                    completion(.error(error))
+                    
+                case .succeeded:
+                    completion(.success)
+                }
+        })
     }
 }

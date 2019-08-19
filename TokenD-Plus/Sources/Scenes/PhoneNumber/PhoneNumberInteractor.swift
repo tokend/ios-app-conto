@@ -22,6 +22,7 @@ extension PhoneNumber {
         private var sceneModel: Model.SceneModel
         private let numberValidator: PhoneNumberValidatorProtocol
         private let numberSubmitWorker: PhoneNumberSubmitWorkerProtocol
+        private let numberIdentifier: PhoneNumberIdentifierProtocol
         
         // MARK: -
         
@@ -29,13 +30,15 @@ extension PhoneNumber {
             presenter: PresentationLogic,
             sceneModel: Model.SceneModel,
             numberValidator: PhoneNumberValidatorProtocol,
-            numberSubmitWorker: PhoneNumberSubmitWorkerProtocol
+            numberSubmitWorker: PhoneNumberSubmitWorkerProtocol,
+            numberIdentifier: PhoneNumberIdentifierProtocol
             ) {
             
             self.presenter = presenter
             self.sceneModel = sceneModel
             self.numberValidator = numberValidator
             self.numberSubmitWorker = numberSubmitWorker
+            self.numberIdentifier = numberIdentifier
         }
     }
 }
@@ -47,6 +50,7 @@ extension PhoneNumber.Interactor: PhoneNumber.BusinessLogic {
     }
     
     public func onSetNumberAction(request: Event.SetNumberAction.Request) {
+        self.presenter.presentSetNumberAction(response: .loading)
         guard let number = self.sceneModel.number else {
             self.presenter.presentSetNumberAction(response: .error(Model.Error.emptyNumber))
             return
@@ -61,6 +65,7 @@ extension PhoneNumber.Interactor: PhoneNumber.BusinessLogic {
         self.numberSubmitWorker.submitNumber(
             number: finalNumber,
             completion: { [weak self] (result) in
+                self?.presenter.presentSetNumberAction(response: .loaded)
                 let response: Event.SetNumberAction.Response
                 switch result {
                     

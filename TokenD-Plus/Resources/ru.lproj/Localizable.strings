@@ -258,7 +258,8 @@
 "incorrect_or_corrupted_recovery_seed" = "Неправильный или поврежденный ключ восстановления";
 "input_2fa_code" = "Введите 2FA Код";
 "input_code_from_google_authenticator_or_similar_app" = "Введите код из Google Authenticator или подобного приложения";
-"input_code_sent_to_your_email" = "Код ввода отправлен на ваш email";
+"input_code_sent_to_you_in_sms" = "Введите код отправленый Вам в СМС";
+"input_code_sent_to_your_email" = "Введите код отправленый на ваш email";
 "input_password" = "Введите пароль";
 "install_authenticator" = "Установить Authenticator";
 "insufficient_funds" = "Недостаточно средств";

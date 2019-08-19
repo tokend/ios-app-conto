@@ -258,6 +258,7 @@
 "incorrect_or_corrupted_recovery_seed" = "Incorrect or corrupted recovery seed";
 "input_2fa_code" = "Input 2FA Code";
 "input_code_from_google_authenticator_or_similar_app" = "Input code from Google Authenticator or similar app";
+"input_code_sent_to_you_in_sms" = "Input code sent to you in SMS";
 "input_code_sent_to_your_email" = "Input code sent to your email";
 "input_password" = "Input Password";
 "install_authenticator" = "Install Authenticator";

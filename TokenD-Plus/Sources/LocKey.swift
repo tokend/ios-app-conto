@@ -261,6 +261,7 @@ enum LocKey: String {
     case incorrect_or_corrupted_recovery_seed
     case input_2fa_code
     case input_code_from_google_authenticator_or_similar_app
+    case input_code_sent_to_you_in_sms
     case input_code_sent_to_your_email
     case input_password
     case install_authenticator

@@ -419,6 +419,7 @@ class SettingsFlowController: BaseSignedInFlowController {
         let sceneModel = PhoneNumber.Model.SceneModel()
         let numberValidator = PhoneNumber.PhoneNumberValidator()
         let numberSubmitWorker = PhoneNumber.PhoneNumberSubmitWorker(
+            generalApi: self.flowControllerStack.api.generalApi,
             accountId: self.userDataProvider.walletData.accountId
         )
         let routing = PhoneNumber.Routing(

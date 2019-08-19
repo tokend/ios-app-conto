@@ -5,6 +5,7 @@ public protocol PhoneNumberDisplayLogic: class {
     typealias Event = PhoneNumber.Event
  
     func displaySetNumberAction(viewModel: Event.SetNumberAction.ViewModel)
+    func displaySceneUpdated(viewModel: Event.SceneUpdated.ViewModel)
 }
 
 extension PhoneNumber {
@@ -222,10 +223,32 @@ extension PhoneNumber.ViewController: PhoneNumber.DisplayLogic {
         switch viewModel {
             
         case .error(let message):
+            self.routing?.hideLoading()
             self.routing?.showError(message)
             
         case .success(let message):
+            self.routing?.hideLoading()
             self.routing?.showMessage(message)
+            
+        case .loading:
+            self.routing?.showLoading()
+            
+        case .loaded:
+            self.routing?.hideLoading()
+        }
+    }
+    
+    public func displaySceneUpdated(viewModel: Event.SceneUpdated.ViewModel) {
+        self.submitButton.setTitle(
+            viewModel.buttonAppearence.title,
+            for: .normal
+        )
+        if viewModel.buttonAppearence.isEnabled {
+            self.submitButton.isEnabled = true
+            self.submitButton.backgroundColor = Theme.Colors.accentColor
+        } else {
+            self.submitButton.isEnabled = false
+            self.submitButton.backgroundColor = Theme.Colors.disabledActionButtonColor
         }
     }
 }

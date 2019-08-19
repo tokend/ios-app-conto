@@ -38,6 +38,12 @@ extension PhoneNumber.Presenter: PhoneNumber.PresentationLogic {
             
         case .success:
             viewModel = .success("Success")
+            
+        case .loaded:
+            viewModel = .loaded
+            
+        case .loading:
+            viewModel = .loading
         }
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displaySetNumberAction(viewModel: viewModel)
