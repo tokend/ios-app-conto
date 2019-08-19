@@ -338,6 +338,26 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
                 })
             })
             .disposed(by: self.disposeBag)
+        
+        let backButton = UIBarButtonItem(
+            title: Localized(.back),
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        backButton
+            .rx
+            .tap
+            .asDriver()
+            .drive(onNext: { (_) in
+                vc.dismiss(
+                    animated: true,
+                    completion: nil
+                )
+            })
+            .disposed(by: self.disposeBag)
+        
+        vc.navigationItem.leftBarButtonItem = backButton
         vc.navigationItem.rightBarButtonItem = doneButton
         navController.setViewControllers([vc], animated: false)
         
