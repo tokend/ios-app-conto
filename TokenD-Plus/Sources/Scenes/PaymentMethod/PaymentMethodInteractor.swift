@@ -120,7 +120,7 @@ extension PaymentMethod.Interactor: PaymentMethod.BusinessLogic {
         }
         self.loadingStatus.accept(.loading)
         self.paymentWorker.performPayment(
-            quoteAsset: selectedPaymentMethod.assetCode,
+            quoteAsset: selectedPaymentMethod.assetName,
             quoteAmount: selectedPaymentMethod.amount,
             completion: { [weak self] (result) in
                 self?.loadingStatus.accept(.loaded)

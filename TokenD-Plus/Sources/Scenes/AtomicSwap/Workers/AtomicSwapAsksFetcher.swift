@@ -85,10 +85,9 @@ extension AtomicSwap {
                     guard let assetCode = assetResource.id else {
                             return nil
                     }
-                    let assetName = self.getAssetName(code: assetCode)
                     return Model.QuoteAmount(
                         assetCode: assetCode,
-                        assetName: assetName,
+                        assetName: assetResource.quoteAsset,
                         value: assetResource.price
                     )
                 })
