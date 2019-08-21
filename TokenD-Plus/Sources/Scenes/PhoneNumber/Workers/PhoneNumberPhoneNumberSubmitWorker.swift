@@ -51,6 +51,9 @@ extension PhoneNumber.PhoneNumberSubmitWorker: PhoneNumber.PhoneNumberSubmitWork
                 case .failed(let error):
                     completion(.error(error))
                     
+                case .tfaFailed:
+                    completion(.error(PhoneNumber.Model.Error.invalidCode))
+                    
                 case .succeeded:
                     completion(.success)
                 }

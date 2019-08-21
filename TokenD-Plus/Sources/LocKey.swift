@@ -159,6 +159,7 @@ enum LocKey: String {
     case email_already_taken
     case email_lowercased
     case empty_amount
+    case empty_number_field
     case empty_recipient_address
     case empty_signers_data
     case ended
@@ -285,6 +286,7 @@ enum LocKey: String {
     case invalid_account_id_or_email
     case invalid_code
     case invalid_company_account_id
+    case invalid_phone_number
     case invalid_redeem_asset
     case invalid_redeem_request
     case invalid_sender_account_id

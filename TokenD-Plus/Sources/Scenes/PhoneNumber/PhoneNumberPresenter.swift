@@ -6,6 +6,7 @@ public protocol PhoneNumberPresentationLogic {
     func presentSetNumberAction(response: Event.SetNumberAction.Response)
     func presentSсeneUpdated(response: Event.SceneUpdated.Response)
     func presentLoadingStatusDidChange(response: Event.LoadingStatusDidChange.Response)
+    func presentError(response: Event.Error.Response)
 }
 
 extension PhoneNumber {
@@ -88,4 +89,27 @@ extension PhoneNumber.Presenter: PhoneNumber.PresentationLogic {
             displayLogic.displayLoadingStatusDidChange(viewModel: viewModel)
         }
     }
-} 
+    
+    public func presentError(response: Event.Error.Response) {
+        let viewModel = Event.Error.ViewModel(error: response.error.localizedDescription)
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displayError(viewModel: viewModel)
+        }
+    }
+}
+
+extension PhoneNumber.Model.Error: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+            
+        case .emptyNumber:
+            return Localized(.empty_number_field)
+            
+        case .invalidCode:
+            return Localized(.invalid_code)
+            
+        case .numberIsNotValid:
+            return Localized(.invalid_phone_number)
+        }
+    }
+}

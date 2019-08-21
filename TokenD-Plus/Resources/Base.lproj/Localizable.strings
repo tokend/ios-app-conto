@@ -156,6 +156,7 @@
 "email_already_taken" = "Email already taken";
 "email_lowercased" = "email";
 "empty_amount" = "Empty amount";
+"empty_number_field" = "Empty phone number field";
 "empty_recipient_address" = "Empty recipient address";
 "empty_signers_data" = "Empty signers data";
 "ended" = "ended";
@@ -282,6 +283,7 @@
 "invalid_account_id_or_email" = "Invalid account id or email";
 "invalid_code" = "Invalid code";
 "invalid_company_account_id" = "Invalid company account id";
+"invalid_phone_number" = "Invalid phone number format";
 "invalid_redeem_asset" = "Invalid redeem asset";
 "invalid_redeem_request" = "Invalid redeem request";
 "invalid_sender_account_id" = "Invalid sender account id";

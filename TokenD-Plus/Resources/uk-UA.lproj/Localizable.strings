@@ -156,6 +156,7 @@
 "email_already_taken" = "Цей email вже зайнятий";
 "email_lowercased" = "email";
 "empty_amount" = "Поле для введення суми не може бути порожнім";
+"empty_number_field" = "Поле номера телефону порожнє";
 "empty_recipient_address" = "Поле для введення адреси одержувача не може бути порожнім";
 "empty_signers_data" = "Дані про підписантів відсутні";
 "ended" = "завершено";
@@ -282,6 +283,7 @@
 "invalid_account_id_or_email" = "Невірний ID акаунта або email";
 "invalid_code" = "Невірний код";
 "invalid_company_account_id" = "Невірний ID компанії";
+"invalid_phone_number" = "Невірний формат номера телефону";
 "invalid_redeem_asset" = "Невірний актив погашення";
 "invalid_redeem_request" = "Невірний запит погашения";
 "invalid_sender_account_id" = "Невірний акаунт ID відправника";

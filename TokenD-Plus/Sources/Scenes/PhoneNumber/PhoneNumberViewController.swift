@@ -7,6 +7,7 @@ public protocol PhoneNumberDisplayLogic: class {
     func displaySetNumberAction(viewModel: Event.SetNumberAction.ViewModel)
     func displaySceneUpdated(viewModel: Event.SceneUpdated.ViewModel)
     func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel)
+    func displayError(viewModel: Event.Error.ViewModel)
 }
 
 extension PhoneNumber {
@@ -270,5 +271,9 @@ extension PhoneNumber.ViewController: PhoneNumber.DisplayLogic {
         case .loading:
             self.routing?.showLoading()
         }
+    }
+    
+    public func displayError(viewModel: Event.Error.ViewModel) {
+        self.routing?.showError(viewModel.error)
     }
 }

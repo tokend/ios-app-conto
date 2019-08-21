@@ -95,4 +95,13 @@ extension PhoneNumber.Event {
         public typealias Response = Model.LoadingStatus
         public typealias ViewModel = Model.LoadingStatus
     }
+    
+    public enum Error {
+        public struct Response {
+            let error: Swift.Error
+        }
+        public struct ViewModel {
+            let error: String
+        }
+    }
 }

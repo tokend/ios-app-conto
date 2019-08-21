@@ -63,6 +63,8 @@ extension PhoneNumber {
                 state = .sameWithIdentity
                 
             case .error(let error):
+                let response = Event.Error.Response(error: error)
+                self.presenter.presentError(response: response)
                 state = .sameWithIdentity
                 break
             }
