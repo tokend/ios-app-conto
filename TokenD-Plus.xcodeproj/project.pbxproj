@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A456E9D8F6860BA2357882C2 /* libPods-TokenD-Plus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */; };
+		12FB6E74A4BB81F44AE5C0A8 /* libPods-TokenD-Plus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 027BFFAC1C81D6C6B3A68345 /* libPods-TokenD-Plus.a */; };
+		DB0033C7230B11E900ECD5E1 /* PhoneNumberPhoneNumberIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0033C6230B11E900ECD5E1 /* PhoneNumberPhoneNumberIdentifier.swift */; };
 		DB00D973230456820041D773 /* KYCVerificationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D972230456820041D773 /* KYCVerificationChecker.swift */; };
 		DB04621122FB14230050D2BB /* AssetResource+AssetName.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */; };
 		DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */; };
 		DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */; };
+		DB1E97A82306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1E97A72306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift */; };
+		DB1E97AA2306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1E97A92306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift */; };
 		DB28C4A722CFAF58005362FD /* ReceiveAddressRedeemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */; };
 		DB28C4A922CFB79A005362FD /* ReceiveAddressHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A822CFB79A005362FD /* ReceiveAddressHeader.swift */; };
 		DB28C4BB22D35B4C005362FD /* AcceptRedeemFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4BA22D35B4C005362FD /* AcceptRedeemFlowController.swift */; };
@@ -695,6 +698,13 @@
 		DBA1F21E22FC2E800027B8B5 /* ReceiveAddressAtomicSwapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F21D22FC2E800027B8B5 /* ReceiveAddressAtomicSwapManager.swift */; };
 		DBA1F22022FC31D70027B8B5 /* SendPaymentAmountAtomicSwapBalanceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F21F22FC31D70027B8B5 /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */; };
 		DBA5738E230596A4007DBA2D /* PaymentMethodFiatPaymentSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5738D230596A4007DBA2D /* PaymentMethodFiatPaymentSender.swift */; };
+		DBA3F3F623059E07008401B7 /* PhoneNumberPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F023059E07008401B7 /* PhoneNumberPresenter.swift */; };
+		DBA3F3F723059E07008401B7 /* PhoneNumberRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F123059E07008401B7 /* PhoneNumberRouting.swift */; };
+		DBA3F3F823059E07008401B7 /* PhoneNumberModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F223059E07008401B7 /* PhoneNumberModels.swift */; };
+		DBA3F3F923059E07008401B7 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F323059E07008401B7 /* PhoneNumberViewController.swift */; };
+		DBA3F3FA23059E07008401B7 /* PhoneNumberInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F423059E07008401B7 /* PhoneNumberInteractor.swift */; };
+		DBA3F3FB23059E07008401B7 /* PhoneNumberConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F523059E07008401B7 /* PhoneNumberConfigurator.swift */; };
+		DBA3F3FE2305A2D2008401B7 /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3FD2305A2D2008401B7 /* PhoneNumberFormatter.swift */; };
 		DBC165412302F36D002A50F7 /* EnvironmentsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */; };
 		DBC165422302F36D002A50F7 /* EnvironmentsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */; };
 		DBC165432302F36D002A50F7 /* EnvironmentsListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */; };
@@ -720,13 +730,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E666969207E5FC77A1609F5 /* Pods-TokenD-Plus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.debug.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.debug.xcconfig"; sourceTree = "<group>"; };
-		51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TokenD-Plus.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5AD850E3986FEE4CD13E7C4 /* Pods-TokenD-Plus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.release.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.release.xcconfig"; sourceTree = "<group>"; };
+		027BFFAC1C81D6C6B3A68345 /* libPods-TokenD-Plus.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TokenD-Plus.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C7CC233B2AF255F0AF2250E /* Pods-TokenD-Plus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.debug.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.debug.xcconfig"; sourceTree = "<group>"; };
+		3C6471B5DD537CA22C8635D4 /* Pods-TokenD-Plus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.release.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.release.xcconfig"; sourceTree = "<group>"; };
+		DB0033C6230B11E900ECD5E1 /* PhoneNumberPhoneNumberIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberPhoneNumberIdentifier.swift; sourceTree = "<group>"; };
 		DB00D972230456820041D773 /* KYCVerificationChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCVerificationChecker.swift; sourceTree = "<group>"; };
 		DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetResource+AssetName.swift"; sourceTree = "<group>"; };
 		DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListChangeLanguageWorker.swift; sourceTree = "<group>"; };
 		DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWorker.swift; sourceTree = "<group>"; };
+		DB1E97A72306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberPhoneNumberValidator.swift; sourceTree = "<group>"; };
+		DB1E97A92306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberPhoneNumberSubmitWorker.swift; sourceTree = "<group>"; };
 		DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressRedeemManager.swift; sourceTree = "<group>"; };
 		DB28C4A822CFB79A005362FD /* ReceiveAddressHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressHeader.swift; sourceTree = "<group>"; };
 		DB28C4BA22D35B4C005362FD /* AcceptRedeemFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemFlowController.swift; sourceTree = "<group>"; };
@@ -1413,6 +1426,13 @@
 		DBA1F21D22FC2E800027B8B5 /* ReceiveAddressAtomicSwapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveAddressAtomicSwapManager.swift; sourceTree = "<group>"; };
 		DBA1F21F22FC31D70027B8B5 /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountAtomicSwapBalanceFetcher.swift; sourceTree = "<group>"; };
 		DBA5738D230596A4007DBA2D /* PaymentMethodFiatPaymentSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodFiatPaymentSender.swift; sourceTree = "<group>"; };
+		DBA3F3F023059E07008401B7 /* PhoneNumberPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberPresenter.swift; sourceTree = "<group>"; };
+		DBA3F3F123059E07008401B7 /* PhoneNumberRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberRouting.swift; sourceTree = "<group>"; };
+		DBA3F3F223059E07008401B7 /* PhoneNumberModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberModels.swift; sourceTree = "<group>"; };
+		DBA3F3F323059E07008401B7 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
+		DBA3F3F423059E07008401B7 /* PhoneNumberInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInteractor.swift; sourceTree = "<group>"; };
+		DBA3F3F523059E07008401B7 /* PhoneNumberConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberConfigurator.swift; sourceTree = "<group>"; };
+		DBA3F3FD2305A2D2008401B7 /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
 		DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListInteractor.swift; sourceTree = "<group>"; };
 		DBC165382302F36D002A50F7 /* EnvironmentsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListViewController.swift; sourceTree = "<group>"; };
 		DBC165392302F36D002A50F7 /* EnvironmentsListConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListConfigurator.swift; sourceTree = "<group>"; };
@@ -1442,26 +1462,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A456E9D8F6860BA2357882C2 /* libPods-TokenD-Plus.a in Frameworks */,
+				12FB6E74A4BB81F44AE5C0A8 /* libPods-TokenD-Plus.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		699A11E68AB4CCD95E7ACE45 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				51CE109C21A92569A9D9F6CC /* libPods-TokenD-Plus.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		A133AE3CE5962DDCBDE37CF0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0E666969207E5FC77A1609F5 /* Pods-TokenD-Plus.debug.xcconfig */,
-				B5AD850E3986FEE4CD13E7C4 /* Pods-TokenD-Plus.release.xcconfig */,
+				1C7CC233B2AF255F0AF2250E /* Pods-TokenD-Plus.debug.xcconfig */,
+				3C6471B5DD537CA22C8635D4 /* Pods-TokenD-Plus.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1473,6 +1485,14 @@
 				DB720ADC22C1396B00ED116A /* SendPaymentAmountsBalanceDetailsLoader.swift */,
 			);
 			path = BalancesFethcers;
+			sourceTree = "<group>";
+		};
+		A81117B61B98BFB07523EC30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				027BFFAC1C81D6C6B3A68345 /* libPods-TokenD-Plus.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		DB04620F22FB13FF0050D2BB /* AssetsRepo */ = {
@@ -1662,7 +1682,7 @@
 				A133AE3CE5962DDCBDE37CF0 /* Pods */,
 				DB72098122C1347100ED116A /* Products */,
 				DB72098222C1347100ED116A /* TokenD-Plus */,
-				699A11E68AB4CCD95E7ACE45 /* Frameworks */,
+				A81117B61B98BFB07523EC30 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1737,6 +1757,7 @@
 				DB720A3D22C1396B00ED116A /* MarkdownViewer */,
 				DBA1F1F422FC2D640027B8B5 /* PaymentMethod */,
 				DBA1F20822FC2D7B0027B8B5 /* PaymentMethodPicker */,
+				DBA3F3EF23059DCB008401B7 /* PhoneNumber */,
 				DB720F4322C4CD1C00ED116A /* Polls */,
 				DB720B6F22C1396B00ED116A /* ReceiveAddress */,
 				DB720BC222C1396B00ED116A /* SaleDetails */,
@@ -2465,14 +2486,14 @@
 		DB720AFB22C1396B00ED116A /* ExploreTokens */ = {
 			isa = PBXGroup;
 			children = (
-				DB720AFC22C1396B00ED116A /* ExploreTokensPresenter.swift */,
-				DB720AFD22C1396B00ED116A /* ExploreTokensModels.swift */,
-				DB720AFE22C1396B00ED116A /* ExploreTokensInteractor.swift */,
-				DB720AFF22C1396B00ED116A /* ExploreTokensRouting.swift */,
 				DB720B0022C1396B00ED116A /* ExploreTokensConfigurator.swift */,
-				DB720B0122C1396B00ED116A /* Workers */,
+				DB720AFE22C1396B00ED116A /* ExploreTokensInteractor.swift */,
+				DB720AFD22C1396B00ED116A /* ExploreTokensModels.swift */,
+				DB720AFC22C1396B00ED116A /* ExploreTokensPresenter.swift */,
+				DB720AFF22C1396B00ED116A /* ExploreTokensRouting.swift */,
 				DB720B0622C1396B00ED116A /* ExploreTokensViewController.swift */,
 				DB720B0722C1396B00ED116A /* Views */,
+				DB720B0122C1396B00ED116A /* Workers */,
 			);
 			path = ExploreTokens;
 			sourceTree = "<group>";
@@ -3266,9 +3287,10 @@
 		DB720C3622C1396B00ED116A /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
+				DB720C3922C1396B00ED116A /* DecimalFormatter.swift */,
+				DBA3F3FD2305A2D2008401B7 /* PhoneNumberFormatter.swift */,
 				DB720C3722C1396B00ED116A /* PrecisedFormatter.swift */,
 				DB720C3822C1396B00ED116A /* ValueFormatter.swift */,
-				DB720C3922C1396B00ED116A /* DecimalFormatter.swift */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -3649,6 +3671,30 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DBA3F3EF23059DCB008401B7 /* PhoneNumber */ = {
+			isa = PBXGroup;
+			children = (
+				DBA3F3F523059E07008401B7 /* PhoneNumberConfigurator.swift */,
+				DBA3F3F423059E07008401B7 /* PhoneNumberInteractor.swift */,
+				DBA3F3F223059E07008401B7 /* PhoneNumberModels.swift */,
+				DBA3F3F023059E07008401B7 /* PhoneNumberPresenter.swift */,
+				DBA3F3F123059E07008401B7 /* PhoneNumberRouting.swift */,
+				DBA3F3F323059E07008401B7 /* PhoneNumberViewController.swift */,
+				DBA3F3FC2305A268008401B7 /* Workers */,
+			);
+			path = PhoneNumber;
+			sourceTree = "<group>";
+		};
+		DBA3F3FC2305A268008401B7 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DB1E97A72306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift */,
+				DB1E97A92306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift */,
+				DB0033C6230B11E900ECD5E1 /* PhoneNumberPhoneNumberIdentifier.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		DBC165362302F36D002A50F7 /* EnvironmnentsList */ = {
 			isa = PBXGroup;
 			children = (
@@ -3736,11 +3782,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB72099222C1347200ED116A /* Build configuration list for PBXNativeTarget "TokenD-Plus" */;
 			buildPhases = (
-				86E12BCD8903E764EE7AED47 /* [CP] Check Pods Manifest.lock */,
+				241C0B29193FF8391C9290AF /* [CP] Check Pods Manifest.lock */,
 				DB72097C22C1347100ED116A /* Sources */,
 				DB72097D22C1347100ED116A /* Frameworks */,
 				DB72097E22C1347100ED116A /* Resources */,
-				45CA3201A7E544AEA4B0E834 /* [CP] Copy Pods Resources */,
+				E7612878268C1C7C7B609ABF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3804,29 +3850,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		45CA3201A7E544AEA4B0E834 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/MarkdownView/MarkdownView.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MarkdownView.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		86E12BCD8903E764EE7AED47 /* [CP] Check Pods Manifest.lock */ = {
+		241C0B29193FF8391C9290AF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3846,6 +3870,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7612878268C1C7C7B609ABF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MarkdownView/MarkdownView.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MarkdownView.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3883,6 +3929,7 @@
 				DB4AE2C622EB3B8F001D0883 /* AtomicSwapRouting.swift in Sources */,
 				DB4AE2CF22EB4DC7001D0883 /* AtomicSwapInfoCell.swift in Sources */,
 				DB720F1122C1396C00ED116A /* PermissionRequestFlowController.swift in Sources */,
+				DB0033C7230B11E900ECD5E1 /* PhoneNumberPhoneNumberIdentifier.swift in Sources */,
 				DB720D8C22C1396B00ED116A /* TransactionDetailsEmailFetcher.swift in Sources */,
 				DB720E9F22C1396C00ED116A /* UIResponder+First.swift in Sources */,
 				DB720EAD22C1396C00ED116A /* ChartCardValueFormatter.swift in Sources */,
@@ -3914,6 +3961,7 @@
 				DB720D4522C1396B00ED116A /* ChartConfigurator.swift in Sources */,
 				DB720CFE22C1396B00ED116A /* SaleEmptyView.swift in Sources */,
 				DB4AE2F222F2066E001D0883 /* CompaniesListAccountIdValidator.swift in Sources */,
+				DBA3F3F723059E07008401B7 /* PhoneNumberRouting.swift in Sources */,
 				DB720F0722C1396C00ED116A /* AppController+OpenUrlSubscriber.swift in Sources */,
 				DB720E8F22C1396C00ED116A /* SnapKit+Extension.swift in Sources */,
 				DB720E1822C1396C00ED116A /* RegisterSceneRegisterWorker.swift in Sources */,
@@ -3972,6 +4020,7 @@
 				DB4AE2EE22F1A308001D0883 /* AtomicSwapAsksRepo.swift in Sources */,
 				DB720DB522C1396B00ED116A /* SendPaymentAmountTitleTextEditView.swift in Sources */,
 				DB720E8822C1396C00ED116A /* SharedSceneBuilder.swift in Sources */,
+				DBA3F3F623059E07008401B7 /* PhoneNumberPresenter.swift in Sources */,
 				DB720EE922C1396C00ED116A /* PollsRepo.swift in Sources */,
 				DB720E0E22C1396C00ED116A /* AssetPickerAmountFormatter.swift in Sources */,
 				DB720E5222C1396C00ED116A /* DepositSceneAssetsFetcherProtocol.swift in Sources */,
@@ -4040,6 +4089,7 @@
 				DB720E2222C1396C00ED116A /* SideMenuModels.swift in Sources */,
 				DB720CE922C1396B00ED116A /* VerifyEmailInteractor.swift in Sources */,
 				DB720F5D22C4CD1C00ED116A /* PollsInteractor.swift in Sources */,
+				DBA3F3FA23059E07008401B7 /* PhoneNumberInteractor.swift in Sources */,
 				DB720E8722C1396C00ED116A /* main.swift in Sources */,
 				DBC165422302F36D002A50F7 /* EnvironmentsListViewController.swift in Sources */,
 				DB720E0D22C1396C00ED116A /* AssetPickerAssetsFetcher.swift in Sources */,
@@ -4203,6 +4253,7 @@
 				DB720DDF22C1396C00ED116A /* TradesListPresenter.swift in Sources */,
 				DB720DE222C1396C00ED116A /* TradesListConfigurator.swift in Sources */,
 				DB720D2722C1396B00ED116A /* AuthenticatorAuthActionCell.swift in Sources */,
+				DB1E97AA2306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift in Sources */,
 				DB04621122FB14230050D2BB /* AssetResource+AssetName.swift in Sources */,
 				DB28C4C322D39EE6005362FD /* Numeric+Bytes.swift in Sources */,
 				DB720D0C22C1396B00ED116A /* TokenDetailsPresenter.swift in Sources */,
@@ -4297,6 +4348,7 @@
 				DB720D1C22C1396B00ED116A /* AuthRequestQRCodeGenerator.swift in Sources */,
 				DB720D2122C1396B00ED116A /* AuthRequestKeyFetcher.swift in Sources */,
 				DB720E9022C1396C00ED116A /* UIColor+Hex.swift in Sources */,
+				DB1E97A82306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift in Sources */,
 				DBCA02DA22D5EB9800503025 /* AcceptRedeemWorker.swift in Sources */,
 				DB4AE2C522EB3B8F001D0883 /* AtomicSwapPresenter.swift in Sources */,
 				DB720EC522C1396C00ED116A /* HorizontalPicker.swift in Sources */,
@@ -4307,6 +4359,7 @@
 				DB720E4022C1396C00ED116A /* BalancesListAmountFormatter.swift in Sources */,
 				DB363E1222DF505900F5761C /* Business+Logo.swift in Sources */,
 				DB720F0422C1396C00ED116A /* SettingsManager.swift in Sources */,
+				DBA3F3FB23059E07008401B7 /* PhoneNumberConfigurator.swift in Sources */,
 				DB720EE022C1396C00ED116A /* DynamicTableView.swift in Sources */,
 				DB720E6A22C1396C00ED116A /* TransactionsListTableViewCell.swift in Sources */,
 				DB720E2A22C1396C00ED116A /* ReceiveAddressInteractor.swift in Sources */,
@@ -4335,6 +4388,7 @@
 				DB720F2E22C2286C00ED116A /* CompaniesListInteractor.swift in Sources */,
 				DB720D2422C1396B00ED116A /* AuthenticatorAuthInteractor.swift in Sources */,
 				DB720CF722C1396B00ED116A /* SalesConfigurator.swift in Sources */,
+				DBA3F3FE2305A2D2008401B7 /* PhoneNumberFormatter.swift in Sources */,
 				DB720CB322C1396B00ED116A /* SettingsPushCell.swift in Sources */,
 				DB720E4D22C1396C00ED116A /* DepositSceneDateFormatterProtocol.swift in Sources */,
 				DB720CF322C1396B00ED116A /* TabsContainerViewController.swift in Sources */,
@@ -4358,6 +4412,7 @@
 				DB720E2922C1396C00ED116A /* ReceiveAddressViewController.swift in Sources */,
 				DB720D9C22C1396B00ED116A /* TabBarTabBarItem.swift in Sources */,
 				DB720DE822C1396C00ED116A /* DashboardInteractor.swift in Sources */,
+				DBA3F3F823059E07008401B7 /* PhoneNumberModels.swift in Sources */,
 				DB720CDC22C1396B00ED116A /* UpdatePasswordPresenter.swift in Sources */,
 				DB720D1622C1396B00ED116A /* TokenDetailsTokenSummaryCell.swift in Sources */,
 				DBC165472302F36D002A50F7 /* EnvironmentCell.swift in Sources */,
@@ -4371,6 +4426,7 @@
 				DB720EC122C1396C00ED116A /* ValueValidator.swift in Sources */,
 				DB720DBE22C1396C00ED116A /* ConfirmationSectionsProviderDummy.swift in Sources */,
 				DB720CF022C1396B00ED116A /* TabsContainerModels.swift in Sources */,
+				DBA3F3F923059E07008401B7 /* PhoneNumberViewController.swift in Sources */,
 				DB720CB222C1396B00ED116A /* SettingsBoolCell.swift in Sources */,
 				DB720CDB22C1396B00ED116A /* UpdatePasswordRouting.swift in Sources */,
 				DB720E1622C1396C00ED116A /* RegisterSceneViewController.swift in Sources */,
@@ -4709,7 +4765,7 @@
 		};
 		DB72099322C1347200ED116A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E666969207E5FC77A1609F5 /* Pods-TokenD-Plus.debug.xcconfig */;
+			baseConfigurationReference = 1C7CC233B2AF255F0AF2250E /* Pods-TokenD-Plus.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -4729,7 +4785,7 @@
 		};
 		DB72099422C1347200ED116A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B5AD850E3986FEE4CD13E7C4 /* Pods-TokenD-Plus.release.xcconfig */;
+			baseConfigurationReference = 3C6471B5DD537CA22C8635D4 /* Pods-TokenD-Plus.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

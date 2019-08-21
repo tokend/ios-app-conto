@@ -137,6 +137,9 @@ class SettingsFlowController: BaseSignedInFlowController {
         case .environment:
             self.showEnvironmentListScene()
             
+        case .phone:
+            self.showPhoneNumberScene()
+            
         default:
             break
         }
@@ -400,6 +403,61 @@ class SettingsFlowController: BaseSignedInFlowController {
         EnvironmentsList.Configurator.configure(
             viewController: vc,
             changeEnvironmentWorker: changeEnvironmentWorker,
+            routing: routing
+        )
+        return vc
+    }
+    
+    private func showPhoneNumberScene() {
+        let vc = self.setupPhoneNumberScene()
+        
+        vc.navigationItem.title = Localized(.phone_number)
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func setupPhoneNumberScene() -> UIViewController {
+        let vc = PhoneNumber.ViewController()
+        let sceneModel = PhoneNumber.Model.SceneModel(
+            accountId: self.userDataProvider.walletData.accountId,
+            apiPhoneNumber: nil,
+            number: nil
+        )
+        let numberValidator = PhoneNumber.PhoneNumberValidator()
+        let numberSubmitWorker = PhoneNumber.PhoneNumberSubmitWorker(
+            generalApi: self.flowControllerStack.api.generalApi,
+            accountId: self.userDataProvider.walletData.accountId
+        )
+        let numberIdentifier = PhoneNumber.PhoneNumberIdentifier(
+            generalApi: self.flowControllerStack.api.generalApi
+        )
+        let routing = PhoneNumber.Routing(
+            showError: { [weak self] (message) in
+                self?.navigationController.showErrorMessage(message, completion: nil)
+        },
+            showMessage: { [weak self] (message) in
+                guard let present = self?.navigationController.getPresentViewControllerClosure() else {
+                    return
+                }
+                self?.showSuccessMessage(
+                    title: Localized(.success),
+                    message: message,
+                    completion: nil,
+                    presentViewController: present
+                )
+        },
+            showLoading: { [weak self] in
+                self?.navigationController.showProgress()
+        },
+            hideLoading: { [weak self] in
+                self?.navigationController.hideProgress()
+        })
+        
+        PhoneNumber.Configurator.configure(
+            viewController: vc,
+            sceneModel: sceneModel,
+            numberValidator: numberValidator,
+            numberSubmitWorker: numberSubmitWorker,
+            numberIdentifier: numberIdentifier,
             routing: routing
         )
         return vc

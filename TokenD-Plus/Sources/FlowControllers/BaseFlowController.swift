@@ -307,6 +307,10 @@ class BaseFlowController {
                 alertTitle = Localized(.input_2fa_code)
                 alertMessage = Localized(.input_code_sent_to_your_email)
                 
+            case .phone:
+                alertTitle = Localized(.input_2fa_code)
+                alertMessage = Localized(.input_code_sent_to_you_in_sms)
+                
             case .other(let source):
                 alertTitle = Localized(.input_2fa_code)
                 alertMessage = Localized(

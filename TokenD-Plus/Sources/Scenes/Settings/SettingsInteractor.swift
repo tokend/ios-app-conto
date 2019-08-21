@@ -72,6 +72,7 @@ extension Settings.Interactor: Settings.BusinessLogic {
             
         case .accountId,
              .environment,
+             .phone,
              .seed,
              .tfa,
              .biometrics,

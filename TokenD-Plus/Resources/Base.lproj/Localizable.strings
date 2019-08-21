@@ -92,6 +92,7 @@
 "card_number_colon" = "Card number:";
 "card_owner" = "Card owner";
 "change_password" = "Change Password";
+"change_phone" = "Change Phone number";
 "charged" = "Charged";
 "charged_from_lock" = "Charged from lock";
 "chart" = "Chart";
@@ -155,6 +156,7 @@
 "email_already_taken" = "Email already taken";
 "email_lowercased" = "email";
 "empty_amount" = "Empty amount";
+"empty_number_field" = "Empty phone number field";
 "empty_recipient_address" = "Empty recipient address";
 "empty_signers_data" = "Empty signers data";
 "ended" = "ended";
@@ -272,13 +274,16 @@
 "incorrect_or_corrupted_recovery_seed" = "Incorrect or corrupted recovery seed";
 "input_2fa_code" = "Input 2FA Code";
 "input_code_from_google_authenticator_or_similar_app" = "Input code from Google Authenticator or similar app";
+"input_code_sent_to_you_in_sms" = "Input code sent to you in SMS";
 "input_code_sent_to_your_email" = "Input code sent to your email";
 "input_password" = "Input Password";
 "install_authenticator" = "Install Authenticator";
 "insufficient_funds" = "Insufficient funds";
 "invalid_account_id" = "Invalid account id";
 "invalid_account_id_or_email" = "Invalid account id or email";
+"invalid_code" = "Invalid code";
 "invalid_company_account_id" = "Invalid company account id";
+"invalid_phone_number" = "Invalid phone number format";
 "invalid_redeem_asset" = "Invalid redeem asset";
 "invalid_redeem_request" = "Invalid redeem request";
 "invalid_sender_account_id" = "Invalid sender account id";
@@ -410,6 +415,7 @@
 "permissions_denied" = "Permissions Denied";
 "permission_for_contacts_denied" = "Permission for contacts access is denied. You can grant it in System Settings.";
 "personal_details" = "Personal details";
+"phone_number" = "Phone number";
 "photo_verification" = "Photo verification";
 "physical_price" = "Physical price";
 "please_validate_this_seed" = "Please validate this seed in the field below to ensure that you copied it properly:";
@@ -480,6 +486,8 @@
 "senders_email" = "Sender's email";
 "sent" = "Sent";
 "server" = "Server";
+"set_phone_number" = "Set Phone number";
+"set_phone_number_hint" = "Add your phone number to the account to let your friends find you faster";
 "set_placeholder" = "Set placeholder";
 "set_up_2fa" = "Set up 2FA";
 "settings" = "Settings";

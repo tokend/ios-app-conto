@@ -92,6 +92,7 @@
 "card_number_colon" = "Номер карты:";
 "card_owner" = "Владелец карты";
 "change_password" = "Змінити пароль";
+"change_phone" = "Змінити номер телефону";
 "charged" = "Списано";
 "charged_from_lock" = "Списано";
 "chart" = "Графік";
@@ -155,6 +156,7 @@
 "email_already_taken" = "Цей email вже зайнятий";
 "email_lowercased" = "email";
 "empty_amount" = "Поле для введення суми не може бути порожнім";
+"empty_number_field" = "Поле номера телефону порожнє";
 "empty_recipient_address" = "Поле для введення адреси одержувача не може бути порожнім";
 "empty_signers_data" = "Дані про підписантів відсутні";
 "ended" = "завершено";
@@ -272,13 +274,16 @@
 "incorrect_or_corrupted_recovery_seed" = "Невірний або ушкоджений ключ відновлення";
 "input_2fa_code" = "Введіть 2FA Код";
 "input_code_from_google_authenticator_or_similar_app" = "Введіть код з Google Authenticator або схожого додатку";
-"input_code_sent_to_your_email" = "Код введення відправлений на ваш email";
+"input_code_sent_to_you_in_sms" = "Введіть код відправлений Вам у СМС";
+"input_code_sent_to_your_email" = "Введіть код відправлений на ваш email";
 "input_password" = "Введіть пароль";
 "install_authenticator" = "Встановити Authenticator";
 "insufficient_funds" = "Недостатньо коштів";
 "invalid_account_id" = "Невірний ID акаунта";
 "invalid_account_id_or_email" = "Невірний ID акаунта або email";
+"invalid_code" = "Невірний код";
 "invalid_company_account_id" = "Невірний ID компанії";
+"invalid_phone_number" = "Невірний формат номера телефону";
 "invalid_redeem_asset" = "Невірний актив погашення";
 "invalid_redeem_request" = "Невірний запит погашения";
 "invalid_sender_account_id" = "Невірний акаунт ID відправника";
@@ -410,6 +415,7 @@
 "permissions_denied" = "У доступі відмовленно";
 "permission_for_contacts_denied" = "Доступ до контактів обмежено. Ви можете надати його у Системних налаштуваннях.";
 "personal_details" = "Особисті делталі";
+"phone_number" = "Номер телефона";
 "photo_verification" = "Верифікація фото";
 "physical_price" = "Фізична ціна";
 "please_validate_this_seed" = "Будь ласка, перевірте ключ у полі нижче щоб упевнитися, що його скопійовано правильно:";
@@ -480,6 +486,8 @@
 "senders_email" = "Email відправника";
 "sent" = "Відправлено";
 "server" = "Сервер";
+"set_phone_number" = "Встановити номер телефону";
+"set_phone_number_hint" = "Додайте ваш номер телефона до акаунта щоб ваші друзі могли швидше вас знаходити";
 "set_placeholder" = "Set placeholder";
 "set_up_2fa" = "Налаштування 2FA";
 "settings" = "Налаштування";

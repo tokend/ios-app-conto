@@ -45,6 +45,7 @@ enum Assets: String {
     case passwordIcon = "Password icon"
     case paymentAction = "Payment action"
     case pendingIcon = "Pending icon"
+    case phone = "Phone"
     case placeHolderIcon = "Place holder icon"
     case plusIcon = "Plus icon"
     case polls = "Polls icon"

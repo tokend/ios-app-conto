@@ -92,6 +92,7 @@
 "card_number_colon" = "Номер карты:";
 "card_owner" = "Владелец карты";
 "change_password" = "Изменить пароль";
+"change_phone" = "Изменить номер телефона";
 "charged" = "Списано";
 "charged_from_lock" = "Списано";
 "chart" = "График";
@@ -155,6 +156,7 @@
 "email_already_taken" = "Этот email уже занят";
 "email_lowercased" = "email";
 "empty_amount" = "Поле ввода суммы не может быть пустым";
+"empty_number_field" = "Поле номера телефона пусто";
 "empty_recipient_address" = "Поле ввода адреса получателя не может быть пустым";
 "empty_signers_data" = "Данные о подписантах отсутствуют";
 "ended" = "завершен";
@@ -272,13 +274,16 @@
 "incorrect_or_corrupted_recovery_seed" = "Неправильный или поврежденный ключ восстановления";
 "input_2fa_code" = "Введите 2FA Код";
 "input_code_from_google_authenticator_or_similar_app" = "Введите код из Google Authenticator или подобного приложения";
-"input_code_sent_to_your_email" = "Код ввода отправлен на ваш email";
+"input_code_sent_to_you_in_sms" = "Введите код отправленый Вам в СМС";
+"input_code_sent_to_your_email" = "Введите код отправленый на ваш email";
 "input_password" = "Введите пароль";
 "install_authenticator" = "Установить Authenticator";
 "insufficient_funds" = "Недостаточно средств";
 "invalid_account_id" = "Неверный ID аккаунта";
 "invalid_account_id_or_email" = "Неверный ID аккаунта или email";
+"invalid_code" = "Неверный код";
 "invalid_company_account_id" = "Неверный ID компании";
+"invalid_phone_number" = "Неверный формат номера телефона";
 "invalid_redeem_asset" = "Неверный актив погашения";
 "invalid_redeem_request" = "Неверный запрос погашения";
 "invalid_sender_account_id" = "Неверный аккаунт ID отправителя";
@@ -410,6 +415,7 @@
 "permissions_denied" = "В доступе отказано";
 "permission_for_contacts_denied" = "Доступ к контактам ограничен. Вы можете предоставить его в Системных настройках.";
 "personal_details" = "Личные детали";
+"phone_number" = "Номер телефона";
 "photo_verification" = "Верификация фото";
 "physical_price" = "Физическая цена";
 "please_validate_this_seed" = "Пожалуйста, проверьте ключ в поле ниже чтобы убедиться, что он скопирован правильно:";
@@ -480,6 +486,8 @@
 "senders_email" = "Email отправителя";
 "sent" = "Отправлено";
 "server" = "Сервер";
+"set_phone_number" = "Установить номер телефона";
+"set_phone_number_hint" = "Добавьте ваш номер телефона к аккаунту чтобы ваши друзья могли быстрее вас найти";
 "set_placeholder" = "Set placeholder";
 "set_up_2fa" = "Настройка 2FA";
 "settings" = "Настройки";

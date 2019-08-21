@@ -95,6 +95,7 @@ enum LocKey: String {
     case card_number_colon
     case card_owner
     case change_password
+    case change_phone
     case charged
     case charged_from_lock
     case chart
@@ -158,6 +159,7 @@ enum LocKey: String {
     case email_already_taken
     case email_lowercased
     case empty_amount
+    case empty_number_field
     case empty_recipient_address
     case empty_signers_data
     case ended
@@ -275,13 +277,16 @@ enum LocKey: String {
     case incorrect_or_corrupted_recovery_seed
     case input_2fa_code
     case input_code_from_google_authenticator_or_similar_app
+    case input_code_sent_to_you_in_sms
     case input_code_sent_to_your_email
     case input_password
     case install_authenticator
     case insufficient_funds
     case invalid_account_id
     case invalid_account_id_or_email
+    case invalid_code
     case invalid_company_account_id
+    case invalid_phone_number
     case invalid_redeem_asset
     case invalid_redeem_request
     case invalid_sender_account_id
@@ -413,6 +418,7 @@ enum LocKey: String {
     case permissions_denied
     case permission_for_contacts_denied
     case personal_details
+    case phone_number
     case photo_verification
     case physical_price
     case please_validate_this_seed
@@ -483,6 +489,8 @@ enum LocKey: String {
     case senders_email
     case sent
     case server
+    case set_phone_number
+    case set_phone_number_hint
     case set_placeholder
     case set_up_2fa
     case settings

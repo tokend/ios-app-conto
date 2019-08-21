@@ -7,7 +7,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 source 'git@github.com:tokend/ios-specs.git'
 
 def main_app_pods
-  pod 'TokenDSDK', '3.1.0-rc.19'
+  pod 'TokenDSDK', '3.1.0-rc.23'
   pod 'TokenDSDK/AlamofireNetwork'
   pod 'TokenDSDK/JSONAPI'
   pod 'TokenDSDK/AlamofireNetworkJSONAPI'
@@ -22,7 +22,7 @@ def main_app_pods
   pod 'ActionsList', 		  '~> 0.9.1'
   
   pod 'PullToRefresher', '~> 3.0'
-  pod 'Nuke'
+  pod 'Nuke'           , '7.6.3'
   pod 'MarkdownView', 	 '1.5.0'
   pod 'AFDateHelper', '~> 4.2.2'
   
