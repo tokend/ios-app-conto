@@ -9,6 +9,7 @@ extension PhoneNumber {
             sceneModel: Model.SceneModel,
             numberValidator: PhoneNumberValidatorProtocol,
             numberSubmitWorker: PhoneNumberSubmitWorkerProtocol,
+            numberIdentifier: PhoneNumberIdentifierProtocol,
             routing: Routing?,
             onDeinit: DeinitCompletion = nil
             ) {
@@ -19,7 +20,8 @@ extension PhoneNumber {
                 presenter: presenter,
                 sceneModel: sceneModel,
                 numberValidator: numberValidator,
-                numberSubmitWorker: numberSubmitWorker
+                numberSubmitWorker: numberSubmitWorker,
+                numberIdentifier: numberIdentifier
                 )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)
             viewController.inject(

@@ -83,6 +83,7 @@
 "card_number_colon" = "Card number:";
 "card_owner" = "Card owner";
 "change_password" = "Change Password";
+"change_phone" = "Change Phone number";
 "charged" = "Charged";
 "charged_from_lock" = "Charged from lock";
 "chart" = "Chart";
@@ -265,6 +266,7 @@
 "insufficient_funds" = "Insufficient funds";
 "invalid_account_id" = "Invalid account id";
 "invalid_account_id_or_email" = "Invalid account id or email";
+"invalid_code" = "Invalid code";
 "invalid_company_account_id" = "Invalid company account id";
 "invalid_redeem_asset" = "Invalid redeem asset";
 "invalid_redeem_request" = "Invalid redeem request";

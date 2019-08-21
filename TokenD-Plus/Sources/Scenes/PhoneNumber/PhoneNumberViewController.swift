@@ -6,6 +6,7 @@ public protocol PhoneNumberDisplayLogic: class {
  
     func displaySetNumberAction(viewModel: Event.SetNumberAction.ViewModel)
     func displaySceneUpdated(viewModel: Event.SceneUpdated.ViewModel)
+    func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel)
 }
 
 extension PhoneNumber {
@@ -72,6 +73,11 @@ extension PhoneNumber {
             self.setupLayout()
             
             self.observeKeyboard()
+            
+            let request = Event.ViewDidLoad.Request()
+            self.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                businessLogic.onViewDidLoad(request: request)
+            })
         }
         
         public override func viewDidAppear(_ animated: Bool) {
@@ -249,6 +255,20 @@ extension PhoneNumber.ViewController: PhoneNumber.DisplayLogic {
         } else {
             self.submitButton.isEnabled = false
             self.submitButton.backgroundColor = Theme.Colors.disabledActionButtonColor
+        }
+        if viewModel.number != self.numberField.text {
+            self.numberField.text = viewModel.number
+        }
+    }
+    
+    public func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel) {
+        switch viewModel {
+            
+        case .loaded:
+            self.routing?.hideLoading()
+
+        case .loading:
+            self.routing?.showLoading()
         }
     }
 }

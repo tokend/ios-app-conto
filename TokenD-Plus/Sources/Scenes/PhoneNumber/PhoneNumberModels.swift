@@ -17,6 +17,7 @@ public enum PhoneNumber {
 extension PhoneNumber.Model {
     
     public struct SceneModel {
+        let accountId: String
         var apiPhoneNumber: String?
         var number: String?
     }
@@ -24,6 +25,7 @@ extension PhoneNumber.Model {
     public enum Error: Swift.Error {
         case emptyNumber
         case numberIsNotValid
+        case invalidCode
     }
     
     public struct ButtonAppearence {
@@ -36,6 +38,11 @@ extension PhoneNumber.Model {
         case sameWithIdentity
         case updated
     }
+    
+    public enum LoadingStatus {
+        case loaded
+        case loading
+    }
 }
 
 // MARK: - Events
@@ -46,16 +53,16 @@ extension PhoneNumber.Event {
     // MARK: -
     
     public enum ViewDidLoad {
-        public enum Request {}
+        public struct Request {}
     }
     
     public enum SceneUpdated {
         public struct Response {
             let number: String?
             let state: Model.NumberState
-            let isUpdated: Bool
         }
         public struct ViewModel {
+            let number: String?
             let buttonAppearence: Model.ButtonAppearence
         }
     }
@@ -82,5 +89,10 @@ extension PhoneNumber.Event {
             case loading
             case loaded
         }
+    }
+    
+    public enum LoadingStatusDidChange {
+        public typealias Response = Model.LoadingStatus
+        public typealias ViewModel = Model.LoadingStatus
     }
 }

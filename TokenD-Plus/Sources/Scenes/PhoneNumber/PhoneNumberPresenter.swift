@@ -4,6 +4,8 @@ public protocol PhoneNumberPresentationLogic {
     typealias Event = PhoneNumber.Event
     
     func presentSetNumberAction(response: Event.SetNumberAction.Response)
+    func presentSсeneUpdated(response: Event.SceneUpdated.Response)
+    func presentLoadingStatusDidChange(response: Event.LoadingStatusDidChange.Response)
 }
 
 extension PhoneNumber {
@@ -49,4 +51,41 @@ extension PhoneNumber.Presenter: PhoneNumber.PresentationLogic {
             displayLogic.displaySetNumberAction(viewModel: viewModel)
         }
     }
-}
+    
+    public func presentSсeneUpdated(response: Event.SceneUpdated.Response) {
+        let buttonTitle: String
+        let buttonIsEnable: Bool
+        switch response.state {
+            
+        case .isNotSet:
+            buttonTitle = Localized(.set_phone_number)
+            buttonIsEnable = response.number?.isEmpty ?? false
+            
+        case .sameWithIdentity:
+            buttonTitle = Localized(.change_phone)
+            buttonIsEnable = false
+            
+        case .updated:
+            buttonTitle = Localized(.change_phone)
+            buttonIsEnable = true
+        }
+        let buttonAppearence = Model.ButtonAppearence(
+            isEnabled: buttonIsEnable,
+            title: buttonTitle
+        )
+        let viewModel = Event.SceneUpdated.ViewModel(
+            number: response.number,
+            buttonAppearence: buttonAppearence
+        )
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displaySceneUpdated(viewModel: viewModel)
+        }
+    }
+    
+    public func presentLoadingStatusDidChange(response: Event.LoadingStatusDidChange.Response) {
+        let viewModel = response
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displayLoadingStatusDidChange(viewModel: viewModel)
+        }
+    }
+} 

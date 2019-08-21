@@ -86,6 +86,7 @@ enum LocKey: String {
     case card_number_colon
     case card_owner
     case change_password
+    case change_phone
     case charged
     case charged_from_lock
     case chart
@@ -268,6 +269,7 @@ enum LocKey: String {
     case insufficient_funds
     case invalid_account_id
     case invalid_account_id_or_email
+    case invalid_code
     case invalid_company_account_id
     case invalid_redeem_asset
     case invalid_redeem_request

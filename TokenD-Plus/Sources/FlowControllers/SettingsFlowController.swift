@@ -416,11 +416,18 @@ class SettingsFlowController: BaseSignedInFlowController {
     
     private func setupPhoneNumberScene() -> UIViewController {
         let vc = PhoneNumber.ViewController()
-        let sceneModel = PhoneNumber.Model.SceneModel()
+        let sceneModel = PhoneNumber.Model.SceneModel(
+            accountId: self.userDataProvider.walletData.accountId,
+            apiPhoneNumber: nil,
+            number: nil
+        )
         let numberValidator = PhoneNumber.PhoneNumberValidator()
         let numberSubmitWorker = PhoneNumber.PhoneNumberSubmitWorker(
             generalApi: self.flowControllerStack.api.generalApi,
             accountId: self.userDataProvider.walletData.accountId
+        )
+        let numberIdentifier = PhoneNumber.PhoneNumberIdentifier(
+            generalApi: self.flowControllerStack.api.generalApi
         )
         let routing = PhoneNumber.Routing(
             showError: { [weak self] (message) in
@@ -449,6 +456,7 @@ class SettingsFlowController: BaseSignedInFlowController {
             sceneModel: sceneModel,
             numberValidator: numberValidator,
             numberSubmitWorker: numberSubmitWorker,
+            numberIdentifier: numberIdentifier,
             routing: routing
         )
         return vc

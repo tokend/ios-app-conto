@@ -1,8 +1,11 @@
 import Foundation
+import RxSwift
+import RxCocoa
 
 public protocol PhoneNumberBusinessLogic {
     typealias Event = PhoneNumber.Event
     
+    func onViewDidLoad(request: Event.ViewDidLoad.Request)
     func onNumberEdited(request: Event.NumberEdited.Request)
     func onSetNumberAction(request: Event.SetNumberAction.Request)
 }
@@ -24,6 +27,9 @@ extension PhoneNumber {
         private let numberSubmitWorker: PhoneNumberSubmitWorkerProtocol
         private let numberIdentifier: PhoneNumberIdentifierProtocol
         
+        private let loadingStatus: BehaviorRelay<Model.LoadingStatus> = BehaviorRelay(value: .loaded)
+        private let disposeBag: DisposeBag = DisposeBag()
+        
         // MARK: -
         
         public init(
@@ -40,13 +46,77 @@ extension PhoneNumber {
             self.numberSubmitWorker = numberSubmitWorker
             self.numberIdentifier = numberIdentifier
         }
+        
+        // MARK: - Private
+        
+        private func handleNumberIdentity(identity: PhoneNumberIdentifyResult) {
+            let state: Model.NumberState
+            switch identity {
+                
+            case .didNotSet:
+                state = .isNotSet
+                
+            case .number(let number):
+                
+                self.sceneModel.apiPhoneNumber = String(number.dropFirst())
+                self.sceneModel.number = self.sceneModel.apiPhoneNumber
+                state = .sameWithIdentity
+                
+            case .error(let error):
+                state = .sameWithIdentity
+                break
+            }
+            let response = Event.SceneUpdated.Response(
+                number: self.sceneModel.number,
+                state: state
+            )
+            self.presenter.presentSсeneUpdated(response: response)
+        }
+        
+        private func updateScene() {
+            guard let number = self.sceneModel.number else {
+                return
+            }
+            let state: Model.NumberState
+            if let apiNumber = self.sceneModel.apiPhoneNumber {
+                state = number == apiNumber ? .sameWithIdentity : .updated
+            } else {
+                state = .isNotSet
+            }
+            
+            let response = Event.SceneUpdated.Response(
+                number: self.sceneModel.number,
+                state: state
+            )
+            self.presenter.presentSсeneUpdated(response: response)
+        }
+        
+        private func observeLoadingStatus() {
+            self.loadingStatus
+                .subscribe(onNext: { [weak self] (status) in
+                    self?.presenter.presentLoadingStatusDidChange(response: status)
+                })
+                .disposed(by: self.disposeBag)
+        }
     }
 }
 
 extension PhoneNumber.Interactor: PhoneNumber.BusinessLogic {
     
+    public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
+        self.observeLoadingStatus()
+        self.loadingStatus.accept(.loading)
+        self.numberIdentifier.identifyBy(
+            accountId: self.sceneModel.accountId,
+            completion: { [weak self] (identity) in
+                self?.loadingStatus.accept(.loaded)
+                self?.handleNumberIdentity(identity: identity)
+        })
+    }
+    
     public func onNumberEdited(request: Event.NumberEdited.Request) {
         self.sceneModel.number = request.number
+        self.updateScene()
     }
     
     public func onSetNumberAction(request: Event.SetNumberAction.Request) {

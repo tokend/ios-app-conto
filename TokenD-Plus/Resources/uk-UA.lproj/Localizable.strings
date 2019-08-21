@@ -83,6 +83,7 @@
 "card_number_colon" = "Номер карты:";
 "card_owner" = "Владелец карты";
 "change_password" = "Змінити пароль";
+"change_phone" = "Змінити номер телефону";
 "charged" = "Списано";
 "charged_from_lock" = "Списано";
 "chart" = "Графік";
@@ -265,6 +266,7 @@
 "insufficient_funds" = "Недостатньо коштів";
 "invalid_account_id" = "Невірний ID акаунта";
 "invalid_account_id_or_email" = "Невірний ID акаунта або email";
+"invalid_code" = "Невірний код";
 "invalid_company_account_id" = "Невірний ID компанії";
 "invalid_redeem_asset" = "Невірний актив погашення";
 "invalid_redeem_request" = "Невірний запит погашения";
