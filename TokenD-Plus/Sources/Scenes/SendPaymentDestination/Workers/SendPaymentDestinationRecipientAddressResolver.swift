@@ -5,7 +5,7 @@ import TokenDSDK
 public enum RecipientAddressResolverResult {
     public enum AddressResolveError: Swift.Error, LocalizedError {
         case invalidEmail
-        case other(ApiErrors)
+        case other(Swift.Error)
         
         public var errorDescription: String? {
             switch self {
@@ -24,6 +24,7 @@ public enum RecipientAddressResolverResult {
     }
     
     case succeeded(recipientAddress: String)
+    case userIsNotExist(masterAccountId: String)
     case failed(AddressResolveError)
 }
 
@@ -42,11 +43,17 @@ extension SendPaymentDestination {
         // MARK: - Private properties
         
         private let generalApi: GeneralApi
+        private let networkFecther: NetworkInfoFetcher
         
         // MARK: -
         
-        public init(generalApi: GeneralApi) {
+        public init(
+            generalApi: GeneralApi,
+            networkFecther: NetworkInfoFetcher
+            ) {
+            
             self.generalApi = generalApi
+            self.networkFecther = networkFecther
         }
         
         // MARK: - RecipientAddressResolver
@@ -74,7 +81,7 @@ extension SendPaymentDestination {
                         guard let identity = response.first(where: { (identity) -> Bool in
                             return identity.attributes.email == email
                         }) else {
-                            completion(.failed(.invalidEmail))
+                            self.fetchMasterAccountId(completion: completion)
                             return
                         }
                         
@@ -87,6 +94,21 @@ extension SendPaymentDestination {
         
         private func validateEmail(_ email: String) -> Bool {
             return true
+        }
+        
+        private func fetchMasterAccountId(
+            completion: @escaping (_ result: RecipientAddressResolverResult) -> Void
+            ) {
+            self.networkFecther.fetchNetworkInfo { (result) in
+                switch result {
+                    
+                case .failed(let error):
+                    completion(.failed(.other(error)))
+                    
+                case .succeeded(let networkInfo):
+                    completion(.userIsNotExist(masterAccountId: networkInfo.masterAccountId))
+                }
+            }
         }
     }
 }

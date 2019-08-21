@@ -585,6 +585,7 @@
 "up_to_replace_amount" = "amount";
 "use_this_qr_code_to_redeem" = "Используйте этот QR код чтобы погасить $(amount)";
 "use_this_qr_code_to_redeem_replace_amount" = "amount";
+"user_with_such_an_email_is_not_found" = "Пользователь с таким email-ом не найден. Убедитесь, что вы ввели правильный адрес электронной почты. Если адрес правильный, пользователь получит платеж, как только зарегистрирует аккаунт.";
 "userdataprovider_should_always_provide_walletdata" = "UserDataProvider should always provide walletData";
 "verification" = "Верификация";
 "verification_link_is_sent" = "Ссылка для верификации отправлена на ваш email";
@@ -598,6 +599,7 @@
 "votes_replace_votes_count" = "votes_count";
 "votes_replace_percent" = "percent";
 "wallet" = "Кошелёк";
+"warning" = "Внимание";
 "we_do_not_know_your_seed" = "Мы не знаем ваш секретный ключ";
 "week" = "Неделя";
 "with_one_for" = "C 1 $(asset) за";

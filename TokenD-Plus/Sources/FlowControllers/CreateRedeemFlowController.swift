@@ -96,7 +96,9 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
         
         let sceneModel = SendPaymentAmount.Model.SceneModel(
             feeType: .payment,
-            operation: .handleRedeem
+            operation: .handleRedeem,
+            senderEmail: "",
+            isAccountExist: false
         )
         
         let viewConfig = SendPaymentAmount.Model.ViewConfig.redeemViewConfig(business: self.companyName)

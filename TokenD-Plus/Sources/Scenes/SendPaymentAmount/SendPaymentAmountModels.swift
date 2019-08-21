@@ -22,16 +22,22 @@ public extension SendPaymentAmount.Model {
         public var amount: Decimal = 0.0
         public let operation: Operation
         public let feeType: FeeType
+        public let senderEmail: String
+        public let isAccountExist: Bool
         
         init(
             feeType: FeeType,
             operation: Operation,
-            recipientAddress: String? = nil
+            recipientAddress: String? = nil,
+            senderEmail: String,
+            isAccountExist: Bool
             ) {
             
             self.operation = operation
             self.recipientAddress = recipientAddress
             self.feeType = feeType
+            self.senderEmail = senderEmail
+            self.isAccountExist = isAccountExist
         }
     }
     

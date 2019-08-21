@@ -100,7 +100,9 @@ class WithdrawFlowController: BaseSignedInFlowController {
         
         let sceneModel = SendPaymentAmount.Model.SceneModel(
             feeType: .withdraw,
-            operation: .handleWithdraw
+            operation: .handleWithdraw,
+            senderEmail: "",
+            isAccountExist: false
         )
         
         let viewConfig = SendPaymentAmount.Model.ViewConfig.withdrawViewConfig()
@@ -193,7 +195,7 @@ class WithdrawFlowController: BaseSignedInFlowController {
                 self?.navigationController?.hideProgress()
             }, showError: { [weak self] (message) in
                 self?.navigationController?.showErrorMessage(message, completion: nil)
-        })
+            }, showDialog: { _, _, _, _ in })
         
         let recipientAddressResolver = SendPaymentDestination.WithdrawRecipientAddressResolver(
             generalApi: self.flowControllerStack.api.generalApi

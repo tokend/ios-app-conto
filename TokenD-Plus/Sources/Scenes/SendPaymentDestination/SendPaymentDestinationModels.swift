@@ -54,6 +54,7 @@ public extension SendPaymentDestination.Model {
     struct SendDestinationModel {
         public let recipientNickname: String
         public let recipientAccountId: String
+        public let isAccountExists: Bool
     }
     
     struct SendWithdrawModel {
@@ -158,11 +159,13 @@ extension SendPaymentDestination.Event {
     public struct PaymentAction {
        public enum Response {
             case destination(Model.SendDestinationModel)
+            case nonExistedDestination(Model.SendDestinationModel)
             case error(DestinationError)
         }
         
         public enum ViewModel {
             case destination(Model.SendDestinationModel)
+            case nonExistedDestination(Model.SendDestinationModel)
             case error(String)
         }
     }
