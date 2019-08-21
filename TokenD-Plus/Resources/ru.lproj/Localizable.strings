@@ -15,9 +15,12 @@
 "aml_alert_request" = "AML alert request";
 "amount" = "Сумма";
 "amount_colon" = "Сумма:";
+"amount_is_too_big" = "Сумма слишком большая";
 "amount_newline" = "Сумма\n$(base)";
 "amount_newline_replace_base" = "base";
 "amount_sent" = "Платёж отправлен";
+"amount_to_pay" = "$(amount) к оплате";
+"amount_to_pay_replace_amount" = "amount";
 "annual_return" = "Ежегодный возрат";
 "app_name" = "TokenD Real Estate";
 "application_is_already_configured_for_this_environment" = "Приложение уже настроена на $(environment) окружение";
@@ -27,6 +30,7 @@
 "are_you_sure_you_want_to_sign_out" = "Вы уверены что хотите Выйти и очистить все данные с устройства?";
 "ask_base" = "Аск ($(base))";
 "ask_base_replace_base" = "base";
+"ask_is_not_found" = "Аск не найден";
 "asset" = "Актив";
 "asset_balance_is_not_found" = "Баланс актива не найден";
 "asset_colon" = "Актив: $(code)";
@@ -42,6 +46,8 @@
 "available_amount" = "$(amount) доступно";
 "available_amount_replace_amount" = "amount";
 "available_colon" = "Доступно:";
+"available_for_buy" = "Доступно для покупки:";
+"available_lowercase" = "доступно";
 "available_assets_for_this_operations" = "Подходящие активы для этих операций не найдены";
 "available_date" = "Доступно: $(formatted)";
 "available_date_replace_formatted" = "formatted";
@@ -65,6 +71,9 @@
 "bought" = "Куплено";
 "bounds" = "границы";
 "buy" = "Покупка";
+"buy_action" = "КУПИТЬ";
+"buy_asset" = "Покупка $(asset)";
+"buy_asset_replace_asset" = "asset";
 "can_be_traded_on_secondary_market" = " - Может торговаться на вторичном рынке";
 "can_be_transfered" = " - Может пересылаться";
 "can_be_withdrawn" = " - Может выводиться";
@@ -107,6 +116,7 @@
 "copy" = "Копировать";
 "corrupted_keychain_data" = "Целостность данных из хранилища повреждена";
 "create_balance" = "Создать баланс";
+"create_bid_request_is_not_found" = "Запрос на создание бида не найден";
 "create_order" = "Создать ордер";
 "create_redeem" = "Погашение";
 "credit_card" = "Кредитная карта";
@@ -177,6 +187,7 @@
 "expires_at" = "\n\nИстекает: $(date)";
 "expires_at_replace_date" = "date";
 "export_seed" = "Экспортировать секретный ключ";
+"external_details_are_not_found" = "Детали платежа не найдены";
 "failed" = "Неудача";
 "failed_to_build_kdf_params" = "Не удалось собрать kdf параметры";
 "failed_to_build_transaction" = "Не удалось собрать транзакцию";
@@ -192,8 +203,10 @@
 "failed_to_decode_quote_balance_id" = "Не удалось раскодировать ID баланса базового актива";
 "failed_to_encode_destination_address" = "Не удалось закодировать адрес";
 "failed_to_encode_destination_data" = "Не удалось закодировать данные";
+"failed_to_fetch_ask_id" = "Не удалось получить идентификатор аска";
 "failed_to_fetch_company" = "Не удалось получить компанию";
 "failed_to_fetch_companies" = "Не удалось получить компании";
+"failed_to_fetch_create_bid_request" = "Не удалось получить запрос на создание бида";
 "failed_to_fetch_fees" = "Не удалось получить комиссию для получателя";
 "failed_to_fetch_network_info" = "Не удалось получить информацию о сети";
 "failed_to_fetch_sender_account" = "Не удалось получить аккаунт отправителя";
@@ -215,6 +228,7 @@
 "failed_to_save_key_and_wallet_data" = "Не удалось сохранить ключ и данные кошельке";
 "failed_to_save_network_info" = "Не удалось сохранить данные о сети";
 "failed_to_scan_server_info" = "Failed to scan server info";
+"failed_to_send_transaction" = "Не удалось отправить транзакцию";
 "failed_to_sign_transaction" = "Не удалось подписать транзакцию";
 "fatal_error" = "Fatal Error";
 "fee" = "Комиссия";
@@ -333,6 +347,7 @@
 "no_movements" = "Операции не найдены";
 "no_open_sales" = "Кампании не найдены";
 "no_opportunities" = "Возможности не найдены";
+"no_orders" = "Ордеров нет";
 "no_payments" = "Платежи не найдены";
 "no_pending_orders" = "Нет активных ордеров";
 "no_personal_address" = "Личный $(assets_asset) адрес не найден";
@@ -377,6 +392,9 @@
 "payment" = "Платеж";
 "payment_amount" = "Сумма платежа";
 "payment_destination" = "Отправка";
+"payment_method" = "Способ оплаты";
+"payment_rejected" = "Платеж отклонен";
+"payment_url_is_invalid" = "Ссылка на платеж недействительна";
 "payout" = "Выплата";
 "pending" = "Активный";
 "pending_investment" = "Активные инвестиции";
@@ -454,6 +472,8 @@
 "selfie_with_verification_code" = "Сделайте селфи с кодом верификации";
 "sell" = "Продажа";
 "send" = "Отправка";
+"send_to_this_address" = "Отправьте $(amount) на этот адрес";
+"send_to_this_address_replace_amount" = "amount";
 "send_transaction_error" = "Ошибка при отправке транзакции: $(message)";
 "send_transaction_error_replace_message" = "message";
 "sender" = "Отправитель";
@@ -505,6 +525,8 @@
 "there_is_no_any_poll_for_chosen_company" = "Опросов нет";
 "there_is_no_progress_history_yet" = "Нет истории прогресса";
 "this_feature_will_be" = "This feature will be available once you have any asset that can be deposited";
+"this_orders_allow_you_to_buy" = "Это предложения прямой покупки $(asset) за внешние активы без необходимости депозита";
+"this_orders_allow_you_to_buy_replace_asset" = "asset";
 "this_seed_is_the_only_way" = "This seed is the only way to recover your account in case of password loss. You will not be able to get it later.";
 "to" = "На $(address)";
 "to_account" = "На аккаунт";
@@ -570,6 +592,8 @@
 "wallet" = "Кошелёк";
 "we_do_not_know_your_seed" = "Мы не знаем ваш секретный ключ";
 "week" = "Неделя";
+"with_one_for" = "C 1 $(asset) за";
+"with_one_for_replace_asset" = "asset";
 "withdraw" = "Вывод";
 "withdraw_amount" = "Сумма вывода";
 "withdraw_destination" = "Адрес";

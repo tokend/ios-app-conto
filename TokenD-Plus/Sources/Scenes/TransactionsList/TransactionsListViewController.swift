@@ -434,6 +434,9 @@ extension TransactionsListScene.ViewController: TransactionsListScene.DisplayLog
                     case .acceptRedeem:
                         self?.routing?.showAcceptRedeem()
                         
+                    case .buy(let assetCode, let assetName):
+                        self?.routing?.showBuy(assetCode, assetName)
+                        
                     case .createRedeem(let balanceId):
                         self?.routing?.showCreateReedeem(balanceId)
                         
@@ -449,7 +452,7 @@ extension TransactionsListScene.ViewController: TransactionsListScene.DisplayLog
                 localizedTitle: item.title,
                 image: item.image,
                 action: action,
-                isEnabled: true
+                isEnabled: item.enabled
             )
             actionModel.appearance.backgroundColor = Theme.Colors.clear
             actionModel.appearance.tint = Theme.Colors.accentColor

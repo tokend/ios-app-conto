@@ -621,8 +621,8 @@ extension TransactionDetails {
                  .opCreateIssuanceRequestDetails,
                  .opCreateAMLAlertRequestDetails,
                  .opCreateWithdrawRequestDetails,
-                 .opPayoutDetails,
-                 .opCreateAtomicSwapAskRequestDetails:
+                 .opCreateAtomicSwapAskRequestDetails,
+                 .opPayoutDetails:
                 
                 break
             }
@@ -664,8 +664,8 @@ extension TransactionDetails {
             case .`self`,
                  .opCreateAMLAlertRequestDetails,
                  .opCreateWithdrawRequestDetails,
-                 .opPayoutDetails,
-                 .opCreateAtomicSwapAskRequestDetails:
+                 .opCreateAtomicSwapAskRequestDetails,
+                 .opPayoutDetails:
                 
                 break
             }

@@ -234,6 +234,7 @@ class TradeFlowController: BaseSignedInFlowController {
             },
             showSendPayment: { _ in },
             showReceive: { },
+            showBuy: { _ in },
             showShadow: { [weak self] in
                 self?.navigationController.showShadow()
             }, hideShadow: { [weak self] in

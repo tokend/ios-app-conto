@@ -71,7 +71,10 @@ class WalletDetailsFlowController: BaseSignedInFlowController {
             },
             showReceive: { [weak self] in
                 self?.showReceiveScene(navigationController: navigationController)
-            }, showShadow: { [weak self] in
+            }, showBuy: { [weak self] (asset) in
+                
+            },
+               showShadow: { [weak self] in
                 self?.navigationController.showShadow()
             }, hideShadow: { [weak self] in
                 self?.navigationController.hideShadow()

@@ -11,8 +11,9 @@ public enum SendPaymentAmount {
 // MARK: - Models
 
 public extension SendPaymentAmount.Model {
+    typealias Ask = AtomicSwap.Model.Ask
     
-   class SceneModel {
+    class SceneModel {
         public var selectedBalance: BalanceDetails?
         public var senderFee: FeeModel?
         public var recipientAddress: String?
@@ -21,7 +22,7 @@ public extension SendPaymentAmount.Model {
         public var amount: Decimal = 0.0
         public let operation: Operation
         public let feeType: FeeType
-    
+        
         init(
             feeType: FeeType,
             operation: Operation,
@@ -38,6 +39,8 @@ public extension SendPaymentAmount.Model {
         let recipientAppearence: RecipientAppearence
         let descriptionIsHidden: Bool
         let actionButtonTitle: NSAttributedString
+        let pickerIsAvailable: Bool
+        let balanceTitle: String
     }
     
     struct SceneViewModel {
@@ -91,6 +94,11 @@ public extension SendPaymentAmount.Model {
         let assetName: String
     }
     
+    struct AskModel {
+        let ask: Ask
+        let amount: Decimal
+    }
+    
     struct ShowRedeemViewModel {
         let redeemRequest: String
         let amount: String
@@ -100,6 +108,7 @@ public extension SendPaymentAmount.Model {
         case handleSend
         case handleWithdraw
         case handleRedeem
+        case handleAtomicSwap(Ask)
     }
     
     enum FeeType {
@@ -254,6 +263,18 @@ extension SendPaymentAmount.Event {
         }
     }
     
+    struct AtomicSwapBuyAction {
+        enum Response {
+            case failed(AtomicSwapError)
+            case succeeded(Model.AskModel)
+        }
+        
+        enum ViewModel {
+            case failed(errorMessage: String)
+            case succeeded(Model.AskModel)
+        }
+    }
+    
     struct FeeOverviewAvailability {
         struct Response {
             let available: Bool
@@ -298,7 +319,7 @@ extension SendPaymentAmount.Event.PaymentAction {
                         .failed_to_load_fees_replace_message: message
                     ]
                 )
-
+                
             case .failedToResolveRecipientAddress(let error):
                 let message = error.localizedDescription
                 return Localized(
@@ -307,7 +328,7 @@ extension SendPaymentAmount.Event.PaymentAction {
                         .failed_to_resolve_recipient_address_replace_message: message
                     ]
                 )
-
+                
             case .insufficientFunds:
                 return Localized(.insufficient_funds)
             case .noBalance:
@@ -400,6 +421,27 @@ extension SendPaymentAmount.Event.RedeemAction {
     }
 }
 
+extension SendPaymentAmount.Event.AtomicSwapBuyAction {
+    
+    public enum AtomicSwapError: Error, LocalizedError {
+        case emptyAmount
+        case bidMoreThanAsk
+        
+        // MARK: - LocalizedError
+        
+        public var errorDescription: String? {
+            switch self {
+                
+            case .emptyAmount:
+                return Localized(.empty_amount)
+                
+            case .bidMoreThanAsk:
+                return Localized(.amount_is_too_big)
+            }
+        }
+    }
+}
+
 
 // MARK: -
 
@@ -433,7 +475,9 @@ extension SendPaymentAmount.Model.ViewConfig {
         return SendPaymentAmount.Model.ViewConfig(
             recipientAppearence: .text(recipeintText),
             descriptionIsHidden: false,
-            actionButtonTitle: actionButtonTitle
+            actionButtonTitle: actionButtonTitle,
+            pickerIsAvailable: true,
+            balanceTitle: Localized(.balance_colon)
         )
     }
     
@@ -449,7 +493,9 @@ extension SendPaymentAmount.Model.ViewConfig {
         return SendPaymentAmount.Model.ViewConfig(
             recipientAppearence: .hidden,
             descriptionIsHidden: true,
-            actionButtonTitle: actionButtonTitle
+            actionButtonTitle: actionButtonTitle,
+            pickerIsAvailable: true,
+            balanceTitle: Localized(.balance_colon)
         )
     }
     
@@ -470,7 +516,27 @@ extension SendPaymentAmount.Model.ViewConfig {
         return SendPaymentAmount.Model.ViewConfig(
             recipientAppearence: .text(businessText),
             descriptionIsHidden: true,
-            actionButtonTitle: actionButtonTitle
+            actionButtonTitle: actionButtonTitle,
+            pickerIsAvailable: true,
+            balanceTitle: Localized(.balance_colon)
+        )
+    }
+    
+    static func atomicSwapViewConfig() -> SendPaymentAmount.Model.ViewConfig {
+        let actionButtonTitle = NSAttributedString(
+            string: Localized(.continue_capitalized),
+            attributes: [
+                .font: Theme.Fonts.actionButtonFont,
+                .foregroundColor: Theme.Colors.textOnAccentColor
+            ]
+        )
+        
+        return SendPaymentAmount.Model.ViewConfig(
+            recipientAppearence: .hidden,
+            descriptionIsHidden: true,
+            actionButtonTitle: actionButtonTitle,
+            pickerIsAvailable: false,
+            balanceTitle: Localized(.available_for_buy)
         )
     }
 }

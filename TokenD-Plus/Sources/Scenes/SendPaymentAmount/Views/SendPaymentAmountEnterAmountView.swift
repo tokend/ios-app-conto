@@ -62,6 +62,10 @@ extension SendPaymentAmount {
                 : Theme.Colors.textOnContentBackgroundColor
         }
         
+        func disablePicker() {
+            self.assetButton.setImage(nil, for: .normal)
+        }
+        
         // MARK: - Private
         
         private func setupView() {
@@ -73,6 +77,7 @@ extension SendPaymentAmount {
         }
         
         private func setupAmountField() {
+            self.amountField.keyboardType = .decimalPad
             self.amountField.textAlignment = .right
             self.amountField.font = Theme.Fonts.hugeTitleFont
             self.amountField.attributedPlaceholder = NSAttributedString(
@@ -81,7 +86,6 @@ extension SendPaymentAmount {
                     .font: Theme.Fonts.hugeTitleFont,
                     .foregroundColor: Theme.Colors.textFieldForegroundColor
                 ])
-            self.amountField.keyboardType = .decimalPad
             self.amountField.onShouldReturn = { fieldView in
                 _ = fieldView.resignFirstResponder()
                 return false
