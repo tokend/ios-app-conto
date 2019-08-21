@@ -164,6 +164,34 @@ class BaseSignedInFlowController: BaseFlowController {
         })
     }
     
+    func runAtomicSwapFlow(
+        navigationController: NavigationControllerProtocol,
+        assetCode: String,
+        assetName: String,
+        onCompleted: @escaping () -> Void
+        ) {
+        
+        let flow = AtomicSwapFlowController(
+            navigationController: navigationController,
+            assetСode: assetCode,
+            assetName: assetName,
+            onCompleted: onCompleted,
+            appController: self.appController,
+            flowControllerStack: self.flowControllerStack,
+            reposController: self.reposController,
+            managersController: self.managersController,
+            userDataProvider: self.userDataProvider,
+            keychainDataProvider: self.keychainDataProvider,
+            rootNavigation: self.rootNavigation
+        )
+        self.currentFlowController = flow
+        flow.run(
+            showRootScreen: { (vc) in
+                navigationController.pushViewController(vc, animated: true)
+        })
+    }
+    
+    
     func showDepositScreen(
         navigationController: NavigationControllerProtocol,
         assetId: String?
@@ -228,7 +256,8 @@ class BaseSignedInFlowController: BaseFlowController {
         let viewConfig = ReceiveAddress.Model.ViewConfig(
             copiedLocalizationKey: Localized(.copied),
             tableViewTopInset: 24,
-            headerAppearence: .hidden
+            headerAppearence: .hidden,
+            qrValueAppearence: .shown
         )
         
         let addressManager = ReceiveAddress.ReceiveAddressManager(

@@ -19,7 +19,8 @@ extension ReceiveAddress {
         public var viewConfig: ReceiveAddress.Model.ViewConfig = ReceiveAddress.Model.ViewConfig(
             copiedLocalizationKey: "",
             tableViewTopInset: 0,
-            headerAppearence: .hidden
+            headerAppearence: .hidden,
+            qrValueAppearence: .shown
             ) {
             didSet {
                 guard self.isViewLoaded else {
@@ -84,6 +85,7 @@ extension ReceiveAddress {
             super.viewDidLoad()
             
             self.setupTableView()
+            self.setupQrValueLabel()
             self.addShareNavigationItem()
             self.setupLayout()
             self.updateWithViewConfig()
@@ -130,6 +132,17 @@ extension ReceiveAddress {
         
         private func setupTableView() {
             self.tableView.backgroundColor = UIColor.white
+        }
+        
+        private func setupQrValueLabel() {
+            switch self.viewConfig.qrValueAppearence {
+                
+            case .hidden:
+                self.qrContentView.hideQrValueLabel()
+                
+            case .shown:
+                self.qrContentView.showQrValueLabel()
+            }
         }
         
         private func setupLayout() {

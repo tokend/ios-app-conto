@@ -153,7 +153,8 @@ class SettingsFlowController: BaseSignedInFlowController {
         let viewConfig = ReceiveAddress.Model.ViewConfig(
             copiedLocalizationKey: Localized(.copied),
             tableViewTopInset: 24,
-            headerAppearence: .hidden
+            headerAppearence: .hidden,
+            qrValueAppearence: .shown
         )
         
         let sceneModel = ReceiveAddress.Model.SceneModel()

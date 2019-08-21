@@ -29,11 +29,17 @@ extension ReceiveAddress.Model {
         let copiedLocalizationKey: String
         let tableViewTopInset: CGFloat
         let headerAppearence: HeaderAppearence
+        let qrValueAppearence: QrValueAppearence
     }
     
     enum HeaderAppearence {
         case hidden
         case withText(String)
+    }
+    
+    enum QrValueAppearence {
+        case hidden
+        case shown
     }
     
     enum ValueAction {

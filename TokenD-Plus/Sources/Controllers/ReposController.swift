@@ -36,6 +36,7 @@ class ReposController {
     
     private var transactionsHistoryRepos: [String: TransactionsHistoryRepo] = [:]
     private var pollsRepos: [String: PollsRepo] = [:]
+    private var atomicSwapAsksRepos: [String: AtomicSwapAsksRepo] = [:]
     private let reposControllerStack: ReposControllerStack
     private let userDataProvider: UserDataProviderProtocol
     private let keychainDataProvider: KeychainDataProviderProtocol
@@ -97,6 +98,21 @@ class ReposController {
             
             self.pollsRepos[ownerAccountId] = pollRepo
             return pollRepo
+        }
+    }
+    
+    public func getAtomicSwapAsksRepo(for baseAsset: String) -> AtomicSwapAsksRepo {
+        if let asksRepo = self.atomicSwapAsksRepos.first(where: { (key, _) -> Bool in
+            return key == baseAsset
+        }) {
+            return asksRepo.value
+        } else {
+            let asksRepo = AtomicSwapAsksRepo(
+                atomicSwapApi: self.reposControllerStack.apiV3.atomicSwapApi,
+                baseAsset: baseAsset
+            )
+            self.atomicSwapAsksRepos[baseAsset] = asksRepo
+            return asksRepo
         }
     }
     

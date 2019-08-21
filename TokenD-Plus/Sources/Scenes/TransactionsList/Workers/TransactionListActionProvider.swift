@@ -11,7 +11,21 @@ extension TransactionsListScene {
     struct ActionModel {
         let title: String
         let image: UIImage
+        let enabled: Bool
         let type: Model.ActionType
+        
+        init(
+            title: String,
+            image: UIImage,
+            enabled: Bool = true,
+            type: Model.ActionType
+            ) {
+            
+            self.title = title
+            self.image = image
+            self.enabled = enabled
+            self.type = type
+        }
     }
     
     class ActionProvider {
@@ -99,17 +113,21 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
     
     func getActions(balanceId: String) -> [TransactionsListScene.ActionModel] {
         var actions: [TransactionsListScene.ActionModel] = []
-        guard let details = self.balancesRepo.balancesDetailsValue
-            .compactMap({ (state) -> BalancesRepo.BalanceDetails? in
-                switch state {
-                case .created(let details):
-                    return details
-                    
-                case .creating:
-                    return nil
-                }
-            }).first(where: { (details) -> Bool in
-                return details.balanceId == balanceId
+        guard
+            let details = self.balancesRepo.balancesDetailsValue
+                .compactMap({ (state) -> BalancesRepo.BalanceDetails? in
+                    switch state {
+                    case .created(let details):
+                        return details
+                        
+                    case .creating:
+                        return nil
+                    }
+                }).first(where: { (details) -> Bool in
+                    return details.balanceId == balanceId
+                }),
+            let asset = self.assetsRepo.assetsValue.first(where: { (repoAsset) -> Bool in
+                return repoAsset.code == details.asset
             }) else {
                 return []
         }
@@ -132,12 +150,6 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
             actions.append(receiveAction)
         }
         
-        guard let asset = self.assetsRepo.assetsValue.first(where: { (asset) in
-            return asset.code == details.asset
-        }) else {
-            return actions
-        }
-        
         if asset.owner == self.originalAccountId {
             let acceptRedeemAction = TransactionsListScene.ActionModel(
                 title: Localized(.accept_redemption),
@@ -155,6 +167,19 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
                 actions.append(createRedeemAction)
             }
         }
+        let buyIsEnabled: Bool =
+            Int32(asset.policy) & AssetPolicy.canBeBaseInAtomicSwap.rawValue
+                == AssetPolicy.canBeBaseInAtomicSwap.rawValue
+        let buyAction = TransactionsListScene.ActionModel(
+            title: Localized(.buy),
+            image: Assets.buy.image,
+            enabled: buyIsEnabled,
+            type: .buy(
+                assetCode: asset.code,
+                assetName: asset.defaultDetails?.name ?? asset.code
+            )
+        )
+        actions.append(buyAction)
         
         return actions
     }

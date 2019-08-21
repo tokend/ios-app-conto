@@ -100,9 +100,6 @@ public class BalancesRepo {
     private func observeTransactionActions() {
         self.transactionSender
             .observeTransactionActions()
-            .do(onNext: { [weak self] in
-                self?.reloadBalancesDetails()
-            })
             .subscribe()
             .disposed(by: self.disposeBag)
     }

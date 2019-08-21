@@ -53,3 +53,34 @@ extension UITableView {
         }
     }
 }
+
+extension UICollectionView {
+    
+    public func dequeueReusableCell(
+        with model: CellViewAnyModel,
+        for indexPath: IndexPath
+        ) -> UICollectionViewCell {
+        
+        let identifier = type(of: model).cellAnyType.defaultNibName()
+        let cell = self.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+        
+        model.setupAny(cell: cell)
+        
+        return cell
+    }
+    
+    public func register(nibModels: [CellViewAnyModel.Type]) {
+        for model in nibModels {
+            let identifier = model.cellAnyType.defaultNibName()
+            let cellNib = model.cellAnyType.defaultNib()
+            self.register(cellNib, forCellWithReuseIdentifier: identifier)
+        }
+    }
+    
+    public func register(classes: [CellViewAnyModel.Type]) {
+        for model in classes {
+            let identifier = model.cellAnyType.defaultNibName()
+            self.register(model.cellAnyType, forCellWithReuseIdentifier: identifier)
+        }
+    }
+}

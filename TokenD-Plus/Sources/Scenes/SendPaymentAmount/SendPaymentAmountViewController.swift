@@ -13,6 +13,7 @@ protocol SendPaymentDisplayLogic: class {
     func displayPaymentAction(viewModel: Event.PaymentAction.ViewModel)
     func displayWithdrawAction(viewModel: Event.WithdrawAction.ViewModel)
     func displayRedeemAction(viewModel: Event.RedeemAction.ViewModel)
+    func displayAtomicSwapBuyAction(viewModel: Event.AtomicSwapBuyAction.ViewModel)
     func displayFeeOverviewAvailability(viewModel: Event.FeeOverviewAvailability.ViewModel)
     func displayFeeOverviewAction(viewModel: Event.FeeOverviewAction.ViewModel)
 }
@@ -186,7 +187,7 @@ extension SendPaymentAmount {
         }
         
         private func setupBalanceView() {
-            
+            self.balanceView.title = self.viewConfig?.balanceTitle
         }
         
         private func setupEnterAmountView() {
@@ -202,6 +203,11 @@ extension SendPaymentAmount {
                 self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
                     businessLogic.onSelectBalance(request: request)
                 })
+            }
+            if let viewConfig = self.viewConfig,
+                !viewConfig.pickerIsAvailable {
+                
+                self.enterAmountView.disablePicker()
             }
         }
         
@@ -396,6 +402,17 @@ extension SendPaymentAmount.ViewController: SendPaymentAmount.DisplayLogic {
         case .succeeded(let redeemModel):
             self.routing?.onHideProgress()
             self.routing?.onShowRedeem?(redeemModel)
+        }
+    }
+    
+    func displayAtomicSwapBuyAction(viewModel: Event.AtomicSwapBuyAction.ViewModel) {
+        switch viewModel {
+            
+        case .failed(let errorMessage):
+            self.routing?.onShowError(errorMessage)
+            
+        case .succeeded(let ask):
+            self.routing?.onAtomicSwapBuyAction?(ask)
         }
     }
     

@@ -82,6 +82,14 @@ extension ReceiveAddress {
             }
         }
         
+        public func hideQrValueLabel() {
+            self.valueLabel.isHidden = true
+        }
+        
+        public func showQrValueLabel() {
+            self.valueLabel.isHidden = false
+        }
+        
         // MARK: - Private
         
         private func disableGestureRecognizer() {
