@@ -316,7 +316,10 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     
     private func showFiatPaymentScene(url: URL) {
         let navController = NavigationController()
-        let vc = self.setupFiatPaymentScene(url: url)
+        let vc = self.setupFiatPaymentScene(
+            url: url,
+            navController: navController
+        )
         vc.navigationItem.title = ""
         
         let doneButton = UIBarButtonItem(
@@ -368,15 +371,19 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         )
     }
     
-    private func setupFiatPaymentScene(url: URL) -> UIViewController {
+    private func setupFiatPaymentScene(
+        url: URL,
+        navController: NavigationControllerProtocol
+        ) -> UIViewController {
+        
         let vc = FiatPayment.ViewController()
         let sceneModel = FiatPayment.Model.SceneModel(url: url)
         let routing = FiatPayment.Routing(
-            showLoading: { [weak self] in
-                self?.navigationController.showProgress()
+            showLoading: {
+                navController.showProgress()
             },
-            hideLoading: { [weak self] in
-                self?.navigationController.hideProgress()
+            hideLoading: {
+                navController.hideProgress()
         })
         
         FiatPayment.Configurator.configure(
