@@ -248,7 +248,7 @@ extension BalancesList {
                 self.buyButton.snp.makeConstraints { (make) in
                     make.trailing.equalToSuperview().inset(self.sideInset)
                     make.bottom.equalToSuperview().inset(self.topInset / 2)
-                    make.width.equalTo(45.0)
+                    make.width.equalTo(70.0)
                     make.height.equalTo(30.0)
                 }
                 

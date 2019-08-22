@@ -60,6 +60,15 @@ extension BalancesList {
                 .disposed(by: self.disposeBag)
         }
         
+        private func observeRepoErrors() {
+            self.asksRepo
+                .observeErrorStatus()
+                .subscribe(onNext: { (error) in
+                    self.errors.accept(error)
+                })
+                .disposed(by: self.disposeBag)
+        }
+        
         private func handleAskResources(resources: [AtomicSwapAskResource]) {
             let asks = resources.compactMap { (resource) -> Model.AskModel? in
                 guard
@@ -124,6 +133,7 @@ extension BalancesList.AsksFetcher: BalancesList.AsksFetcherProtocol {
     }
     
     public func observeErrors() -> Observable<Error> {
+        self.observeRepoErrors()
         return self.errors.asObservable()
     }
     

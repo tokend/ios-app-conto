@@ -306,7 +306,7 @@ extension BalancesList.Interactor: BalancesList.BusinessLogic {
             self.asksFetcher.observeAsks()
             )
             .filter({ (balances, asks) -> Bool in
-               return !self.balancesFetcher.isLoading && !self.asksFetcher.isLoading
+                return !self.balancesFetcher.isLoading && !self.asksFetcher.isLoading
             })
             .subscribe(onNext: { [weak self] (balances, asks) in
                 self?.sceneModel.asks = asks
@@ -315,7 +315,7 @@ extension BalancesList.Interactor: BalancesList.BusinessLogic {
                 self?.updateSelectedTab()
                 self?.updateSections()
             })
-        .disposed(by: self.disposeBag)
+            .disposed(by: self.disposeBag)
         
         Observable.combineLatest(
             self.asksFetcher.observeLoadingStatus(),
@@ -326,6 +326,35 @@ extension BalancesList.Interactor: BalancesList.BusinessLogic {
                 self?.presenter.presentLoadingStatusDidChange(response: status)
             })
             .disposed(by: self.disposeBag)
+        
+        self.asksFetcher
+            .observeErrors()
+            .subscribe(onNext: { [weak self] (error) in
+                if self?.sceneModel.selectedTabIdentifier == .atomicSwapAsks {
+                    let response = Event.SectionsUpdated.Response.init(
+                        type: .error(error),
+                        selectedTabIdentifier: .atomicSwapAsks,
+                        selectedTabIndex: nil
+                    )
+                    self?.presenter.presentSectionsUpdated(response: response)
+                }
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.balancesFetcher
+            .observeErrors()
+            .subscribe(onNext: { [weak self] (error) in
+                if self?.sceneModel.selectedTabIdentifier == .balances {
+                    let response = Event.SectionsUpdated.Response.init(
+                        type: .error(error),
+                        selectedTabIdentifier: .balances,
+                        selectedTabIndex: nil
+                    )
+                    self?.presenter.presentSectionsUpdated(response: response)
+                }
+            })
+            .disposed(by: self.disposeBag)
+        
         
         self.updateActions()
         
