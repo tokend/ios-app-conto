@@ -30,10 +30,6 @@ extension BalancesList {
         private let actionProvider: ActionsProviderProtocol
         
         private let displayEntriesCount: Int = 3
-        private let sceduler: ConcurrentDispatchQueueScheduler = ConcurrentDispatchQueueScheduler(
-            queue: DispatchQueue(label: "debounce")
-        )
-        private let updateRelay: PublishRelay<()> = PublishRelay()
         private let disposeBag: DisposeBag = DisposeBag()
         
         // MARK: -
@@ -54,15 +50,6 @@ extension BalancesList {
         }
         
         // MARK: - Private
-        
-        private func observeUpdateRelay() {
-            self.updateRelay
-                .debounce(0.5, scheduler: self.sceduler)
-                .subscribe(onNext: { [weak self] (_) in
-                    self?.updateSections()
-                })
-                .disposed(by: self.disposeBag)
-        }
         
         private func updateSections() {
             let type: Model.SceneType
@@ -145,7 +132,7 @@ extension BalancesList {
         
         private func updateSelectedTab() {
             let totalConvertedAmpount = self.sceneModel.balances.reduce(0, { (sum, balance) -> Decimal in
-                return sum + balance.convertedBalance
+                return sum + balance.balance
             })
             if totalConvertedAmpount == 0 {
                 self.sceneModel.selectedTabIdentifier = .atomicSwapAsks
@@ -314,36 +301,29 @@ extension BalancesList {
 extension BalancesList.Interactor: BalancesList.BusinessLogic {
     
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
-        self.observeUpdateRelay()
-        self.asksFetcher
-            .observeAsks()
-            .subscribe(onNext: { [weak self] (asks) in
+        Observable.combineLatest(
+            self.balancesFetcher.observeBalances(),
+            self.asksFetcher.observeAsks()
+            )
+            .filter({ (balances, asks) -> Bool in
+               return !self.balancesFetcher.isLoading && !self.asksFetcher.isLoading
+            })
+            .subscribe(onNext: { [weak self] (balances, asks) in
                 self?.sceneModel.asks = asks
-                self?.updateRelay.accept(())
-            })
-            .disposed(by: self.disposeBag)
-        
-        self.asksFetcher
-            .observeLoadingStatus()
-            .subscribe(onNext: { [weak self] (status) in
-                self?.presenter.presentLoadingStatusDidChange(response: status)
-            })
-            .disposed(by: self.disposeBag)
-        
-        self.balancesFetcher
-            .observeLoadingStatus()
-            .subscribe(onNext: { [weak self] (status) in
-                self?.presenter.presentLoadingStatusDidChange(response: status)
-            })
-            .disposed(by: self.disposeBag)
-        
-        self.balancesFetcher
-            .observeBalances()
-            .subscribe(onNext: { [weak self] (balances) in
                 self?.sceneModel.balances = balances
                 self?.updateChartBalances()
                 self?.updateSelectedTab()
-                self?.updateRelay.accept(())
+                self?.updateSections()
+            })
+        .disposed(by: self.disposeBag)
+        
+        Observable.combineLatest(
+            self.asksFetcher.observeLoadingStatus(),
+            self.balancesFetcher.observeLoadingStatus()
+            )
+            .subscribe(onNext: { [weak self] (first, second) in
+                let status: Model.LoadingStatus = (first == .loaded && second == .loaded) ? .loaded : .loading
+                self?.presenter.presentLoadingStatusDidChange(response: status)
             })
             .disposed(by: self.disposeBag)
         
