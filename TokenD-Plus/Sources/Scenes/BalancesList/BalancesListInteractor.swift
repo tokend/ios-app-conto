@@ -1,5 +1,6 @@
 import Foundation
 import RxSwift
+import RxCocoa
 
 public protocol BalancesListBusinessLogic {
     typealias Event = BalancesList.Event
@@ -32,6 +33,7 @@ extension BalancesList {
         private let sceduler: ConcurrentDispatchQueueScheduler = ConcurrentDispatchQueueScheduler(
             queue: DispatchQueue(label: "debounce")
         )
+        private let updateRelay: PublishRelay<()> = PublishRelay()
         private let disposeBag: DisposeBag = DisposeBag()
         
         // MARK: -
@@ -52,6 +54,15 @@ extension BalancesList {
         }
         
         // MARK: - Private
+        
+        private func observeUpdateRelay() {
+            self.updateRelay
+                .debounce(0.5, scheduler: self.sceduler)
+                .subscribe(onNext: { [weak self] (_) in
+                    self?.updateSections()
+                })
+                .disposed(by: self.disposeBag)
+        }
         
         private func updateSections() {
             let type: Model.SceneType
@@ -138,6 +149,8 @@ extension BalancesList {
             })
             if totalConvertedAmpount == 0 {
                 self.sceneModel.selectedTabIdentifier = .atomicSwapAsks
+            } else {
+                self.sceneModel.selectedTabIdentifier = .balances
             }
         }
         
@@ -301,12 +314,19 @@ extension BalancesList {
 extension BalancesList.Interactor: BalancesList.BusinessLogic {
     
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
+        self.observeUpdateRelay()
         self.asksFetcher
             .observeAsks()
-            .debounce(0.5, scheduler: self.sceduler)
             .subscribe(onNext: { [weak self] (asks) in
                 self?.sceneModel.asks = asks
-                self?.updateSections()
+                self?.updateRelay.accept(())
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.asksFetcher
+            .observeLoadingStatus()
+            .subscribe(onNext: { [weak self] (status) in
+                self?.presenter.presentLoadingStatusDidChange(response: status)
             })
             .disposed(by: self.disposeBag)
         
@@ -319,12 +339,11 @@ extension BalancesList.Interactor: BalancesList.BusinessLogic {
         
         self.balancesFetcher
             .observeBalances()
-            .debounce(0.5, scheduler: self.sceduler)
             .subscribe(onNext: { [weak self] (balances) in
                 self?.sceneModel.balances = balances
                 self?.updateChartBalances()
                 self?.updateSelectedTab()
-                self?.updateSections()
+                self?.updateRelay.accept(())
             })
             .disposed(by: self.disposeBag)
         

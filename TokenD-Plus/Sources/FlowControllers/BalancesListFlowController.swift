@@ -82,7 +82,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
         let vc = BalancesList.ViewController()
         let tabs: [BalancesList.Model.Tab] = [
             BalancesList.Model.Tab(
-                name: Localized(.balances),
+                name: Localized(.wallet),
                 identifier: .balances
             ),
             BalancesList.Model.Tab(

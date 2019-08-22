@@ -236,7 +236,6 @@ extension BalancesList {
             )
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
-            self.tableView.refreshControl = self.refreshControl
             self.tableView
                 .rx
                 .contentOffset
@@ -278,6 +277,8 @@ extension BalancesList {
             self.view.addSubview(self.tableView)
             self.view.addSubview(self.fab)
             self.view.addSubview(self.emptyView)
+            
+            self.tableView.addSubview(self.refreshControl)
             
             self.horizontalPicker.snp.makeConstraints { (make) in
                 make.leading.trailing.top.equalToSuperview()
@@ -425,7 +426,7 @@ extension BalancesList.ViewController: UITableViewDelegate {
         } else if model as? BalancesList.BalanceCell.ViewModel != nil {
             return 90.0
         } else if model as? BalancesList.AskCell.ViewModel != nil {
-            return 117.0
+            return 115.0
         } else {
             return 44.0
         }
@@ -439,7 +440,7 @@ extension BalancesList.ViewController: UITableViewDelegate {
         } else if model as? BalancesList.BalanceCell.ViewModel != nil {
             return 90.0
         } else if model as? BalancesList.AskCell.ViewModel != nil {
-            return 117.0
+            return 115.0
         } else {
             return 44.0
         }

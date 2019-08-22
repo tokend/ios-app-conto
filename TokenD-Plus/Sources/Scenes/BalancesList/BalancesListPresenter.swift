@@ -118,7 +118,7 @@ extension BalancesList {
                             ]
                         )
                         
-                        let abbreviationBackgroundColor = TokenColoringProvider.shared.coloringForCode(balanceModel.code)
+                        let abbreviationBackgroundColor = TokenColoringProvider.shared.coloringForCode(balanceModel.assetName)
                         let abbreviation = balanceModel.assetName.first
                         let abbreviationText = abbreviation?.description ?? ""
                         
