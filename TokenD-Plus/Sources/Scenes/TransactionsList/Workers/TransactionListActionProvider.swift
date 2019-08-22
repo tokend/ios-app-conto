@@ -167,19 +167,6 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
                 actions.append(createRedeemAction)
             }
         }
-        let buyIsEnabled: Bool =
-            Int32(asset.policy) & AssetPolicy.canBeBaseInAtomicSwap.rawValue
-                == AssetPolicy.canBeBaseInAtomicSwap.rawValue
-        let buyAction = TransactionsListScene.ActionModel(
-            title: Localized(.buy),
-            image: Assets.buy.image,
-            enabled: buyIsEnabled,
-            type: .buy(
-                assetCode: asset.code,
-                assetName: asset.defaultDetails?.name ?? asset.code
-            )
-        )
-        actions.append(buyAction)
         
         return actions
     }

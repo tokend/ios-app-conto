@@ -132,7 +132,6 @@ class SalesFlowController: BaseSignedInFlowController {
             showCreateReedeem: { _ in },
             showAcceptRedeem: { },
             showReceive: { },
-            showBuy: { _, _ in },
             showShadow: { [weak self] in
                 self?.navigationController.showShadow()
             }, hideShadow: { [weak self] in

@@ -105,6 +105,10 @@ public extension SendPaymentAmount.Model {
         let amount: Decimal
     }
     
+    struct AtomicSwapPaymentUrl {
+        let url: URL
+    }
+    
     struct ShowRedeemViewModel {
         let redeemRequest: String
         let amount: String
@@ -269,15 +273,19 @@ extension SendPaymentAmount.Event {
         }
     }
     
-    struct AtomicSwapBuyAction {
-        enum Response {
+    public struct AtomicSwapBuyAction {
+        public enum Response {
+            case loading
+            case loaded
             case failed(AtomicSwapError)
-            case succeeded(Model.AskModel)
+            case succeeded(Model.AtomicSwapPaymentUrl)
         }
         
-        enum ViewModel {
+        public enum ViewModel {
+            case loading
+            case loaded
             case failed(errorMessage: String)
-            case succeeded(Model.AskModel)
+            case succeeded(Model.AtomicSwapPaymentUrl)
         }
     }
     
@@ -432,6 +440,17 @@ extension SendPaymentAmount.Event.AtomicSwapBuyAction {
     public enum AtomicSwapError: Error, LocalizedError {
         case emptyAmount
         case bidMoreThanAsk
+        case failedToFecthAskId
+        case askIsNotFound
+        case failedToDecodeSourceAccountId
+        case failedToBuildTransaction
+        case failedToSendTransaction
+        case failedToFetchCreateBidRequest
+        case createBidRequestIsNotFound
+        case externalDetailsAreNotFound
+        case paymentIsRejected
+        case paymentUrlIsInvalid
+        case other(Error)
         
         // MARK: - LocalizedError
         
@@ -443,6 +462,39 @@ extension SendPaymentAmount.Event.AtomicSwapBuyAction {
                 
             case .bidMoreThanAsk:
                 return Localized(.amount_is_too_big)
+                
+            case .askIsNotFound:
+                return Localized(.ask_is_not_found)
+                
+            case .createBidRequestIsNotFound:
+                return Localized(.create_bid_request_is_not_found)
+                
+            case .externalDetailsAreNotFound:
+                return Localized(.external_details_are_not_found)
+                
+            case .failedToBuildTransaction:
+                return Localized(.failed_to_build_transaction)
+                
+            case .failedToDecodeSourceAccountId:
+                return Localized(.failed_to_decode_account_id)
+                
+            case .failedToFecthAskId:
+                return Localized(.failed_to_fetch_ask_id)
+                
+            case .failedToFetchCreateBidRequest:
+                return Localized(.failed_to_fetch_create_bid_request)
+                
+            case .failedToSendTransaction:
+                return Localized(.failed_to_send_transaction)
+                
+            case .other(let error):
+                return error.localizedDescription
+                
+            case .paymentIsRejected:
+                return Localized(.payment_rejected)
+                
+            case .paymentUrlIsInvalid:
+                return Localized(.payment_url_is_invalid)
             }
         }
     }

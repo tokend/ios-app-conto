@@ -101,17 +101,25 @@ class ReposController {
         }
     }
     
-    public func getAtomicSwapAsksRepo(for baseAsset: String) -> AtomicSwapAsksRepo {
-        if let asksRepo = self.atomicSwapAsksRepos.first(where: { (key, _) -> Bool in
-            return key == baseAsset
+    public func getAtomicSwapAsksRepo(filter: AtomicSwapAsksRepo.AsksFilter) -> AtomicSwapAsksRepo {
+        let key: String
+        
+        switch filter {
+        case .baseAsset(let asset):
+            key = asset
+        case .company(let owner):
+            key = owner
+        }
+        if let asksRepo = self.atomicSwapAsksRepos.first(where: { (mapKey, _) -> Bool in
+            return mapKey == key
         }) {
             return asksRepo.value
         } else {
             let asksRepo = AtomicSwapAsksRepo(
                 atomicSwapApi: self.reposControllerStack.apiV3.atomicSwapApi,
-                baseAsset: baseAsset
+                asksFilter: filter
             )
-            self.atomicSwapAsksRepos[baseAsset] = asksRepo
+            self.atomicSwapAsksRepos[key] = asksRepo
             return asksRepo
         }
     }

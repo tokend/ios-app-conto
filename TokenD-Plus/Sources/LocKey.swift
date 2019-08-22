@@ -494,6 +494,7 @@ enum LocKey: String {
     case set_placeholder
     case set_up_2fa
     case settings
+    case shop
     case show_key
     case side_title
     case sign_in

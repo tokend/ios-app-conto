@@ -1,5 +1,6 @@
 import Foundation
 import RxSwift
+import RxCocoa
 
 public protocol BalancesListBusinessLogic {
     typealias Event = BalancesList.Event
@@ -7,6 +8,8 @@ public protocol BalancesListBusinessLogic {
     func onViewDidLoad(request: Event.ViewDidLoad.Request)
     func onPieChartBalanceSelected(request: Event.PieChartBalanceSelected.Request)
     func onRefreshInitiated(request: Event.RefreshInitiated.Request)
+    func onBuyAsk(request: Event.BuyAsk.Request)
+    func onSelectedTab(request: Event.SelectedTab.Request)
 }
 
 extension BalancesList {
@@ -23,9 +26,14 @@ extension BalancesList {
         private let presenter: PresentationLogic
         private var sceneModel: Model.SceneModel
         private let balancesFetcher: BalancesFetcherProtocol
+        private let asksFetcher: AsksFetcherProtocol
         private let actionProvider: ActionsProviderProtocol
         
         private let displayEntriesCount: Int = 3
+        private let sceduler: ConcurrentDispatchQueueScheduler = ConcurrentDispatchQueueScheduler(
+            queue: DispatchQueue(label: "debounce")
+        )
+        private let updateRelay: PublishRelay<()> = PublishRelay()
         private let disposeBag: DisposeBag = DisposeBag()
         
         // MARK: -
@@ -34,34 +42,70 @@ extension BalancesList {
             presenter: PresentationLogic,
             sceneModel: Model.SceneModel,
             balancesFetcher: BalancesFetcherProtocol,
+            asksFetcher: AsksFetcherProtocol,
             actionProvider: ActionsProviderProtocol
             ) {
             
             self.presenter = presenter
             self.sceneModel = sceneModel
             self.balancesFetcher = balancesFetcher
+            self.asksFetcher = asksFetcher
             self.actionProvider = actionProvider
         }
         
         // MARK: - Private
         
+        private func observeUpdateRelay() {
+            self.updateRelay
+                .debounce(0.5, scheduler: self.sceduler)
+                .subscribe(onNext: { [weak self] (_) in
+                    self?.updateSections()
+                })
+                .disposed(by: self.disposeBag)
+        }
+        
         private func updateSections() {
-            guard !self.sceneModel.balances.isEmpty else {
-                self.presenter.presentSectionsUpdated(response: .empty)
-                return
+            let type: Model.SceneType
+            switch self.sceneModel.selectedTabIdentifier {
+                
+            case .atomicSwapAsks:
+                if self.sceneModel.asks.isEmpty {
+                    type = .empty
+                } else {
+                    let shopSections = self.getShopsSections()
+                    type = .sections(sections: shopSections)
+                }
+                
+            case .balances:
+                if self.sceneModel.balances.isEmpty {
+                    type = .empty
+                } else {
+                    let balancesSection = self.getBalancesSections()
+                    type = .sections(sections: balancesSection)
+                }
             }
-            let headerSection = self.getHeaderSectionModel()
+            let index = self.sceneModel.tabs.firstIndex { (tab) -> Bool in
+                return self.sceneModel.selectedTabIdentifier == tab.identifier
+            }
+            let response = Event.SectionsUpdated.Response(
+                type: type,
+                selectedTabIdentifier: self.sceneModel.selectedTabIdentifier,
+                selectedTabIndex: index
+            )
+            
+            self.presenter.presentSectionsUpdated(response: response)
+        }
+        
+        private func getBalancesSections() -> [Model.SectionModel] {
+            // let headerSection = self.getHeaderSectionModel()
             // let chartSection = self.getChartSectionModel()
             let balancesSection = self.getBalancesSectionModel()
-            
-            let response = Event.SectionsUpdated.Response.sections(
-                sections: [
-                    headerSection,
-                    // chartSection,
-                    balancesSection
-                ]
-            )
-            self.presenter.presentSectionsUpdated(response: response)
+            return [balancesSection]
+        }
+        
+        private func getShopsSections() -> [Model.SectionModel] {
+            let shopSection = self.getAsksSectionModel()
+            return [shopSection]
         }
         
         private func updateActions() {
@@ -95,6 +139,27 @@ extension BalancesList {
             var cells: [Model.CellModel] = []
             self.sceneModel.balances.forEach { (balance) in
                 cells.append(.balance(balance))
+            }
+            return Model.SectionModel(cells: cells)
+        }
+        
+        private func updateSelectedTab() {
+            let totalConvertedAmpount = self.sceneModel.balances.reduce(0, { (sum, balance) -> Decimal in
+                return sum + balance.convertedBalance
+            })
+            if totalConvertedAmpount == 0 {
+                self.sceneModel.selectedTabIdentifier = .atomicSwapAsks
+            } else {
+                self.sceneModel.selectedTabIdentifier = .balances
+            }
+        }
+        
+        // MARK: - Asks
+        
+        private func getAsksSectionModel() -> Model.SectionModel {
+            var cells: [Model.CellModel] = []
+            self.sceneModel.asks.forEach { (ask) in
+                cells.append(.ask(ask))
             }
             return Model.SectionModel(cells: cells)
         }
@@ -249,6 +314,22 @@ extension BalancesList {
 extension BalancesList.Interactor: BalancesList.BusinessLogic {
     
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
+        self.observeUpdateRelay()
+        self.asksFetcher
+            .observeAsks()
+            .subscribe(onNext: { [weak self] (asks) in
+                self?.sceneModel.asks = asks
+                self?.updateRelay.accept(())
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.asksFetcher
+            .observeLoadingStatus()
+            .subscribe(onNext: { [weak self] (status) in
+                self?.presenter.presentLoadingStatusDidChange(response: status)
+            })
+            .disposed(by: self.disposeBag)
+        
         self.balancesFetcher
             .observeLoadingStatus()
             .subscribe(onNext: { [weak self] (status) in
@@ -261,11 +342,16 @@ extension BalancesList.Interactor: BalancesList.BusinessLogic {
             .subscribe(onNext: { [weak self] (balances) in
                 self?.sceneModel.balances = balances
                 self?.updateChartBalances()
-                self?.updateSections()
+                self?.updateSelectedTab()
+                self?.updateRelay.accept(())
             })
             .disposed(by: self.disposeBag)
         
         self.updateActions()
+        
+        let tabs = self.sceneModel.tabs
+        let response = Event.ViewDidLoad.Response(tabs: tabs)
+        self.presenter.presentViewDidLoad(response: response)
     }
     
     public func onPieChartBalanceSelected(request: Event.PieChartBalanceSelected.Request) {
@@ -280,6 +366,28 @@ extension BalancesList.Interactor: BalancesList.BusinessLogic {
     }
     
     public func onRefreshInitiated(request: Event.RefreshInitiated.Request) {
-        self.balancesFetcher.reloadBalances()
+        switch self.sceneModel.selectedTabIdentifier {
+            
+        case .atomicSwapAsks:
+            self.asksFetcher.reloadAsks()
+            
+        case .balances:
+            self.balancesFetcher.reloadBalances()
+        }
+    }
+    
+    public func onBuyAsk(request: Event.BuyAsk.Request) {
+        guard let ask = self.sceneModel.asks.first(where: { (ask) -> Bool in
+            return ask.ask.id == request.id
+        })?.ask else {
+            return
+        }
+        let response = Event.BuyAsk.Response(ask: ask)
+        self.presenter.presentBuyAsk(response: response)
+    }
+    
+    public func onSelectedTab(request: Event.SelectedTab.Request) {
+        self.sceneModel.selectedTabIdentifier = request.tabIdentifier
+        self.updateSections()
     }
 }

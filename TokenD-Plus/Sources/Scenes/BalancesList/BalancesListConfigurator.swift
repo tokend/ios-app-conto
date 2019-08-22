@@ -8,6 +8,7 @@ extension BalancesList {
             viewController: ViewController,
             sceneModel: Model.SceneModel,
             balancesFetcher: BalancesFetcherProtocol,
+            asksFetcher: AsksFetcherProtocol,
             actionProvider: ActionsProviderProtocol,
             amountFormatter: AmountFormatterProtocol,
             percentFormatter: PercentFormatterProtocol,
@@ -27,6 +28,7 @@ extension BalancesList {
                 presenter: presenter,
                 sceneModel: sceneModel,
                 balancesFetcher: balancesFetcher,
+                asksFetcher: asksFetcher,
                 actionProvider: actionProvider
             )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)
