@@ -441,7 +441,13 @@ extension TransactionDetails {
                     let toAccountId = toAccount.id {
                     
                     if self.counterpartyEmail == nil {
-                        self.fetchEmail(accountId: toAccountId)
+                        if let subjectData = payment.subject.data(using: .utf8),
+                           let subject = try? JSONDecoder().decode(Model.NonExistedRecipientSubject.self, from: subjectData) {
+                            
+                            self.counterpartyEmail = subject.email
+                        } else {
+                            self.fetchEmail(accountId: toAccountId)
+                        }
                     }
                     
                     emailCell = TransactionDetails.Model.CellModel(
@@ -454,7 +460,13 @@ extension TransactionDetails {
                     let fromAccountId = fromAccount.id {
                     
                     if self.counterpartyEmail == nil {
-                        self.fetchEmail(accountId: fromAccountId)
+                        if let subjectData = payment.subject.data(using: .utf8),
+                            let subject = try? JSONDecoder().decode(Model.NonExistedRecipientSubject.self, from: subjectData) {
+                            
+                            self.fetchEmail(accountId: subject.sender)
+                        } else {
+                            self.fetchEmail(accountId: fromAccountId)
+                        }
                     }
                     
                     emailCell = TransactionDetails.Model.CellModel(
@@ -653,189 +665,207 @@ extension TransactionDetails {
                 }
                 
                 if !resource.subject.isEmpty {
-                    let subjectCell = TransactionDetails.Model.CellModel(
-                        title: resource.subject,
-                        hint: Localized(.description),
-                        identifier: .reference
-                    )
-                    detailsCells.append(subjectCell)
+                    if let subjectData = resource.subject.data(using: .utf8),
+                        let nonExistedRecipientSubject = try? JSONDecoder().decode(
+                            Model.NonExistedRecipientSubject.self,
+                            from: subjectData
+                        ) {
+                        
+                        if let description =  nonExistedRecipientSubject.subject,
+                            !description.isEmpty {
+                            
+                            let subjectCell = TransactionDetails.Model.CellModel(
+                                title: description,
+                                hint: Localized(.description),
+                                identifier: .reference
+                            )
+                            detailsCells.append(subjectCell)
+                        }
+                    } else {
+                        let subjectCell = TransactionDetails.Model.CellModel(
+                            title: resource.subject,
+                            hint: Localized(.description),
+                            identifier: .reference
+                        )
+                        detailsCells.append(subjectCell)
+                    }
+                }
+                    
+                    case .`self`,
+                    .opCreateAMLAlertRequestDetails,
+                    .opCreateWithdrawRequestDetails,
+                    .opCreateAtomicSwapAskRequestDetails,
+                    .opPayoutDetails:
+                    
+                    break
                 }
                 
-            case .`self`,
-                 .opCreateAMLAlertRequestDetails,
-                 .opCreateWithdrawRequestDetails,
-                 .opCreateAtomicSwapAskRequestDetails,
-                 .opPayoutDetails:
-                
-                break
+                return detailsCells
             }
             
-            return detailsCells
-        }
-        
-        private func createManageAssetPairDetailsSection(
-            details: OpManageAssetPairDetailsResource
-            ) -> TransactionDetails.Model.SectionModel? {
-            
-            guard let baseAssetResource = details.baseAsset,
-                let baseAsset = baseAssetResource.id,
-                let quoteAssetResource = details.quoteAsset,
-                let quoteAsset = quoteAssetResource.id else {
-                    return nil
-            }
-            
-            var cells: [TransactionDetails.Model.CellModel] = []
-            
-            let code = "\(quoteAsset)/\(baseAsset)"
-            let codeCell = TransactionDetails.Model.CellModel(
-                title: code,
-                hint: Localized(.code),
-                identifier: .code
-            )
-            cells.append(codeCell)
-            
-            let physicalPriceFormatted = "\(details.physicalPrice)"
-            
-            let physicalPrice = Localized(
-                .one_equals,
-                replace: [
-                    .one_equals_replace_quote_asset: quoteAsset,
-                    .one_equals_replace_price: physicalPriceFormatted,
-                    .one_equals_replace_base_asset: baseAsset
-                ]
-            )
-            
-            let physicalPriceCell = TransactionDetails.Model.CellModel(
-                title: physicalPrice,
-                hint: Localized(.physical_price),
-                identifier: .price
-            )
-            cells.append(physicalPriceCell)
-            
-            let tradable: String
-            let restrictedByPhysical: String
-            let restrictedByCurrent: String
-            
-            if let policy = details.policies {
-                tradable = self.meetsPolicy(
-                    policy: policy.value,
-                    policyToCheck: .tradeableSecondaryMarket
-                    ) ? Localized(.can_be_traded_on_secondary_market) :
-                    Localized(.cannot_be_traded_on_secondary_market)
+            private func createManageAssetPairDetailsSection(
+                details: OpManageAssetPairDetailsResource
+                ) -> TransactionDetails.Model.SectionModel? {
                 
-                restrictedByPhysical = self.meetsPolicy(
-                    policy: policy.value,
-                    policyToCheck: .physicalPriceRestriction
-                    ) ? Localized(.is_restricted_by_physical_price) :
-                    Localized(.is_not_restricted_by_physical_price)
-                
-                restrictedByCurrent = self.meetsPolicy(
-                    policy: policy.value,
-                    policyToCheck: .currentPriceRestriction
-                    ) ? Localized(.is_restricted_by_current_price) :
-                    Localized(.is_not_restricted_by_current_price)
-            } else {
-                tradable = Localized(.is_not_restricted_by_physical_price)
-                restrictedByPhysical = Localized(.is_not_restricted_by_current_price)
-                restrictedByCurrent = Localized(.cannot_be_traded_on_secondary_market)
-            }
-            
-            let tradeMarketCell = TransactionDetails.Model.CellModel(
-                title: tradable,
-                hint: "",
-                identifier: .check
-            )
-            
-            let physicalPriceRestrictionCell = TransactionDetails.Model.CellModel(
-                title: restrictedByPhysical,
-                hint: "",
-                identifier: .physicalPrice
-            )
-            
-            let currentPriceRestrictionCell = TransactionDetails.Model.CellModel(
-                title: restrictedByCurrent,
-                hint: "",
-                identifier: .currentPrice
-            )
-            
-            cells.append(tradeMarketCell)
-            cells.append(physicalPriceRestrictionCell)
-            cells.append(currentPriceRestrictionCell)
-            
-            let section = Model.SectionModel(
-                title: Localized(.asset_pair),
-                cells: cells,
-                description: ""
-            )
-            return section
-        }
-        
-        private func meetsPolicy(policy: Int32, policyToCheck: AssetPairPolicy) -> Bool {
-            return (policy & policyToCheck.rawValue) == policyToCheck.rawValue
-        }
-        
-        private func fetchEmail(accountId: String) {
-            self.emailFetcher.fetchEmail(
-                accountId: accountId,
-                completion: { [weak self] (result) in
-                    switch result {
-                        
-                    case .failed:
-                        self?.counterpartyEmail = Localized(.undefined)
-                        self?.loadDataSections()
-                        
-                    case .succeeded(let email):
-                        self?.counterpartyEmail = email
-                        self?.loadDataSections()
-                    }
-            })
-        }
-    }
-}
-// swiftlint:enable type_body_length
-
-extension TransactionDetails.OperationSectionsProvider: TransactionDetails.SectionsProviderProtocol {
-    
-    func observeTransaction() -> Observable<[TransactionDetails.Model.SectionModel]> {
-        self.transactionsProvider
-            .observeParicipantEffects()
-            .subscribe(onNext: { [weak self] (effects) in
-                guard let effect = effects.first(where: { (effect) -> Bool in
-                    guard let effectId = effect.id,
-                        let effectIdUInt64 = UInt64(effectId),
-                        let identifier = self?.identifier else {
-                            return false
-                    }
-                    return identifier == effectIdUInt64
-                }) else {
-                    return
+                guard let baseAssetResource = details.baseAsset,
+                    let baseAsset = baseAssetResource.id,
+                    let quoteAssetResource = details.quoteAsset,
+                    let quoteAsset = quoteAssetResource.id else {
+                        return nil
                 }
-                self?.effect = effect
-                self?.loadDataSections()
-            })
-            .disposed(by: self.disposeBag)
+                
+                var cells: [TransactionDetails.Model.CellModel] = []
+                
+                let code = "\(quoteAsset)/\(baseAsset)"
+                let codeCell = TransactionDetails.Model.CellModel(
+                    title: code,
+                    hint: Localized(.code),
+                    identifier: .code
+                )
+                cells.append(codeCell)
+                
+                let physicalPriceFormatted = "\(details.physicalPrice)"
+                
+                let physicalPrice = Localized(
+                    .one_equals,
+                    replace: [
+                        .one_equals_replace_quote_asset: quoteAsset,
+                        .one_equals_replace_price: physicalPriceFormatted,
+                        .one_equals_replace_base_asset: baseAsset
+                    ]
+                )
+                
+                let physicalPriceCell = TransactionDetails.Model.CellModel(
+                    title: physicalPrice,
+                    hint: Localized(.physical_price),
+                    identifier: .price
+                )
+                cells.append(physicalPriceCell)
+                
+                let tradable: String
+                let restrictedByPhysical: String
+                let restrictedByCurrent: String
+                
+                if let policy = details.policies {
+                    tradable = self.meetsPolicy(
+                        policy: policy.value,
+                        policyToCheck: .tradeableSecondaryMarket
+                        ) ? Localized(.can_be_traded_on_secondary_market) :
+                        Localized(.cannot_be_traded_on_secondary_market)
+                    
+                    restrictedByPhysical = self.meetsPolicy(
+                        policy: policy.value,
+                        policyToCheck: .physicalPriceRestriction
+                        ) ? Localized(.is_restricted_by_physical_price) :
+                        Localized(.is_not_restricted_by_physical_price)
+                    
+                    restrictedByCurrent = self.meetsPolicy(
+                        policy: policy.value,
+                        policyToCheck: .currentPriceRestriction
+                        ) ? Localized(.is_restricted_by_current_price) :
+                        Localized(.is_not_restricted_by_current_price)
+                } else {
+                    tradable = Localized(.is_not_restricted_by_physical_price)
+                    restrictedByPhysical = Localized(.is_not_restricted_by_current_price)
+                    restrictedByCurrent = Localized(.cannot_be_traded_on_secondary_market)
+                }
+                
+                let tradeMarketCell = TransactionDetails.Model.CellModel(
+                    title: tradable,
+                    hint: "",
+                    identifier: .check
+                )
+                
+                let physicalPriceRestrictionCell = TransactionDetails.Model.CellModel(
+                    title: restrictedByPhysical,
+                    hint: "",
+                    identifier: .physicalPrice
+                )
+                
+                let currentPriceRestrictionCell = TransactionDetails.Model.CellModel(
+                    title: restrictedByCurrent,
+                    hint: "",
+                    identifier: .currentPrice
+                )
+                
+                cells.append(tradeMarketCell)
+                cells.append(physicalPriceRestrictionCell)
+                cells.append(currentPriceRestrictionCell)
+                
+                let section = Model.SectionModel(
+                    title: Localized(.asset_pair),
+                    cells: cells,
+                    description: ""
+                )
+                return section
+            }
+            
+            private func meetsPolicy(policy: Int32, policyToCheck: AssetPairPolicy) -> Bool {
+                return (policy & policyToCheck.rawValue) == policyToCheck.rawValue
+            }
+            
+            private func fetchEmail(accountId: String) {
+                self.emailFetcher.fetchEmail(
+                    accountId: accountId,
+                    completion: { [weak self] (result) in
+                        switch result {
+                            
+                        case .failed:
+                            self?.counterpartyEmail = Localized(.undefined)
+                            self?.loadDataSections()
+                            
+                        case .succeeded(let email):
+                            self?.counterpartyEmail = email
+                            self?.loadDataSections()
+                        }
+                })
+            }
+        }
+    }
+    // swiftlint:enable type_body_length
+    
+    extension TransactionDetails.OperationSectionsProvider: TransactionDetails.SectionsProviderProtocol {
         
-        return self.sectionsRelay.asObservable()
+        func observeTransaction() -> Observable<[TransactionDetails.Model.SectionModel]> {
+            self.transactionsProvider
+                .observeParicipantEffects()
+                .subscribe(onNext: { [weak self] (effects) in
+                    guard let effect = effects.first(where: { (effect) -> Bool in
+                        guard let effectId = effect.id,
+                            let effectIdUInt64 = UInt64(effectId),
+                            let identifier = self?.identifier else {
+                                return false
+                        }
+                        return identifier == effectIdUInt64
+                    }) else {
+                        return
+                    }
+                    self?.effect = effect
+                    self?.loadDataSections()
+                })
+                .disposed(by: self.disposeBag)
+            
+            return self.sectionsRelay.asObservable()
+        }
+        
+        func getActions() -> [TransactionDetailsProviderProtocol.Action] {
+            return []
+        }
+        
+        func performActionWithId(
+            _ id: String,
+            onSuccess: @escaping () -> Void,
+            onShowLoading: @escaping () -> Void,
+            onHideLoading: @escaping () -> Void,
+            onError: @escaping (String) -> Void
+            ) { }
     }
     
-    func getActions() -> [TransactionDetailsProviderProtocol.Action] {
-        return []
-    }
-    
-    func performActionWithId(
-        _ id: String,
-        onSuccess: @escaping () -> Void,
-        onShowLoading: @escaping () -> Void,
-        onHideLoading: @escaping () -> Void,
-        onError: @escaping (String) -> Void
-        ) { }
-}
-
-extension TransactionDetails.OperationSectionsProvider {
-    enum AssetPairPolicy: Int32 {
-        case tradeableSecondaryMarket = 1
-        case physicalPriceRestriction = 2
-        case currentPriceRestriction = 4
-    }
+    extension TransactionDetails.OperationSectionsProvider {
+        enum AssetPairPolicy: Int32 {
+            case tradeableSecondaryMarket = 1
+            case physicalPriceRestriction = 2
+            case currentPriceRestriction = 4
+        }
 }
 // swiftlint:enable file_length

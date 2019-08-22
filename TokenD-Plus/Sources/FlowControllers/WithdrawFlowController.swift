@@ -101,7 +101,7 @@ class WithdrawFlowController: BaseSignedInFlowController {
         let sceneModel = SendPaymentAmount.Model.SceneModel(
             feeType: .withdraw,
             operation: .handleWithdraw,
-            senderEmail: "",
+            originalAccountId: "",
             isAccountExist: false
         )
         

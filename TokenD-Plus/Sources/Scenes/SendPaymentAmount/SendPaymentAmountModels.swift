@@ -22,21 +22,21 @@ public extension SendPaymentAmount.Model {
         public var amount: Decimal = 0.0
         public let operation: Operation
         public let feeType: FeeType
-        public let senderEmail: String
+        public let originalAccountId: String
         public let isAccountExist: Bool
         
         init(
             feeType: FeeType,
             operation: Operation,
             recipientAddress: String? = nil,
-            senderEmail: String,
+            originalAccountId: String,
             isAccountExist: Bool
             ) {
             
             self.operation = operation
             self.recipientAddress = recipientAddress
             self.feeType = feeType
-            self.senderEmail = senderEmail
+            self.originalAccountId = originalAccountId
             self.isAccountExist = isAccountExist
         }
     }
@@ -134,6 +134,12 @@ public extension SendPaymentAmount.Model {
     
     struct FeeOverviewModel {
         let asset: String
+    }
+    
+    public struct NonExistedRecipientSubject: Codable {
+        let sender: String
+        let email: String
+        let subject: String?
     }
 }
 

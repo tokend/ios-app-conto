@@ -57,7 +57,7 @@ extension BalancesList {
         
         private func observeUpdateRelay() {
             self.updateRelay
-                .debounce(0.5, scheduler: self.sceduler)
+                .debounce(1, scheduler: self.sceduler)
                 .subscribe(onNext: { [weak self] (_) in
                     self?.updateSections()
                 })
@@ -323,16 +323,13 @@ extension BalancesList.Interactor: BalancesList.BusinessLogic {
             })
             .disposed(by: self.disposeBag)
         
-        self.asksFetcher
-            .observeLoadingStatus()
-            .subscribe(onNext: { [weak self] (status) in
-                self?.presenter.presentLoadingStatusDidChange(response: status)
-            })
-            .disposed(by: self.disposeBag)
-        
-        self.balancesFetcher
-            .observeLoadingStatus()
-            .subscribe(onNext: { [weak self] (status) in
+        Observable.combineLatest(
+            self.asksFetcher.observeLoadingStatus(),
+            self.balancesFetcher.observeLoadingStatus()
+            )
+            .delay(0.25, scheduler: self.sceduler)
+            .subscribe(onNext: { [weak self] (first, second) in
+                let status: Model.LoadingStatus = (first == .loaded && second == .loaded) ? .loaded : .loading
                 self?.presenter.presentLoadingStatusDidChange(response: status)
             })
             .disposed(by: self.disposeBag)

@@ -39,6 +39,7 @@ enum ConfirmationScene {
 
 extension ConfirmationScene.Model {
     typealias CellIdentifier = ConfirmationScene.CellIdentifier
+    public typealias NonExistedRecipientSubject = SendPaymentAmount.Model.NonExistedRecipientSubject
     
     class SectionModel {
         let title: String

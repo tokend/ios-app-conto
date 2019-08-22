@@ -162,6 +162,14 @@ extension SendPaymentAmount {
                 return
             }
             
+            let description: String
+            if !self.sceneModel.isAccountExist,
+                let subject = self.getNonExistedRecipientSubject() {
+                description = subject
+            } else {
+                description = self.sceneModel.description ?? ""
+            }
+            
             self.loadFees(
                 asset: balance.assetCode,
                 amount: amount,
@@ -183,7 +191,7 @@ extension SendPaymentAmount {
                             recipientAccountId: recipientAddress,
                             senderFee: senderFee,
                             recipientFee: recipientFee,
-                            description: self.sceneModel.description ?? "",
+                            description: description,
                             reference: Date().description
                         )
                         self.presenter.presentPaymentAction(response: .succeeded(sendPaymentModel))
@@ -229,6 +237,22 @@ extension SendPaymentAmount {
                         self?.presenter.presentWithdrawAction(response: .succeeded(sendWitdrawtModel))
                     }
             })
+        }
+        
+        private func getNonExistedRecipientSubject() -> String? {
+            guard let email = self.sceneModel.recipientAddress else {
+                return nil
+            }
+            let subjectModel = Model.NonExistedRecipientSubject(
+                sender: self.sceneModel.originalAccountId,
+                email: email,
+                subject: self.sceneModel.description
+            )
+            guard let subjectModelData = try? JSONEncoder().encode(subjectModel),
+                let subject = String(data: subjectModelData, encoding: .utf8) else {
+                return nil
+            }
+            return subject
         }
         
         private func handleRedeem() {

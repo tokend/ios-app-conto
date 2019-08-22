@@ -156,7 +156,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         let sceneModel = SendPaymentAmount.Model.SceneModel(
             feeType: .payment,
             operation: .handleAtomicSwap(ask),
-            senderEmail: "",
+            originalAccountId: "",
             isAccountExist: false
         )
         

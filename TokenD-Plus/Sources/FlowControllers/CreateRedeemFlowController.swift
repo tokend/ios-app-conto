@@ -97,7 +97,7 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
         let sceneModel = SendPaymentAmount.Model.SceneModel(
             feeType: .payment,
             operation: .handleRedeem,
-            senderEmail: "",
+            originalAccountId: "",
             isAccountExist: false
         )
         

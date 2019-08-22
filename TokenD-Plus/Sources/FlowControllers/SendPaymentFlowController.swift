@@ -108,7 +108,7 @@ class SendPaymentFlowController: BaseSignedInFlowController {
             feeType: .payment,
             operation: .handleSend,
             recipientAddress: destination.recipientNickname,
-            senderEmail: self.userDataProvider.userEmail,
+            originalAccountId: self.userDataProvider.walletData.accountId,
             isAccountExist: destination.isAccountExists
         )
         sceneModel.resolvedRecipientId = destination.recipientAccountId
