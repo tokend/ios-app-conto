@@ -15,14 +15,25 @@ public enum BalancesList {
 // MARK: - Models
 
 extension BalancesList.Model {
+    public typealias Ask = AtomicSwap.Model.Ask
+    public typealias QuoteAmount = AtomicSwap.Model.QuoteAmount
+    public typealias BaseAmount = AtomicSwap.Model.BaseAmount
     
     public struct SceneModel {
+        var tabs: [Tab]
         var balances: [Balance]
+        var asks: [AskModel]
         var chartBalances: [ChartBalance]
         var selectedChartBalance: ChartBalance?
+        var selectedTabIdentifier: TabIdentifier
         let imageUrl: URL?
         let convertedAsset: String
         let companyName: String
+    }
+    
+    public struct Tab {
+        let name: String
+        let identifier: TabIdentifier
     }
     
     public struct SectionModel {
@@ -36,7 +47,24 @@ extension BalancesList.Model {
     public enum CellModel {
         case header(Header)
         case balance(Balance)
+        case ask(AskModel)
         case chart(PieChartModel)
+    }
+    
+    public enum TabIdentifier {
+        case balances
+        case atomicSwapAsks
+    }
+    
+    public enum SceneType {
+        case sections(sections: [SectionModel])
+        case empty
+        case error(Error)
+    }
+    
+    public enum SceneTypeViewModel {
+        case sections(sections: [SectionViewModel])
+        case empty(String)
     }
     
     public struct ActionModel {
@@ -76,6 +104,11 @@ extension BalancesList.Model {
         let balanceId: String
         let convertedBalance: Decimal
         let cellIdentifier: CellIdentifier
+    }
+    
+    public struct AskModel {
+        let ask: Ask
+        let imageUrl: URL?
     }
     
     public struct ChartBalance: Equatable {
@@ -133,6 +166,7 @@ extension BalancesList.Model {
     }
     
     public enum CellIdentifier {
+        case asks
         case balances
         case chart
         case header
@@ -148,18 +182,24 @@ extension BalancesList.Event {
     
     public enum ViewDidLoad {
         public struct Request {}
+        public struct Response {
+            let tabs: [Model.Tab]
+        }
+        public struct ViewModel {
+            let tabs: [Model.Tab]
+        }
     }
     
     public enum SectionsUpdated {
-        public enum Response {
-            case sections(sections: [Model.SectionModel])
-            case empty
-            case error(Error)
+        public struct Response {
+            let type: Model.SceneType
+            let selectedTabIdentifier: Model.TabIdentifier
+            let selectedTabIndex: Int?
         }
         
-        public enum ViewModel {
-            case sections(sections: [Model.SectionViewModel])
-            case empty(String)
+        public struct ViewModel {
+            let type: Model.SceneTypeViewModel
+            let selectedTabIndex: Int?
         }
     }
     
@@ -203,5 +243,21 @@ extension BalancesList.Event {
     
     public enum RefreshInitiated {
         public struct Request {}
+    }
+    
+    public enum SelectedTab {
+        public struct Request {
+            let tabIdentifier: Model.TabIdentifier
+        }
+    }
+    
+    public enum BuyAsk {
+        public struct Request {
+            let id: String
+        }
+        public struct Response {
+            let ask: Model.Ask
+        }
+        public typealias ViewModel = Response
     }
 }

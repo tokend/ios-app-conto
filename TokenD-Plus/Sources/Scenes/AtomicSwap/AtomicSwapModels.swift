@@ -15,8 +15,8 @@ public enum AtomicSwap {
 // MARK: - Models
 
 extension AtomicSwap.Model {
-    typealias BaseAmount = Amount
-    typealias QuoteAmount = Amount
+    public typealias BaseAmount = Amount
+    public typealias QuoteAmount = Amount
     
     public struct SceneModel {
         let assetCode: String
@@ -28,6 +28,12 @@ extension AtomicSwap.Model {
         let id: String
         let available: BaseAmount
         let prices: [QuoteAmount]
+        
+        public func getDefaultPaymentMethod() -> QuoteAmount? {
+            return self.prices.first(where: { (price) -> Bool in
+                return price.assetName == "UAH"
+            })
+        }
     }
     
     public struct Header {

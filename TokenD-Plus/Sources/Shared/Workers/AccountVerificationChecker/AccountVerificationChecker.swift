@@ -105,6 +105,7 @@ public class AccountVerificationChecker {
 extension AccountVerificationChecker: AccountVerificationCheckerProtocol {
     
     public func checkAccount() {
+        self.showLoading()
         self.fetchExistingForm()
     }
 }

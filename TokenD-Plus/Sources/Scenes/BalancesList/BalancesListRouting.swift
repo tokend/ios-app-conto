@@ -11,5 +11,6 @@ extension BalancesList {
         let showCreateRedeem: () -> Void
         let showAcceptRedeem: () -> Void
         let showSendPayment: () -> Void
+        let showBuy: (_ model: Model.Ask) -> Void
     }
 }
