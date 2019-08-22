@@ -7,7 +7,6 @@ extension TransactionsListScene {
         let showCreateReedeem: (_ balanceId: String?) -> Void
         let showAcceptRedeem: () -> Void
         let showReceive: () -> Void
-        let showBuy: (_ assetCode: String, _ assetName: String) -> Void
         let showShadow: () -> Void
         let hideShadow: () -> Void
     }

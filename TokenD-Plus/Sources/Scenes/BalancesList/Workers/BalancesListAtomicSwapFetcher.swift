@@ -3,38 +3,39 @@ import TokenDSDK
 import RxSwift
 import RxCocoa
 
-public protocol AtomicSwapAsksFetcherProtocol {
-    func observeAsks() -> Observable<[AtomicSwap.Model.Ask]>
+public protocol BalancesListAtomicSwapAsksFetcherProtocol {
+    func observeAsks() -> Observable<[BalancesList.Model.AskModel]>
     func observeErrors() -> Observable<Swift.Error>
-    func observeLoadingStatus() -> Observable<AtomicSwap.Model.LoadingStatus>
+    func observeLoadingStatus() -> Observable<BalancesList.Model.LoadingStatus>
     func reloadAsks()
 }
 
-extension AtomicSwap {
-    public typealias AsksFetcherProtocol = AtomicSwapAsksFetcherProtocol
+extension BalancesList {
+    public typealias AsksFetcherProtocol = BalancesListAtomicSwapAsksFetcherProtocol
     
     public class AsksFetcher {
         
         // MARK: - Private properties
         
         private let asksRepo: AtomicSwapAsksRepo
-        private let assetsRepo: AssetsRepo
+        private let apiConfigurationModel: APIConfigurationModel
         
-        private let asks: BehaviorRelay<[Model.Ask]> = BehaviorRelay(value: [])
+        private let asks: BehaviorRelay<[Model.AskModel]> = BehaviorRelay(value: [])
         private let loadingStatus: BehaviorRelay<Model.LoadingStatus> = BehaviorRelay(value: .loaded)
         private let errors: PublishRelay<Swift.Error> = PublishRelay()
         
+        private let priceAsset: String = "UAH"
         private let disposeBag: DisposeBag = DisposeBag()
         
         // MARK: -
         
         init(
             asksRepo: AtomicSwapAsksRepo,
-            assetsRepo: AssetsRepo
+            apiConfigurationModel: APIConfigurationModel
             ) {
             
             self.asksRepo = asksRepo
-            self.assetsRepo = assetsRepo
+            self.apiConfigurationModel = apiConfigurationModel
         }
         
         // MARK: - Private
@@ -57,45 +58,48 @@ extension AtomicSwap {
                 .disposed(by: self.disposeBag)
         }
         
-        private func getAssetName(code: String) -> String {
-            let asset = self.assetsRepo.assetsValue.first(where: { (asset) -> Bool in
-                return asset.code == code
-            })
-            return asset?.defaultDetails?.name ?? code
-        }
-        
         private func handleAskResources(resources: [AtomicSwapAskResource]) {
-            let asks = resources.compactMap { (resource) -> Model.Ask? in
+            let asks = resources.compactMap { (resource) -> Model.AskModel? in
                 guard
                     let id = resource.id,
                     let baseAsset = resource.baseAsset?.id,
-                    let baseAssetName = resource.baseAsset?.name else {
+                    let baseAssetName = resource.baseAsset?.name,
+                    let quoteAssets = resource.quoteAssets else {
                         return nil
                 }
+                
                 let available = Model.BaseAmount(
                     assetCode: baseAsset,
                     assetName: baseAssetName,
                     value: resource.availableAmount
                 )
-                guard let quoteAssets = resource.quoteAssets else {
-                    return nil
-                }
-                
                 let prices = quoteAssets.compactMap({ (assetResource) -> Model.QuoteAmount? in
                     guard let assetCode = assetResource.id else {
-                            return nil
+                        return nil
                     }
                     return Model.QuoteAmount(
                         assetCode: assetCode,
                         assetName: assetResource.quoteAsset,
                         value: assetResource.price
                     )
+                }).filter({ (price) -> Bool in
+                    return price.assetName == self.priceAsset
                 })
                 
-                return Model.Ask(
+                let ask = Model.Ask(
                     id: id,
                     available: available,
                     prices: prices
+                )
+                
+                var imageUrl: URL?
+                if let key = resource.baseAsset?.customDetails?.logo?.key,
+                    !key.isEmpty {
+                    imageUrl = URL(string: self.apiConfigurationModel.storageEndpoint/key)
+                }
+                return Model.AskModel(
+                    ask: ask,
+                    imageUrl: imageUrl
                 )
             }
             self.asks.accept(asks)
@@ -103,11 +107,11 @@ extension AtomicSwap {
     }
 }
 
-extension AtomicSwap.AsksFetcher: AtomicSwap.AsksFetcherProtocol {
+extension BalancesList.AsksFetcher: BalancesList.AsksFetcherProtocol {
     
-    public func observeAsks() -> Observable<[AtomicSwap.Model.Ask]> {
-        self.asksRepo.reloadAsks()
+    public func observeAsks() -> Observable<[BalancesList.Model.AskModel]> {
         self.observeRepoAsks()
+        self.asksRepo.reloadAsks()
         return self.asks.asObservable()
     }
     
@@ -115,7 +119,7 @@ extension AtomicSwap.AsksFetcher: AtomicSwap.AsksFetcherProtocol {
         return self.errors.asObservable()
     }
     
-    public func observeLoadingStatus() -> Observable<AtomicSwap.Model.LoadingStatus> {
+    public func observeLoadingStatus() -> Observable<BalancesList.Model.LoadingStatus> {
         self.observeRepoLoadingStatus()
         return self.loadingStatus.asObservable()
     }
@@ -126,7 +130,7 @@ extension AtomicSwap.AsksFetcher: AtomicSwap.AsksFetcherProtocol {
 }
 
 private extension AtomicSwapAsksRepo.LoadingStatus {
-    var status: AtomicSwap.Model.LoadingStatus {
+    var status: BalancesList.Model.LoadingStatus {
         switch self {
         case .loaded :
             return .loaded

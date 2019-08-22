@@ -408,10 +408,18 @@ extension SendPaymentAmount.ViewController: SendPaymentAmount.DisplayLogic {
     func displayAtomicSwapBuyAction(viewModel: Event.AtomicSwapBuyAction.ViewModel) {
         switch viewModel {
             
+        case .loaded:
+            self.routing?.onHideProgress()
+            
+        case .loading:
+            self.routing?.onShowProgress()
+            
         case .failed(let errorMessage):
+            self.routing?.onHideProgress()
             self.routing?.onShowError(errorMessage)
             
         case .succeeded(let ask):
+            self.routing?.onHideProgress()
             self.routing?.onAtomicSwapBuyAction?(ask)
         }
     }

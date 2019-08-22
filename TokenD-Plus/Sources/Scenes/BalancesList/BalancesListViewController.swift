@@ -6,11 +6,13 @@ import ActionsList
 public protocol BalancesListDisplayLogic: class {
     typealias Event = BalancesList.Event
     
+    func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel)
     func displaySectionsUpdated(viewModel: Event.SectionsUpdated.ViewModel)
     func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel)
     func displayPieChartEntriesChanged(viewModel: Event.PieChartEntriesChanged.ViewModel)
     func displayPieChartBalanceSelected(viewModel: Event.PieChartBalanceSelected.ViewModel)
     func displayActionsDidChange(viewModel: Event.ActionsDidChange.ViewModel)
+    func displayBuyAsk(viewModel: Event.BuyAsk.ViewModel)
 }
 
 extension BalancesList {
@@ -24,6 +26,7 @@ extension BalancesList {
         
         // MARK: - Private properties
         
+        private let horizontalPicker: HorizontalPicker = HorizontalPicker()
         private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
         private let emptyView: UILabel = SharedViewsBuilder.createEmptyLabel()
         private let fab: UIButton = UIButton()
@@ -35,6 +38,7 @@ extension BalancesList {
         )
         private let refreshControl: UIRefreshControl = UIRefreshControl()
         
+        private var tabs: [Model.Tab] = []
         private var sections: [Model.SectionViewModel] = [] {
             didSet {
                 if self.refreshControl.isRefreshing {
@@ -85,6 +89,7 @@ extension BalancesList {
             super.viewDidLoad()
             
             self.setupView()
+            self.setupHorizontalPicker()
             self.setupFab()
             self.setupRefreshControl()
             self.setupTableView()
@@ -170,10 +175,23 @@ extension BalancesList {
             return nil
         }
         
+        private func setSelectedTabIfNeeded(index: Int?) {
+            guard let index = index,
+                index != self.horizontalPicker.selectedItemIndex else {
+                    return
+            }
+            self.horizontalPicker.setSelectedItemAtIndex(index, animated: true)
+        }
+        
         // MARK: - Setup
         
         private func setupView() {
             self.view.backgroundColor = Theme.Colors.contentBackgroundColor
+        }
+        
+        private func setupHorizontalPicker() {
+            self.horizontalPicker.backgroundColor = Theme.Colors.contentBackgroundColor
+            self.horizontalPicker.tintColor = Theme.Colors.accentColor
         }
         
         private func setupNavBarItems() {
@@ -205,7 +223,8 @@ extension BalancesList {
             self.tableView.register(classes: [
                 HeaderCell.ViewModel.self,
                 BalanceCell.ViewModel.self,
-                PieChartCell.ViewModel.self
+                PieChartCell.ViewModel.self,
+                AskCell.ViewModel.self
                 ]
             )
             self.tableView.delegate = self
@@ -255,16 +274,23 @@ extension BalancesList {
         }
         
         private func setupLayout() {
+            self.view.addSubview(self.horizontalPicker)
             self.view.addSubview(self.tableView)
             self.view.addSubview(self.fab)
             self.view.addSubview(self.emptyView)
             
+            self.horizontalPicker.snp.makeConstraints { (make) in
+                make.leading.trailing.top.equalToSuperview()
+            }
+            
             self.tableView.snp.makeConstraints { (make) in
-                make.edges.equalToSuperview()
+                make.top.equalTo(self.horizontalPicker.snp.bottom)
+                make.leading.trailing.bottom.equalToSuperview()
             }
             
             self.emptyView.snp.makeConstraints { (make) in
-                make.edges.equalToSuperview()
+                make.top.equalTo(self.horizontalPicker.snp.bottom)
+                make.leading.trailing.bottom.equalToSuperview()
             }
             
             self.fab.snp.makeConstraints { (make) in
@@ -278,8 +304,25 @@ extension BalancesList {
 
 extension BalancesList.ViewController: BalancesList.DisplayLogic {
     
+    public func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel) {
+        self.tabs = viewModel.tabs
+        let items = self.tabs.map { (tab) -> HorizontalPicker.Item in
+            return HorizontalPicker.Item(
+                title: tab.name,
+                enabled: true,
+                onSelect: { [weak self] in
+                    let request = Event.SelectedTab.Request(tabIdentifier: tab.identifier)
+                    self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                        businessLogic.onSelectedTab(request: request)
+                    })
+            })
+        }
+        self.horizontalPicker.items = items
+    }
+    
     public func displaySectionsUpdated(viewModel: Event.SectionsUpdated.ViewModel) {
-        switch viewModel {
+        self.setSelectedTabIfNeeded(index: viewModel.selectedTabIndex)
+        switch viewModel.type {
             
         case .sections(let sections):
             self.fab.isHidden = false
@@ -327,66 +370,6 @@ extension BalancesList.ViewController: BalancesList.DisplayLogic {
         udpdatedChartViewModel.setup(cell: chartCell)
         self.sections[indexPath.section].cells[indexPath.row] = udpdatedChartViewModel
     }
-}
-
-extension BalancesList.ViewController: UITableViewDelegate {
-    
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = self.sections[indexPath.section].cells[indexPath.row]
-        if let balancesModel = model as? BalancesList.BalanceCell.ViewModel {
-            self.routing?.onBalanceSelected(balancesModel.balanceId)
-        }
-    }
-    
-    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model = self.sections[indexPath.section].cells[indexPath.row]
-        
-        if model as? BalancesList.HeaderCell.ViewModel != nil {
-            return 120.0
-        } else if model as? BalancesList.BalanceCell.ViewModel != nil {
-            return 90.0
-        } else {
-            return 44.0
-        }
-    }
-    
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model = self.sections[indexPath.section].cells[indexPath.row]
-        
-        if model as? BalancesList.HeaderCell.ViewModel != nil {
-            return 120.0
-        } else if model as? BalancesList.BalanceCell.ViewModel != nil {
-            return 90.0
-        } else {
-            return 44.0
-        }
-    }
-}
-
-extension BalancesList.ViewController: UITableViewDataSource {
-    
-    public func numberOfSections(in tableView: UITableView) -> Int {
-        return self.sections.count
-    }
-    
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.sections[section].cells.count
-    }
-    
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = self.sections[indexPath.section].cells[indexPath.row]
-        let cell = tableView.dequeueReusableCell(with: model, for: indexPath)
-        
-        if let chartCell = cell as? BalancesList.PieChartCell.View {
-            chartCell.onChartBalanceSelected = { [weak self] (value) in
-                let request = Event.PieChartBalanceSelected.Request(value: value)
-                self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
-                    businessLogic.onPieChartBalanceSelected(request: request)
-                })
-            }
-        }
-        return cell
-    }
     
     public func displayActionsDidChange(viewModel: Event.ActionsDidChange.ViewModel) {
         
@@ -418,5 +401,81 @@ extension BalancesList.ViewController: UITableViewDataSource {
             actionModel.appearance.tint = Theme.Colors.accentColor
             return actionModel
         })
+    }
+    
+    public func displayBuyAsk(viewModel: Event.BuyAsk.ViewModel) {
+        self.routing?.showBuy(viewModel.ask)
+    }
+}
+
+extension BalancesList.ViewController: UITableViewDelegate {
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = self.sections[indexPath.section].cells[indexPath.row]
+        if let balancesModel = model as? BalancesList.BalanceCell.ViewModel {
+            self.routing?.onBalanceSelected(balancesModel.balanceId)
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        let model = self.sections[indexPath.section].cells[indexPath.row]
+        
+        if model as? BalancesList.HeaderCell.ViewModel != nil {
+            return 120.0
+        } else if model as? BalancesList.BalanceCell.ViewModel != nil {
+            return 90.0
+        } else if model as? BalancesList.AskCell.ViewModel != nil {
+            return 117.0
+        } else {
+            return 44.0
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let model = self.sections[indexPath.section].cells[indexPath.row]
+        
+        if model as? BalancesList.HeaderCell.ViewModel != nil {
+            return 120.0
+        } else if model as? BalancesList.BalanceCell.ViewModel != nil {
+            return 90.0
+        } else if model as? BalancesList.AskCell.ViewModel != nil {
+            return 117.0
+        } else {
+            return 44.0
+        }
+    }
+}
+
+extension BalancesList.ViewController: UITableViewDataSource {
+    
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        return self.sections.count
+    }
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.sections[section].cells.count
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let model = self.sections[indexPath.section].cells[indexPath.row]
+        let cell = tableView.dequeueReusableCell(with: model, for: indexPath)
+        
+        if let chartCell = cell as? BalancesList.PieChartCell.View {
+            chartCell.onChartBalanceSelected = { [weak self] (value) in
+                let request = Event.PieChartBalanceSelected.Request(value: value)
+                self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                    businessLogic.onPieChartBalanceSelected(request: request)
+                })
+            }
+        } else if let askCell = cell as? BalancesList.AskCell.Cell,
+            let askModel = model as? BalancesList.AskCell.ViewModel {
+            askCell.onBuyAction = { [weak self] in
+                let request = Event.BuyAsk.Request(id: askModel.askId)
+                self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                    businessLogic.onBuyAsk(request: request)
+                })
+            }
+        }
+        return cell
     }
 }

@@ -3,11 +3,13 @@ import UIKit
 public protocol BalancesListPresentationLogic {
     typealias Event = BalancesList.Event
     
+    func presentViewDidLoad(response: Event.ViewDidLoad.Response)
     func presentSectionsUpdated(response: Event.SectionsUpdated.Response)
     func presentLoadingStatusDidChange(response: Event.LoadingStatusDidChange.Response)
     func presentPieChartEntriesChanged(response: Event.PieChartEntriesChanged.Response)
     func presentPieChartBalanceSelected(response: Event.PieChartBalanceSelected.Response)
     func presentActionsDidChange(response: Event.ActionsDidChange.Response)
+    func presentBuyAsk(response: Event.BuyAsk.Response)
 }
 
 extension BalancesList {
@@ -168,6 +170,41 @@ extension BalancesList {
                             cellIdentifier: .chart
                         )
                         return chartViewModel
+                        
+                    case .ask(let askModel):
+                        let priceAmount = self.amountFormatter.formatAmount(
+                            askModel.ask.prices.first?.value ?? 0,
+                            currency: askModel.ask.prices.first?.assetName ?? ""
+                        )
+                        let price = "\(Localized(.price_colon)) \(priceAmount)"
+                        let availableAmount = self.amountFormatter.formatAmount(
+                            askModel.ask.available.value,
+                            currency: askModel.ask.available.assetName
+                        )
+                        let available = "\(Localized(.available_colon)) \(availableAmount)"
+                        let abbreviationText: String
+                        if let firstLetter = askModel.ask.available.assetName.first {
+                            abbreviationText = "\(firstLetter)"
+                        } else {
+                            abbreviationText = "D"
+                        }
+                        let abbreviationColor = TokenColoringProvider.shared.coloringForCode(askModel.ask.available.assetName)
+                        var imageRepresentation: Model.ImageRepresentation = .abbreviation
+                        if let url = askModel.imageUrl {
+                            imageRepresentation = .image(url)
+                        }
+                        
+                        let askViewModel = AskCell.ViewModel(
+                            askId: askModel.ask.id,
+                            assetName: askModel.ask.available.assetName,
+                            imageRepresentation: imageRepresentation,
+                            price: price,
+                            available: available,
+                            abbreviationBackgroundColor: abbreviationColor,
+                            abbreviationText: abbreviationText,
+                            cellIdentifier: .asks
+                        )
+                        return askViewModel
                     }
                 })
                 return Model.SectionViewModel(cells: cells)
@@ -179,20 +216,39 @@ extension BalancesList {
 
 extension BalancesList.Presenter: BalancesList.PresentationLogic {
     
+    public func presentViewDidLoad(response: Event.ViewDidLoad.Response) {
+        let viewModel = Event.ViewDidLoad.ViewModel(tabs: response.tabs)
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displayViewDidLoad(viewModel: viewModel)
+        }
+    }
+    
     public func presentSectionsUpdated(response: Event.SectionsUpdated.Response) {
-        let viewModel: Event.SectionsUpdated.ViewModel
-        switch response {
+        let type: Model.SceneTypeViewModel
+        switch response.type {
             
         case .empty:
-            viewModel = .empty(Localized(.no_balances))
+            switch response.selectedTabIdentifier {
+                
+            case .atomicSwapAsks:
+                type = .empty(Localized(.no_asks))
+                
+            case .balances:
+                type = .empty(Localized(.no_balances))
+            }
             
         case .error(let error):
-            viewModel = .empty(error.localizedDescription)
+            type = .empty(error.localizedDescription)
             
         case .sections(let sections):
             let sectionsViewModels = self.getSectionViewModels(sections: sections)
-            viewModel = .sections(sections: sectionsViewModels)
+            type = .sections(sections: sectionsViewModels)
         }
+        
+        let viewModel = Event.SectionsUpdated.ViewModel(
+            type: type,
+            selectedTabIndex: response.selectedTabIndex
+        )
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displaySectionsUpdated(viewModel: viewModel)
         }
@@ -247,6 +303,13 @@ extension BalancesList.Presenter: BalancesList.PresentationLogic {
         let viewModel = response
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displayActionsDidChange(viewModel: viewModel)
+        }
+    }
+    
+    public func presentBuyAsk(response: Event.BuyAsk.Response) {
+        let viewModel = response
+        self.presenterDispatch.display { (displayLogic) in
+            displayLogic.displayBuyAsk(viewModel: viewModel)
         }
     }
 }

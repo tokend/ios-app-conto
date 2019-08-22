@@ -6,8 +6,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol
-    private let assetСode: String
-    private let assetName: String
+    private let model: AtomicSwap.Model.Ask
     private let onCompleted: () -> Void
     
     
@@ -17,8 +16,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     
     init(
         navigationController: NavigationControllerProtocol,
-        assetСode: String,
-        assetName: String,
+        model: AtomicSwap.Model.Ask,
         onCompleted: @escaping () -> Void,
         appController: AppControllerProtocol,
         flowControllerStack: FlowControllerStack,
@@ -30,8 +28,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         ) {
         
         self.navigationController = navigationController
-        self.assetСode = assetСode
-        self.assetName = assetName
+        self.model = model
         self.onCompleted = onCompleted
         
         super.init(
@@ -48,12 +45,12 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     // MARK: - Public
     
     func run(showRootScreen: @escaping ((_ vc: UIViewController) -> Void)) {
-        let vc = self.setupAtomicSwapScene()
+        let vc = self.setupAtomicSwapBuyScreen(ask: self.model)
         
         vc.navigationItem.title = Localized(
             .buy_asset,
             replace: [
-                .buy_asset_replace_asset: self.assetName
+                .buy_asset_replace_asset: self.model.available.assetName
             ]
         )
         showRootScreen(vc)
@@ -61,47 +58,47 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     
     // MARK: - Private
     
-    private func setupAtomicSwapScene() -> UIViewController {
-        let vc = AtomicSwap.ViewController()
-        let asksRepo = self.reposController.getAtomicSwapAsksRepo(for: self.assetСode)
-        let asksFetcher = AtomicSwap.AsksFetcher(
-            asksRepo: asksRepo,
-            assetsRepo: self.reposController.assetsRepo
-        )
-        let sceneModel = AtomicSwap.Model.SceneModel(
-            assetCode: self.assetСode,
-            assetName: self.assetName,
-            asks: []
-        )
-        let amountFormatter = AtomicSwap.AmountFormatter()
-        
-        let routing = AtomicSwap.Routing(
-            showLoading: { [weak self] in
-                self?.navigationController.showProgress()
-            },
-            hideLoading: { [weak self] in
-                self?.navigationController.hideProgress()
-            },
-            showShadow: { [weak self] in
-                self?.navigationController.showShadow()
-            },
-            hideShadow: { [weak self] in
-                self?.navigationController.hideShadow()
-            },
-            onBuyAction: { [weak self] (ask) in
-                self?.showAtomicSwapBuyScene(ask: ask)
-        })
-        
-        AtomicSwap.Configurator.configure(
-            viewController: vc,
-            asksFetcher: asksFetcher,
-            sceneModel: sceneModel,
-            amountFormatter: amountFormatter,
-            routing: routing
-        )
-        
-        return vc
-    }
+    //    private func setupAtomicSwapScene() -> UIViewController {
+    //        let vc = AtomicSwap.ViewController()
+    //        let asksRepo = self.reposController.getAtomicSwapAsksRepo(filter: .baseAsset(self.assetСode))
+    //        let asksFetcher = AtomicSwap.AsksFetcher(
+    //            asksRepo: asksRepo,
+    //            assetsRepo: self.reposController.assetsRepo
+    //        )
+    //        let sceneModel = AtomicSwap.Model.SceneModel(
+    //            assetCode: self.assetСode,
+    //            assetName: self.assetName,
+    //            asks: []
+    //        )
+    //        let amountFormatter = AtomicSwap.AmountFormatter()
+    //
+    //        let routing = AtomicSwap.Routing(
+    //            showLoading: { [weak self] in
+    //                self?.navigationController.showProgress()
+    //            },
+    //            hideLoading: { [weak self] in
+    //                self?.navigationController.hideProgress()
+    //            },
+    //            showShadow: { [weak self] in
+    //                self?.navigationController.showShadow()
+    //            },
+    //            hideShadow: { [weak self] in
+    //                self?.navigationController.hideShadow()
+    //            },
+    //            onBuyAction: { [weak self] (ask) in
+    //                self?.showAtomicSwapBuyScene(ask: ask)
+    //        })
+    //
+    //        AtomicSwap.Configurator.configure(
+    //            viewController: vc,
+    //            asksFetcher: asksFetcher,
+    //            sceneModel: sceneModel,
+    //            amountFormatter: amountFormatter,
+    //            routing: routing
+    //        )
+    //
+    //        return vc
+    //    }
     
     private func showAtomicSwapBuyScene(ask: AtomicSwap.Model.Ask) {
         let vc = self.setupAtomicSwapBuyScreen(ask: ask)
@@ -126,6 +123,21 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         )
         let balanceDetailsLoader = SendPaymentAmount.AtomicSwapBalanceFetcherWorker(
             buyPreposition: buyPreposition
+        )
+        let fiatPaymentSender = SendPaymentAmount.FiatPaymentSender(
+            api: self.flowControllerStack.api.transactionsApi,
+            keychainDataProvider: self.keychainDataProvider
+        )
+        let amountConverter = AmountConverter()
+        let atomicSwapPaymentWorker = SendPaymentAmount.AtomicSwapPaymentWorker(
+            accountsApi: self.flowControllerStack.apiV3.accountsApi,
+            requestsApi: self.flowControllerStack.apiV3.requetsApi,
+            networkFetcher: self.reposController.networkInfoRepo,
+            transactionSender: self.managersController.transactionSender,
+            amountConverter: amountConverter,
+            fiatPaymentSender: fiatPaymentSender,
+            ask: ask,
+            originalAccountId: self.userDataProvider.walletData.accountId
         )
         
         let amountFormatter = SendPaymentAmount.AmountFormatter()
@@ -160,8 +172,8 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             },
             onPresentPicker: { (_, _) in },
             onSendAction: { _ in },
-            onAtomicSwapBuyAction: { [weak self] (askModel) in
-                self?.showPaymentMethodScene(askModel: askModel)
+            onAtomicSwapBuyAction: { [weak self] (paymentUrl) in
+                self?.showFiatPaymentScene(url: paymentUrl.url)
             },
             onShowWithdrawDestination: nil,
             onShowRedeem: nil,
@@ -173,6 +185,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             selectedBalanceId: nil,
             sceneModel: sceneModel,
             balanceDetailsLoader: balanceDetailsLoader,
+            atomicSwapPaymentWorker: atomicSwapPaymentWorker,
             amountFormatter: amountFormatter,
             feeLoader: feeLoaderWorker,
             feeOverviewer: feeOverviewer,
@@ -381,7 +394,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         let routing = FiatPayment.Routing(
             showLoading: {
                 navController.showProgress()
-            },
+        },
             hideLoading: {
                 navController.hideProgress()
         })

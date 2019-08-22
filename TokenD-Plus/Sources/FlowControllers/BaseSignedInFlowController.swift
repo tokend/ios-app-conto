@@ -166,15 +166,13 @@ class BaseSignedInFlowController: BaseFlowController {
     
     func runAtomicSwapFlow(
         navigationController: NavigationControllerProtocol,
-        assetCode: String,
-        assetName: String,
+        model: AtomicSwap.Model.Ask,
         onCompleted: @escaping () -> Void
         ) {
         
         let flow = AtomicSwapFlowController(
             navigationController: navigationController,
-            assetСode: assetCode,
-            assetName: assetName,
+            model: model,
             onCompleted: onCompleted,
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,

@@ -80,10 +80,23 @@ class BalancesListFlowController: BaseSignedInFlowController {
     
     private func setupBalancesListScene() -> UIViewController {
         let vc = BalancesList.ViewController()
+        let tabs: [BalancesList.Model.Tab] = [
+            BalancesList.Model.Tab(
+                name: Localized(.balances),
+                identifier: .balances
+            ),
+            BalancesList.Model.Tab(
+                name: Localized(.shop),
+                identifier: .atomicSwapAsks
+            ),
+        ]
         let sceneModel = BalancesList.Model.SceneModel(
+            tabs: tabs,
             balances: [],
+            asks: [],
             chartBalances: [],
             selectedChartBalance: nil,
+            selectedTabIdentifier: .balances,
             imageUrl: company.imageUrl,
             convertedAsset: company.conversionAsset,
             companyName: company.name
@@ -100,6 +113,10 @@ class BalancesListFlowController: BaseSignedInFlowController {
             originalAccountId: self.userDataProvider.walletData.accountId,
             conversionAsset: self.company.conversionAsset,
             imageUtility: imagesUtility
+        )
+        let asksFetcher = BalancesList.AsksFetcher(
+            asksRepo: self.reposController.getAtomicSwapAsksRepo(filter: .company(self.company.accountId)),
+            apiConfigurationModel: self.flowControllerStack.apiConfigurationModel
         )
         let actionProvider = BalancesList.ActionProvider(
             originalAccountId: self.userDataProvider.walletData.accountId,
@@ -149,13 +166,21 @@ class BalancesListFlowController: BaseSignedInFlowController {
                     completion: {
                         strongSelf.backToBalances()
                 })
-            }
-        )
+            }, showBuy: { [weak self] (model) in
+                guard let strongSelf = self else { return }
+                strongSelf.runAtomicSwapFlow(
+                    navigationController: strongSelf.navigationController,
+                    model: model,
+                    onCompleted: {
+                        self?.backToBalances()
+                })
+            })
         
         BalancesList.Configurator.configure(
             viewController: vc,
             sceneModel: sceneModel,
             balancesFetcher: balancesFetcher,
+            asksFetcher: asksFetcher,
             actionProvider: actionProvider,
             amountFormatter: amountFormatter,
             percentFormatter: percentFormatter,
@@ -217,15 +242,6 @@ class BalancesListFlowController: BaseSignedInFlowController {
             showReceive: { [weak self] in
                 self?.showReceiveScene(navigationController: navigationController)
             },
-            showBuy: { [weak self] (assetCode, assetName) in
-                self?.runAtomicSwapFlow(
-                    navigationController: navigationController,
-                    assetCode: assetCode,
-                    assetName: assetName,
-                    onCompleted: {
-                        self?.backToBalances()
-                })
-            },
             showShadow: { [weak self] in
                 self?.navigationController.showShadow()
             },
@@ -279,7 +295,6 @@ class BalancesListFlowController: BaseSignedInFlowController {
             showCreateReedeem: { _ in },
             showAcceptRedeem: { },
             showReceive: { },
-            showBuy: { _, _ in },
             showShadow: { [weak self] in
                 self?.navigationController.showShadow()
             },

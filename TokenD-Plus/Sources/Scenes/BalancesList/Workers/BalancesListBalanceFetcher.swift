@@ -105,6 +105,9 @@ extension BalancesList {
                     convertedBalance: convertedBalance,
                     cellIdentifier: .balances
                 )}
+                .filter({ (balance) -> Bool in
+                    return balance.balance > 0
+                })
                 .sorted(by: { (left, right) -> Bool in
                     return left.balance > right.balance
                 })

@@ -9,9 +9,10 @@ public class AtomicSwapAsksRepo {
     // MARK: - Private properties
     
     private let quoteAssetsInclude: String = "quote_assets"
+    private let baseAssetInclude: String = "base_asset"
     
     private let atomicSwapApi: AtomicSwapApiV3
-    private let baseAsset: String
+    private let asksFilter: AsksFilter
     
     private let pagination: RequestPagination = {
         let strategy = IndexedPaginationStrategy(index: nil, limit: 10, order: .descending)
@@ -29,11 +30,11 @@ public class AtomicSwapAsksRepo {
     
     init(
         atomicSwapApi: AtomicSwapApiV3,
-        baseAsset: String
+        asksFilter: AsksFilter
         ) {
         
         self.atomicSwapApi = atomicSwapApi
-        self.baseAsset = baseAsset
+        self.asksFilter = asksFilter
     }
     
     // MARK: - Public
@@ -97,11 +98,20 @@ public class AtomicSwapAsksRepo {
     // MARK: - Private
     
     private func loadAsks() {
-        let filter = AtomicSwapFiltersV3.with(.baseAsset(self.baseAsset))
+        let filter: AtomicSwapFiltersV3
+        switch self.asksFilter {
+            
+        case .baseAsset(let baseAsset):
+            filter = AtomicSwapFiltersV3.with(.baseAsset(baseAsset))
+            
+        case .company(let owner):
+            filter = AtomicSwapFiltersV3.with(.owner(owner))
+        }
+        
         self.loadingStatus.accept(.loading)
         _ = self.atomicSwapApi.requestAtomicSwapAsks(
             filters: filter,
-            include: [self.quoteAssetsInclude],
+            include: [self.quoteAssetsInclude, self.baseAssetInclude],
             pagination: self.pagination,
             onRequestBuilt: { [weak self] (request) in
                 self?.prevRequest = request
@@ -131,3 +141,12 @@ extension AtomicSwapAsksRepo {
         case loading
     }
 }
+
+extension AtomicSwapAsksRepo {
+    
+    public enum AsksFilter {
+        case baseAsset(String)
+        case company(String)
+    }
+}
+

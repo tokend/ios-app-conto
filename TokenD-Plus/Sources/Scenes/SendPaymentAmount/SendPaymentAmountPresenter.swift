@@ -212,6 +212,12 @@ extension SendPaymentAmount.Presenter: SendPaymentAmount.PresentationLogic {
         let viewModel: Event.AtomicSwapBuyAction.ViewModel
         switch response {
             
+        case .loaded:
+            viewModel = .loaded
+            
+        case .loading:
+            viewModel = .loading
+            
         case .failed(let error):
             viewModel = .failed(errorMessage: error.localizedDescription)
             
