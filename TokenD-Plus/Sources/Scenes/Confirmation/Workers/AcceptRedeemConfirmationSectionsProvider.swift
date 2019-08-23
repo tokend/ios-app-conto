@@ -70,12 +70,14 @@ extension ConfirmationScene {
         // MARK: - Private
         
         private func tryToInitHistoryRepo() {
-            guard let balance = self.balancesRepo.balancesDetailsValue.first(where: { (state) -> Bool in
-                return state.asset == self.redeemModel.asset
-            }), case let .created(details) = balance else {
-                return
+            guard
+                let balance = self.balancesRepo.convertedBalancesStatesValue.first(where: { (state) -> Bool in
+                    return state.balance?.asset?.id == self.redeemModel.asset
+                })?.balance,
+                let balanceId = balance.id else {
+                    return
             }
-            self.historyRepo = self.reposController.getTransactionsHistoryRepo(for: details.balanceId)
+            self.historyRepo = self.reposController.getTransactionsHistoryRepo(for: balanceId)
         }
         
         private func fetchRequestor() {
@@ -180,7 +182,7 @@ extension ConfirmationScene {
                                 completion(.failed(.sendTransactionError(RedeemError.doubleSpend)))
                             } else {
                                 self.historyRepo?.reloadTransactions()
-                                self.balancesRepo.reloadBalancesDetails()
+                                self.balancesRepo.reloadConvertedBalancesStates()
                                 completion(.succeeded)
                             }
                         case .failed(let error):

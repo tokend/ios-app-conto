@@ -135,7 +135,7 @@ class CompanyFlowController: BaseSignedInFlowController {
     
     private func runReposPreload() {
         _ = self.reposController.assetsRepo.observeAssets()
-        _ = self.reposController.balancesRepo.observeBalancesDetails()
+        _ = self.reposController.balancesRepo.observeConvertedBalancesStates()
     }
     
     private func runBalancesFlow() {

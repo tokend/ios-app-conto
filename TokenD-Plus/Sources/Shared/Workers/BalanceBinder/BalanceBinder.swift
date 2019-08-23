@@ -37,7 +37,7 @@ class BalanceBinder: BalanceBinderProtocol {
         self.isWaiting[asset] = true
         self.disposables[asset]?.dispose()
         self.disposables[asset] = self.balancesRepo
-            .observeBalancesDetails()
+            .observeConvertedBalancesStates()
             .subscribe(onNext: { [weak self] (details) in
                 guard self?.isWaiting[asset] == true else {
                     self?.disposables[asset]?.dispose()

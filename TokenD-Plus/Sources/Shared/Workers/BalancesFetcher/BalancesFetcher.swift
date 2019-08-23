@@ -1,10 +1,11 @@
 import Foundation
+import TokenDSDK
 import RxCocoa
 import RxSwift
 
 class BalancesFetcher {
     
-    typealias Balance = BalancesRepo.BalanceState
+    typealias Balance = ConvertedBalanceStateResource
     
     // MARK: - Private properties
     
@@ -26,14 +27,14 @@ class BalancesFetcher {
     }
     
     func refreshBalances() {
-        self.balancesRepo.reloadBalancesDetails()
+        self.balancesRepo.reloadConvertedBalancesStates()
     }
     
     // MARK: - Private
     
     private func observeBalancesRepo() {
         self.balancesRepo
-            .observeBalancesDetails()
+            .observeConvertedBalancesStates()
             .subscribe(onNext: { (balancesDetails) in
                 self.balancesBehaviorRelay.accept(balancesDetails)
             })

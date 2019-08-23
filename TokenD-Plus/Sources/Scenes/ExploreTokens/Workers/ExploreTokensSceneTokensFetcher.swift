@@ -107,7 +107,7 @@ extension ExploreTokensScene {
         
         private func observeBalances() {
             self.balancesRepo
-                .observeBalancesDetails()
+                .observeConvertedBalancesStates()
                 .subscribe(onNext: { [weak self] (_) in
                     self?.updateTokens()
                 })

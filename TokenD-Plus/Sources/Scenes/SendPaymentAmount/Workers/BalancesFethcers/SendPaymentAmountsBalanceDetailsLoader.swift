@@ -88,7 +88,7 @@ extension SendPaymentAmount.BalanceDetailsLoaderWorker: SendPaymentAmount.Balanc
     func observeBalanceDetails() -> Observable<[SendPaymentAmount.Model.BalanceDetails]> {
         typealias BalanceDetails = SendPaymentAmount.Model.BalanceDetails
         
-        return self.balancesRepo.observeBalancesDetails().map { (balanceDetails) -> [BalanceDetails] in
+        return self.balancesRepo.observeConvertedBalancesStates().map { (balanceDetails) -> [BalanceDetails] in
             let balances = balanceDetails.compactMap({ (balanceState) -> BalanceDetails? in
                 switch balanceState {
                     

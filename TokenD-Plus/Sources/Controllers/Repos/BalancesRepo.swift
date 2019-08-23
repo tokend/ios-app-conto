@@ -7,12 +7,9 @@ import RxSwift
 
 public class BalancesRepo {
     
-    public typealias Asset = String
-    public typealias BalanceDetails = TokenDSDK.BalanceDetails
-    
     // MARK: - Private properties
     
-    private let api: TokenDSDK.BalancesApi
+    private let api: AccountsApiV3
     private let transactionSender: TransactionSender
     private let originalAccountId: String
     private let accountId: AccountID
@@ -23,14 +20,15 @@ public class BalancesRepo {
     
     private var shouldInitiateLoad: Bool = true
     
-    private let balancesDetails: BehaviorRelay<[BalanceState]> = BehaviorRelay(value: [])
+    private let convertedBalancesStates: BehaviorRelay<[ConvertedBalanceStateResource]> = BehaviorRelay(value: [])
     private var loadingStatus: BehaviorRelay<LoadingStatus> = BehaviorRelay<LoadingStatus>(value: .loaded)
     private let errorStatus: PublishRelay<Swift.Error> = PublishRelay()
+    private let conversionAsset: String = "UAH"
     
     // MARK: - Public properties
     
-    public var balancesDetailsValue: [BalanceState] {
-        return self.balancesDetails.value
+    public var convertedBalancesStatesValue: [ConvertedBalanceStateResource] {
+        return self.convertedBalancesStates.value
     }
     
     public var loadingStatusValue: LoadingStatus {
@@ -40,7 +38,7 @@ public class BalancesRepo {
     // MARK: -
     
     public init(
-        api: TokenDSDK.BalancesApi,
+        api: AccountsApiV3,
         transactionSender: TransactionSender,
         originalAccountId: String,
         accountId: AccountID,
@@ -61,29 +59,31 @@ public class BalancesRepo {
     
     // MARK: - Private
     
-    private enum ReloadBalanceDetailsResult {
-        case succeeded(balances: [BalanceState])
+    private enum ReloadConvertedBalancesStatesResult {
+        case succeeded(balances: [ConvertedBalanceStateResource])
         case failed(ApiErrors)
     }
-    private func reloadBalancesDetails(
-        _ completion: ((ReloadBalanceDetailsResult) -> Void)? = nil
+    private func reloadConvertedBalancesStates(
+        _ completion: ((ReloadConvertedBalancesStatesResult) -> Void)? = nil
         ) {
         
         self.loadingStatus.accept(.loading)
-        self.api.requestDetails(
+        self.api.requestConvertedBalances(
             accountId: self.originalAccountId,
+            convertationAsset: self.conversionAsset,
+            include: ["states", "balance", "balance.state", "balance.asset"],
             completion: { [weak self] (result) in
-                self?.loadingStatus.accept(.loaded)
                 switch result {
                     
-                case .success(let balances):
-                    let balancesDetails = balances.map({ (details) -> BalanceState in
-                        return .created(details)
-                    })
-                    completion?(.succeeded(balances: balancesDetails))
+                case .failure(let error):
+                    self?.errorStatus.accept(error)
                     
-                case .failure(let errors):
-                    completion?(.failed(errors))
+                case .success(let document):
+                    guard let collection = document.data,
+                        let states = collection.states else {
+                        return
+                    }
+                    self?.convertedBalancesStates.accept(states)
                 }
         })
     }
@@ -106,9 +106,9 @@ public class BalancesRepo {
     
     // MARK: - Public
     
-    func observeBalancesDetails() -> Observable<[BalanceState]> {
-        self.reloadBalancesDetails()
-        return self.balancesDetails.asObservable()
+    func observeConvertedBalancesStates() -> Observable<[ConvertedBalanceStateResource]> {
+        self.reloadConvertedBalancesStates()
+        return self.convertedBalancesStates.asObservable()
     }
     
     func observeLoadingStatus() -> Observable<LoadingStatus> {
@@ -119,15 +119,17 @@ public class BalancesRepo {
         return self.errorStatus.asObservable()
     }
     
-    func reloadBalancesDetails() {
+    func reloadConvertedBalancesStates() {
         self.loadingStatus.accept(.loading)
-        self.reloadBalancesDetails { [weak self] (result) in
+        self.reloadConvertedBalancesStates { [weak self] (result) in
             self?.loadingStatus.accept(.loaded)
             switch result {
+                
             case .failed(let errors):
                 self?.errorStatus.accept(errors)
-            case .succeeded(let balances):
-                self?.saveBalancesDetails(balances)
+                
+            case .succeeded(let states):
+                self?.convertedBalancesStates.accept(states)
             }
         }
     }
@@ -141,17 +143,12 @@ public class BalancesRepo {
         completion: @escaping (CreateBalanceResult) -> Void
         ) {
         
-        var new = self.balancesDetailsValue
-        
-        let existing = new.first(where: { (state) -> Bool in
-            return state.asset == asset
+        let existing = self.convertedBalancesStatesValue.first(where: { (state) -> Bool in
+            return state.balance?.asset?.id == asset.code
         })
         if existing != nil {
             return
         }
-        
-        new.append(.creating(asset))
-        self.balancesDetails.accept(new)
         
         self.networkInfoFetcher.fetchNetworkInfo({ [weak self] (result) in
             switch result {
@@ -161,7 +158,7 @@ public class BalancesRepo {
                 
             case .succeeded(let networkInfo):
                 self?.createBalance(
-                    asset: asset,
+                    asset: asset.code,
                     networkInfo: networkInfo,
                     completion: completion
                 )
@@ -202,13 +199,12 @@ public class BalancesRepo {
                     switch result {
                         
                     case .succeeded:
-                        self?.reloadBalancesDetails({ [weak self] (result) in
-                            self?.removeBalanceDetailsWithAsset(asset)
+                        self?.reloadConvertedBalancesStates({ [weak self] (result) in
                             switch result {
                             case .failed:
                                 break
-                            case .succeeded(let balances):
-                                self?.saveBalancesDetails(balances)
+                            case .succeeded(let states):
+                                self?.convertedBalancesStates.accept(states)
                             }
                             completion(.succeeded)
                         })
@@ -220,127 +216,6 @@ public class BalancesRepo {
         } catch let error {
             completion(.failed(error))
         }
-    }
-}
-
-// MARK: - Edit sequence methods
-
-extension BalancesRepo {
-    
-    private func saveBalancesDetails(_ details: [BalanceState]) {
-        var newDetails = self.balancesDetailsValue.filter { (state) -> Bool in
-            switch state {
-            case .creating:
-                return true
-            case .created:
-                return false
-            }
-        }
-        
-        for detail in details {
-            newDetails = self.appendingElement(detail, to: newDetails)
-        }
-        
-        self.balancesDetails.accept(newDetails)
-    }
-    
-    private func writeBalanceDetails(
-        _ details: BalanceState
-        ) {
-        
-        self.balancesDetails.accept(self.appendingElement(
-            details,
-            to: self.balancesDetailsValue
-        ))
-    }
-    
-    private func removeBalanceDetailsWithAsset(
-        _ asset: Asset
-        ) {
-        
-        self.balancesDetails.accept(self.removingElementWithAsset(
-            asset,
-            from: self.balancesDetailsValue
-        ))
-    }
-    
-    private func removingElementWithAsset(
-        _ asset: Asset,
-        from sequence: [BalanceState]
-        ) -> [BalanceState] {
-        
-        var newSequence = sequence
-        
-        while let index = newSequence.index(where: { (state) -> Bool in
-            return state.asset == asset
-        }) {
-            newSequence.remove(at: index)
-        }
-        
-        return newSequence
-    }
-    
-    private func appendingElement(
-        _ details: BalanceState,
-        to sequence: [BalanceState]
-        ) -> [BalanceState] {
-        
-        var newSequence = self.removingElementWithAsset(
-            details.asset,
-            from: sequence
-        )
-        
-        newSequence.append(details)
-        return newSequence
-    }
-}
-
-extension BalancesRepo {
-    
-    public enum BalanceState {
-        
-        /// Balance for the asset is creating
-        case creating(Asset)
-        
-        /// Balance for the asset already created
-        case created(BalanceDetails)
-    }
-}
-
-extension BalancesRepo.BalanceState: Equatable {
-    
-    public typealias SelfType = BalancesRepo.BalanceState
-    
-    public static func ==(left: SelfType, right: SelfType) -> Bool {
-        switch (left, right) {
-        case (.creating(let left), .creating(let right)):
-            return left == right
-        case (.created(let left), .created(let right)):
-            return left == right
-        default:
-            return false
-        }
-    }
-}
-
-extension BalancesRepo.BalanceState {
-    
-    var asset: String {
-        switch self {
-        case .creating(let balanceAsset):
-            return balanceAsset
-        case .created(let balanceDetails):
-            return balanceDetails.asset
-        }
-    }
-}
-
-extension TokenDSDK.BalanceDetails: Equatable {
-    
-    public typealias SelfType = TokenDSDK.BalanceDetails
-    
-    public static func ==(left: SelfType, right: SelfType) -> Bool {
-        return left.balanceId == right.balanceId
     }
 }
 

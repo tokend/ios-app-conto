@@ -346,7 +346,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             .tap
             .asDriver()
             .drive(onNext: { [weak self] (_) in
-                self?.reposController.balancesRepo.reloadBalancesDetails()
+                self?.reposController.balancesRepo.reloadConvertedBalancesStates()
                 vc.dismiss(
                     animated: true,
                     completion: {

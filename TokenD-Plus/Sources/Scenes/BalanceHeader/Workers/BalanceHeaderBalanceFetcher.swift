@@ -46,7 +46,7 @@ extension BalanceHeader {
         
         private func observeBalancesRepo() {
             self.balancesRepo
-                .observeBalancesDetails()
+                .observeConvertedBalancesStates()
                 .subscribe(onNext: { [weak self] (states) in
                     self?.balances = states.compactMap({ (state) -> BalancesRepo.BalanceDetails? in
                         switch state {

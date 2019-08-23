@@ -148,7 +148,7 @@ extension TransactionsListScene {
         
         private func observeBalancesDetails() {
             self.balancesRepo
-                .observeBalancesDetails()
+                .observeConvertedBalancesStates()
                 .subscribe(onNext: { [weak self] (_) in
                     self?.transactionsDidChange()
                 })

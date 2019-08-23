@@ -166,9 +166,9 @@ extension SaleDetails {
                 }
                 
                 var balanceState: TokenContent.BalanceState = .notCreated
-                let existingBalance = self.balancesRepo.balancesDetailsValue.first(where: { (balance) -> Bool in
-                    return balance.asset == asset.code
-                })
+                let existingBalance = self.balancesRepo.convertedBalancesStatesValue.first(where: { (state) -> Bool in
+                    return state.balance?.asset?.id == asset.code
+                })?.balance
                 if existingBalance != nil {
                     balanceState = .created
                 }

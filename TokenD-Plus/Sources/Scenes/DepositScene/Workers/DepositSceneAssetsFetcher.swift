@@ -89,7 +89,7 @@ extension DepositScene {
         
         private func observeBalances() {
             self.balancesRepo
-                .observeBalancesDetails()
+                .observeConvertedBalancesStates()
                 .subscribe(onNext: { (_) in
                     self.updateDepositableAssets()
                 })

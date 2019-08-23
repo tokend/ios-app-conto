@@ -50,7 +50,7 @@ extension TokenDetailsScene {
         
         private func observeBalances() {
             self.balancesRepo
-                .observeBalancesDetails()
+                .observeConvertedBalancesStates()
                 .subscribe(onNext: { [weak self] (_) in
                     self?.updateTokens()
                 })
@@ -59,15 +59,17 @@ extension TokenDetailsScene {
         
         private func updateTokens() {
             let assets = self.assetsRepo.assetsValue
-            let balances = self.balancesRepo.balancesDetailsValue
-            
+            let balances = self.balancesRepo.convertedBalancesStatesValue
             let tokens = assets.map({ (asset) -> Token in
                 let imageKey: ImagesUtility.ImageKey? = asset.defaultDetails?.logo?.imageKey
                 let iconUrl = self.imagesUtility.getImageURL(imageKey)
                 
-                let balanceState = balances.first(where: { (state) -> Bool in
-                    return state.asset == asset.code
-                })?.tokenBalanceState ?? .notCreated
+                var balanceState: Token.BalanceState = .notCreated
+                if let balanceId = balances.first(where: { (state) -> Bool in
+                    return state.balance?.asset?.id == asset.code
+                })?.balance?.id {
+                    balanceState = .created(balanceId: balanceId)
+                }
                 
                 return self.createTokenWithAsset(
                     asset,
@@ -151,19 +153,6 @@ extension TokenDetailsScene {
         
         public func tokenForIdentifier(_ identifier: TokenIdentifier) -> Token? {
             return self.findTokenWithIdentifier(identifier, in: self.tokensBehaviorRelay.value)
-        }
-    }
-}
-
-private extension BalancesRepo.BalanceState {
-    var tokenBalanceState: TokenDetailsScene.Model.Token.BalanceState {
-        switch self {
-            
-        case .creating:
-            return .creating
-            
-        case .created(let details):
-            return .created(balanceId: details.balanceId)
         }
     }
 }

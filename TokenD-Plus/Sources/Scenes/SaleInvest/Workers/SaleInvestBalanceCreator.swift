@@ -61,19 +61,23 @@ extension SaleInvest {
             completion: @escaping ((SaleInvestBalanceCreateResult) -> Void)
             ) {
             
-            guard let balance = self.balancesRepo.balancesDetailsValue
+            guard
+                let state = self.balancesRepo.convertedBalancesStatesValue
                 .first(where: { (state) -> Bool in
-                    return state.asset == asset
+                    return state.balance?.asset?.id == asset
                 }),
-                case let BalancesRepo.BalanceState.created(details) = balance else {
+                let balanceResource = state.balance,
+                let balance = state.initialAmounts,
+                let asset = balanceResource.asset?.name,
+                let balanceId = balanceResource.id else {
                     completion(.failure)
                     return
             }
             
             let createdBalance = SaleInvest.Model.BalanceDetails(
-                asset: details.asset,
-                balance: details.balance,
-                balanceId: details.balanceId,
+                asset: asset,
+                balance:  balance.available,
+                balanceId: balanceId,
                 prevOfferId: nil
             )
             completion(.success(createdBalance))
