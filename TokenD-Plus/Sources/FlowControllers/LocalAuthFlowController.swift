@@ -328,9 +328,7 @@ class LocalAuthFlowController: BaseFlowController {
                 self?.showSuccessMessage(
                     title: Localized(.success),
                     message: message,
-                    completion: { [weak self] in
-                        self?.onKYCFailed()
-                    },
+                    completion: nil,
                     presentViewController: presenter
                 )
             }, showValidationError: { [weak self] (message) in
