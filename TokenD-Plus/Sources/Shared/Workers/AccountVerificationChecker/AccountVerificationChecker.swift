@@ -56,6 +56,7 @@ public class AccountVerificationChecker {
                     
                 case .success(let document):
                     guard let request = document.data?.first else {
+                        self?.hideLoading()
                         self?.completion(.unverified)
                         return
                     }
@@ -74,6 +75,7 @@ public class AccountVerificationChecker {
         switch requestDetailsType {
             
         case .changeRoleRequestDetails:
+            self.hideLoading()
             switch request.stateValue {
                 
             case .approved:
@@ -94,7 +96,6 @@ public class AccountVerificationChecker {
             case .unknown:
                 self.completion(.message(Localized(.unknown)))
             }
-            self.hideLoading()
             
         default:
             self.hideLoading()
