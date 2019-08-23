@@ -247,6 +247,7 @@ extension BalancesList.Presenter: BalancesList.PresentationLogic {
         
         let viewModel = Event.SectionsUpdated.ViewModel(
             type: type,
+            selectedTabIdentifier: response.selectedTabIdentifier,
             selectedTabIndex: response.selectedTabIndex
         )
         self.presenterDispatch.display { (displayLogic) in

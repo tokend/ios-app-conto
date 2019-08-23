@@ -199,6 +199,7 @@ extension BalancesList.Event {
         
         public struct ViewModel {
             let type: Model.SceneTypeViewModel
+            let selectedTabIdentifier: Model.TabIdentifier
             let selectedTabIndex: Int?
         }
     }
