@@ -190,7 +190,7 @@ class AppController {
             originalAccountId: walletData.accountId
         )
         let balancesRepo = BalancesRepo(
-            api: self.reposControllerStack.api.balancesApi,
+            api: self.reposControllerStack.apiV3.accountsApi,
             transactionSender: transactionSender,
             originalAccountId: walletData.accountId,
             accountId: userDataProvider.accountId,

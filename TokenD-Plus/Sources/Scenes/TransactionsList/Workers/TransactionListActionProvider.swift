@@ -32,19 +32,16 @@ extension TransactionsListScene {
         
         // MARK: - Private properties
         
-        private let assetsRepo: AssetsRepo
         private let balancesRepo: BalancesRepo
         private let originalAccountId: String
         
         // MARK: -
         
         init(
-            assetsRepo: AssetsRepo,
             balancesRepo: BalancesRepo,
             originalAccountId: String
             ) {
             
-            self.assetsRepo = assetsRepo
             self.balancesRepo = balancesRepo
             self.originalAccountId = originalAccountId
         }
@@ -55,10 +52,11 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
     
     func getActions(asset: String) -> [TransactionsListScene.ActionModel] {
         var actions: [TransactionsListScene.ActionModel] = []
-        guard let asset = self.assetsRepo.assetsValue
-            .first(where: { (storedAsset) -> Bool in
-                return storedAsset.code == asset
-            }) else {
+        guard
+            let state = self.balancesRepo.convertedBalancesStatesValue.first(where: { (state) -> Bool in
+            return state.balance?.asset?.id == asset
+        }), let assetResource = state.balance?.asset,
+            let assetOwner = assetResource.owner?.id else {
                 return []
         }
         
@@ -67,42 +65,34 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
             image: Assets.receive.image,
             type: .receive
         )
-        if let state = balancesRepo.balancesDetailsValue
-            .first(where: { (state) -> Bool in
-                return state.asset == asset.code
-            }) {
+        if
+            let balanceId = state.balance?.id,
+            let balance = state.initialAmounts {
             
-            switch state {
+            if balance.available > 0 {
+                let sendAction = TransactionsListScene.ActionModel(
+                    title: Localized(.send),
+                    image: Assets.paymentAction.image,
+                    type: .send(balanceId: balanceId)
+                )
+                actions.append(sendAction)
+                actions.append(receiveAction)
                 
-            case .created(let details):
-                if details.balance > 0 {
-                    let sendAction = TransactionsListScene.ActionModel(
-                        title: Localized(.send),
-                        image: Assets.paymentAction.image,
-                        type: .send(balanceId: details.balanceId)
+                if assetOwner == self.originalAccountId {
+                    let acceptRedeemAction = TransactionsListScene.ActionModel(
+                        title: Localized(.accept_redemption),
+                        image: Assets.scanQrIcon.image,
+                        type: .acceptRedeem
                     )
-                    actions.append(sendAction)
-                    actions.append(receiveAction)
-                    
-                    if asset.owner == self.originalAccountId {
-                        let acceptRedeemAction = TransactionsListScene.ActionModel(
-                            title: Localized(.accept_redemption),
-                            image: Assets.scanQrIcon.image,
-                            type: .acceptRedeem
-                        )
-                        actions.append(acceptRedeemAction)
-                    } else {
-                        let createRedeemAction = TransactionsListScene.ActionModel(
-                            title: Localized(.redeem),
-                            image: Assets.redeem.image,
-                            type: .createRedeem(balanceId: details.balanceId)
-                        )
-                        actions.append(createRedeemAction)
-                    }
+                    actions.append(acceptRedeemAction)
+                } else {
+                    let createRedeemAction = TransactionsListScene.ActionModel(
+                        title: Localized(.redeem),
+                        image: Assets.redeem.image,
+                        type: .createRedeem(balanceId: balanceId)
+                    )
+                    actions.append(createRedeemAction)
                 }
-                
-            case .creating:
-                break
             }
         } else {
             actions.append(receiveAction)
@@ -114,21 +104,13 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
     func getActions(balanceId: String) -> [TransactionsListScene.ActionModel] {
         var actions: [TransactionsListScene.ActionModel] = []
         guard
-            let details = self.balancesRepo.balancesDetailsValue
-                .compactMap({ (state) -> BalancesRepo.BalanceDetails? in
-                    switch state {
-                    case .created(let details):
-                        return details
-                        
-                    case .creating:
-                        return nil
-                    }
-                }).first(where: { (details) -> Bool in
-                    return details.balanceId == balanceId
-                }),
-            let asset = self.assetsRepo.assetsValue.first(where: { (repoAsset) -> Bool in
-                return repoAsset.code == details.asset
-            }) else {
+            let state = self.balancesRepo.convertedBalancesStatesValue.first(where: { (state) -> Bool in
+                return state.balance?.id == balanceId
+            }),
+            let balance = state.initialAmounts,
+            let balanceId = state.balance?.id,
+            let assetResource = state.balance?.asset,
+            let assetOwner = assetResource.owner?.id else {
                 return []
         }
         
@@ -138,11 +120,11 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
             type: .receive
         )
         
-        if details.balance > 0 {
+        if balance.available > 0 {
             let sendAction = TransactionsListScene.ActionModel(
                 title: Localized(.send),
                 image: Assets.paymentAction.image,
-                type: .send(balanceId: details.balanceId)
+                type: .send(balanceId: balanceId)
             )
             actions.append(sendAction)
             actions.append(receiveAction)
@@ -150,7 +132,7 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
             actions.append(receiveAction)
         }
         
-        if asset.owner == self.originalAccountId {
+        if assetOwner == self.originalAccountId {
             let acceptRedeemAction = TransactionsListScene.ActionModel(
                 title: Localized(.accept_redemption),
                 image: Assets.scanQrIcon.image,
@@ -158,11 +140,11 @@ extension TransactionsListScene.ActionProvider: TransactionsListScene.ActionProv
             )
             actions.append(acceptRedeemAction)
         } else {
-            if details.balance > 0 {
+            if balance.available > 0 {
                 let createRedeemAction = TransactionsListScene.ActionModel(
                     title: Localized(.redeem),
                     image: Assets.redeem.image,
-                    type: .createRedeem(balanceId: details.balanceId)
+                    type: .createRedeem(balanceId: balanceId)
                 )
                 actions.append(createRedeemAction)
             }

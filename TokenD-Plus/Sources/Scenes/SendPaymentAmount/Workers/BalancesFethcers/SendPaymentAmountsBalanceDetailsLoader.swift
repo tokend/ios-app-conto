@@ -36,7 +36,6 @@ extension SendPaymentAmount {
         // MARK: - Private properties
         
         private let balancesRepo: BalancesRepo
-        private let assetsRepo: AssetsRepo
         private let operation: SendPaymentAmount.Model.Operation
         private let ownerAccountId: String
         
@@ -44,13 +43,11 @@ extension SendPaymentAmount {
         
         init(
             balancesRepo: BalancesRepo,
-            assetsRepo: AssetsRepo,
             operation: SendPaymentAmount.Model.Operation,
             ownerAccountId: String
             ) {
             
             self.balancesRepo = balancesRepo
-            self.assetsRepo = assetsRepo
             self.operation = operation
             self.ownerAccountId = ownerAccountId
         }
@@ -62,22 +59,20 @@ extension SendPaymentAmount {
             ) -> [SendPaymentAmount.Model.BalanceDetails] {
             
             return balances.filter { [weak self] (balance) -> Bool in
-                if let ownerAccountId = self?.ownerAccountId,
-                    let asset = self?.assetsRepo.assetsValue.first(where: { (asset) -> Bool in
-                        return asset.code == balance.assetCode &&
-                            asset.owner == ownerAccountId
-                    }) {
-                    return Int32(asset.policy) & AssetPolicy.withdrawable.rawValue == AssetPolicy.withdrawable.rawValue
+                if
+                    let ownerAccountId = self?.ownerAccountId,
+                    let state = self?.balancesRepo.convertedBalancesStatesValue.first(where: { (state) -> Bool in
+                        return state.balance?.id == balance.balanceId
+                    }),
+                    let assetResource = state.balance?.asset,
+                    let assetOwner = assetResource.owner?.id,
+                    let policy = assetResource.policies?.value,
+                    ownerAccountId == assetOwner
+                    {
+                    return policy == AssetPolicy.withdrawable.rawValue
                 }
                 return false
             }
-        }
-        
-        private func getAssetName(code: String) -> String {
-            let asset = self.assetsRepo.assetsValue.first(where: { (asset) -> Bool in
-                return asset.code == code
-            })
-            return asset?.defaultDetails?.name ?? code
         }
     }
 }
@@ -148,7 +143,7 @@ extension SendPaymentAmount.BalanceDetailsLoaderWorker: SendPaymentAmount.Balanc
     }
     
     func loadBalanceDetails() {
-        self.balancesRepo.reloadBalancesDetails()
+        self.balancesRepo.reloadConvertedBalancesStates()
     }
 }
 

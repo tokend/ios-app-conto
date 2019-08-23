@@ -22,7 +22,6 @@ extension SendPaymentAmount {
         
         // MARK: - Private properties
         
-        private let assetsRepo: AssetsRepo
         private let balancesRepo: BalancesRepo
         private let networkRepo: NetworkInfoRepo
         private let keychainManager: KeychainManagerProtocol
@@ -32,7 +31,6 @@ extension SendPaymentAmount {
         // MARK: -
         
         init(
-            assetsRepo: AssetsRepo,
             balancesRepo: BalancesRepo,
             networkRepo: NetworkInfoRepo,
             keychainManager: KeychainManagerProtocol,
@@ -40,7 +38,6 @@ extension SendPaymentAmount {
             originalAccountId: String
             ) {
             
-            self.assetsRepo = assetsRepo
             self.balancesRepo = balancesRepo
             self.networkRepo = networkRepo
             self.keychainManager = keychainManager
@@ -84,15 +81,11 @@ extension SendPaymentAmount {
             ) {
             
             guard
-                let repoAsset = self.assetsRepo.assetsValue
-                    .first(where: { (storedAsset) -> Bool in
-                        return storedAsset.code == assetCode
-                    }),
-                let balanceState = self.balancesRepo.balancesDetailsValue
-                    .first(where: { (state) -> Bool in
-                        return state.asset == repoAsset.code
-                    }),
-                case let BalancesRepo.BalanceState.created(details) = balanceState else {
+                let state = self.balancesRepo.convertedBalancesStatesValue.first(where: { (state) -> Bool in
+                return state.balance?.asset?.id == assetCode
+            }),
+                let assetOwner = state.balance?.asset?.owner?.id,
+                let balanceId = state.balance?.id else {
                     completion(.failure(.noBalance))
                     return
             }
@@ -102,8 +95,8 @@ extension SendPaymentAmount {
                 assetName: assetName,
                 amount: amount,
                 networkInfo: networkInfo,
-                ownerAccountId: repoAsset.owner,
-                balanceId: details.balanceId,
+                ownerAccountId: assetOwner,
+                balanceId: balanceId,
                 completion: completion
             )
         }

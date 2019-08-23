@@ -29,13 +29,8 @@ extension TransactionsListScene {
         private let originalAccountId: String
         private var targetBaseAsset: String?
         private var balancesIds: [String] {
-            return self.balancesRepo.balancesDetailsValue.compactMap({ (balance) -> String? in
-                switch balance {
-                case .created(let details):
-                    return details.balanceId
-                case .creating:
-                    return nil
-                }
+            return self.balancesRepo.convertedBalancesStatesValue.compactMap({ (state) -> String? in
+                return state.balance?.id
             })
         }
         
@@ -117,7 +112,7 @@ extension TransactionsListScene {
         // MARK: - Private
         
         private func reloadBalancesDetails() {
-            self.balancesRepo.reloadBalancesDetails()
+            self.balancesRepo.reloadConvertedBalancesStates()
         }
         
         private func observeRepoLoadingStatus() {

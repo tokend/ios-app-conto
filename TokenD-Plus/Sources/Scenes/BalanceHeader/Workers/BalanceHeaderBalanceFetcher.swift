@@ -1,4 +1,5 @@
 import Foundation
+import TokenDSDK
 import RxCocoa
 import RxSwift
 
@@ -20,8 +21,6 @@ extension BalanceHeader {
         private let balance: BehaviorRelay<BalanceHeader.Model.Balance?> = BehaviorRelay(value: nil)
         private let imageUtility: ImagesUtility
         
-        private var balances: [BalancesRepo.BalanceDetails] = []
-        private var assets: [AssetsRepo.Asset] = []
         private let disposeBag: DisposeBag = DisposeBag()
         
         private let balanceId: String
@@ -48,51 +47,31 @@ extension BalanceHeader {
             self.balancesRepo
                 .observeConvertedBalancesStates()
                 .subscribe(onNext: { [weak self] (states) in
-                    self?.balances = states.compactMap({ (state) -> BalancesRepo.BalanceDetails? in
-                        switch state {
-                            
-                        case .created(let balance):
-                            return balance
-                            
-                        case .creating:
-                            return nil
-                        }
-                    })
-                    self?.updateBalance()
+                    self?.updateBalance(states: states)
                 })
                 .disposed(by: self.disposeBag)
         }
         
-        private func observeAssetsRepo() {
-            self.assetsRepo
-                .observeAssets()
-                .subscribe(onNext: { [weak self] (assets) in
-                    self?.assets = assets
-                    self?.updateBalance()
-                })
-                .disposed(by: self.disposeBag)
-        }
-        
-        private func updateBalance() {
+        private func updateBalance(states: [ConvertedBalanceStateResource]) {
             guard
-                let balance = self.balances.first(where: { (balance) -> Bool in
-                    return balance.balanceId == self.balanceId
+                let state = states.first(where: { (state) -> Bool in
+                    return state.balance?.id == self.balanceId
                 }),
-                let asset = self.assets.first(where: { (asset) -> Bool in
-                    return asset.code == balance.asset
-                }),
-                let assetName = asset.defaultDetails?.name else {
+                let balanceResource = state.balance,
+                let balance = state.initialAmounts,
+                let asset = balanceResource.asset,
+                let assetName = asset.name else {
                     return
             }
             
             var iconUrl: URL?
-            if let key = asset.defaultDetails?.logo?.key {
+            if let key = asset.customDetails?.logo?.key {
                 let imageKey = ImagesUtility.ImageKey.key(key)
                 iconUrl = self.imageUtility.getImageURL(imageKey)
             }
             
             let amount = BalanceHeader.Model.Amount(
-                value: balance.balance,
+                value: balance.available,
                 assetName: assetName
             )
             
@@ -108,13 +87,11 @@ extension BalanceHeader {
 extension BalanceHeader.BalancesFetcher: BalanceHeader.BalanceFetcherProtocol {
     
     public func observeBalance() -> Observable<BalanceHeader.Model.Balance?> {
-        self.observeAssetsRepo()
         self.observeBalancesRepo()
-        
         return self.balance.asObservable()
     }
     
     public func reloadBalance() {
-        self.balancesRepo.reloadBalancesDetails()
+        self.balancesRepo.reloadConvertedBalancesStates()
     }
 }

@@ -358,31 +358,6 @@
 		DB720DE522C1396C00ED116A /* TradesListAssetColoringProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B1B22C1396B00ED116A /* TradesListAssetColoringProvider.swift */; };
 		DB720DE622C1396C00ED116A /* TradesListAssetPairsFetcherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B1C22C1396B00ED116A /* TradesListAssetPairsFetcherProtocol.swift */; };
 		DB720DE722C1396C00ED116A /* TradesListRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B1D22C1396B00ED116A /* TradesListRouting.swift */; };
-		DB720DE822C1396C00ED116A /* DashboardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B1F22C1396B00ED116A /* DashboardInteractor.swift */; };
-		DB720DE922C1396C00ED116A /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B2022C1396B00ED116A /* DashboardViewController.swift */; };
-		DB720DEA22C1396C00ED116A /* DashboardPaymentsPlugInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B2322C1396B00ED116A /* DashboardPaymentsPlugInInteractor.swift */; };
-		DB720DEB22C1396C00ED116A /* DashboardPaymentsPlugInRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B2422C1396B00ED116A /* DashboardPaymentsPlugInRouting.swift */; };
-		DB720DEC22C1396C00ED116A /* DashboardPaymentsPlugInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B2522C1396B00ED116A /* DashboardPaymentsPlugInViewController.swift */; };
-		DB720DED22C1396C00ED116A /* DashboardPaymentsPlugInConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B2622C1396B00ED116A /* DashboardPaymentsPlugInConfigurator.swift */; };
-		DB720DEE22C1396C00ED116A /* DashboardPaymentsPlugInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B2722C1396B00ED116A /* DashboardPaymentsPlugInPresenter.swift */; };
-		DB720DEF22C1396C00ED116A /* DashboardPaymentsPlugInModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B2822C1396B00ED116A /* DashboardPaymentsPlugInModels.swift */; };
-		DB720DF022C1396C00ED116A /* DashboardPaymentsPlugInAmountFormatterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B2A22C1396B00ED116A /* DashboardPaymentsPlugInAmountFormatterProtocol.swift */; };
-		DB720DF122C1396C00ED116A /* DashboardPaymentsPlugInAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B2B22C1396B00ED116A /* DashboardPaymentsPlugInAmountFormatter.swift */; };
-		DB720DF222C1396C00ED116A /* DashboardPaymentsPlugInBalancesFetcherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B2C22C1396B00ED116A /* DashboardPaymentsPlugInBalancesFetcherProtocol.swift */; };
-		DB720DF322C1396C00ED116A /* DashboardPaymentsPlugInBalancesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B2D22C1396B00ED116A /* DashboardPaymentsPlugInBalancesFetcher.swift */; };
-		DB720DF422C1396C00ED116A /* DashboardPaymentsPlugInRateProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B2E22C1396B00ED116A /* DashboardPaymentsPlugInRateProviderProtocol.swift */; };
-		DB720DF522C1396C00ED116A /* DashboardPendingOffersPreviewPlugInModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3022C1396B00ED116A /* DashboardPendingOffersPreviewPlugInModels.swift */; };
-		DB720DF622C1396C00ED116A /* DashboardPendingOffersPreviewPlugInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3122C1396B00ED116A /* DashboardPendingOffersPreviewPlugInViewController.swift */; };
-		DB720DF722C1396C00ED116A /* DashboardPendingOffersPreviewPlugInRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3222C1396B00ED116A /* DashboardPendingOffersPreviewPlugInRouting.swift */; };
-		DB720DF822C1396C00ED116A /* DashboardPendingOffersPreviewPlugInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3322C1396B00ED116A /* DashboardPendingOffersPreviewPlugInInteractor.swift */; };
-		DB720DF922C1396C00ED116A /* DashboardPendingOffersPreviewPlugInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3422C1396B00ED116A /* DashboardPendingOffersPreviewPlugInPresenter.swift */; };
-		DB720DFA22C1396C00ED116A /* DashboardPendingOffersPreviewPlugInConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3522C1396B00ED116A /* DashboardPendingOffersPreviewPlugInConfigurator.swift */; };
-		DB720DFB22C1396C00ED116A /* DashboardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3622C1396B00ED116A /* DashboardPresenter.swift */; };
-		DB720DFC22C1396C00ED116A /* DashboardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3722C1396B00ED116A /* DashboardModels.swift */; };
-		DB720DFD22C1396C00ED116A /* DashboardConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3822C1396B00ED116A /* DashboardConfigurator.swift */; };
-		DB720DFE22C1396C00ED116A /* DashboardRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3922C1396B00ED116A /* DashboardRouting.swift */; };
-		DB720DFF22C1396C00ED116A /* DashboardPlugInsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3B22C1396B00ED116A /* DashboardPlugInsProvider.swift */; };
-		DB720E0022C1396C00ED116A /* DashboardPlugInsProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3C22C1396B00ED116A /* DashboardPlugInsProviderProtocol.swift */; };
 		DB720E0122C1396C00ED116A /* TabBarContainerRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B3F22C1396B00ED116A /* TabBarContainerRouting.swift */; };
 		DB720E0222C1396C00ED116A /* TabBarContainerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B4022C1396B00ED116A /* TabBarContainerPresenter.swift */; };
 		DB720E0322C1396C00ED116A /* TabBarContainerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720B4122C1396B00ED116A /* TabBarContainerInteractor.swift */; };
@@ -1090,31 +1065,6 @@
 		DB720B1B22C1396B00ED116A /* TradesListAssetColoringProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesListAssetColoringProvider.swift; sourceTree = "<group>"; };
 		DB720B1C22C1396B00ED116A /* TradesListAssetPairsFetcherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesListAssetPairsFetcherProtocol.swift; sourceTree = "<group>"; };
 		DB720B1D22C1396B00ED116A /* TradesListRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesListRouting.swift; sourceTree = "<group>"; };
-		DB720B1F22C1396B00ED116A /* DashboardInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardInteractor.swift; sourceTree = "<group>"; };
-		DB720B2022C1396B00ED116A /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
-		DB720B2322C1396B00ED116A /* DashboardPaymentsPlugInInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPaymentsPlugInInteractor.swift; sourceTree = "<group>"; };
-		DB720B2422C1396B00ED116A /* DashboardPaymentsPlugInRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPaymentsPlugInRouting.swift; sourceTree = "<group>"; };
-		DB720B2522C1396B00ED116A /* DashboardPaymentsPlugInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPaymentsPlugInViewController.swift; sourceTree = "<group>"; };
-		DB720B2622C1396B00ED116A /* DashboardPaymentsPlugInConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPaymentsPlugInConfigurator.swift; sourceTree = "<group>"; };
-		DB720B2722C1396B00ED116A /* DashboardPaymentsPlugInPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPaymentsPlugInPresenter.swift; sourceTree = "<group>"; };
-		DB720B2822C1396B00ED116A /* DashboardPaymentsPlugInModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPaymentsPlugInModels.swift; sourceTree = "<group>"; };
-		DB720B2A22C1396B00ED116A /* DashboardPaymentsPlugInAmountFormatterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPaymentsPlugInAmountFormatterProtocol.swift; sourceTree = "<group>"; };
-		DB720B2B22C1396B00ED116A /* DashboardPaymentsPlugInAmountFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPaymentsPlugInAmountFormatter.swift; sourceTree = "<group>"; };
-		DB720B2C22C1396B00ED116A /* DashboardPaymentsPlugInBalancesFetcherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPaymentsPlugInBalancesFetcherProtocol.swift; sourceTree = "<group>"; };
-		DB720B2D22C1396B00ED116A /* DashboardPaymentsPlugInBalancesFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPaymentsPlugInBalancesFetcher.swift; sourceTree = "<group>"; };
-		DB720B2E22C1396B00ED116A /* DashboardPaymentsPlugInRateProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPaymentsPlugInRateProviderProtocol.swift; sourceTree = "<group>"; };
-		DB720B3022C1396B00ED116A /* DashboardPendingOffersPreviewPlugInModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPendingOffersPreviewPlugInModels.swift; sourceTree = "<group>"; };
-		DB720B3122C1396B00ED116A /* DashboardPendingOffersPreviewPlugInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPendingOffersPreviewPlugInViewController.swift; sourceTree = "<group>"; };
-		DB720B3222C1396B00ED116A /* DashboardPendingOffersPreviewPlugInRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPendingOffersPreviewPlugInRouting.swift; sourceTree = "<group>"; };
-		DB720B3322C1396B00ED116A /* DashboardPendingOffersPreviewPlugInInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPendingOffersPreviewPlugInInteractor.swift; sourceTree = "<group>"; };
-		DB720B3422C1396B00ED116A /* DashboardPendingOffersPreviewPlugInPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPendingOffersPreviewPlugInPresenter.swift; sourceTree = "<group>"; };
-		DB720B3522C1396B00ED116A /* DashboardPendingOffersPreviewPlugInConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPendingOffersPreviewPlugInConfigurator.swift; sourceTree = "<group>"; };
-		DB720B3622C1396B00ED116A /* DashboardPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPresenter.swift; sourceTree = "<group>"; };
-		DB720B3722C1396B00ED116A /* DashboardModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardModels.swift; sourceTree = "<group>"; };
-		DB720B3822C1396B00ED116A /* DashboardConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardConfigurator.swift; sourceTree = "<group>"; };
-		DB720B3922C1396B00ED116A /* DashboardRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardRouting.swift; sourceTree = "<group>"; };
-		DB720B3B22C1396B00ED116A /* DashboardPlugInsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPlugInsProvider.swift; sourceTree = "<group>"; };
-		DB720B3C22C1396B00ED116A /* DashboardPlugInsProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardPlugInsProviderProtocol.swift; sourceTree = "<group>"; };
 		DB720B3F22C1396B00ED116A /* TabBarContainerRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarContainerRouting.swift; sourceTree = "<group>"; };
 		DB720B4022C1396B00ED116A /* TabBarContainerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarContainerPresenter.swift; sourceTree = "<group>"; };
 		DB720B4122C1396B00ED116A /* TabBarContainerInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarContainerInteractor.swift; sourceTree = "<group>"; };
@@ -1753,7 +1703,6 @@
 				DB720F2322C2283C00ED116A /* CompaniesList */,
 				DB720AE522C1396B00ED116A /* Confirmation */,
 				DB720A9422C1396B00ED116A /* CreateOffer */,
-				DB720B1E22C1396B00ED116A /* Dashboard */,
 				DB720B9822C1396B00ED116A /* DepositScene */,
 				DBC165362302F36D002A50F7 /* EnvironmnentsList */,
 				DB720AFB22C1396B00ED116A /* ExploreTokens */,
@@ -2572,86 +2521,6 @@
 				DB720B1C22C1396B00ED116A /* TradesListAssetPairsFetcherProtocol.swift */,
 			);
 			path = Workers;
-			sourceTree = "<group>";
-		};
-		DB720B1E22C1396B00ED116A /* Dashboard */ = {
-			isa = PBXGroup;
-			children = (
-				DB720B3822C1396B00ED116A /* DashboardConfigurator.swift */,
-				DB720B1F22C1396B00ED116A /* DashboardInteractor.swift */,
-				DB720B3722C1396B00ED116A /* DashboardModels.swift */,
-				DB720B3622C1396B00ED116A /* DashboardPresenter.swift */,
-				DB720B3922C1396B00ED116A /* DashboardRouting.swift */,
-				DB720B2022C1396B00ED116A /* DashboardViewController.swift */,
-				DB720B2122C1396B00ED116A /* PlugIns */,
-				DB720B3D22C1396B00ED116A /* Views */,
-				DB720B3A22C1396B00ED116A /* Workers */,
-			);
-			path = Dashboard;
-			sourceTree = "<group>";
-		};
-		DB720B2122C1396B00ED116A /* PlugIns */ = {
-			isa = PBXGroup;
-			children = (
-				DB720B2222C1396B00ED116A /* Payments */,
-				DB720B2F22C1396B00ED116A /* PendingOffers */,
-			);
-			path = PlugIns;
-			sourceTree = "<group>";
-		};
-		DB720B2222C1396B00ED116A /* Payments */ = {
-			isa = PBXGroup;
-			children = (
-				DB720B2322C1396B00ED116A /* DashboardPaymentsPlugInInteractor.swift */,
-				DB720B2422C1396B00ED116A /* DashboardPaymentsPlugInRouting.swift */,
-				DB720B2522C1396B00ED116A /* DashboardPaymentsPlugInViewController.swift */,
-				DB720B2622C1396B00ED116A /* DashboardPaymentsPlugInConfigurator.swift */,
-				DB720B2722C1396B00ED116A /* DashboardPaymentsPlugInPresenter.swift */,
-				DB720B2822C1396B00ED116A /* DashboardPaymentsPlugInModels.swift */,
-				DB720B2922C1396B00ED116A /* Workers */,
-			);
-			path = Payments;
-			sourceTree = "<group>";
-		};
-		DB720B2922C1396B00ED116A /* Workers */ = {
-			isa = PBXGroup;
-			children = (
-				DB720B2A22C1396B00ED116A /* DashboardPaymentsPlugInAmountFormatterProtocol.swift */,
-				DB720B2B22C1396B00ED116A /* DashboardPaymentsPlugInAmountFormatter.swift */,
-				DB720B2C22C1396B00ED116A /* DashboardPaymentsPlugInBalancesFetcherProtocol.swift */,
-				DB720B2D22C1396B00ED116A /* DashboardPaymentsPlugInBalancesFetcher.swift */,
-				DB720B2E22C1396B00ED116A /* DashboardPaymentsPlugInRateProviderProtocol.swift */,
-			);
-			path = Workers;
-			sourceTree = "<group>";
-		};
-		DB720B2F22C1396B00ED116A /* PendingOffers */ = {
-			isa = PBXGroup;
-			children = (
-				DB720B3022C1396B00ED116A /* DashboardPendingOffersPreviewPlugInModels.swift */,
-				DB720B3122C1396B00ED116A /* DashboardPendingOffersPreviewPlugInViewController.swift */,
-				DB720B3222C1396B00ED116A /* DashboardPendingOffersPreviewPlugInRouting.swift */,
-				DB720B3322C1396B00ED116A /* DashboardPendingOffersPreviewPlugInInteractor.swift */,
-				DB720B3422C1396B00ED116A /* DashboardPendingOffersPreviewPlugInPresenter.swift */,
-				DB720B3522C1396B00ED116A /* DashboardPendingOffersPreviewPlugInConfigurator.swift */,
-			);
-			path = PendingOffers;
-			sourceTree = "<group>";
-		};
-		DB720B3A22C1396B00ED116A /* Workers */ = {
-			isa = PBXGroup;
-			children = (
-				DB720B3B22C1396B00ED116A /* DashboardPlugInsProvider.swift */,
-				DB720B3C22C1396B00ED116A /* DashboardPlugInsProviderProtocol.swift */,
-			);
-			path = Workers;
-			sourceTree = "<group>";
-		};
-		DB720B3D22C1396B00ED116A /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		DB720B3E22C1396B00ED116A /* TabBarContainer */ = {
@@ -3954,7 +3823,6 @@
 				DBCA02E722D885B500503025 /* SettingsBaseCell.swift in Sources */,
 				DB720CED22C1396B00ED116A /* VerifyEmailVerifyWorkerProtocol.swift in Sources */,
 				DB720DB622C1396B00ED116A /* SendPaymentAmountEnterAmountView.swift in Sources */,
-				DB720DF122C1396C00ED116A /* DashboardPaymentsPlugInAmountFormatter.swift in Sources */,
 				DBA1F21422FC2D7C0027B8B5 /* PaymentMethodPickerModels.swift in Sources */,
 				DB363E3522DF764700F5761C /* LanguagesListConfigurator.swift in Sources */,
 				DB720F3822C2361100ED116A /* CompaniesListEmptyView.swift in Sources */,
@@ -3979,11 +3847,9 @@
 				DB720E1822C1396C00ED116A /* RegisterSceneRegisterWorker.swift in Sources */,
 				DBC1655E2303FD2B002A50F7 /* AccountVerificationChecker.swift in Sources */,
 				DB4AE2FC22F2DF38001D0883 /* AddCompanyModels.swift in Sources */,
-				DB720DFB22C1396C00ED116A /* DashboardPresenter.swift in Sources */,
 				DB720D6222C1396B00ED116A /* TradeOffersAmountFormatterProtocol.swift in Sources */,
 				DB720ECE22C1396C00ED116A /* OrderBookTableViewCellModel.swift in Sources */,
 				DB28C4A922CFB79A005362FD /* ReceiveAddressHeader.swift in Sources */,
-				DB720DFC22C1396C00ED116A /* DashboardModels.swift in Sources */,
 				DB363E0522DCDBB700F5761C /* FacilitiesListPresenter.swift in Sources */,
 				DB720E4F22C1396C00ED116A /* DepositSceneAddressManager.swift in Sources */,
 				DB363E0822DCDBB700F5761C /* FacilitiesListViewController.swift in Sources */,
@@ -4040,7 +3906,6 @@
 				DB720E2722C1396C00ED116A /* SideMenuConfigurator.swift in Sources */,
 				DB720D6B22C1396B00ED116A /* TradeOffersConfigurator.swift in Sources */,
 				DB720DC322C1396C00ED116A /* SendPaymentConfirmationSectionsProvider.swift in Sources */,
-				DB720DEE22C1396C00ED116A /* DashboardPaymentsPlugInPresenter.swift in Sources */,
 				DB720E4822C1396C00ED116A /* DepositSceneModels.swift in Sources */,
 				DB720D9122C1396B00ED116A /* TransactionDetailsOperationSectionsProvider.swift in Sources */,
 				DB720E2C22C1396C00ED116A /* ReceiveAddressConfigurator.swift in Sources */,
@@ -4110,8 +3975,6 @@
 				DB720E0A22C1396C00ED116A /* AssetPickerModels.swift in Sources */,
 				DB720DE022C1396C00ED116A /* TradesListModels.swift in Sources */,
 				DB720E3322C1396C00ED116A /* ReceiveAddressShareUtilProtocol.swift in Sources */,
-				DB720DEB22C1396C00ED116A /* DashboardPaymentsPlugInRouting.swift in Sources */,
-				DB720DF422C1396C00ED116A /* DashboardPaymentsPlugInRateProviderProtocol.swift in Sources */,
 				DBC1655523035530002A50F7 /* KYCField.swift in Sources */,
 				DB720CEF22C1396B00ED116A /* TabsContainerInteractor.swift in Sources */,
 				DB720E2D22C1396C00ED116A /* ReceiveAddressInvoiceFormatter.swift in Sources */,
@@ -4131,7 +3994,6 @@
 				DB720CFD22C1396B00ED116A /* SaleListCell.swift in Sources */,
 				DB720DBD22C1396B00ED116A /* ConfirmationSceneModels.swift in Sources */,
 				DB720E7222C1396C00ED116A /* SaleDetailsLoadingView.swift in Sources */,
-				DB720DFF22C1396C00ED116A /* DashboardPlugInsProvider.swift in Sources */,
 				DB720EFE22C1396C00ED116A /* TransactionSender.swift in Sources */,
 				DB720EB622C1396C00ED116A /* FeeLoader.swift in Sources */,
 				DB4AE2C822EB3B8F001D0883 /* AtomicSwapViewController.swift in Sources */,
@@ -4143,7 +4005,6 @@
 				DB720EA722C1396C00ED116A /* TermsInfoProvider.swift in Sources */,
 				DB720D3422C1396B00ED116A /* MarkdownViewerModels.swift in Sources */,
 				DB720EB822C1396C00ED116A /* ContactEmailPickerHandler.swift in Sources */,
-				DB720DE922C1396C00ED116A /* DashboardViewController.swift in Sources */,
 				DB3DDBEF23044D1E0002E540 /* FiatPaymentModels.swift in Sources */,
 				DB720D0622C1396B00ED116A /* FeesCardCell.swift in Sources */,
 				DB720D2F22C1396B00ED116A /* MarkdownViewerRouting.swift in Sources */,
@@ -4177,8 +4038,6 @@
 				DB720CDD22C1396B00ED116A /* UpdatePasswordViewController.swift in Sources */,
 				DB720E3522C1396C00ED116A /* ReceiveAddressQRCell.swift in Sources */,
 				DB4AE2C722EB3B8F001D0883 /* AtomicSwapModels.swift in Sources */,
-				DB720DF722C1396C00ED116A /* DashboardPendingOffersPreviewPlugInRouting.swift in Sources */,
-				DB720DF322C1396C00ED116A /* DashboardPaymentsPlugInBalancesFetcher.swift in Sources */,
 				DB720E6822C1396C00ED116A /* TransactionsListConfigurator.swift in Sources */,
 				DB720EF422C1396C00ED116A /* TFADataProvider.swift in Sources */,
 				DB720EAC22C1396C00ED116A /* PasswordValidator.swift in Sources */,
@@ -4222,7 +4081,6 @@
 				DBA5738E230596A4007DBA2D /* PaymentMethodFiatPaymentSender.swift in Sources */,
 				DB720F1722C1396C00ED116A /* BalancesListFlowController.swift in Sources */,
 				DB720E9122C1396C00ED116A /* String+QueueLabel.swift in Sources */,
-				DB720DF222C1396C00ED116A /* DashboardPaymentsPlugInBalancesFetcherProtocol.swift in Sources */,
 				DB720DCA22C1396C00ED116A /* ConfirmationTitleTextView.swift in Sources */,
 				DB720E6322C1396C00ED116A /* TransactionsListSceneTransactionsProviderProtocol.swift in Sources */,
 				DB720D0D22C1396B00ED116A /* TokenDetailsInteractor.swift in Sources */,
@@ -4241,7 +4099,6 @@
 				DB720CC022C1396B00ED116A /* SaleInvestViewController.swift in Sources */,
 				DB720CB922C1396B00ED116A /* SaleInvestInteractor.swift in Sources */,
 				DB720CCE22C1396B00ED116A /* SaleOverviewInteractor.swift in Sources */,
-				DB720DF022C1396C00ED116A /* DashboardPaymentsPlugInAmountFormatterProtocol.swift in Sources */,
 				DB720E3122C1396C00ED116A /* ReceiveAddressInvoiceFormatterProtocol.swift in Sources */,
 				DB720CE822C1396B00ED116A /* VerifyEmailViewController.swift in Sources */,
 				DB720D5B22C1396B00ED116A /* SendPaymentDestinationRecipientAddressView.swift in Sources */,
@@ -4309,7 +4166,6 @@
 				DB720F1222C1396C00ED116A /* CompanyFlowController.swift in Sources */,
 				DBA1F21522FC2D7C0027B8B5 /* PaymentMethodPickerConfigurator.swift in Sources */,
 				DB720E2B22C1396C00ED116A /* ReceiveAddressRouting.swift in Sources */,
-				DB720DF622C1396C00ED116A /* DashboardPendingOffersPreviewPlugInViewController.swift in Sources */,
 				DB720EBB22C1396C00ED116A /* TimerApplication.swift in Sources */,
 				DB720F5922C4CD1C00ED116A /* PollsVoteWorker.swift in Sources */,
 				DB720D5422C1396B00ED116A /* WithdrawRecipientAddressResolver.swift in Sources */,
@@ -4368,7 +4224,6 @@
 				DB4AE2C522EB3B8F001D0883 /* AtomicSwapPresenter.swift in Sources */,
 				DB720EC522C1396C00ED116A /* HorizontalPicker.swift in Sources */,
 				DB720D5622C1396B00ED116A /* SendPaymentDestinationRecipientAddressResolver.swift in Sources */,
-				DB720DFE22C1396C00ED116A /* DashboardRouting.swift in Sources */,
 				DB720E2622C1396C00ED116A /* SideMenuHeaderView.swift in Sources */,
 				DB720F1522C1396C00ED116A /* LocalAuthFlowController.swift in Sources */,
 				DB720E4022C1396C00ED116A /* BalancesListAmountFormatter.swift in Sources */,
@@ -4392,14 +4247,12 @@
 				DB720DC622C1396C00ED116A /* ConfirmationPercentFormatterProtocol.swift in Sources */,
 				DB720DBF22C1396C00ED116A /* SaleInvestConfirmationProvider.swift in Sources */,
 				DB720ED622C1396C00ED116A /* BXFStaticTableViewButtonCellModel.swift in Sources */,
-				DB720DF822C1396C00ED116A /* DashboardPendingOffersPreviewPlugInInteractor.swift in Sources */,
 				DB720E9A22C1396C00ED116A /* UISegmentedControl+FillWithSegments.swift in Sources */,
 				DB720E8622C1396C00ED116A /* AppDelegate.swift in Sources */,
 				DB720D9B22C1396B00ED116A /* TabBarConfigurator.swift in Sources */,
 				DB720F3622C22A5300ED116A /* CompaniesListCompaniesFethcer.swift in Sources */,
 				DB720E1722C1396C00ED116A /* RegisterSceneConfigurator.swift in Sources */,
 				DB720E7C22C1396C00ED116A /* BiometricsAuthConfigurator.swift in Sources */,
-				DB720DFD22C1396C00ED116A /* DashboardConfigurator.swift in Sources */,
 				DB720F2E22C2286C00ED116A /* CompaniesListInteractor.swift in Sources */,
 				DB720D2422C1396B00ED116A /* AuthenticatorAuthInteractor.swift in Sources */,
 				DB720CF722C1396B00ED116A /* SalesConfigurator.swift in Sources */,
@@ -4407,7 +4260,6 @@
 				DB720CB322C1396B00ED116A /* SettingsPushCell.swift in Sources */,
 				DB720E4D22C1396C00ED116A /* DepositSceneDateFormatterProtocol.swift in Sources */,
 				DB720CF322C1396B00ED116A /* TabsContainerViewController.swift in Sources */,
-				DB720DED22C1396C00ED116A /* DashboardPaymentsPlugInConfigurator.swift in Sources */,
 				DB720E0522C1396C00ED116A /* TabBarContainerConfigurator.swift in Sources */,
 				DB720D6D22C1396B00ED116A /* BalanceHeaderWithPickerInteractor.swift in Sources */,
 				DB720EFB22C1396C00ED116A /* KeychainManager.swift in Sources */,
@@ -4426,7 +4278,6 @@
 				DB720D1B22C1396B00ED116A /* AuthenticatorAuthPresenter.swift in Sources */,
 				DB720E2922C1396C00ED116A /* ReceiveAddressViewController.swift in Sources */,
 				DB720D9C22C1396B00ED116A /* TabBarTabBarItem.swift in Sources */,
-				DB720DE822C1396C00ED116A /* DashboardInteractor.swift in Sources */,
 				DBA3F3F823059E07008401B7 /* PhoneNumberModels.swift in Sources */,
 				DB720CDC22C1396B00ED116A /* UpdatePasswordPresenter.swift in Sources */,
 				DB720D1622C1396B00ED116A /* TokenDetailsTokenSummaryCell.swift in Sources */,
@@ -4470,7 +4321,6 @@
 				DBA1F20622FC2D640027B8B5 /* PaymentMethodAmountFormatter.swift in Sources */,
 				DB720D2322C1396B00ED116A /* AuthenticatorAuthConfigurator.swift in Sources */,
 				DB720ED122C1396C00ED116A /* BXFStaticTableViewInputCell.swift in Sources */,
-				DB720DEC22C1396C00ED116A /* DashboardPaymentsPlugInViewController.swift in Sources */,
 				DB720CD622C1396B00ED116A /* SaleOverviewRouting.swift in Sources */,
 				DB720DE422C1396C00ED116A /* TradesListAmountFormatterProtocol.swift in Sources */,
 				DB720F2B22C2286C00ED116A /* CompaniesListRouting.swift in Sources */,
@@ -4498,7 +4348,6 @@
 				DB720DCF22C1396C00ED116A /* ExploreTokensRouting.swift in Sources */,
 				DB720D7122C1396B00ED116A /* BalanceHeaderWithPickerAmountFormatter.swift in Sources */,
 				DB720D0322C1396B00ED116A /* FeeAmountFormatter.swift in Sources */,
-				DB720DEA22C1396C00ED116A /* DashboardPaymentsPlugInInteractor.swift in Sources */,
 				DB720DBA22C1396B00ED116A /* ConfirmationSceneRouting.swift in Sources */,
 				DB720CBE22C1396B00ED116A /* SaleInvestAmountFormatter.swift in Sources */,
 				DB4AE2BD22E9F6D5001D0883 /* TitleView.swift in Sources */,
@@ -4527,7 +4376,6 @@
 				DB720EA122C1396C00ED116A /* QRCodeReaderView.swift in Sources */,
 				DB720F5722C4CD1C00ED116A /* PollsPercentFormatter.swift in Sources */,
 				DB720D2222C1396B00ED116A /* AuthenticatorAuthViewController.swift in Sources */,
-				DB720DFA22C1396C00ED116A /* DashboardPendingOffersPreviewPlugInConfigurator.swift in Sources */,
 				DB720CC222C1396B00ED116A /* SaleInvestExistingInvestmentCell.swift in Sources */,
 				DB720CCD22C1396B00ED116A /* BalancePickerBalanceCell.swift in Sources */,
 				DB720ED422C1396C00ED116A /* BXFInteractiveLabel.swift in Sources */,
@@ -4541,7 +4389,6 @@
 				DB720E1A22C1396C00ED116A /* RegisterSceneLocalSignInWorker.swift in Sources */,
 				DB720E3A22C1396C00ED116A /* BalancesListModels.swift in Sources */,
 				DB720E2522C1396C00ED116A /* SideMenuTableViewCell.swift in Sources */,
-				DB720DF922C1396C00ED116A /* DashboardPendingOffersPreviewPlugInPresenter.swift in Sources */,
 				DB720E2122C1396C00ED116A /* SideMenuPresenter.swift in Sources */,
 				DB720EA822C1396C00ED116A /* BalanceBinderProtocol.swift in Sources */,
 				DB720D6C22C1396B00ED116A /* TradeOffersViewController.swift in Sources */,
@@ -4595,12 +4442,10 @@
 				DB720EED22C1396C00ED116A /* AssetsRepo.swift in Sources */,
 				DB720EA422C1396C00ED116A /* NavigationController.swift in Sources */,
 				DB720ED322C1396C00ED116A /* BXFStaticTableViewUtils.swift in Sources */,
-				DB720DEF22C1396C00ED116A /* DashboardPaymentsPlugInModels.swift in Sources */,
 				DB720DAF22C1396B00ED116A /* SendPaymentAmountInteractor.swift in Sources */,
 				DB720CF922C1396B00ED116A /* SalesViewController.swift in Sources */,
 				DB720CF222C1396B00ED116A /* TabsContainerContentProvider.swift in Sources */,
 				DB363E3022DF764700F5761C /* LanguagesListPresenter.swift in Sources */,
-				DB720E0022C1396C00ED116A /* DashboardPlugInsProviderProtocol.swift in Sources */,
 				DB720CBA22C1396B00ED116A /* SaleInvestDataProvider.swift in Sources */,
 				DB720D5922C1396B00ED116A /* SendPaymentDestinationContactCell.swift in Sources */,
 				DB720D7622C1396B00ED116A /* BalanceHeaderWithPickerView.swift in Sources */,
@@ -4622,7 +4467,6 @@
 				DB720D3022C1396B00ED116A /* MarkdownViewerConfigurator.swift in Sources */,
 				DB720E3622C1396C00ED116A /* ReceiveAddressPresenter.swift in Sources */,
 				DB720EA522C1396C00ED116A /* Assets.swift in Sources */,
-				DB720DF522C1396C00ED116A /* DashboardPendingOffersPreviewPlugInModels.swift in Sources */,
 				DB720D5222C1396B00ED116A /* SendPaymentDestinationInteractor.swift in Sources */,
 				DB720D8D22C1396B00ED116A /* TransactionDetailsDateFormatter.swift in Sources */,
 				DB720CE322C1396B00ED116A /* UpdatePasswordConfigurator.swift in Sources */,

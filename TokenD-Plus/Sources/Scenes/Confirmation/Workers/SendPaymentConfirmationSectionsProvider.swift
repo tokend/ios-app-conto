@@ -154,7 +154,7 @@ extension ConfirmationScene {
                     switch result {
                     case .succeeded:
                         self.historyRepo.reloadTransactions()
-                        self.balancesRepo.reloadBalancesDetails()
+                        self.balancesRepo.reloadConvertedBalancesStates()
                         completion(.succeeded)
                     case .failed(let error):
                         completion(.failed(.sendTransactionError(error)))

@@ -180,7 +180,7 @@ extension ExploreTokensScene {
         
         func reloadTokens() {
             self.assetsRepo.reloadAssets()
-            self.balancesRepo.reloadBalancesDetails()
+            self.balancesRepo.reloadConvertedBalancesStates()
         }
         
         func tokenForIdentifier(_ identifier: TokenIdentifier) -> Token? {
