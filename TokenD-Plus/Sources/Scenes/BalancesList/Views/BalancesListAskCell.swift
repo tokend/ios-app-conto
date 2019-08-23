@@ -224,7 +224,7 @@ extension BalancesList {
                 }
                 
                 self.labelsContainer.snp.makeConstraints { (make) in
-                    make.leading.equalTo(self.abbreviationView.snp.trailing).offset(self.sideInset)
+                    make.leading.equalTo(self.abbreviationView.snp.trailing)
                     make.trailing.equalTo(self.buyButton.snp.leading).offset(-self.sideInset/2)
                     make.top.bottom.equalToSuperview()
                 }
@@ -248,7 +248,7 @@ extension BalancesList {
                 self.buyButton.snp.makeConstraints { (make) in
                     make.trailing.equalToSuperview().inset(self.sideInset)
                     make.bottom.equalToSuperview().inset(self.topInset / 2)
-                    make.width.equalTo(70.0)
+                    make.width.equalTo(60.0)
                     make.height.equalTo(30.0)
                 }
                 

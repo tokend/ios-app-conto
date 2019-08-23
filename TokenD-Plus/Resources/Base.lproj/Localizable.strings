@@ -256,6 +256,7 @@
 "funded_lowercase" = "funded";
 "general" = "General";
 "get_address" = "Get address";
+"github" = "GitHub";
 "goal" = "goal\n$(amount)";
 "goal_replace_amount" = "amount";
 "go_to_confirmation" = "Go to confirmation";

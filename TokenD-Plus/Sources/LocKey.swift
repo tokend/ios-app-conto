@@ -259,6 +259,7 @@ enum LocKey: String {
     case funded_lowercase
     case general
     case get_address
+    case github
     case goal
     case goal_replace_amount
     case go_to_confirmation
