@@ -93,6 +93,7 @@
 "card_owner" = "Card owner";
 "change_password" = "Change Password";
 "change_phone" = "Change Phone number";
+"change_telegram" = "Change Telegram username";
 "charged" = "Charged";
 "charged_from_lock" = "Charged from lock";
 "chart" = "Chart";
@@ -489,6 +490,8 @@
 "set_phone_number" = "Set Phone number";
 "set_phone_number_hint" = "Add your phone number to the account to let your friends find you faster";
 "set_placeholder" = "Set placeholder";
+"set_telegram" = "Set Telegram username";
+"set_telegram_hint" = "Add your Telegram username to the account to let your friends find you faster";
 "set_up_2fa" = "Set up 2FA";
 "settings" = "Settings";
 "shop" = "Shop";
@@ -524,6 +527,7 @@
 "surname" = "Surname";
 "swift_bic" = "SWIFT/BIC";
 "swift_bic_colon" = "SWIFT/BIC:";
+"telegram" = "Telegram";
 "terms_of_service" = "Terms of Service";
 "terms_of_service_not_agreed" = "Terms of Service not agreed";
 "terms_of_use" = "Terms of use";
@@ -623,4 +627,5 @@
 "you_have_already_invested" = "You have already contributed:";
 "you_have_no_depositable_assets" = "You have no depositable assets";
 "your_account_is_approved" = "Your account is approved. All actions that requires verification are now available";
+"your_username" = "Your username";
 "your_verification_request_is_submitted" = "Your verification request is submitted. Please wait until we review the information. You will be able to update details once the request is reviewed.";

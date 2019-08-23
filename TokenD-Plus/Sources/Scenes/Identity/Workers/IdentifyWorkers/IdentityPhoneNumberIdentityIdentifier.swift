@@ -1,20 +1,9 @@
 import Foundation
 import TokenDSDK
 
-public enum PhoneNumberIdentifyResult {
-    case didNotSet
-    case number(String)
-    case error(Swift.Error)
-}
-public protocol PhoneNumberPhoneNumberIdentifierProtocol {
-    func identifyBy(
-        accountId: String,
-        completion: @escaping(PhoneNumberIdentifyResult) -> Void
-        )
-}
 
-extension PhoneNumber {
-    public typealias PhoneNumberIdentifierProtocol = PhoneNumberPhoneNumberIdentifierProtocol
+extension Identity {
+    public typealias PhoneNumberIdentifierProtocol = IdentityIdentifierProtocol
     
     public class PhoneNumberIdentifier {
         
@@ -32,11 +21,11 @@ extension PhoneNumber {
     }
 }
 
-extension PhoneNumber.PhoneNumberIdentifier: PhoneNumber.PhoneNumberIdentifierProtocol {
+extension Identity.PhoneNumberIdentifier: Identity.PhoneNumberIdentifierProtocol {
     
     public func identifyBy(
         accountId: String,
-        completion: @escaping (PhoneNumberIdentifyResult) -> Void
+        completion: @escaping (IdentifyResult) -> Void
         ) {
         
         self.generalApi.requestIdentities(
@@ -54,7 +43,7 @@ extension PhoneNumber.PhoneNumberIdentifier: PhoneNumber.PhoneNumberIdentifierPr
                         completion(.didNotSet)
                         return
                     }
-                    completion(.number(number))
+                    completion(.value(number))
                 }
         })
     }

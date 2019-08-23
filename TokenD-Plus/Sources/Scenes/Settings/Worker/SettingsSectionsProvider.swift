@@ -172,9 +172,17 @@ extension Settings {
                 identifier: .phone
             )
             
+            let telegramCell = Model.CellModel(
+                title: Localized(.telegram),
+                icon: Assets.telegram.image,
+                cellType: .disclosureCell,
+                bottomSeparator: .line,
+                identifier: .telegram
+            )
+            
             let acountSection = Model.SectionModel(
                 title: Localized(.account),
-                cells: [accountIdCell, phoneCell],
+                cells: [accountIdCell, phoneCell, telegramCell],
                 description: ""
             )
             

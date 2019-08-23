@@ -1,15 +1,16 @@
 import Foundation
 
-extension PhoneNumber {
+extension Identity {
     
     public enum Configurator {
         
         public static func configure(
             viewController: ViewController,
             sceneModel: Model.SceneModel,
-            numberValidator: PhoneNumberValidatorProtocol,
-            numberSubmitWorker: PhoneNumberSubmitWorkerProtocol,
-            numberIdentifier: PhoneNumberIdentifierProtocol,
+            numberValidator: PhoneNumberValidatorProtocol?,
+            submitWorker: IdentitySubmitWorkerProtocol,
+            identityIdentifier: IdentityIdentifierProtocol,
+            viewConfig: Model.ViewConfig,
             routing: Routing?,
             onDeinit: DeinitCompletion = nil
             ) {
@@ -20,12 +21,13 @@ extension PhoneNumber {
                 presenter: presenter,
                 sceneModel: sceneModel,
                 numberValidator: numberValidator,
-                numberSubmitWorker: numberSubmitWorker,
-                numberIdentifier: numberIdentifier
+                submitWorker: submitWorker,
+                identityIdentifier: identityIdentifier
                 )
             let interactorDispatch = InteractorDispatch(businessLogic: interactor)
             viewController.inject(
                 interactorDispatch: interactorDispatch,
+                viewConfig: viewConfig,
                 routing: routing,
                 onDeinit: onDeinit
             )
@@ -33,7 +35,7 @@ extension PhoneNumber {
     }
 }
 
-extension PhoneNumber {
+extension Identity {
     
     @objc(PhoneNumberInteractorDispatch)
     public class InteractorDispatch: NSObject {

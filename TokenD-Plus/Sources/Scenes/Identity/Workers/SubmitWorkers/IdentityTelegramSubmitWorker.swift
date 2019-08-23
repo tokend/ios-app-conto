@@ -1,21 +1,12 @@
 import Foundation
 import TokenDSDK
 
-public enum PhoneNumberSubmitResult {
-    case success
-    case error(Swift.Error)
-}
-public protocol PhoneNumberPhoneNumberSubmitWorkerProtocol {
-    func submitNumber(
-        number: String,
-        completion: @escaping (PhoneNumberSubmitResult) -> Void
-        )
-}
 
-extension PhoneNumber {
-    public typealias PhoneNumberSubmitWorkerProtocol = PhoneNumberPhoneNumberSubmitWorkerProtocol
+extension Identity {
     
-    public class PhoneNumberSubmitWorker {
+    public typealias TelegramIdentitySubmitWorkerProtocol = IdentityIdentitySubmitWorkerProtocol
+    
+    public class TelegramSubmitWorker {
         
         // MARK: - Private properties
         
@@ -35,16 +26,16 @@ extension PhoneNumber {
     }
 }
 
-extension PhoneNumber.PhoneNumberSubmitWorker: PhoneNumber.PhoneNumberSubmitWorkerProtocol {
+extension Identity.TelegramSubmitWorker: Identity.TelegramIdentitySubmitWorkerProtocol {
     
-    public func submitNumber(
-        number: String,
-        completion: @escaping (PhoneNumberSubmitResult) -> Void
+    public func submitIdentity(
+        value: String,
+        completion: @escaping (IdentitySubmitResult) -> Void
         ) {
         
         self.generalApi.requestSetPhone(
             accountId: self.accountId,
-            phone: .init(phone: number),
+            phone: .init(phone: value),
             completion: { (result) in
                 switch result {
                     
@@ -52,7 +43,7 @@ extension PhoneNumber.PhoneNumberSubmitWorker: PhoneNumber.PhoneNumberSubmitWork
                     completion(.error(error))
                     
                 case .tfaFailed:
-                    completion(.error(PhoneNumber.Model.Error.invalidCode))
+                    completion(.error(Identity.Event.SetNumberAction.Error.invalidCode))
                     
                 case .succeeded:
                     completion(.success)

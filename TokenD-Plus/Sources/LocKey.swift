@@ -96,6 +96,7 @@ enum LocKey: String {
     case card_owner
     case change_password
     case change_phone
+    case change_telegram
     case charged
     case charged_from_lock
     case chart
@@ -492,6 +493,8 @@ enum LocKey: String {
     case set_phone_number
     case set_phone_number_hint
     case set_placeholder
+    case set_telegram
+    case set_telegram_hint
     case set_up_2fa
     case settings
     case shop
@@ -527,6 +530,7 @@ enum LocKey: String {
     case surname
     case swift_bic
     case swift_bic_colon
+    case telegram
     case terms_of_service
     case terms_of_service_not_agreed
     case terms_of_use
@@ -626,5 +630,6 @@ enum LocKey: String {
     case you_have_already_invested
     case you_have_no_depositable_assets
     case your_account_is_approved
+    case your_username
     case your_verification_request_is_submitted
 }

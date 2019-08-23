@@ -2,7 +2,7 @@ import UIKit
 import RxSwift
 
 public protocol PhoneNumberDisplayLogic: class {
-    typealias Event = PhoneNumber.Event
+    typealias Event = Identity.Event
  
     func displaySetNumberAction(viewModel: Event.SetNumberAction.ViewModel)
     func displaySceneUpdated(viewModel: Event.SceneUpdated.ViewModel)
@@ -10,14 +10,14 @@ public protocol PhoneNumberDisplayLogic: class {
     func displayError(viewModel: Event.Error.ViewModel)
 }
 
-extension PhoneNumber {
+extension Identity {
     public typealias DisplayLogic = PhoneNumberDisplayLogic
     
     @objc(PhoneNumberViewController)
     public class ViewController: UIViewController {
         
-        public typealias Event = PhoneNumber.Event
-        public typealias Model = PhoneNumber.Model
+        public typealias Event = Identity.Event
+        public typealias Model = Identity.Model
         
         // MARK: -
         
@@ -28,8 +28,8 @@ extension PhoneNumber {
         // MARK: - Private properties
         
         private let hintLabel: UILabel = UILabel()
-        private let plusLabel: UILabel = UILabel()
-        private let numberField: TextFieldView = TextFieldView()
+        private let prefixLabel: UILabel = UILabel()
+        private let valueField: TextFieldView = TextFieldView()
         private var numberEditingContext: TextEditingContext<String>?
         private let underlineView: UIView = UIView()
         
@@ -46,16 +46,25 @@ extension PhoneNumber {
         // MARK: - Injections
         
         private var interactorDispatch: InteractorDispatch?
+        private var viewConfig: Model.ViewConfig = Model.ViewConfig(
+            hint: "",
+            prefix: "",
+            placeholder: "",
+            keyboardType: .default,
+            valueFormatter: PlainTextValueFormatter()
+        )
         private var routing: Routing?
         private var onDeinit: DeinitCompletion = nil
         
         public func inject(
             interactorDispatch: InteractorDispatch?,
+            viewConfig: Model.ViewConfig,
             routing: Routing?,
             onDeinit: DeinitCompletion = nil
             ) {
             
             self.interactorDispatch = interactorDispatch
+            self.viewConfig = viewConfig
             self.routing = routing
             self.onDeinit = onDeinit
         }
@@ -67,7 +76,7 @@ extension PhoneNumber {
             
             self.setupView()
             self.setupHintLabel()
-            self.setupPlusLabel()
+            self.setupPrefixLabel()
             self.setupNumberTextField()
             self.setupUnderlineView()
             self.setupSubmitButton()
@@ -125,34 +134,33 @@ extension PhoneNumber {
         
         private func setupHintLabel() {
             self.hintLabel.backgroundColor = Theme.Colors.contentBackgroundColor
-            self.hintLabel.text = Localized(.set_phone_number_hint)
+            self.hintLabel.text = self.viewConfig.hint
             self.hintLabel.font = Theme.Fonts.plainTextFont
             self.hintLabel.numberOfLines = 0
         }
         
-        private func setupPlusLabel() {
-            self.plusLabel.backgroundColor = Theme.Colors.contentBackgroundColor
-            self.plusLabel.text = "+"
-            self.plusLabel.font = Theme.Fonts.largeTitleFont
+        private func setupPrefixLabel() {
+            self.prefixLabel.backgroundColor = Theme.Colors.contentBackgroundColor
+            self.prefixLabel.text = self.viewConfig.prefix
+            self.prefixLabel.font = Theme.Fonts.largeTitleFont
         }
         
         private func setupNumberTextField() {
-            self.numberField.backgroundColor = Theme.Colors.contentBackgroundColor
-            self.numberField.placeholder = Localized(.phone_number)
-            let phoneNumberFormatter = PhoneNumberFormatter()
+            self.valueField.backgroundColor = Theme.Colors.contentBackgroundColor
+            self.valueField.placeholder = self.viewConfig.placeholder
             self.numberEditingContext = TextEditingContext(
-                textInputView: self.numberField,
-                valueFormatter: phoneNumberFormatter,
+                textInputView: self.valueField,
+                valueFormatter: self.viewConfig.valueFormatter,
                 callbacks: TextEditingContext.Callbacks(
                     onInputValue: { [weak self] (value) in
-                        let request = Event.NumberEdited.Request(number: value)
+                        let request = Event.ValueEdited.Request(value: value)
                         self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
-                            businessLogic.onNumberEdited(request: request)
+                            businessLogic.onValueEdited(request: request)
                         })
                     }
             ))
-            self.numberField.keyboardType = .phonePad
-            _ = self.numberField.becomeFirstResponder()
+            self.valueField.keyboardType = self.viewConfig.keyboardType
+            _ = self.valueField.becomeFirstResponder()
         }
         
         private func setupUnderlineView() {
@@ -165,19 +173,15 @@ extension PhoneNumber {
                 Theme.Colors.textOnAccentColor,
                 for: .normal
             )
-            self.submitButton.setTitle(
-                Localized(.set_phone_number),
-                for: .normal
-            )
             self.submitButton.titleLabel?.font = Theme.Fonts.actionButtonFont
             self.submitButton
                 .rx
                 .tap
                 .asDriver()
                 .drive(onNext: { [weak self] (_) in
-                    let request = Event.SetNumberAction.Request()
+                    let request = Event.Action.Request()
                     self?.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
-                        businessLogic.onSetNumberAction(request: request)
+                        businessLogic.onAction(request: request)
                     })
                 })
                 .disposed(by: self.disposeBag)
@@ -186,8 +190,8 @@ extension PhoneNumber {
         
         private func setupLayout() {
             self.view.addSubview(self.hintLabel)
-            self.view.addSubview(self.plusLabel)
-            self.view.addSubview(self.numberField)
+            self.view.addSubview(self.prefixLabel)
+            self.view.addSubview(self.valueField)
             self.view.addSubview(self.underlineView)
             self.view.addSubview(self.submitButton)
             
@@ -197,13 +201,13 @@ extension PhoneNumber {
                 make.top.equalToSuperview().inset(self.topInset * 3)
             }
             
-            self.plusLabel.snp.makeConstraints { (make) in
+            self.prefixLabel.snp.makeConstraints { (make) in
                 make.leading.equalToSuperview().inset(self.sideInset)
-                make.centerY.equalTo(self.numberField)
+                make.centerY.equalTo(self.valueField)
             }
             
-            self.numberField.snp.makeConstraints { (make) in
-                make.leading.equalTo(self.plusLabel.snp.trailing).offset(self.sideInset/2)
+            self.valueField.snp.makeConstraints { (make) in
+                make.leading.equalTo(self.prefixLabel.snp.trailing).offset(self.sideInset/2)
                 make.trailing.equalToSuperview().inset(self.sideInset)
                 make.top.equalTo(self.hintLabel.snp.bottom).offset(self.topInset * 3)
                 make.height.equalTo(35.0)
@@ -211,7 +215,7 @@ extension PhoneNumber {
             
             self.underlineView.snp.makeConstraints { (make) in
                 make.leading.trailing.equalToSuperview().inset(self.sideInset)
-                make.top.equalTo(self.numberField.snp.bottom).offset(self.topInset / 2)
+                make.top.equalTo(self.valueField.snp.bottom).offset(self.topInset / 2)
                 make.height.equalTo(1.5)
             }
             
@@ -224,7 +228,7 @@ extension PhoneNumber {
     }
 }
 
-extension PhoneNumber.ViewController: PhoneNumber.DisplayLogic {
+extension Identity.ViewController: Identity.DisplayLogic {
     
     public func displaySetNumberAction(viewModel: Event.SetNumberAction.ViewModel) {
         switch viewModel {
@@ -257,8 +261,8 @@ extension PhoneNumber.ViewController: PhoneNumber.DisplayLogic {
             self.submitButton.isEnabled = false
             self.submitButton.backgroundColor = Theme.Colors.disabledActionButtonColor
         }
-        if viewModel.number != self.numberField.text {
-            self.numberField.text = viewModel.number
+        if viewModel.value != self.valueField.text {
+            self.valueField.text = viewModel.value
         }
     }
     

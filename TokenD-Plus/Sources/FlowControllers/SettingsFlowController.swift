@@ -140,6 +140,9 @@ class SettingsFlowController: BaseSignedInFlowController {
         case .phone:
             self.showPhoneNumberScene()
             
+        case .telegram:
+            self.showTelegramScene()
+            
         default:
             break
         }
@@ -416,21 +419,29 @@ class SettingsFlowController: BaseSignedInFlowController {
     }
     
     private func setupPhoneNumberScene() -> UIViewController {
-        let vc = PhoneNumber.ViewController()
-        let sceneModel = PhoneNumber.Model.SceneModel(
+        let vc = Identity.ViewController()
+        let sceneModel = Identity.Model.SceneModel(
             accountId: self.userDataProvider.walletData.accountId,
-            apiPhoneNumber: nil,
-            number: nil
+            apiValue: nil,
+            value: nil,
+            sceneType: .phoneNumber
         )
-        let numberValidator = PhoneNumber.PhoneNumberValidator()
-        let numberSubmitWorker = PhoneNumber.PhoneNumberSubmitWorker(
+        let numberValidator = Identity.PhoneNumberValidator()
+        let numberSubmitWorker = Identity.PhoneNumberSubmitWorker(
             generalApi: self.flowControllerStack.api.generalApi,
             accountId: self.userDataProvider.walletData.accountId
         )
-        let numberIdentifier = PhoneNumber.PhoneNumberIdentifier(
+        let numberIdentifier = Identity.PhoneNumberIdentifier(
             generalApi: self.flowControllerStack.api.generalApi
         )
-        let routing = PhoneNumber.Routing(
+        let viewConfig = Identity.Model.ViewConfig(
+            hint: Localized(.set_phone_number_hint),
+            prefix: "+",
+            placeholder: Localized(.phone_number),
+            keyboardType: .decimalPad,
+            valueFormatter: PhoneNumberFormatter()
+        )
+        let routing = Identity.Routing(
             showError: { [weak self] (message) in
                 self?.navigationController.showErrorMessage(message, completion: nil)
         },
@@ -452,12 +463,76 @@ class SettingsFlowController: BaseSignedInFlowController {
                 self?.navigationController.hideProgress()
         })
         
-        PhoneNumber.Configurator.configure(
+        Identity.Configurator.configure(
             viewController: vc,
             sceneModel: sceneModel,
             numberValidator: numberValidator,
-            numberSubmitWorker: numberSubmitWorker,
-            numberIdentifier: numberIdentifier,
+            submitWorker: numberSubmitWorker,
+            identityIdentifier: numberIdentifier,
+            viewConfig: viewConfig,
+            routing: routing
+        )
+        return vc
+    }
+    
+    private func showTelegramScene() {
+        let vc = self.setupTelegramScene()
+        
+        vc.navigationItem.title = "Telegram"
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func setupTelegramScene() -> UIViewController {
+        let vc = Identity.ViewController()
+        let sceneModel = Identity.Model.SceneModel(
+            accountId: self.userDataProvider.walletData.accountId,
+            apiValue: nil,
+            value: nil,
+            sceneType: .telegram
+        )
+        let telegramSubmitWorker = Identity.TelegramSubmitWorker(
+            generalApi: self.flowControllerStack.api.generalApi,
+            accountId: self.userDataProvider.walletData.accountId
+        )
+        let telegramIdentifier = Identity.TelegramIdentifier(
+            generalApi: self.flowControllerStack.api.generalApi
+        )
+        let viewConfig = Identity.Model.ViewConfig(
+            hint: Localized(.set_telegram_hint),
+            prefix: "@",
+            placeholder: Localized(.your_username),
+            keyboardType: .default,
+            valueFormatter: PlainTextValueFormatter()
+        )
+        let routing = Identity.Routing(
+            showError: { [weak self] (message) in
+                self?.navigationController.showErrorMessage(message, completion: nil)
+            },
+            showMessage: { [weak self] (message) in
+                guard let present = self?.navigationController.getPresentViewControllerClosure() else {
+                    return
+                }
+                self?.showSuccessMessage(
+                    title: Localized(.success),
+                    message: message,
+                    completion: nil,
+                    presentViewController: present
+                )
+            },
+            showLoading: { [weak self] in
+                self?.navigationController.showProgress()
+            },
+            hideLoading: { [weak self] in
+                self?.navigationController.hideProgress()
+        })
+        
+        Identity.Configurator.configure(
+            viewController: vc,
+            sceneModel: sceneModel,
+            numberValidator: nil,
+            submitWorker: telegramSubmitWorker,
+            identityIdentifier: telegramIdentifier,
+            viewConfig: viewConfig,
             routing: routing
         )
         return vc

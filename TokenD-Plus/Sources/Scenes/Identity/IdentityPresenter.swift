@@ -1,7 +1,7 @@
 import Foundation
 
 public protocol PhoneNumberPresentationLogic {
-    typealias Event = PhoneNumber.Event
+    typealias Event = Identity.Event
     
     func presentSetNumberAction(response: Event.SetNumberAction.Response)
     func presentSсeneUpdated(response: Event.SceneUpdated.Response)
@@ -9,14 +9,14 @@ public protocol PhoneNumberPresentationLogic {
     func presentError(response: Event.Error.Response)
 }
 
-extension PhoneNumber {
+extension Identity {
     public typealias PresentationLogic = PhoneNumberPresentationLogic
     
     @objc(PhoneNumberPresenter)
     public class Presenter: NSObject {
         
-        public typealias Event = PhoneNumber.Event
-        public typealias Model = PhoneNumber.Model
+        public typealias Event = Identity.Event
+        public typealias Model = Identity.Model
         
         // MARK: - Private properties
         
@@ -27,10 +27,34 @@ extension PhoneNumber {
         public init(presenterDispatch: PresenterDispatch) {
             self.presenterDispatch = presenterDispatch
         }
+        
+        // MARK: - Private
+        
+        private func getSetTitle(sceneType: Model.SceneType) -> String {
+            switch sceneType {
+                
+            case .phoneNumber:
+                return Localized(.set_phone_number)
+                
+            case .telegram:
+                return Localized(.set_telegram)
+            }
+        }
+        
+        private func getChangeTitle(sceneType: Model.SceneType) -> String {
+            switch sceneType {
+                
+            case .phoneNumber:
+                return Localized(.change_phone)
+                
+            case .telegram:
+                return Localized(.change_telegram)
+            }
+        }
     }
 }
 
-extension PhoneNumber.Presenter: PhoneNumber.PresentationLogic {
+extension Identity.Presenter: Identity.PresentationLogic {
     
     public func presentSetNumberAction(response: Event.SetNumberAction.Response) {
         let viewModel: Event.SetNumberAction.ViewModel
@@ -40,7 +64,7 @@ extension PhoneNumber.Presenter: PhoneNumber.PresentationLogic {
             viewModel = .error(error.localizedDescription)
             
         case .success:
-            viewModel = .success("Success")
+            viewModel = .success(Localized(.success))
             
         case .loaded:
             viewModel = .loaded
@@ -59,15 +83,15 @@ extension PhoneNumber.Presenter: PhoneNumber.PresentationLogic {
         switch response.state {
             
         case .isNotSet:
-            buttonTitle = Localized(.set_phone_number)
-            buttonIsEnable = response.number?.isEmpty ?? false
+            buttonTitle = self.getSetTitle(sceneType: response.sceneType)
+            buttonIsEnable = response.value?.isEmpty ?? false
             
         case .sameWithIdentity:
-            buttonTitle = Localized(.change_phone)
+            buttonTitle = self.getChangeTitle(sceneType: response.sceneType)
             buttonIsEnable = false
             
         case .updated:
-            buttonTitle = Localized(.change_phone)
+            buttonTitle = self.getChangeTitle(sceneType: response.sceneType)
             buttonIsEnable = true
         }
         let buttonAppearence = Model.ButtonAppearence(
@@ -75,7 +99,7 @@ extension PhoneNumber.Presenter: PhoneNumber.PresentationLogic {
             title: buttonTitle
         )
         let viewModel = Event.SceneUpdated.ViewModel(
-            number: response.number,
+            value: response.value,
             buttonAppearence: buttonAppearence
         )
         self.presenterDispatch.display { (displayLogic) in
@@ -98,7 +122,7 @@ extension PhoneNumber.Presenter: PhoneNumber.PresentationLogic {
     }
 }
 
-extension PhoneNumber.Model.Error: LocalizedError {
+extension Identity.Event.SetNumberAction.Error: LocalizedError {
     public var errorDescription: String? {
         switch self {
             
