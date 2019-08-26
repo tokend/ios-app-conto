@@ -5,7 +5,7 @@ import TokenDSDK
 public enum RecipientAddressResolverResult {
     public enum AddressResolveError: Swift.Error, LocalizedError {
         case invalidEmail
-        case other(ApiErrors)
+        case other(Swift.Error)
         
         public var errorDescription: String? {
             switch self {
@@ -24,6 +24,7 @@ public enum RecipientAddressResolverResult {
     }
     
     case succeeded(recipientAddress: String)
+    case userIsNotExist(proxyAccountId: String)
     case failed(AddressResolveError)
 }
 
@@ -42,11 +43,17 @@ extension SendPaymentDestination {
         // MARK: - Private properties
         
         private let generalApi: GeneralApi
+        private let integrationsApi: IntegrationsApiV3
         
         // MARK: -
         
-        public init(generalApi: GeneralApi) {
+        public init(
+            generalApi: GeneralApi,
+            integrationsApi: IntegrationsApiV3
+            ) {
+            
             self.generalApi = generalApi
+            self.integrationsApi = integrationsApi
         }
         
         // MARK: - RecipientAddressResolver
@@ -74,7 +81,7 @@ extension SendPaymentDestination {
                         guard let identity = response.first(where: { (identity) -> Bool in
                             return identity.attributes.email == email
                         }) else {
-                            completion(.failed(.invalidEmail))
+                            self.fetchProxyAccountId(completion: completion)
                             return
                         }
                         
@@ -87,6 +94,26 @@ extension SendPaymentDestination {
         
         private func validateEmail(_ email: String) -> Bool {
             return true
+        }
+        
+        private func fetchProxyAccountId(
+            completion: @escaping (_ result: RecipientAddressResolverResult) -> Void
+            ) {
+            
+            self.integrationsApi.requestProxyPaymentAccount { (result) in
+                switch result {
+                    
+                case .failure(let error):
+                    completion(.failed(.other(error)))
+                    
+                case .success(let document):
+                    guard let account = document.data,
+                        let accountId = account.id else {
+                            return
+                    }
+                    completion(.userIsNotExist(proxyAccountId: accountId))
+                }
+            }
         }
     }
 }

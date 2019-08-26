@@ -592,6 +592,7 @@ enum LocKey: String {
     case up_to_replace_amount
     case use_this_qr_code_to_redeem
     case use_this_qr_code_to_redeem_replace_amount
+    case user_with_such_an_email_is_not_found
     case userdataprovider_should_always_provide_walletdata
     case verification
     case verification_link_is_sent
@@ -605,6 +606,7 @@ enum LocKey: String {
     case votes_replace_votes_count
     case votes_replace_percent
     case wallet
+    case warning
     case we_do_not_know_your_seed
     case week
     case with_one_for

@@ -112,6 +112,9 @@ extension SendPaymentDestination.Presenter: SendPaymentDestination.PresentationL
             
         case .error(let error):
             viewModel = .error(error.localizedDescription)
+            
+        case .nonExistedDestination(let model):
+            viewModel = .nonExistedDestination(model)
         }
         self.presenterDispatch.display { (displayLogic) in
             displayLogic.displayPaymentAction(viewModel: viewModel)

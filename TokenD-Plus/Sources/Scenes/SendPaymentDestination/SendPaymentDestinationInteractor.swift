@@ -69,6 +69,9 @@ extension SendPaymentDestination {
                     case .succeeded(_):
                         self?.handleSucceededQRScan(recipientAddress: qrValue)
                         return
+                        
+                    case .userIsNotExist:
+                        response = .failed(.invalidEmail)
                     }
                     
                     self?.presenter.presentScanRecipientQRAddress(response: response)
@@ -91,6 +94,10 @@ extension SendPaymentDestination {
                         response = .failure(message: error.localizedDescription)
                         
                     case .succeeded:
+                        self?.sceneModel.recipientAddress = email
+                        response = .success(email)
+                        
+                    case .userIsNotExist:
                         self?.sceneModel.recipientAddress = email
                         response = .success(email)
                     }
@@ -123,9 +130,18 @@ extension SendPaymentDestination {
                     case .succeeded(let accountId):
                         let destinationModel = Model.SendDestinationModel(
                             recipientNickname: recipientAddress,
-                            recipientAccountId: accountId
+                            recipientAccountId: accountId,
+                            isAccountExists: true
                         )
                         self?.presenter.presentPaymentAction(response: .destination(destinationModel))
+                        
+                    case .userIsNotExist(let masterAccountId):
+                        let destinationModel = Model.SendDestinationModel(
+                            recipientNickname: recipientAddress,
+                            recipientAccountId: masterAccountId,
+                            isAccountExists: false
+                        )
+                        self?.presenter.presentPaymentAction(response: .nonExistedDestination(destinationModel))
                     }
             })
         }

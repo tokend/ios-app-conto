@@ -589,6 +589,7 @@
 "up_to_replace_amount" = "amount";
 "use_this_qr_code_to_redeem" = "Використайте цей QR код щоб погасити $(amount)";
 "use_this_qr_code_to_redeem_replace_amount" = "amount";
+"user_with_such_an_email_is_not_found" = "Користувача з такою email адресою не знайдено. Переконайтеся, що ви ввели правильну електронну адресу. Якщо адреса правильна, користувач отримає платіж, як тільки зареєструє акаунт.";
 "userdataprovider_should_always_provide_walletdata" = "UserDataProvider should always provide walletData";
 "verification" = "Верифікація";
 "verification_link_is_sent" = "Посилання для верифікації відправлено на ваш email";
@@ -602,6 +603,7 @@
 "votes_replace_votes_count" = "votes_count";
 "votes_replace_percent" = "percent";
 "wallet" = "Гаманець";
+"warning" = "Увага";
 "we_do_not_know_your_seed" = "Не не знаємо ваш секретний ключ";
 "week" = "Тиждень";
 "with_one_for" = "З 1 $(asset) за";

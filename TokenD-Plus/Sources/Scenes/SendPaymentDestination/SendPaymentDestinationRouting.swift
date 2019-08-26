@@ -9,5 +9,11 @@ extension SendPaymentDestination {
         let showProgress: () -> Void
         let hideProgress: () -> Void
         let showError: (_ message: String) -> Void
+        let showDialog: (
+        _ title: String,
+        _ message: String,
+        _ options: [String],
+        _ onSelect: @escaping (_ index: Int) -> Void
+        ) -> Void
     }
 }

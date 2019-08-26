@@ -107,7 +107,9 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         let sceneModel = SendPaymentAmount.Model.SceneModel(
             feeType: .payment,
             operation: .handleSend,
-            recipientAddress: destination.recipientNickname
+            recipientAddress: destination.recipientNickname,
+            originalAccountId: self.userDataProvider.walletData.accountId,
+            isAccountExist: destination.isAccountExists
         )
         sceneModel.resolvedRecipientId = destination.recipientAccountId
         
@@ -183,10 +185,25 @@ class SendPaymentFlowController: BaseSignedInFlowController {
             },
             showError: { [weak self] (message) in
                 self?.navigationController.showErrorMessage(message, completion: nil)
+            },
+            showDialog: { [weak self] (title, message, options, onSelected) in
+                guard let presenter = self?.navigationController.getPresentViewControllerClosure() else {
+                    return
+                }
+                self?.showDialog(
+                    title: title,
+                    message: message,
+                    style: .alert,
+                    options: options,
+                    onSelected: onSelected,
+                    onCanceled: nil,
+                    presentViewController: presenter
+                )
         })
         
         let recipientAddressResolver = SendPaymentDestination.RecipientAddressResolverWorker(
-            generalApi: self.flowControllerStack.api.generalApi
+            generalApi: self.flowControllerStack.api.generalApi,
+            integrationsApi: self.flowControllerStack.apiV3.integrationsApi
         )
         
         let contactsFetcher = SendPaymentDestination.ContactsFetcher()

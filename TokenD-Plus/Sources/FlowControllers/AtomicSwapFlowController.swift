@@ -155,7 +155,9 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         
         let sceneModel = SendPaymentAmount.Model.SceneModel(
             feeType: .payment,
-            operation: .handleAtomicSwap(ask)
+            operation: .handleAtomicSwap(ask),
+            originalAccountId: "",
+            isAccountExist: false
         )
         
         let viewConfig = SendPaymentAmount.Model.ViewConfig.atomicSwapViewConfig()
