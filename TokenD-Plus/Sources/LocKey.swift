@@ -104,6 +104,7 @@ enum LocKey: String {
     case check_sale_state
     case choose_asset
     case choose_email
+    case choose_environment
     case close_time
     case code
     case common

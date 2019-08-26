@@ -101,6 +101,7 @@
 "check_sale_state" = "Check sale state";
 "choose_asset" = "Choose asset";
 "choose_email" = "Choose email";
+"choose_environment" = "Choose environment";
 "close_time" = "Close time";
 "code" = "Code";
 "common" = "Common";
