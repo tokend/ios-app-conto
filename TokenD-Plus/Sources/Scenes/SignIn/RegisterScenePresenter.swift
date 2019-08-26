@@ -152,6 +152,12 @@ extension RegisterScene {
                 
             case .agreeOnTerms(let checked, _):
                 return .agreeOnTerms(checked: checked)
+                
+            case .environment(let environment):
+                return self.getSubActionTextViewModel(
+                    plainPart: environment,
+                    actionPart: ""
+                )
             }
         }
         

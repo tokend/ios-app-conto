@@ -187,7 +187,8 @@ class LocalAuthFlowController: BaseFlowController {
             onSignedOut: { [weak self] in
                 self?.onSignOut()
             },
-            onShowTerms: { _ in }
+            onShowTerms: { _ in },
+            onEnvironmentChanged: {}
         )
         
         RegisterScene.Configurator.configure(

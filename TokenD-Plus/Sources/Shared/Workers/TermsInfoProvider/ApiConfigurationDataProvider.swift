@@ -1,15 +1,21 @@
 import Foundation
 
-struct TermsInfoProvider {
+struct ApiConfigurationDataProvider {
     
     // MARK: - Public properties
     
     let apiConfigurationModel: APIConfigurationModel
+    let settingsManager: SettingsManagerProtocol
     
     // MARK: -
     
-    init(apiConfigurationModel: APIConfigurationModel) {
+    init(
+        apiConfigurationModel: APIConfigurationModel,
+        settingsManager: SettingsManagerProtocol
+        ) {
+        
         self.apiConfigurationModel = apiConfigurationModel
+        self.settingsManager = settingsManager
     }
     
     // MARK: - Public
@@ -24,5 +30,9 @@ struct TermsInfoProvider {
         }
         
         return termsUrl
+    }
+    
+    func getEnvironment() -> String? {
+        return self.settingsManager.environment
     }
 }

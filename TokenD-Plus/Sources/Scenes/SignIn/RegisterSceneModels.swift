@@ -43,6 +43,7 @@ extension RegisterScene.Model {
         case recovery
         case signOut
         case agreeOnTerms(checked: Bool, link: URL)
+        case environment(String)
     }
     
     class SceneModel {
@@ -51,13 +52,15 @@ extension RegisterScene.Model {
         var fields: [Field]
         var subActions: [SubAction]
         let termsUrl: URL?
+        let environment: String?
         
-        static func empty(termsUrl: URL?) -> SceneModel {
+        static func empty(termsUrl: URL?, environment: String?) -> SceneModel {
             let model = SceneModel(
                 state: .signIn,
                 fields: [],
                 subActions: [],
-                termsUrl: termsUrl
+                termsUrl: termsUrl,
+                environment: environment
             )
             return model
         }
@@ -65,7 +68,8 @@ extension RegisterScene.Model {
         static func signInWithEmail(
             _ email: String?,
             state: State = .signIn,
-            termsUrl: URL? = nil
+            termsUrl: URL? = nil,
+            environment: String? = nil
             ) -> SceneModel {
             
             let model = SceneModel(
@@ -78,7 +82,8 @@ extension RegisterScene.Model {
                     )
                 ],
                 subActions: [],
-                termsUrl: termsUrl
+                termsUrl: termsUrl,
+                environment: environment
             )
             return model
         }
@@ -87,13 +92,15 @@ extension RegisterScene.Model {
             state: State,
             fields: [Field],
             subActions: [SubAction],
-            termsUrl: URL?
+            termsUrl: URL?,
+            environment: String?
             ) {
             
             self.state = state
             self.fields = fields
             self.subActions = subActions
             self.termsUrl = termsUrl
+            self.environment = environment
         }
     }
     
@@ -269,6 +276,7 @@ extension RegisterScene.Event {
 
 extension RegisterScene.Event.SubAction {
     enum Action {
+        case showChooseEnvironment
         case routeToRecovery
         case routeToSignOut
         case routeToSignInAuthenticator

@@ -76,6 +76,7 @@ extension Settings.Interactor: Settings.BusinessLogic {
              .seed,
              .tfa,
              .biometrics,
+             .autoAuth,
              .verification,
              .changePassword,
              .language,

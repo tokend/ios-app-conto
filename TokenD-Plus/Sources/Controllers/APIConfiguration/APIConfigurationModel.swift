@@ -8,7 +8,7 @@ public struct APIConfigurationModel: Decodable, Equatable {
     let webClient: String?
     let downloadUrl: String?
     
-    public enum Environment: String {
+    public enum Environment: String, CaseIterable {
         case production = "Production"
         case demo = "Demo"
     }

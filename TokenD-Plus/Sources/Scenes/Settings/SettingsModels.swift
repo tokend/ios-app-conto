@@ -13,6 +13,7 @@ enum Settings {
         case seed
         case tfa
         case biometrics
+        case autoAuth
         case verification
         case changePassword
         case termsOfService

@@ -20,5 +20,6 @@ extension RegisterScene {
         ) -> Void
         let onSignedOut: () -> Void
         let onShowTerms: (_ url: URL) -> Void
+        let onEnvironmentChanged: () -> Void
     }
 }

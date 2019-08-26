@@ -42,6 +42,7 @@
 "at_date" = "$(date)";
 "at_date_replace_date" = "date";
 "authenticator" = "Аутентификатор";
+"auto_authentication" = "Автоматическая Aутентификация";
 "available" = "Доступно";
 "available_amount" = "$(amount) доступно";
 "available_amount_replace_amount" = "amount";
@@ -100,6 +101,7 @@
 "check_sale_state" = "Отмена кампании";
 "choose_asset" = "Выберите актив";
 "choose_email" = "Выберите email";
+"choose_environment" = "Выберите окружение";
 "close_time" = "Дата конца";
 "code" = "Код";
 "common" = "Общие";
