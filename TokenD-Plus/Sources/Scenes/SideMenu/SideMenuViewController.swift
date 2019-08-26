@@ -79,6 +79,9 @@ extension SideMenu {
             case .contribute:
                 self.routing?.showContribute()
                 
+            case .movements:
+                self.routing?.showMovements()
+                
             case .settings:
                 self.routing?.showSettings()
             }

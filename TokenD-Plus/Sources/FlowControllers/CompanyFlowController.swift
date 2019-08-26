@@ -123,7 +123,10 @@ class CompanyFlowController: BaseSignedInFlowController {
                 },
                 showContribute: { [weak self] in
                     self?.showContribute()
-            })
+                },
+                showMovements: { [weak self] in
+                    self?.showMovementsScene()
+                })
         )
         
         self.sideNavigationController.embed(sideViewController: self.sideMenuViewController)
@@ -233,6 +236,61 @@ class CompanyFlowController: BaseSignedInFlowController {
         flowController.run(showRootScreen: { [weak self] (vc) in
             self?.sideNavigationController.embed(centerViewController: vc)
         })
+    }
+    
+    private func showMovementsScene() {
+        let vc = self.setupMovementsScene()
+        
+        self.sideNavigationController.embed(centerViewController: vc)
+    }
+    
+    private func setupMovementsScene() -> UIViewController {
+        let navigationController = NavigationController()
+        let vc = TransactionsListScene.ViewController()
+        let transactionsProvider = TransactionsListScene.MovementsProvider(movementsRepo: self.reposController.movementsRepo)
+        let transactionsFetcher = TransactionsListScene.PaymentsFetcher(
+            transactionsProvider: transactionsProvider,
+            ownerAccountId: self.company.accountId,
+            currencyIsShown: true
+        )
+        let emptyActionsProvider = TransactionsListScene.EmptyActionsProvider()
+        let amountFormatter = TransactionsListScene.AmountFormatter()
+        let dateFormatter = TransactionsListScene.DateFormatter()
+        let viewConfig = TransactionsListScene.Model.ViewConfig(actionButtonIsHidden: true)
+        
+        let routing = TransactionsListScene.Routing(
+            onDidSelectItemWithIdentifier: { [weak self] (transactionId, balancId) in
+                self?.showTransactionDetailsScreen(
+                    transactionsProvider: transactionsProvider,
+                    navigationController: navigationController,
+                    transactionId: transactionId,
+                    balanceId: balancId
+                )
+            },
+            showSendPayment: { _ in },
+            showCreateReedeem: { _ in },
+            showAcceptRedeem: {},
+            showReceive: {},
+            showShadow: {
+                navigationController.showShadow()
+            },
+            hideShadow: {
+                navigationController.hideShadow()
+            })
+        TransactionsListScene.Configurator.configure(
+            viewController: vc,
+            transactionsFetcher: transactionsFetcher,
+            actionProvider: emptyActionsProvider,
+            amountFormatter: amountFormatter,
+            dateFormatter: dateFormatter,
+            emptyTitle: Localized(.no_movements),
+            viewConfig: viewConfig,
+            routing: routing
+        )
+        
+        vc.navigationItem.title = Localized(.movements)
+        navigationController.setViewControllers([vc], animated: false)
+        return navigationController.getViewController()
     }
     
     private func showReceiveScene() {
