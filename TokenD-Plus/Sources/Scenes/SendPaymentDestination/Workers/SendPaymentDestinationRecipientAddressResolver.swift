@@ -24,7 +24,7 @@ public enum RecipientAddressResolverResult {
     }
     
     case succeeded(recipientAddress: String)
-    case userIsNotExist(masterAccountId: String)
+    case userIsNotExist(proxyAccountId: String)
     case failed(AddressResolveError)
 }
 
@@ -43,17 +43,17 @@ extension SendPaymentDestination {
         // MARK: - Private properties
         
         private let generalApi: GeneralApi
-        private let networkFecther: NetworkInfoFetcher
+        private let integrationsApi: IntegrationsApiV3
         
         // MARK: -
         
         public init(
             generalApi: GeneralApi,
-            networkFecther: NetworkInfoFetcher
+            integrationsApi: IntegrationsApiV3
             ) {
             
             self.generalApi = generalApi
-            self.networkFecther = networkFecther
+            self.integrationsApi = integrationsApi
         }
         
         // MARK: - RecipientAddressResolver
@@ -81,7 +81,7 @@ extension SendPaymentDestination {
                         guard let identity = response.first(where: { (identity) -> Bool in
                             return identity.attributes.email == email
                         }) else {
-                            self.fetchMasterAccountId(completion: completion)
+                            self.fetchProxyAccountId(completion: completion)
                             return
                         }
                         
@@ -96,17 +96,22 @@ extension SendPaymentDestination {
             return true
         }
         
-        private func fetchMasterAccountId(
+        private func fetchProxyAccountId(
             completion: @escaping (_ result: RecipientAddressResolverResult) -> Void
             ) {
-            self.networkFecther.fetchNetworkInfo { (result) in
+            
+            self.integrationsApi.requestProxyPaymentAccount { (result) in
                 switch result {
                     
-                case .failed(let error):
+                case .failure(let error):
                     completion(.failed(.other(error)))
                     
-                case .succeeded(let networkInfo):
-                    completion(.userIsNotExist(masterAccountId: networkInfo.masterAccountId))
+                case .success(let document):
+                    guard let account = document.data,
+                        let accountId = account.id else {
+                            return
+                    }
+                    completion(.userIsNotExist(proxyAccountId: accountId))
                 }
             }
         }

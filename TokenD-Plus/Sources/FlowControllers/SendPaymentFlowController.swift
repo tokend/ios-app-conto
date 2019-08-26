@@ -203,7 +203,7 @@ class SendPaymentFlowController: BaseSignedInFlowController {
         
         let recipientAddressResolver = SendPaymentDestination.RecipientAddressResolverWorker(
             generalApi: self.flowControllerStack.api.generalApi,
-            networkFecther: self.reposController.networkInfoRepo
+            integrationsApi: self.flowControllerStack.apiV3.integrationsApi
         )
         
         let contactsFetcher = SendPaymentDestination.ContactsFetcher()
