@@ -256,6 +256,7 @@
 "funded_lowercase" = "зібрано";
 "general" = "Загальне";
 "get_address" = "Отримати адрес ";
+"github" = "GitHub";
 "goal" = "ціль\n$(amount)";
 "goal_replace_amount" = "amount";
 "go_to_confirmation" = "До підтвердження";

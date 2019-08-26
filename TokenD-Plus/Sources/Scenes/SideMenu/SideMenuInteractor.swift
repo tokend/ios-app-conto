@@ -46,8 +46,8 @@ extension SideMenu {
                 ],
                 [
                     SideMenu.Model.MenuItem(
-                        iconImage: Assets.heart.image,
-                        title: Localized(.contribute),
+                        iconImage: Assets.github.image,
+                        title: Localized(.github),
                         identifier: .contribute
                     )
                 ]

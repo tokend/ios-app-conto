@@ -138,12 +138,12 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         
         let sceneModel = CompaniesList.Model.SceneModel(companies: [])
         let companiesFetcher = CompaniesList.CompaniesFetcher(
-            accountsApi: self.flowControllerStack.apiV3.accountsApi,
+            integrationsApi: self.flowControllerStack.apiV3.integrationsApi,
             apiConfiguration: self.flowControllerStack.apiConfigurationModel,
             userDataProvider: self.userDataProvider
         )
         let companyRecognizer = CompaniesList.CompanyRecognizer(
-            accountsApi: self.flowControllerStack.apiV3.accountsApi,
+            integrationsApi: self.flowControllerStack.apiV3.integrationsApi,
             apiConfigurationModel: self.flowControllerStack.apiConfigurationModel
         )
         let accountIdValidator = CompaniesList.AccountIdValidator()
@@ -244,7 +244,7 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         let vc = AddCompany.ViewController()
         let sceneModel = AddCompany.Model.SceneModel(company: company)
         let addCompanyWorker = AddCompany.AddCompanyWorker(
-            accountApiV3: self.flowControllerStack.apiV3.accountsApi,
+            integrationsApi: self.flowControllerStack.apiV3.integrationsApi,
             originalAccountId: self.userDataProvider.walletData.accountId
         )
         let routing = AddCompany.Routing(

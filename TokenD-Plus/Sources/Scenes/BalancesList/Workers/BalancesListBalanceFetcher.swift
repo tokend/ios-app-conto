@@ -8,6 +8,8 @@ protocol BalanceListBalanceFetcherProtocol {
     func observeLoadingStatus() -> Observable<BalancesList.Model.LoadingStatus>
     func observeErrors() -> Observable<Swift.Error>
     func reloadBalances()
+    
+    var isLoading: Bool { get }
 }
 
 extension BalancesList {
@@ -117,6 +119,12 @@ extension BalancesList {
 }
 
 extension BalancesList.BalancesFetcher: BalancesList.BalancesFetcherProtocol {
+    
+    public var isLoading: Bool {
+        get {
+            return self.loadingStatus.value == .loading
+        }
+    }
     
     func observeBalances() -> Observable<[BalancesList.Model.Balance]> {
         self.loadBalances()

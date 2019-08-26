@@ -8,6 +8,8 @@ public protocol BalancesListAtomicSwapAsksFetcherProtocol {
     func observeErrors() -> Observable<Swift.Error>
     func observeLoadingStatus() -> Observable<BalancesList.Model.LoadingStatus>
     func reloadAsks()
+    
+    var isLoading: Bool { get }
 }
 
 extension BalancesList {
@@ -54,6 +56,15 @@ extension BalancesList {
                 .observeLoadingStatus()
                 .subscribe(onNext: { (status) in
                     self.loadingStatus.accept(status.status)
+                })
+                .disposed(by: self.disposeBag)
+        }
+        
+        private func observeRepoErrors() {
+            self.asksRepo
+                .observeErrorStatus()
+                .subscribe(onNext: { (error) in
+                    self.errors.accept(error)
                 })
                 .disposed(by: self.disposeBag)
         }
@@ -109,6 +120,12 @@ extension BalancesList {
 
 extension BalancesList.AsksFetcher: BalancesList.AsksFetcherProtocol {
     
+    public var isLoading: Bool {
+        get {
+            return self.loadingStatus.value == .loading
+        }
+    }
+    
     public func observeAsks() -> Observable<[BalancesList.Model.AskModel]> {
         self.observeRepoAsks()
         self.asksRepo.reloadAsks()
@@ -116,6 +133,7 @@ extension BalancesList.AsksFetcher: BalancesList.AsksFetcherProtocol {
     }
     
     public func observeErrors() -> Observable<Error> {
+        self.observeRepoErrors()
         return self.errors.asObservable()
     }
     

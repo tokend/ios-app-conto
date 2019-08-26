@@ -323,6 +323,10 @@ class BaseFlowController {
             case .totp:
                 alertTitle = Localized(.input_2fa_code)
                 alertMessage = Localized(.input_code_from_google_authenticator_or_similar_app)
+                
+            case .telegram:
+                alertTitle = ""
+                alertMessage = ""
             }
         }
         

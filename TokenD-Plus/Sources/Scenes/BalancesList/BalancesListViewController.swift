@@ -130,6 +130,17 @@ extension BalancesList {
             )
         }
         
+        private func handleActionButtonVisibility(tabIdentifier: Model.TabIdentifier) {
+            switch tabIdentifier {
+                
+            case .atomicSwapAsks:
+                self.fab.isHidden = true
+                
+            case .balances:
+                self.fab.isHidden = false
+            }
+        }
+        
         private func showActions() {
             self.actionsList = self.fab.createActionsList()
             self.actions.forEach { (action) in
@@ -332,10 +343,10 @@ extension BalancesList.ViewController: BalancesList.DisplayLogic {
     
     public func displaySectionsUpdated(viewModel: Event.SectionsUpdated.ViewModel) {
         self.setSelectedTabIfNeeded(index: viewModel.selectedTabIndex)
+        self.handleActionButtonVisibility(tabIdentifier: viewModel.selectedTabIdentifier)
         switch viewModel.type {
             
         case .sections(let sections):
-            self.fab.isHidden = false
             self.emptyView.isHidden = true
             self.sections = sections
             

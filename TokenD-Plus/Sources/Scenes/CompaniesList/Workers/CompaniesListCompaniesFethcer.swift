@@ -20,7 +20,7 @@ extension CompaniesList {
         private let loadingStatus: BehaviorRelay<Model.LoadingStatus> = BehaviorRelay(value: .loaded)
         private let errors: PublishRelay<Swift.Error> = PublishRelay()
         
-        private let accountsApi: AccountsApiV3
+        private let integrationsApi: IntegrationsApiV3
         private let apiConfiguration: APIConfigurationModel
         private let userDataProvider: UserDataProviderProtocol
         
@@ -29,12 +29,12 @@ extension CompaniesList {
         // MARK: -
         
         init(
-            accountsApi: AccountsApiV3,
+            integrationsApi: IntegrationsApiV3,
             apiConfiguration: APIConfigurationModel,
             userDataProvider: UserDataProviderProtocol
             ) {
             
-            self.accountsApi = accountsApi
+            self.integrationsApi = integrationsApi
             self.apiConfiguration = apiConfiguration
             self.userDataProvider = userDataProvider
         }
@@ -43,7 +43,7 @@ extension CompaniesList {
         
         private func loadCompanies() {
             self.loadingStatus.accept(.loading)
-            self.accountsApi.requestBusinesses(
+            self.integrationsApi.requestBusinesses(
                 accountId: self.userDataProvider.walletData.accountId,
                 completion: { [weak self] (result) in
                     self?.loadingStatus.accept(.loaded)
