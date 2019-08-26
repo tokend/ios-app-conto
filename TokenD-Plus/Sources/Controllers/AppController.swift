@@ -133,12 +133,14 @@ class AppController {
     private func runLaunchFlow() {
         let latestApiConfugurationModel = APIConfigurationModel.getLatestApiConfigutarion()
         self.updateFlowControllerStack(latestApiConfugurationModel, self.keychainManager)
+        let environmetChanger = EnvironmentChangeWorker(settingsManager: self.flowControllerStack.settingsManager)
         let launchFlowController = LaunchFlowController(
             appController: self,
             flowControllerStack: self.flowControllerStack,
             rootNavigation: self.rootNavigation,
             userDataManager: self.userDataManager,
             keychainManager: self.keychainManager,
+            environmetChanger: environmetChanger,
             onAuthorized: { [weak self] (account) in
                 self?.runSignedInFlowController(account: account)
             },
@@ -147,6 +149,9 @@ class AppController {
             },
             onKYCFailed: { [weak self] in
                 self?.performSignOut()
+            },
+            onEnvironmentChanged: { [weak self] in
+                self?.runLaunchFlow()
             })
         self.currentFlowController = launchFlowController
         launchFlowController.start()

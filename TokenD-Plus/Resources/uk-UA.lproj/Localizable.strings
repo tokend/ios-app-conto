@@ -101,6 +101,7 @@
 "check_sale_state" = "Скасування кампанії";
 "choose_asset" = "Оберіть актив";
 "choose_email" = "Оберіть email";
+"choose_environment" = "Оберіть оточення";
 "close_time" = "Дата кінця";
 "code" = "Код";
 "common" = "Спільні";

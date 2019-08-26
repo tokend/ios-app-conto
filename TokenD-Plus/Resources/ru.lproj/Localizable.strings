@@ -101,6 +101,7 @@
 "check_sale_state" = "Отмена кампании";
 "choose_asset" = "Выберите актив";
 "choose_email" = "Выберите email";
+"choose_environment" = "Выберите окружение";
 "close_time" = "Дата конца";
 "code" = "Код";
 "common" = "Общие";
