@@ -2,6 +2,7 @@ import Foundation
 
 protocol SettingsManagerProtocol: class {
     var biometricsAuthEnabled: Bool { get set }
+    var autoAuthEnabled: Bool { get set }
     var businessOwnerAccountId: String? { get set }
     var businessName: String? { get set }
     var businessImageKey: String? { get set }
@@ -17,6 +18,7 @@ class SettingsManager {
     // MARK: - Public properties
     
     static let biometricsAuthEnabledUserDefaultsKey: String = "biometricsAuthEnabled"
+    static let autoAuthEnabledUserDefaultsKey: String = "autoAuthEnabled"
     static let businessOwnerAccountIdKey: String = "businessOwnerAccountId"
     static let businessNameKey: String = "businessName"
     static let businessImageKey: String = "businessImage"
@@ -29,6 +31,15 @@ class SettingsManager {
         }
         set {
             self.setBiometricsAuthEnabled(newValue)
+        }
+    }
+    
+    var autoAuthEnabled: Bool {
+        get {
+            return self.getAutoAuthEnabled()
+        }
+        set {
+            self.setAutoAuthEnabled(newValue)
         }
     }
     
@@ -100,6 +111,19 @@ class SettingsManager {
     
     private func setBiometricsAuthEnabled(_ enabled: Bool) {
         self.userDefaults.set(enabled, forKey: SettingsManager.biometricsAuthEnabledUserDefaultsKey)
+    }
+    
+    private func getAutoAuthEnabled() -> Bool {
+        guard self.userDefaults.object(forKey: SettingsManager.autoAuthEnabledUserDefaultsKey) != nil else {
+            // Autoauth is disabled by default
+            return false
+        }
+        
+        return self.userDefaults.bool(forKey: SettingsManager.autoAuthEnabledUserDefaultsKey)
+    }
+    
+    private func setAutoAuthEnabled(_ enabled: Bool) {
+        self.userDefaults.set(enabled, forKey: SettingsManager.autoAuthEnabledUserDefaultsKey)
     }
     
     private func getBusinessOwnerAccountId() -> String? {

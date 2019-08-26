@@ -104,6 +104,9 @@ extension Settings {
                 )
                 return
                 
+            case .autoAuth:
+                self.handleAutoAuthEnabled(state, completion: completion)
+                
             default:
                 break
             }
@@ -189,7 +192,16 @@ extension Settings {
                 identifier: .changePassword
             )
             
+            let autoAuthCell = Model.CellModel(
+                title: Localized(.auto_authentication),
+                icon: Assets.autoAuth.image,
+                cellType: .boolCell(self.settingsManger.autoAuthEnabled),
+                bottomSeparator: .line,
+                identifier: .autoAuth
+            )
+            
             var securityCells: [Model.CellModel] = [
+                autoAuthCell,
                 changePassCell
             ]
             
@@ -428,6 +440,16 @@ extension Settings {
             ) {
             
             self.settingsManger.biometricsAuthEnabled = enabled
+            completion(.succeded)
+            self.updateSections()
+        }
+        
+        private func handleAutoAuthEnabled(
+            _ enabled: Bool,
+            completion: @escaping (_ result: SettingsSectionsProviderHandleBoolCellResult) -> Void
+            ) {
+            
+            self.settingsManger.autoAuthEnabled = enabled
             completion(.succeded)
             self.updateSections()
         }
