@@ -97,7 +97,11 @@ class LaunchFlowController: BaseFlowController {
             self.userDataManager.hasWalletDataForMainAccount(),
             !self.userDataManager.isSignedViaAuthenticator() {
             
-            self.runLocalAuthFlow(account: mainAccount, fromBackground: false)
+            if self.flowControllerStack.settingsManager.autoAuthEnabled {
+                self.onAuthorized(mainAccount)
+            } else {
+                self.runLocalAuthFlow(account: mainAccount, fromBackground: false)
+            }
         } else if
             let walletData = VerifyEmailWorker.checkSavedWalletData(userDataManager: self.userDataManager),
             let launchUrl = launchUrl {

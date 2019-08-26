@@ -42,6 +42,7 @@
 "at_date" = "$(date)";
 "at_date_replace_date" = "date";
 "authenticator" = "Аутентификатор";
+"auto_authentication" = "Автоматическая Aутентификация";
 "available" = "Доступно";
 "available_amount" = "$(amount) доступно";
 "available_amount_replace_amount" = "amount";
