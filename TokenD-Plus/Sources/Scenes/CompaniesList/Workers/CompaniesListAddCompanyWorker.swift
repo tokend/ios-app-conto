@@ -19,17 +19,17 @@ extension CompaniesList {
         
         // MARK: - Private properties
         
-        private let accountApiV3: AccountsApiV3
+        private let integrationsApi: IntegrationsApiV3
         private let originalAccountId: String
         
         // MARK: -
         
         init(
-            accountApiV3: AccountsApiV3,
+            integrationsApi: IntegrationsApiV3,
             originalAccountId: String
             ) {
             
-            self.accountApiV3 = accountApiV3
+            self.integrationsApi = integrationsApi
             self.originalAccountId = originalAccountId
         }
         
@@ -40,7 +40,7 @@ extension CompaniesList {
             completion: @escaping (CompaniesListAddCompanyResult) -> Void
             ) {
             
-            self.accountApiV3.addBusinesses(
+            self.integrationsApi.addBusinesses(
                 clientAccountId: self.originalAccountId,
                 businessAccountId: businessAccountId,
                 completion: { (result) in

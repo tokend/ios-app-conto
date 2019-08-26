@@ -19,7 +19,7 @@ extension CompaniesList {
         
         // MARK: - Private properties
         
-        private let accountsApi: AccountsApiV3
+        private let integrationsApi: IntegrationsApiV3
         private let apiConfigurationModel: APIConfigurationModel
         private let companyIsNotFound: String = "404"
         private let defaultQuoteAsset: String = "UAH"
@@ -27,11 +27,11 @@ extension CompaniesList {
         // MARK: -
         
         init(
-            accountsApi: AccountsApiV3,
+            integrationsApi: IntegrationsApiV3,
             apiConfigurationModel: APIConfigurationModel
             ) {
             
-            self.accountsApi = accountsApi
+            self.integrationsApi = integrationsApi
             self.apiConfigurationModel = apiConfigurationModel
         }
         
@@ -70,7 +70,7 @@ extension CompaniesList.CompanyRecognizer: CompaniesList.CompanyRecognizerProtoc
         completion: @escaping (CompaniesListRecognizeCompanyResult) -> Void
         ) {
         
-        self.accountsApi
+        self.integrationsApi
             .requestBusiness(
                 accountId: accountId,
                 completion: { [weak self] (result) in
