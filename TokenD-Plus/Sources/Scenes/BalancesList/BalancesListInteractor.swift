@@ -52,8 +52,11 @@ extension BalancesList {
         // MARK: - Private
         
         private func updateSections() {
+            guard let selectedTabIdentifier = self.sceneModel.selectedTabIdentifier else {
+                return
+            }
             let type: Model.SceneType
-            switch self.sceneModel.selectedTabIdentifier {
+            switch selectedTabIdentifier {
                 
             case .atomicSwapAsks:
                 if self.sceneModel.asks.isEmpty {
@@ -72,11 +75,11 @@ extension BalancesList {
                 }
             }
             let index = self.sceneModel.tabs.firstIndex { (tab) -> Bool in
-                return self.sceneModel.selectedTabIdentifier == tab.identifier
+                return selectedTabIdentifier == tab.identifier
             }
             let response = Event.SectionsUpdated.Response(
                 type: type,
-                selectedTabIdentifier: self.sceneModel.selectedTabIdentifier,
+                selectedTabIdentifier: selectedTabIdentifier,
                 selectedTabIndex: index
             )
             
@@ -131,6 +134,9 @@ extension BalancesList {
         }
         
         private func updateSelectedTab() {
+            guard self.sceneModel.selectedTabIdentifier == nil else {
+                return
+            }
             let totalConvertedAmpount = self.sceneModel.balances.reduce(0, { (sum, balance) -> Decimal in
                 return sum + balance.balance
             })
@@ -375,7 +381,10 @@ extension BalancesList.Interactor: BalancesList.BusinessLogic {
     }
     
     public func onRefreshInitiated(request: Event.RefreshInitiated.Request) {
-        switch self.sceneModel.selectedTabIdentifier {
+        guard let selectedTabIdentifier = self.sceneModel.selectedTabIdentifier else {
+            return
+        }
+        switch selectedTabIdentifier {
             
         case .atomicSwapAsks:
             self.asksFetcher.reloadAsks()

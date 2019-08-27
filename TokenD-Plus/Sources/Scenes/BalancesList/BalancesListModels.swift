@@ -25,7 +25,7 @@ extension BalancesList.Model {
         var asks: [AskModel]
         var chartBalances: [ChartBalance]
         var selectedChartBalance: ChartBalance?
-        var selectedTabIdentifier: TabIdentifier
+        var selectedTabIdentifier: TabIdentifier?
         let imageUrl: URL?
         let convertedAsset: String
         let companyName: String
