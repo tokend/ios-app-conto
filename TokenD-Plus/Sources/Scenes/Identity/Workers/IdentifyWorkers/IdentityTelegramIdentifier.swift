@@ -37,13 +37,13 @@ extension Identity.TelegramIdentifier: Identity.TelegramIdentifierProtocol {
                     completion(.error(error))
                     
                 case .succeeded(let identities):
-                    guard let number = identities.first(where: { (identity) -> Bool in
-                        return identity.attributes.phoneNumber != nil
-                    })?.attributes.phoneNumber else {
+                    guard let telegramUsername = identities.first(where: { (identity) -> Bool in
+                        return identity.attributes.telegramUsername != nil
+                    })?.attributes.telegramUsername else {
                         completion(.didNotSet)
                         return
                     }
-                    completion(.value(number))
+                    completion(.value(telegramUsername))
                 }
         })
     }

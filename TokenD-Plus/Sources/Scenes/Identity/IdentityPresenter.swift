@@ -91,7 +91,11 @@ extension Identity.Presenter: Identity.PresentationLogic {
             
         case .isNotSet:
             buttonTitle = self.getSetTitle(sceneType: response.sceneType)
-            buttonIsEnable = response.value?.isEmpty ?? false
+            if let value = response.value {
+                buttonIsEnable = !value.isEmpty
+            } else {
+                buttonIsEnable = false
+            }
             
         case .sameWithIdentity:
             buttonTitle = self.getChangeTitle(sceneType: response.sceneType)

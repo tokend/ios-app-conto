@@ -171,7 +171,7 @@ extension Settings {
                 title: Localized(.phone_number),
                 icon: Assets.phone.image,
                 cellType: .disclosureCell,
-                bottomSeparator: .line,
+                bottomSeparator: .lineWithInset,
                 identifier: .phone
             )
             

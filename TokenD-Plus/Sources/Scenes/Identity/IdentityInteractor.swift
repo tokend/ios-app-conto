@@ -50,12 +50,12 @@ extension Identity {
         // MARK: - Private
         
         private func updateScene() {
-            guard let number = self.sceneModel.value else {
+            guard let value = self.sceneModel.value else {
                 return
             }
             let state: Model.ValueState
-            if let apiNumber = self.sceneModel.apiValue {
-                state = number == apiNumber ? .sameWithIdentity : .updated
+            if let apiValue = self.sceneModel.apiValue {
+                state = value == apiValue ? .sameWithIdentity : .updated
             } else {
                 state = .isNotSet
             }
