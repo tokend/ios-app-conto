@@ -58,11 +58,17 @@ extension RegisterScene {
                 text: nil
             )
             
+            var subActions: [Model.SubAction] = [.signUp]
+            if let environment = self.sceneModel.environment {
+                subActions.append(.environment(environment))
+            }
+            
             self.sceneModel = Model.SceneModel(
                 state: .signIn,
                 fields: [emailField, passwordField],
-                subActions: [.signUp],
-                termsUrl: self.sceneModel.termsUrl
+                subActions: subActions,
+                termsUrl: self.sceneModel.termsUrl,
+                environment: self.sceneModel.environment
             )
         }
         
@@ -89,7 +95,8 @@ extension RegisterScene {
                 state: .signUp,
                 fields: [emailField, passwordField, confirmPasswordField],
                 subActions: subActions,
-                termsUrl: self.sceneModel.termsUrl
+                termsUrl: self.sceneModel.termsUrl,
+                environment: self.sceneModel.environment
             )
         }
         
@@ -108,7 +115,8 @@ extension RegisterScene {
                 state: .signIn,
                 fields: [emailField, passwordField],
                 subActions: [.signOut],
-                termsUrl: self.sceneModel.termsUrl
+                termsUrl: self.sceneModel.termsUrl,
+                environment: self.sceneModel.environment
             )
         }
         
@@ -428,6 +436,10 @@ extension RegisterScene.Interactor: RegisterScene.BusinessLogic {
         case .authenticator:
             let response = Event.SubAction.Response(action: .routeToSignInAuthenticator)
             self.presenter.presentSubAction(response: response)
+            
+        case .environment:
+            let response = Event.SubAction.Response(action: .showChooseEnvironment)
+            self.presenter.presentSubAction(response: response)
         }
     }
     
@@ -438,7 +450,7 @@ extension RegisterScene.Interactor: RegisterScene.BusinessLogic {
             case .agreeOnTerms(_, let link):
                 self.sceneModel.subActions[index] = .agreeOnTerms(checked: request.checked, link: link)
                 
-            case .recovery, .signIn, .signOut, .signUp, .authenticator:
+            case .recovery, .signIn, .signOut, .signUp, .authenticator, .environment:
                 break
             }
         }

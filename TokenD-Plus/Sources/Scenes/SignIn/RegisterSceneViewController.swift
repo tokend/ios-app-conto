@@ -225,6 +225,9 @@ extension RegisterScene.ViewController: RegisterScene.DisplayLogic {
         case .routeToSignOut:
             self.routing?.onSignedOut()
             
+        case .showChooseEnvironment:
+            self.routing?.onEnvironmentChanged()
+            
         case .showTermsPage(let link):
             self.routing?.onShowTerms(link)
         }

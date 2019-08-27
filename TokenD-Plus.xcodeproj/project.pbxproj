@@ -539,7 +539,7 @@
 		DB720EA422C1396C00ED116A /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C0822C1396B00ED116A /* NavigationController.swift */; };
 		DB720EA522C1396C00ED116A /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C0A22C1396B00ED116A /* Assets.swift */; };
 		DB720EA622C1396C00ED116A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C0B22C1396B00ED116A /* Theme.swift */; };
-		DB720EA722C1396C00ED116A /* TermsInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C0E22C1396B00ED116A /* TermsInfoProvider.swift */; };
+		DB720EA722C1396C00ED116A /* ApiConfigurationDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C0E22C1396B00ED116A /* ApiConfigurationDataProvider.swift */; };
 		DB720EA822C1396C00ED116A /* BalanceBinderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C1022C1396B00ED116A /* BalanceBinderProtocol.swift */; };
 		DB720EA922C1396C00ED116A /* BalanceBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C1122C1396B00ED116A /* BalanceBinder.swift */; };
 		DB720EAA22C1396C00ED116A /* SharedAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB720C1322C1396B00ED116A /* SharedAmountFormatter.swift */; };
@@ -722,6 +722,7 @@
 		DBCA02E322D787B600503025 /* SettingsTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E222D787B600503025 /* SettingsTextCell.swift */; };
 		DBCA02E522D78DE600503025 /* acknowledgements.markdown in Resources */ = {isa = PBXBuildFile; fileRef = DBCA02E422D78DE500503025 /* acknowledgements.markdown */; };
 		DBCA02E722D885B500503025 /* SettingsBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E622D885B500503025 /* SettingsBaseCell.swift */; };
+		DBDA68B4231410FB00EC1519 /* EnvironmentChangeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */; };
 		DBDA688723100D6000EC1519 /* IdentitySetIdentityWorkerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA688623100D6000EC1519 /* IdentitySetIdentityWorkerProtocol.swift */; };
 		DBDA688A23100EA600EC1519 /* IdentityIdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA688923100EA600EC1519 /* IdentityIdentifierProtocol.swift */; };
 		DBDA68932310149200EC1519 /* IdentityInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA688D2310149100EC1519 /* IdentityInteractor.swift */; };
@@ -735,6 +736,7 @@
 		DBDA68A0231014DE00EC1519 /* IdentityPhoneNumberSubmitWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA689F231014DE00EC1519 /* IdentityPhoneNumberSubmitWorker.swift */; };
 		DBDA68A22310165500EC1519 /* IdentityTelegramIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68A12310165500EC1519 /* IdentityTelegramIdentifier.swift */; };
 		DBDA68A4231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68A3231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift */; };
+        DBDA68B72314381300EC1519 /* TransactionsListEmptyActionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1275,7 +1277,7 @@
 		DB720C0822C1396B00ED116A /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		DB720C0A22C1396B00ED116A /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		DB720C0B22C1396B00ED116A /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		DB720C0E22C1396B00ED116A /* TermsInfoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsInfoProvider.swift; sourceTree = "<group>"; };
+		DB720C0E22C1396B00ED116A /* ApiConfigurationDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiConfigurationDataProvider.swift; sourceTree = "<group>"; };
 		DB720C1022C1396B00ED116A /* BalanceBinderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceBinderProtocol.swift; sourceTree = "<group>"; };
 		DB720C1122C1396B00ED116A /* BalanceBinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceBinder.swift; sourceTree = "<group>"; };
 		DB720C1322C1396B00ED116A /* SharedAmountFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedAmountFormatter.swift; sourceTree = "<group>"; };
@@ -1458,6 +1460,7 @@
 		DBCA02E222D787B600503025 /* SettingsTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextCell.swift; sourceTree = "<group>"; };
 		DBCA02E422D78DE500503025 /* acknowledgements.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = acknowledgements.markdown; sourceTree = "<group>"; };
 		DBCA02E622D885B500503025 /* SettingsBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBaseCell.swift; sourceTree = "<group>"; };
+		DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentChangeWorker.swift; sourceTree = "<group>"; };
 		DBDA688623100D6000EC1519 /* IdentitySetIdentityWorkerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentitySetIdentityWorkerProtocol.swift; sourceTree = "<group>"; };
 		DBDA688923100EA600EC1519 /* IdentityIdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityIdentifierProtocol.swift; sourceTree = "<group>"; };
 		DBDA688D2310149100EC1519 /* IdentityInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityInteractor.swift; sourceTree = "<group>"; };
@@ -1471,6 +1474,7 @@
 		DBDA689F231014DE00EC1519 /* IdentityPhoneNumberSubmitWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityPhoneNumberSubmitWorker.swift; sourceTree = "<group>"; };
 		DBDA68A12310165500EC1519 /* IdentityTelegramIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityTelegramIdentifier.swift; sourceTree = "<group>"; };
 		DBDA68A3231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityTelegramSubmitWorker.swift; sourceTree = "<group>"; };
+		DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListEmptyActionsProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2904,13 +2908,13 @@
 		DB720BAB22C1396B00ED116A /* Workers */ = {
 			isa = PBXGroup;
 			children = (
-				DB720BAD22C1396B00ED116A /* TransactionListActionProvider.swift */,
 				DB720BB822C1396B00ED116A /* TransactionsListAmountFormatter.swift */,
 				DB720BAE22C1396B00ED116A /* TransactionsListSceneDateFormatter.swift */,
 				DB720BAC22C1396B00ED116A /* TransactionsListSceneDateFormatterProtocol.swift */,
 				DB720BBA22C1396B00ED116A /* TransactionsListSceneRateProviderProtocol.swift */,
 				DB720BB722C1396B00ED116A /* TransactionsListSceneTransactionsFetcherProtocol.swift */,
 				DB720BB922C1396B00ED116A /* TransactionsListSceneTransactionsProviderProtocol.swift */,
+				DBDA68B5231437E800EC1519 /* ActionsProvider */,
 				DB720BB222C1396B00ED116A /* TransactionsFetchers */,
 				DB720BAF22C1396B00ED116A /* TransactionsProviders */,
 			);
@@ -3131,6 +3135,7 @@
 				DB720C2322C1396B00ED116A /* BalancesFetcher */,
 				DB720C1822C1396B00ED116A /* ChartCardValueFormatter */,
 				DB720C2122C1396B00ED116A /* ClientRedirections */,
+				DBDA68B22314108E00EC1519 /* EnvironmentChangeWorker */,
 				DB720C2822C1396B00ED116A /* FeeLoader */,
 				DB0AFD3022E1CC1A00FB39FF /* NotificationCenterWorker */,
 				DB720C1622C1396B00ED116A /* PasswordValidator */,
@@ -3145,7 +3150,7 @@
 		DB720C0D22C1396B00ED116A /* TermsInfoProvider */ = {
 			isa = PBXGroup;
 			children = (
-				DB720C0E22C1396B00ED116A /* TermsInfoProvider.swift */,
+				DB720C0E22C1396B00ED116A /* ApiConfigurationDataProvider.swift */,
 			);
 			path = TermsInfoProvider;
 			sourceTree = "<group>";
@@ -3796,6 +3801,23 @@
 			path = AcceptRedeemWorker;
 			sourceTree = "<group>";
 		};
+		DBDA68B22314108E00EC1519 /* EnvironmentChangeWorker */ = {
+			isa = PBXGroup;
+			children = (
+				DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */,
+			);
+			path = EnvironmentChangeWorker;
+			sourceTree = "<group>";
+		};
+		DBDA68B5231437E800EC1519 /* ActionsProvider */ = {
+			isa = PBXGroup;
+			children = (
+				DB720BAD22C1396B00ED116A /* TransactionListActionProvider.swift */,
+				DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */,
+			);
+			path = ActionsProvider;
+			sourceTree = "<group>";
+		};
 		DBDA688823100DF000EC1519 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -4178,7 +4200,7 @@
 				DB720CC122C1396B00ED116A /* SaleInvestEnterInvestAmountView.swift in Sources */,
 				DB720EDF22C1396C00ED116A /* TableViewStickyHeader.swift in Sources */,
 				DB720D0B22C1396B00ED116A /* TokenDetailsConfigurator.swift in Sources */,
-				DB720EA722C1396C00ED116A /* TermsInfoProvider.swift in Sources */,
+				DB720EA722C1396C00ED116A /* ApiConfigurationDataProvider.swift in Sources */,
 				DB720D3422C1396B00ED116A /* MarkdownViewerModels.swift in Sources */,
 				DB720EB822C1396C00ED116A /* ContactEmailPickerHandler.swift in Sources */,
 				DB720DE922C1396C00ED116A /* DashboardViewController.swift in Sources */,
@@ -4314,6 +4336,7 @@
 				DB28C4C322D39EE6005362FD /* Numeric+Bytes.swift in Sources */,
 				DB720D0C22C1396B00ED116A /* TokenDetailsPresenter.swift in Sources */,
 				DB720EA622C1396C00ED116A /* Theme.swift in Sources */,
+				DBDA68B72314381300EC1519 /* TransactionsListEmptyActionsProvider.swift in Sources */,
 				DB720DB122C1396B00ED116A /* SendPaymentAmountsBalanceDetailsLoader.swift in Sources */,
 				DB720E1022C1396C00ED116A /* AssetPickerConfigurator.swift in Sources */,
 				DB720DE122C1396C00ED116A /* TradesListAssetPairListView.swift in Sources */,
@@ -4421,6 +4444,7 @@
 				DB720D7822C1396B00ED116A /* CreateOfferPresenter.swift in Sources */,
 				DB720D7422C1396B00ED116A /* BalanceHeaderWithPickerRateProviderProtocol.swift in Sources */,
 				DB720EA222C1396C00ED116A /* QRCodeReaderOverlayView.swift in Sources */,
+				DBDA68B4231410FB00EC1519 /* EnvironmentChangeWorker.swift in Sources */,
 				DB720F5C22C4CD1C00ED116A /* PollsViewController.swift in Sources */,
 				DB720E0322C1396C00ED116A /* TabBarContainerInteractor.swift in Sources */,
 				DB720E8322C1396C00ED116A /* BalanceHeaderAmountFormatter.swift in Sources */,

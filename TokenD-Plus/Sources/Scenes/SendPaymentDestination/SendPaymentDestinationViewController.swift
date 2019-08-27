@@ -255,6 +255,17 @@ extension SendPaymentDestination.ViewController: SendPaymentDestination.DisplayL
             
         case .error(let message):
             self.routing?.showError(message)
+            
+        case .nonExistedDestination(let model):
+            let onSelected: (Int) -> Void = { [weak self] _ in
+                self?.routing?.showSendAmount(model)
+            }
+            self.routing?.showDialog(
+                Localized(.warning),
+                Localized(.user_with_such_an_email_is_not_found),
+                ["OK"],
+                onSelected
+            )
         }
     }
     

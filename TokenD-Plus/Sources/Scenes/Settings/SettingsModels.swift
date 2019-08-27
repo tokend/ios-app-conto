@@ -14,6 +14,7 @@ enum Settings {
         case telegram
         case tfa
         case biometrics
+        case autoAuth
         case verification
         case changePassword
         case termsOfService

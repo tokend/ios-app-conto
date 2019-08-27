@@ -42,6 +42,7 @@
 "at_date" = "$(date)";
 "at_date_replace_date" = "date";
 "authenticator" = "Аутентификатор";
+"auto_authentication" = "Автоматическая Aутентификация";
 "available" = "Доступно";
 "available_amount" = "$(amount) доступно";
 "available_amount_replace_amount" = "amount";
@@ -101,6 +102,7 @@
 "check_sale_state" = "Отмена кампании";
 "choose_asset" = "Выберите актив";
 "choose_email" = "Выберите email";
+"choose_environment" = "Выберите окружение";
 "close_time" = "Дата конца";
 "code" = "Код";
 "common" = "Общие";
@@ -257,6 +259,7 @@
 "funded_lowercase" = "собрано";
 "general" = "Общее";
 "get_address" = "Получить адрес";
+"github" = "GitHub";
 "goal" = "цель\n$(amount)";
 "goal_replace_amount" = "amount";
 "go_to_confirmation" = "К подтверждению";
@@ -376,6 +379,8 @@
 "one_vote" = "1 голос - $(percent)";
 "one_vote_replace_percent" = "percent";
 "open_app" = "Открыть приложение";
+"open_bot" = "Открыть бота";
+"open_our_telegram_bot" = "Откройте нашего Телеграм Бота для получения кода верификации";
 "operation" = "Операция";
 "operations" = "Операции";
 "opportunities" = "Возможности";
@@ -590,6 +595,7 @@
 "up_to_replace_amount" = "amount";
 "use_this_qr_code_to_redeem" = "Используйте этот QR код чтобы погасить $(amount)";
 "use_this_qr_code_to_redeem_replace_amount" = "amount";
+"user_with_such_an_email_is_not_found" = "Пользователь с таким email-ом не найден. Убедитесь, что вы ввели правильный адрес электронной почты. Если адрес правильный, пользователь получит платеж, как только зарегистрирует аккаунт.";
 "userdataprovider_should_always_provide_walletdata" = "UserDataProvider should always provide walletData";
 "verification" = "Верификация";
 "verification_link_is_sent" = "Ссылка для верификации отправлена на ваш email";
@@ -603,6 +609,7 @@
 "votes_replace_votes_count" = "votes_count";
 "votes_replace_percent" = "percent";
 "wallet" = "Кошелёк";
+"warning" = "Внимание";
 "we_do_not_know_your_seed" = "Мы не знаем ваш секретный ключ";
 "week" = "Неделя";
 "with_one_for" = "C 1 $(asset) за";

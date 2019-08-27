@@ -45,6 +45,7 @@ enum LocKey: String {
     case at_date
     case at_date_replace_date
     case authenticator
+    case auto_authentication
     case available
     case available_amount
     case available_amount_replace_amount
@@ -104,6 +105,7 @@ enum LocKey: String {
     case check_sale_state
     case choose_asset
     case choose_email
+    case choose_environment
     case close_time
     case code
     case common
@@ -260,6 +262,7 @@ enum LocKey: String {
     case funded_lowercase
     case general
     case get_address
+    case github
     case goal
     case goal_replace_amount
     case go_to_confirmation
@@ -379,6 +382,8 @@ enum LocKey: String {
     case one_vote
     case one_vote_replace_percent
     case open_app
+    case open_bot
+    case open_our_telegram_bot
     case operation
     case operations
     case opportunities
@@ -593,6 +598,7 @@ enum LocKey: String {
     case up_to_replace_amount
     case use_this_qr_code_to_redeem
     case use_this_qr_code_to_redeem_replace_amount
+    case user_with_such_an_email_is_not_found
     case userdataprovider_should_always_provide_walletdata
     case verification
     case verification_link_is_sent
@@ -606,6 +612,7 @@ enum LocKey: String {
     case votes_replace_votes_count
     case votes_replace_percent
     case wallet
+    case warning
     case we_do_not_know_your_seed
     case week
     case with_one_for

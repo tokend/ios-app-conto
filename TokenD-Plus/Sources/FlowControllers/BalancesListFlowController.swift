@@ -198,7 +198,8 @@ class BalancesListFlowController: BaseSignedInFlowController {
             originalAccountId: self.userDataProvider.walletData.accountId
         )
         let transactionsFetcher = TransactionsListScene.PaymentsFetcher(
-            transactionsProvider: transactionsProvider
+            transactionsProvider: transactionsProvider,
+            ownerAccountId: self.company.accountId
         )
         
         let actionProvider = TransactionsListScene.ActionProvider(

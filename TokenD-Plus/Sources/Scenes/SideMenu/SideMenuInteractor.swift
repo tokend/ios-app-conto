@@ -34,6 +34,11 @@ extension SideMenu {
                         identifier: .balances
                     ),
                     SideMenu.Model.MenuItem(
+                        iconImage: Assets.tradeIcon.image,
+                        title: Localized(.movements),
+                        identifier: .movements
+                    ),
+                    SideMenu.Model.MenuItem(
                         iconImage: Assets.settingsIcon.image,
                         title: Localized(.settings),
                         identifier: .settings
@@ -46,8 +51,8 @@ extension SideMenu {
                 ],
                 [
                     SideMenu.Model.MenuItem(
-                        iconImage: Assets.heart.image,
-                        title: Localized(.contribute),
+                        iconImage: Assets.github.image,
+                        title: Localized(.github),
                         identifier: .contribute
                     )
                 ]

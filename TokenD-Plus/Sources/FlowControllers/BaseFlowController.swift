@@ -300,7 +300,7 @@ class BaseFlowController {
             alertTitle = Localized(.input_password)
             alertMessage = nil
             
-        case .code(let type, _):
+        case .code(let type, let inputCallback):
             switch type {
                 
             case .email:
@@ -323,6 +323,22 @@ class BaseFlowController {
             case .totp:
                 alertTitle = Localized(.input_2fa_code)
                 alertMessage = Localized(.input_code_from_google_authenticator_or_similar_app)
+                
+            case .telegram(let url):
+                guard let url = URL(string: url) else {
+                    return
+                }
+                self.redirectAlert(
+                    redirectTitle: Localized(.open_our_telegram_bot),
+                    redirectAction: Localized(.open_bot),
+                    title: Localized(.input_2fa_code),
+                    url: url,
+                    completion: { (text) in
+                        inputCallback(text)
+                    },
+                    cancel: cancel
+                )
+                return
             }
         }
         
@@ -353,6 +369,46 @@ class BaseFlowController {
             }, cancel: {
                 cancel()
         })
+    }
+    
+    func redirectAlert(
+        redirectTitle: String,
+        redirectAction: String,
+        title: String,
+        url: URL,
+        completion: @escaping (_ text: String) -> Void,
+        cancel: @escaping () -> Void
+        ) {
+        
+        let alert = UIAlertController(
+            title: redirectTitle,
+            message: nil,
+            preferredStyle: .alert
+        )
+        let action = UIAlertAction(
+            title: redirectAction,
+            style: .default,
+            handler: { _ in
+                UIApplication.shared.open(
+                    url,
+                    options: [:],
+                    completionHandler: { [weak self] (_) in
+                        self?.presentTextField(
+                            title: title,
+                            completion: completion,
+                            cancel: cancel
+                        )
+                })
+        })
+        let cancelAction = UIAlertAction(
+            title: Localized(.cancel),
+            style: .cancel,
+            handler: { _ in
+                cancel()
+        })
+        alert.addAction(action)
+        alert.addAction(cancelAction)
+        self.rootNavigation.presentAlert(alert, animated: true, completion: nil)
     }
     
     private func processInput(

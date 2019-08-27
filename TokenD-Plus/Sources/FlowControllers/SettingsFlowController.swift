@@ -93,7 +93,10 @@ class SettingsFlowController: BaseSignedInFlowController {
                 self?.onSignOut()
         })
         
-        let provider = TermsInfoProvider(apiConfigurationModel: self.flowControllerStack.apiConfigurationModel)
+        let provider = ApiConfigurationDataProvider(
+            apiConfigurationModel: self.flowControllerStack.apiConfigurationModel,
+            settingsManager: self.flowControllerStack.settingsManager
+        )
         let termsUrl = provider.getTermsUrl()
         let sceneModel = Settings.Model.SceneModel(termsUrl: termsUrl)
         

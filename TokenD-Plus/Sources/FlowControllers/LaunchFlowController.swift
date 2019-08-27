@@ -9,9 +9,11 @@ class LaunchFlowController: BaseFlowController {
     private let navigationController: NavigationControllerProtocol = NavigationController()
     private var userDataManager: UserDataManagerProtocol
     private var keychainManager: KeychainManagerProtocol
+    private let environmetChanger: EnvironmentChangeWorkerProtocol
     private let onAuthorized: (_ account: String) -> Void
     private let onSignOut: () -> Void
     private let onKYCFailed: () -> Void
+    private let onEnvironmentChanged: () -> Void
     
     private var submittedEmail: String?
     private var kycChecker: AccountVerificationCheckerProtocol?
@@ -24,16 +26,20 @@ class LaunchFlowController: BaseFlowController {
         rootNavigation: RootNavigationProtocol,
         userDataManager: UserDataManagerProtocol,
         keychainManager: KeychainManagerProtocol,
+        environmetChanger: EnvironmentChangeWorkerProtocol,
         onAuthorized: @escaping (_ account: String) -> Void,
         onSignOut: @escaping () -> Void,
-        onKYCFailed: @escaping () -> Void
+        onKYCFailed: @escaping () -> Void,
+        onEnvironmentChanged: @escaping () -> Void
         ) {
         
         self.userDataManager = userDataManager
         self.keychainManager = keychainManager
+        self.environmetChanger = environmetChanger
         self.onAuthorized = onAuthorized
         self.onSignOut = onSignOut
         self.onKYCFailed = onKYCFailed
+        self.onEnvironmentChanged = onEnvironmentChanged
         
         super.init(
             appController: appController,
@@ -97,7 +103,11 @@ class LaunchFlowController: BaseFlowController {
             self.userDataManager.hasWalletDataForMainAccount(),
             !self.userDataManager.isSignedViaAuthenticator() {
             
-            self.runLocalAuthFlow(account: mainAccount, fromBackground: false)
+            if self.flowControllerStack.settingsManager.autoAuthEnabled {
+                self.onAuthorized(mainAccount)
+            } else {
+                self.runLocalAuthFlow(account: mainAccount, fromBackground: false)
+            }
         } else if
             let walletData = VerifyEmailWorker.checkSavedWalletData(userDataManager: self.userDataManager),
             let launchUrl = launchUrl {
@@ -287,9 +297,17 @@ class LaunchFlowController: BaseFlowController {
     private func setupRegisterScreen() -> RegisterScene.ViewController {
         let vc = RegisterScene.ViewController()
         
-        let provider = TermsInfoProvider(apiConfigurationModel: self.flowControllerStack.apiConfigurationModel)
+        let provider = ApiConfigurationDataProvider(
+            apiConfigurationModel: self.flowControllerStack.apiConfigurationModel,
+            settingsManager: self.flowControllerStack.settingsManager
+        )
         let termsUrl = provider.getTermsUrl()
-        let sceneModel = RegisterScene.Model.SceneModel.signInWithEmail(self.submittedEmail, termsUrl: termsUrl)
+        let environment = provider.getEnvironment()
+        let sceneModel = RegisterScene.Model.SceneModel.signInWithEmail(
+            self.submittedEmail,
+            termsUrl: termsUrl,
+            environment: environment
+            )
         let signUpRequestBuilder = SignUpRequestBuilder(
             keyServerApi: self.flowControllerStack.keyServerApi
         )
@@ -355,7 +373,29 @@ class LaunchFlowController: BaseFlowController {
             onSignedOut: {},
             onShowTerms: { [weak self] (url) in
                 self?.presentTermsScreen(url)
-        })
+            },
+            onEnvironmentChanged: { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+                let environments = strongSelf.environmetChanger.getAvailableEnvironments()
+                self?.showDialog(
+                    title: Localized(.choose_environment),
+                    message: nil,
+                    style: .actionSheet,
+                    options: environments,
+                    onSelected: { index in
+                        let chosenEnvironment = environments[index]
+                        if !strongSelf.environmetChanger.checkIfCurrent(environment: chosenEnvironment) {
+                            
+                            strongSelf.environmetChanger.setCurrentEnvironmnet(environment: chosenEnvironment)
+                            strongSelf.onEnvironmentChanged()
+                        }
+                    },
+                    onCanceled: nil,
+                    presentViewController: strongSelf.navigationController.getPresentViewControllerClosure()
+                )
+            })
         
         RegisterScene.Configurator.configure(
             viewController: vc,

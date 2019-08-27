@@ -3,6 +3,7 @@ import UIKit
 enum Assets: String {
     case addIcon = "Add icon"
     case amount = "Amount"
+    case autoAuth = "Auto auth"
     case buy = "Buy"
     case check = "Check"
     case checkmark = "Checkmark"
@@ -28,6 +29,7 @@ enum Assets: String {
     case fee = "Fee"
     case filledStarIcon = "Filled star icon"
     case flashLightIcon = "Flash Light icon"
+    case github = "Github icon"
     case heart = "Heart icon"
     case help = "Help icon"
     case hidePasswordIcon = "Hide password icon"

@@ -105,6 +105,15 @@ extension BalancesList {
             }
         }
         
+        public override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            
+            let request = Event.RefreshInitiated.Request()
+            self.interactorDispatch?.sendRequest(requestBlock: { (businessLogic) in
+                businessLogic.onRefreshInitiated(request: request)
+            })
+        }
+        
         // MARK: - Private
         
         private func observeLanguageChanges() {
