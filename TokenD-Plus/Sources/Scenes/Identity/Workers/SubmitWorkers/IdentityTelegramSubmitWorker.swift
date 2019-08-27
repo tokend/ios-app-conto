@@ -33,9 +33,9 @@ extension Identity.TelegramSubmitWorker: Identity.TelegramIdentitySubmitWorkerPr
         completion: @escaping (IdentitySubmitResult) -> Void
         ) {
         
-        self.generalApi.requestSetPhone(
+        self.generalApi.requestSetTelegram(
             accountId: self.accountId,
-            phone: .init(phone: value),
+            telegram: .init(username: value),
             completion: { (result) in
                 switch result {
                     
@@ -43,7 +43,7 @@ extension Identity.TelegramSubmitWorker: Identity.TelegramIdentitySubmitWorkerPr
                     completion(.error(error))
                     
                 case .tfaFailed:
-                    completion(.error(Identity.Event.SetNumberAction.Error.invalidCode))
+                    completion(.error(Identity.Event.SetAction.SetTelegramError.invalidCode))
                     
                 case .succeeded:
                     completion(.success)

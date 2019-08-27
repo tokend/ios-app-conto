@@ -722,7 +722,6 @@
 		DBCA02E322D787B600503025 /* SettingsTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E222D787B600503025 /* SettingsTextCell.swift */; };
 		DBCA02E522D78DE600503025 /* acknowledgements.markdown in Resources */ = {isa = PBXBuildFile; fileRef = DBCA02E422D78DE500503025 /* acknowledgements.markdown */; };
 		DBCA02E722D885B500503025 /* SettingsBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E622D885B500503025 /* SettingsBaseCell.swift */; };
-		DBDA68B4231410FB00EC1519 /* EnvironmentChangeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */; };
 		DBDA688723100D6000EC1519 /* IdentitySetIdentityWorkerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA688623100D6000EC1519 /* IdentitySetIdentityWorkerProtocol.swift */; };
 		DBDA688A23100EA600EC1519 /* IdentityIdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA688923100EA600EC1519 /* IdentityIdentifierProtocol.swift */; };
 		DBDA68932310149200EC1519 /* IdentityInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA688D2310149100EC1519 /* IdentityInteractor.swift */; };
@@ -736,7 +735,8 @@
 		DBDA68A0231014DE00EC1519 /* IdentityPhoneNumberSubmitWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA689F231014DE00EC1519 /* IdentityPhoneNumberSubmitWorker.swift */; };
 		DBDA68A22310165500EC1519 /* IdentityTelegramIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68A12310165500EC1519 /* IdentityTelegramIdentifier.swift */; };
 		DBDA68A4231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68A3231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift */; };
-        DBDA68B72314381300EC1519 /* TransactionsListEmptyActionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */; };
+		DBDA68B4231410FB00EC1519 /* EnvironmentChangeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */; };
+		DBDA68B72314381300EC1519 /* TransactionsListEmptyActionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1460,7 +1460,6 @@
 		DBCA02E222D787B600503025 /* SettingsTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextCell.swift; sourceTree = "<group>"; };
 		DBCA02E422D78DE500503025 /* acknowledgements.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = acknowledgements.markdown; sourceTree = "<group>"; };
 		DBCA02E622D885B500503025 /* SettingsBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBaseCell.swift; sourceTree = "<group>"; };
-		DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentChangeWorker.swift; sourceTree = "<group>"; };
 		DBDA688623100D6000EC1519 /* IdentitySetIdentityWorkerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentitySetIdentityWorkerProtocol.swift; sourceTree = "<group>"; };
 		DBDA688923100EA600EC1519 /* IdentityIdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityIdentifierProtocol.swift; sourceTree = "<group>"; };
 		DBDA688D2310149100EC1519 /* IdentityInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityInteractor.swift; sourceTree = "<group>"; };
@@ -1474,6 +1473,7 @@
 		DBDA689F231014DE00EC1519 /* IdentityPhoneNumberSubmitWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityPhoneNumberSubmitWorker.swift; sourceTree = "<group>"; };
 		DBDA68A12310165500EC1519 /* IdentityTelegramIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityTelegramIdentifier.swift; sourceTree = "<group>"; };
 		DBDA68A3231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityTelegramSubmitWorker.swift; sourceTree = "<group>"; };
+		DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentChangeWorker.swift; sourceTree = "<group>"; };
 		DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListEmptyActionsProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1772,12 +1772,12 @@
 				DB363DFE22DCDB8C00F5761C /* FacilitiesList */,
 				DB720A0222C1396B00ED116A /* Fees */,
 				DB3DDBE323044D1E0002E540 /* FiatPayment */,
+				DBA3F3EF23059DCB008401B7 /* Identity */,
 				DBC1654923035530002A50F7 /* KYC */,
 				DB363E2922DF761200F5761C /* LanguagesList */,
 				DB720A3D22C1396B00ED116A /* MarkdownViewer */,
 				DBA1F1F422FC2D640027B8B5 /* PaymentMethod */,
 				DBA1F20822FC2D7B0027B8B5 /* PaymentMethodPicker */,
-				DBA3F3EF23059DCB008401B7 /* Identity */,
 				DB720F4322C4CD1C00ED116A /* Polls */,
 				DB720B6F22C1396B00ED116A /* ReceiveAddress */,
 				DB720BC222C1396B00ED116A /* SaleDetails */,
@@ -3801,23 +3801,6 @@
 			path = AcceptRedeemWorker;
 			sourceTree = "<group>";
 		};
-		DBDA68B22314108E00EC1519 /* EnvironmentChangeWorker */ = {
-			isa = PBXGroup;
-			children = (
-				DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */,
-			);
-			path = EnvironmentChangeWorker;
-			sourceTree = "<group>";
-		};
-		DBDA68B5231437E800EC1519 /* ActionsProvider */ = {
-			isa = PBXGroup;
-			children = (
-				DB720BAD22C1396B00ED116A /* TransactionListActionProvider.swift */,
-				DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */,
-			);
-			path = ActionsProvider;
-			sourceTree = "<group>";
-		};
 		DBDA688823100DF000EC1519 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -3843,6 +3826,23 @@
 				DBDA68A12310165500EC1519 /* IdentityTelegramIdentifier.swift */,
 			);
 			path = IdentifyWorkers;
+			sourceTree = "<group>";
+		};
+		DBDA68B22314108E00EC1519 /* EnvironmentChangeWorker */ = {
+			isa = PBXGroup;
+			children = (
+				DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */,
+			);
+			path = EnvironmentChangeWorker;
+			sourceTree = "<group>";
+		};
+		DBDA68B5231437E800EC1519 /* ActionsProvider */ = {
+			isa = PBXGroup;
+			children = (
+				DB720BAD22C1396B00ED116A /* TransactionListActionProvider.swift */,
+				DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */,
+			);
+			path = ActionsProvider;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

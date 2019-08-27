@@ -638,5 +638,7 @@ enum LocKey: String {
     case you_have_no_depositable_assets
     case your_account_is_approved
     case your_username
+    case your_phone_number_has_been_successfully_set
+    case your_telegram_username_has_been_successfully_set
     case your_verification_request_is_submitted
 }

@@ -27,6 +27,24 @@ extension Identity.TelegramIdentifier: Identity.TelegramIdentifierProtocol {
         accountId: String,
         completion: @escaping (IdentifyResult) -> Void
         ) {
-            completion(.didNotSet)
+        
+        self.generalApi.requestIdentities(
+            filter: .accountId(accountId),
+            completion: { result in
+                switch result {
+                    
+                case .failed(let error):
+                    completion(.error(error))
+                    
+                case .succeeded(let identities):
+                    guard let number = identities.first(where: { (identity) -> Bool in
+                        return identity.attributes.phoneNumber != nil
+                    })?.attributes.phoneNumber else {
+                        completion(.didNotSet)
+                        return
+                    }
+                    completion(.value(number))
+                }
+        })
     }
 }

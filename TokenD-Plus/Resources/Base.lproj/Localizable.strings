@@ -635,4 +635,6 @@
 "you_have_no_depositable_assets" = "You have no depositable assets";
 "your_account_is_approved" = "Your account is approved. All actions that requires verification are now available";
 "your_username" = "Your username";
+"your_phone_number_has_been_successfully_set" = "Your phone number has been successfully set";
+"your_telegram_username_has_been_successfully_set" = "Your telegram username has been successfully set";
 "your_verification_request_is_submitted" = "Your verification request is submitted. Please wait until we review the information. You will be able to update details once the request is reviewed.";

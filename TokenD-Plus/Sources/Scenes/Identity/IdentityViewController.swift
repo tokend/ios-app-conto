@@ -4,7 +4,7 @@ import RxSwift
 public protocol PhoneNumberDisplayLogic: class {
     typealias Event = Identity.Event
  
-    func displaySetNumberAction(viewModel: Event.SetNumberAction.ViewModel)
+    func displaySetAction(viewModel: Event.SetAction.ViewModel)
     func displaySceneUpdated(viewModel: Event.SceneUpdated.ViewModel)
     func displayLoadingStatusDidChange(viewModel: Event.LoadingStatusDidChange.ViewModel)
     func displayError(viewModel: Event.Error.ViewModel)
@@ -230,7 +230,7 @@ extension Identity {
 
 extension Identity.ViewController: Identity.DisplayLogic {
     
-    public func displaySetNumberAction(viewModel: Event.SetNumberAction.ViewModel) {
+    public func displaySetAction(viewModel: Event.SetAction.ViewModel) {
         switch viewModel {
             
         case .error(let message):

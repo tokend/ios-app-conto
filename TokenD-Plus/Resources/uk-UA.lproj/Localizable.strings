@@ -635,4 +635,6 @@
 "you_have_no_depositable_assets" = "У Вас немає активів для яких можливий депозит";
 "your_account_is_approved" = "Ваш аккаунт схвалений. Всі дії які вимагають верифікацію тепер доступні";
 "your_username" = "Ваше ім'я користувача";
+"your_phone_number_has_been_successfully_set" = "Ваш номер телефону був успiшно встановлений";
+"your_telegram_username_has_been_successfully_set" = "Ваше ім'я користувача Телеграм було успiшно встановлено";
 "your_verification_request_is_submitted" = "Ваш запит на верифікацію відправлений. Будь ласка, зачекайте його розгляду. Ви зможете оновити деталі, коли запит буде розглянутий.";

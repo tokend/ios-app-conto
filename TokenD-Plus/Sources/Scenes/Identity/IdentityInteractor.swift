@@ -106,40 +106,62 @@ extension Identity {
         }
         
         private func handleSetNumberAction() {
-            self.presenter.presentSetNumberAction(response: .loading)
+            self.presenter.presentSetAction(response: .loading)
             guard let number = self.sceneModel.value else {
-                self.presenter.presentSetNumberAction(response: .error(Event.SetNumberAction.Error.emptyNumber))
+                self.presenter.presentSetAction(response: .error(Event.SetAction.SetNumberError.emptyNumber))
                 return
             }
             let finalNumber = "+" + number
             
             guard let numberValidator = self.numberValidator,
                 numberValidator.validate(number: finalNumber) else {
-                self.presenter.presentSetNumberAction(response: .error(Event.SetNumberAction.Error.numberIsNotValid))
+                self.presenter.presentSetAction(response: .error(Event.SetAction.SetNumberError.numberIsNotValid))
                 return
             }
             
+            let sceneType = self.sceneModel.sceneType
             self.submitWorker.submitIdentity(
                 value: finalNumber,
                 completion: { [weak self] (result) in
-                    self?.presenter.presentSetNumberAction(response: .loaded)
-                    let response: Event.SetNumberAction.Response
+                    self?.presenter.presentSetAction(response: .loaded)
+                    let response: Event.SetAction.Response
                     switch result {
                         
                     case .error(let error):
                         response = .error(error)
                         
                     case .success:
-                        response = .success
+                        response = .success(sceneType: sceneType)
                     }
-                    self?.presenter.presentSetNumberAction(response: response)
+                    self?.presenter.presentSetAction(response: response)
             })
         }
         
         // MARK: - Telegram
         
         private func handleTelegramAction() {
+            self.presenter.presentSetAction(response: .loading)
+            guard let username = self.sceneModel.value else {
+                self.presenter.presentSetAction(response: .error(Event.SetAction.SetTelegramError.emptyUserName))
+                return
+            }
             
+            let sceneType = self.sceneModel.sceneType
+            self.submitWorker.submitIdentity(
+                value: username,
+                completion: { [weak self] (result) in
+                    self?.presenter.presentSetAction(response: .loaded)
+                    let response: Event.SetAction.Response
+                    switch result {
+                        
+                    case .error(let error):
+                        response = .error(error)
+                        
+                    case .success:
+                        response = .success(sceneType: sceneType)
+                    }
+                    self?.presenter.presentSetAction(response: response)
+            })
         }
     }
 }

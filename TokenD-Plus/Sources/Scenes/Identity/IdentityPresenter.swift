@@ -3,7 +3,7 @@ import Foundation
 public protocol PhoneNumberPresentationLogic {
     typealias Event = Identity.Event
     
-    func presentSetNumberAction(response: Event.SetNumberAction.Response)
+    func presentSetAction(response: Event.SetAction.Response)
     func presentSсeneUpdated(response: Event.SceneUpdated.Response)
     func presentLoadingStatusDidChange(response: Event.LoadingStatusDidChange.Response)
     func presentError(response: Event.Error.Response)
@@ -56,15 +56,22 @@ extension Identity {
 
 extension Identity.Presenter: Identity.PresentationLogic {
     
-    public func presentSetNumberAction(response: Event.SetNumberAction.Response) {
-        let viewModel: Event.SetNumberAction.ViewModel
+    public func presentSetAction(response: Event.SetAction.Response) {
+        let viewModel: Event.SetAction.ViewModel
         switch response {
             
         case .error(let error):
             viewModel = .error(error.localizedDescription)
             
-        case .success:
-            viewModel = .success(Localized(.success))
+        case .success(let sceneType):
+            let message: String
+            switch sceneType {
+            case .phoneNumber:
+                message = Localized(.your_phone_number_has_been_successfully_set)
+            case .telegram:
+                message = Localized(.your_telegram_username_has_been_successfully_set)
+            }
+            viewModel = .success(message)
             
         case .loaded:
             viewModel = .loaded
@@ -73,7 +80,7 @@ extension Identity.Presenter: Identity.PresentationLogic {
             viewModel = .loading
         }
         self.presenterDispatch.display { (displayLogic) in
-            displayLogic.displaySetNumberAction(viewModel: viewModel)
+            displayLogic.displaySetAction(viewModel: viewModel)
         }
     }
     
@@ -122,7 +129,7 @@ extension Identity.Presenter: Identity.PresentationLogic {
     }
 }
 
-extension Identity.Event.SetNumberAction.Error: LocalizedError {
+extension Identity.Event.SetAction.SetNumberError: LocalizedError {
     public var errorDescription: String? {
         switch self {
             

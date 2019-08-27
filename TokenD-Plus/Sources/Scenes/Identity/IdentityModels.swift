@@ -86,9 +86,9 @@ extension Identity.Event {
         public struct Request {}
     }
     
-    public enum SetNumberAction {
+    public enum SetAction {
         public enum Response {
-            case success
+            case success(sceneType: Model.SceneType)
             case error(Swift.Error)
             case loading
             case loaded
@@ -117,10 +117,17 @@ extension Identity.Event {
     }
 }
 
-extension Identity.Event.SetNumberAction {
-    public enum Error: Swift.Error {
+extension Identity.Event.SetAction {
+    public enum SetNumberError: Swift.Error {
         case emptyNumber
         case numberIsNotValid
+        case invalidCode
+    }
+}
+
+extension Identity.Event.SetAction {
+    public enum SetTelegramError: Swift.Error {
+        case emptyUserName
         case invalidCode
     }
 }
