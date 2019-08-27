@@ -165,6 +165,7 @@ enum LocKey: String {
     case empty_number_field
     case empty_recipient_address
     case empty_signers_data
+    case empty_username_field
     case ended
     case ended_capitalized
     case enter_account_holders_name
@@ -539,6 +540,7 @@ enum LocKey: String {
     case terms_of_service
     case terms_of_service_not_agreed
     case terms_of_use
+    case tfa_failed
     case the_company_has_been_successfully_added
     case the_redemption_has_been_already_completed
     case there_is_not_any_company_where_you_are_a_client_yet

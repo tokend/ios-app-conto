@@ -43,7 +43,7 @@ extension Identity.PhoneNumberSubmitWorker: Identity.IdentitySubmitWorkerProtoco
                     completion(.error(error))
                     
                 case .tfaFailed:
-                    completion(.error(Identity.Event.SetAction.SetNumberError.invalidCode))
+                    completion(.error(Identity.Event.SetAction.SetNumberError.tfaFailed))
                     
                 case .succeeded:
                     completion(.success)

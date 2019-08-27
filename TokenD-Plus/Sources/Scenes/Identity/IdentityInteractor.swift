@@ -76,7 +76,17 @@ extension Identity {
                 .disposed(by: self.disposeBag)
         }
         
-        // MARK: - Phone number
+        private func setIdentity(value: String) {
+            let sceneValue: String
+            switch self.sceneModel.sceneType {
+            case .phoneNumber:
+                sceneValue = String(value.dropFirst())
+            case .telegram:
+                sceneValue = value
+            }
+            self.sceneModel.apiValue = sceneValue
+            self.sceneModel.value = self.sceneModel.apiValue
+        }
         
         private func handleIdentity(identity: IdentifyResult) {
             let state: Model.ValueState
@@ -85,10 +95,8 @@ extension Identity {
             case .didNotSet:
                 state = .isNotSet
                 
-            case .value(let number):
-                
-                self.sceneModel.apiValue = String(number.dropFirst())
-                self.sceneModel.value = self.sceneModel.apiValue
+            case .value(let value):
+                self.setIdentity(value: value)
                 state = .sameWithIdentity
                 
             case .error(let error):

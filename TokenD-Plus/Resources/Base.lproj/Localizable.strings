@@ -162,6 +162,7 @@
 "empty_number_field" = "Empty phone number field";
 "empty_recipient_address" = "Empty recipient address";
 "empty_signers_data" = "Empty signers data";
+"empty_username_field" = "Empty username field";
 "ended" = "ended";
 "ended_capitalized" = "Ended";
 "enter_account_holders_name" = "Enter Account holder's name";
@@ -536,6 +537,7 @@
 "terms_of_service" = "Terms of Service";
 "terms_of_service_not_agreed" = "Terms of Service not agreed";
 "terms_of_use" = "Terms of use";
+"tfa_failed" = "Two factor authentification failed";
 "the_company_has_been_successfully_added" = "The company has been successfully added";
 "the_redemption_has_been_already_completed" = "The redemption has already been completed, the request is invalid";
 "there_is_not_any_company_where_you_are_a_client_yet" = "There is not any company where you are a client yet";

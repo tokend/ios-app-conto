@@ -121,13 +121,13 @@ extension Identity.Event.SetAction {
     public enum SetNumberError: Swift.Error {
         case emptyNumber
         case numberIsNotValid
-        case invalidCode
+        case tfaFailed
     }
 }
 
 extension Identity.Event.SetAction {
     public enum SetTelegramError: Swift.Error {
         case emptyUserName
-        case invalidCode
+        case tfaFailed
     }
 }

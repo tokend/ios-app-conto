@@ -43,7 +43,7 @@ extension Identity.TelegramSubmitWorker: Identity.TelegramIdentitySubmitWorkerPr
                     completion(.error(error))
                     
                 case .tfaFailed:
-                    completion(.error(Identity.Event.SetAction.SetTelegramError.invalidCode))
+                    completion(.error(Identity.Event.SetAction.SetTelegramError.tfaFailed))
                     
                 case .succeeded:
                     completion(.success)

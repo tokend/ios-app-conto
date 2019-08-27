@@ -140,11 +140,25 @@ extension Identity.Event.SetAction.SetNumberError: LocalizedError {
         case .emptyNumber:
             return Localized(.empty_number_field)
             
-        case .invalidCode:
-            return Localized(.invalid_code)
+        case .tfaFailed:
+            return Localized(.tfa_failed)
             
         case .numberIsNotValid:
             return Localized(.invalid_phone_number)
         }
     }
 }
+
+extension Identity.Event.SetAction.SetTelegramError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+            
+        case .emptyUserName:
+            return Localized(.empty_username_field)
+            
+        case .tfaFailed:
+            return Localized(.tfa_failed)
+        }
+    }
+}
+
