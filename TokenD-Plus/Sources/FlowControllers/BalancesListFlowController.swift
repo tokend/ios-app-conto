@@ -96,7 +96,7 @@ class BalancesListFlowController: BaseSignedInFlowController {
             asks: [],
             chartBalances: [],
             selectedChartBalance: nil,
-            selectedTabIdentifier: .balances,
+            selectedTabIdentifier: nil,
             imageUrl: company.imageUrl,
             convertedAsset: company.conversionAsset,
             companyName: company.name
