@@ -732,6 +732,7 @@
 		DBCA02E522D78DE600503025 /* acknowledgements.markdown in Resources */ = {isa = PBXBuildFile; fileRef = DBCA02E422D78DE500503025 /* acknowledgements.markdown */; };
 		DBCA02E722D885B500503025 /* SettingsBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E622D885B500503025 /* SettingsBaseCell.swift */; };
 		DBDA68B4231410FB00EC1519 /* EnvironmentChangeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */; };
+		DBDA68B72314381300EC1519 /* TransactionsListEmptyActionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1465,6 +1466,7 @@
 		DBCA02E422D78DE500503025 /* acknowledgements.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = acknowledgements.markdown; sourceTree = "<group>"; };
 		DBCA02E622D885B500503025 /* SettingsBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBaseCell.swift; sourceTree = "<group>"; };
 		DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentChangeWorker.swift; sourceTree = "<group>"; };
+		DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListEmptyActionsProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2898,13 +2900,13 @@
 		DB720BAB22C1396B00ED116A /* Workers */ = {
 			isa = PBXGroup;
 			children = (
-				DB720BAD22C1396B00ED116A /* TransactionListActionProvider.swift */,
 				DB720BB822C1396B00ED116A /* TransactionsListAmountFormatter.swift */,
 				DB720BAE22C1396B00ED116A /* TransactionsListSceneDateFormatter.swift */,
 				DB720BAC22C1396B00ED116A /* TransactionsListSceneDateFormatterProtocol.swift */,
 				DB720BBA22C1396B00ED116A /* TransactionsListSceneRateProviderProtocol.swift */,
 				DB720BB722C1396B00ED116A /* TransactionsListSceneTransactionsFetcherProtocol.swift */,
 				DB720BB922C1396B00ED116A /* TransactionsListSceneTransactionsProviderProtocol.swift */,
+				DBDA68B5231437E800EC1519 /* ActionsProvider */,
 				DB720BB222C1396B00ED116A /* TransactionsFetchers */,
 				DB720BAF22C1396B00ED116A /* TransactionsProviders */,
 			);
@@ -3798,6 +3800,15 @@
 			path = EnvironmentChangeWorker;
 			sourceTree = "<group>";
 		};
+		DBDA68B5231437E800EC1519 /* ActionsProvider */ = {
+			isa = PBXGroup;
+			children = (
+				DB720BAD22C1396B00ED116A /* TransactionListActionProvider.swift */,
+				DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */,
+			);
+			path = ActionsProvider;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4283,6 +4294,7 @@
 				DB28C4C322D39EE6005362FD /* Numeric+Bytes.swift in Sources */,
 				DB720D0C22C1396B00ED116A /* TokenDetailsPresenter.swift in Sources */,
 				DB720EA622C1396C00ED116A /* Theme.swift in Sources */,
+				DBDA68B72314381300EC1519 /* TransactionsListEmptyActionsProvider.swift in Sources */,
 				DB720DB122C1396B00ED116A /* SendPaymentAmountsBalanceDetailsLoader.swift in Sources */,
 				DB720E1022C1396C00ED116A /* AssetPickerConfigurator.swift in Sources */,
 				DB720DE122C1396C00ED116A /* TradesListAssetPairListView.swift in Sources */,

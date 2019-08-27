@@ -9,6 +9,8 @@ extension TransactionsListScene {
         // MARK: - Private properties
         
         private let transactionsProvider: TransactionsProviderProtocol
+        private let ownerAccountId: String
+        private let currencyIsShown: Bool
         private var effects: [ParticipantEffectResource] = []
         private let disposeBag: DisposeBag = DisposeBag()
         
@@ -32,8 +34,15 @@ extension TransactionsListScene {
         
         // MARK: -
         
-        init(transactionsProvider: TransactionsProviderProtocol) {
+        init(
+            transactionsProvider: TransactionsProviderProtocol,
+            ownerAccountId: String,
+            currencyIsShown: Bool = false
+            ) {
+            
             self.transactionsProvider = transactionsProvider
+            self.ownerAccountId = ownerAccountId
+            self.currencyIsShown = currencyIsShown
             
             self.observeEffects()
             self.observeTransactionsLoadingStatus()
@@ -75,6 +84,14 @@ extension TransactionsListScene {
         private func observeEffects() {
             self.transactionsProvider
                 .observeParicipantEffects()
+                .map({ (resources) -> [ParticipantEffectResource] in
+                    return resources.filter({ (resource) -> Bool in
+                        guard let assetOwner = resource.asset?.owner?.id else {
+                            return false
+                        }
+                        return assetOwner == self.ownerAccountId
+                    })
+                })
                 .subscribe(onNext: { [weak self] (effects) in
                     self?.effects = effects
                     self?.transactionsDidChange()
@@ -151,7 +168,7 @@ extension TransactionsListScene {
             guard let balance = participantEffect.balance,
                 let balanceId = balance.id,
                 let assetResource = participantEffect.asset,
-                let asset = assetResource.id,
+                let asset = assetResource.name,
                 let id = participantEffect.id,
                 let identifier = UInt64(id),
                 let details = operation.details else {
@@ -160,7 +177,7 @@ extension TransactionsListScene {
             
             let amount = TransactionsListScene.Model.Amount(
                 value: balanceChangeEffect.amount,
-                asset: asset
+                asset: self.currencyIsShown ? asset : ""
             )
             
             let amountEffect = self.getAmountEffect(balanceChangeEffect)

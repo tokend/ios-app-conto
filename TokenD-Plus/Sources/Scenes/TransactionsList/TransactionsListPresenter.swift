@@ -48,8 +48,9 @@ extension TransactionsListScene {
                         
                         let attributes = self.getTransactionAttributes(effect: transaction.amountEffect)
                         
-                        let amount: String = self.amountFormatter.assetAmountToString(
-                            transaction.amount.value
+                        let amount: String = self.amountFormatter.formatAmount(
+                            transaction.amount,
+                            isIncome: nil
                         )
                         
                         let counterparty: String? = transaction.counterparty
