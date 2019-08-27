@@ -1,6 +1,6 @@
 import UIKit
 
-public enum PhoneNumber {
+public enum Identity {
     
     // MARK: - Typealiases
     
@@ -14,18 +14,18 @@ public enum PhoneNumber {
 
 // MARK: - Models
 
-extension PhoneNumber.Model {
+extension Identity.Model {
     
     public struct SceneModel {
         let accountId: String
-        var apiPhoneNumber: String?
-        var number: String?
+        var apiValue: String?
+        var value: String?
+        let sceneType: SceneType
     }
     
-    public enum Error: Swift.Error {
-        case emptyNumber
-        case numberIsNotValid
-        case invalidCode
+    public enum SceneType {
+        case telegram
+        case phoneNumber
     }
     
     public struct ButtonAppearence {
@@ -33,7 +33,7 @@ extension PhoneNumber.Model {
         public let title: String
     }
     
-    public enum NumberState {
+    public enum ValueState {
         case isNotSet
         case sameWithIdentity
         case updated
@@ -43,12 +43,20 @@ extension PhoneNumber.Model {
         case loaded
         case loading
     }
+    
+    public struct ViewConfig {
+        let hint: String
+        let prefix: String
+        let placeholder: String
+        let keyboardType: UIKeyboardType
+        let valueFormatter: ValueFormatter<String>
+    }
 }
 
 // MARK: - Events
 
-extension PhoneNumber.Event {
-    public typealias Model = PhoneNumber.Model
+extension Identity.Event {
+    public typealias Model = Identity.Model
     
     // MARK: -
     
@@ -58,26 +66,29 @@ extension PhoneNumber.Event {
     
     public enum SceneUpdated {
         public struct Response {
-            let number: String?
-            let state: Model.NumberState
+            let value: String?
+            let state: Model.ValueState
+            let sceneType: Model.SceneType
         }
         public struct ViewModel {
-            let number: String?
+            let value: String?
             let buttonAppearence: Model.ButtonAppearence
         }
     }
     
-    public enum NumberEdited {
+    public enum ValueEdited {
         public struct Request {
-            let number: String?
+            let value: String?
         }
     }
     
-    public enum SetNumberAction {
+    public struct Action {
         public struct Request {}
-        
+    }
+    
+    public enum SetAction {
         public enum Response {
-            case success
+            case success(sceneType: Model.SceneType)
             case error(Swift.Error)
             case loading
             case loaded
@@ -103,5 +114,20 @@ extension PhoneNumber.Event {
         public struct ViewModel {
             let error: String
         }
+    }
+}
+
+extension Identity.Event.SetAction {
+    public enum SetNumberError: Swift.Error {
+        case emptyNumber
+        case numberIsNotValid
+        case tfaFailed
+    }
+}
+
+extension Identity.Event.SetAction {
+    public enum SetTelegramError: Swift.Error {
+        case emptyUserName
+        case tfaFailed
     }
 }

@@ -8,13 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		12FB6E74A4BB81F44AE5C0A8 /* libPods-TokenD-Plus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 027BFFAC1C81D6C6B3A68345 /* libPods-TokenD-Plus.a */; };
-		DB0033C7230B11E900ECD5E1 /* PhoneNumberPhoneNumberIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0033C6230B11E900ECD5E1 /* PhoneNumberPhoneNumberIdentifier.swift */; };
 		DB00D973230456820041D773 /* KYCVerificationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D972230456820041D773 /* KYCVerificationChecker.swift */; };
 		DB04621122FB14230050D2BB /* AssetResource+AssetName.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */; };
 		DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */; };
 		DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */; };
-		DB1E97A82306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1E97A72306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift */; };
-		DB1E97AA2306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1E97A92306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift */; };
 		DB28C4A722CFAF58005362FD /* ReceiveAddressRedeemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */; };
 		DB28C4A922CFB79A005362FD /* ReceiveAddressHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4A822CFB79A005362FD /* ReceiveAddressHeader.swift */; };
 		DB28C4BB22D35B4C005362FD /* AcceptRedeemFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C4BA22D35B4C005362FD /* AcceptRedeemFlowController.swift */; };
@@ -701,12 +698,6 @@
 		DBA1F21C22FC2D9A0027B8B5 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F21B22FC2D9A0027B8B5 /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		DBA1F21E22FC2E800027B8B5 /* ReceiveAddressAtomicSwapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F21D22FC2E800027B8B5 /* ReceiveAddressAtomicSwapManager.swift */; };
 		DBA1F22022FC31D70027B8B5 /* SendPaymentAmountAtomicSwapBalanceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1F21F22FC31D70027B8B5 /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */; };
-		DBA3F3F623059E07008401B7 /* PhoneNumberPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F023059E07008401B7 /* PhoneNumberPresenter.swift */; };
-		DBA3F3F723059E07008401B7 /* PhoneNumberRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F123059E07008401B7 /* PhoneNumberRouting.swift */; };
-		DBA3F3F823059E07008401B7 /* PhoneNumberModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F223059E07008401B7 /* PhoneNumberModels.swift */; };
-		DBA3F3F923059E07008401B7 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F323059E07008401B7 /* PhoneNumberViewController.swift */; };
-		DBA3F3FA23059E07008401B7 /* PhoneNumberInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F423059E07008401B7 /* PhoneNumberInteractor.swift */; };
-		DBA3F3FB23059E07008401B7 /* PhoneNumberConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3F523059E07008401B7 /* PhoneNumberConfigurator.swift */; };
 		DBA3F3FE2305A2D2008401B7 /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3F3FD2305A2D2008401B7 /* PhoneNumberFormatter.swift */; };
 		DBA5738E230596A4007DBA2D /* PaymentMethodFiatPaymentSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5738D230596A4007DBA2D /* PaymentMethodFiatPaymentSender.swift */; };
 		DBC165412302F36D002A50F7 /* EnvironmentsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */; };
@@ -731,6 +722,19 @@
 		DBCA02E322D787B600503025 /* SettingsTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E222D787B600503025 /* SettingsTextCell.swift */; };
 		DBCA02E522D78DE600503025 /* acknowledgements.markdown in Resources */ = {isa = PBXBuildFile; fileRef = DBCA02E422D78DE500503025 /* acknowledgements.markdown */; };
 		DBCA02E722D885B500503025 /* SettingsBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA02E622D885B500503025 /* SettingsBaseCell.swift */; };
+		DBDA688723100D6000EC1519 /* IdentitySetIdentityWorkerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA688623100D6000EC1519 /* IdentitySetIdentityWorkerProtocol.swift */; };
+		DBDA688A23100EA600EC1519 /* IdentityIdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA688923100EA600EC1519 /* IdentityIdentifierProtocol.swift */; };
+		DBDA68932310149200EC1519 /* IdentityInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA688D2310149100EC1519 /* IdentityInteractor.swift */; };
+		DBDA68942310149200EC1519 /* IdentityRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA688E2310149100EC1519 /* IdentityRouting.swift */; };
+		DBDA68952310149200EC1519 /* IdentityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA688F2310149100EC1519 /* IdentityViewController.swift */; };
+		DBDA68962310149200EC1519 /* IdentityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68902310149100EC1519 /* IdentityPresenter.swift */; };
+		DBDA68972310149200EC1519 /* IdentityConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68912310149100EC1519 /* IdentityConfigurator.swift */; };
+		DBDA68982310149200EC1519 /* IdentityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68922310149100EC1519 /* IdentityModels.swift */; };
+		DBDA689C231014B000EC1519 /* IdentityIdentityValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA689B231014AF00EC1519 /* IdentityIdentityValidator.swift */; };
+		DBDA689E231014BA00EC1519 /* IdentityPhoneNumberIdentityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA689D231014BA00EC1519 /* IdentityPhoneNumberIdentityIdentifier.swift */; };
+		DBDA68A0231014DE00EC1519 /* IdentityPhoneNumberSubmitWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA689F231014DE00EC1519 /* IdentityPhoneNumberSubmitWorker.swift */; };
+		DBDA68A22310165500EC1519 /* IdentityTelegramIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68A12310165500EC1519 /* IdentityTelegramIdentifier.swift */; };
+		DBDA68A4231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68A3231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift */; };
 		DBDA68B4231410FB00EC1519 /* EnvironmentChangeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */; };
 		DBDA68B72314381300EC1519 /* TransactionsListEmptyActionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */; };
 /* End PBXBuildFile section */
@@ -739,13 +743,10 @@
 		027BFFAC1C81D6C6B3A68345 /* libPods-TokenD-Plus.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TokenD-Plus.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C7CC233B2AF255F0AF2250E /* Pods-TokenD-Plus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.debug.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.debug.xcconfig"; sourceTree = "<group>"; };
 		3C6471B5DD537CA22C8635D4 /* Pods-TokenD-Plus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenD-Plus.release.xcconfig"; path = "Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus.release.xcconfig"; sourceTree = "<group>"; };
-		DB0033C6230B11E900ECD5E1 /* PhoneNumberPhoneNumberIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberPhoneNumberIdentifier.swift; sourceTree = "<group>"; };
 		DB00D972230456820041D773 /* KYCVerificationChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCVerificationChecker.swift; sourceTree = "<group>"; };
 		DB04621022FB14230050D2BB /* AssetResource+AssetName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetResource+AssetName.swift"; sourceTree = "<group>"; };
 		DB0AFD2D22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListChangeLanguageWorker.swift; sourceTree = "<group>"; };
 		DB0AFD3122E1CC3A00FB39FF /* NotificationCenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWorker.swift; sourceTree = "<group>"; };
-		DB1E97A72306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberPhoneNumberValidator.swift; sourceTree = "<group>"; };
-		DB1E97A92306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberPhoneNumberSubmitWorker.swift; sourceTree = "<group>"; };
 		DB28C4A622CFAF58005362FD /* ReceiveAddressRedeemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressRedeemManager.swift; sourceTree = "<group>"; };
 		DB28C4A822CFB79A005362FD /* ReceiveAddressHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAddressHeader.swift; sourceTree = "<group>"; };
 		DB28C4BA22D35B4C005362FD /* AcceptRedeemFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRedeemFlowController.swift; sourceTree = "<group>"; };
@@ -1435,12 +1436,6 @@
 		DBA1F21B22FC2D9A0027B8B5 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		DBA1F21D22FC2E800027B8B5 /* ReceiveAddressAtomicSwapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveAddressAtomicSwapManager.swift; sourceTree = "<group>"; };
 		DBA1F21F22FC31D70027B8B5 /* SendPaymentAmountAtomicSwapBalanceFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountAtomicSwapBalanceFetcher.swift; sourceTree = "<group>"; };
-		DBA3F3F023059E07008401B7 /* PhoneNumberPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberPresenter.swift; sourceTree = "<group>"; };
-		DBA3F3F123059E07008401B7 /* PhoneNumberRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberRouting.swift; sourceTree = "<group>"; };
-		DBA3F3F223059E07008401B7 /* PhoneNumberModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberModels.swift; sourceTree = "<group>"; };
-		DBA3F3F323059E07008401B7 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
-		DBA3F3F423059E07008401B7 /* PhoneNumberInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInteractor.swift; sourceTree = "<group>"; };
-		DBA3F3F523059E07008401B7 /* PhoneNumberConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberConfigurator.swift; sourceTree = "<group>"; };
 		DBA3F3FD2305A2D2008401B7 /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
 		DBA5738D230596A4007DBA2D /* PaymentMethodFiatPaymentSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodFiatPaymentSender.swift; sourceTree = "<group>"; };
 		DBC165372302F36D002A50F7 /* EnvironmentsListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentsListInteractor.swift; sourceTree = "<group>"; };
@@ -1465,6 +1460,19 @@
 		DBCA02E222D787B600503025 /* SettingsTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextCell.swift; sourceTree = "<group>"; };
 		DBCA02E422D78DE500503025 /* acknowledgements.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = acknowledgements.markdown; sourceTree = "<group>"; };
 		DBCA02E622D885B500503025 /* SettingsBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBaseCell.swift; sourceTree = "<group>"; };
+		DBDA688623100D6000EC1519 /* IdentitySetIdentityWorkerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentitySetIdentityWorkerProtocol.swift; sourceTree = "<group>"; };
+		DBDA688923100EA600EC1519 /* IdentityIdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityIdentifierProtocol.swift; sourceTree = "<group>"; };
+		DBDA688D2310149100EC1519 /* IdentityInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityInteractor.swift; sourceTree = "<group>"; };
+		DBDA688E2310149100EC1519 /* IdentityRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityRouting.swift; sourceTree = "<group>"; };
+		DBDA688F2310149100EC1519 /* IdentityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityViewController.swift; sourceTree = "<group>"; };
+		DBDA68902310149100EC1519 /* IdentityPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityPresenter.swift; sourceTree = "<group>"; };
+		DBDA68912310149100EC1519 /* IdentityConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityConfigurator.swift; sourceTree = "<group>"; };
+		DBDA68922310149100EC1519 /* IdentityModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityModels.swift; sourceTree = "<group>"; };
+		DBDA689B231014AF00EC1519 /* IdentityIdentityValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityIdentityValidator.swift; sourceTree = "<group>"; };
+		DBDA689D231014BA00EC1519 /* IdentityPhoneNumberIdentityIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityPhoneNumberIdentityIdentifier.swift; sourceTree = "<group>"; };
+		DBDA689F231014DE00EC1519 /* IdentityPhoneNumberSubmitWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityPhoneNumberSubmitWorker.swift; sourceTree = "<group>"; };
+		DBDA68A12310165500EC1519 /* IdentityTelegramIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityTelegramIdentifier.swift; sourceTree = "<group>"; };
+		DBDA68A3231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityTelegramSubmitWorker.swift; sourceTree = "<group>"; };
 		DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentChangeWorker.swift; sourceTree = "<group>"; };
 		DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListEmptyActionsProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1764,12 +1772,12 @@
 				DB363DFE22DCDB8C00F5761C /* FacilitiesList */,
 				DB720A0222C1396B00ED116A /* Fees */,
 				DB3DDBE323044D1E0002E540 /* FiatPayment */,
+				DBA3F3EF23059DCB008401B7 /* Identity */,
 				DBC1654923035530002A50F7 /* KYC */,
 				DB363E2922DF761200F5761C /* LanguagesList */,
 				DB720A3D22C1396B00ED116A /* MarkdownViewer */,
 				DBA1F1F422FC2D640027B8B5 /* PaymentMethod */,
 				DBA1F20822FC2D7B0027B8B5 /* PaymentMethodPicker */,
-				DBA3F3EF23059DCB008401B7 /* PhoneNumber */,
 				DB720F4322C4CD1C00ED116A /* Polls */,
 				DB720B6F22C1396B00ED116A /* ReceiveAddress */,
 				DB720BC222C1396B00ED116A /* SaleDetails */,
@@ -3688,26 +3696,27 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		DBA3F3EF23059DCB008401B7 /* PhoneNumber */ = {
+		DBA3F3EF23059DCB008401B7 /* Identity */ = {
 			isa = PBXGroup;
 			children = (
-				DBA3F3F523059E07008401B7 /* PhoneNumberConfigurator.swift */,
-				DBA3F3F423059E07008401B7 /* PhoneNumberInteractor.swift */,
-				DBA3F3F223059E07008401B7 /* PhoneNumberModels.swift */,
-				DBA3F3F023059E07008401B7 /* PhoneNumberPresenter.swift */,
-				DBA3F3F123059E07008401B7 /* PhoneNumberRouting.swift */,
-				DBA3F3F323059E07008401B7 /* PhoneNumberViewController.swift */,
+				DBDA68912310149100EC1519 /* IdentityConfigurator.swift */,
+				DBDA688D2310149100EC1519 /* IdentityInteractor.swift */,
+				DBDA68922310149100EC1519 /* IdentityModels.swift */,
+				DBDA68902310149100EC1519 /* IdentityPresenter.swift */,
+				DBDA688E2310149100EC1519 /* IdentityRouting.swift */,
+				DBDA688F2310149100EC1519 /* IdentityViewController.swift */,
 				DBA3F3FC2305A268008401B7 /* Workers */,
 			);
-			path = PhoneNumber;
+			path = Identity;
 			sourceTree = "<group>";
 		};
 		DBA3F3FC2305A268008401B7 /* Workers */ = {
 			isa = PBXGroup;
 			children = (
-				DB1E97A72306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift */,
-				DB1E97A92306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift */,
-				DB0033C6230B11E900ECD5E1 /* PhoneNumberPhoneNumberIdentifier.swift */,
+				DBDA689B231014AF00EC1519 /* IdentityIdentityValidator.swift */,
+				DBDA688C2310100000EC1519 /* IdentifyWorkers */,
+				DBDA688823100DF000EC1519 /* Protocols */,
+				DBDA688B23100F2600EC1519 /* SubmitWorkers */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -3790,6 +3799,33 @@
 				DBCA02D922D5EB9800503025 /* AcceptRedeemWorker.swift */,
 			);
 			path = AcceptRedeemWorker;
+			sourceTree = "<group>";
+		};
+		DBDA688823100DF000EC1519 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DBDA688923100EA600EC1519 /* IdentityIdentifierProtocol.swift */,
+				DBDA688623100D6000EC1519 /* IdentitySetIdentityWorkerProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		DBDA688B23100F2600EC1519 /* SubmitWorkers */ = {
+			isa = PBXGroup;
+			children = (
+				DBDA689F231014DE00EC1519 /* IdentityPhoneNumberSubmitWorker.swift */,
+				DBDA68A3231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift */,
+			);
+			path = SubmitWorkers;
+			sourceTree = "<group>";
+		};
+		DBDA688C2310100000EC1519 /* IdentifyWorkers */ = {
+			isa = PBXGroup;
+			children = (
+				DBDA689D231014BA00EC1519 /* IdentityPhoneNumberIdentityIdentifier.swift */,
+				DBDA68A12310165500EC1519 /* IdentityTelegramIdentifier.swift */,
+			);
+			path = IdentifyWorkers;
 			sourceTree = "<group>";
 		};
 		DBDA68B22314108E00EC1519 /* EnvironmentChangeWorker */ = {
@@ -3939,6 +3975,7 @@
 				DB720EE522C1396C00ED116A /* MovementsRepo.swift in Sources */,
 				DB720F2C22C2286C00ED116A /* CompaniesListModels.swift in Sources */,
 				DB720CE022C1396B00ED116A /* UpdatePasswordBaseSubmitWorker.swift in Sources */,
+				DBDA68982310149200EC1519 /* IdentityModels.swift in Sources */,
 				DB720EEF22C1396C00ED116A /* PendingOffersRepo.swift in Sources */,
 				DB720CD922C1396B00ED116A /* UpdatePasswordModels.swift in Sources */,
 				DB720D1522C1396B00ED116A /* TokenDetailsModels.swift in Sources */,
@@ -3963,7 +4000,6 @@
 				DB4AE2C622EB3B8F001D0883 /* AtomicSwapRouting.swift in Sources */,
 				DB4AE2CF22EB4DC7001D0883 /* AtomicSwapInfoCell.swift in Sources */,
 				DB720F1122C1396C00ED116A /* PermissionRequestFlowController.swift in Sources */,
-				DB0033C7230B11E900ECD5E1 /* PhoneNumberPhoneNumberIdentifier.swift in Sources */,
 				DB720D8C22C1396B00ED116A /* TransactionDetailsEmailFetcher.swift in Sources */,
 				DB720E9F22C1396C00ED116A /* UIResponder+First.swift in Sources */,
 				DB720EAD22C1396C00ED116A /* ChartCardValueFormatter.swift in Sources */,
@@ -3983,6 +4019,7 @@
 				DB720F1D22C13DD600ED116A /* UserDataManager.swift in Sources */,
 				DB720D7A22C1396B00ED116A /* CreateOfferRouting.swift in Sources */,
 				DB720DCE22C1396C00ED116A /* ExploreTokensInteractor.swift in Sources */,
+				DBDA689C231014B000EC1519 /* IdentityIdentityValidator.swift in Sources */,
 				DB720DD822C1396C00ED116A /* WalletRecoveryModels.swift in Sources */,
 				DB720D1D22C1396B00ED116A /* DownloadUrlFetcher.swift in Sources */,
 				DB72281422CF546200341565 /* CreateRedeemFlowController.swift in Sources */,
@@ -3995,7 +4032,6 @@
 				DB720D4522C1396B00ED116A /* ChartConfigurator.swift in Sources */,
 				DB720CFE22C1396B00ED116A /* SaleEmptyView.swift in Sources */,
 				DB4AE2F222F2066E001D0883 /* CompaniesListAccountIdValidator.swift in Sources */,
-				DBA3F3F723059E07008401B7 /* PhoneNumberRouting.swift in Sources */,
 				DB720F0722C1396C00ED116A /* AppController+OpenUrlSubscriber.swift in Sources */,
 				DB720E8F22C1396C00ED116A /* SnapKit+Extension.swift in Sources */,
 				DB720E1822C1396C00ED116A /* RegisterSceneRegisterWorker.swift in Sources */,
@@ -4005,6 +4041,7 @@
 				DB720D6222C1396B00ED116A /* TradeOffersAmountFormatterProtocol.swift in Sources */,
 				DB720ECE22C1396C00ED116A /* OrderBookTableViewCellModel.swift in Sources */,
 				DB28C4A922CFB79A005362FD /* ReceiveAddressHeader.swift in Sources */,
+				DBDA68972310149200EC1519 /* IdentityConfigurator.swift in Sources */,
 				DB720DFC22C1396C00ED116A /* DashboardModels.swift in Sources */,
 				DB363E0522DCDBB700F5761C /* FacilitiesListPresenter.swift in Sources */,
 				DB720E4F22C1396C00ED116A /* DepositSceneAddressManager.swift in Sources */,
@@ -4015,6 +4052,7 @@
 				DB720F1B22C1396C00ED116A /* LocKey.swift in Sources */,
 				DBC1655B230356C6002A50F7 /* KYCFormSender.swift in Sources */,
 				DB720DDB22C1396C00ED116A /* WalletRecoveryInteractor.swift in Sources */,
+				DBDA68932310149200EC1519 /* IdentityInteractor.swift in Sources */,
 				DB720D8422C1396B00ED116A /* TransactionDetailsInteractor.swift in Sources */,
 				DBA1F20222FC2D640027B8B5 /* PaymentMethodViewController.swift in Sources */,
 				DB720DE322C1396C00ED116A /* TradesListAssetPairsFetcher.swift in Sources */,
@@ -4043,6 +4081,7 @@
 				DB720E5022C1396C00ED116A /* DepositSceneDateFormatter.swift in Sources */,
 				DB720DBC22C1396B00ED116A /* ConfirmationSceneConfigurator.swift in Sources */,
 				DB720F0822C1396C00ED116A /* AppController.swift in Sources */,
+				DBDA68942310149200EC1519 /* IdentityRouting.swift in Sources */,
 				DB4AE30422F2DFA7001D0883 /* AddCompanyAddCompanyWorker.swift in Sources */,
 				DB720CC522C1396B00ED116A /* BalancePickerViewController.swift in Sources */,
 				DB720CAC22C1396B00ED116A /* SettingsRouting.swift in Sources */,
@@ -4054,7 +4093,6 @@
 				DB4AE2EE22F1A308001D0883 /* AtomicSwapAsksRepo.swift in Sources */,
 				DB720DB522C1396B00ED116A /* SendPaymentAmountTitleTextEditView.swift in Sources */,
 				DB720E8822C1396C00ED116A /* SharedSceneBuilder.swift in Sources */,
-				DBA3F3F623059E07008401B7 /* PhoneNumberPresenter.swift in Sources */,
 				DB720EE922C1396C00ED116A /* PollsRepo.swift in Sources */,
 				DB720E0E22C1396C00ED116A /* AssetPickerAmountFormatter.swift in Sources */,
 				DB720E5222C1396C00ED116A /* DepositSceneAssetsFetcherProtocol.swift in Sources */,
@@ -4111,6 +4149,7 @@
 				DB720CBF22C1396B00ED116A /* SaleInvestCancelIvestWorker.swift in Sources */,
 				DBA1F21622FC2D7C0027B8B5 /* PaymentMethodPickerRouting.swift in Sources */,
 				DB720E7522C1396C00ED116A /* SaleDetailsViewController.swift in Sources */,
+				DBDA688A23100EA600EC1519 /* IdentityIdentifierProtocol.swift in Sources */,
 				DB720D6522C1396B00ED116A /* TradeOffersDateFormatterProtocol.swift in Sources */,
 				DB720E0722C1396C00ED116A /* TabBarContentProvider.swift in Sources */,
 				DB720EF222C1396C00ED116A /* ManagersController.swift in Sources */,
@@ -4124,7 +4163,6 @@
 				DB720E2222C1396C00ED116A /* SideMenuModels.swift in Sources */,
 				DB720CE922C1396B00ED116A /* VerifyEmailInteractor.swift in Sources */,
 				DB720F5D22C4CD1C00ED116A /* PollsInteractor.swift in Sources */,
-				DBA3F3FA23059E07008401B7 /* PhoneNumberInteractor.swift in Sources */,
 				DB720E8722C1396C00ED116A /* main.swift in Sources */,
 				DBC165422302F36D002A50F7 /* EnvironmentsListViewController.swift in Sources */,
 				DB720E0D22C1396C00ED116A /* AssetPickerAssetsFetcher.swift in Sources */,
@@ -4199,6 +4237,7 @@
 				DB720CDD22C1396B00ED116A /* UpdatePasswordViewController.swift in Sources */,
 				DB720E3522C1396C00ED116A /* ReceiveAddressQRCell.swift in Sources */,
 				DB4AE2C722EB3B8F001D0883 /* AtomicSwapModels.swift in Sources */,
+				DBDA68A22310165500EC1519 /* IdentityTelegramIdentifier.swift in Sources */,
 				DB720DF722C1396C00ED116A /* DashboardPendingOffersPreviewPlugInRouting.swift in Sources */,
 				DB720DF322C1396C00ED116A /* DashboardPaymentsPlugInBalancesFetcher.swift in Sources */,
 				DB720E6822C1396C00ED116A /* TransactionsListConfigurator.swift in Sources */,
@@ -4210,6 +4249,7 @@
 				DB720E8022C1396C00ED116A /* BalanceHeaderRouting.swift in Sources */,
 				DB720ECF22C1396C00ED116A /* ScrollableStackView.swift in Sources */,
 				DB720ED722C1396C00ED116A /* BXFStaticTableViewButtonCell.swift in Sources */,
+				DBDA689E231014BA00EC1519 /* IdentityPhoneNumberIdentityIdentifier.swift in Sources */,
 				DB363E0722DCDBB700F5761C /* FacilitiesListModels.swift in Sources */,
 				DBC1655723035530002A50F7 /* KYCModels.swift in Sources */,
 				DB720E7622C1396C00ED116A /* BiometricsAuthPresenter.swift in Sources */,
@@ -4229,6 +4269,7 @@
 				DB720D7922C1396B00ED116A /* CreateOfferInteractor.swift in Sources */,
 				DB720D8822C1396B00ED116A /* TransactionDetailsViewController.swift in Sources */,
 				DB720CD822C1396B00ED116A /* SaleOverviewViewController.swift in Sources */,
+				DBDA68A0231014DE00EC1519 /* IdentityPhoneNumberSubmitWorker.swift in Sources */,
 				DB720F1322C1396C00ED116A /* QRCodeReaderFlowController.swift in Sources */,
 				DB720EDE22C1396C00ED116A /* BXFStaticTableViewInfoSection.swift in Sources */,
 				DB363E3122DF764700F5761C /* LanguagesListRouting.swift in Sources */,
@@ -4282,14 +4323,15 @@
 				DB720E6022C1396C00ED116A /* TransactionsListSalesFetcher.swift in Sources */,
 				DBC165442302F36D002A50F7 /* EnvironmentsListPresenter.swift in Sources */,
 				DB720D7F22C1396B00ED116A /* CreateOfferAmountFormatter.swift in Sources */,
+				DBDA688723100D6000EC1519 /* IdentitySetIdentityWorkerProtocol.swift in Sources */,
 				DB5E3C05230E96ED00BAF983 /* SendPaymentAmountAtomicSwapPaymentWorker.swift in Sources */,
 				DBA1F20422FC2D640027B8B5 /* PaymentMethodMethodsFetcher.swift in Sources */,
 				DB720EE422C1396C00ED116A /* CellViewModelProtocol.swift in Sources */,
+				DBDA68962310149200EC1519 /* IdentityPresenter.swift in Sources */,
 				DB720D8022C1396B00ED116A /* CreateOfferAmountFormatterProtocol.swift in Sources */,
 				DB720DDF22C1396C00ED116A /* TradesListPresenter.swift in Sources */,
 				DB720DE222C1396C00ED116A /* TradesListConfigurator.swift in Sources */,
 				DB720D2722C1396B00ED116A /* AuthenticatorAuthActionCell.swift in Sources */,
-				DB1E97AA2306B5780075EAC6 /* PhoneNumberPhoneNumberSubmitWorker.swift in Sources */,
 				DB04621122FB14230050D2BB /* AssetResource+AssetName.swift in Sources */,
 				DB28C4C322D39EE6005362FD /* Numeric+Bytes.swift in Sources */,
 				DB720D0C22C1396B00ED116A /* TokenDetailsPresenter.swift in Sources */,
@@ -4386,7 +4428,6 @@
 				DB720D1C22C1396B00ED116A /* AuthRequestQRCodeGenerator.swift in Sources */,
 				DB720D2122C1396B00ED116A /* AuthRequestKeyFetcher.swift in Sources */,
 				DB720E9022C1396C00ED116A /* UIColor+Hex.swift in Sources */,
-				DB1E97A82306AFD30075EAC6 /* PhoneNumberPhoneNumberValidator.swift in Sources */,
 				DBCA02DA22D5EB9800503025 /* AcceptRedeemWorker.swift in Sources */,
 				DB4AE2C522EB3B8F001D0883 /* AtomicSwapPresenter.swift in Sources */,
 				DB720EC522C1396C00ED116A /* HorizontalPicker.swift in Sources */,
@@ -4397,7 +4438,6 @@
 				DB720E4022C1396C00ED116A /* BalancesListAmountFormatter.swift in Sources */,
 				DB363E1222DF505900F5761C /* Business+Logo.swift in Sources */,
 				DB720F0422C1396C00ED116A /* SettingsManager.swift in Sources */,
-				DBA3F3FB23059E07008401B7 /* PhoneNumberConfigurator.swift in Sources */,
 				DB720EE022C1396C00ED116A /* DynamicTableView.swift in Sources */,
 				DB720E6A22C1396C00ED116A /* TransactionsListTableViewCell.swift in Sources */,
 				DB720E2A22C1396C00ED116A /* ReceiveAddressInteractor.swift in Sources */,
@@ -4451,7 +4491,6 @@
 				DB720E2922C1396C00ED116A /* ReceiveAddressViewController.swift in Sources */,
 				DB720D9C22C1396B00ED116A /* TabBarTabBarItem.swift in Sources */,
 				DB720DE822C1396C00ED116A /* DashboardInteractor.swift in Sources */,
-				DBA3F3F823059E07008401B7 /* PhoneNumberModels.swift in Sources */,
 				DB720CDC22C1396B00ED116A /* UpdatePasswordPresenter.swift in Sources */,
 				DB720D1622C1396B00ED116A /* TokenDetailsTokenSummaryCell.swift in Sources */,
 				DBC165472302F36D002A50F7 /* EnvironmentCell.swift in Sources */,
@@ -4465,7 +4504,6 @@
 				DB720EC122C1396C00ED116A /* ValueValidator.swift in Sources */,
 				DB720DBE22C1396C00ED116A /* ConfirmationSectionsProviderDummy.swift in Sources */,
 				DB720CF022C1396B00ED116A /* TabsContainerModels.swift in Sources */,
-				DBA3F3F923059E07008401B7 /* PhoneNumberViewController.swift in Sources */,
 				DB720CB222C1396B00ED116A /* SettingsBoolCell.swift in Sources */,
 				DB720CDB22C1396B00ED116A /* UpdatePasswordRouting.swift in Sources */,
 				DB720E1622C1396C00ED116A /* RegisterSceneViewController.swift in Sources */,
@@ -4558,6 +4596,7 @@
 				DB720D7C22C1396B00ED116A /* CreateOfferConfigurator.swift in Sources */,
 				DB720E9222C1396C00ED116A /* Array+IndexInBounds.swift in Sources */,
 				DB0AFD2E22E0A33700FB39FF /* LanguageListChangeLanguageWorker.swift in Sources */,
+				DBDA68952310149200EC1519 /* IdentityViewController.swift in Sources */,
 				DB720E5A22C1396C00ED116A /* TransactionsListSceneDateFormatter.swift in Sources */,
 				DB720D8922C1396B00ED116A /* TransactionDetailsConfigurator.swift in Sources */,
 				DB720D7022C1396B00ED116A /* BalanceHeaderWithPickerConfigurator.swift in Sources */,
@@ -4652,6 +4691,7 @@
 				DB720CE322C1396B00ED116A /* UpdatePasswordConfigurator.swift in Sources */,
 				DB720EF322C1396C00ED116A /* UserDataProvider.swift in Sources */,
 				DB28C4C122D38EFE005362FD /* Array+Numeric.swift in Sources */,
+				DBDA68A4231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift in Sources */,
 				DB0AFD3222E1CC3A00FB39FF /* NotificationCenterWorker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,6 +11,7 @@ enum Settings {
         case environment
         case phone
         case seed
+        case telegram
         case tfa
         case biometrics
         case autoAuth

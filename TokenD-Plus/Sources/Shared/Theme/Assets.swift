@@ -66,6 +66,7 @@ enum Assets: String {
     case showPasswordIcon = "Show password icon"
     case signOutIcon = "Sign out icon"
     case starIcon = "Star icon"
+    case telegram = "Telegram"
     case timeIcon = "Time icon"
     case token = "Token"
     case touchIdIcon = "Touch ID icon"

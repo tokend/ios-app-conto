@@ -74,6 +74,7 @@ extension Settings.Interactor: Settings.BusinessLogic {
              .environment,
              .phone,
              .seed,
+             .telegram,
              .tfa,
              .biometrics,
              .autoAuth,

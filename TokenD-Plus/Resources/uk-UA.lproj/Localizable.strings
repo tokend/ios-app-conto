@@ -94,6 +94,7 @@
 "card_owner" = "Владелец карты";
 "change_password" = "Змінити пароль";
 "change_phone" = "Змінити номер телефону";
+"change_telegram" = "Змінити ім'я користувача";
 "charged" = "Списано";
 "charged_from_lock" = "Списано";
 "chart" = "Графік";
@@ -161,6 +162,7 @@
 "empty_number_field" = "Поле номера телефону порожнє";
 "empty_recipient_address" = "Поле для введення адреси одержувача не може бути порожнім";
 "empty_signers_data" = "Дані про підписантів відсутні";
+"empty_username_field" = "Поле з ім'ям користувача порожнє";
 "ended" = "завершено";
 "ended_capitalized" = "Завершено";
 "enter_account_holders_name" = "Введіть ім'я власника аккаунта";
@@ -378,6 +380,8 @@
 "one_vote" = "1 голос - $(percent)";
 "one_vote_replace_percent" = "percent";
 "open_app" = "Відкрити додаток";
+"open_bot" = "Відкрити Бота";
+"open_our_telegram_bot" = "Відкрийте нашого Телеграм Бота для отримання коду верифiкацiї";
 "operation" = "Операція";
 "operations" = "Операції";
 "opportunities" = "Можливості";
@@ -492,6 +496,8 @@
 "set_phone_number" = "Встановити номер телефону";
 "set_phone_number_hint" = "Додайте ваш номер телефона до акаунта щоб ваші друзі могли швидше вас знаходити";
 "set_placeholder" = "Set placeholder";
+"set_telegram" = "Встановити ім'я користувача Телеграм";
+"set_telegram_hint" = "Додайте вашe Телеграм ім'я користувача до акаунта щоб ваші друзі могли швидше вас знаходити";
 "set_up_2fa" = "Налаштування 2FA";
 "settings" = "Налаштування";
 "shop" = "Крамниця";
@@ -527,9 +533,11 @@
 "surname" = "Прізвище";
 "swift_bic" = "SWIFT/BIC";
 "swift_bic_colon" = "SWIFT/BIC:";
+"telegram" = "Телеграм";
 "terms_of_service" = "Умови обслуговування";
 "terms_of_service_not_agreed" = "Умови обслуговування не узгоджені";
 "terms_of_use" = "Умови використання";
+"tfa_failed" = "Двофакторна аутентифiкацiя не пройдена";
 "the_company_has_been_successfully_added" = "Компанія була успішно додана";
 "the_redemption_has_been_already_completed" = "Погашення вже виконано, запит не дійсний";
 "there_is_not_any_company_where_you_are_a_client_yet" = "Компанії не знайдено";
@@ -628,4 +636,7 @@
 "you_have_already_invested" = "Ви вже вклали:";
 "you_have_no_depositable_assets" = "У Вас немає активів для яких можливий депозит";
 "your_account_is_approved" = "Ваш аккаунт схвалений. Всі дії які вимагають верифікацію тепер доступні";
+"your_username" = "Ваше ім'я користувача";
+"your_phone_number_has_been_successfully_set" = "Ваш номер телефону був успiшно встановлений";
+"your_telegram_username_has_been_successfully_set" = "Ваше ім'я користувача Телеграм було успiшно встановлено";
 "your_verification_request_is_submitted" = "Ваш запит на верифікацію відправлений. Будь ласка, зачекайте його розгляду. Ви зможете оновити деталі, коли запит буде розглянутий.";

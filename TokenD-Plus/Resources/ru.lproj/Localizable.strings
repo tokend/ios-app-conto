@@ -94,6 +94,7 @@
 "card_owner" = "Владелец карты";
 "change_password" = "Изменить пароль";
 "change_phone" = "Изменить номер телефона";
+"change_telegram" = "Изменить имя пользователя";
 "charged" = "Списано";
 "charged_from_lock" = "Списано";
 "chart" = "График";
@@ -161,6 +162,7 @@
 "empty_number_field" = "Поле номера телефона пусто";
 "empty_recipient_address" = "Поле ввода адреса получателя не может быть пустым";
 "empty_signers_data" = "Данные о подписантах отсутствуют";
+"empty_username_field" = "Поле с именем пользователя пусто";
 "ended" = "завершен";
 "ended_capitalized" = "Завершен";
 "enter_account_holders_name" = "Введите имя владельца аккаунта";
@@ -378,6 +380,8 @@
 "one_vote" = "1 голос - $(percent)";
 "one_vote_replace_percent" = "percent";
 "open_app" = "Открыть приложение";
+"open_bot" = "Открыть бота";
+"open_our_telegram_bot" = "Откройте нашего Телеграм Бота для получения кода верификации";
 "operation" = "Операция";
 "operations" = "Операции";
 "opportunities" = "Возможности";
@@ -492,6 +496,8 @@
 "set_phone_number" = "Установить номер телефона";
 "set_phone_number_hint" = "Добавьте ваш номер телефона к аккаунту чтобы ваши друзья могли быстрее вас найти";
 "set_placeholder" = "Set placeholder";
+"set_telegram" = "Установить имя пользователя Телеграм";
+"set_telegram_hint" = "Добавьте ваше Телеграм имя пользователя к аккаунту чтобы ваши друзья могли быстрее вас найти";
 "set_up_2fa" = "Настройка 2FA";
 "settings" = "Настройки";
 "shop" = "Магазин";
@@ -527,9 +533,11 @@
 "surname" = "Фамилия";
 "swift_bic" = "SWIFT/BIC";
 "swift_bic_colon" = "SWIFT/BIC:";
+"telegram" = "Телеграм";
 "terms_of_service" = "Условия использования";
 "terms_of_service_not_agreed" = "Условия обслуживания не согласованы";
 "terms_of_use" = "Условия использования";
+"tfa_failed" = "Двухфакторная аутентификация не пройдена";
 "the_company_has_been_successfully_added" = "Компания была успешно добавлена";
 "the_redemption_has_been_already_completed" = "Погашение уже выполнено, запрос недействителен";
 "there_is_not_any_company_where_you_are_a_client_yet" = "Компании не найдены";
@@ -628,4 +636,7 @@
 "you_have_already_invested" = "Вы уже вложили:";
 "you_have_no_depositable_assets" = "У Вас нет активов для которых доступен депозит";
 "your_account_is_approved" = "Ваш аккаунт одобрен. Все действия которые требуют верификацию теперь доступны";
+"your_username" = "Ваше имя пользователя";
+"your_phone_number_has_been_successfully_set" = "Ваш номер телефона был успешно установлен";
+"your_telegram_username_has_been_successfully_set" = "Ваше имя пользователя телеграм было успешно установлено";
 "your_verification_request_is_submitted" = "Ваш запрос на верификацию отправлен. Пожалуйста, подождите его рассмотрения. Вы сможете обновить детали, когда запрос будет рассмотрен.";

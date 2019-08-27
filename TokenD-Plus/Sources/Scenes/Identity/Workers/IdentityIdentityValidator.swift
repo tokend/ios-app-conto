@@ -4,7 +4,7 @@ public protocol PhoneNumberPhoneNumberValidatorProtocol {
     func validate(number: String) -> Bool
 }
 
-extension PhoneNumber {
+extension Identity {
     public typealias PhoneNumberValidatorProtocol = PhoneNumberPhoneNumberValidatorProtocol
     
     public class PhoneNumberValidator: PhoneNumberValidatorProtocol {

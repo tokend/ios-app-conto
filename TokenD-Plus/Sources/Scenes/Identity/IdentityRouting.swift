@@ -1,6 +1,6 @@
 import Foundation
 
-extension PhoneNumber {
+extension Identity {
     public struct Routing {
         let showError: (_ message: String) -> Void
         let showMessage: (_ message: String) -> Void
