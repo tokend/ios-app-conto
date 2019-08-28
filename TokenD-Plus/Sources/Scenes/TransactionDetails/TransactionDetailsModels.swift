@@ -72,7 +72,7 @@ public enum TransactionDetails {
 // MARK: - Models
 
 extension TransactionDetails.Model {
-    public typealias NonExistedRecipientSubject = SendPaymentAmount.Model.NonExistedRecipientSubject
+    public typealias RecipientSubject = SendPaymentAmount.Model.RecipientSubject
     
     struct Amount {
         let value: Decimal

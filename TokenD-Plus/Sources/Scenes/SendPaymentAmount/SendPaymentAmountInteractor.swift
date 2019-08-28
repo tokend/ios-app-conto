@@ -162,13 +162,7 @@ extension SendPaymentAmount {
                 return
             }
             
-            let description: String
-            if !self.sceneModel.isAccountExist,
-                let subject = self.getNonExistedRecipientSubject() {
-                description = subject
-            } else {
-                description = self.sceneModel.description ?? ""
-            }
+            let description = self.getRecipientSubject(isAccountExists: self.sceneModel.isAccountExist) ?? ""
             
             self.loadFees(
                 asset: balance.assetCode,
@@ -239,18 +233,27 @@ extension SendPaymentAmount {
             })
         }
         
-        private func getNonExistedRecipientSubject() -> String? {
-            guard let email = self.sceneModel.recipientAddress else {
-                return nil
+        private func getRecipientSubject(isAccountExists: Bool) -> String? {
+            var sender: String?
+            var email: String?
+            var subjectDescription: String?
+            if !isAccountExists,
+                let recipientEmail = self.sceneModel.recipientAddress {
+                
+                sender = self.sceneModel.originalAccountId
+                email = recipientEmail
+                subjectDescription = self.sceneModel.description
+            } else {
+                subjectDescription = self.sceneModel.description ?? ""
             }
-            let subjectModel = Model.NonExistedRecipientSubject(
-                sender: self.sceneModel.originalAccountId,
+            let subjectModel = Model.RecipientSubject(
+                sender: sender,
                 email: email,
-                subject: self.sceneModel.description
+                subject: subjectDescription
             )
             guard let subjectModelData = try? JSONEncoder().encode(subjectModel),
                 let subject = String(data: subjectModelData, encoding: .utf8) else {
-                return nil
+                    return nil
             }
             return subject
         }
