@@ -21,6 +21,8 @@ extension FiatPayment {
         private let webView: UIWebView = UIWebView()
         private let disposeBag: DisposeBag = DisposeBag()
         
+        private var redirectDomen: String?
+        
         // MARK: -
         
         deinit {
@@ -92,6 +94,29 @@ extension FiatPayment {
 extension FiatPayment.ViewController: FiatPayment.DisplayLogic {
     
     public func displayViewDidLoad(viewModel: Event.ViewDidLoad.ViewModel) {
+        self.redirectDomen = viewModel.redirectDomen
         self.webView.loadRequest(viewModel.request)
+    }
+}
+
+extension FiatPayment.ViewController: UIWebViewDelegate {
+    
+    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
+        
+        guard let url = request.url,
+            let domen = url.host else {
+                return false
+        }
+        
+        if let redirectDomen = self.redirectDomen {
+            if domen == redirectDomen {
+                self.routing?.showComplete()
+                return false
+            } else {
+                return true
+            }
+        } else {
+            return true
+        }
     }
 }

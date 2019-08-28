@@ -7,6 +7,7 @@ public struct APIConfigurationModel: Decodable, Equatable {
     let termsAddress: String?
     let webClient: String?
     let downloadUrl: String?
+    let fiatRedirectDomen: String?
     
     public enum Environment: String, CaseIterable {
         case production = "Production"
@@ -22,22 +23,14 @@ extension APIConfigurationModel {
             
         case .demo:
             return APIConfigurationModel(
-                storageEndpoint: "https://53133ee4.ngrok.io/_/storage/api",
-                apiEndpoint: "https://53133ee4.ngrok.io/_/api/",
+                storageEndpoint: "https://s3.eu-north-1.amazonaws.com/contodemo-identity-storage-stoic-haslett",
+                apiEndpoint: "https://api.demo.conto.me",
                 contributeUrl: "https://github.com/tokend/ios-app-loyalty",
                 termsAddress: "https://demo.conto.me/terms",
                 webClient: nil,
-                downloadUrl: nil
+                downloadUrl: nil,
+                fiatRedirectDomen: nil
             )
-
-//            return APIConfigurationModel(
-//                storageEndpoint: "https://s3.eu-north-1.amazonaws.com/contodemo-identity-storage-stoic-haslett",
-//                apiEndpoint: "https://api.demo.conto.me",
-//                contributeUrl: "https://github.com/tokend/ios-app-loyalty",
-//                termsAddress: "https://demo.conto.me/terms",
-//                webClient: nil,
-//                downloadUrl: nil
-//            )
             
         case .production:
             return APIConfigurationModel(
@@ -46,7 +39,8 @@ extension APIConfigurationModel {
                 contributeUrl: "https://github.com/tokend/ios-app-loyalty",
                 termsAddress: nil,
                 webClient: nil,
-                downloadUrl: nil
+                downloadUrl: nil,
+                fiatRedirectDomen: nil
             )
         }
     }

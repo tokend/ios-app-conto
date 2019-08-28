@@ -30,15 +30,16 @@ extension FiatPayment {
             self.presenter = presenter
             self.sceneModel = sceneModel
         }
-        
-        
     }
 }
 
 extension FiatPayment.Interactor: FiatPayment.BusinessLogic {
     
     public func onViewDidLoad(request: Event.ViewDidLoad.Request) {
-        let response = Event.ViewDidLoad.Response(url: self.sceneModel.url)
+        let response = Event.ViewDidLoad.Response(
+            url: self.sceneModel.url,
+            redirectDomen: self.sceneModel.redirectDomen
+        )
         self.presenter.presentViewDidLoad(response: response)
     }
 }

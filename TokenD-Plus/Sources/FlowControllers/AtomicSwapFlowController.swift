@@ -392,8 +392,19 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
         ) -> UIViewController {
         
         let vc = FiatPayment.ViewController()
-        let sceneModel = FiatPayment.Model.SceneModel(url: url)
+        let sceneModel = FiatPayment.Model.SceneModel(
+            url: url,
+            redirectDomen: self.flowControllerStack.apiConfigurationModel.fiatRedirectDomen
+            
+        )
         let routing = FiatPayment.Routing(
+            showComplete: { [weak self] in
+                vc.dismiss(
+                    animated: true,
+                    completion: {
+                        self?.onCompleted()
+                })
+        },
             showLoading: {
                 navController.showProgress()
         },

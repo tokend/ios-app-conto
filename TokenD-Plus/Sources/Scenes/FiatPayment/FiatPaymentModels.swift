@@ -18,6 +18,7 @@ extension FiatPayment.Model {
     
     public struct SceneModel {
         let url: URL
+        let redirectDomen: String?
     }
 }
 
@@ -32,9 +33,11 @@ extension FiatPayment.Event {
         public struct Request {}
         public struct Response {
             let url: URL
+            let redirectDomen: String?
         }
         public struct ViewModel {
             let request: URLRequest
+            let redirectDomen: String?
         }
     }
 }

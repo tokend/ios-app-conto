@@ -31,7 +31,10 @@ extension FiatPayment.Presenter: FiatPayment.PresentationLogic {
     
     public func presentViewDidLoad(response: Event.ViewDidLoad.Response) {
         let urlRequest = URLRequest(url: response.url)
-        let viewModel = Event.ViewDidLoad.ViewModel(request: urlRequest)
+        let viewModel = Event.ViewDidLoad.ViewModel(
+            request: urlRequest,
+            redirectDomen: response.redirectDomen
+        )
         self.presenterDispatch.display { displayLogic in
             displayLogic.displayViewDidLoad(viewModel: viewModel)
         }

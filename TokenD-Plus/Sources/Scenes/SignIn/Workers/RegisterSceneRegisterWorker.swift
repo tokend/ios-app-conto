@@ -75,7 +75,8 @@ extension RegisterScene {
                 contributeUrl: serverInfo.contributionUrl,
                 termsAddress: serverInfo.terms,
                 webClient: serverInfo.web,
-                downloadUrl: serverInfo.download
+                downloadUrl: serverInfo.download,
+                fiatRedirectDomen: nil
             )
             
             self.appController.updateFlowControllerStack(newConfiguration, self.keychainManager)
