@@ -134,7 +134,8 @@ class SendPaymentFlowController: BaseSignedInFlowController {
             onSendAction: { [weak self] (sendModel) in
                 self?.showPaymentConfirmationScreen(sendPaymentModel: sendModel)
             },
-            onAtomicSwapBuyAction: nil,
+            onAtomicSwapFiatBuyAction: nil,
+            onAtomicSwapCryptoBuyAction: nil,
             onShowWithdrawDestination: nil,
             onShowRedeem: nil,
             showFeesOverview: { [weak self] (asset, feeType) in

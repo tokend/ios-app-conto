@@ -4,7 +4,7 @@ import TokenDWallet
 import RxCocoa
 
 public enum SendPaymentAmountPaymentSenderResult {
-    case success(SendPaymentAmount.Model.AtomicSwapPaymentUrl)
+    case success(SendPaymentAmount.Model.AtomicSwapPaymentType)
     case error(Swift.Error)
 }
 public protocol SendPaymentAmountPaymentSenderProtocol {
@@ -51,13 +51,12 @@ extension SendPaymentAmount {
             ) { (result) in
                 switch result {
                     
-                case .success(let response):
+                case .success(let paymentType):
                     guard let url = URL(string: response.data.attributes.payUrl) else {
                         completion(.error(Event.AtomicSwapBuyAction.AtomicSwapError.paymentUrlIsInvalid))
                         return
                     }
-                    let atomicSwapPaymentUrl = Model.AtomicSwapPaymentUrl(url: url)
-                    completion(.success(atomicSwapPaymentUrl))
+                    completion(.success(paymentType))
                     
                 case .failure(let error):
                     completion(.error(error))

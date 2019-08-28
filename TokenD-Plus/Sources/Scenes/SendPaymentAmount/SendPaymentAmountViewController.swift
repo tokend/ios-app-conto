@@ -418,9 +418,17 @@ extension SendPaymentAmount.ViewController: SendPaymentAmount.DisplayLogic {
             self.routing?.onHideProgress()
             self.routing?.onShowError(errorMessage)
             
-        case .succeeded(let ask):
+        case .succeeded(let paymentType):
             self.routing?.onHideProgress()
-            self.routing?.onAtomicSwapBuyAction?(ask)
+            
+            switch paymentType {
+                
+            case .crypto(let crypto):
+                self.routing?.onAtomicSwapCryptoBuyAction?(crypto)
+            case .fiat(let url):
+                self.routing?.onAtomicSwapFiatBuyAction?(url)
+            }
+            
         }
     }
     

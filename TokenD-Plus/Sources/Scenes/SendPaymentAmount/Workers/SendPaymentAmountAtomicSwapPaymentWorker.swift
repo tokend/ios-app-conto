@@ -4,7 +4,7 @@ import TokenDWallet
 
 public enum SendPaymentAmountAtomicSwapPaymentResult {
     case failure(SendPaymentAmount.Event.AtomicSwapBuyAction.AtomicSwapError)
-    case success(SendPaymentAmount.Model.AtomicSwapPaymentUrl)
+    case success(SendPaymentAmount.Model.AtomicSwapPaymentType)
 }
 public protocol SendPaymentAmountAtomicSwapPaymentWorkerProtocol {
     func performPayment(
@@ -148,8 +148,8 @@ extension SendPaymentAmount {
                     case .error(let error):
                         completion(.failure(.other(error)))
                         
-                    case .success(let atomicSwapUrl):
-                        completion(.success(atomicSwapUrl))
+                    case .success(let paymentType):
+                        completion(.success(paymentType))
                     }
             })
         }

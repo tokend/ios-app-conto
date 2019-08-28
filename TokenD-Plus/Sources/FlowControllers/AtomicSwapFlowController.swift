@@ -174,8 +174,10 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             },
             onPresentPicker: { (_, _) in },
             onSendAction: { _ in },
-            onAtomicSwapBuyAction: { [weak self] (paymentUrl) in
+            onAtomicSwapFiatBuyAction: { [weak self] (paymentUrl) in
                 self?.showFiatPaymentScene(url: paymentUrl.url)
+            }, onAtomicSwapCryptoBuyAction: { [weak self] (atomicSwapInvoice) in
+                self?.showAtomicSwapQrScene(atomicSwapInvoice: atomicSwapInvoice)
             },
             onShowWithdrawDestination: nil,
             onShowRedeem: nil,
@@ -421,7 +423,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
     }
     
     private func showAtomicSwapQrScene(
-        atomicSwapInvoice: PaymentMethod.Model.AtomicSwapInvoiceViewModel
+        atomicSwapInvoice: SendPaymentAmount.Model.AtomicSwapInvoiceViewModel
         ) {
         
         let vc = ReceiveAddress.ViewController()

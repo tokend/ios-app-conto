@@ -105,8 +105,29 @@ public extension SendPaymentAmount.Model {
         let amount: Decimal
     }
     
+    enum AtomicSwapPaymentType {
+        case fiat(AtomicSwapPaymentUrl)
+        case crypto(AtomicSwapInvoiceModel)
+    }
+    
+    enum AtomicSwapPaymentViewType {
+        case fiat(AtomicSwapPaymentUrl)
+        case crypto(AtomicSwapInvoiceViewModel)
+    }
+    
     struct AtomicSwapPaymentUrl {
         let url: URL
+    }
+    
+    struct AtomicSwapInvoiceModel {
+        let address: String
+        let asset: String
+        let amount: Decimal
+    }
+    
+    struct AtomicSwapInvoiceViewModel {
+        let address: String
+        let amount: String
     }
     
     struct ShowRedeemViewModel {
@@ -284,14 +305,14 @@ extension SendPaymentAmount.Event {
             case loading
             case loaded
             case failed(AtomicSwapError)
-            case succeeded(Model.AtomicSwapPaymentUrl)
+            case succeeded(Model.AtomicSwapPaymentType)
         }
         
         public enum ViewModel {
             case loading
             case loaded
             case failed(errorMessage: String)
-            case succeeded(Model.AtomicSwapPaymentUrl)
+            case succeeded(Model.AtomicSwapPaymentViewType)
         }
     }
     

@@ -322,8 +322,8 @@ extension SendPaymentAmount {
                     case .failure(let error):
                         response = .failed(error)
                         
-                    case .success(let url):
-                        response = .succeeded(url)
+                    case .success(let paymentType):
+                        response = .succeeded(paymentType)
                     }
                     self?.presenter.presentAtomicSwapBuyAction(response: response)
             })
