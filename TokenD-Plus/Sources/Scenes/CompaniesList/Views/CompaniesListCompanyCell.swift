@@ -141,7 +141,8 @@ extension CompaniesList {
                 self.companyNameLabel.textColor = Theme.Colors.textOnContentBackgroundColor
                 self.companyNameLabel.font = Theme.Fonts.largeTitleFont
                 self.companyNameLabel.textAlignment = .left
-                self.companyNameLabel.numberOfLines = 1
+                self.companyNameLabel.numberOfLines = 0
+                self.companyNameLabel.lineBreakMode = .byTruncatingMiddle
             }
             
             private func setupLayout() {
@@ -172,7 +173,7 @@ extension CompaniesList {
                 
                 self.companyNameLabel.snp.makeConstraints { (make) in
                     make.leading.equalTo(self.imageContainer.snp.trailing).offset(self.sideInset)
-                    make.trailing.equalToSuperview().offset(self.sideInset)
+                    make.trailing.equalToSuperview().inset(self.sideInset)
                     make.top.centerY.equalTo(self.companyImageView)
                 }
             }
