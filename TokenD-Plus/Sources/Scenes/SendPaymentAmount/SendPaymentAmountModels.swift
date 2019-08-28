@@ -136,9 +136,9 @@ public extension SendPaymentAmount.Model {
         let asset: String
     }
     
-    struct NonExistedRecipientSubject: Codable {
-        let sender: String
-        let email: String
+    struct RecipientSubject: Codable {
+        let sender: String?
+        let email: String?
         let subject: String?
     }
 }

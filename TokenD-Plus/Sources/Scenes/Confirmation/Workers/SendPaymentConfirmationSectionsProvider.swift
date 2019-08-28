@@ -195,12 +195,14 @@ extension ConfirmationScene.SendPaymentConfirmationSectionsProvider: Confirmatio
         var sections: [ConfirmationScene.Model.SectionModel] = []
         var destinationCells: [ConfirmationScene.Model.CellModel] = []
         if let subjectData = self.sendPaymentModel.description.data(using: .utf8),
-            let nonExistedRecipientSubject = try? JSONDecoder().decode(
-                ConfirmationScene.Model.NonExistedRecipientSubject.self,
+            let recipientSubject = try? JSONDecoder().decode(
+                ConfirmationScene.Model.RecipientSubject.self,
                 from: subjectData
-            ), self.requestorEmail == nil {
+            ),
+            self.requestorEmail == nil,
+            let requestorEmail = recipientSubject.email {
             
-            self.requestorEmail = nonExistedRecipientSubject.email
+            self.requestorEmail = requestorEmail
         }
         
         let recipient = self.requestorEmail ?? Localized(.loading)
@@ -212,12 +214,12 @@ extension ConfirmationScene.SendPaymentConfirmationSectionsProvider: Confirmatio
         destinationCells.append(recepientCell)
         if !self.sendPaymentModel.description.isEmpty {
             if let subjectData = self.sendPaymentModel.description.data(using: .utf8),
-                let nonExistedRecipientSubject = try? JSONDecoder().decode(
-                    ConfirmationScene.Model.NonExistedRecipientSubject.self,
+                let recipientSubject = try? JSONDecoder().decode(
+                    ConfirmationScene.Model.RecipientSubject.self,
                     from: subjectData
                 ) {
                 
-                if let description =  nonExistedRecipientSubject.subject,
+                if let description =  recipientSubject.subject,
                     !description.isEmpty {
                     
                     let subjectCell = ConfirmationScene.Model.CellModel(
@@ -227,13 +229,6 @@ extension ConfirmationScene.SendPaymentConfirmationSectionsProvider: Confirmatio
                     )
                     destinationCells.append(subjectCell)
                 }
-            } else {
-                let subjectCell = ConfirmationScene.Model.CellModel(
-                    hint: Localized(.description),
-                    cellType: .text(value: self.sendPaymentModel.description),
-                    identifier: .description
-                )
-                destinationCells.append(subjectCell)
             }
         }
 

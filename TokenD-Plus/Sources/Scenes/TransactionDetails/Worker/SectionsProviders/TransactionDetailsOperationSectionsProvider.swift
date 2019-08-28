@@ -442,9 +442,9 @@ extension TransactionDetails {
                     
                     if self.counterpartyEmail == nil {
                         if let subjectData = payment.subject.data(using: .utf8),
-                           let subject = try? JSONDecoder().decode(Model.NonExistedRecipientSubject.self, from: subjectData) {
-                            
-                            self.counterpartyEmail = subject.email
+                           let subject = try? JSONDecoder().decode(Model.RecipientSubject.self, from: subjectData),
+                        let subjectEmail = subject.email {
+                            self.counterpartyEmail = subjectEmail
                         } else {
                             self.fetchEmail(accountId: toAccountId)
                         }
@@ -461,9 +461,9 @@ extension TransactionDetails {
                     
                     if self.counterpartyEmail == nil {
                         if let subjectData = payment.subject.data(using: .utf8),
-                            let subject = try? JSONDecoder().decode(Model.NonExistedRecipientSubject.self, from: subjectData) {
-                            
-                            self.fetchEmail(accountId: subject.sender)
+                            let subject = try? JSONDecoder().decode(Model.RecipientSubject.self, from: subjectData),
+                            let senderAccountId = subject.sender {
+                            self.fetchEmail(accountId: senderAccountId)
                         } else {
                             self.fetchEmail(accountId: fromAccountId)
                         }
@@ -666,12 +666,12 @@ extension TransactionDetails {
                 
                 if !resource.subject.isEmpty {
                     if let subjectData = resource.subject.data(using: .utf8),
-                        let nonExistedRecipientSubject = try? JSONDecoder().decode(
-                            Model.NonExistedRecipientSubject.self,
+                        let recipientSubject = try? JSONDecoder().decode(
+                            Model.RecipientSubject.self,
                             from: subjectData
                         ) {
                         
-                        if let description =  nonExistedRecipientSubject.subject,
+                        if let description =  recipientSubject.subject,
                             !description.isEmpty {
                             
                             let subjectCell = TransactionDetails.Model.CellModel(
@@ -681,13 +681,6 @@ extension TransactionDetails {
                             )
                             detailsCells.append(subjectCell)
                         }
-                    } else {
-                        let subjectCell = TransactionDetails.Model.CellModel(
-                            title: resource.subject,
-                            hint: Localized(.description),
-                            identifier: .reference
-                        )
-                        detailsCells.append(subjectCell)
                     }
                 }
                     
