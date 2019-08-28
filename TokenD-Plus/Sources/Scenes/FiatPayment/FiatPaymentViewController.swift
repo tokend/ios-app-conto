@@ -72,6 +72,7 @@ extension FiatPayment {
         
         private func setupWebView() {
             self.webView.backgroundColor = Theme.Colors.contentBackgroundColor
+            self.webView.delegate = self
             self.webView
                 .rx
                 .didFinishLoad

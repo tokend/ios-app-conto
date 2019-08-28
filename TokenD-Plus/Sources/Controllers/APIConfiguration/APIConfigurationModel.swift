@@ -29,7 +29,7 @@ extension APIConfigurationModel {
                 termsAddress: "https://demo.conto.me/terms",
                 webClient: nil,
                 downloadUrl: nil,
-                fiatRedirectDomen: nil
+                fiatRedirectDomen: "demo.conto.me"
             )
             
         case .production:
@@ -40,7 +40,7 @@ extension APIConfigurationModel {
                 termsAddress: nil,
                 webClient: nil,
                 downloadUrl: nil,
-                fiatRedirectDomen: nil
+                fiatRedirectDomen: "staging.conto.me"
             )
         }
     }
