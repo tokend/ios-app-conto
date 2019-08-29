@@ -399,9 +399,9 @@ extension SendPaymentAmount.ViewController: SendPaymentAmount.DisplayLogic {
             self.routing?.onHideProgress()
             self.routing?.onShowError(errorMessage)
             
-        case .succeeded(let redeemModel):
+        case .succeeded(let redeemModel, let reference):
             self.routing?.onHideProgress()
-            self.routing?.onShowRedeem?(redeemModel)
+            self.routing?.onShowRedeem?(redeemModel, reference)
         }
     }
     

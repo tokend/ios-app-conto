@@ -4,7 +4,7 @@ import TokenDWallet
 
 enum SendPaymentAmountCreateRedeemRequest {
     case failure(SendPaymentAmount.Event.RedeemAction.RedeemError)
-    case success(SendPaymentAmount.Model.ShowRedeemModel)
+    case success(SendPaymentAmount.Model.ShowRedeemModel, String)
 }
 protocol SendPaymentAmountCreateRedeemRequestWorkerProtocol {
     func createRedeemRequest(
@@ -189,6 +189,7 @@ extension SendPaymentAmount {
                 amount: amount,
                 convertedAmount: Int64(convertedAmount),
                 transaction: transaction,
+                reference: salt.description,
                 completion: completion
             )
         }
@@ -199,6 +200,7 @@ extension SendPaymentAmount {
             amount: Decimal,
             convertedAmount: Int64,
             transaction: TransactionModel,
+            reference: String,
             completion: @escaping (SendPaymentAmountCreateRedeemRequest) -> Void
             ) {
             
@@ -217,6 +219,7 @@ extension SendPaymentAmount {
                 amount: amount,
                 convertedAmount: convertedAmount,
                 transaction: transaction,
+                reference: reference,
                 completion: completion
             )
         }
@@ -227,6 +230,7 @@ extension SendPaymentAmount {
             amount: Decimal,
             convertedAmount: Int64,
             transaction: TransactionModel,
+            reference: String,
             completion: @escaping (SendPaymentAmountCreateRedeemRequest) -> Void
             ) {
             
@@ -262,7 +266,7 @@ extension SendPaymentAmount {
                 amount: amount,
                 assetName: assetName
             )
-            completion(.success(redeemToShow))
+            completion(.success(redeemToShow, reference))
         }
     }
 }

@@ -150,8 +150,10 @@ class BalancesListFlowController: BaseSignedInFlowController {
                     navigationController: strongSelf.navigationController,
                     companyName: strongSelf.company.name,
                     ownerAccountId: strongSelf.company.accountId,
-                    balanceId: nil
-                )
+                    balanceId: nil,
+                    onCompleted: {
+                        self?.backToBalances()
+                })
         },
             showAcceptRedeem: { [weak self] in
                 guard let strongSelf = self else { return }
@@ -234,8 +236,10 @@ class BalancesListFlowController: BaseSignedInFlowController {
                     navigationController: navigationController,
                     companyName: self?.company.name ?? "",
                     ownerAccountId: self?.company.accountId ?? "",
-                    balanceId: balanceId
-                )
+                    balanceId: balanceId,
+                    onCompleted: {
+                        self?.backToBalances()
+                })
             },
             showAcceptRedeem: { [weak self] in
                 self?.runAcceptRedeemFlow(navigationController: navigationController)

@@ -191,7 +191,7 @@ extension SendPaymentAmount.Presenter: SendPaymentAmount.PresentationLogic {
         case .failed(let error):
             viewModel = .failed(errorMessage: error.localizedDescription)
             
-        case .succeeded(let redeemModel):
+        case .succeeded(let redeemModel, let reference):
             let amount = self.amountFormatter.formatAmount(
                 redeemModel.amount,
                 currency: redeemModel.assetName
@@ -200,7 +200,7 @@ extension SendPaymentAmount.Presenter: SendPaymentAmount.PresentationLogic {
                 redeemRequest: redeemModel.redeemRequest,
                 amount: amount
                 )
-            viewModel = .succeeded(redeemViewModel)
+            viewModel = .succeeded(redeemViewModel, reference)
         }
         
         self.presenterDispatch.display { displayLogic in

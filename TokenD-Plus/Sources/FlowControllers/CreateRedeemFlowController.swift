@@ -9,7 +9,10 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
     private let companyName: String
     private let ownerAccountId: String
     private let selectedBalanceId: String?
+    private let redeemAcceptionChecker: RedeemAcceptionChecker
     private let disposeBag: DisposeBag = DisposeBag()
+    
+    private let onCompleted: () -> Void
     
     // MARK: -
     
@@ -24,13 +27,17 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
         rootNavigation: RootNavigationProtocol,
         companyName: String,
         ownerAccountId: String,
-        selectedBalanceId: String?
+        selectedBalanceId: String?,
+        redeemAcceptionChecker: RedeemAcceptionChecker,
+        onCompleted: @escaping() -> Void
         ) {
         
         self.navigationController = navigationController
         self.companyName = companyName
         self.ownerAccountId = ownerAccountId
         self.selectedBalanceId = selectedBalanceId
+        self.redeemAcceptionChecker = redeemAcceptionChecker
+        self.onCompleted = onCompleted
         
         super.init(
             appController: appController,
@@ -122,8 +129,9 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
             onSendAction: nil,
             onAtomicSwapBuyAction: nil,
             onShowWithdrawDestination: nil,
-            onShowRedeem: { [weak self] (redeemModel) in
+            onShowRedeem: { [weak self] (redeemModel, reference) in
                 self?.showRedeemQrScene(redeemModel: redeemModel)
+                self?.checkRedeemAcception(reference: reference)
             },
             showFeesOverview: { [weak self] (asset, feeType) in
                 self?.showFees(asset: asset, feeType: feeType)
@@ -144,6 +152,17 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
         )
         
         return vc
+    }
+    
+    private func checkRedeemAcception(reference: String) {
+        self.redeemAcceptionChecker.checkRedeemAcception(
+            reference: reference,
+            completion: { [weak self] (result) in
+                switch result {
+                case .accepted:
+                    self?.onCompleted()
+                }
+        })
     }
     
     private func showFees(asset: String, feeType: Int32) {
