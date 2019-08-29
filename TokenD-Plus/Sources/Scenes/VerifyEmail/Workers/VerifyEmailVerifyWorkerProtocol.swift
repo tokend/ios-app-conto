@@ -6,6 +6,10 @@ enum VerifyEmailVerifyResult {
     case failed(Swift.Error)
 }
 
+enum VerifyEmailVerificationStateResult {
+    case verified
+}
+
 protocol VerifyEmailVerifyWorkerProtocol {
     typealias Result = VerifyEmailVerifyResult
     
@@ -15,4 +19,8 @@ protocol VerifyEmailVerifyWorkerProtocol {
     )
     
     func verifyEmailTokenFrom(url: URL) -> String?
+    
+    func checkVerificationState(
+        completion: @escaping (_ result: VerifyEmailVerificationStateResult) -> Void
+    )
 }

@@ -1976,12 +1976,12 @@
 		DB7209E122C1396B00ED116A /* VerifyEmail */ = {
 			isa = PBXGroup;
 			children = (
-				DB7209E222C1396B00ED116A /* VerifyEmailModels.swift */,
-				DB7209E322C1396B00ED116A /* VerifyEmailRouting.swift */,
-				DB7209E422C1396B00ED116A /* VerifyEmailPresenter.swift */,
-				DB7209E522C1396B00ED116A /* VerifyEmailViewController.swift */,
-				DB7209E622C1396B00ED116A /* VerifyEmailInteractor.swift */,
 				DB7209E722C1396B00ED116A /* VerifyEmailConfigurator.swift */,
+				DB7209E622C1396B00ED116A /* VerifyEmailInteractor.swift */,
+				DB7209E222C1396B00ED116A /* VerifyEmailModels.swift */,
+				DB7209E422C1396B00ED116A /* VerifyEmailPresenter.swift */,
+				DB7209E322C1396B00ED116A /* VerifyEmailRouting.swift */,
+				DB7209E522C1396B00ED116A /* VerifyEmailViewController.swift */,
 				DB7209E822C1396B00ED116A /* Workers */,
 			);
 			path = VerifyEmail;

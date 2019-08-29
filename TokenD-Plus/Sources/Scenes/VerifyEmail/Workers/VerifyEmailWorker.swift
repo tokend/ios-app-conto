@@ -8,6 +8,7 @@ class VerifyEmailWorker {
     let keyServerApi: KeyServerApi
     let userDataManager: UserDataManagerProtocol
     let walletId: String
+    let dispatchQueue: DispatchQueue = DispatchQueue(label: "verification-checker")
     
     // MARK: -
     
@@ -79,6 +80,28 @@ extension VerifyEmailWorker: VerifyEmail.ResendWorker {
 }
 
 extension VerifyEmailWorker: VerifyEmail.VerifyWorker {
+    
+    func checkVerificationState(
+        completion: @escaping (VerifyEmailVerificationStateResult) -> Void
+        ) {
+        
+        self.keyServerApi.requestWalletVerificationState(
+            walletId: self.walletId,
+            completion: { [weak self] (result) in
+                switch result {
+                case .verified:
+                    completion(.verified)
+                    
+                case .unverified, .failure:
+                    self?.dispatchQueue.asyncAfter(
+                        deadline: .now() + .seconds(2),
+                        execute: {
+                            self?.checkVerificationState(completion: completion)
+                    })
+                }
+        })
+    }
+    
     func performVerifyRequest(
         token: String,
         completion: @escaping (VerifyEmailVerifyWorkerProtocol.Result) -> Void
