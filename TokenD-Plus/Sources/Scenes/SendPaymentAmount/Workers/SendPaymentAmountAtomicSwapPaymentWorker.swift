@@ -141,6 +141,7 @@ extension SendPaymentAmount {
             }
             
             self.paymentSender.sendPayment(
+                quoteAsset: quoteAsset,
                 transaction: transaction,
                 completion: { result in
                     switch result {

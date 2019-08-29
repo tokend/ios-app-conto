@@ -125,7 +125,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             buyPreposition: buyPreposition
         )
         let fiatPaymentSender = SendPaymentAmount.FiatPaymentSender(
-            api: self.flowControllerStack.api.transactionsApi,
+            api: self.flowControllerStack.apiV3.integrationsApi,
             keychainDataProvider: self.keychainDataProvider
         )
         let amountConverter = AmountConverter()

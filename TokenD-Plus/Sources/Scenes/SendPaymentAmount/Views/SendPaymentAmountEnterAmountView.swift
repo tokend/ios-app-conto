@@ -17,6 +17,7 @@ extension SendPaymentAmount {
         private var amountEditingContext: TextEditingContext<Decimal>?
         private let assetButton: UIButton = UIButton(type: .system)
         
+        private var isPickerEnabled: Bool = true
         private let spacing: CGFloat = 30.0
         private let disposeBag = DisposeBag()
         
@@ -46,14 +47,16 @@ extension SendPaymentAmount {
         
         func set(amount: Decimal?, asset: String?) {
             self.amountEditingContext?.setValue(amount)
-            self.assetButton.setAttributedTitle(
-                NSAttributedString(
-                    string: asset ?? "",
-                    attributes: [
-                        .font: Theme.Fonts.largeTitleFont
-                    ]),
-                for: .normal
-            )
+            if self.isPickerEnabled {
+                self.assetButton.setAttributedTitle(
+                    NSAttributedString(
+                        string: asset ?? "",
+                        attributes: [
+                            .font: Theme.Fonts.largeTitleFont
+                        ]),
+                    for: .normal
+                )
+            }
         }
         
         func set(amountHighlighted: Bool) {
@@ -63,7 +66,12 @@ extension SendPaymentAmount {
         }
         
         func disablePicker() {
+            self.isPickerEnabled = false
+            self.assetButton.setTitle("", for: .normal)
             self.assetButton.setImage(nil, for: .normal)
+            self.assetButton.snp.makeConstraints { (make) in
+                make.width.equalTo(0)
+            }
         }
         
         // MARK: - Private

@@ -737,6 +737,7 @@
 		DBDA68A4231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68A3231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift */; };
 		DBDA68B4231410FB00EC1519 /* EnvironmentChangeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */; };
 		DBDA68B72314381300EC1519 /* TransactionsListEmptyActionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */; };
+		DBF86EE52317EA2D009A1482 /* AtomicSwapBuy+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EE42317EA2D009A1482 /* AtomicSwapBuy+Details.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1475,6 +1476,7 @@
 		DBDA68A3231016BE00EC1519 /* IdentityTelegramSubmitWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityTelegramSubmitWorker.swift; sourceTree = "<group>"; };
 		DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentChangeWorker.swift; sourceTree = "<group>"; };
 		DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListEmptyActionsProvider.swift; sourceTree = "<group>"; };
+		DBF86EE42317EA2D009A1482 /* AtomicSwapBuy+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AtomicSwapBuy+Details.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1566,6 +1568,7 @@
 			isa = PBXGroup;
 			children = (
 				DB363E1122DF505900F5761C /* Business+Logo.swift */,
+				DBF86EE42317EA2D009A1482 /* AtomicSwapBuy+Details.swift */,
 			);
 			path = ResourcesExtensions;
 			sourceTree = "<group>";
@@ -4414,6 +4417,7 @@
 				DB720E7122C1396C00ED116A /* SaleDetailsGeneralContentView.swift in Sources */,
 				DB720DB922C1396B00ED116A /* ConfirmationScenePresenter.swift in Sources */,
 				DB720CC722C1396B00ED116A /* BalancePickerPresenter.swift in Sources */,
+				DBF86EE52317EA2D009A1482 /* AtomicSwapBuy+Details.swift in Sources */,
 				DBC165452302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift in Sources */,
 				DB720D5722C1396B00ED116A /* SendPaymentDestinationRouting.swift in Sources */,
 				DBC1655823035530002A50F7 /* KYCConfigurator.swift in Sources */,

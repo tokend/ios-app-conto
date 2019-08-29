@@ -63,6 +63,22 @@ extension SendPaymentAmount {
             )
             return viewModel
         }
+        
+        private func getAtomicSwapPaymentViewType(model: Model.AtomicSwapPaymentType) -> Model.AtomicSwapPaymentViewType {
+            
+            switch model {
+            case .crypto(let invoce):
+                let amount = self.amountFormatter.assetAmountToString(invoce.amount) + " \(invoce.asset)"
+                let invoceViewModel = Model.AtomicSwapInvoiceViewModel(
+                    address: invoce.address,
+                    amount: amount
+                )
+                return .crypto(invoceViewModel)
+                
+            case .fiat(let paymentUrl):
+                return .fiat(paymentUrl)
+            }
+        }
     }
 }
 
@@ -221,8 +237,9 @@ extension SendPaymentAmount.Presenter: SendPaymentAmount.PresentationLogic {
         case .failed(let error):
             viewModel = .failed(errorMessage: error.localizedDescription)
             
-        case .succeeded(let askModel):
-            viewModel = .succeeded(askModel)
+        case .succeeded(let paymentType):
+            let paymentViewType = self.getAtomicSwapPaymentViewType(model: paymentType)
+            viewModel = .succeeded(paymentViewType)
         }
         
         self.presenterDispatch.display { displayLogic in
