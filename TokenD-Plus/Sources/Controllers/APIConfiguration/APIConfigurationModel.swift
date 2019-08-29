@@ -24,7 +24,7 @@ extension APIConfigurationModel {
         case .demo:
             return APIConfigurationModel(
                 storageEndpoint: "https://s3.eu-north-1.amazonaws.com/contodemo-identity-storage-stoic-haslett",
-                apiEndpoint: "https://53133ee4.ngrok.io/_/api/",
+                apiEndpoint: "https://api.demo.conto.me",
                 contributeUrl: "https://github.com/tokend/ios-app-loyalty",
                 termsAddress: "https://demo.conto.me/terms",
                 webClient: nil,
