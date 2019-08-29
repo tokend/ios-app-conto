@@ -268,14 +268,14 @@ extension SendPaymentAmount.Event {
             case loading
             case loaded
             case failed(RedeemError)
-            case succeeded(Model.ShowRedeemModel)
+            case succeeded(Model.ShowRedeemModel, String)
         }
         
         enum ViewModel {
             case loading
             case loaded
             case failed(errorMessage: String)
-            case succeeded(Model.ShowRedeemViewModel)
+            case succeeded(Model.ShowRedeemViewModel, String)
         }
     }
     

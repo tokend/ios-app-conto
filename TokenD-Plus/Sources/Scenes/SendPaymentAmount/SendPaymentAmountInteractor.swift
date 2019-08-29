@@ -286,8 +286,8 @@ extension SendPaymentAmount {
                     case .failure(let error):
                         response = .failed(error)
                         
-                    case .success(let redeemModel):
-                        response = .succeeded(redeemModel)
+                    case .success(let redeemModel, let reference):
+                        response = .succeeded(redeemModel, reference)
                     }
                     self?.presenter.presentRedeemAction(response: response)
             })

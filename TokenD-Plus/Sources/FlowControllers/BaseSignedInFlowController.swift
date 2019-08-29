@@ -120,9 +120,11 @@ class BaseSignedInFlowController: BaseFlowController {
         navigationController: NavigationControllerProtocol,
         companyName: String,
         ownerAccountId: String,
-        balanceId: String?
+        balanceId: String?,
+        onCompleted: @escaping() -> Void
         ) {
         
+        let redeemAcceptionChecker = RedeemAcceptionChecker(movementsRepo: self.reposController.movementsRepo)
         let flow = CreateRedeemFlowController(
             navigationController: navigationController,
             appController: self.appController,
@@ -134,7 +136,9 @@ class BaseSignedInFlowController: BaseFlowController {
             rootNavigation: self.rootNavigation,
             companyName: companyName,
             ownerAccountId: ownerAccountId,
-            selectedBalanceId: balanceId
+            selectedBalanceId: balanceId,
+            redeemAcceptionChecker: redeemAcceptionChecker,
+            onCompleted: onCompleted
         )
         self.currentFlowController = flow
         flow.run(

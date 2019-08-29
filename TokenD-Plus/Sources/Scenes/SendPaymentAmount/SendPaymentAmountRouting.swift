@@ -12,7 +12,7 @@ extension SendPaymentAmount {
         let onSendAction: ((_ sendModel: Model.SendPaymentModel) -> Void)?
         let onAtomicSwapBuyAction: ((_ ask: Model.AtomicSwapPaymentUrl) -> Void)?
         let onShowWithdrawDestination: ((_ sendModel: Model.SendWithdrawModel) -> Void)?
-        let onShowRedeem: ((_ redeemModel: Model.ShowRedeemViewModel) -> Void)?
+        let onShowRedeem: ((_ redeemModel: Model.ShowRedeemViewModel, _ reference: String) -> Void)?
         let showFeesOverview: (_ asset: String, _ feeType: Int32) -> Void
     }
 }
