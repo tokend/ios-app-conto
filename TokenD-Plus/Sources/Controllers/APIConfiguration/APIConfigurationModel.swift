@@ -37,7 +37,7 @@ extension APIConfigurationModel {
                 storageEndpoint: "https://s3.eu-north-1.amazonaws.com/contostaging-identity-storage-festive-cannon-2",
                 apiEndpoint: "https://api.staging.conto.me/",
                 contributeUrl: "https://github.com/tokend/ios-app-loyalty",
-                termsAddress: nil,
+                termsAddress: "https://staging.conto.me/terms",
                 webClient: nil,
                 downloadUrl: nil,
                 fiatRedirectDomen: "staging.conto.me"
