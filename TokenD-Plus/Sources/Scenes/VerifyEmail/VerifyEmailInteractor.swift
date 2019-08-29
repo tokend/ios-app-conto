@@ -77,6 +77,15 @@ extension VerifyEmail.Interactor: VerifyEmail.BusinessLogic {
         } else if let lastURL = self.appController.getLastUserActivityWebLink(), self.handle(url: lastURL) {
             self.appController.lastUserActivityWebLinkHandled(url: lastURL)
         }
+        
+        self.verifyWorker.checkVerificationState(
+            completion: { [weak self] (result) in
+                switch result {
+                case .verified:
+                    let response = VerifyEmail.Event.VerifyToken.Response.succeded
+                    self?.presenter.presentVerifyToken(response: response)
+                }
+        })
     }
     
     func onResendEmail(request: VerifyEmail.Event.ResendEmail.Request) {
