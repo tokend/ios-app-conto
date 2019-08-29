@@ -22,7 +22,7 @@ extension AssetPicker.Model {
     }
     
     public struct Asset {
-        let code: String
+        let name: String
         let iconUrl: URL?
         let ownerAccountId: String
     }

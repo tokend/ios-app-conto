@@ -738,6 +738,17 @@
 		DBDA68B4231410FB00EC1519 /* EnvironmentChangeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */; };
 		DBDA68B72314381300EC1519 /* TransactionsListEmptyActionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */; };
 		DBF86EE52317EA2D009A1482 /* AtomicSwapBuy+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EE42317EA2D009A1482 /* AtomicSwapBuy+Details.swift */; };
+		DBF86EF723180866009A1482 /* AtomicSwapBuyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EE723180865009A1482 /* AtomicSwapBuyViewController.swift */; };
+		DBF86EF823180866009A1482 /* AtomicSwapBuyConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EE823180865009A1482 /* AtomicSwapBuyConfigurator.swift */; };
+		DBF86EF923180866009A1482 /* AtomicSwapBuyEnterAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EEA23180865009A1482 /* AtomicSwapBuyEnterAmountView.swift */; };
+		DBF86EFB23180866009A1482 /* AtomicSwapBuyBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EEC23180865009A1482 /* AtomicSwapBuyBalanceView.swift */; };
+		DBF86EFD23180866009A1482 /* AtomicSwapBuyAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EF023180865009A1482 /* AtomicSwapBuyAmountFormatter.swift */; };
+		DBF86EFE23180866009A1482 /* AtomicSwapBuyFiatPaymentSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EF123180865009A1482 /* AtomicSwapBuyFiatPaymentSender.swift */; };
+		DBF86EFF23180866009A1482 /* AtomicSwapBuyAtomicSwapPaymentWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EF223180865009A1482 /* AtomicSwapBuyAtomicSwapPaymentWorker.swift */; };
+		DBF86F0023180866009A1482 /* AtomicSwapBuyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EF323180866009A1482 /* AtomicSwapBuyInteractor.swift */; };
+		DBF86F0123180866009A1482 /* AtomicSwapBuyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EF423180866009A1482 /* AtomicSwapBuyPresenter.swift */; };
+		DBF86F0223180866009A1482 /* AtomicSwapBuyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EF523180866009A1482 /* AtomicSwapBuyModels.swift */; };
+		DBF86F0323180866009A1482 /* AtomicSwapBuyRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF86EF623180866009A1482 /* AtomicSwapBuyRouting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1477,6 +1488,17 @@
 		DBDA68B3231410FB00EC1519 /* EnvironmentChangeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentChangeWorker.swift; sourceTree = "<group>"; };
 		DBDA68B62314381300EC1519 /* TransactionsListEmptyActionsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListEmptyActionsProvider.swift; sourceTree = "<group>"; };
 		DBF86EE42317EA2D009A1482 /* AtomicSwapBuy+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AtomicSwapBuy+Details.swift"; sourceTree = "<group>"; };
+		DBF86EE723180865009A1482 /* AtomicSwapBuyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSwapBuyViewController.swift; sourceTree = "<group>"; };
+		DBF86EE823180865009A1482 /* AtomicSwapBuyConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSwapBuyConfigurator.swift; sourceTree = "<group>"; };
+		DBF86EEA23180865009A1482 /* AtomicSwapBuyEnterAmountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSwapBuyEnterAmountView.swift; sourceTree = "<group>"; };
+		DBF86EEC23180865009A1482 /* AtomicSwapBuyBalanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSwapBuyBalanceView.swift; sourceTree = "<group>"; };
+		DBF86EF023180865009A1482 /* AtomicSwapBuyAmountFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSwapBuyAmountFormatter.swift; sourceTree = "<group>"; };
+		DBF86EF123180865009A1482 /* AtomicSwapBuyFiatPaymentSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSwapBuyFiatPaymentSender.swift; sourceTree = "<group>"; };
+		DBF86EF223180865009A1482 /* AtomicSwapBuyAtomicSwapPaymentWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSwapBuyAtomicSwapPaymentWorker.swift; sourceTree = "<group>"; };
+		DBF86EF323180866009A1482 /* AtomicSwapBuyInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSwapBuyInteractor.swift; sourceTree = "<group>"; };
+		DBF86EF423180866009A1482 /* AtomicSwapBuyPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSwapBuyPresenter.swift; sourceTree = "<group>"; };
+		DBF86EF523180866009A1482 /* AtomicSwapBuyModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSwapBuyModels.swift; sourceTree = "<group>"; };
+		DBF86EF623180866009A1482 /* AtomicSwapBuyRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSwapBuyRouting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1758,6 +1780,7 @@
 				DB4AE2F322F2DF16001D0883 /* AddCompany */,
 				DB720B4822C1396B00ED116A /* AssetPicker */,
 				DB4AE2BE22EB3B6A001D0883 /* AtomicSwap */,
+				DBF86EE62318079C009A1482 /* AtomicSwapBuy */,
 				DB720A2322C1396B00ED116A /* AuthenticatorAuth */,
 				DB720BD922C1396B00ED116A /* BalanceHeader */,
 				DB720A8722C1396B00ED116A /* BalanceHeaderWithPicker */,
@@ -3848,6 +3871,48 @@
 			path = ActionsProvider;
 			sourceTree = "<group>";
 		};
+		DBF86EE62318079C009A1482 /* AtomicSwapBuy */ = {
+			isa = PBXGroup;
+			children = (
+				DBF86EE823180865009A1482 /* AtomicSwapBuyConfigurator.swift */,
+				DBF86EF323180866009A1482 /* AtomicSwapBuyInteractor.swift */,
+				DBF86EF523180866009A1482 /* AtomicSwapBuyModels.swift */,
+				DBF86EF423180866009A1482 /* AtomicSwapBuyPresenter.swift */,
+				DBF86EF623180866009A1482 /* AtomicSwapBuyRouting.swift */,
+				DBF86EE723180865009A1482 /* AtomicSwapBuyViewController.swift */,
+				DBF86EE923180865009A1482 /* Views */,
+				DBF86EED23180865009A1482 /* Workers */,
+			);
+			path = AtomicSwapBuy;
+			sourceTree = "<group>";
+		};
+		DBF86EE923180865009A1482 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DBF86EEA23180865009A1482 /* AtomicSwapBuyEnterAmountView.swift */,
+				DBF86EEC23180865009A1482 /* AtomicSwapBuyBalanceView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DBF86EED23180865009A1482 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				DBF86EEE23180865009A1482 /* BalancesFethcers */,
+				DBF86EF023180865009A1482 /* AtomicSwapBuyAmountFormatter.swift */,
+				DBF86EF123180865009A1482 /* AtomicSwapBuyFiatPaymentSender.swift */,
+				DBF86EF223180865009A1482 /* AtomicSwapBuyAtomicSwapPaymentWorker.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
+		DBF86EEE23180865009A1482 /* BalancesFethcers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BalancesFethcers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4029,6 +4094,7 @@
 				DB720F0522C1396C00ED116A /* APIConfigurationFetcher.swift in Sources */,
 				DB720DD622C1396C00ED116A /* ExploreTokensTableViewCell.swift in Sources */,
 				DB720ECB22C1396C00ED116A /* OrderBookTableViewBuyCell.swift in Sources */,
+				DBF86EF823180866009A1482 /* AtomicSwapBuyConfigurator.swift in Sources */,
 				DB720D7322C1396B00ED116A /* BalanceHeaderWithPickerBalancesFetcher.swift in Sources */,
 				DB720DCC22C1396C00ED116A /* ExploreTokensPresenter.swift in Sources */,
 				DB720F0022C1396C00ED116A /* WalletDataSerializable.swift in Sources */,
@@ -4123,6 +4189,7 @@
 				DB720CB022C1396B00ED116A /* SettingsActionCell.swift in Sources */,
 				DB720DC222C1396C00ED116A /* CreateOfferConfirmationSectionsProvider.swift in Sources */,
 				DB720DDA22C1396C00ED116A /* WalletRecoveryViewController.swift in Sources */,
+				DBF86F0223180866009A1482 /* AtomicSwapBuyModels.swift in Sources */,
 				DB720CBD22C1396B00ED116A /* SaleInvestBalanceCreator.swift in Sources */,
 				DB720DDD22C1396C00ED116A /* TradesListInteractor.swift in Sources */,
 				DB720E8922C1396C00ED116A /* Bundle+Version.swift in Sources */,
@@ -4161,6 +4228,7 @@
 				DB720F0222C1396C00ED116A /* KDFParamsSerializable.swift in Sources */,
 				DB720F0B22C1396C00ED116A /* LaunchFlowController.swift in Sources */,
 				DB720E4B22C1396C00ED116A /* DepositSceneConfigurator.swift in Sources */,
+				DBF86F0023180866009A1482 /* AtomicSwapBuyInteractor.swift in Sources */,
 				DB720ECD22C1396C00ED116A /* OrderBookTableView.swift in Sources */,
 				DB720E7B22C1396C00ED116A /* BiometricsAuthRouting.swift in Sources */,
 				DB720E2222C1396C00ED116A /* SideMenuModels.swift in Sources */,
@@ -4319,6 +4387,7 @@
 				DB720DC122C1396C00ED116A /* ConfirmationAmountFormatterProtocol.swift in Sources */,
 				DB720E8B22C1396C00ED116A /* TokenDSDK.Asset+Identifier.swift in Sources */,
 				DB720F2F22C2286C00ED116A /* CompaniesListConfigurator.swift in Sources */,
+				DBF86EF723180866009A1482 /* AtomicSwapBuyViewController.swift in Sources */,
 				DB720D1022C1396B00ED116A /* TokenDetailsDocumentURLBuilderProtocol.swift in Sources */,
 				DB720CE222C1396B00ED116A /* UpdatePasswordRequestBuilderProtocol.swift in Sources */,
 				DB720EBC22C1396C00ED116A /* TextEditingContext.swift in Sources */,
@@ -4412,6 +4481,7 @@
 				DB720F3422C2290800ED116A /* CompaniesListCompanyCell.swift in Sources */,
 				DB720E1522C1396C00ED116A /* RegisterScenePresenter.swift in Sources */,
 				DB720E7E22C1396C00ED116A /* BalanceHeaderInteractor.swift in Sources */,
+				DBF86EF923180866009A1482 /* AtomicSwapBuyEnterAmountView.swift in Sources */,
 				DB720E3F22C1396C00ED116A /* BalancesListBalanceFetcher.swift in Sources */,
 				DB720D9A22C1396B00ED116A /* TabBarDashboardTabProvider.swift in Sources */,
 				DB720E7122C1396C00ED116A /* SaleDetailsGeneralContentView.swift in Sources */,
@@ -4420,6 +4490,8 @@
 				DBF86EE52317EA2D009A1482 /* AtomicSwapBuy+Details.swift in Sources */,
 				DBC165452302F36D002A50F7 /* EnvironmentListChangeEnvironmentWorker.swift in Sources */,
 				DB720D5722C1396B00ED116A /* SendPaymentDestinationRouting.swift in Sources */,
+				DBF86EFE23180866009A1482 /* AtomicSwapBuyFiatPaymentSender.swift in Sources */,
+				DBF86F0323180866009A1482 /* AtomicSwapBuyRouting.swift in Sources */,
 				DBC1655823035530002A50F7 /* KYCConfigurator.swift in Sources */,
 				DB720EB422C1396C00ED116A /* QRCodeGenerationOperation.swift in Sources */,
 				DB720CF422C1396B00ED116A /* TabsContainerPresenter.swift in Sources */,
@@ -4527,6 +4599,7 @@
 				DB720D9422C1396B00ED116A /* TransactionDetailsCell.swift in Sources */,
 				DB720F5F22C4CD1C00ED116A /* PollsNavigationTitleView.swift in Sources */,
 				DB720D9022C1396B00ED116A /* TransactionDetailsPendingOfferSectionsProvider.swift in Sources */,
+				DBF86EFD23180866009A1482 /* AtomicSwapBuyAmountFormatter.swift in Sources */,
 				DB720EF122C1396C00ED116A /* AppController+UserActivitySubscribers.swift in Sources */,
 				DB720EE222C1396C00ED116A /* DynamicTableViewDataSourceDelegate.swift in Sources */,
 				DB720EEA22C1396C00ED116A /* AccountRepo.swift in Sources */,
@@ -4540,6 +4613,7 @@
 				DB720CD622C1396B00ED116A /* SaleOverviewRouting.swift in Sources */,
 				DB720DE422C1396C00ED116A /* TradesListAmountFormatterProtocol.swift in Sources */,
 				DB720F2B22C2286C00ED116A /* CompaniesListRouting.swift in Sources */,
+				DBF86EFB23180866009A1482 /* AtomicSwapBuyBalanceView.swift in Sources */,
 				DB720EC222C1396C00ED116A /* TextFieldView.swift in Sources */,
 				DB720F5422C4CD1C00ED116A /* PollsConfigurator.swift in Sources */,
 				DB720E7F22C1396C00ED116A /* BalanceHeaderPresenter.swift in Sources */,
@@ -4553,6 +4627,7 @@
 				DB720CE122C1396B00ED116A /* UpdatePasswordChangePasswordWorker.swift in Sources */,
 				DB720EDB22C1396C00ED116A /* BXFStaticTableViewSection.swift in Sources */,
 				DB720EF822C1396C00ED116A /* KeyboardController.swift in Sources */,
+				DBF86F0123180866009A1482 /* AtomicSwapBuyPresenter.swift in Sources */,
 				DB00D973230456820041D773 /* KYCVerificationChecker.swift in Sources */,
 				DB720ED522C1396C00ED116A /* BXFStaticTableView.swift in Sources */,
 				DB720DD022C1396C00ED116A /* ExploreTokensConfigurator.swift in Sources */,
@@ -4640,6 +4715,7 @@
 				DB720EB222C1396C00ED116A /* ClientRedirectsModel.swift in Sources */,
 				DB720D0922C1396B00ED116A /* FeesInteractor.swift in Sources */,
 				DB720D1722C1396B00ED116A /* TokenDetailsTokenDocumentCell.swift in Sources */,
+				DBF86EFF23180866009A1482 /* AtomicSwapBuyAtomicSwapPaymentWorker.swift in Sources */,
 				DB720CC922C1396B00ED116A /* BalancePickerBalancesFetcher.swift in Sources */,
 				DB720EC822C1396C00ED116A /* ChartView.swift in Sources */,
 				DB720D7D22C1396B00ED116A /* CreateOfferModels.swift in Sources */,

@@ -41,15 +41,15 @@ extension AssetPicker.Presenter: AssetPicker.PresentationLogic {
             
         case .assets(let models):
             let assets = models.map { (asset) -> AssetPicker.AssetCell.ViewModel in
-                let firstLetter = asset.code.first?.description ?? ""
+                let firstLetter = asset.name.first?.description ?? ""
                 var imageRepresentation = Model.ImageRepresentation.abbreviation
                 if let url = asset.iconUrl {
                     imageRepresentation = .image(url)
                 }
                 return AssetPicker.AssetCell.ViewModel(
-                    code: asset.code,
+                    name: asset.name,
                     imageRepresentation: imageRepresentation,
-                    abbreviationBackgroundColor: TokenColoringProvider.shared.coloringForCode(asset.code),
+                    abbreviationBackgroundColor: TokenColoringProvider.shared.coloringForCode(asset.name),
                     abbreviationText: firstLetter,
                     ownerAccountId: asset.ownerAccountId
                 )

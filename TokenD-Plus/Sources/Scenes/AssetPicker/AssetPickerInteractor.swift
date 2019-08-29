@@ -57,7 +57,7 @@ extension AssetPicker {
                 !filter.isEmpty {
                 
                 assets = assets.filter({ (asset) -> Bool in
-                    return asset.code.localizedCaseInsensitiveContains(filter)
+                    return asset.name.localizedCaseInsensitiveContains(filter)
                 })
             }
             if assets.isEmpty {

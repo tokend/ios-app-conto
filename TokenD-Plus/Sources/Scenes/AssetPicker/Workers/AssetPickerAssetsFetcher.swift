@@ -18,6 +18,7 @@ extension AssetPicker {
         
         private let assetsRelay: BehaviorRelay<[Model.Asset]> = BehaviorRelay(value: [])
         private var assets: [AssetsRepo.Asset] = []
+        private var targetAssets: [String]?
         
         private let disposeBag: DisposeBag = DisposeBag()
         
@@ -25,11 +26,13 @@ extension AssetPicker {
         
         init(
             assetsRepo: AssetsRepo,
-            imagesUtility: ImagesUtility
+            imagesUtility: ImagesUtility,
+            targetAssets: [String]?
             ) {
             
             self.assetsRepo = assetsRepo
             self.imagesUtility = imagesUtility
+            self.targetAssets = targetAssets
         }
         
         // MARK: - Private
@@ -45,17 +48,23 @@ extension AssetPicker {
         }
         
         private func updateAssets() {
-            let assets = self.assets.map { (asset) -> Model.Asset in
+            var assets = self.assets.map { (asset) -> Model.Asset in
                 var iconUrl: URL?
                 if let key = asset.defaultDetails?.logo?.key {
                     let imageKey = ImagesUtility.ImageKey.key(key)
                     iconUrl = self.imagesUtility.getImageURL(imageKey)
                 }
                 return Model.Asset(
-                    code: asset.code,
+                    name: asset.defaultDetails?.name ?? asset.code,
                     iconUrl: iconUrl,
                     ownerAccountId: asset.owner
                 )
+            }
+            
+            if let targetAssets = self.targetAssets {
+                assets = assets.filter({ (asset) -> Bool in
+                    return targetAssets.contains(asset.name)
+                })
             }
             
             self.assetsRelay.accept(assets)

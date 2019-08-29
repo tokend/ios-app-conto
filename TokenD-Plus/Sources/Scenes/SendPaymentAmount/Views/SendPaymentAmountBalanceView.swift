@@ -1,7 +1,7 @@
 import UIKit
 
 extension SendPaymentAmount {
-    class BalanceView: UIView {
+    public class BalanceView: UIView {
         
         // MARK: - Public properties
         

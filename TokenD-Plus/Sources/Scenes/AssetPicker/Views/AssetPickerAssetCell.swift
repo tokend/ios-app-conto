@@ -6,14 +6,14 @@ extension AssetPicker {
     public enum AssetCell {
         
         public struct ViewModel: CellViewModel {
-            let code: String
+            let name: String
             let imageRepresentation: AssetPicker.Model.ImageRepresentation
             let abbreviationBackgroundColor: UIColor
             let abbreviationText: String
             let ownerAccountId: String
             
             public func setup(cell: Cell) {
-                cell.code = self.code
+                cell.name = self.name
                 cell.imageRepresentation = imageRepresentation
                 cell.abbreviationBackgroundColor = self.abbreviationBackgroundColor
                 cell.abbreviationText = self.abbreviationText
@@ -24,9 +24,9 @@ extension AssetPicker {
             
             // MARK: - Public properties
             
-            var code: String? {
-                get { return self.codeLabel.text }
-                set { self.codeLabel.text = newValue }
+            var name: String? {
+                get { return self.nameLabel.text }
+                set { self.nameLabel.text = newValue }
             }
             
             var imageRepresentation: AssetPicker.Model.ImageRepresentation? {
@@ -122,7 +122,7 @@ extension AssetPicker {
                 self.addSubview(self.abbreviationView)
                 self.abbreviationView.addSubview(self.abbreviationLabel)
                 self.addSubview(self.iconView)
-                self.addSubview(self.codeLabel)
+                self.addSubview(self.nameLabel)
                 
                 self.abbreviationView.snp.makeConstraints { (make) in
                     make.leading.equalToSuperview().inset(self.sideInset)
@@ -138,7 +138,7 @@ extension AssetPicker {
                     make.edges.equalTo(self.abbreviationView)
                 }
                 
-                self.codeLabel.snp.makeConstraints { (make) in
+                self.nameLabel.snp.makeConstraints { (make) in
                     make.leading.equalTo(self.abbreviationView.snp.trailing).offset(self.sideInset)
                     make.trailing.equalToSuperview().inset(self.sideInset)
                     make.centerY.equalTo(self.abbreviationView.snp.centerY)

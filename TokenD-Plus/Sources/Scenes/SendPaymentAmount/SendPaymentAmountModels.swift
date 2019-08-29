@@ -301,6 +301,10 @@ extension SendPaymentAmount.Event {
     }
     
     public struct AtomicSwapBuyAction {
+        public struct Request {
+            
+        }
+        
         public enum Response {
             case loading
             case loaded

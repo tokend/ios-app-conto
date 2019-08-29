@@ -3,7 +3,7 @@ import RxCocoa
 import RxSwift
 
 extension SendPaymentAmount {
-    class EnterAmountView: UIView {
+    public class EnterAmountView: UIView {
         
         // MARK: - Public properties
         
@@ -65,11 +65,16 @@ extension SendPaymentAmount {
                 : Theme.Colors.textOnContentBackgroundColor
         }
         
-        func disablePicker() {
-            self.isPickerEnabled = false
-            self.assetButton.setTitle("", for: .normal)
-            self.assetButton.setImage(nil, for: .normal)
+        func hidePicker() {
+            self.assetButton.isHidden = true
             self.assetButton.snp.makeConstraints { (make) in
+                make.width.equalTo(0)
+            }
+        }
+        
+        func hideEnterAmountField() {
+            self.amountField.isHidden = true
+            self.amountField.snp.makeConstraints { (make) in
                 make.width.equalTo(0)
             }
         }

@@ -207,7 +207,7 @@ extension SendPaymentAmount {
             if let viewConfig = self.viewConfig,
                 !viewConfig.pickerIsAvailable {
                 
-                self.enterAmountView.disablePicker()
+                self.enterAmountView.hidePicker()
             }
         }
         
