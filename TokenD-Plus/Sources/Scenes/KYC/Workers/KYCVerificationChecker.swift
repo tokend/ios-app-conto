@@ -40,7 +40,7 @@ extension KYC {
             self.accountsApi.requestChangeRoleRequests(
                 filters: .with(.requestor(self.accountId)),
                 include: ["request_details"],
-                pagination: RequestPagination(.single(index: 0, limit: 10, order: .descending)),
+                pagination: RequestPagination(.single(index: 0, limit: 10, order: .ascending)),
                 completion: { [weak self] (result) in
                     switch result {
                         

@@ -10,10 +10,13 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     static let backgroundTimeout: TimeInterval = 15 * 60
     
     private(set) var isAuthorized: Bool = true
+    private let shouldAddCompany: Bool
     
     // MARK: - Private properties
     
     private let navigationController: NavigationControllerProtocol = NavigationController()
+    
+    private let addAccountWorker: AddCompany.AddCompanyWorker
     private let onSignOut: () -> Void
     private let onEnvironmentChanged: () -> Void
     private let onLocalAuthRecoverySucceeded: () -> Void
@@ -35,14 +38,18 @@ class CompaniesListFlowController: BaseSignedInFlowController {
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
         rootNavigation: RootNavigationProtocol,
+        addAccountWorker: AddCompany.AddCompanyWorker,
+        shouldAddCompany: Bool = false,
         onSignOut: @escaping (() -> Void),
         onEnvironmentChanged: @escaping (() -> Void),
         onLocalAuthRecoverySucceeded: @escaping () -> Void
         ) {
         
+        self.addAccountWorker = addAccountWorker
         self.onSignOut = onSignOut
         self.onEnvironmentChanged = onEnvironmentChanged
         self.onLocalAuthRecoverySucceeded = onLocalAuthRecoverySucceeded
+        self.shouldAddCompany = shouldAddCompany
         super.init(
             appController: appController,
             flowControllerStack: flowControllerStack,
@@ -97,8 +104,17 @@ class CompaniesListFlowController: BaseSignedInFlowController {
     
     public func run(showRootScreen: ((UIViewController) -> Void)?) {
         self.showRootScreen = showRootScreen
-        self.showCompaniesScreen()
-        self.startUserActivityTimer()
+        if self.shouldAddCompany {
+            self.addAccountWorker.addCompany(
+                businessAccountId: "GB6RXMSM77D4PAJKAD3LWLZ2YTDB47P72VVU27QCDZ6O4FSHBECQYVCV",
+                completion: { [weak self] (result) in
+                    self?.showCompaniesScreen()
+                    self?.startUserActivityTimer()
+            })
+        } else {
+            self.showCompaniesScreen()
+            self.startUserActivityTimer()
+        }
     }
     
     // MARK: - Private

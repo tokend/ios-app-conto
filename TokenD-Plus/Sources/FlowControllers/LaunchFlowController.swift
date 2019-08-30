@@ -17,6 +17,7 @@ class LaunchFlowController: BaseFlowController {
     
     private var submittedEmail: String?
     private var kycChecker: AccountVerificationCheckerProtocol?
+    private var addAccountWorker: AddCompany.AddCompanyWorker?
     
     // MARK: -
     

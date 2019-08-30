@@ -88,7 +88,7 @@ extension RegisterScene {
             
             var subActions: [Model.SubAction] = [.signIn]
             if let termsUrl = self.sceneModel.termsUrl {
-                subActions.append(.agreeOnTerms(checked: false, link: termsUrl))
+                subActions.insert(.agreeOnTerms(checked: false, link: termsUrl), at: 0)
             }
             
             self.sceneModel = Model.SceneModel(

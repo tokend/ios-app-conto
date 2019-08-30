@@ -215,6 +215,10 @@ class CompanyFlowController: BaseSignedInFlowController {
     }
     
     private func runCompanyListFlow() {
+        let addAccountWorker = AddCompany.AddCompanyWorker(
+            integrationsApi: self.flowControllerStack.apiV3.integrationsApi,
+            originalAccountId: self.userDataProvider.walletData.accountId
+        )
         let flowController = CompaniesListFlowController(
             appController: self.appController,
             flowControllerStack: self.flowControllerStack,
@@ -223,6 +227,7 @@ class CompanyFlowController: BaseSignedInFlowController {
             userDataProvider: self.userDataProvider,
             keychainDataProvider: self.keychainDataProvider,
             rootNavigation: self.rootNavigation,
+            addAccountWorker: addAccountWorker,
             onSignOut: { [weak self] in
                 self?.onSignOut()
             },

@@ -258,7 +258,8 @@ class AppController {
                 managersController: managersController,
                 userDataProvider: userDataProvider,
                 keychainDataProvider: keychainDataProvider,
-                rootNavigation: self.rootNavigation
+                rootNavigation: self.rootNavigation,
+                shouldAddCompany: true
             )
         }
     }
@@ -270,9 +271,14 @@ class AppController {
         managersController: ManagersController,
         userDataProvider: UserDataProviderProtocol,
         keychainDataProvider: KeychainDataProviderProtocol,
-        rootNavigation: RootNavigationProtocol
+        rootNavigation: RootNavigationProtocol,
+        shouldAddCompany: Bool = false
         ) {
         
+        let addAccountWorker = AddCompany.AddCompanyWorker(
+            integrationsApi: flowControllerStack.apiV3.integrationsApi,
+            originalAccountId: userDataProvider.walletData.accountId
+        )
         let flowController = CompaniesListFlowController(
             appController: self,
             flowControllerStack: self.flowControllerStack,
@@ -281,6 +287,8 @@ class AppController {
             userDataProvider: userDataProvider,
             keychainDataProvider: keychainDataProvider,
             rootNavigation: self.rootNavigation,
+            addAccountWorker: addAccountWorker,
+            shouldAddCompany: shouldAddCompany,
             onSignOut: { [weak self] in
                 self?.initiateSignOut()
             }, onEnvironmentChanged: { [weak self] in
