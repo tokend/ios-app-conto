@@ -13,7 +13,6 @@ protocol SendPaymentDisplayLogic: class {
     func displayPaymentAction(viewModel: Event.PaymentAction.ViewModel)
     func displayWithdrawAction(viewModel: Event.WithdrawAction.ViewModel)
     func displayRedeemAction(viewModel: Event.RedeemAction.ViewModel)
-    func displayAtomicSwapBuyAction(viewModel: Event.AtomicSwapBuyAction.ViewModel)
     func displayFeeOverviewAvailability(viewModel: Event.FeeOverviewAvailability.ViewModel)
     func displayFeeOverviewAction(viewModel: Event.FeeOverviewAction.ViewModel)
 }
@@ -402,33 +401,6 @@ extension SendPaymentAmount.ViewController: SendPaymentAmount.DisplayLogic {
         case .succeeded(let redeemModel):
             self.routing?.onHideProgress()
             self.routing?.onShowRedeem?(redeemModel)
-        }
-    }
-    
-    func displayAtomicSwapBuyAction(viewModel: Event.AtomicSwapBuyAction.ViewModel) {
-        switch viewModel {
-            
-        case .loaded:
-            self.routing?.onHideProgress()
-            
-        case .loading:
-            self.routing?.onShowProgress()
-            
-        case .failed(let errorMessage):
-            self.routing?.onHideProgress()
-            self.routing?.onShowError(errorMessage)
-            
-        case .succeeded(let paymentType):
-            self.routing?.onHideProgress()
-            
-            switch paymentType {
-                
-            case .crypto(let crypto):
-                self.routing?.onAtomicSwapCryptoBuyAction?(crypto)
-            case .fiat(let url):
-                self.routing?.onAtomicSwapFiatBuyAction?(url)
-            }
-            
         }
     }
     

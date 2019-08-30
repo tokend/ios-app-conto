@@ -26,7 +26,6 @@ extension BalancesList {
         private let loadingStatus: BehaviorRelay<Model.LoadingStatus> = BehaviorRelay(value: .loaded)
         private let errors: PublishRelay<Swift.Error> = PublishRelay()
         
-        private let priceAsset: String = "UAH"
         private let disposeBag: DisposeBag = DisposeBag()
         
         // MARK: -
@@ -93,8 +92,6 @@ extension BalancesList {
                         assetName: assetResource.quoteAsset,
                         value: assetResource.price
                     )
-                }).filter({ (price) -> Bool in
-                    return price.assetName == self.priceAsset
                 })
                 
                 let ask = Model.Ask(

@@ -15,7 +15,7 @@ public enum PaymentMethod {
 // MARK: - Models
 
 extension PaymentMethod.Model {
-    public typealias AskModel = SendPaymentAmount.Model.AskModel
+    public typealias AskModel = AtomicSwapBuy.Model.AskModel
     
     public struct SceneModel {
         let baseAssetCode: String

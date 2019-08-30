@@ -128,9 +128,6 @@ extension SendPaymentAmount.BalanceDetailsLoaderWorker: SendPaymentAmount.Balanc
                 
             case .handleWithdraw:
                 return self.filterWithdrawable(balances: balances)
-                
-            case .handleAtomicSwap:
-                return balances
             }
         }
     }

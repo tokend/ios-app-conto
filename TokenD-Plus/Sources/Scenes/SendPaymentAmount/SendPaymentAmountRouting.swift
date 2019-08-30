@@ -10,8 +10,6 @@ extension SendPaymentAmount {
         _ onSelect: @escaping (_ balanceId: String) -> Void
         ) -> Void
         let onSendAction: ((_ sendModel: Model.SendPaymentModel) -> Void)?
-        let onAtomicSwapFiatBuyAction: ((_ ask: Model.AtomicSwapPaymentUrl) -> Void)?
-        let onAtomicSwapCryptoBuyAction: ((_ ask: Model.AtomicSwapInvoiceViewModel) -> Void)?
         let onShowWithdrawDestination: ((_ sendModel: Model.SendWithdrawModel) -> Void)?
         let onShowRedeem: ((_ redeemModel: Model.ShowRedeemViewModel) -> Void)?
         let showFeesOverview: (_ asset: String, _ feeType: Int32) -> Void

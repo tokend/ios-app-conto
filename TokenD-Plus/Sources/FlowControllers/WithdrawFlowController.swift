@@ -124,8 +124,6 @@ class WithdrawFlowController: BaseSignedInFlowController {
                 )
             },
             onSendAction: nil,
-            onAtomicSwapFiatBuyAction: nil,
-            onAtomicSwapCryptoBuyAction: nil,
             onShowWithdrawDestination: { [weak self] (sendModel) in
                 self?.showWithdrawDestinationScreen(withdrawAmountModel: sendModel)
             },

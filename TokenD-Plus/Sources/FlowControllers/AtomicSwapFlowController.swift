@@ -113,7 +113,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             },
             onAtomicSwapCryptoBuyAction: { [weak self] (atomicSwapInvoice) in
                 self?.showAtomicSwapQrScene(atomicSwapInvoice: atomicSwapInvoice)
-            })
+        })
         
         AtomicSwapBuy.Configurator.configure(
             viewController: vc,
@@ -201,7 +201,7 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
                     completion: {
                         self?.onCompleted()
                 })
-        },
+            },
             showLoading: {
                 navController.showProgress()
         },
@@ -280,6 +280,24 @@ class AtomicSwapFlowController: BaseSignedInFlowController {
             onSelected: onSelected
         )
         vc.navigationItem.title = Localized(.payment_method)
+        let closeBarItem = UIBarButtonItem(
+            title: Localized(.back),
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        closeBarItem
+            .rx
+            .tap
+            .asDriver()
+            .drive(onNext: { _ in
+                navigationController
+                    .getViewController()
+                    .dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: self.disposeBag)
+        
+        vc.navigationItem.leftBarButtonItem = closeBarItem
         navigationController.setViewControllers([vc], animated: false)
         self.navigationController
             .getViewController()

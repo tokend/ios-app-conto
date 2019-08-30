@@ -72,8 +72,6 @@
 		DB4AE30622F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AE30522F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift */; };
 		DB5E3C01230D7E1C00BAF983 /* BalancesListAskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5E3C00230D7E1C00BAF983 /* BalancesListAskCell.swift */; };
 		DB5E3C03230D8B9A00BAF983 /* BalancesListAtomicSwapFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5E3C02230D8B9A00BAF983 /* BalancesListAtomicSwapFetcher.swift */; };
-		DB5E3C05230E96ED00BAF983 /* SendPaymentAmountAtomicSwapPaymentWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5E3C04230E96ED00BAF983 /* SendPaymentAmountAtomicSwapPaymentWorker.swift */; };
-		DB5E3C07230E97EE00BAF983 /* SendPaymentAmountFiatPaymentSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5E3C06230E97EE00BAF983 /* SendPaymentAmountFiatPaymentSender.swift */; };
 		DB72098B22C1347200ED116A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB72098A22C1347200ED116A /* Assets.xcassets */; };
 		DB720CAA22C1396B00ED116A /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099922C1396B00ED116A /* SettingsModels.swift */; };
 		DB720CAB22C1396B00ED116A /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB72099A22C1396B00ED116A /* SettingsInteractor.swift */; };
@@ -820,8 +818,6 @@
 		DB4AE30522F2F17A001D0883 /* CompaniesListCompanyRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListCompanyRecognizer.swift; sourceTree = "<group>"; };
 		DB5E3C00230D7E1C00BAF983 /* BalancesListAskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesListAskCell.swift; sourceTree = "<group>"; };
 		DB5E3C02230D8B9A00BAF983 /* BalancesListAtomicSwapFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesListAtomicSwapFetcher.swift; sourceTree = "<group>"; };
-		DB5E3C04230E96ED00BAF983 /* SendPaymentAmountAtomicSwapPaymentWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountAtomicSwapPaymentWorker.swift; sourceTree = "<group>"; };
-		DB5E3C06230E97EE00BAF983 /* SendPaymentAmountFiatPaymentSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentAmountFiatPaymentSender.swift; sourceTree = "<group>"; };
 		DB72098022C1347100ED116A /* TokenD-Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TokenD-Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB72098A22C1347200ED116A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB72098F22C1347200ED116A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2468,11 +2464,9 @@
 			isa = PBXGroup;
 			children = (
 				DB720ADD22C1396B00ED116A /* SendPaymentAmountAmountFormatter.swift */,
-				DB5E3C04230E96ED00BAF983 /* SendPaymentAmountAtomicSwapPaymentWorker.swift */,
 				DB72281522CF622300341565 /* SendPaymentAmountCreateRedeemRequest.swift */,
 				DB720ADB22C1396B00ED116A /* SendPaymentAmountFeeLoader.swift */,
 				DB720ADE22C1396B00ED116A /* SendPaymentAmountFeeOverviewer.swift */,
-				DB5E3C06230E97EE00BAF983 /* SendPaymentAmountFiatPaymentSender.swift */,
 				DB0461C022F45B0B0050D2BB /* BalancesFethcers */,
 			);
 			path = Workers;
@@ -4184,7 +4178,6 @@
 				DBC1655623035530002A50F7 /* KYCViewController.swift in Sources */,
 				DB720E4E22C1396C00ED116A /* DepositSceneErrorFormatter.swift in Sources */,
 				DB720E5322C1396C00ED116A /* DepositSceneAddressManagerProtocol.swift in Sources */,
-				DB5E3C07230E97EE00BAF983 /* SendPaymentAmountFiatPaymentSender.swift in Sources */,
 				DB720CEC22C1396B00ED116A /* VerifyEmailResendWorkerProtocol.swift in Sources */,
 				DB720CB022C1396B00ED116A /* SettingsActionCell.swift in Sources */,
 				DB720DC222C1396C00ED116A /* CreateOfferConfirmationSectionsProvider.swift in Sources */,
@@ -4396,7 +4389,6 @@
 				DBC165442302F36D002A50F7 /* EnvironmentsListPresenter.swift in Sources */,
 				DB720D7F22C1396B00ED116A /* CreateOfferAmountFormatter.swift in Sources */,
 				DBDA688723100D6000EC1519 /* IdentitySetIdentityWorkerProtocol.swift in Sources */,
-				DB5E3C05230E96ED00BAF983 /* SendPaymentAmountAtomicSwapPaymentWorker.swift in Sources */,
 				DBA1F20422FC2D640027B8B5 /* PaymentMethodMethodsFetcher.swift in Sources */,
 				DB720EE422C1396C00ED116A /* CellViewModelProtocol.swift in Sources */,
 				DBDA68962310149200EC1519 /* IdentityPresenter.swift in Sources */,

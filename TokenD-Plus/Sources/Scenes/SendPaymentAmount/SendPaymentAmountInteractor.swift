@@ -31,7 +31,6 @@ extension SendPaymentAmount {
         private let senderAccountId: String
         private let balanceDetailsLoader: BalanceDetailsLoader
         private let createRedeemRequestWorker: CreateRedeemRequestWorkerProtocol?
-        private let atomicSwapPaymentWorker: AtomicSwapPaymentWorkerProtocol?
         
         private let feeLoader: FeeLoaderProtocol
         private let feeOverviewer: FeeOverviewerProtocol
@@ -49,7 +48,6 @@ extension SendPaymentAmount {
             selectedBalanceId: String?,
             balanceDetailsLoader: BalanceDetailsLoader,
             createRedeemRequestWorker: CreateRedeemRequestWorkerProtocol? = nil,
-            atomicSwapPaymentWorker: AtomicSwapPaymentWorkerProtocol? = nil,
             feeLoader: FeeLoaderProtocol,
             feeOverviewer: FeeOverviewerProtocol
             ) {
@@ -60,7 +58,6 @@ extension SendPaymentAmount {
             self.senderAccountId = senderAccountId
             self.balanceDetailsLoader = balanceDetailsLoader
             self.createRedeemRequestWorker = createRedeemRequestWorker
-            self.atomicSwapPaymentWorker = atomicSwapPaymentWorker
             self.feeLoader = feeLoader
             self.feeOverviewer = feeOverviewer
             
@@ -290,45 +287,6 @@ extension SendPaymentAmount {
             })
         }
         
-        private func handleAtomicSwapBuy(ask: Model.Ask) {
-            guard let balance = self.sceneModel.selectedBalance else {
-                return
-            }
-            self.presenter.presentAtomicSwapBuyAction(response: .loading)
-            guard self.sceneModel.amount > 0 else {
-                self.presenter.presentAtomicSwapBuyAction(response: .failed(.emptyAmount))
-                return
-            }
-            
-            let amount = self.sceneModel.amount
-            guard balance.balance >= amount else {
-                self.presenter.presentAtomicSwapBuyAction(response: .failed(.bidMoreThanAsk))
-                return
-            }
-            guard let price = ask.getDefaultPaymentMethod() else {
-                self.presenter.presentAtomicSwapBuyAction(response: .failed(.failedToBuildTransaction))
-                return
-
-            }
-            self.atomicSwapPaymentWorker?.performPayment(
-                baseAmount: amount,
-                quoteAsset: price.assetName,
-                quoteAmount: price.value,
-                completion: { [weak self] (result) in
-                    self?.presenter.presentAtomicSwapBuyAction(response: .loaded)
-                    let response: Event.AtomicSwapBuyAction.Response
-                    switch result {
-                        
-                    case .failure(let error):
-                        response = .failed(error)
-                        
-                    case .success(let paymentType):
-                        response = .succeeded(paymentType)
-                    }
-                    self?.presenter.presentAtomicSwapBuyAction(response: response)
-            })
-        }
-        
         enum LoadFeesResult {
             case succeeded(senderFee: Model.FeeModel, recipientFee: Model.FeeModel)
             case failed(SendPaymentAmountFeeLoaderResult.FeeLoaderError)
@@ -503,9 +461,6 @@ extension SendPaymentAmount.Interactor: SendPaymentAmount.BusinessLogic {
             
         case .handleWithdraw:
             self.handleWithdrawSendAction()
-            
-        case .handleAtomicSwap(let ask):
-            self.handleAtomicSwapBuy(ask: ask)
         }
     }
     

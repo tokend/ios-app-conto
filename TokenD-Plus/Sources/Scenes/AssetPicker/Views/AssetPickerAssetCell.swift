@@ -99,7 +99,7 @@ extension AssetPicker {
             
             private func setupNameLabel() {
                 self.nameLabel.backgroundColor = Theme.Colors.contentBackgroundColor
-                self.nameLabel.font = Theme.Fonts.plainTextFont
+                self.nameLabel.font = Theme.Fonts.largePlainTextFont
             }
             
             private func setupIconView() {
@@ -139,7 +139,7 @@ extension AssetPicker {
                 }
                 
                 self.nameLabel.snp.makeConstraints { (make) in
-                    make.leading.equalTo(self.abbreviationView.snp.trailing).offset(self.sideInset)
+                    make.leading.equalTo(self.abbreviationView.snp.trailing).offset(self.topInset * 2)
                     make.trailing.equalToSuperview().inset(self.sideInset)
                     make.centerY.equalTo(self.abbreviationView.snp.centerY)
                 }

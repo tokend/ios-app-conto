@@ -12,7 +12,6 @@ protocol SendPaymentPresentationLogic {
     func presentPaymentAction(response: Event.PaymentAction.Response)
     func presentWithdrawAction(response: Event.WithdrawAction.Response)
     func presentRedeemAction(response: Event.RedeemAction.Response)
-    func presentAtomicSwapBuyAction(response: Event.AtomicSwapBuyAction.Response)
     func presentFeeOverviewAvailability(response: Event.FeeOverviewAvailability.Response)
     func presentFeeOverviewAction(response: Event.FeeOverviewAction.Response)
 }
@@ -62,22 +61,6 @@ extension SendPaymentAmount {
                 balanceId: balanceDetails.balanceId
             )
             return viewModel
-        }
-        
-        private func getAtomicSwapPaymentViewType(model: Model.AtomicSwapPaymentType) -> Model.AtomicSwapPaymentViewType {
-            
-            switch model {
-            case .crypto(let invoce):
-                let amount = self.amountFormatter.assetAmountToString(invoce.amount) + " \(invoce.asset)"
-                let invoceViewModel = Model.AtomicSwapInvoiceViewModel(
-                    address: invoce.address,
-                    amount: amount
-                )
-                return .crypto(invoceViewModel)
-                
-            case .fiat(let paymentUrl):
-                return .fiat(paymentUrl)
-            }
         }
     }
 }
@@ -221,29 +204,6 @@ extension SendPaymentAmount.Presenter: SendPaymentAmount.PresentationLogic {
         
         self.presenterDispatch.display { displayLogic in
             displayLogic.displayRedeemAction(viewModel: viewModel)
-        }
-    }
-    
-    func presentAtomicSwapBuyAction(response: Event.AtomicSwapBuyAction.Response) {
-        let viewModel: Event.AtomicSwapBuyAction.ViewModel
-        switch response {
-            
-        case .loaded:
-            viewModel = .loaded
-            
-        case .loading:
-            viewModel = .loading
-            
-        case .failed(let error):
-            viewModel = .failed(errorMessage: error.localizedDescription)
-            
-        case .succeeded(let paymentType):
-            let paymentViewType = self.getAtomicSwapPaymentViewType(model: paymentType)
-            viewModel = .succeeded(paymentViewType)
-        }
-        
-        self.presenterDispatch.display { displayLogic in
-            displayLogic.displayAtomicSwapBuyAction(viewModel: viewModel)
         }
     }
     

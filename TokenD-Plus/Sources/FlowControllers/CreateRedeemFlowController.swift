@@ -120,8 +120,6 @@ class CreateRedeemFlowController: BaseSignedInFlowController {
                 )
             },
             onSendAction: nil,
-            onAtomicSwapFiatBuyAction: nil,
-            onAtomicSwapCryptoBuyAction: nil,
             onShowWithdrawDestination: nil,
             onShowRedeem: { [weak self] (redeemModel) in
                 self?.showRedeemQrScene(redeemModel: redeemModel)

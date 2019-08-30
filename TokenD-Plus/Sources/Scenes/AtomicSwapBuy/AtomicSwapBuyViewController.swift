@@ -245,7 +245,7 @@ extension AtomicSwapBuy {
             }
             
             self.quoteAssetButton.snp.makeConstraints { (make) in
-                make.centerX.equalToSuperview()
+                make.centerX.equalToSuperview().offset(15.0)
                 make.top.equalTo(self.paymentMethodLabel.snp.bottom).offset(self.topInset)
                 make.height.equalTo(35.0)
             }
