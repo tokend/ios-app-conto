@@ -34,13 +34,13 @@ extension APIConfigurationModel {
             
         case .production:
             return APIConfigurationModel(
-                storageEndpoint: "https://s3.eu-north-1.amazonaws.com/contostaging-identity-storage-festive-cannon-2",
-                apiEndpoint: "https://api.staging.conto.me/",
+                storageEndpoint: "https://s3.eu-north-1.amazonaws.com/conto-identity-storage-ecstatic-beaver",
+                apiEndpoint: "https://api.conto.me/",
                 contributeUrl: "https://github.com/tokend/ios-app-loyalty",
-                termsAddress: "https://staging.conto.me/terms",
+                termsAddress: "https://conto.me/terms",
                 webClient: nil,
                 downloadUrl: nil,
-                fiatRedirectDomen: "staging.conto.me"
+                fiatRedirectDomen: "conto.me"
             )
         }
     }
