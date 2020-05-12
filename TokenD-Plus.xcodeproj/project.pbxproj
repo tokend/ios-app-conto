@@ -3959,16 +3959,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/MarkdownView/MarkdownView.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MarkdownView.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-TokenD-Plus/Pods-TokenD-Plus-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -114,7 +114,7 @@ PODS:
   - UICircularProgressRing (6.2.1)
 
 DEPENDENCIES:
-  - ActionsList (~> 0.9.1)
+  - ActionsList (from `https://github.com/LowKostKustomz/ActionsList.git`, branch `hotfix/swift_5.0_compatibility_stable`)
   - AFDateHelper (~> 4.2.2)
   - Charts (from `https://github.com/tokend/Charts.git`)
   - Crashlytics
@@ -144,8 +144,7 @@ SPEC REPOS:
     - DLOpenSSL
     - TokenDSDK
     - TokenDWallet
-  https://github.com/cocoapods/specs.git:
-    - ActionsList
+  https://github.com/CocoaPods/Specs.git:
     - AFDateHelper
     - Alamofire
     - AlamofireNetworkActivityLogger
@@ -173,6 +172,9 @@ SPEC REPOS:
     - UICircularProgressRing
 
 EXTERNAL SOURCES:
+  ActionsList:
+    :branch: hotfix/swift_5.0_compatibility_stable
+    :git: https://github.com/LowKostKustomz/ActionsList.git
   Charts:
     :git: https://github.com/tokend/Charts.git
   Floaty:
@@ -181,6 +183,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/tokend/SideMenuController.git
 
 CHECKOUT OPTIONS:
+  ActionsList:
+    :commit: 5be57fabefa7e709373d99704dc214ce839a0c9e
+    :git: https://github.com/LowKostKustomz/ActionsList.git
   Charts:
     :commit: 90f818dfc9432b617bca971ea56b57f2fbc4ae09
     :git: https://github.com/tokend/Charts.git
@@ -192,7 +197,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/tokend/SideMenuController.git
 
 SPEC CHECKSUMS:
-  ActionsList: ab6cf254d259ccb921fbdee139ef6171fb9976ac
+  ActionsList: 93a2d6506b15b1852ee080262898e428ad957420
   AFDateHelper: 4ad66fb19503041fbba8a3018cb7ef9c71b2ff88
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlamofireNetworkActivityLogger: 6d3398c692d2c5d83b0c58793537860aca1e383d
@@ -227,6 +232,6 @@ SPEC CHECKSUMS:
   TokenDWallet: 0f415dc845b38227bd99602e341258ec4dda4a32
   UICircularProgressRing: b52543c79dbd89844e13f0053e3f565b7d7efc5c
 
-PODFILE CHECKSUM: 7766bafa2c1b48007bb26b7f6ccf0cd5d70dcde3
+PODFILE CHECKSUM: 9b3380b72db6f03ce36f442ecb12faffa4bf1d9e
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4
